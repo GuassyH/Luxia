@@ -1,5 +1,10 @@
 #pragma once
 
-namespace Luxia {
-	_declspec (dllexport) void print();
-}
+// APP SIDE ONLY
+#include "Luxia/Application.h"
+
+#include "Luxia/Core.h"
+
+// ---- Entry Point ----
+#include "Luxia/EntryPoint.h"
+// ---------------------
