@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Window Creation">
       <UniqueIdentifier>{fe308294-91e7-437b-897d-a6055b6c05b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Layers">
+      <UniqueIdentifier>{2ff4a170-ef59-4193-af58-ad916e6428a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Layers">
+      <UniqueIdentifier>{4f71c875-cf40-4007-8128-af5002a97627}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
@@ -29,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\TestLayer.cpp">
+      <Filter>Source Files\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\PlatformDefinitions.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\LayerStack.h">
+      <Filter>Header Files\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layer.h">
+      <Filter>Header Files\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\TestLayer.h">
+      <Filter>Header Files\Layers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

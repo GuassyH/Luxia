@@ -1,17 +1,24 @@
 #include "Application.h"
 #include "PlatformDefinitions.h"
+#include "TestLayer.h"
 
 namespace Luxia
 {
+	Luxia::Application* Application::a_Instance = nullptr;
+
 	Application::Application()
 	{
+		Application::a_Instance = this;
+
 		m_Window = Platform::CreateWindow();
 		m_Window->Create(1920, 1080, "Luxia Application");
+
+		m_LayerStack = std::make_shared<LayerStack>();
+		m_LayerStack->PushLayer(std::make_shared<Luxia::Layers::TestLayer>());
 	}
 
 	Application::~Application() = default;
 	
-
 	void Application::Run()
 	{
 		while (!m_Window->ShouldClose()) {
@@ -19,9 +26,9 @@ namespace Luxia
 			m_Window->BeginFrame();
 
 			// Loop through layers
-			// for (auto& layer : *m_LayerStack) {
-			// 	layer->OnUpdate();
-			// }
+			for (auto layer : m_LayerStack->m_Layers) {
+				layer->OnUpdate();
+			}
 
 			// End the Frame (swap buffers)
 			m_Window->EndFrame();

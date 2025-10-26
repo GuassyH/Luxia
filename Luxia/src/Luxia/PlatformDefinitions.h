@@ -15,7 +15,7 @@ namespace Luxia::Platform
 	{
 		#ifdef LUXIA_PLATFORM_WINDOWS
 		return std::make_shared<Luxia::Platform::Win_Window>();
-		#else
+		#else 
 		#error Luxia doesnt support your OS!
 		#endif
 	}

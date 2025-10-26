@@ -7,7 +7,6 @@ class TallorenApp : public Luxia::Application
 		~TallorenApp() {}
 };
 
-Luxia::Application* Luxia::CreateApplication()
-{
+Luxia::Application* Luxia::CreateApplication(){
 	return new TallorenApp();
 };

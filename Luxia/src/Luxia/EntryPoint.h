@@ -10,13 +10,13 @@ extern Luxia::Application* Luxia::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	printf("Started Luxia App!\n");
+	printf("Started Luxia App!\n\n");
 
 	Luxia::Application* app = Luxia::CreateApplication();
 	app->Run();
 	delete app;
 	
-	printf("Ended Luxia App, see you next time!\n");
+	printf("\nEnded Luxia App, see you next time!\n");
 	return 0;
 }
 

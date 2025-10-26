@@ -13,6 +13,10 @@ namespace Luxia::Platform {
 
 		int m_Width;
 		int m_Height;
+
+		int m_MonitorWidth;
+		int m_MonitorHeight;
+
 		std::string m_Title;
 
 		GLFWwindow* m_Window = nullptr;
@@ -24,6 +28,7 @@ namespace Luxia::Platform {
 		virtual void BeginFrame() override;
 		virtual void EndFrame() override;
 
+		virtual void SetTitle(const std::string& title) override;
 		virtual bool ShouldClose() const override;
 	};
 }

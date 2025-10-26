@@ -48,9 +48,9 @@ namespace Luxia::Platform {
 		std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl;
 
 		// Get monitor height
-		// const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		// monitorWidth = mode->width;
-		// monitorHeight = mode->height;
+		 const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		 m_MonitorWidth = mode->width;
+		 m_MonitorHeight = mode->height;
 
 		// Set Frame Buffer Size Callback
 		glfwSetFramebufferSizeCallback(m_Window, frame_buffer_size_callback);
@@ -69,12 +69,14 @@ namespace Luxia::Platform {
 
 		return 1;
 	}
+	
 	void Win_Window::BeginFrame()
 	{
 		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, m_Width, m_Height);
 	}
+
 	void Win_Window::EndFrame()
 	{
 		if(glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -84,6 +86,13 @@ namespace Luxia::Platform {
 		glfwSwapBuffers(m_Window);
 		// Windows specific end frame code
 	}
+
+	void Win_Window::SetTitle(const std::string& title)
+	{
+		m_Title = title;
+		glfwSetWindowTitle(m_Window, m_Title.c_str());
+	}
+
 	bool Win_Window::ShouldClose() const {
 		return glfwWindowShouldClose(m_Window);
 	}
