@@ -9,7 +9,7 @@ namespace Luxia
 		public:
 			virtual ~IWindow() = default;
 
-			virtual void Create(int width, int height, const std::string& title = "Luxia") = 0;
+			virtual int Create(int width, int height, const std::string& title = "Luxia") = 0;
 			virtual void BeginFrame() = 0;
 			virtual void EndFrame() = 0;
 

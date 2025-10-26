@@ -27,6 +27,9 @@
     <ClCompile Include="src\Luxia\Win_Window.cpp">
       <Filter>Source Files\Window Creation</Filter>
     </ClCompile>
+    <ClCompile Include="vendor\glad\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia\Core.h">
