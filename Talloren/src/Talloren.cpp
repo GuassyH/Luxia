@@ -10,7 +10,7 @@ class IslandLayer : public Luxia::Layer
 			LX_WARN("IslandLayer Attached");
 		}
 		virtual void OnDetach() override {
-			LX_WARN("IslandLayer Detached");
+			LX_ERROR("IslandLayer Detached");
 		}
 		virtual void OnUpdate() override {
 			// Update logic here

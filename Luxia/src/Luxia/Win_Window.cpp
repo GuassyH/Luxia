@@ -1,16 +1,12 @@
 #include "Win_Window.h"
 
+#include "Log.h"
 #include <stdio.h>
 
 namespace Luxia::Platform {
 
 	Win_Window::Win_Window() = default;
 	Win_Window::~Win_Window() = default;
-
-	void frame_buffer_size_callback(GLFWwindow* window, int width, int height) {
-		glViewport(0, 0, width, height);
-		std::cout << "window size is " << width << " x " << height << std::endl;
-	}
 
 	int Win_Window::Create(int width, int height, const std::string& title)
 	{
@@ -29,7 +25,7 @@ namespace Luxia::Platform {
 		m_Monitor = glfwGetWindowMonitor(m_Window);
 
 		if (!m_Window) {
-			std::cout << "Failed to create Window" << std::endl;
+			LX_CORE_ERROR("Failed to create Window");
 			glfwTerminate();
 			return -1;
 		}
@@ -38,14 +34,15 @@ namespace Luxia::Platform {
 		glfwSwapInterval(0); // Turn off v-sync
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-			std::cerr << "Failed to initialize GLAD" << std::endl;
+			LX_CORE_ERROR("Failed to initialize GLAD");
 			return -1;
 		}
 
+		LX_CORE_TRACE("OpenGL Info: ");
 		std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 		std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 		std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
-		std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl;
+		std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl << "\n";
 
 		// Get monitor height
 		 const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -53,8 +50,6 @@ namespace Luxia::Platform {
 		 m_MonitorHeight = mode->height;
 
 		// Set Frame Buffer Size Callback
-		glfwSetFramebufferSizeCallback(m_Window, frame_buffer_size_callback);
-		// glfwSetScrollCallback(window, scroll_callback);
 
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);
@@ -63,9 +58,8 @@ namespace Luxia::Platform {
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
-		std::cout << "Display / GLFW initialized\n";
 
-		printf("Created Windows Window: %s (%dx%d)\n", m_Title.c_str(), m_Width, m_Height);
+		LX_CORE_INFO("Created Windows Window: {} ({}x{})", m_Title.c_str(), m_Width, m_Height);
 
 		return 1;
 	}

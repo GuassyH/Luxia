@@ -11,12 +11,16 @@
 // IM NOT GOING TO FOCUS ON THIS NOW... ITS JUST A TEST
 namespace Luxia::Platform
 {
-	std::shared_ptr<Luxia::IWindow> CreateAppWindow()
+	std::shared_ptr<Luxia::IWindow> CreateAppWindow(int width, int height, std::string title)
 	{
+		std::shared_ptr<Luxia::IWindow> win;
 		#ifdef LUXIA_PLATFORM_WINDOWS
-		return std::make_shared<Luxia::Platform::Win_Window>();
+		win = std::make_shared<Luxia::Platform::Win_Window>();
+		win->Create(1920, 1080, "Luxia Application");
 		#else 
 		#error Luxia doesnt support your OS!
 		#endif
+		
+		return win;
 	}
 }

@@ -12,8 +12,7 @@ namespace Luxia
 	{
 		Application::a_Instance = this;
 
-		m_Window = Luxia::Platform::CreateAppWindow();
-		m_Window->Create(1920, 1080, "Luxia Application");
+		m_Window = Luxia::Platform::CreateAppWindow(1920, 1080, "Luxia Application");
 
 		m_LayerStack = std::make_shared<LayerStack>();
 		m_LayerStack->PushLayer(std::make_shared<Luxia::Layers::TestLayer>());
