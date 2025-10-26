@@ -1,81 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="src\Luxia">
+      <UniqueIdentifier>{7F895DB3-EBF3-112A-3432-C3CFA0DBEF7E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Window Creation">
-      <UniqueIdentifier>{21780d90-f293-4b06-87d1-50e7d2768ed3}</UniqueIdentifier>
+    <Filter Include="vendor\glad">
+      <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Window Creation">
-      <UniqueIdentifier>{fe308294-91e7-437b-897d-a6055b6c05b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Layers">
-      <UniqueIdentifier>{2ff4a170-ef59-4193-af58-ad916e6428a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Layers">
-      <UniqueIdentifier>{4f71c875-cf40-4007-8128-af5002a97627}</UniqueIdentifier>
-    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Luxia.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Application.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Core.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\EntryPoint.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\IWindow.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layer.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\LayerStack.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Log.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\PlatformDefinitions.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\TestLayer.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Win_Window.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\Win_Window.cpp">
-      <Filter>Source Files\Window Creation</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\glad\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\TestLayer.cpp">
-      <Filter>Source Files\Layers</Filter>
+      <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Log.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>src\Luxia</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Luxia\Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\EntryPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Win_Window.h">
-      <Filter>Header Files\Window Creation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\IWindow.h">
-      <Filter>Header Files\Window Creation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\PlatformDefinitions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\LayerStack.h">
-      <Filter>Header Files\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Layer.h">
-      <Filter>Header Files\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\TestLayer.h">
-      <Filter>Header Files\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="src\Luxia\TestLayer.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Win_Window.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\glad\glad.c">
+      <Filter>vendor\glad</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
