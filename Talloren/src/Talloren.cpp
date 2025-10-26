@@ -1,5 +1,7 @@
 #include <Luxia.h>
 
+#include "IslandLayer.h"
+
 class TallorenApp : public Luxia::Application
 {
 	public:
@@ -8,5 +10,8 @@ class TallorenApp : public Luxia::Application
 };
 
 Luxia::Application* Luxia::CreateApplication(){
-	return new TallorenApp();
+	Application* app = new TallorenApp();
+	app->PushLayer(std::make_shared<IslandLayer>());
+	app->GetWindow()->SetTitle("Island Application");
+	return app;
 };
