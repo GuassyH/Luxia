@@ -1,0 +1,3 @@
+[submodule "Luxia/vendor/spdlog"]
+	path = Luxia/vendor/spdlog
+	url = https://github.com/gabime/spdlog
