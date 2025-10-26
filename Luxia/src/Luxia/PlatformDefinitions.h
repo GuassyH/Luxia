@@ -11,7 +11,7 @@
 // IM NOT GOING TO FOCUS ON THIS NOW... ITS JUST A TEST
 namespace Luxia::Platform
 {
-	std::shared_ptr<Luxia::IWindow> CreateWindow()
+	std::shared_ptr<Luxia::IWindow> CreateAppWindow()
 	{
 		#ifdef LUXIA_PLATFORM_WINDOWS
 		return std::make_shared<Luxia::Platform::Win_Window>();

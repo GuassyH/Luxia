@@ -3,6 +3,7 @@
 
 #include "Core.h"
 #include "Application.h"
+#include "Log.h"
 
 #ifdef LUXIA_PLATFORM_WINDOWS
 
@@ -10,13 +11,13 @@ extern Luxia::Application* Luxia::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	printf("Started Luxia App!\n\n");
+	Luxia::Log::Init();
+	LX_CORE_WARN("Initialized Logger");
 
 	Luxia::Application* app = Luxia::CreateApplication();
 	app->Run();
 	delete app;
 	
-	printf("\nEnded Luxia App, see you next time!\n");
 	return 0;
 }
 

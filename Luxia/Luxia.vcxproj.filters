@@ -39,6 +39,9 @@
     <ClCompile Include="src\Luxia\TestLayer.cpp">
       <Filter>Source Files\Layers</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia\Core.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\TestLayer.h">
       <Filter>Header Files\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Log.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

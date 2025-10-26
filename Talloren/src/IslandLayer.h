@@ -9,10 +9,10 @@ public:
 	IslandLayer() = default;
 	virtual ~IslandLayer() = default;
 	virtual void OnAttach() override {
-		printf("Island layer Attached!");
+		LX_WARN("IslandLayer Attached");
 	}
 	virtual void OnDetach() override {
-		printf("Island layer Detached!");
+		LX_WARN("IslandLayer Detached");
 	}
 	virtual void OnUpdate() override {
 		// Update logic here
