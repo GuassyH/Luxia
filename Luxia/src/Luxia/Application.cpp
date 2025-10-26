@@ -1,21 +1,30 @@
 #include "Application.h"
+#include "PlatformDefinitions.h"
 
 namespace Luxia
 {
 	Application::Application()
 	{
-	#ifdef LUXIA_PLATFORM_WINDOWS
-		m_Window = std::make_unique<Win_Window>();
-	#endif
+		m_Window = Platform::CreateWindow();
+		m_Window->Create(1920, 1080, "Luxia Application");
 	}
-	Application::~Application()
-	{
-		m_Window->~IWindow();
-	}
+
+	Application::~Application() = default;
+	
+
 	void Application::Run()
 	{
-		while (true) {
-			m_Window->Render();
+		while (!m_Window->ShouldClose()) {
+			// Begin the Frame
+			m_Window->BeginFrame();
+
+			// Loop through layers
+			// for (auto& layer : *m_LayerStack) {
+			// 	layer->OnUpdate();
+			// }
+
+			// End the Frame (swap buffers)
+			m_Window->EndFrame();
 		}
 	}
 }

@@ -1,13 +1,18 @@
 #pragma once
-class IWindow
+
+#include <iostream>
+
+namespace Luxia
 {
-	public:
-		IWindow() {}
-		virtual ~IWindow() {}
-		virtual void Render() {}
+	class IWindow
+	{
+		public:
+			virtual ~IWindow() = default;
 
-		int m_Width = 800;
-		int m_Height = 600;
-		const char* m_Title = "Luxia Window";
-};
+			virtual void Create(int width, int height, const std::string& title = "Luxia") = 0;
+			virtual void BeginFrame() = 0;
+			virtual void EndFrame() = 0;
 
+			virtual bool ShouldClose() const = 0;
+	};
+}

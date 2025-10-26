@@ -17,12 +17,12 @@ namespace Luxia
 		void Run();
 
 
-		// void PushLayer(std::shared_ptr<Layer> layer) { /*m_LayerStack->PushLayer(layer);*/ }
+		// void PushLayer(std::shared_ptr<Layer> layer) { m_LayerStack->PushLayer(layer); }
 
-		std::shared_ptr<IWindow> GetWindow() { return m_Window; }
+		std::shared_ptr<Luxia::IWindow> GetWindow() { return m_Window; }
 		// std::shared_ptr<LayerStack> GetLayerStack() { return nullptr; /*m_LayerStack;*/ }
 	protected:
-		std::shared_ptr<IWindow> m_Window;
+		std::shared_ptr<Luxia::IWindow> m_Window;
 		// std::shared_ptr<LayerStack> m_LayerStack;
 	};
 
