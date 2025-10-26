@@ -137,9 +137,12 @@
     <ClInclude Include="src\Luxia\Core.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\EntryPoint.h" />
+    <ClInclude Include="src\Luxia\IWindow.h" />
+    <ClInclude Include="src\Luxia\Win_Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp" />
+    <ClCompile Include="src\Luxia\Win_Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,10 +13,19 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Window Creation">
+      <UniqueIdentifier>{21780d90-f293-4b06-87d1-50e7d2768ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window Creation">
+      <UniqueIdentifier>{fe308294-91e7-437b-897d-a6055b6c05b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Win_Window.cpp">
+      <Filter>Source Files\Window Creation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +40,12 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\EntryPoint.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Win_Window.h">
+      <Filter>Header Files\Window Creation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\IWindow.h">
+      <Filter>Header Files\Window Creation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,8 +3,8 @@
 
 // Definitions for different platforms
 #ifdef LUXIA_PLATFORM_WINDOWS
-	#ifdef LUXIA_EXPORT 
-	#define LUXIA_API __declspec(dllexport) // export or import dll
+	#ifdef LUXIA_EXPORT // export or import dll
+	#define LUXIA_API __declspec(dllexport) 
 	#else
 	#define LUXIA_API __declspec(dllimport)
 	#endif
