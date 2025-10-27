@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Event.h"
+
 namespace Luxia
 {
 	class Layer {
@@ -10,6 +12,6 @@ namespace Luxia
 		virtual void OnAttach() = 0;
 		virtual void OnDetach() = 0;
 		virtual void OnUpdate() = 0;
-		virtual void OnEvent() = 0;
+		virtual void OnEvent(Luxia::Event& event) = 0;
 	};
 }

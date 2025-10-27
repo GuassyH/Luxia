@@ -12,6 +12,8 @@ namespace Luxia
 	{
 		Application::a_Instance = this;
 
+		m_EventHandler = Luxia::EventHandler();
+
 		m_Window = Luxia::Platform::CreateAppWindow(1920, 1080, "Luxia Application");
 
 		m_LayerStack = std::make_shared<LayerStack>();
@@ -38,5 +40,13 @@ namespace Luxia
 		}
 
 		LX_CORE_ERROR("Application Ended");
+	}
+
+	void Application::OnEvent(Luxia::Event& e) {
+		for (auto layer : m_LayerStack->m_Layers) {
+			layer->OnEvent(e);
+			if (e.isConsumed)
+				break;
+		}
 	}
 }

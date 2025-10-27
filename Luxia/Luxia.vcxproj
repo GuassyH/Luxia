@@ -158,6 +158,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\EventHandler.h" />
+    <ClInclude Include="src\Luxia\MouseEvent.h" />
+    <ClInclude Include="src\Luxia\Event.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Core.h" />
@@ -171,6 +174,7 @@
     <ClInclude Include="src\Luxia\Win_Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Application.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />
     <ClCompile Include="src\Luxia\TestLayer.cpp" />

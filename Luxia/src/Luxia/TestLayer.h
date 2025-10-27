@@ -15,7 +15,7 @@ namespace Luxia::Layers {
 		}
 		virtual void OnUpdate() override;
 
-		virtual void OnEvent() override {
+		virtual void OnEvent(Luxia::Event& e) override {
 			LX_CORE_TRACE("TestLayer Event Occurred");
 		}
 	};
