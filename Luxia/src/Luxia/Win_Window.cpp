@@ -56,9 +56,9 @@ namespace Luxia::Platform {
 
 		glfwSetWindowUserPointer(m_Window, this);
 
-		/*
+	
 		// In your Win_Window::Create
-		glfwSetKeyCallback(m_Window, [this](GLFWwindow* window, int key, int scancode, int action, int mods) {
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) {
 				if (action == GLFW_PRESS)
@@ -67,7 +67,7 @@ namespace Luxia::Platform {
 					win->GetEventHandler().PushEvent(std::make_shared<KeyReleaseEvent>(key));
 			}
 			});
-		*/
+		
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseMoveEvent>(xpos, ypos));
