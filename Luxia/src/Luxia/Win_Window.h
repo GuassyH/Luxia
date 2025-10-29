@@ -29,7 +29,6 @@ namespace Luxia::Platform {
 		virtual void EndFrame() override;
 
 		virtual void SetTitle(const std::string& title) override;
-		virtual bool ShouldClose() const override;
 	};
 }
 

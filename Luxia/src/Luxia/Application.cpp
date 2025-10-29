@@ -19,6 +19,8 @@ namespace Luxia
 
 		m_LayerStack = std::make_shared<LayerStack>();
 		m_LayerStack->PushLayer(std::make_shared<Luxia::Layers::TestLayer>());
+
+		m_Running = true;
 	}
 
 	Application::~Application() = default;
@@ -27,19 +29,16 @@ namespace Luxia
 	{
 		LX_CORE_INFO("Application Started");
 
-		
+		// Set Event Handler for each layer
 		for (auto layer : m_LayerStack->m_Layers) {
 			layer->SetEventHandler(m_EventHandler);
 		}
+
 	
-		Luxia::MouseMoveEvent moveEvent(100.0f, 200.0f);
-		LX_CORE_TRACE(moveEvent.GetDebug());
-
-		if(moveEvent.GetEventType() == Luxia::EventType::MouseMoved) {
-			LX_CORE_TRACE("MouseMoveEvent Type Verified");
-		}
-
-		while (!m_Window->ShouldClose()) {
+		while (m_Running) {
+			// Dispatch Events
+			m_EventHandler.DispatchAll(this);
+			
 			// Begin the Frame
 			m_Window->BeginFrame();
 
@@ -52,12 +51,19 @@ namespace Luxia
 			m_Window->EndFrame();
 		}
 
+		for(auto layer : m_LayerStack->m_Layers) {
+			layer->OnDetach();
+		}
+		for (auto layer : m_LayerStack->m_Layers) {
+			layer->~Layer();
+		}
+
 		LX_CORE_ERROR("Application Ended");
 	}
 
 	void Application::OnEvent(Luxia::Event& e) {
 		for (auto layer : m_LayerStack->m_Layers) {
-			// layer->OnEvent();
+			layer->OnEvent(e);
 			if (e.isConsumed)
 				break;
 		}

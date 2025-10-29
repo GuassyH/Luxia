@@ -14,7 +14,7 @@ namespace Luxia
 		virtual void OnAttach() = 0;
 		virtual void OnDetach() = 0;
 		virtual void OnUpdate() = 0;
-		virtual void OnEvent() = 0;
+		virtual void OnEvent(Event& event) = 0;
 
 		virtual void SetEventHandler(Luxia::EventHandler& handler) { event_handler = &handler; }
 
@@ -25,3 +25,6 @@ namespace Luxia
 }
 
 #define PUSH_EVENT(EventType, ...) this->GetEventHandler().PushEvent(std::make_shared<EventType>(__VA_ARGS__))
+#define IS_EVENT(EventType, event) \
+	{ EventDispatcher dispatcher(event); \
+	dispatcher.Dispatch<EventType>([](EventType& e) { return true; }); }

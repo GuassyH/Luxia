@@ -38,6 +38,8 @@ namespace Luxia
 		
 		Luxia::EventHandler m_EventHandler;
 
+		bool m_Running = true;
+
 		Application();
 	};
 

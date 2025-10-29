@@ -19,16 +19,20 @@ namespace Luxia {
 	enum EventCategory {			// Bitmap
 		None						= 0b0,
 		EventCategoryApplication	= 0b1 << 0,
-		EventCategoryInput			= 0b1 << 1,
-		EventCategoryKeyboard		= 0b1 << 2,
-		EventCategoryMouse			= 0b1 << 3,
-		EventCategoryMouseButton	= 0b1 << 4
+		EventCategoryWindow			= 0b1 << 1,
+		EventCategoryInput			= 0b1 << 2,
+		EventCategoryKeyboard		= 0b1 << 3,
+		EventCategoryMouse			= 0b1 << 4,
+		EventCategoryMouseButton	= 0b1 << 5
 	};
 }
 
-#define GET_EVENT_TYPE(type) static EventType GetStaticType() { return type; }\
-								virtual EventType GetEventType() const override { return GetStaticType(); }
-#define GET_EVENT_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+#define GET_EVENT_TYPE(type) \
+	static EventType GetStaticType() { return type; }\
+	virtual EventType GetEventType() const override { return GetStaticType(); }
+
+#define GET_EVENT_CATEGORY(category) \
+virtual int GetCategoryFlags() const override { return category; }
 
 namespace Luxia
 {
@@ -48,3 +52,24 @@ namespace Luxia
 	};
 
 }
+
+
+namespace Luxia {
+	class EventDispatcher {
+	public:
+		EventDispatcher(Event& event)
+			: m_Event(event) {
+		}
+		template<typename T, typename F>
+		bool Dispatch(const F& func) {
+			if (m_Event.GetEventType() == T::GetStaticType()) {
+				m_Event.isConsumed = func(static_cast<T&>(m_Event));
+				return true;
+			}
+			return false;
+		}
+	private:
+		Event& m_Event;
+	};
+
+};

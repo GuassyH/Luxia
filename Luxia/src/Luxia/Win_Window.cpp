@@ -73,8 +73,8 @@ namespace Luxia::Platform {
 
 	void Win_Window::EndFrame()
 	{
-		if(glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			glfwSetWindowShouldClose(m_Window, true);
+		// if(glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			// PUSH_EVENT(EventType::WindowClose());
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
@@ -87,7 +87,4 @@ namespace Luxia::Platform {
 		glfwSetWindowTitle(m_Window, m_Title.c_str());
 	}
 
-	bool Win_Window::ShouldClose() const {
-		return glfwWindowShouldClose(m_Window);
-	}
 }

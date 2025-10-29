@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Luxia/Core.h"
+#include "Luxia/Log.h"
 #include "Event.h"
 
 #include <iostream>
@@ -8,9 +9,10 @@
 #include <memory>
 #include <xmemory>
 
-class Application;
 
 namespace Luxia {
+	class Application;
+	
 	class LUXIA_API EventHandler {
 	public:
 		EventHandler() = default; 
@@ -20,7 +22,7 @@ namespace Luxia {
 			event_queue.push_back(std::move(event));
 		}
 
-		void DispatchAll(Application* app) {}
+		void DispatchAll(Application* app);
 
 	private:
 		std::vector<std::shared_ptr<Event>> event_queue;

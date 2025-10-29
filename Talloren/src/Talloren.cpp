@@ -17,7 +17,7 @@ class IslandLayer : public Luxia::Layer
 		virtual void OnUpdate() override {
 			// Update logic here
 		}
-		virtual void OnEvent() override {
+		virtual void OnEvent(Luxia::Event& event) override {
 			// Event handling logic here
 		}
 };
