@@ -1,8 +1,6 @@
 #include "Application.h"
 #include "PlatformDefinitions.h"
-#include "TestLayer.h"
 
-#include "Events/MouseEvent.h"
 #include "Log.h"
 
 namespace Luxia
@@ -16,17 +14,21 @@ namespace Luxia
 		m_EventHandler = Luxia::EventHandler();
 
 		m_Window = Luxia::Platform::CreateAppWindow(1920, 1080, "Luxia Application");
+		m_Window->SetHandler(m_EventHandler);
 
 		m_LayerStack = std::make_shared<LayerStack>();
-		m_LayerStack->PushLayer(std::make_shared<Luxia::Layers::TestLayer>());
 
 		m_Running = true;
 	}
 
 	Application::~Application() = default;
 	
+	
+
 	void Application::Run()
 	{
+		
+
 		LX_CORE_INFO("Application Started");
 
 		// Set Event Handler for each layer
@@ -61,11 +63,19 @@ namespace Luxia
 		LX_CORE_ERROR("Application Ended");
 	}
 
-	void Application::OnEvent(Luxia::Event& e) {
+	bool Application::OnEvent(Luxia::Event& e) {
+		EventDispatcher dispatcher(e);
+		if (e.GetEventType() == EventType::WindowClose) {
+			m_Running = false; 
+			return true;
+		}
+
 		for (auto layer : m_LayerStack->m_Layers) {
 			layer->OnEvent(e);
 			if (e.isConsumed)
 				break;
 		}
+
+		return e.isConsumed ? true : false;
 	}
 }

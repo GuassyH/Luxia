@@ -24,7 +24,7 @@ namespace Luxia
 	};
 }
 
-#define PUSH_EVENT(EventType, ...) this->GetEventHandler().PushEvent(std::make_shared<EventType>(__VA_ARGS__))
+// #define PUSH_EVENT(EventType, ...) this->GetEventHandler().PushEvent(std::make_shared<EventType>(__VA_ARGS__))
 #define IS_EVENT(EventType, event) \
 	{ EventDispatcher dispatcher(event); \
 	dispatcher.Dispatch<EventType>([](EventType& e) { return true; }); }

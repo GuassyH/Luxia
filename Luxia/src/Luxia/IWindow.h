@@ -4,6 +4,7 @@
 #include <Luxia/Core.h>
 #include <Luxia/Events/Event.h>
 #include <Luxia/Events/EventHandler.h>
+#include "Luxia/Events/WindowEvent.h"
 
 namespace Luxia
 {
@@ -17,5 +18,9 @@ namespace Luxia
 		virtual void EndFrame() = 0;
 
 		virtual void SetTitle(const std::string& title) = 0;
+		void SetHandler(EventHandler& handler) { event_handler = &handler; }
+		EventHandler& GetEventHandler() { return *event_handler; }
+	protected:
+		EventHandler* event_handler;
 	};
 }

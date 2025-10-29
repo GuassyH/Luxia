@@ -170,7 +170,6 @@
     <ClInclude Include="src\Luxia\Log.h" />
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\PlatformDefinitions.h" />
-    <ClInclude Include="src\Luxia\TestLayer.h" />
     <ClInclude Include="src\Luxia\Win_Window.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />
   </ItemGroup>
@@ -178,7 +177,6 @@
     <ClCompile Include="src\Luxia\Application.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />
-    <ClCompile Include="src\Luxia\TestLayer.cpp" />
     <ClCompile Include="src\Luxia\Win_Window.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
   </ItemGroup>

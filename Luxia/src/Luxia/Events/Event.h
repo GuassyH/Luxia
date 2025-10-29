@@ -73,3 +73,5 @@ namespace Luxia {
 	};
 
 };
+
+#define LX_BIND_EVENT_FN(fn) [this](auto& e) { return this->fn(e); }

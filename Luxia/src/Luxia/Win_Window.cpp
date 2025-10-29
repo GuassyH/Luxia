@@ -73,8 +73,9 @@ namespace Luxia::Platform {
 
 	void Win_Window::EndFrame()
 	{
-		// if(glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			// PUSH_EVENT(EventType::WindowClose());
+		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+			PUSH_EVENT(WindowCloseEvent);
+		}
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);

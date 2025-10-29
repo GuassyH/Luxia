@@ -16,7 +16,6 @@ namespace Luxia {
 			std::ostringstream stream; stream << "Window Close Event";
 			return stream.str();
 		}
-
 	};
 
 };

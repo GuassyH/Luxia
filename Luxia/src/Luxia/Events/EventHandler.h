@@ -29,3 +29,5 @@ namespace Luxia {
 	};
 }
 
+#define PUSH_EVENT(EventType, ...) this->GetEventHandler().PushEvent(std::make_shared<EventType>(__VA_ARGS__))
+

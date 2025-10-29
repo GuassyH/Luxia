@@ -8,6 +8,7 @@
 
 #include "Events/Event.h"
 #include "Events/EventHandler.h"
+#include "Events/WindowEvent.h"
 
 #include <iostream>
 
@@ -23,7 +24,7 @@ namespace Luxia
 
 		void Run();
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { m_LayerStack->PushLayer(layer); }
-		void OnEvent(Luxia::Event& e);
+		bool OnEvent(Luxia::Event& e);
 
 		inline std::shared_ptr<Luxia::IWindow> GetWindow() { return m_Window; }
 		inline std::shared_ptr<Luxia::LayerStack> GetLayerStack() { return m_LayerStack; }
