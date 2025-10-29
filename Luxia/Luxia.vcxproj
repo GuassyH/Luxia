@@ -167,6 +167,7 @@
     <ClInclude Include="src\Luxia\IWindow.h" />
     <ClInclude Include="src\Luxia\Layer.h" />
     <ClInclude Include="src\Luxia\LayerStack.h" />
+    <ClInclude Include="src\Luxia\Layers\InputLayer.h" />
     <ClInclude Include="src\Luxia\Log.h" />
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\PlatformDefinitions.h" />

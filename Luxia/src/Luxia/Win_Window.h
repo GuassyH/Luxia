@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <KHR/khrplatform.h>
+#include <Windows.h> 
 
 namespace Luxia::Platform {
 	class Win_Window : public Luxia::IWindow {
@@ -27,14 +28,14 @@ namespace Luxia::Platform {
 		virtual int Create(int width, int height, const std::string& title) override;
 		virtual void BeginFrame() override;
 		virtual void EndFrame() override;
-		virtual void Close() override {} // impl later
+		virtual void Close() override;
 
 		virtual void SetTitle(const std::string& title) override;
-		virtual bool ResizeEvent(WindowResizeEvent& e) override;
-		virtual bool MoveEvent(WindowMoveEvent& e) override; 
 
 		virtual void OnEvent(Event& e) override;
-
+	protected:
+		virtual bool ResizeEvent(WindowResizeEvent& e) override;
+		virtual bool MoveEvent(WindowMoveEvent& e) override; 
 	};
 }
 

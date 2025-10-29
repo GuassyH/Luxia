@@ -30,12 +30,49 @@ namespace Luxia {
 		GET_EVENT_TYPE(EventType::MouseScrolled)
 		GET_EVENT_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
+		float GetX() { return e_XOffset; }
+		float GetY() { return e_YOffset; }
+
 		std::string GetDebug() override {
-			std::ostringstream stream; stream << "MouseScrollEvent: Horizontal = " << e_XOffset << ", Vertical = " << e_YOffset;
+			std::ostringstream stream; stream << "MouseScrollEvent: Horizontal = " << GetX() << ", Vertical = " << GetY();
 			return stream.str();
 		}
 
 	private:
 		float e_XOffset, e_YOffset;
+	};
+
+	
+
+	class MouseButtonPressEvent : public Event {
+	public:
+		MouseButtonPressEvent(int button) :  e_Button(button) {}
+
+		GET_EVENT_TYPE(EventType::MouseButtonPressed)
+		GET_EVENT_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton) 
+
+		std::string GetDebug() override {
+			std::ostringstream stream; stream << "Mouse Button Pressed: " << e_Button;
+			return stream.str();
+		}
+
+	private:
+		int e_Button;
+	};
+
+	class MouseButtonReleaseEvent : public Event {
+	public:
+		MouseButtonReleaseEvent(int button) : e_Button(button) {}
+
+		GET_EVENT_TYPE(EventType::MouseButtonReleased)
+		GET_EVENT_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
+
+		std::string GetDebug() override {
+			std::ostringstream stream; stream << "Mouse Button Pressed: " << e_Button;
+			return stream.str();
+		}
+
+	private:
+		int e_Button;
 	};
 };

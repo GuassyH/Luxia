@@ -17,7 +17,7 @@ namespace Luxia
 		virtual void OnUpdate() = 0;
 		virtual void OnEvent(Event& event) = 0;
 
-		virtual void SetEventHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
+		void SetEventHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
 
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
 	private:

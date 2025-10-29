@@ -13,6 +13,15 @@
     <Filter Include="vendor\glad">
       <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Luxia\Events">
+      <UniqueIdentifier>{788b1054-7fa6-4a44-b08d-8f981fe2341c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Windows">
+      <UniqueIdentifier>{a2d1d65e-c027-4763-baac-6f087799725f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Layers">
+      <UniqueIdentifier>{967ac1c8-740d-4227-a6f2-f7922b258198}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia.h">
@@ -27,38 +36,41 @@
     <ClInclude Include="src\Luxia\EntryPoint.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\IWindow.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Layer.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\LayerStack.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\Log.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\PlatformDefinitions.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Win_Window.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Events\Event.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Events\EventHandler.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Events\MouseEvent.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\WeakPtrProxy.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\WindowEvent.h">
-      <Filter>src\Luxia</Filter>
+      <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Events\MouseEvent.h">
+      <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Events\Event.h">
+      <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Events\EventHandler.h">
+      <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Win_Window.h">
+      <Filter>src\Luxia\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\IWindow.h">
+      <Filter>src\Luxia\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layer.h">
+      <Filter>src\Luxia\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\LayerStack.h">
+      <Filter>src\Luxia\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layers\InputLayer.h">
+      <Filter>src\Luxia\Layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,14 +80,14 @@
     <ClCompile Include="src\Luxia\Log.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Win_Window.cpp">
-      <Filter>src\Luxia</Filter>
-    </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp">
-      <Filter>src\Luxia</Filter>
+      <Filter>src\Luxia\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Win_Window.cpp">
+      <Filter>src\Luxia\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

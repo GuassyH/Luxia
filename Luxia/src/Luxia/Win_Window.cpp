@@ -38,29 +38,64 @@ namespace Luxia::Platform {
 			return -1;
 		}
 
-		LX_CORE_TRACE("OpenGL Info: ");
-		std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
-		std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-		std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
-		std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl << "\n";
+		LX_CORE_TRACE("OpenGL Version: {}", (char*)glGetString(GL_VERSION));
+		LX_CORE_TRACE("GLSL Version: {}", (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
+		LX_CORE_TRACE("Renderer: {}", (char*)glGetString(GL_RENDERER));
+		LX_CORE_TRACE("Vendor: {} \n", (char*)glGetString(GL_VENDOR));
+
 
 		// Get monitor height
-		 const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		 m_MonitorWidth = mode->width;
-		 m_MonitorHeight = mode->height;
+		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		m_MonitorWidth = mode->width;
+		m_MonitorHeight = mode->height;
 
 		// Set Size
 		glfwSetWindowSize(m_Window, m_Width, m_Height);
 		glfwSetWindowPos(m_Window, (m_MonitorWidth - m_Width) / 2, (m_MonitorHeight - m_Height) / 2);
 
-		std::cout << "New Window Size : " << width << "px * " << height << "px\n\n";
 
+		glfwSetWindowUserPointer(m_Window, this);
+
+		/*
+		// In your Win_Window::Create
+		glfwSetKeyCallback(m_Window, [this](GLFWwindow* window, int key, int scancode, int action, int mods) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (win) {
+				if (action == GLFW_PRESS)
+					win->GetEventHandler().PushEvent(std::make_shared<KeyPressEvent>(key));
+				else if (action == GLFW_RELEASE)
+					win->GetEventHandler().PushEvent(std::make_shared<KeyReleaseEvent>(key));
+			}
+			});
+		*/
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseMoveEvent>(xpos, ypos));
+			});
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (!win) return;
+			if (action == GLFW_PRESS)
+				// PUSH_EVENT(MouseButtonPressEvent, button);
+				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonPressEvent>(button));
+			else if (action == GLFW_RELEASE)
+				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonReleaseEvent>(button));
+			});
+
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseScrollEvent>(xoffset, yoffset));
+			});
+
+		
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);
 		glEnable(GL_DEPTH_TEST);
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
+
 
 
 		LX_CORE_INFO("Created Windows Window: {} ({}x{})", m_Title.c_str(), m_Width, m_Height);
@@ -78,13 +113,18 @@ namespace Luxia::Platform {
 
 	void Win_Window::EndFrame()
 	{
-		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		if (glfwWindowShouldClose(m_Window)) 
 			PUSH_EVENT(WindowCloseEvent);
-		}
+		
 
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 		// Windows specific end frame code
+	}
+
+	void Win_Window::Close() {
+		glfwDestroyWindow(m_Window);
+		glfwTerminate();
 	}
 
 	void Win_Window::SetTitle(const std::string& title)
@@ -99,11 +139,15 @@ namespace Luxia::Platform {
 		m_Width = e.GetX();
 		m_Height = e.GetY();
 
+		LX_CORE_WARN("Window Resized to: ({}x{})", m_Width, m_Height);
+
 		return true;
 	}
 
 	bool Win_Window::MoveEvent(WindowMoveEvent& e) {
 		glfwSetWindowPos(m_Window, e.GetX(), e.GetY());
+
+		LX_CORE_WARN("Window Moved to: ({}x{})", e.GetX(), e.GetY());
 
 		return true;
 	}
@@ -115,4 +159,6 @@ namespace Luxia::Platform {
 		if (e.isConsumed) return;
 		dispatcher.Dispatch<WindowMoveEvent>(LX_BIND_EVENT_FN(MoveEvent));
 	}
+
+
 }

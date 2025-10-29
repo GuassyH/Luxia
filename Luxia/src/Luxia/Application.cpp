@@ -3,6 +3,8 @@
 #include "Events/MouseEvent.h"
 #include "Log.h"
 
+#include "Layers/InputLayer.h"
+
 namespace Luxia
 {
 	Luxia::Application* Application::a_Instance = nullptr;
@@ -17,6 +19,9 @@ namespace Luxia
 		m_Window->SetHandler(m_EventHandler);
 
 		m_LayerStack = std::make_shared<LayerStack>();
+		m_LayerStack->m_Layers.clear();	m_LayerStack->m_Layers.resize(0);
+
+		m_LayerStack->PushLayer(std::make_shared<InputLayer>());
 
 		m_Running = true;
 	}
@@ -29,7 +34,7 @@ namespace Luxia
 		LX_CORE_INFO("Application Started");
 
 		// Set Event Handler for each layer
-		for (auto layer : m_LayerStack->m_Layers) {
+		for (auto& layer : m_LayerStack->m_Layers) {
 			layer->SetEventHandler(m_EventHandler);
 		}
 
@@ -38,17 +43,19 @@ namespace Luxia
 
 		while (m_Running) {
 			m_EventHandler->DispatchAll(this);
-			
+
 			m_Window->BeginFrame();
 
-			for (auto layer : m_LayerStack->m_Layers) {
+			for (auto& layer : m_LayerStack->m_Layers) {
+				// Input Layer should be first to update
 				layer->OnUpdate();
+				// Rendering layer should be last to update
 			}
 
 			m_Window->EndFrame();
 		}
 
-		// ======= MAIN LOOP =======
+		// ======= ========= =======
 
 
 		// Detach
@@ -66,6 +73,7 @@ namespace Luxia
 		LX_CORE_ERROR("Application Ended");
 	}
 
+
 	bool Application::OnEvent(Luxia::Event& e) {
 		EventDispatcher dispatcher(e);
 		m_Running = !dispatcher.Dispatch<WindowCloseEvent>([](WindowCloseEvent& e) { return true; });
@@ -78,7 +86,7 @@ namespace Luxia
 		if (!e.isConsumed) {
 			m_Window->OnEvent(e);
 		}
-
+		
 		return e.isConsumed;
 	}
 }

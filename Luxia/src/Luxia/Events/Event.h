@@ -32,7 +32,7 @@ namespace Luxia {
 	virtual EventType GetEventType() const override { return GetStaticType(); }
 
 #define GET_EVENT_CATEGORY(category) \
-virtual int GetCategoryFlags() const override { return category; }
+	virtual int GetCategoryFlags() const override { return category; }
 
 namespace Luxia
 {
@@ -78,7 +78,6 @@ namespace Luxia {
 };
 
 #define IS_EVENT(EventType, event) \
-	{ EventDispatcher dispatcher(event); \
-	dispatcher.Dispatch<EventType>([](EventType& e) { return true; }); }
+	{ return EventType == event.GetStaticType(); }
 
 #define LX_BIND_EVENT_FN(fn) [this](auto& e) { return this->fn(e); } // FUNC NEEDS TO BE BOOL WITH (EventTypeClass& e)
