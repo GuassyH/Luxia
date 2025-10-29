@@ -1,5 +1,5 @@
 #include "EventHandler.h"
-#include "Application.h"
+#include "Luxia/Application.h"
 
 
 namespace Luxia {

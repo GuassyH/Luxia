@@ -7,6 +7,9 @@
 namespace Luxia::Layers {
 	class TestLayer : public Luxia::Layer {
 	public:
+		TestLayer() = default;
+		virtual ~TestLayer() = default;
+
 		virtual void OnAttach() override {
 			LX_CORE_WARN("TestLayer Attached");
 		}
@@ -15,8 +18,9 @@ namespace Luxia::Layers {
 		}
 		virtual void OnUpdate() override;
 
-		virtual void OnEvent(Luxia::Event& e) override {
+		virtual void OnEvent() override {
 			LX_CORE_TRACE("TestLayer Event Occurred");
 		}
 	};
 }
+

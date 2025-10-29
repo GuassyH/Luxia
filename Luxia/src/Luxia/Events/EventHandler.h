@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Luxia/Core.h"
 #include "Event.h"
 
 #include <iostream>

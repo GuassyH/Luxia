@@ -13,12 +13,6 @@
     <Filter Include="vendor\glad">
       <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Layers">
-      <UniqueIdentifier>{2a23e22d-61f8-457d-9610-45e5f1bfa0a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Luxia\Events">
-      <UniqueIdentifier>{9e9c2233-0aba-49a4-a9cc-ce34116865cc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia.h">
@@ -33,39 +27,42 @@
     <ClInclude Include="src\Luxia\EntryPoint.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Event.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\EventHandler.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\IWindow.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layer.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\LayerStack.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Log.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\MouseEvent.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\PlatformDefinitions.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\TestLayer.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Win_Window.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Layer.h">
-      <Filter>src\Luxia\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\LayerStack.h">
-      <Filter>src\Luxia\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\TestLayer.h">
-      <Filter>src\Luxia\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Event.h">
-      <Filter>src\Luxia\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\MouseEvent.h">
-      <Filter>src\Luxia\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\EventHandler.h">
-      <Filter>src\Luxia\Events</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\EventHandler.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Log.cpp">
@@ -79,9 +76,6 @@
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\EventHandler.cpp">
-      <Filter>src\Luxia\Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

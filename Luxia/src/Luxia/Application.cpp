@@ -2,6 +2,7 @@
 #include "PlatformDefinitions.h"
 #include "TestLayer.h"
 
+#include "Events/MouseEvent.h"
 #include "Log.h"
 
 namespace Luxia
@@ -26,6 +27,18 @@ namespace Luxia
 	{
 		LX_CORE_INFO("Application Started");
 
+		
+		for (auto layer : m_LayerStack->m_Layers) {
+			layer->SetEventHandler(m_EventHandler);
+		}
+	
+		Luxia::MouseMoveEvent moveEvent(100.0f, 200.0f);
+		LX_CORE_TRACE(moveEvent.GetDebug());
+
+		if(moveEvent.GetEventType() == Luxia::EventType::MouseMoved) {
+			LX_CORE_TRACE("MouseMoveEvent Type Verified");
+		}
+
 		while (!m_Window->ShouldClose()) {
 			// Begin the Frame
 			m_Window->BeginFrame();
@@ -44,7 +57,7 @@ namespace Luxia
 
 	void Application::OnEvent(Luxia::Event& e) {
 		for (auto layer : m_LayerStack->m_Layers) {
-			layer->OnEvent(e);
+			// layer->OnEvent();
 			if (e.isConsumed)
 				break;
 		}

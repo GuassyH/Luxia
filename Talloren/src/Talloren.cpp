@@ -6,6 +6,8 @@ class IslandLayer : public Luxia::Layer
 	public:
 		IslandLayer() = default;
 		virtual ~IslandLayer() = default;
+
+		// Override Layer methods
 		virtual void OnAttach() override {
 			LX_WARN("IslandLayer Attached");
 		}
@@ -15,7 +17,7 @@ class IslandLayer : public Luxia::Layer
 		virtual void OnUpdate() override {
 			// Update logic here
 		}
-		virtual void OnEvent(Luxia::Event& e) override {
+		virtual void OnEvent() override {
 			// Event handling logic here
 		}
 };
@@ -23,8 +25,8 @@ class IslandLayer : public Luxia::Layer
 class TallorenApp : public Luxia::Application
 {
 	public:
-		TallorenApp() {}
-		~TallorenApp() {}
+		TallorenApp() = default;
+		~TallorenApp() = default;
 };
 
 Luxia::Application* Luxia::CreateApplication(){

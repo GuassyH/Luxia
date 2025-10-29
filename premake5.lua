@@ -31,6 +31,7 @@ project "Luxia"
 
 	-- what should be included?
 	includedirs{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor",
 		"%{prj.name}/vendor/spdlog/include"
 	}

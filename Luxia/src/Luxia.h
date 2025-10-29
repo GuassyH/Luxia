@@ -5,8 +5,8 @@
 #include "Luxia/Application.h"
 
 #include "Luxia/Log.h"
-#include "Luxia/Event.h"
-#include "Luxia/EventHandler.h"
+#include "Luxia/Events/Event.h"
+#include "Luxia/Events/EventHandler.h"
 
 // ---- Entry Point ----
 #include "Luxia/EntryPoint.h"

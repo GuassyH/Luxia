@@ -6,8 +6,8 @@
 #include "LayerStack.h"
 #include "Layer.h"
 
-#include "Event.h"
-#include "EventHandler.h"
+#include "Events/Event.h"
+#include "Events/EventHandler.h"
 
 #include <iostream>
 

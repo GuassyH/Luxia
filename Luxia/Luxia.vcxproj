@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -104,7 +104,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -133,7 +133,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -158,24 +158,24 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\EventHandler.h" />
-    <ClInclude Include="src\Luxia\MouseEvent.h" />
-    <ClInclude Include="src\Luxia\Event.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Core.h" />
     <ClInclude Include="src\Luxia\EntryPoint.h" />
+    <ClInclude Include="src\Luxia\Events\Event.h" />
+    <ClInclude Include="src\Luxia\Events\EventHandler.h" />
     <ClInclude Include="src\Luxia\IWindow.h" />
     <ClInclude Include="src\Luxia\Layer.h" />
     <ClInclude Include="src\Luxia\LayerStack.h" />
     <ClInclude Include="src\Luxia\Log.h" />
+    <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\PlatformDefinitions.h" />
     <ClInclude Include="src\Luxia\TestLayer.h" />
     <ClInclude Include="src\Luxia\Win_Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Application.cpp" />
+    <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />
     <ClCompile Include="src\Luxia\TestLayer.cpp" />
     <ClCompile Include="src\Luxia\Win_Window.cpp" />
