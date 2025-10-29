@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "PlatformDefinitions.h"
-
+#include "Events/MouseEvent.h"
 #include "Log.h"
 
 namespace Luxia
@@ -10,8 +10,8 @@ namespace Luxia
 	Application::Application()
 	{
 		Application::a_Instance = this;
-
-		m_EventHandler = Luxia::EventHandler();
+		
+		m_EventHandler = std::make_shared<Luxia::EventHandler>();	
 
 		m_Window = Luxia::Platform::CreateAppWindow(1920, 1080, "Luxia Application");
 		m_Window->SetHandler(m_EventHandler);
@@ -23,12 +23,9 @@ namespace Luxia
 
 	Application::~Application() = default;
 	
-	
 
 	void Application::Run()
 	{
-		
-
 		LX_CORE_INFO("Application Started");
 
 		// Set Event Handler for each layer
@@ -36,46 +33,52 @@ namespace Luxia
 			layer->SetEventHandler(m_EventHandler);
 		}
 
-	
+
+		// ======= MAIN LOOP =======
+
 		while (m_Running) {
-			// Dispatch Events
-			m_EventHandler.DispatchAll(this);
+			m_EventHandler->DispatchAll(this);
 			
-			// Begin the Frame
 			m_Window->BeginFrame();
 
-			// Loop through layers
 			for (auto layer : m_LayerStack->m_Layers) {
 				layer->OnUpdate();
 			}
 
-			// End the Frame (swap buffers)
 			m_Window->EndFrame();
 		}
 
-		for(auto layer : m_LayerStack->m_Layers) {
-			layer->OnDetach();
+		// ======= MAIN LOOP =======
+
+
+		// Detach
+		for (int i = m_LayerStack->m_Layers.size() - 1; i >= 0; i--) {
+			m_LayerStack->m_Layers[i]->OnDetach();
 		}
-		for (auto layer : m_LayerStack->m_Layers) {
-			layer->~Layer();
-		}
+		
+		// Deconstruct
+		m_LayerStack->m_Layers.clear();
+		m_Window->Close();
+		m_Window.reset();
+
+		m_EventHandler.reset();
 
 		LX_CORE_ERROR("Application Ended");
 	}
 
 	bool Application::OnEvent(Luxia::Event& e) {
 		EventDispatcher dispatcher(e);
-		if (e.GetEventType() == EventType::WindowClose) {
-			m_Running = false; 
-			return true;
-		}
+		m_Running = !dispatcher.Dispatch<WindowCloseEvent>([](WindowCloseEvent& e) { return true; });
 
-		for (auto layer : m_LayerStack->m_Layers) {
-			layer->OnEvent(e);
+		for (int i = m_LayerStack->m_Layers.size() - 1; i >= 0; i--) {
+			m_LayerStack->m_Layers[i]->OnEvent(e);
 			if (e.isConsumed)
 				break;
 		}
+		if (!e.isConsumed) {
+			m_Window->OnEvent(e);
+		}
 
-		return e.isConsumed ? true : false;
+		return e.isConsumed;
 	}
 }

@@ -36,7 +36,7 @@ virtual int GetCategoryFlags() const override { return category; }
 
 namespace Luxia
 {
-	class LUXIA_API Event {
+	class LUXIA_API Event { // Abstract class
 	public:
 		virtual ~Event() = default;
 		virtual EventType GetEventType() const = 0;
@@ -55,13 +55,16 @@ namespace Luxia
 
 
 namespace Luxia {
-	class EventDispatcher {
+	class EventDispatcher { // Used to call a function if event is of right type
 	public:
 		EventDispatcher(Event& event)
 			: m_Event(event) {
 		}
+
+		// If the event is same as wanted, the func will execute. 
+		// IMP: Functions must be bools and return wether is consumed is true
 		template<typename T, typename F>
-		bool Dispatch(const F& func) {
+		bool Dispatch(const F& func) { 
 			if (m_Event.GetEventType() == T::GetStaticType()) {
 				m_Event.isConsumed = func(static_cast<T&>(m_Event));
 				return true;
@@ -74,4 +77,8 @@ namespace Luxia {
 
 };
 
-#define LX_BIND_EVENT_FN(fn) [this](auto& e) { return this->fn(e); }
+#define IS_EVENT(EventType, event) \
+	{ EventDispatcher dispatcher(event); \
+	dispatcher.Dispatch<EventType>([](EventType& e) { return true; }); }
+
+#define LX_BIND_EVENT_FN(fn) [this](auto& e) { return this->fn(e); } // FUNC NEEDS TO BE BOOL WITH (EventTypeClass& e)

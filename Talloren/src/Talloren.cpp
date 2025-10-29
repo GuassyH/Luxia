@@ -24,9 +24,9 @@ class IslandLayer : public Luxia::Layer
 
 class TallorenApp : public Luxia::Application
 {
-	public:
-		TallorenApp() = default;
-		~TallorenApp() = default;
+public:
+	TallorenApp() = default;
+	~TallorenApp() = default;
 };
 
 Luxia::Application* Luxia::CreateApplication(){

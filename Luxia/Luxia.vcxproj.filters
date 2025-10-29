@@ -27,12 +27,6 @@
     <ClInclude Include="src\Luxia\EntryPoint.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Event.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\EventHandler.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\IWindow.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
@@ -45,16 +39,25 @@
     <ClInclude Include="src\Luxia\Log.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\MouseEvent.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\PlatformDefinitions.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\TestLayer.h">
+    <ClInclude Include="src\Luxia\Win_Window.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Win_Window.h">
+    <ClInclude Include="src\Luxia\Events\Event.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Events\EventHandler.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Events\MouseEvent.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\WeakPtrProxy.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Events\WindowEvent.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,13 +65,7 @@
     <ClCompile Include="src\Luxia\Application.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\EventHandler.cpp">
-      <Filter>src\Luxia</Filter>
-    </ClCompile>
     <ClCompile Include="src\Luxia\Log.cpp">
-      <Filter>src\Luxia</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\TestLayer.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Win_Window.cpp">
@@ -76,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Events\EventHandler.cpp">
+      <Filter>src\Luxia</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

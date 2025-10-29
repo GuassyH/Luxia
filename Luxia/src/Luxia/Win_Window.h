@@ -11,11 +11,11 @@ namespace Luxia::Platform {
 		Win_Window();
 		~Win_Window();
 
-		int m_Width;
-		int m_Height;
+		int m_Width = 0;
+		int m_Height = 0;
 
-		int m_MonitorWidth;
-		int m_MonitorHeight;
+		int m_MonitorWidth = 0;
+		int m_MonitorHeight = 0;
 
 		std::string m_Title;
 
@@ -27,8 +27,13 @@ namespace Luxia::Platform {
 		virtual int Create(int width, int height, const std::string& title) override;
 		virtual void BeginFrame() override;
 		virtual void EndFrame() override;
+		virtual void Close() override {} // impl later
 
 		virtual void SetTitle(const std::string& title) override;
+		virtual bool ResizeEvent(WindowResizeEvent& e) override;
+		virtual bool MoveEvent(WindowMoveEvent& e) override; 
+
+		virtual void OnEvent(Event& e) override;
 
 	};
 }

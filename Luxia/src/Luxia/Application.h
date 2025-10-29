@@ -28,20 +28,19 @@ namespace Luxia
 
 		inline std::shared_ptr<Luxia::IWindow> GetWindow() { return m_Window; }
 		inline std::shared_ptr<Luxia::LayerStack> GetLayerStack() { return m_LayerStack; }
-		inline Luxia::EventHandler& GetEventHandler() { return m_EventHandler; }
+		inline Luxia::EventHandler& GetEventHandler() { return *m_EventHandler; }
 
 		// Each client defines this function; editor, runtime, etc.
 	protected:
 		static Application* a_Instance;
-		
+		Application();
+
 		std::shared_ptr<Luxia::IWindow> m_Window;
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
 		
-		Luxia::EventHandler m_EventHandler;
+		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
 
 		bool m_Running = true;
-
-		Application();
 	};
 
 	Application* CreateApplication();

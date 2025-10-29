@@ -3,6 +3,7 @@
 #include "Luxia/Events/Event.h"
 #include "Luxia/Events/EventHandler.h"
 #include "Core.h"
+#include "WeakPtrProxy.h"
 
 namespace Luxia
 {
@@ -16,15 +17,11 @@ namespace Luxia
 		virtual void OnUpdate() = 0;
 		virtual void OnEvent(Event& event) = 0;
 
-		virtual void SetEventHandler(Luxia::EventHandler& handler) { event_handler = &handler; }
+		virtual void SetEventHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
 
-		Luxia::EventHandler& GetEventHandler() { return *event_handler; }
+		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
 	private:
-		Luxia::EventHandler* event_handler;
+		WeakPtrProxy<EventHandler> event_handler;
 	};
 }
 
-// #define PUSH_EVENT(EventType, ...) this->GetEventHandler().PushEvent(std::make_shared<EventType>(__VA_ARGS__))
-#define IS_EVENT(EventType, event) \
-	{ EventDispatcher dispatcher(event); \
-	dispatcher.Dispatch<EventType>([](EventType& e) { return true; }); }

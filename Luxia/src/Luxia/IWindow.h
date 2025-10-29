@@ -5,6 +5,7 @@
 #include <Luxia/Events/Event.h>
 #include <Luxia/Events/EventHandler.h>
 #include "Luxia/Events/WindowEvent.h"
+#include "WeakPtrProxy.h"
 
 namespace Luxia
 {
@@ -16,11 +17,18 @@ namespace Luxia
 		virtual int Create(int width, int height, const std::string& title = "Luxia") = 0;
 		virtual void BeginFrame() = 0;
 		virtual void EndFrame() = 0;
+		virtual void Close() = 0;
 
 		virtual void SetTitle(const std::string& title) = 0;
-		void SetHandler(EventHandler& handler) { event_handler = &handler; }
-		EventHandler& GetEventHandler() { return *event_handler; }
+		virtual bool ResizeEvent(WindowResizeEvent& e) = 0;
+		virtual bool MoveEvent(WindowMoveEvent& e) = 0;
+
+		virtual void OnEvent(Event& e) = 0;
+
+		virtual void SetHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
+		virtual EventHandler& GetEventHandler() { return *event_handler.lock(); }
+	
 	protected:
-		EventHandler* event_handler;
+		WeakPtrProxy<EventHandler> event_handler;
 	};
 }

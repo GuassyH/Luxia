@@ -49,7 +49,11 @@ namespace Luxia::Platform {
 		 m_MonitorWidth = mode->width;
 		 m_MonitorHeight = mode->height;
 
-		// Set Frame Buffer Size Callback
+		// Set Size
+		glfwSetWindowSize(m_Window, m_Width, m_Height);
+		glfwSetWindowPos(m_Window, (m_MonitorWidth - m_Width) / 2, (m_MonitorHeight - m_Height) / 2);
+
+		std::cout << "New Window Size : " << width << "px * " << height << "px\n\n";
 
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);
@@ -69,6 +73,7 @@ namespace Luxia::Platform {
 		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, m_Width, m_Height);
+
 	}
 
 	void Win_Window::EndFrame()
@@ -88,4 +93,26 @@ namespace Luxia::Platform {
 		glfwSetWindowTitle(m_Window, m_Title.c_str());
 	}
 
+	bool Win_Window::ResizeEvent(WindowResizeEvent& e) {
+		glfwSetWindowSize(m_Window, e.GetX(), e.GetY());
+		glViewport(0, 0, e.GetX(), e.GetY());
+		m_Width = e.GetX();
+		m_Height = e.GetY();
+
+		return true;
+	}
+
+	bool Win_Window::MoveEvent(WindowMoveEvent& e) {
+		glfwSetWindowPos(m_Window, e.GetX(), e.GetY());
+
+		return true;
+	}
+
+	void Win_Window::OnEvent(Event& e) {
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowResizeEvent>(LX_BIND_EVENT_FN(ResizeEvent));
+
+		if (e.isConsumed) return;
+		dispatcher.Dispatch<WindowMoveEvent>(LX_BIND_EVENT_FN(MoveEvent));
+	}
 }

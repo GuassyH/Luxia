@@ -15,12 +15,12 @@ namespace Luxia::Platform
 	{
 		std::shared_ptr<Luxia::IWindow> win;
 		#ifdef LUXIA_PLATFORM_WINDOWS
-		win = std::make_shared<Luxia::Platform::Win_Window>();
-		win->Create(1920, 1080, "Luxia Application");
+			win = std::make_shared<Luxia::Platform::Win_Window>();
 		#else 
 		#error Luxia doesnt support your OS!
 		#endif
 		
+		win->Create(1920, 1080, "Luxia Application");
 		return win;
 	}
 }

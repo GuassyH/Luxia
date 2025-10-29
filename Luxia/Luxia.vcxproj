@@ -170,6 +170,7 @@
     <ClInclude Include="src\Luxia\Log.h" />
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\PlatformDefinitions.h" />
+    <ClInclude Include="src\Luxia\WeakPtrProxy.h" />
     <ClInclude Include="src\Luxia\Win_Window.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />
   </ItemGroup>
