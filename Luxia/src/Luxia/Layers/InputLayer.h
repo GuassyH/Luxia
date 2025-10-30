@@ -22,9 +22,9 @@ namespace Luxia
 
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);
-
+			
 			// Handle input events here
-			LX_CORE_TRACE("InputLayer received event: {}", e.GetDebug());
+			// LX_CORE_TRACE("InputLayer received event: {}", e.GetDebug());
 		}
 	};
 }

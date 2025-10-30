@@ -7,7 +7,7 @@
 
 namespace Luxia
 {
-	Luxia::Application* Application::a_Instance = nullptr;
+	Application* Application::a_Instance = nullptr;
 
 	Application::Application()
 	{
@@ -27,11 +27,11 @@ namespace Luxia
 	}
 
 	Application::~Application() = default;
-	
 
 	void Application::Run()
 	{
 		LX_CORE_INFO("Application Started");
+
 
 		// Set Event Handler for each layer
 		for (auto& layer : m_LayerStack->m_Layers) {
@@ -41,7 +41,7 @@ namespace Luxia
 
 		// ======= MAIN LOOP =======
 
-		while (m_Running) {
+		while (m_Window->isRunning()) {
 			m_EventHandler->DispatchAll(this);
 
 			m_Window->BeginFrame();
@@ -65,18 +65,15 @@ namespace Luxia
 		
 		// Deconstruct
 		m_LayerStack->m_Layers.clear();
-		m_Window->Close();
 		m_Window.reset();
-
 		m_EventHandler.reset();
+		
 
 		LX_CORE_ERROR("Application Ended");
 	}
 
 
 	bool Application::OnEvent(Luxia::Event& e) {
-		EventDispatcher dispatcher(e);
-		m_Running = !dispatcher.Dispatch<WindowCloseEvent>([](WindowCloseEvent& e) { return true; });
 
 		for (int i = m_LayerStack->m_Layers.size() - 1; i >= 0; i--) {
 			m_LayerStack->m_Layers[i]->OnEvent(e);

@@ -42,13 +42,13 @@ namespace Luxia {
 
 	class WindowMoveEvent : public Event {
 	public:
-		WindowMoveEvent(float x, float y) : xPos(x), yPos(y) {}
+		WindowMoveEvent(int x, int y) : xPos(x), yPos(y) {}
 
 		GET_EVENT_TYPE(EventType::WindowResize)
 		GET_EVENT_CATEGORY(EventCategoryWindow)
 
-		float GetX() { return xPos; }
-		float GetY() { return yPos; }
+		int GetX() { return xPos; }
+		int GetY() { return yPos; }
 
 		std::string GetDebug() override {
 			std::ostringstream stream; stream << "Window Moved: (" << GetX() << ", " << GetY() << ")";
@@ -56,7 +56,35 @@ namespace Luxia {
 		}
 
 	private:
-		float xPos, yPos;
+		int xPos, yPos;
+	};
+
+	class WindowFocusEvent : public Event {
+	public:
+		WindowFocusEvent() {}
+
+		GET_EVENT_TYPE(EventType::WindowFocus)
+		GET_EVENT_CATEGORY(EventCategoryWindow)
+
+		std::string GetDebug() override {
+			std::ostringstream stream; stream << "Window Focused";
+			return stream.str();
+		}
+
+	};
+
+	class WindowLoseFocusEvent : public Event {
+	public:
+		WindowLoseFocusEvent() {}
+
+		GET_EVENT_TYPE(EventType::WindowLostFocus)
+		GET_EVENT_CATEGORY(EventCategoryWindow)
+
+		std::string GetDebug() override {
+			std::ostringstream stream; stream << "Window Lost Focus";
+			return stream.str();
+		}
+
 	};
 };
 

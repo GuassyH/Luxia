@@ -12,11 +12,7 @@ namespace Luxia::Platform {
 		Win_Window();
 		~Win_Window();
 
-		int m_Width = 0;
-		int m_Height = 0;
-
-		int m_MonitorWidth = 0;
-		int m_MonitorHeight = 0;
+	
 
 		std::string m_Title;
 
@@ -35,7 +31,6 @@ namespace Luxia::Platform {
 		virtual void OnEvent(Event& e) override;
 	protected:
 		virtual bool ResizeEvent(WindowResizeEvent& e) override;
-		virtual bool MoveEvent(WindowMoveEvent& e) override; 
 	};
 }
 

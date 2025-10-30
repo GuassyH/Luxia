@@ -87,8 +87,29 @@ namespace Luxia::Platform {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseScrollEvent>(xoffset, yoffset));
 			});
-
 		
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(width, height));
+			});
+		
+		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xpos, int ypos) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowMoveEvent>(xpos, ypos));
+			});
+
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowCloseEvent>());
+			});
+
+		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
+			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			if (!win) return;
+			focused == 1 ? win->GetEventHandler().PushEvent(std::make_shared<WindowFocusEvent>())
+				: win->GetEventHandler().PushEvent(std::make_shared<WindowLoseFocusEvent>());
+			});
+
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);
 		glEnable(GL_DEPTH_TEST);
@@ -113,10 +134,6 @@ namespace Luxia::Platform {
 
 	void Win_Window::EndFrame()
 	{
-		if (glfwWindowShouldClose(m_Window)) 
-			PUSH_EVENT(WindowCloseEvent);
-		
-
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 		// Windows specific end frame code
@@ -125,6 +142,7 @@ namespace Luxia::Platform {
 	void Win_Window::Close() {
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
+		running = false;
 	}
 
 	void Win_Window::SetTitle(const std::string& title)
@@ -134,30 +152,20 @@ namespace Luxia::Platform {
 	}
 
 	bool Win_Window::ResizeEvent(WindowResizeEvent& e) {
-		glfwSetWindowSize(m_Window, e.GetX(), e.GetY());
 		glViewport(0, 0, e.GetX(), e.GetY());
 		m_Width = e.GetX();
 		m_Height = e.GetY();
-
-		LX_CORE_WARN("Window Resized to: ({}x{})", m_Width, m_Height);
-
-		return true;
-	}
-
-	bool Win_Window::MoveEvent(WindowMoveEvent& e) {
-		glfwSetWindowPos(m_Window, e.GetX(), e.GetY());
-
-		LX_CORE_WARN("Window Moved to: ({}x{})", e.GetX(), e.GetY());
-
 		return true;
 	}
 
 	void Win_Window::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowResizeEvent>(LX_BIND_EVENT_FN(ResizeEvent));
 
-		if (e.isConsumed) return;
+		dispatcher.Dispatch<WindowResizeEvent>(LX_BIND_EVENT_FN(ResizeEvent));
 		dispatcher.Dispatch<WindowMoveEvent>(LX_BIND_EVENT_FN(MoveEvent));
+		dispatcher.Dispatch<WindowFocusEvent>(LX_BIND_EVENT_FN(FocusEvent));
+		dispatcher.Dispatch<WindowLoseFocusEvent>(LX_BIND_EVENT_FN(LoseFocusEvent));
+		dispatcher.Dispatch<WindowCloseEvent>(LX_BIND_EVENT_FN(CloseEvent));
 	}
 
 

@@ -26,11 +26,47 @@ namespace Luxia
 		virtual void OnEvent(Event& e) = 0;
 
 		virtual void SetHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
-		virtual EventHandler& GetEventHandler() { return *event_handler.lock(); }
-	
+		EventHandler& GetEventHandler() const { return *event_handler.lock(); }
+		bool IsFocused() const { return focused; }
+		bool isRunning() const { return running; }
+
 	protected:
-		virtual bool ResizeEvent(WindowResizeEvent& e) = 0;
-		virtual bool MoveEvent(WindowMoveEvent& e) = 0;
+		virtual bool ResizeEvent(WindowResizeEvent& e) {
+			m_Width = e.GetX();
+			m_Height = e.GetY();
+			return true;
+		}
+		virtual bool MoveEvent(WindowMoveEvent& e) {
+			m_PosX = e.GetX();
+			m_PosY = e.GetY();
+			return true;
+		}
+		virtual bool FocusEvent(WindowFocusEvent& e) {
+			focused = true;
+			return true;
+		}
+		virtual bool LoseFocusEvent(WindowLoseFocusEvent& e) {
+			focused = false;
+			return true;
+		}
+		virtual bool CloseEvent(WindowCloseEvent& e) {
+			LX_CORE_WARN("Window Close Event Received");
+			Close();
+			return true;
+		}
+
 		WeakPtrProxy<EventHandler> event_handler;
+
+		int m_Width = 0;
+		int m_Height = 0;
+
+		int m_MonitorWidth = 0;
+		int m_MonitorHeight = 0;
+
+		int m_PosX = 0;
+		int m_PosY = 0;
+
+		bool focused = true;
+		bool running = true;
 	};
 }
