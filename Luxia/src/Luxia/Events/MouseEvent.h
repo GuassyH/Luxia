@@ -51,6 +51,8 @@ namespace Luxia {
 		GET_EVENT_TYPE(EventType::MouseButtonPressed)
 		GET_EVENT_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton) 
 
+		int GetKeyCode() const { return e_Button; }
+
 		std::string GetDebug() override {
 			std::ostringstream stream; stream << "Mouse Button Pressed: " << e_Button;
 			return stream.str();
@@ -67,6 +69,8 @@ namespace Luxia {
 		GET_EVENT_TYPE(EventType::MouseButtonReleased)
 		GET_EVENT_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
 
+		int GetKeyCode() const { return e_Button; }
+		
 		std::string GetDebug() override {
 			std::ostringstream stream; stream << "Mouse Button Pressed: " << e_Button;
 			return stream.str();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Luxia/Layer.h" 
+#include "Luxia/InputSystem.h"
 
 namespace Luxia
 {
@@ -23,6 +24,29 @@ namespace Luxia
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);
 			
+			Input::InputSytem& input = Input::InputSytem::Get();
+
+			dispatcher.Dispatch<KeyPressEvent>([&](KeyPressEvent& event) {
+				input.KeyPressed(event.GetKeyCode());
+				return false; // Not consumed
+				});
+
+			dispatcher.Dispatch<KeyReleaseEvent>([&](KeyReleaseEvent& event) {
+				input.KeyReleased(event.GetKeyCode());
+				return false; // Not consumed
+				});
+
+			dispatcher.Dispatch<MouseButtonPressEvent>([&](MouseButtonPressEvent& event) {
+				input.MouseButtonPressed(event.GetKeyCode());
+				return false; // Not consumed
+				});
+
+			dispatcher.Dispatch<MouseButtonReleaseEvent>([&](MouseButtonReleaseEvent& event) {
+				input.MouseButtonReleased(event.GetKeyCode());
+				return false; // Not consumed
+				});
+
+
 			// Handle input events here
 			// LX_CORE_TRACE("InputLayer received event: {}", e.GetDebug());
 		}

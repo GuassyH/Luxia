@@ -4,6 +4,7 @@
 #include "Log.h"
 
 #include "Layers/InputLayer.h"
+#include "Layers/RenderLayer.h"
 
 namespace Luxia
 {
@@ -22,11 +23,13 @@ namespace Luxia
 		m_LayerStack->m_Layers.clear();	m_LayerStack->m_Layers.resize(0);
 
 		m_LayerStack->PushLayer(std::make_shared<InputLayer>());
+		m_LayerStack->PushLayer(std::make_shared<RenderLayer>());
 
 		m_Running = true;
 	}
 
 	Application::~Application() = default;
+
 
 	void Application::Run()
 	{

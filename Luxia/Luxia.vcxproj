@@ -158,6 +158,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\InputSystem.h" />
+    <ClInclude Include="src\Luxia\Layers\RenderLayer.h" />
     <ClInclude Include="src\Luxia\Events\KeyEvent.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />

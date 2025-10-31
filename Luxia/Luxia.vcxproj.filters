@@ -75,6 +75,12 @@
     <ClInclude Include="src\Luxia\Events\KeyEvent.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Layers\RenderLayer.h">
+      <Filter>src\Luxia\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\InputSystem.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
