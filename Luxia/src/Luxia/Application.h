@@ -39,8 +39,6 @@ namespace Luxia
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
 		
 		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
-
-		bool m_Running = true;
 	};
 
 	Application* CreateApplication();

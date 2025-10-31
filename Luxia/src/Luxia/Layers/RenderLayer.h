@@ -19,11 +19,10 @@ namespace Luxia
 		}
 		virtual void OnUpdate() override {
 			// Rendering logic here
-
 		}
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);
-			
+
 			// Handle rendering events here
 			// LX_CORE_TRACE("RenderLayer received event: {}", e.GetDebug());
 		}

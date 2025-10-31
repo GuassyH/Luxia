@@ -25,7 +25,6 @@ namespace Luxia
 		m_LayerStack->PushLayer(std::make_shared<InputLayer>());
 		m_LayerStack->PushLayer(std::make_shared<RenderLayer>());
 
-		m_Running = true;
 	}
 
 	Application::~Application() = default;
@@ -34,7 +33,7 @@ namespace Luxia
 	void Application::Run()
 	{
 		LX_CORE_INFO("Application Started");
-
+		Input::InputSytem& input = Input::InputSytem::Get();
 
 		// Set Event Handler for each layer
 		for (auto& layer : m_LayerStack->m_Layers) {
@@ -52,10 +51,10 @@ namespace Luxia
 			for (auto& layer : m_LayerStack->m_Layers) {
 				// Input Layer should be first to update
 				layer->OnUpdate();
-				// Rendering layer should be last to update
 			}
 
 			m_Window->EndFrame();
+			input.Reset();
 		}
 
 		// ======= ========= =======
@@ -71,7 +70,6 @@ namespace Luxia
 		m_Window.reset();
 		m_EventHandler.reset();
 		
-
 		LX_CORE_ERROR("Application Ended");
 	}
 

@@ -7,6 +7,8 @@ namespace Luxia
 {
 	class LUXIA_API InputLayer : public Layer
 	{
+	private:
+		Input::InputSytem& input = Input::InputSytem::Get();
 	public:
 		InputLayer() = default;
 		virtual ~InputLayer() = default;
@@ -18,37 +20,44 @@ namespace Luxia
 			LX_WARN("InputLayer Detached");
 		}
 		virtual void OnUpdate() override {
-			// Update logic here
+
 		}
 
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);
 			
-			Input::InputSytem& input = Input::InputSytem::Get();
+			bool shouldConsume = true;
 
 			dispatcher.Dispatch<KeyPressEvent>([&](KeyPressEvent& event) {
 				input.KeyPressed(event.GetKeyCode());
-				return false; // Not consumed
+				return shouldConsume; // Check each event type and update input
 				});
 
 			dispatcher.Dispatch<KeyReleaseEvent>([&](KeyReleaseEvent& event) {
 				input.KeyReleased(event.GetKeyCode());
-				return false; // Not consumed
+				return shouldConsume; // Check each event type and update input
 				});
 
 			dispatcher.Dispatch<MouseButtonPressEvent>([&](MouseButtonPressEvent& event) {
 				input.MouseButtonPressed(event.GetKeyCode());
-				return false; // Not consumed
+				return shouldConsume; // Check each event type and update input
 				});
 
 			dispatcher.Dispatch<MouseButtonReleaseEvent>([&](MouseButtonReleaseEvent& event) {
 				input.MouseButtonReleased(event.GetKeyCode());
-				return false; // Not consumed
+				return shouldConsume; // Check each event type and update input
 				});
 
+			dispatcher.Dispatch<MouseMoveEvent>([&](MouseMoveEvent& event) {
+				input.SetMousePosition(event.GetX(), event.GetY());
+				return shouldConsume; // Check each event type and update input
+				});
 
-			// Handle input events here
-			// LX_CORE_TRACE("InputLayer received event: {}", e.GetDebug());
+			dispatcher.Dispatch<MouseScrollEvent>([&](MouseScrollEvent& event) {
+				input.MouseScrolled(event.GetX(), event.GetY());
+				return shouldConsume; // Check each event type and update input
+				});
+
 		}
 	};
 }

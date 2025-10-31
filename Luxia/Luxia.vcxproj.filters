@@ -22,6 +22,9 @@
     <Filter Include="src\Luxia\Layers">
       <UniqueIdentifier>{967ac1c8-740d-4227-a6f2-f7922b258198}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Luxia\LXM">
+      <UniqueIdentifier>{1b0e9530-8db3-4764-a318-c9be5c3929a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia.h">
@@ -80,6 +83,12 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\InputSystem.h">
       <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lxm\lxm_common.h">
+      <Filter>src\Luxia\LXM</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lxm\lxm_vectors.h">
+      <Filter>src\Luxia\LXM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
