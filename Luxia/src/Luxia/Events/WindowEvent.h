@@ -4,6 +4,8 @@
 #include "Event.h"
 
 namespace Luxia {
+
+	// Event for when window is closed
 	class WindowCloseEvent : public Event {
 	public:
 		WindowCloseEvent() {}
@@ -17,8 +19,7 @@ namespace Luxia {
 		}
 	};
 
-
-
+	// Event for when window is resized
 	class WindowResizeEvent : public Event {
 	public:
 		WindowResizeEvent(int w, int h) : width(w), height(h) {}
@@ -38,8 +39,7 @@ namespace Luxia {
 		int width, height;
 	};
 
-
-
+	// Event for when window is moved
 	class WindowMoveEvent : public Event {
 	public:
 		WindowMoveEvent(int x, int y) : xPos(x), yPos(y) {}
@@ -59,6 +59,7 @@ namespace Luxia {
 		int xPos, yPos;
 	};
 
+	// Event for when window is focused
 	class WindowFocusEvent : public Event {
 	public:
 		WindowFocusEvent() {}
@@ -73,6 +74,7 @@ namespace Luxia {
 
 	};
 
+	// Event for when window loses focus
 	class WindowLoseFocusEvent : public Event {
 	public:
 		WindowLoseFocusEvent() {}

@@ -57,7 +57,7 @@ namespace Luxia::Platform {
 		glfwSetWindowUserPointer(m_Window, this);
 
 	
-		// In your Win_Window::Create
+		// Set all the callbacks: AKA, when resizing send a WindowResizeEvent to the EventHandler
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) {
@@ -67,12 +67,10 @@ namespace Luxia::Platform {
 					win->GetEventHandler().PushEvent(std::make_shared<KeyReleaseEvent>(key));
 			}
 			});
-		
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseMoveEvent>(xpos, ypos));
 			});
-
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (!win) return;
@@ -82,27 +80,22 @@ namespace Luxia::Platform {
 			else if (action == GLFW_RELEASE)
 				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonReleaseEvent>(button));
 			});
-
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseScrollEvent>(xoffset, yoffset));
 			});
-		
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(width, height));
 			});
-		
 		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xpos, int ypos) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowMoveEvent>(xpos, ypos));
 			});
-
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowCloseEvent>());
 			});
-
 		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
 			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
 			if (!win) return;
@@ -114,11 +107,11 @@ namespace Luxia::Platform {
 		glViewport(0, 0, m_Width, m_Height);
 		glEnable(GL_DEPTH_TEST);
 
+		// Cull backface
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
-
-
+		// Just debug
 		LX_CORE_INFO("Created Windows Window: {} ({}x{})", m_Title.c_str(), m_Width, m_Height);
 
 		return 1;
@@ -126,6 +119,7 @@ namespace Luxia::Platform {
 	
 	void Win_Window::BeginFrame()
 	{
+		// Clear the window
 		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, m_Width, m_Height);
@@ -134,12 +128,13 @@ namespace Luxia::Platform {
 
 	void Win_Window::EndFrame()
 	{
+		// Poll the events and swap the buffer
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
-		// Windows specific end frame code
 	}
 
 	void Win_Window::Close() {
+		// Destroy the context and glfw, and set running to false
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 		running = false;
@@ -152,6 +147,7 @@ namespace Luxia::Platform {
 	}
 
 	bool Win_Window::ResizeEvent(WindowResizeEvent& e) {
+		// Resize viewport and set the m_width and height params
 		glViewport(0, 0, e.GetX(), e.GetY());
 		m_Width = e.GetX();
 		m_Height = e.GetY();
@@ -161,6 +157,7 @@ namespace Luxia::Platform {
 	void Win_Window::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
 
+		// Check if event is one of the below and call the function
 		dispatcher.Dispatch<WindowResizeEvent>(LX_BIND_EVENT_FN(ResizeEvent));
 		dispatcher.Dispatch<WindowMoveEvent>(LX_BIND_EVENT_FN(MoveEvent));
 		dispatcher.Dispatch<WindowFocusEvent>(LX_BIND_EVENT_FN(FocusEvent));

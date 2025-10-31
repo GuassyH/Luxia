@@ -5,6 +5,7 @@
 
 namespace Luxia
 {
+	// Base class, defines that a KeyEvent takes a KeyCode and can return it
 	class LUXIA_API KeyEvent : public Event
 	{
 	public:
@@ -16,6 +17,7 @@ namespace Luxia
 		int m_KeyCode;
 	};
 	
+	// Event for when key is pressed
 	class LUXIA_API KeyPressEvent : public KeyEvent
 	{
 	public:
@@ -33,6 +35,7 @@ namespace Luxia
 	private:
 	};
 
+	// Event for when key is released
 	class LUXIA_API KeyReleaseEvent : public KeyEvent
 	{
 	public:

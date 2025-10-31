@@ -12,14 +12,10 @@ namespace Luxia::Platform {
 		Win_Window();
 		~Win_Window();
 
-	
-
 		std::string m_Title;
 
 		GLFWwindow* m_Window = nullptr;
 		GLFWmonitor* m_Monitor = nullptr;
-
-		// void frame_buffer_size_callback(GLFWwindow* window, int width, int height);
 
 		virtual int Create(int width, int height, const std::string& title) override;
 		virtual void BeginFrame() override;

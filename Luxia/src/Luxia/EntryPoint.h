@@ -14,6 +14,7 @@ int main(int argc, char** argv)
 	Luxia::Log::Init();
 	LX_CORE_WARN("Initialized Logger");
 
+	// Create the application using externally defined function
 	Luxia::Application* app = Luxia::CreateApplication();
 	app->Run();
 	delete app;

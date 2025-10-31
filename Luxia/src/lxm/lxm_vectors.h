@@ -6,7 +6,7 @@
 
 namespace lxm {
 
-	struct Vec2
+	struct Vec2 // A struct holding two floats (x, y)
 	{
 		float x, y;
 		Vec2() : x(0), y(0) {}
@@ -53,7 +53,7 @@ namespace lxm {
 	inline Vec2 operator*(const Vec2 left, float scalar) { return Vec2(scalar * left.x, scalar * left.y); }
 
 
-	struct Vec3
+	struct Vec3 // A struct holding three floats (x, y, z)
 	{
 		float x, y, z;
 		Vec3() : x(0), y(0), z(0) {}
@@ -105,26 +105,26 @@ namespace lxm {
 	inline Vec3 operator*(const Vec3 left, float scalar) { return Vec3(scalar * left.x, scalar * left.y, scalar * left.z); }
 
 
-	inline float length(const Vec2& v) {
+	inline float length(const Vec2& v) { // Returns length of the vector
 		return std::sqrt(v.x * v.x + v.y * v.y);
 	}
-	inline float length(const Vec3& v) {
+	inline float length(const Vec3& v) { // Returns length of the vector
 		return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 	}
 
-	inline Vec2 normalize(const Vec2& v) {
+	inline Vec2 normalize(const Vec2& v) { // Returns the vector scaled to a length of one unit
 		float len = length(v);
 		return Vec2(v.x / len, v.y / len);
 	}
-	inline Vec3 normalize(const Vec3& v) {
+	inline Vec3 normalize(const Vec3& v) { // Returns the vector scaled to a length of one unit
 		float len = length(v);
 		return Vec3(v.x / len, v.y / len, v.z / len);
 	}
 
-	inline float dot(const Vec2& a, const Vec2& b) {
+	inline float dot(const Vec2& a, const Vec2& b) { // Returns the dot product, 1 if similar, -1 if opposite
 		return a.x * b.x + a.y * b.y;
 	}
-	inline float dot(const Vec3& a, const Vec3& b) {
+	inline float dot(const Vec3& a, const Vec3& b) { // Returns the dot product, 1 if similar, -1 if opposite
 		return a.x * b.x + a.y * b.y + a.z * b.z;
 	}
 }

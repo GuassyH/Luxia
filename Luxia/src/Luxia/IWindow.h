@@ -11,11 +11,12 @@
 
 namespace Luxia
 {
-	class IWindow
+	class IWindow // A base window class
 	{
 	public:
 		virtual ~IWindow() = default;
 
+		// Basic runtime functions
 		virtual int Create(int width, int height, const std::string& title = "Luxia") = 0;
 		virtual void BeginFrame() = 0;
 		virtual void EndFrame() = 0;
@@ -29,29 +30,30 @@ namespace Luxia
 		inline bool IsFocused() const { return focused; }
 		inline bool isRunning() const { return running; }
 	protected:
+		// Basic functions for what to do with each eventtype, can be overridden
 		virtual bool ResizeEvent(WindowResizeEvent& e) {
 			m_Width = e.GetX();
 			m_Height = e.GetY();
 			return true;
-		}
+		}		
 		virtual bool MoveEvent(WindowMoveEvent& e) {
 			m_PosX = e.GetX();
 			m_PosY = e.GetY();
 			return true;
-		}
+		}		
 		virtual bool FocusEvent(WindowFocusEvent& e) {
 			focused = true;
 			return true;
-		}
+		}		
 		virtual bool LoseFocusEvent(WindowLoseFocusEvent& e) {
 			focused = false;
 			return true;
-		}
+		}		
 		virtual bool CloseEvent(WindowCloseEvent& e) {
 			LX_CORE_ERROR("Window Close Event Received");
 			Close();
 			return true;
-		}
+		}		
 
 		WeakPtrProxy<EventHandler> event_handler = nullptr;
 

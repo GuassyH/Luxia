@@ -20,6 +20,7 @@ namespace Luxia::Input {
 			return instance;
 		}
 
+		// Store an unordered set of the keys (O(1) lookup time)
 		std::unordered_set<int> pressedKeys;
 		std::unordered_set<int> justPressedKeys;
 		std::unordered_set<int> pressedMouseButton;
@@ -78,7 +79,7 @@ namespace Luxia::Input {
 		}
 	};
 
-	// If any key is pressed
+	// Easy to call functions, just say "if(Input::IsKeyPressed(YOUR_KEY))"
 	inline LUXIA_API bool AnyKeyPressed() {
 		auto& input = InputSytem::Get();
 		return !input.pressedKeys.empty();
@@ -87,14 +88,11 @@ namespace Luxia::Input {
 		auto& input = InputSytem::Get();
 		return input.pressedKeys.contains(keycode);
 	}
-	// If a key was pressed this frame
 	inline LUXIA_API bool IsKeyJustPressed(int keycode) {
 		auto& input = InputSytem::Get();
 		return input.justPressedKeys.contains(keycode);
 	}
 
-
-	// If any mouse button is pressed
 	inline LUXIA_API bool AnyMouseButtonPressed() {
 		auto& input = InputSytem::Get();
 		return !input.pressedMouseButton.empty();
@@ -103,7 +101,6 @@ namespace Luxia::Input {
 		auto& input = InputSytem::Get();
 		return input.pressedMouseButton.contains(button);
 	}
-	// If mouse button was pressed JUST this frame
 	inline LUXIA_API bool IsMouseButtonJustPressed(int button) {
 		auto& input = InputSytem::Get();
 		return input.justPressedMouseButton.contains(button);

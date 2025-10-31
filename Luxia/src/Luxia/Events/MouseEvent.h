@@ -3,6 +3,8 @@
 #include "Event.h"
 
 namespace Luxia {
+
+	// Event for when the mouse moves
 	class MouseMoveEvent : public Event {
 	public:
 		MouseMoveEvent(float xpos, float ypos) 
@@ -23,6 +25,7 @@ namespace Luxia {
 		float e_MouseX, e_MouseY;
 	};
 
+	// Event for when the mouse scrolls
 	class MouseScrollEvent : public Event {
 	public:
 		MouseScrollEvent(float xOffset, float yOffset) : e_XOffset(xOffset), e_YOffset(yOffset) {}
@@ -43,7 +46,7 @@ namespace Luxia {
 	};
 
 	
-
+	// Event for mouse button presses
 	class MouseButtonPressEvent : public Event {
 	public:
 		MouseButtonPressEvent(int button) :  e_Button(button) {}
@@ -62,6 +65,7 @@ namespace Luxia {
 		int e_Button;
 	};
 
+	// Event for mouse button releases
 	class MouseButtonReleaseEvent : public Event {
 	public:
 		MouseButtonReleaseEvent(int button) : e_Button(button) {}

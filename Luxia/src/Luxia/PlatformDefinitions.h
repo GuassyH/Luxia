@@ -11,6 +11,7 @@
 // IM NOT GOING TO FOCUS ON THIS NOW... ITS JUST A TEST
 namespace Luxia::Platform
 {
+	// Create the window, with width, height, and title, this will change automatically based on the OS
 	std::shared_ptr<Luxia::IWindow> CreateAppWindow(int width, int height, std::string title)
 	{
 		std::shared_ptr<Luxia::IWindow> win;

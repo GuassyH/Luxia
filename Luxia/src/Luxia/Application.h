@@ -18,9 +18,8 @@ namespace Luxia
 	class LUXIA_API Application
 	{
 	public:
-		virtual ~Application();
-
-		inline static Application& Get() { return *a_Instance; }
+		Application();
+		virtual ~Application() = default;
 
 		void Run();
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { m_LayerStack->PushLayer(layer); }
@@ -32,9 +31,6 @@ namespace Luxia
 
 		// Each client defines this function; editor, runtime, etc.
 	protected:
-		static Application* a_Instance;
-		Application();
-
 		std::shared_ptr<Luxia::IWindow> m_Window;
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
 		
