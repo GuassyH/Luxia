@@ -22,6 +22,15 @@
     <Filter Include="vendor\glad">
       <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Luxia\Managers">
+      <UniqueIdentifier>{af46ea4e-fb63-49cf-91b4-3f7a8413e745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Interfaces">
+      <UniqueIdentifier>{bc192f70-f41c-4941-9772-712612554417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Assets">
+      <UniqueIdentifier>{5bace0b5-1894-49d7-8cbd-a1daead1a8c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia.h">
@@ -54,12 +63,6 @@
     <ClInclude Include="src\Luxia\Events\WindowEvent.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\IWindow.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\InputSystem.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\Layers\GameLayer.h">
       <Filter>src\Luxia\Layers</Filter>
     </ClInclude>
@@ -84,14 +87,35 @@
     <ClInclude Include="src\Luxia\WeakPtrProxy.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Win_Window.h">
-      <Filter>src\Luxia</Filter>
-    </ClInclude>
     <ClInclude Include="src\lxm\lxm_common.h">
       <Filter>src\lxm</Filter>
     </ClInclude>
     <ClInclude Include="src\lxm\lxm_vectors.h">
       <Filter>src\lxm</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Managers\InputManager.h">
+      <Filter>src\Luxia\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Managers\AssetManager.h">
+      <Filter>src\Luxia\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Interfaces\Win_Window.h">
+      <Filter>src\Luxia\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Interfaces\IWindow.h">
+      <Filter>src\Luxia\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Assets\Asset.h">
+      <Filter>src\Luxia\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Assets\TextureAsset.h">
+      <Filter>src\Luxia\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Assets\ModelAsset.h">
+      <Filter>src\Luxia\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Texture.h">
+      <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,11 +128,16 @@
     <ClCompile Include="src\Luxia\Log.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Win_Window.cpp">
-      <Filter>src\Luxia</Filter>
-    </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Managers\AssetManager.cpp">
+      <Filter>src\Luxia\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Interfaces\Win_Window.cpp">
+      <Filter>src\Luxia\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Texture.cpp" />
+    <ClCompile Include="src\Luxia\stb.cpp" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,8 @@
 #include "Core.h"
 #include "WeakPtrProxy.h"
 #include "Luxia/Events/EventPCH.h"
-#include "Luxia/Systems/InputSystem.h"
+#include "Luxia/Managers/InputManager.h"
+#include "Luxia/Managers/AssetManager.h"
 
 namespace Luxia
 {

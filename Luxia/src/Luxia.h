@@ -7,7 +7,9 @@
 
 #include "lxm/lxm_common.h"
 
-#include "Luxia/Systems/InputSystem.h"
+#include "Luxia/Managers/InputManager.h"
+#include "Luxia/Managers/AssetManager.h"
+
 
 // Should be precompiled header
 #include "Luxia/Events/EventPCH.h"

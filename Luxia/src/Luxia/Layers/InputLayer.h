@@ -7,7 +7,7 @@ namespace Luxia::Layers
 	class LUXIA_API InputLayer : public Layer
 	{
 	private:
-		Input::InputSytem& input = Input::InputSytem::Get();
+		Input::InputManager& input = Input::InputManager::Get();
 	public:
 		InputLayer() = default;
 		virtual ~InputLayer() = default;

@@ -3,15 +3,14 @@
 #include "Core.h"
 
 #include "Interfaces/IWindow.h"
-#include "Systems/InputSystem.h"
+#include "Managers/InputManager.h"
+#include "Managers/AssetManager.h"
 
 #include "Layers/LayerStack.h"
 #include "Layers/Layer.h"
 
 #include "Events/EventPCH.h"
 #include "Events/WindowEvent.h"
-
-#include "AssetManager.h"
 
 #include <iostream>
 
@@ -39,10 +38,11 @@ namespace Luxia
 		
 		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
 
-		Input::InputSytem& input = Input::InputSytem::Get();
+		Input::InputManager& input = Input::InputManager::Get();
 		AssetManager& assetManager = AssetManager::Get();
 	};
 
 	Application* CreateApplication();
+
 }
 

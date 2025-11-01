@@ -38,8 +38,6 @@ namespace Luxia
 			layer->SetEventHandler(m_EventHandler);
 		}
 
-		std::string path = "C:/dev/Luxia/assets/Test.JPG";
-		assetManager.Load<TextureAsset>(path);
 
 		// While the window is running loop
 		while (m_Window->isRunning()) {
@@ -73,7 +71,7 @@ namespace Luxia
 		m_LayerStack.reset();
 		m_Window.reset();
 		m_EventHandler.reset();
-		assetManager.Finish();
+		assetManager.Cleanup();
 		
 		LX_CORE_ERROR("Application Ended");
 	}
