@@ -117,6 +117,10 @@
     <ClInclude Include="src\Luxia\Texture.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Managers\ProjectManager.h">
+      <Filter>src\Luxia\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
@@ -137,7 +141,15 @@
     <ClCompile Include="src\Luxia\Interfaces\Win_Window.cpp">
       <Filter>src\Luxia\Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Texture.cpp" />
-    <ClCompile Include="src\Luxia\stb.cpp" />
+    <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp">
+      <Filter>src\Luxia\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\stb.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Texture.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
   </ItemGroup>
 </Project>

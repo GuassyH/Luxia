@@ -10,6 +10,7 @@
 #include "Luxia/Managers/InputManager.h"
 #include "Luxia/Managers/AssetManager.h"
 
+#include "Luxia/Managers/ProjectManager.h"
 
 // Should be precompiled header
 #include "Luxia/Events/EventPCH.h"

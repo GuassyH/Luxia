@@ -17,13 +17,12 @@ namespace Luxia::Assets {
 			type = AssetType::Texture; 
 			loaded = false;
 		}
-		virtual void Load(std::string& m_path) override { 
+		virtual void Load(const std::filesystem::path& m_path) override { 
 			path = m_path; 
 
 			bool suffix_found = false;
-			if (path.find(".") != std::string::npos) {
-				int suf_start = path.find_last_of(".");
-				std::string m_suf = path.substr(suf_start, path.size() - suf_start);
+			if (path.has_extension()) {
+				std::string m_suf = path.extension().string();
 
 				for (auto& t_suf : p_suf) {
 					if (t_suf == m_suf) {
@@ -33,21 +32,18 @@ namespace Luxia::Assets {
 					}
 				}
 
-				std::string name_path = path.substr(0, suf_start);
-
-				if (name_path.find_last_of("/") != std::string::npos) {
-					int name_start = name_path.find_last_of("/") + 1;
-					std::string m_name = name_path.substr(name_start, name_path.size() - name_start);
-					name = m_name;
-				}
-					
+				std::string name_path = path.stem().string();
 			}
 
 			texture.LoadFromFile(path);
 
-			loaded == texture.IsValid();
+			loaded = texture.IsValid();	
 			
-			LX_CORE_TRACE("Loaded Texture Asset: '{}', {}", name, suffix);
+			if(loaded)
+				LX_CORE_TRACE("{} Texture Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
+			else
+				LX_CORE_ERROR("{} Texture Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
+
 		}
 		virtual void Unload() override {
 			texture.Unload();
@@ -59,7 +55,7 @@ namespace Luxia::Assets {
 		}
 
 	private:
-		std::array<std::string, 4> p_suf{
+		std::array<std::string, 3> p_suf{
 			".png",
 			".jpg",
 			".bmp"

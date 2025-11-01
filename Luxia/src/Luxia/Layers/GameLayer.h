@@ -10,7 +10,6 @@ namespace Luxia::Layers {
 
 		virtual void OnAttach() override {
 			LX_CORE_WARN("GameLayer Attached");
-			Luxia::AssetManager& assetManager = Luxia::AssetManager::Get();
 
 		}
 		virtual void OnDetach() override {

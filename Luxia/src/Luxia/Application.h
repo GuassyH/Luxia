@@ -5,12 +5,12 @@
 #include "Interfaces/IWindow.h"
 #include "Managers/InputManager.h"
 #include "Managers/AssetManager.h"
+#include "Managers/ProjectManager.h"
 
+#include "Events/EventPCH.h"
 #include "Layers/LayerStack.h"
 #include "Layers/Layer.h"
 
-#include "Events/EventPCH.h"
-#include "Events/WindowEvent.h"
 
 #include <iostream>
 
@@ -24,22 +24,22 @@ namespace Luxia
 		virtual ~Application() = default;
 
 		void Run();
+		void Shutdown();
+
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { m_LayerStack->PushLayer(layer); }
 		bool OnEvent(Luxia::Event& e);
 
 		inline std::shared_ptr<Luxia::IWindow> GetWindow() { return m_Window; }
 		inline std::shared_ptr<Luxia::LayerStack> GetLayerStack() { return m_LayerStack; }
-		inline Luxia::EventHandler& GetEventHandler() { return *m_EventHandler; }
-
+		std::shared_ptr<Luxia::ProjectManager> GetProjectManager() { return m_ProjectManager; }
 		// Each client defines this function; editor, runtime, etc.
 	protected:
 		std::shared_ptr<Luxia::IWindow> m_Window;
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
-		
 		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
-
 		Input::InputManager& input = Input::InputManager::Get();
-		AssetManager& assetManager = AssetManager::Get();
+		
+		std::shared_ptr<Luxia::ProjectManager> m_ProjectManager;
 	};
 
 	Application* CreateApplication();

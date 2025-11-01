@@ -5,6 +5,8 @@
 #include <iostream>
 #include "stb/stb_image.h"
 
+#include <filesystem>
+
 namespace Luxia {
 	class LUXIA_API Texture {
 	public:
@@ -13,7 +15,7 @@ namespace Luxia {
 		Texture() = default;
 		~Texture() = default;
 
-		void LoadFromFile(const std::string& m_path, const bool flip = false);
+		void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false);
 		void Unload();
 		void Use();
 

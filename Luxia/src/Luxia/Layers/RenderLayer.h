@@ -20,7 +20,15 @@ namespace Luxia::Layers
 			// Rendering logic here
 		}
 		virtual void OnRender() override {
-
+			/*
+			for (auto& [path, asset] : project_manager->GetAssetManager()->loaded_assets) {
+				if (asset && asset->loaded) {
+					if (asset->type == Assets::AssetType::Model) {
+						// DrawModel(asset->Model);
+					}
+				}
+			}
+			*/
 		}
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);

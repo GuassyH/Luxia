@@ -3,6 +3,7 @@
 #include "Luxia/Core.h"
 #include <iostream>
 #include <sstream>
+#include <filesystem>
 
 namespace Luxia::Assets {
 
@@ -18,15 +19,15 @@ namespace Luxia::Assets {
 		Asset() = default;
 		virtual ~Asset() = default;
 
-		virtual void Load(std::string& m_path) = 0; // Load the asset
+		virtual void Load(const std::filesystem::path& m_path) = 0; // Load the asset
 		virtual void Unload() = 0; // Unload the asset
 		virtual void Delete() = 0;
 
 		AssetType type = AssetType::NoAsset;
 
-		std::string suffix = ".none"; // .png, .obj, etc. Helps to decide how to load
-		std::string path = "no/path";
-		std::string name = "no_name";
+		std::string suffix			= ".none"; // .png, .obj, etc. Helps to decide how to load
+		std::filesystem::path path  = "no/path";
+		std::string name			= "no_name";
 
 		bool loaded = false;
 	};

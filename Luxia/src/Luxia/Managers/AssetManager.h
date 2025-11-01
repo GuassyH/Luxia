@@ -10,6 +10,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <iostream>
+#include <filesystem>
 
 
 
@@ -17,28 +18,26 @@ namespace Luxia {
 
 	class LUXIA_API AssetManager {
 	public:
-		static AssetManager& Get() { static AssetManager instance; return instance; }
-
-		// std::unordered_set<std::string> loaded_paths; // Stores the path
-		std::unordered_map<std::string, std::shared_ptr<Assets::Asset>> loaded_assets;
-
-
 		void Init(); // When app opens
 		void Cleanup(); // Before app closes, save everything, etc
 
-		bool IsLoaded(std::string& m_path);
+		int NumLoaded() { return loaded_assets.size(); }
+		bool IsLoaded(const std::filesystem::path& m_path) { return loaded_assets.contains(m_path); }
+		bool LoadAssetPoolFromPath(const std::filesystem::path& m_path) { return true; }
+		bool SaveAssetPool(const std::filesystem::path& m_path) { return true; }
 
 		template <typename T> // Load an asset from a path
-		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>> Load(std::string& m_path) {
+		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>> 
+			Load(const std::filesystem::path& m_path) {
 			if (loaded_assets.contains(m_path)) {
-				LX_CORE_WARN("Asset at path: {}. Already exists!", m_path.c_str());
+				LX_CORE_WARN("Asset at path: {}. Already exists!", m_path.string());
 				return std::static_pointer_cast<T>(loaded_assets[m_path]);
 			}
 
 			auto asset = std::make_shared<T>();
 
 			if (asset->type == Assets::AssetType::NoAsset) {
-				LX_CORE_ERROR("Asset at path: {}. Does not have asset type!", m_path.c_str());
+				LX_CORE_ERROR("Asset at path: {}. Does not have asset type!", m_path.string());
 				return asset;
 			}
 
@@ -49,9 +48,10 @@ namespace Luxia {
 		}
 
 		template <typename T> // Unload an asset from a path
-		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void> Unload(std::string& m_path) {
+		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void> 
+			Unload(const std::filesystem::path& m_path) {
 			if (!loaded_assets.contains(m_path)) {
-				LX_CORE_TRACE("Asset ({}) already unloaded", m_path.c_str());
+				LX_CORE_TRACE("Asset ({}) already unloaded", m_path.string());
 				return;
 			}
 
@@ -61,8 +61,13 @@ namespace Luxia {
 			loaded_assets.erase(m_path);
 		}
 
-	private:
+		~AssetManager() = default;
 		AssetManager() = default;
+
+	private:
+		// std::unordered_set<std::string> loaded_paths; // Stores the path
+		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> loaded_assets;
+		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> asset_pool;
 	};
 
 };
