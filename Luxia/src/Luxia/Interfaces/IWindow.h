@@ -1,13 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include "Luxia/Events/EventPCH.h"
 #include <Luxia/Core.h>
-#include <Luxia/Events/Event.h>
-#include <Luxia/Events/EventHandler.h>
-#include "Luxia/Events/WindowEvent.h"
-#include "Luxia/Events/MouseEvent.h"
-#include "Luxia/Events/KeyEvent.h"
-#include "WeakPtrProxy.h"
+#include "Luxia/WeakPtrProxy.h"
 
 namespace Luxia
 {
@@ -18,8 +14,8 @@ namespace Luxia
 
 		// Basic runtime functions
 		virtual int Create(int width, int height, const std::string& title = "Luxia") = 0;
-		virtual void BeginFrame() = 0;
-		virtual void EndFrame() = 0;
+		virtual void BeginFrame() = 0; // Poll events and clear window
+		virtual void EndFrame() = 0; // Swap buffers
 		virtual void Close() = 0;
 
 		virtual void OnEvent(Event& e) = 0;

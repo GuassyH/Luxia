@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Luxia/Layer.h"
-#include "Luxia/InputSystem.h"
+#include "Layer.h"
 
-namespace Luxia
+namespace Luxia::Layers
 {
 	class LUXIA_API RenderLayer : public Layer
 	{
@@ -12,13 +11,16 @@ namespace Luxia
 		virtual ~RenderLayer() = default;
 		
 		virtual void OnAttach() override {
-			LX_WARN("RenderLayer Attached");
+			LX_CORE_WARN("RenderLayer Attached");
 		}
 		virtual void OnDetach() override {
-			LX_WARN("RenderLayer Detached");
+			LX_CORE_WARN("RenderLayer Detached");
 		}
 		virtual void OnUpdate() override {
 			// Rendering logic here
+		}
+		virtual void OnRender() override {
+
 		}
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);

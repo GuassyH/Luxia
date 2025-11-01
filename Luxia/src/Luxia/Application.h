@@ -2,13 +2,16 @@
 
 #include "Core.h"
 
-#include "IWindow.h"
-#include "LayerStack.h"
-#include "Layer.h"
+#include "Interfaces/IWindow.h"
+#include "Systems/InputSystem.h"
 
-#include "Events/Event.h"
-#include "Events/EventHandler.h"
+#include "Layers/LayerStack.h"
+#include "Layers/Layer.h"
+
+#include "Events/EventPCH.h"
 #include "Events/WindowEvent.h"
+
+#include "AssetManager.h"
 
 #include <iostream>
 
@@ -35,6 +38,9 @@ namespace Luxia
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
 		
 		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
+
+		Input::InputSytem& input = Input::InputSytem::Get();
+		AssetManager& assetManager = AssetManager::Get();
 	};
 
 	Application* CreateApplication();

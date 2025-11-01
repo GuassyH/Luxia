@@ -1,6 +1,6 @@
 #include "Win_Window.h"
 
-#include "Log.h"
+#include "Luxia/Log.h"
 #include <stdio.h>
 
 namespace Luxia::Platform {
@@ -124,12 +124,12 @@ namespace Luxia::Platform {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, m_Width, m_Height);
 
+		glfwPollEvents(); // AKA, SEND EVENTS!!!
 	}
 
 	void Win_Window::EndFrame()
 	{
 		// Poll the events and swap the buffer
-		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
 
@@ -137,7 +137,7 @@ namespace Luxia::Platform {
 		// Destroy the context and glfw, and set running to false
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
-		running = false;
+		running = false; // Dont consume, since other layers might have an onwindowclose function
 	}
 
 	void Win_Window::SetTitle(const std::string& title)

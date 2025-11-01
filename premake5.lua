@@ -33,7 +33,8 @@ project "Luxia"
 	includedirs{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/glm"
 	}
 
 
@@ -98,6 +99,7 @@ project "Talloren"
 	includedirs{
 		"Luxia/vendor",
 		"Luxia/vendor/spdlog/include",
+		"Luxia/vendor/glm",
 		"Luxia/src"
 	}
 

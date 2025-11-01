@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Luxia/Layer.h" 
-#include "Luxia/InputSystem.h"
+#include "Layer.h" 
 
-namespace Luxia
+namespace Luxia::Layers
 {
 	class LUXIA_API InputLayer : public Layer
 	{
@@ -14,15 +13,17 @@ namespace Luxia
 		virtual ~InputLayer() = default;
 		
 		virtual void OnAttach() override {
-			LX_WARN("InputLayer Attached");
+			LX_CORE_WARN("InputLayer Attached");
 		}
 		virtual void OnDetach() override {
-			LX_WARN("InputLayer Detached");
+			LX_CORE_WARN("InputLayer Detached");
 		}
 		virtual void OnUpdate() override {
 
 		}
-
+		virtual void OnRender() override {
+		
+		}
 		virtual void OnEvent(Event& e) override {
 			EventDispatcher dispatcher(e);
 			

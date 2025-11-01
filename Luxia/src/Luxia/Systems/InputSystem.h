@@ -3,11 +3,10 @@
 
 #include "Core.h"
 
-#include "Luxia/Events/Event.h"
-#include "Luxia/Events/KeyEvent.h"
-#include "Luxia/Events/MouseEvent.h"
 #include <unordered_set>
-#include "lxm/lxm_common.h"
+#include "Luxia/Events/EventPCH.h"
+#include "glm/glm/common.hpp"
+#include "glm/glm.hpp"
 
 namespace Luxia::Input {
 	
@@ -23,11 +22,14 @@ namespace Luxia::Input {
 		// Store an unordered set of the keys (O(1) lookup time)
 		std::unordered_set<int> pressedKeys;
 		std::unordered_set<int> justPressedKeys;
-		std::unordered_set<int> pressedMouseButton;
-		std::unordered_set<int> justPressedMouseButton;
+		std::unordered_set<int> justReleasedKeys;
 
-		lxm::Vec2 scrollOffset;
-		lxm::Vec2 mousePosition;
+		std::unordered_set<int> pressedMouseButtons;
+		std::unordered_set<int> justPressedMouseButtons;
+		std::unordered_set<int> justReleasedMouseButtons;
+
+		glm::vec2 scrollOffset;
+		glm::vec2 mousePosition;
 
 		// KEYBOARD
 
@@ -40,6 +42,7 @@ namespace Luxia::Input {
 		void KeyReleased(int keycode) {
 			if (pressedKeys.contains(keycode)) {
 				pressedKeys.erase(keycode);
+				justReleasedKeys.insert(keycode);
 			}
 		}
 
@@ -47,13 +50,14 @@ namespace Luxia::Input {
 
 		void MouseButtonPressed(int button) {
 			if (!pressedKeys.contains(button)) {
-				pressedMouseButton.insert(button);
-				justPressedMouseButton.insert(button);
+				pressedMouseButtons.insert(button);
+				justPressedMouseButtons.insert(button);
 			}
 		}
 		void MouseButtonReleased(int button) {
-			if (pressedMouseButton.contains(button)) {
-				pressedMouseButton.erase(button);
+			if (pressedMouseButtons.contains(button)) {
+				pressedMouseButtons.erase(button);
+				justReleasedMouseButtons.insert(button);
 			}
 		}
 		void SetMousePosition(float x, float y) {
@@ -71,11 +75,14 @@ namespace Luxia::Input {
 		void Reset() { // Is called at the end of the frame
 
 			// Reset scroll, since scroll is an instant thing
-			scrollOffset = lxm::Vec2(0.0f);
+			scrollOffset = glm::vec2(0.0f);
 
 			// Clear just pressed keys, keys that were pressed THIS frame should not carry on
 			justPressedKeys.clear();
-			justPressedMouseButton.clear();
+			justPressedMouseButtons.clear();
+
+			justReleasedKeys.clear();
+			justReleasedMouseButtons.clear();
 		}
 	};
 
@@ -92,28 +99,36 @@ namespace Luxia::Input {
 		auto& input = InputSytem::Get();
 		return input.justPressedKeys.contains(keycode);
 	}
+	inline LUXIA_API bool IsKeyJustReleased(int keycode) {
+		auto& input = Input::InputSytem::Get();
+		return input.justReleasedKeys.contains(keycode);
+	}
 
 	inline LUXIA_API bool AnyMouseButtonPressed() {
 		auto& input = InputSytem::Get();
-		return !input.pressedMouseButton.empty();
+		return !input.pressedMouseButtons.empty();
 	}
 	inline LUXIA_API bool IsMouseButtonPressed(int button) {
 		auto& input = InputSytem::Get();
-		return input.pressedMouseButton.contains(button);
+		return input.pressedMouseButtons.contains(button);
 	}
 	inline LUXIA_API bool IsMouseButtonJustPressed(int button) {
 		auto& input = InputSytem::Get();
-		return input.justPressedMouseButton.contains(button);
+		return input.justPressedMouseButtons.contains(button);
+	}
+	inline LUXIA_API bool IsMouseButtonJustReleased(int button) {
+		auto& input = Input::InputSytem::Get();
+		return input.justReleasedMouseButtons.contains(button);
 	}
 
 	// Self explanatory
-	inline LUXIA_API lxm::Vec2 GetMousePosition() {
+	inline LUXIA_API glm::vec2 GetMousePosition() {
 		auto& input = InputSytem::Get();
 		return input.mousePosition;
 	}
 
 	// x is left & right, y is up & down
-	inline LUXIA_API lxm::Vec2 GetScrollOffset() {
+	inline LUXIA_API glm::vec2 GetScrollOffset() {
 		auto& input = InputSytem::Get();
 		return input.scrollOffset;
 	}

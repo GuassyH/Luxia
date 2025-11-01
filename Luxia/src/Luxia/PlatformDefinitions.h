@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Core.h"
-#include "IWindow.h"
-#include "Win_Window.h"
+#include "Interfaces/IWindow.h"
+#include "Interfaces/Win_Window.h"
 
 #include <iostream>
 

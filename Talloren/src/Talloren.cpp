@@ -16,6 +16,7 @@ namespace Luxia {
 			virtual void OnUpdate() override {
 				// Update logic here
 			}
+			virtual void OnRender() override {}
 			virtual void OnEvent(Luxia::Event& event) override {
 				// Event handling logic here
 			}
@@ -30,7 +31,6 @@ public:
 
 Luxia::Application* Luxia::CreateApplication(){
 	Application* app = new TallorenApp();
-	app->PushLayer(std::make_shared<EditorLayer>());
 	app->GetWindow()->SetTitle("Island Application");
 	return app;
 };
