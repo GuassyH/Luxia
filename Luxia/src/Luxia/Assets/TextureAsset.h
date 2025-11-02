@@ -45,13 +45,11 @@ namespace Luxia::Assets {
 			}
 			
 			loaded = texture->IsValid();	
-			if(loaded){
-				LX_CORE_TRACE("{} Texture Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
-				LX_CORE_TRACE("Params: {}x{}, numColCh = {}", texture->GetWidth(), texture->GetHeight(), texture->GetNumColCh());
-			}
-			else
-				LX_CORE_ERROR("{} Texture Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
 
+			if (loaded)
+				LX_CORE_TRACE("Loaded Texture Asset: '{}', {}", name, suffix);
+			else
+				LX_CORE_ERROR("Failed Loading Texture Asset: {}", path.string());
 		}
 		virtual void Unload() override {
 			texture->Unload();

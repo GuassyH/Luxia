@@ -30,9 +30,10 @@ namespace Luxia
 		m_LayerStack->PushLayer(std::make_shared<Layers::RenderLayer>());
 	}
 
-	void Application::Run()
-	{
-		LX_CORE_INFO("Application Started");
+
+
+	void Application::Startup() {
+		LX_CORE_INFO("Application Started\n");
 
 		// Set Event Handler for each layer
 		for (auto& layer : m_LayerStack->m_Layers) 
@@ -40,6 +41,11 @@ namespace Luxia
 
 		std::filesystem::path p = "C:/dev/Luxia/assets/Lovely.jpg";
 		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>(p);
+	}
+
+	void Application::Run()
+	{
+		Startup();
 
 		// While the window is running loop
 		while (m_Window->isRunning()) {
@@ -53,9 +59,8 @@ namespace Luxia
 				layer->OnRender();
 
 			m_Window->EndFrame();
-			input.Reset();
+			input.Clear();
 		}
-
 
 		Shutdown();
 	}
@@ -72,9 +77,8 @@ namespace Luxia
 		m_Window.reset();
 		m_EventHandler.reset();
 
-
 		m_ProjectManager->CloseProject();
-		
+
 		LX_CORE_ERROR("Application Ended");
 	}
 

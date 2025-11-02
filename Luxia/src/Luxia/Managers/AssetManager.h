@@ -18,14 +18,13 @@ namespace Luxia {
 
 	class LUXIA_API AssetManager {
 	public:
-		void Init(); // When app opens
-		void Cleanup(); // Before app closes, save everything, etc
-
 		int NumLoaded() { return loaded_assets.size(); }
 		bool IsLoaded(const std::filesystem::path& m_path) { return loaded_assets.contains(m_path); }
-		bool LoadAssetPoolFromPath(const std::filesystem::path& m_path) { return true; }
-		bool SaveAssetPool(const std::filesystem::path& m_path) { return true; }
+		bool LoadAssetPoolFromPath(const std::filesystem::path& m_path);
+		bool SaveAssetPool(const std::filesystem::path& m_path);
 
+		void Cleanup(); // Before app closes, save everything, etc
+		
 		template <typename T> // Load an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>> 
 			Load(const std::filesystem::path& m_path) {

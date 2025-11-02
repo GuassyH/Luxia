@@ -158,6 +158,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Platform\IModel.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
@@ -186,9 +187,12 @@
     <ClInclude Include="src\Luxia\Platform\Win_Texture.h" />
     <ClInclude Include="src\Luxia\Platform\Win_Window.h" />
     <ClInclude Include="src\Luxia\PlatformDefinitions.h" />
+    <ClInclude Include="src\Luxia\Rendering\OpenGLRendering.h" />
+    <ClInclude Include="src\Luxia\Rendering\RenderingBuffers.h" />
     <ClInclude Include="src\Luxia\WeakPtrProxy.h" />
     <ClInclude Include="src\lxm\lxm_common.h" />
     <ClInclude Include="src\lxm\lxm_vectors.h" />
+    <ClInclude Include="src\Luxia\Platform\Win_Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp" />
@@ -199,6 +203,7 @@
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
     <ClCompile Include="src\Luxia\Platform\Win_Texture.cpp" />
     <ClCompile Include="src\Luxia\Platform\Win_Window.cpp" />
+    <ClCompile Include="src\Luxia\Rendering\OpenGLRendering.cpp" />
     <ClCompile Include="src\Luxia\stb.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
   </ItemGroup>

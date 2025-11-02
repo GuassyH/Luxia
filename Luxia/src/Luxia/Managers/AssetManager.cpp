@@ -2,11 +2,13 @@
 
 namespace Luxia {
 
+	bool AssetManager::LoadAssetPoolFromPath(const std::filesystem::path& m_path) { 
 
-	void AssetManager::Init() {
-		// Lookup savefile
-		// Get all saved assets
-		// load them
+		return true; 
+	}
+
+	bool AssetManager::SaveAssetPool(const std::filesystem::path& m_path) {
+		return true;
 	}
 
 	void AssetManager::Cleanup() {

@@ -4,14 +4,16 @@
 #include "Luxia/Core.h"
 #include "Asset.h"
 #include <vector>
+#include "Luxia/Platform/IModel.h"
+#include "Luxia/PlatformDefinitions.h"
 
-// using Luxia::Model
+using Luxia::IModel;
 
 namespace Luxia::Assets {
 
 	class LUXIA_API ModelAsset : public Asset {
 	public:
-		// Luxia::Model model = Luxia::Model();
+		 std::shared_ptr<Luxia::IModel> model = nullptr;
 
 		ModelAsset() {
 			type = AssetType::Model;
@@ -20,6 +22,8 @@ namespace Luxia::Assets {
 		virtual void Load(const std::filesystem::path& m_path) override {
 			path = m_path;
 
+			model = Luxia::Platform::CreateModel();
+			
 			bool suffix_found = false;
 			if (path.has_extension()) {
 				std::string m_suf = path.extension().string();
@@ -35,8 +39,14 @@ namespace Luxia::Assets {
 				std::string name_path = path.stem().string();
 			}
 
-			loaded = suffix_found;
-			LX_CORE_TRACE("{} Model Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
+			model->LoadFromFile(path);
+
+			loaded = model->IsValid();
+
+			if (loaded)
+				LX_CORE_TRACE("Loaded Model Asset: '{}', {}", name, suffix);
+			else
+				LX_CORE_ERROR("Failed Loading Model Asset: {}", path.string());
 		}
 		virtual void Unload() override {}
 	private:

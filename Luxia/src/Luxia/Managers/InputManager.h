@@ -72,7 +72,7 @@ namespace Luxia::Input {
 
 		// GENERAL
 
-		void Reset() { // Is called at the end of the frame
+		void Clear() { // Is called at the end of the frame
 
 			// Reset scroll, since scroll is an instant thing
 			scrollOffset = glm::vec2(0.0f);
