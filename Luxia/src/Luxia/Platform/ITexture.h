@@ -24,7 +24,7 @@ namespace Luxia {
 		int GetHeight() { return imgHeight; }
 		int GetNumColCh() { return numColCh; }
 	protected:
-		int imgWidth = 0, imgHeight = 0, numColCh = 0;
+		int imgWidth = 0, imgHeight = 0, numColCh = 3;
 		std::string path;
 
 		bool valid = false;

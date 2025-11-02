@@ -10,12 +10,12 @@ namespace Luxia::Platform {
 
 		unsigned char* bytes = stbi_load(m_path.string().c_str(), &imgWidth, &imgHeight, &numColCh, 0);
 
-		LX_CORE_TRACE("{},{},{}", imgWidth, imgHeight, numColCh);
 		if (!bytes) { LX_CORE_ERROR("BYTES NULLPTR"); return; }
 
 		glGenTextures(1, &texID);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texID);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Creation crashes if pixel allignment needs to be divisible by 4
 
 		GLenum colorMode = GL_RGB;
 		switch (numColCh)
@@ -34,7 +34,6 @@ namespace Luxia::Platform {
 			break;
 		}
 
-		LX_CORE_TRACE("Creating tex");
 		if (bytes) {
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -49,7 +48,6 @@ namespace Luxia::Platform {
 			LX_CORE_ERROR("Failed to load image: {}", m_path.string());
 			return;
 		}
-		LX_CORE_TRACE("Done");
 		stbi_image_free(bytes);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
