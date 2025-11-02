@@ -90,7 +90,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\glfw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Debug-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
@@ -119,7 +119,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\glfw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Release-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
@@ -148,7 +148,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\glfw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Distribution-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
@@ -158,12 +158,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
-    <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
-    <ClInclude Include="src\Luxia\Managers\AssetManager.h" />
+    <ClInclude Include="src\Luxia\Assets\ModelAsset.h" />
+    <ClInclude Include="src\Luxia\Assets\TextureAsset.h" />
     <ClInclude Include="src\Luxia\Core.h" />
     <ClInclude Include="src\Luxia\EntryPoint.h" />
     <ClInclude Include="src\Luxia\Events\Event.h" />
@@ -172,33 +171,35 @@
     <ClInclude Include="src\Luxia\Events\KeyEvent.h" />
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />
-    <ClInclude Include="src\Luxia\Interfaces\IWindow.h" />
-    <ClInclude Include="src\Luxia\Managers\InputManager.h" />
     <ClInclude Include="src\Luxia\Layers\GameLayer.h" />
     <ClInclude Include="src\Luxia\Layers\InputLayer.h" />
     <ClInclude Include="src\Luxia\Layers\Layer.h" />
     <ClInclude Include="src\Luxia\Layers\LayerStack.h" />
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h" />
     <ClInclude Include="src\Luxia\Log.h" />
-    <ClInclude Include="src\Luxia\Assets\ModelAsset.h" />
+    <ClInclude Include="src\Luxia\Managers\AssetManager.h" />
+    <ClInclude Include="src\Luxia\Managers\InputManager.h" />
+    <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
+    <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
+    <ClInclude Include="src\Luxia\Platform\ITexture.h" />
+    <ClInclude Include="src\Luxia\Platform\IWindow.h" />
+    <ClInclude Include="src\Luxia\Platform\Win_Texture.h" />
+    <ClInclude Include="src\Luxia\Platform\Win_Window.h" />
     <ClInclude Include="src\Luxia\PlatformDefinitions.h" />
-    <ClInclude Include="src\Luxia\Assets\TextureAsset.h" />
-    <ClInclude Include="src\Luxia\Texture.h" />
     <ClInclude Include="src\Luxia\WeakPtrProxy.h" />
-    <ClInclude Include="src\Luxia\Interfaces\Win_Window.h" />
     <ClInclude Include="src\lxm\lxm_common.h" />
     <ClInclude Include="src\lxm\lxm_vectors.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
-    <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
     <ClCompile Include="src\Luxia\Application.cpp" />
-    <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />
-    <ClCompile Include="src\Luxia\Interfaces\Win_Window.cpp" />
+    <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
+    <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
+    <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
+    <ClCompile Include="src\Luxia\Platform\Win_Texture.cpp" />
+    <ClCompile Include="src\Luxia\Platform\Win_Window.cpp" />
     <ClCompile Include="src\Luxia\stb.cpp" />
-    <ClCompile Include="src\Luxia\Texture.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

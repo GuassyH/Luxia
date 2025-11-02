@@ -3,7 +3,6 @@
 namespace Luxia {
 
 	bool ProjectManager::NewProject(const std::filesystem::path& folder_path) {
-
 		// Check if there is already a folder at that path
 		if (std::filesystem::exists(folder_path)) {
 			LX_CORE_WARN("Project Manager: folder already at path - {}", folder_path.string());
@@ -16,8 +15,8 @@ namespace Luxia {
 			return false;
 		}
 
-		// Create a ProjectFile (.lux?)
 		m_ProjectPath = folder_path;
+		// Create a ProjectFile (.lux?)
 		
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
@@ -33,14 +32,13 @@ namespace Luxia {
 	}
 
 	bool ProjectManager::OpenProject(const std::filesystem::path& folder_path) {
-		// Open the JSON project file
-		// Read the information (saved assets etc)
 		if (!std::filesystem::exists(folder_path)) {
 			LX_CORE_ERROR("Project Manager: project doesnt exist - {}", folder_path.string());
 			return false;
 		}
 
 		m_ProjectPath = folder_path;
+		// Set ProjectFile and read
 
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
@@ -64,7 +62,12 @@ namespace Luxia {
 	}
 
 	void ProjectManager::CloseProject() {
+		SaveProject();
+
 		m_AssetManager->Cleanup();
 		m_AssetManager.reset();
+
+		m_SceneManager->Cleanup();
+		m_SceneManager.reset();
 	}
 };

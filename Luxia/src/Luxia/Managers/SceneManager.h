@@ -9,6 +9,8 @@ namespace Luxia {
 		SceneManager() = default;
 		~SceneManager() = default;
 
+		void Cleanup() {} 
+
 		bool LoadScenesFromPath(const std::filesystem::path& m_path) { scene_pool_path = m_path; return true; }
 		bool SaveScenes(const std::filesystem::path& m_path) { return true; }
 	private:

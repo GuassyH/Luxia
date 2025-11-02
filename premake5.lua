@@ -59,7 +59,7 @@ project "Luxia"
 
 		
 		libdirs { "Luxia/vendor/glfw" }
-		links { "glfw3dll" }
+		links { "glfw3dll", "opengl32" }
 
 	-- Specify how to build different configs
 	filter "configurations:Debug"
@@ -106,6 +106,7 @@ project "Talloren"
 
 	links{
 		"Luxia",
+		"opengl32"
 	}
 
 	filter "system:windows"

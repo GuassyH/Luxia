@@ -1,17 +1,18 @@
 #pragma once
 
 #include "Luxia/Core.h"
-#include "Luxia/Texture.h"
+#include "Luxia/Platform/ITexture.h"
+#include "Luxia/PlatformDefinitions.h"
 
 #include "Asset.h"
 #include <vector>
 
-using Luxia::Texture;
+using Luxia::ITexture;
 
 namespace Luxia::Assets {
 	class LUXIA_API TextureAsset : public Asset {
 	public:
-		Luxia::Texture texture = Luxia::Texture();
+		std::shared_ptr<Luxia::ITexture> texture = nullptr;
 
 		TextureAsset() { 
 			type = AssetType::Texture; 
@@ -19,6 +20,9 @@ namespace Luxia::Assets {
 		}
 		virtual void Load(const std::filesystem::path& m_path) override { 
 			path = m_path; 
+
+			// Create OS specific Texture
+			texture = Luxia::Platform::CreateTexture();
 
 			bool suffix_found = false;
 			if (path.has_extension()) {
@@ -33,25 +37,29 @@ namespace Luxia::Assets {
 				}
 
 				std::string name_path = path.stem().string();
+				name = name_path;
 			}
 
-			texture.LoadFromFile(path);
-
-			loaded = texture.IsValid();	
+			if (suffix_found) {
+				texture->LoadFromFile(path);
+			}
 			
-			if(loaded)
+			loaded = texture->IsValid();	
+			if(loaded){
 				LX_CORE_TRACE("{} Texture Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
+				LX_CORE_TRACE("Params: {}x{}, numColCh = {}", texture->GetWidth(), texture->GetHeight(), texture->GetNumColCh());
+			}
 			else
 				LX_CORE_ERROR("{} Texture Asset: '{}', {}", loaded ? "Loaded" : "Not Loaded", name, suffix);
 
 		}
 		virtual void Unload() override {
-			texture.Unload();
+			texture->Unload();
 		}
 
 		virtual void Delete() override {
 			Unload();
-			texture.Delete();
+			texture->Delete();
 		}
 
 	private:

@@ -2,7 +2,7 @@
 
 #include "Core.h"
 
-#include "Interfaces/IWindow.h"
+#include "Platform/IWindow.h"
 #include "Managers/InputManager.h"
 #include "Managers/AssetManager.h"
 #include "Managers/ProjectManager.h"
