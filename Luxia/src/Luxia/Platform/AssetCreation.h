@@ -19,10 +19,10 @@ namespace Luxia::Platform::Assets
 	{
 		std::shared_ptr<Luxia::IWindow> win;
 
-		#ifdef LUXIA_PLATFORM_WINDOWS
-				win = std::make_shared<Luxia::Platform::GL_Window>();
+		#ifdef LUXIA_RENDERER_OPENGL
+			win = std::make_shared<Luxia::Platform::OpenGL::GL_Window>();
 		#else 
-		#error Luxia doesnt support your OS!
+		#error Luxia doesnt support your Renderer!
 		#endif
 
 		win->Create(1920, 1080, "Luxia Application");
@@ -32,10 +32,10 @@ namespace Luxia::Platform::Assets
 	inline std::shared_ptr<Luxia::ITexture> CreateTexture() {
 		std::shared_ptr<Luxia::ITexture> tex;
 
-		#ifdef LUXIA_PLATFORM_WINDOWS
-				tex = std::make_shared<Luxia::Platform::GL_Texture>();
+		#ifdef LUXIA_RENDERER_OPENGL
+			tex = std::make_shared<Luxia::Platform::OpenGL::GL_Texture>();
 		#else 
-		#error Luxia doesnt support your OS!
+		#error Luxia doesnt support your Renderer!
 		#endif
 
 		return tex;
@@ -44,10 +44,10 @@ namespace Luxia::Platform::Assets
 	inline std::shared_ptr<Luxia::IModel> CreateModel() {
 		std::shared_ptr<Luxia::IModel> mod;
 
-		#ifdef LUXIA_PLATFORM_WINDOWS
-				mod = std::make_shared<Luxia::Platform::GL_Model>();
+		#ifdef LUXIA_RENDERER_OPENGL
+			mod = std::make_shared<Luxia::Platform::OpenGL::GL_Model>();
 		#else 
-		#error Luxia doesnt support your OS!
+		#error Luxia doesnt support your Renderer!
 		#endif
 
 		return mod;

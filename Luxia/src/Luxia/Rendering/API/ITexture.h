@@ -4,6 +4,7 @@
 #include <filesystem>
 #include "stb/stb_image.h"
 #include "Luxia/Log.h"
+#include <filesystem>
 
 namespace Luxia {
 	class LUXIA_API ITexture {
@@ -23,10 +24,10 @@ namespace Luxia {
 		int GetWidth() { return imgWidth; }
 		int GetHeight() { return imgHeight; }
 		int GetNumColCh() { return numColCh; }
+
+		std::filesystem::path path;
 	protected:
 		int imgWidth = 0, imgHeight = 0, numColCh = 3;
-		std::string path;
-
 		bool valid = false;
 	};
 }

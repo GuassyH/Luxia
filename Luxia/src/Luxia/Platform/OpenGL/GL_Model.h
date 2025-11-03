@@ -2,18 +2,24 @@
 
 #include "Luxia/Rendering/API/IModel.h"
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
-namespace Luxia::Platform {
+namespace Luxia::Platform::OpenGL {
 	class GL_Model : public IModel {
 	public:
 		GL_Model() = default;
 		~GL_Model() = default;
 
-		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) override {}
-		virtual void Unload() override {}
-		virtual void Render() override {}
+		virtual void LoadFromFile(const std::filesystem::path& m_path) override;
+		virtual void Unload() override {} // Implement?
 	
-		virtual void Cleanup() override {}
-		virtual void Delete() override {}
+		virtual void Cleanup() override;
+		virtual void Delete() override {} // Implement?
+	protected:
+		void processNode(aiNode* node, const aiScene* scene);
+		Mesh processMesh(aiMesh* mesh, const aiScene* scene);
+		std::vector<std::shared_ptr<ITexture>> loadTextures(aiMaterial* material, aiTextureType type);
 	};
 }

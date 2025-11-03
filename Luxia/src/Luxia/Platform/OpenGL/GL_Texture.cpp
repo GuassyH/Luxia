@@ -2,7 +2,7 @@
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
 
-namespace Luxia::Platform {
+namespace Luxia::Platform::OpenGL {
 	
 	void GL_Texture::LoadFromFile(const std::filesystem::path& m_path, const bool flip) {
 		// Load Texture
@@ -65,7 +65,7 @@ namespace Luxia::Platform {
 	}
 
 	void GL_Texture::Use() {
-		if (!IsValid()) { LX_CORE_ERROR("Tried to use unvalid texture: {}", path); }
+		if (!IsValid()) { LX_CORE_ERROR("Tried to use unvalid texture: {}", path.string()); }
 		glBindTexture(GL_TEXTURE_2D, texID);
 		// Bind currently used texture to be this
 	}

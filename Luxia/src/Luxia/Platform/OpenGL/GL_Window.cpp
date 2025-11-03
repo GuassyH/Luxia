@@ -3,7 +3,7 @@
 #include "Luxia/Log.h"
 #include <stdio.h>
 
-namespace Luxia::Platform {
+namespace Luxia::Platform::OpenGL {
 
 	GL_Window::GL_Window() = default;
 	GL_Window::~GL_Window() = default;

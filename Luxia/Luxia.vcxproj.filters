@@ -22,6 +22,18 @@
     <Filter Include="src\Luxia\Platform">
       <UniqueIdentifier>{B3E49310-9FC8-5466-0829-4FB9F42B3FE8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Luxia\Platform\OpenGL">
+      <UniqueIdentifier>{87E62F03-F3A8-638D-3C59-F219A85A3C6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Rendering">
+      <UniqueIdentifier>{8C7D8E59-F8DE-6B67-814C-B219EDACA226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Rendering\API">
+      <UniqueIdentifier>{75488550-E17F-CDE7-EA89-310B5640F4E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Luxia\Rendering\OpenGL">
+      <UniqueIdentifier>{40F11C89-2C01-C959-95BA-2D7881E9B7F2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\lxm">
       <UniqueIdentifier>{CD1A30A9-39FA-AE44-4212-3A1BAE7015A6}</UniqueIdentifier>
     </Filter>
@@ -30,15 +42,6 @@
     </Filter>
     <Filter Include="vendor\glad">
       <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Luxia\Platform\Textures">
-      <UniqueIdentifier>{08619ba8-6779-4091-91ea-149e3b55ab39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Luxia\Platform\Windows">
-      <UniqueIdentifier>{8c89e975-98dc-4bba-9b00-6d3f018e0dfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Luxia\Platform\Models">
-      <UniqueIdentifier>{53712381-f9ed-4fd8-bc4a-faf109086781}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,8 +114,50 @@
     <ClInclude Include="src\Luxia\Managers\SceneManager.h">
       <Filter>src\Luxia\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h">
+    <ClInclude Include="src\Luxia\Mesh.h">
       <Filter>src\Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\AssetCreation.h">
+      <Filter>src\Luxia\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h">
+      <Filter>src\Luxia\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IModel.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\ITexture.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IWindow.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h">
+      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h">
+      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h">
+      <Filter>src\Luxia\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\Vertex.h">
+      <Filter>src\Luxia\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\WeakPtrProxy.h">
       <Filter>src\Luxia</Filter>
@@ -123,32 +168,6 @@
     <ClInclude Include="src\lxm\lxm_vectors.h">
       <Filter>src\lxm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h">
-      <Filter>src\Luxia\Platform\Textures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Rendering\API\ITexture.h">
-      <Filter>src\Luxia\Platform\Textures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Rendering\API\IWindow.h">
-      <Filter>src\Luxia\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h">
-      <Filter>src\Luxia\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Rendering\API\IModel.h">
-      <Filter>src\Luxia\Platform\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h">
-      <Filter>src\Luxia\Platform\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h" />
-    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
-    <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
-    <ClInclude Include="src\Luxia\Mesh.h" />
-    <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
-    <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
-    <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
-    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
@@ -169,20 +188,26 @@
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp">
       <Filter>src\Luxia\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Mesh.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Texture.cpp">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp">
+      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp">
+      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Luxia\stb.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Texture.cpp">
-      <Filter>src\Luxia\Platform\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp">
-      <Filter>src\Luxia\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />
-    <ClCompile Include="src\Luxia\Mesh.cpp" />
-    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp" />
   </ItemGroup>
 </Project>

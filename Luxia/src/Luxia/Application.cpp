@@ -44,39 +44,7 @@ namespace Luxia
 		std::filesystem::path p = "C:/dev/Luxia/assets/Lovely.jpg";
 		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>(p);
 
-		std::shared_ptr<Rendering::Buffers::VAO> vao = nullptr;
-		std::shared_ptr<Rendering::Buffers::VBO> vbo = nullptr;
-		std::shared_ptr<Rendering::Buffers::EBO> ebo = nullptr;
-
-		std::vector<Rendering::Vertex> vertices{
-			{ {-0.5f, -0.5f, 0.0f }, {-0.5f, -0.5f, 0.0f }, {-0.5f, -0.5f, 0.0f },  { 0.0f, 0.0f } },
-			{ {0.5f, -0.5f, 0.0f }, {0.5f, -0.5f, 0.0f }, {0.5f, -0.5f, 0.0f },  { 1.0f, 0.0f } },
-			{ {0.0f, 0.5f, 0.0f }, {0.0f, 0.5f, 0.0f }, {0.0f, 0.5f, 0.0f },  { 0.5f, 1.0f } }
-		};
-
-		std::vector<uint32_t> indices{
-			0, 1, 2
-		};
-
-		vao = Platform::Rendering::CreateVAO();
-		vbo = Platform::Rendering::CreateVBO();
-		ebo = Platform::Rendering::CreateEBO();
-
-		vbo->BindBufferData(sizeof(float) * vertices.size(), vertices.data());
-
-		vao->LinkAttrib(0, 3, GL_FLOAT, sizeof(float) * 3, 0);
-
-		ebo->BindBufferData(indices.size() * sizeof(int), indices.data());
-
-		vbo->Unbind();
-		vao->Unbind();
-		ebo->Unbind();
-
-		Mesh mesh = Mesh(vertices, indices);
-		mesh.CalculateMesh();
-
-		auto ma = m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/lie.obj");
-		ma->model->GetMeshes().push_back(mesh);
+		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/cute_ghost/scene.gltf");
 	}
 
 	void Application::Run()

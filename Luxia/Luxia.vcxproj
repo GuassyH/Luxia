@@ -78,11 +78,11 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -90,8 +90,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\glfw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Debug-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -103,14 +103,14 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -119,8 +119,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\glfw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Release-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -132,14 +132,14 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -148,8 +148,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\glfw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Distribution-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -158,9 +158,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\Mesh.h" />
-    <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
-    <ClInclude Include="src\Luxia\Rendering\API\IModel.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
@@ -184,30 +181,34 @@
     <ClInclude Include="src\Luxia\Managers\InputManager.h" />
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
     <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
-    <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
-    <ClInclude Include="src\Luxia\Rendering\API\ITexture.h" />
-    <ClInclude Include="src\Luxia\Rendering\API\IWindow.h" />
-    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
-    <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
+    <ClInclude Include="src\Luxia\Mesh.h" />
+    <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h" />
     <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h" />
-    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IModel.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\ITexture.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IWindow.h" />
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
+    <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
     <ClInclude Include="src\Luxia\WeakPtrProxy.h" />
     <ClInclude Include="src\lxm\lxm_common.h" />
     <ClInclude Include="src\lxm\lxm_vectors.h" />
-    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Mesh.cpp" />
     <ClCompile Include="src\Luxia\Application.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
+    <ClCompile Include="src\Luxia\Mesh.cpp" />
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Model.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Texture.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />

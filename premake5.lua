@@ -40,13 +40,14 @@ project "Luxia"
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "Off"
+		staticruntime "On"
 		systemversion "latest"
 
 		-- Define what should be defined
 		defines{
 			"LUXIA_EXPORT",
-			"LUXIA_PLATFORM_WINDOWS"
+			"LUXIA_PLATFORM_WINDOWS",
+			"LUXIA_RENDERER_OPENGL"
 		}
 
 		buildoptions { "/utf-8" }
@@ -58,8 +59,8 @@ project "Luxia"
 		}
 
 		
-		libdirs { "Luxia/vendor/glfw" }
-		links { "glfw3dll", "opengl32" }
+		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib" }
+		links { "glfw3dll", "opengl32", "assimp-vc143-mtd" }
 
 	-- Specify how to build different configs
 	filter "configurations:Debug"
@@ -103,20 +104,25 @@ project "Talloren"
 		"Luxia/src"
 	}
 
-
+	libdirs {
+		"Luxia/vendor/glfw",
+		"Luxia/vendor/assimp/lib"
+	}
 	links{
 		"Luxia",
-		"opengl32"
+		"opengl32",
+		"assimp-vc143-mtd"
 	}
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "Off"
+		staticruntime "On"
 		systemversion "latest"
 
 		-- Define what should be defined
 		defines{
-			"LUXIA_PLATFORM_WINDOWS"
+			"LUXIA_PLATFORM_WINDOWS",
+			"LUXIA_RENDERER_OPENGL"
 		}
 
 		buildoptions { "/utf-8" }

@@ -4,6 +4,8 @@
 #include "Luxia/Log.h"
 #include "Luxia/Mesh.h"
 
+#include "Luxia/Rendering/API/ITexture.h"
+
 #include <filesystem>
 #include <vector>
 #include <memory>
@@ -15,9 +17,8 @@ namespace Luxia {
 		IModel() = default;
 		virtual ~IModel() = default;
 
-		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) = 0;
+		virtual void LoadFromFile(const std::filesystem::path& m_path) = 0;
 		virtual void Unload() = 0;
-		virtual void Render() = 0;
 
 		virtual void Cleanup() = 0;
 		virtual void Delete() = 0;
@@ -26,7 +27,9 @@ namespace Luxia {
 		std::vector<Mesh>& GetMeshes() { return meshes; }
 	protected:
 		std::vector<Mesh> meshes;
-		std::string path;
+		std::vector<std::shared_ptr<ITexture>> loaded_textures;
+		std::filesystem::path path; // the name
+		std::filesystem::path directory; // the way to the folder
 
 		bool valid = false;
 	};
