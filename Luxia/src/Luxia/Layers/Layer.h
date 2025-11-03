@@ -5,6 +5,7 @@
 #include "Luxia/Events/EventPCH.h"
 #include "Luxia/Managers/InputManager.h"
 #include "Luxia/Managers/ProjectManager.h"
+#include "Luxia/Platform/PlatformDefinitions.h"
 
 namespace Luxia
 {
@@ -20,14 +21,15 @@ namespace Luxia
 		virtual void OnRender() = 0;
 		virtual void OnEvent(Event& event) = 0;
 
-		void SetDeps(std::shared_ptr<EventHandler> handler, std::shared_ptr<ProjectManager> manager){
-			event_handler = handler;  project_manager = manager;
+		void SetDeps(std::shared_ptr<EventHandler> handler, std::shared_ptr<ProjectManager> manager, std::shared_ptr<Rendering::IRenderer> m_renderer){
+			event_handler = handler;  project_manager = manager; renderer = m_renderer;
 		}
 
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
 	protected:
 		WeakPtrProxy<EventHandler> event_handler;
 		WeakPtrProxy<ProjectManager> project_manager;
+		WeakPtrProxy<Rendering::IRenderer> renderer;
 	};
 }
 

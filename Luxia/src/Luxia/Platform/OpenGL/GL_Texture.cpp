@@ -1,10 +1,10 @@
-#include "Win_Texture.h"
+#include "GL_Texture.h"
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
 
 namespace Luxia::Platform {
 	
-	void Win_Texture::LoadFromFile(const std::filesystem::path& m_path, const bool flip) {
+	void GL_Texture::LoadFromFile(const std::filesystem::path& m_path, const bool flip) {
 		// Load Texture
 		stbi_set_flip_vertically_on_load(flip);
 
@@ -59,18 +59,18 @@ namespace Luxia::Platform {
 	}
 
 
-	void Win_Texture::Unload() {
+	void GL_Texture::Unload() {
 		// Unload Texture
 		valid = false;
 	}
 
-	void Win_Texture::Use() {
+	void GL_Texture::Use() {
 		if (!IsValid()) { LX_CORE_ERROR("Tried to use unvalid texture: {}", path); }
 		glBindTexture(GL_TEXTURE_2D, texID);
 		// Bind currently used texture to be this
 	}
 
-	void Win_Texture::Delete() {
+	void GL_Texture::Delete() {
 		// Delete Texture
 		glDeleteTextures(1, &texID);
 	}

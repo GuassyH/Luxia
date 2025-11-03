@@ -1,5 +1,5 @@
 #pragma once
-#include "IWindow.h"
+#include "Luxia/Rendering/API/IWindow.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -7,10 +7,10 @@
 #include <Windows.h> 
 
 namespace Luxia::Platform {
-	class Win_Window : public Luxia::IWindow {
+	class GL_Window : public Luxia::IWindow {
 	public:
-		Win_Window();
-		~Win_Window();
+		GL_Window();
+		~GL_Window();
 
 		std::string m_Title;
 

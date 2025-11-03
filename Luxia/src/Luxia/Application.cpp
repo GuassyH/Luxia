@@ -1,10 +1,12 @@
 #include "Application.h"
-#include "PlatformDefinitions.h"
+#include "Platform/PlatformDefinitions.h"
 #include "Log.h"
 
 #include "Layers/InputLayer.h"
 #include "Layers/RenderLayer.h"
 #include "Layers/GameLayer.h"
+
+#include "Mesh.h"
 
 namespace Luxia
 {
@@ -12,12 +14,13 @@ namespace Luxia
 	{
 		// Open the project
 		m_ProjectManager = std::make_shared<ProjectManager>();
+		m_Renderer = Luxia::Platform::Rendering::CreateRenderer();
 
 		// Initialise event handler
 		m_EventHandler = std::make_shared<Luxia::EventHandler>();	
 
 		// Initialise window
-		m_Window = Luxia::Platform::CreateAppWindow(1920, 1080, "Luxia Application");
+		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application");
 		m_Window->SetHandler(m_EventHandler);
 
 		// Initialise layerstack
@@ -31,16 +34,49 @@ namespace Luxia
 	}
 
 
-
 	void Application::Startup() {
 		LX_CORE_INFO("Application Started\n");
 
 		// Set Event Handler for each layer
 		for (auto& layer : m_LayerStack->m_Layers) 
-			layer->SetDeps(m_EventHandler, m_ProjectManager);
+			layer->SetDeps(m_EventHandler, m_ProjectManager, m_Renderer);
 
 		std::filesystem::path p = "C:/dev/Luxia/assets/Lovely.jpg";
 		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>(p);
+
+		std::shared_ptr<Rendering::Buffers::VAO> vao = nullptr;
+		std::shared_ptr<Rendering::Buffers::VBO> vbo = nullptr;
+		std::shared_ptr<Rendering::Buffers::EBO> ebo = nullptr;
+
+		std::vector<Rendering::Vertex> vertices{
+			{ {-0.5f, -0.5f, 0.0f }, {-0.5f, -0.5f, 0.0f }, {-0.5f, -0.5f, 0.0f },  { 0.0f, 0.0f } },
+			{ {0.5f, -0.5f, 0.0f }, {0.5f, -0.5f, 0.0f }, {0.5f, -0.5f, 0.0f },  { 1.0f, 0.0f } },
+			{ {0.0f, 0.5f, 0.0f }, {0.0f, 0.5f, 0.0f }, {0.0f, 0.5f, 0.0f },  { 0.5f, 1.0f } }
+		};
+
+		std::vector<uint32_t> indices{
+			0, 1, 2
+		};
+
+		vao = Platform::Rendering::CreateVAO();
+		vbo = Platform::Rendering::CreateVBO();
+		ebo = Platform::Rendering::CreateEBO();
+
+		vbo->BindBufferData(sizeof(float) * vertices.size(), vertices.data());
+
+		vao->LinkAttrib(0, 3, GL_FLOAT, sizeof(float) * 3, 0);
+
+		ebo->BindBufferData(indices.size() * sizeof(int), indices.data());
+
+		vbo->Unbind();
+		vao->Unbind();
+		ebo->Unbind();
+
+		Mesh mesh = Mesh(vertices, indices);
+		mesh.CalculateMesh();
+
+		auto ma = m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/lie.obj");
+		ma->model->GetMeshes().push_back(mesh);
 	}
 
 	void Application::Run()

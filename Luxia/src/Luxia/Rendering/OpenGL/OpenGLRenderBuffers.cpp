@@ -1,8 +1,8 @@
-#include "OpenGLRendering.h"
+#include "OpenGLRenderBuffers.h"
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
 
-namespace Luxia::Rendering::OpenGL {
+namespace Luxia::Rendering::OpenGL::Buffers {
 	// ======== VAO ========
 
 	OpenGL_VAO::OpenGL_VAO() { glGenVertexArrays(1, &ID); }

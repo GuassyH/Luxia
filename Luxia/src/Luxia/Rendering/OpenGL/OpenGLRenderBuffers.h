@@ -1,10 +1,10 @@
 #pragma once
-#include "RenderingBuffers.h"
+#include "Luxia/Rendering/API/IRenderBuffers.h"
 
 
-namespace Luxia::Rendering::OpenGL {
+namespace Luxia::Rendering::OpenGL::Buffers {
 
-	class OpenGL_VAO : public Luxia::Rendering::VAO {
+	class OpenGL_VAO : public Luxia::Rendering::Buffers::VAO {
 	public:
 		OpenGL_VAO();
 		~OpenGL_VAO() = default;
@@ -15,7 +15,7 @@ namespace Luxia::Rendering::OpenGL {
 		virtual void Delete() override;
 	};
 
-	class OpenGL_VBO : public Luxia::Rendering::VBO {
+	class OpenGL_VBO : public Luxia::Rendering::Buffers::VBO {
 	public:
 		OpenGL_VBO();
 		~OpenGL_VBO() = default;
@@ -26,7 +26,7 @@ namespace Luxia::Rendering::OpenGL {
 		virtual void Delete() override;
 	};
 
-	class OpenGL_EBO : public Luxia::Rendering::EBO {
+	class OpenGL_EBO : public Luxia::Rendering::Buffers::EBO {
 	public:
 		OpenGL_EBO();
 		~OpenGL_EBO() = default;

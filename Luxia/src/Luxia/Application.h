@@ -2,7 +2,9 @@
 
 #include "Core.h"
 
-#include "Platform/IWindow.h"
+#include "Rendering/API/IWindow.h"
+#include "Rendering/API/IRenderer.h"
+
 #include "Managers/InputManager.h"
 #include "Managers/AssetManager.h"
 #include "Managers/ProjectManager.h"
@@ -41,6 +43,7 @@ namespace Luxia
 		Input::InputManager& input = Input::InputManager::Get();
 		
 		std::shared_ptr<Luxia::ProjectManager> m_ProjectManager;
+		std::shared_ptr<Luxia::Rendering::IRenderer> m_Renderer;
 	};
 
 	Application* CreateApplication();

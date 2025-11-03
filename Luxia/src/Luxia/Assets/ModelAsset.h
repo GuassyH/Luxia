@@ -4,8 +4,8 @@
 #include "Luxia/Core.h"
 #include "Asset.h"
 #include <vector>
-#include "Luxia/Platform/IModel.h"
-#include "Luxia/PlatformDefinitions.h"
+#include "Luxia/Rendering/API/IModel.h"
+#include "Luxia/Platform/AssetCreation.h"
 
 using Luxia::IModel;
 
@@ -13,7 +13,7 @@ namespace Luxia::Assets {
 
 	class LUXIA_API ModelAsset : public Asset {
 	public:
-		 std::shared_ptr<Luxia::IModel> model = nullptr;
+		std::shared_ptr<Luxia::IModel> model = nullptr;
 
 		ModelAsset() {
 			type = AssetType::Model;
@@ -22,7 +22,7 @@ namespace Luxia::Assets {
 		virtual void Load(const std::filesystem::path& m_path) override {
 			path = m_path;
 
-			model = Luxia::Platform::CreateModel();
+			model = Luxia::Platform::Assets::CreateModel();
 			
 			bool suffix_found = false;
 			if (path.has_extension()) {
@@ -48,7 +48,13 @@ namespace Luxia::Assets {
 			else
 				LX_CORE_ERROR("Failed Loading Model Asset: {}", path.string());
 		}
-		virtual void Unload() override {}
+		virtual void Unload() override {
+			model->Cleanup();
+		}
+		virtual void Delete() override {
+			Unload();
+			// Rest
+		}
 	private:
 		std::array<std::string, 3> p_suf{
 			".obj",

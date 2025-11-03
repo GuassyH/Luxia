@@ -1,14 +1,14 @@
-#include "Win_Window.h"
+#include "GL_Window.h"
 
 #include "Luxia/Log.h"
 #include <stdio.h>
 
 namespace Luxia::Platform {
 
-	Win_Window::Win_Window() = default;
-	Win_Window::~Win_Window() = default;
+	GL_Window::GL_Window() = default;
+	GL_Window::~GL_Window() = default;
 
-	int Win_Window::Create(int width, int height, const std::string& title)
+	int GL_Window::Create(int width, int height, const std::string& title)
 	{
 		m_Width = width;
 		m_Height = height;
@@ -59,7 +59,7 @@ namespace Luxia::Platform {
 	
 		// Set all the callbacks: AKA, when resizing send a WindowResizeEvent to the EventHandler
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) {
 				if (action == GLFW_PRESS)
 					win->GetEventHandler().PushEvent(std::make_shared<KeyPressEvent>(key));
@@ -68,11 +68,11 @@ namespace Luxia::Platform {
 			}
 			});
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseMoveEvent>(xpos, ypos));
 			});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (!win) return;
 			if (action == GLFW_PRESS)
 				// PUSH_EVENT(MouseButtonPressEvent, button);
@@ -81,23 +81,23 @@ namespace Luxia::Platform {
 				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonReleaseEvent>(button));
 			});
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseScrollEvent>(xoffset, yoffset));
 			});
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(width, height));
 			});
 		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xpos, int ypos) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowMoveEvent>(xpos, ypos));
 			});
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowCloseEvent>());
 			});
 		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
-			Win_Window* win = reinterpret_cast<Win_Window*>(glfwGetWindowUserPointer(window));
+			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (!win) return;
 			focused == 1 ? win->GetEventHandler().PushEvent(std::make_shared<WindowFocusEvent>())
 				: win->GetEventHandler().PushEvent(std::make_shared<WindowLoseFocusEvent>());
@@ -117,7 +117,7 @@ namespace Luxia::Platform {
 		return 1;
 	}
 	
-	void Win_Window::BeginFrame()
+	void GL_Window::BeginFrame()
 	{
 		// Clear the window
 		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
@@ -127,26 +127,26 @@ namespace Luxia::Platform {
 		glfwPollEvents(); // AKA, SEND EVENTS!!!
 	}
 
-	void Win_Window::EndFrame()
+	void GL_Window::EndFrame()
 	{
 		// Poll the events and swap the buffer
 		glfwSwapBuffers(m_Window);
 	}
 
-	void Win_Window::Close() {
+	void GL_Window::Close() {
 		// Destroy the context and glfw, and set running to false
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 		running = false; // Dont consume, since other layers might have an onwindowclose function
 	}
 
-	void Win_Window::SetTitle(const std::string& title)
+	void GL_Window::SetTitle(const std::string& title)
 	{
 		m_Title = title;
 		glfwSetWindowTitle(m_Window, m_Title.c_str());
 	}
 
-	bool Win_Window::ResizeEvent(WindowResizeEvent& e) {
+	bool GL_Window::ResizeEvent(WindowResizeEvent& e) {
 		// Resize viewport and set the m_width and height params
 		glViewport(0, 0, e.GetX(), e.GetY());
 		m_Width = e.GetX();
@@ -154,7 +154,7 @@ namespace Luxia::Platform {
 		return true;
 	}
 
-	void Win_Window::OnEvent(Event& e) {
+	void GL_Window::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
 
 		// Check if event is one of the below and call the function

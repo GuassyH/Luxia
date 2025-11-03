@@ -2,7 +2,7 @@
 
 #include "Luxia/Core.h"
 
-namespace Luxia::Rendering {
+namespace Luxia::Rendering::Buffers {
 
 	class LUXIA_API VAO {
 	public:

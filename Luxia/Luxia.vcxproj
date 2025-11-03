@@ -158,7 +158,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\Platform\IModel.h" />
+    <ClInclude Include="src\Luxia\Mesh.h" />
+    <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IModel.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
@@ -182,28 +184,34 @@
     <ClInclude Include="src\Luxia\Managers\InputManager.h" />
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
     <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
-    <ClInclude Include="src\Luxia\Platform\ITexture.h" />
-    <ClInclude Include="src\Luxia\Platform\IWindow.h" />
-    <ClInclude Include="src\Luxia\Platform\Win_Texture.h" />
-    <ClInclude Include="src\Luxia\Platform\Win_Window.h" />
-    <ClInclude Include="src\Luxia\PlatformDefinitions.h" />
-    <ClInclude Include="src\Luxia\Rendering\OpenGLRendering.h" />
-    <ClInclude Include="src\Luxia\Rendering\RenderingBuffers.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\ITexture.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IWindow.h" />
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
+    <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h" />
+    <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h" />
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h" />
+    <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
     <ClInclude Include="src\Luxia\WeakPtrProxy.h" />
     <ClInclude Include="src\lxm\lxm_common.h" />
     <ClInclude Include="src\lxm\lxm_vectors.h" />
-    <ClInclude Include="src\Luxia\Platform\Win_Model.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Mesh.cpp" />
     <ClCompile Include="src\Luxia\Application.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
-    <ClCompile Include="src\Luxia\Platform\Win_Texture.cpp" />
-    <ClCompile Include="src\Luxia\Platform\Win_Window.cpp" />
-    <ClCompile Include="src\Luxia\Rendering\OpenGLRendering.cpp" />
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Texture.cpp" />
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp" />
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp" />
     <ClCompile Include="src\Luxia\stb.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
   </ItemGroup>

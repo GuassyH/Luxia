@@ -23,6 +23,9 @@ namespace Luxia {
 		bool LoadAssetPoolFromPath(const std::filesystem::path& m_path);
 		bool SaveAssetPool(const std::filesystem::path& m_path);
 
+		// TEMP, THIS SHOULD BE HANDLED BY SCENE
+		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> GetAssets() { return loaded_assets; }
+
 		void Cleanup(); // Before app closes, save everything, etc
 		
 		template <typename T> // Load an asset from a path

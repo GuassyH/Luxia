@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Luxia/Core.h"
-#include "Luxia/Platform/ITexture.h"
-#include "Luxia/PlatformDefinitions.h"
+#include "Luxia/Rendering/API/ITexture.h"
+#include "Luxia/Platform/AssetCreation.h"
 
 #include "Asset.h"
 #include <vector>
@@ -22,7 +22,7 @@ namespace Luxia::Assets {
 			path = m_path; 
 
 			// Create OS specific Texture
-			texture = Luxia::Platform::CreateTexture();
+			texture = Luxia::Platform::Assets::CreateTexture();
 
 			bool suffix_found = false;
 			if (path.has_extension()) {
