@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Luxia/Rendering/API/IRenderer.h"
+
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
+#include "glm/common.hpp"
 
 namespace Luxia::Rendering::OpenGL {
 	class OpenGL_Renderer : public Luxia::Rendering::IRenderer {
@@ -10,7 +12,7 @@ namespace Luxia::Rendering::OpenGL {
 		OpenGL_Renderer() = default;
 		~OpenGL_Renderer() = default;
 
-		virtual void RenderModel(const std::shared_ptr<IModel> m_model) override;
-		virtual void RenderMesh(const Mesh& m_mesh) override;
+		virtual void RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const std::shared_ptr<ICamera> m_camera) override;
+		virtual void RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const std::shared_ptr<ICamera> m_camera) override;
 	};
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Luxia/Rendering/API/IModel.h"
+#include "Luxia/Rendering/API/ICamera.h"
+#include "Luxia/Rendering/API/IShader.h"
 #include "Luxia/Mesh.h"
 
 namespace Luxia::Rendering {
@@ -9,7 +11,7 @@ namespace Luxia::Rendering {
 		IRenderer() = default;
 		virtual ~IRenderer() = default;
 
-		virtual void RenderModel(const std::shared_ptr<IModel> m_model) = 0;
-		virtual void RenderMesh(const Mesh& m_mesh) = 0;
+		virtual void RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const std::shared_ptr<ICamera> m_camera) = 0;
+		virtual void RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const std::shared_ptr<ICamera> m_camera) = 0;
 	};
 }

@@ -158,6 +158,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Shader.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Camera.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Application.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
@@ -187,9 +189,11 @@
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h" />
     <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\ICamera.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IModel.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IShader.h" />
     <ClInclude Include="src\Luxia\Rendering\API\ITexture.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IWindow.h" />
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
@@ -201,6 +205,8 @@
     <ClInclude Include="src\lxm\lxm_vectors.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Shader.cpp" />
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp" />
     <ClCompile Include="src\Luxia\Application.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
     <ClCompile Include="src\Luxia\Log.cpp" />

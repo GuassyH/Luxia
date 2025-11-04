@@ -168,6 +168,18 @@
     <ClInclude Include="src\lxm\lxm_vectors.h">
       <Filter>src\lxm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Camera.h">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Shader.h">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IShader.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\ICamera.h">
+      <Filter>src\Luxia\Rendering\API</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Application.cpp">
@@ -208,6 +220,15 @@
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Model.cpp">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Shader.cpp">
+      <Filter>src\Luxia\Platform\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

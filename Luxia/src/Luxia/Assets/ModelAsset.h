@@ -37,6 +37,7 @@ namespace Luxia::Assets {
 				}
 
 				std::string name_path = path.stem().string();
+				name = name_path;
 			}
 
 			model->LoadFromFile(path);

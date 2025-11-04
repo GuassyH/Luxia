@@ -41,9 +41,7 @@ namespace Luxia
 		for (auto& layer : m_LayerStack->m_Layers) 
 			layer->SetDeps(m_EventHandler, m_ProjectManager, m_Renderer);
 
-		std::filesystem::path p = "C:/dev/Luxia/assets/Lovely.jpg";
-		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>(p);
-
+		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>("C:/dev/Luxia/assets/Lovely.jpg");
 		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/cute_ghost/scene.gltf");
 	}
 
