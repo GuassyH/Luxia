@@ -11,7 +11,7 @@ namespace Luxia {
 	enum TextureType {
 		LX_TEXTURE_DIFFUSE = 0,
 		LX_TEXTURE_SPECULAR = 1,
-		LX_TEXTURE_NORMAL = 2,
+		LX_TEXTURE_NORMALS = 2,
 		LX_TEXTURE_ROUGHNESS = 3,
 	};
 

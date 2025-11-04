@@ -42,7 +42,7 @@ namespace Luxia
 			layer->SetDeps(m_EventHandler, m_ProjectManager, m_Renderer);
 
 		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>("C:/dev/Luxia/assets/Lovely.jpg");
-		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/cute_ghost/scene.gltf");
+		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/lotr_troll/scene.gltf");
 	}
 
 	void Application::Run()

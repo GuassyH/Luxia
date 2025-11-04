@@ -2,9 +2,11 @@
 
 uniform bool hasDiffuse;
 uniform bool hasSpecular;
+uniform bool hasNormals;
 
 uniform sampler2D diffuse0;
 uniform sampler2D specular0;
+uniform sampler2D normals0;
 
 in vec3 crntPos;
 in vec3 vertCol;

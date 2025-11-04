@@ -40,6 +40,9 @@ namespace Luxia::Platform::OpenGL {
 				case aiTextureType_SPECULAR:
 					tex->type = TextureType::LX_TEXTURE_SPECULAR;
 					break;
+				case aiTextureType_NORMALS:
+					tex->type = TextureType::LX_TEXTURE_NORMALS;
+					break;
 				}
 
 				textures.push_back(tex); 
@@ -146,6 +149,9 @@ namespace Luxia::Platform::OpenGL {
 			std::vector<std::shared_ptr<ITexture>> specularMaps = loadTextures(material, aiTextureType_SPECULAR);
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
+			// normals
+			std::vector<std::shared_ptr<ITexture>> normalMaps = loadTextures(material, aiTextureType_NORMALS);
+			textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		}
 
 

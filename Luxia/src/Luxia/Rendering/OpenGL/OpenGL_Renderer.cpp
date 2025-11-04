@@ -17,6 +17,7 @@ namespace Luxia::Rendering::OpenGL {
 
 		unsigned int diffuseIdx = 0;
 		unsigned int specularIdx = 0;
+		unsigned int normalIdx = 0;
 
 		for (unsigned int i = 0; i < m_mesh.textures.size(); i++) {
 			// activate texture slot
@@ -26,11 +27,13 @@ namespace Luxia::Rendering::OpenGL {
 			std::string name;
 			switch (m_mesh.textures[i]->type) {
 			case LX_TEXTURE_DIFFUSE:
-				// if (textures[i].numColCh == 4) { material->AddFlag(MaterialFlags_Transparent); }
 				name = "diffuse" + std::to_string(diffuseIdx++);
 				break;
 			case LX_TEXTURE_SPECULAR:
 				name = "specular" + std::to_string(specularIdx++);
+				break;
+			case LX_TEXTURE_NORMALS:
+				name = "normals" + std::to_string(normalIdx++);
 				break;
 			}
 
@@ -42,14 +45,14 @@ namespace Luxia::Rendering::OpenGL {
 
 		m_shader->SetBool("hasDiffuse", diffuseIdx > 0);
 		m_shader->SetBool("hasSpecular", specularIdx > 0);
+		m_shader->SetBool("hasNormals", normalIdx > 0);
 
 		glm::mat4 modelmat = glm::mat4(1.0f);
 		modelmat = glm::translate(modelmat, glm::vec3(0.0f, -1.0f, -7.0f));
-		// modelmat = glm::scale(modelmat, glm::vec3(0.05f));
+		modelmat = glm::scale (modelmat, glm::vec3(0.02f));
 
-		//modelmat = glm::scale(modelmat, glm::vec3(0.1f));
 		glm::quat rotY = glm::angleAxis(glm::radians((float)glfwGetTime() * 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::quat rotX = glm::angleAxis(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		glm::quat rotX = glm::angleAxis(glm::radians(-0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		glm::quat rotZ = glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 		glm::quat rotationQuat = rotY * rotX * rotZ; // Apply Z rotation first, then X, then Y
 
@@ -61,8 +64,8 @@ namespace Luxia::Rendering::OpenGL {
 
 		m_mesh.vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);
-		m_mesh.vao->Unbind();
 
+		m_mesh.vao->Unbind();
 		glActiveTexture(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
