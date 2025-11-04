@@ -5,6 +5,7 @@
 #include "Luxia/Rendering/API/IRenderBuffers.h"
 #include <vector>
 #include <iostream>
+#include "Luxia/Rendering/API/ITexture.h"
 
 namespace Luxia {
 	class LUXIA_API Mesh {
@@ -12,10 +13,11 @@ namespace Luxia {
 		Mesh() = default;
 		~Mesh() = default;
 
-		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds) : vertices(verts), indices(inds) {}
+		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds, std::vector<std::shared_ptr<ITexture>> texs) 
+			: vertices(verts), indices(inds), textures(texs) {}
 		bool CalculateMesh();
 
-		void Cleanup() { vertices.clear(); indices.clear(); valid = false; }
+		void Cleanup();
 
 		bool IsValid() const { return valid; }
 		
@@ -25,6 +27,7 @@ namespace Luxia {
 
 		std::vector<Rendering::Vertex> vertices;
 		std::vector<uint32_t> indices;
+		std::vector<std::shared_ptr<ITexture>> textures;
 	private:
 		bool valid = false;
 	};

@@ -31,7 +31,16 @@ namespace Luxia::Platform::OpenGL {
 				std::ostringstream pstr; pstr << directory.string() << "/" << std::string(str.C_Str());
 				std::filesystem::path new_p = pstr.str();
 
-				tex->LoadFromFile(new_p, true); // type
+				tex->LoadFromFile(new_p, false); // type
+				
+				switch (type) {
+				case aiTextureType_DIFFUSE:
+					tex->type = TextureType::LX_TEXTURE_DIFFUSE;
+					break;
+				case aiTextureType_SPECULAR:
+					tex->type = TextureType::LX_TEXTURE_SPECULAR;
+					break;
+				}
 
 				textures.push_back(tex); 
 				loaded_textures.push_back(tex);
@@ -53,11 +62,10 @@ namespace Luxia::Platform::OpenGL {
 		valid = false;
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-			std::cout << "Could not load model at " << path.string().c_str() << std::endl << import.GetErrorString() << std::endl;
-
-			valid = false;
+			LX_CORE_ERROR("Could not load model at {}\n{}", path.string().c_str(), import.GetErrorString());
 			return;
 		}
+
 		valid = true;
 		
 		directory = path.parent_path();
@@ -84,7 +92,7 @@ namespace Luxia::Platform::OpenGL {
 
 		// vertices
 		for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
-			Luxia::Rendering::Vertex vertex;
+			Luxia::Rendering::Vertex vertex = {};
 
 			// Position
 			vertex.pos = glm::vec3(
@@ -102,13 +110,13 @@ namespace Luxia::Platform::OpenGL {
 
 			// Textures
 			if (mesh->mTextureCoords[0]) {
-				vertex.texCoord = glm::vec2(
+				vertex.texCoords = glm::vec2(
 					mesh->mTextureCoords[0][i].x,
 					mesh->mTextureCoords[0][i].y
 				);
 			}
 			else {
-				vertex.texCoord = glm::vec2(0.0f);
+				vertex.texCoords = glm::vec2(0.0f);
 			}
 
 			vertices.push_back(vertex);
@@ -138,13 +146,10 @@ namespace Luxia::Platform::OpenGL {
 			std::vector<std::shared_ptr<ITexture>> specularMaps = loadTextures(material, aiTextureType_SPECULAR);
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
-			// normal
-			std::vector<std::shared_ptr<ITexture>> normalMaps = loadTextures(material, aiTextureType_NORMALS);
-			textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		}
 
 
-		Mesh newMesh(vertices, indices); // textures
+		Mesh newMesh(vertices, indices, textures);
 		newMesh.CalculateMesh();
 		return newMesh;
 	}

@@ -35,18 +35,18 @@ namespace Luxia {
 		virtual void Use() = 0;
 		virtual void Delete() = 0;
 
-		void SetBool(const std::string& name, bool value) const {}						// should implement
-		void SetInt(const std::string& name, int value) const {}						// should implement
-		void SetFloat(const std::string& name, float value) const {}					// should implement
-		void SetVec2(const std::string& name, const glm::vec2& value) const {}			// should implement
-		void SetVec2(const std::string& name, float x, float y) const {}				// should implement
-		void SetVec3(const std::string& name, const glm::vec3& value) const {}			// should implement
-		void SetVec3(const std::string& name, float x, float y, float z) const {}		// should implement
-		void SetVec4(const std::string& name, const glm::vec4& value) const {}			// should implement
-		void SetVec4(const std::string& name, float x, float y, float z, float w) {}	// should implement
-		void SetMat2(const std::string& name, const glm::mat2& mat) const {}			// should implement
-		void SetMat3(const std::string& name, const glm::mat3& mat) const {}			// should implement
-		void SetMat4(const std::string& name, const glm::mat4& mat) const {}			// should implement
+		virtual void SetBool(const std::string& name, bool value) const = 0;
+		virtual void SetInt(const std::string& name, int value) const = 0;
+		virtual void SetFloat(const std::string& name, float value) const = 0;
+		virtual void SetVec2(const std::string& name, const glm::vec2& value) const = 0;
+		virtual void SetVec2(const std::string& name, float x, float y) const = 0;
+		virtual void SetVec3(const std::string& name, const glm::vec3& value) const = 0;
+		virtual void SetVec3(const std::string& name, float x, float y, float z) const = 0;
+		virtual void SetVec4(const std::string& name, const glm::vec4& value) const = 0;
+		virtual void SetVec4(const std::string& name, float x, float y, float z, float w) const = 0;
+		virtual void SetMat2(const std::string& name, const glm::mat2& mat) const = 0;
+		virtual void SetMat3(const std::string& name, const glm::mat3& mat) const = 0;
+		virtual void SetMat4(const std::string& name, const glm::mat4& mat) const = 0;
 	protected:
 		std::string fragment_path;
 		std::string vertex_path;

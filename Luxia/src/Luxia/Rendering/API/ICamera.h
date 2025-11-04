@@ -18,6 +18,7 @@ namespace Luxia {
 
 		glm::mat4& GetViewMat() { return m_View; }
 		glm::mat4& GetProjMat() { return m_Proj; }
+		glm::vec2 GetRes() { return glm::vec2(width, height); }
 	protected:
 		int width = 10, height = 10;
 		float nearPlane = 0.01f, farPlane = 1000.0f;

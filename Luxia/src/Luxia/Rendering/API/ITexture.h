@@ -7,6 +7,14 @@
 #include <filesystem>
 
 namespace Luxia {
+
+	enum TextureType {
+		LX_TEXTURE_DIFFUSE = 0,
+		LX_TEXTURE_SPECULAR = 1,
+		LX_TEXTURE_NORMAL = 2,
+		LX_TEXTURE_ROUGHNESS = 3,
+	};
+
 	class LUXIA_API ITexture {
 	public:
 		unsigned int texID = 0;
@@ -25,6 +33,7 @@ namespace Luxia {
 		int GetHeight() { return imgHeight; }
 		int GetNumColCh() { return numColCh; }
 
+		TextureType type;
 		std::filesystem::path path;
 	protected:
 		int imgWidth = 0, imgHeight = 0, numColCh = 3;

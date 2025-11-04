@@ -15,6 +15,7 @@ namespace Luxia::Platform::OpenGL {
 		glGenTextures(1, &texID);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texID);
+
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Creation crashes if pixel allignment needs to be divisible by 4
 
 		GLenum colorMode = GL_RGB;
@@ -35,14 +36,14 @@ namespace Luxia::Platform::OpenGL {
 		}
 
 		if (bytes) {
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexImage2D(GL_TEXTURE_2D, 0, colorMode, imgWidth, imgHeight, 0, colorMode, GL_UNSIGNED_BYTE, bytes);
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-			glTexImage2D(GL_TEXTURE_2D, 0, colorMode, imgWidth, imgHeight, 0, colorMode, GL_UNSIGNED_BYTE, bytes);
-			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else {
 			LX_CORE_ERROR("Failed to load image: {}", m_path.string());
