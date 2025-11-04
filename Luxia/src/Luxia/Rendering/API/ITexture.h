@@ -22,13 +22,15 @@ namespace Luxia {
 		ITexture() = default;
 		virtual ~ITexture() = default;
 
-		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) = 0;
+		virtual void CreateEmpty(const int width, const int height, const int colCh) = 0; // For custom textures created through code, such as FBO tex
+		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) = 0; // Loading textures
 		virtual void Unload() = 0;
 		virtual void Use() = 0;
 
 		virtual void Delete() = 0;
 
 		bool IsValid() { return valid; }
+		bool HasPath() { return hasPath; }
 		int GetWidth() { return imgWidth; }
 		int GetHeight() { return imgHeight; }
 		int GetNumColCh() { return numColCh; }
@@ -37,6 +39,7 @@ namespace Luxia {
 		std::filesystem::path path;
 	protected:
 		int imgWidth = 0, imgHeight = 0, numColCh = 3;
+		bool hasPath = false;
 		bool valid = false;
 	};
 }

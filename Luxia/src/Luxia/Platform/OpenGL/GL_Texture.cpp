@@ -4,6 +4,45 @@
 
 namespace Luxia::Platform::OpenGL {
 	
+	void GL_Texture::CreateEmpty(const int width, const int height, const int colCh) {
+		imgWidth = width;
+		imgHeight = height;
+		numColCh = colCh;
+
+		glGenTextures(1, &texID);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texID);
+
+		GLenum colorMode = GL_RGB;
+		switch (numColCh)
+		{
+		case 1:
+			colorMode = GL_RED;
+			break;
+		case 2:
+			colorMode = GL_RG;
+			break;
+		case 3:
+			colorMode = GL_RGB;
+			break;
+		case 4:
+			colorMode = GL_RGBA;
+			break;
+		}
+
+		glTexImage2D(GL_TEXTURE_2D, 0, colorMode, imgWidth, imgHeight, 0, colorMode, GL_UNSIGNED_BYTE, NULL);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		valid = true;
+		hasPath = false;
+	}
+
 	void GL_Texture::LoadFromFile(const std::filesystem::path& m_path, const bool flip) {
 		// Load Texture
 		stbi_set_flip_vertically_on_load(flip);
@@ -53,6 +92,8 @@ namespace Luxia::Platform::OpenGL {
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		valid = true;
+		hasPath = true;
+		path = m_path;
 
 		// Reset flip vertically on load since the next might not want to
 		stbi_set_flip_vertically_on_load(false);
@@ -62,6 +103,7 @@ namespace Luxia::Platform::OpenGL {
 
 	void GL_Texture::Unload() {
 		// Unload Texture
+		hasPath = false;
 		valid = false;
 	}
 
