@@ -10,6 +10,8 @@
 
 namespace Luxia
 {
+
+	// Create proj manager, renderer, eventhandler, and window on INIT
 	Application::Application()
 	{
 		// Open the project
@@ -23,29 +25,24 @@ namespace Luxia
 		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application");
 		m_Window->SetHandler(m_EventHandler);
 
-		// Initialise layerstack
+
+		// ==== Initialise layerstack ==== 
 		m_LayerStack = std::make_shared<LayerStack>();
 		m_LayerStack->m_Layers.clear();	m_LayerStack->m_Layers.resize(0);
 
 		// Push universal layers (used by all applications) MUST BE DONE IN ORDER BOTTOM TO TOP
-		m_LayerStack->PushLayer(std::make_shared<Layers::InputLayer>());
-		m_LayerStack->PushLayer(std::make_shared<Layers::GameLayer>());
-		m_LayerStack->PushLayer(std::make_shared<Layers::RenderLayer>());
+		m_LayerStack->PushLayer(std::make_shared<Layers::InputLayer>(m_EventHandler, m_ProjectManager, m_Renderer));
+		m_LayerStack->PushLayer(std::make_shared<Layers::GameLayer>(m_EventHandler, m_ProjectManager, m_Renderer));
+		m_LayerStack->PushLayer(std::make_shared<Layers::RenderLayer>(m_EventHandler, m_ProjectManager, m_Renderer));
 	}
 
 
-
+	// Create layers, instantiate
 	void Application::Startup() {
 		LX_CORE_INFO("Application Started\n");
-
-		// Set Event Handler for each layer
-		for (auto& layer : m_LayerStack->m_Layers) 
-			layer->SetDeps(m_EventHandler, m_ProjectManager, m_Renderer);
-
-		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>("Lovely.jpg");
-		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("cute_ghost/scene.gltf");
 	}
 
+	// Run
 	void Application::Run()
 	{
 		Startup();

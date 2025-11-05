@@ -4,9 +4,10 @@
 #include "Luxia/Rendering/API/ICamera.h"
 #include "Luxia/Rendering/API/IShader.h"
 #include "Luxia/Mesh.h"
+#include "Luxia/Core/Core.h"
 
 namespace Luxia::Rendering {
-	class IRenderer {
+	class LUXIA_API IRenderer {
 	public:
 		IRenderer() = default;
 		virtual ~IRenderer() = default;

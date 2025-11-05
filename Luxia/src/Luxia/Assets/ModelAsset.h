@@ -1,8 +1,7 @@
 #pragma once
-
+#include "Asset.h"
 
 #include "Luxia/Core/Core.h"
-#include "Asset.h"
 #include "Luxia/Rendering/API/IModel.h"
 #include "Luxia/Platform/AssetCreation.h"
 
@@ -18,14 +17,16 @@ namespace Luxia::Assets {
 			type = AssetType::Model;
 			loaded = false;
 		}
-		virtual void Load(const std::filesystem::path& m_path, const std::string& m_name) override {
-			path = m_path;
+
+
+		virtual void Create(const std::filesystem::path& sourcePath) override {
+			srcPath = sourcePath;
 
 			model = Luxia::Platform::Assets::CreateModel();
 			
 			bool suffix_found = false;
-			if (path.has_extension()) {
-				std::string m_suf = path.extension().string();
+			if (srcPath.has_extension()) {
+				std::string m_suf = srcPath.extension().string();
 
 				for (auto& t_suf : p_suf) {
 					if (t_suf == m_suf) {
@@ -36,22 +37,24 @@ namespace Luxia::Assets {
 				}
 			}
 
-			model->LoadFromFile(path);
+			model->LoadFromFile(srcPath);
 			name = model->name;
 
 			loaded = model->IsValid();
 
 			if (loaded)
-				LX_CORE_TRACE("Loaded Model Asset: '{}', {}", name, suffix);
+				LX_CORE_TRACE("Created Model Asset: '{}', {}", name, suffix);
 			else
-				LX_CORE_ERROR("Failed Loading Model Asset: {}", path.string());
+				LX_CORE_ERROR("Failed Created Model Asset: {}", srcPath.string());
 		}
+
+		virtual void Load(const std::filesystem::path& metaFile) {
+
+		}
+
+
 		virtual void Unload() override {
 			model->Cleanup();
-		}
-		virtual void Delete() override {
-			Unload();
-			// Rest
 		}
 	private:
 		std::array<std::string, 3> p_suf{

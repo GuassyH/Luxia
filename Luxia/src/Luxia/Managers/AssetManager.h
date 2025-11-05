@@ -25,10 +25,11 @@ namespace Luxia {
 
 		void Cleanup(); // Before app closes, save everything, etc
 		
+
 		template <typename T> // Load an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>> 
-			Load(const std::string& m_path, const std::string& m_name = "no_name") {
-			std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path;
+			Create(const std::string& sourcePath) {
+			std::filesystem::path full_path = asset_dir.string() + std::string("/") + sourcePath;
 
 			if (loaded_assets.contains(full_path)) {
 				LX_CORE_WARN("Asset at path: {}. Already exists!", full_path.string());
@@ -42,11 +43,36 @@ namespace Luxia {
 				return asset;
 			}
 
-			asset->Load(full_path, m_name);
+			asset->Create(full_path);
 			loaded_assets[full_path] = asset;
 
 			return asset;
 		}
+
+
+		template <typename T> // Load an asset from a path
+		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>>
+			Load(const std::string& metaPath) {
+			std::filesystem::path full_path = asset_dir.string() + std::string("/") + metaPath;
+
+			if (loaded_assets.contains(full_path)) {
+				LX_CORE_WARN("Asset at path: {}. Already exists!", full_path.string());
+				return std::static_pointer_cast<T>(loaded_assets[full_path]);
+			}
+
+			auto asset = std::make_shared<T>();
+
+			if (asset->type == Assets::AssetType::NoAsset) {
+				LX_CORE_ERROR("Asset at path: {}. Does not have asset type!", full_path.string());
+				return asset;
+			}
+
+			asset->Load(full_path);
+			loaded_assets[full_path] = asset;
+
+			return asset;
+		}
+
 
 		template <typename T> // Unload an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void> 

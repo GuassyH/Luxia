@@ -9,10 +9,14 @@
 
 namespace Luxia
 {
-	class Layer {
+	class LUXIA_API Layer {
 	public:
 
 		Layer() = default;
+		Layer(const std::shared_ptr<EventHandler>& handler,
+			const std::shared_ptr<ProjectManager>& manager,
+			const std::shared_ptr<Rendering::IRenderer>& m_renderer)
+			: event_handler(handler), project_manager(manager), renderer(m_renderer) { }
 		virtual ~Layer() = default;
 
 		virtual void OnAttach() = 0;
@@ -20,10 +24,6 @@ namespace Luxia
 		virtual void OnUpdate() = 0;
 		virtual void OnRender() = 0;
 		virtual void OnEvent(Event& event) = 0;
-
-		void SetDeps(std::shared_ptr<EventHandler> handler, std::shared_ptr<ProjectManager> manager, std::shared_ptr<Rendering::IRenderer> m_renderer){
-			event_handler = handler;  project_manager = manager; renderer = m_renderer;
-		}
 
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
 	protected:

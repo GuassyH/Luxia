@@ -17,15 +17,16 @@ namespace Luxia::Assets {
 			type = AssetType::Texture; 
 			loaded = false;
 		}
-		virtual void Load(const std::filesystem::path& m_path, const std::string& m_name) override {
-			path = m_path; 
+
+		virtual void Create(const std::filesystem::path& sourcePath) override {
+			srcPath = sourcePath;
 
 			// Create OS specific Texture
 			texture = Luxia::Platform::Assets::CreateTexture();
 
 			bool suffix_found = false;
-			if (path.has_extension()) {
-				std::string m_suf = path.extension().string();
+			if (srcPath.has_extension()) {
+				std::string m_suf = srcPath.extension().string();
 
 				for (auto& t_suf : p_suf) {
 					if (t_suf == m_suf) {
@@ -35,36 +36,32 @@ namespace Luxia::Assets {
 					}
 				}
 
-
-
-				if (m_name == "no_name") {
-					std::string name_path = path.stem().string();
-					name = name_path;
-				}
-				else {
-					name = m_name;
-				}
+				std::string name_path = srcPath.stem().string();
+				name = name_path;
 			}
 
 			if (suffix_found) {
-				texture->LoadFromFile(path);
+				texture->LoadFromFile(srcPath);
 			}
 			
 			loaded = texture->IsValid();	
 
 			if (loaded)
-				LX_CORE_TRACE("Loaded Texture Asset: '{}', {}", name, suffix);
+				LX_CORE_TRACE("Created Texture Asset: '{}', {}", name, suffix);
 			else
-				LX_CORE_ERROR("Failed Loading Texture Asset: {}", path.string());
-		}
-		virtual void Unload() override {
-			texture->Unload();
+				LX_CORE_ERROR("Failed Created Texture Asset: {}", srcPath.string());
 		}
 
-		virtual void Delete() override {
-			Unload();
+
+		virtual void Load(const std::filesystem::path& metaFile) {
+
+		}
+
+
+		virtual void Unload() override {
 			texture->Delete();
 		}
+
 
 	private:
 		std::array<std::string, 3> p_suf{

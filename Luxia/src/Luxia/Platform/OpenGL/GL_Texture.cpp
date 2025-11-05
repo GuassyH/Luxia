@@ -103,10 +103,11 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Texture::Unload() {
+	void GL_Texture::Delete() {
 		// Unload Texture
 		hasPath = false;
 		valid = false;
+		glDeleteTextures(1, &texID);
 	}
 
 	void GL_Texture::Use() {
@@ -115,8 +116,4 @@ namespace Luxia::Platform::OpenGL {
 		// Bind currently used texture to be this
 	}
 
-	void GL_Texture::Delete() {
-		// Delete Texture
-		glDeleteTextures(1, &texID);
-	}
 }

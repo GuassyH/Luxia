@@ -10,9 +10,7 @@ namespace Luxia::Platform::OpenGL {
 
 		virtual void CreateEmpty(const int width, const int height, const int colCh) override;
 		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) override;
-		virtual void Unload() override;
-		virtual void Use() override;
-
 		virtual void Delete() override;
+		virtual void Use() override;
 	};
 }

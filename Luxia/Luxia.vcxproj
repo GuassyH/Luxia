@@ -211,6 +211,9 @@
     <ClCompile Include="src\Luxia\Core\Log.cpp" />
     <ClCompile Include="src\Luxia\Core\stb.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
+    <ClCompile Include="src\Luxia\Layers\GameLayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\InputLayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />

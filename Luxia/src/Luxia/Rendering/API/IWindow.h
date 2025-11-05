@@ -3,10 +3,11 @@
 #include "Luxia/Events/EventDefs.h"
 #include <Luxia/Core/Core.h>
 #include "Luxia/Core/WeakPtrProxy.h"
+#include "Luxia/Core/Core.h"
 
 namespace Luxia
 {
-	class IWindow // A base window class
+	class LUXIA_API IWindow // A base window class
 	{
 	public:
 		virtual ~IWindow() = default;

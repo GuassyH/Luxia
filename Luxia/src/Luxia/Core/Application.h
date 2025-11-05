@@ -32,7 +32,10 @@ namespace Luxia
 
 		inline std::shared_ptr<Luxia::IWindow> GetWindow() { return m_Window; }
 		inline std::shared_ptr<Luxia::LayerStack> GetLayerStack() { return m_LayerStack; }
+
 		std::shared_ptr<Luxia::ProjectManager> GetProjectManager() { return m_ProjectManager; }
+		std::shared_ptr<Luxia::EventHandler> GetEventHandler() { return m_EventHandler; }
+		std::shared_ptr<Luxia::Rendering::IRenderer> GetRenderer() { return m_Renderer; }
 		// Each client defines this function; editor, runtime, etc.
 	protected:
 		std::shared_ptr<Luxia::IWindow> m_Window;
