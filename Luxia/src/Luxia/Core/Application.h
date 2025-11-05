@@ -9,12 +9,10 @@
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 
-#include "Luxia/Events/EventPCH.h"
+#include "Luxia/Events/EventDefs.h"
 #include "Luxia/Layers/LayerStack.h"
 #include "Luxia/Layers/Layer.h"
 
-
-#include <iostream>
 
 namespace Luxia
 {

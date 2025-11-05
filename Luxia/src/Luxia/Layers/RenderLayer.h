@@ -13,7 +13,8 @@ namespace Luxia::Layers
 		virtual ~RenderLayer() = default;
 		
 		std::shared_ptr<ICamera> cam = Luxia::Platform::Assets::CreateCamera(1920, 1080);
-		std::shared_ptr<IShader> shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
+		std::shared_ptr<IShader> shader = 
+			Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
 
 		virtual void OnAttach() override {
 			LX_CORE_WARN("RenderLayer Attached");
@@ -27,6 +28,9 @@ namespace Luxia::Layers
 		}
 		virtual void OnRender() override {
 			// TEMP, SHOULD BE SCENE.GETSCENEASSETS OR SO
+
+			// for (auto cam : entitysystem.getmap<camera>) { render(scenemanager.getassetpool; }
+
 			for (auto [path, model] : project_manager->GetAssetManager()->GetAssets()) {
 				if (model->type == Assets::AssetType::Model) {
 					auto ma = std::static_pointer_cast<Assets::ModelAsset>(model);

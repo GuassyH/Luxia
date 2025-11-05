@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
+
 #include <iostream>
-#include <ostream>
 #include <sstream>
 
 namespace Luxia {

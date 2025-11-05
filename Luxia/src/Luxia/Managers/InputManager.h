@@ -3,10 +3,12 @@
 
 #include "Luxia/Core/Core.h"
 
-#include <unordered_set>
-#include "Luxia/Events/EventPCH.h"
+#include "Luxia/Events/EventDefs.h"
 #include "glm/glm/common.hpp"
 #include "glm/glm.hpp"
+
+#include <unordered_set>
+#include <iostream>
 
 namespace Luxia::Input {
 	

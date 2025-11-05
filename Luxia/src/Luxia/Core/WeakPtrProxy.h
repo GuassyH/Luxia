@@ -1,8 +1,7 @@
 #pragma once
 
-// This class should make WeakPtr feel like a normal ptr, so i dont need all the boilerplate
-#include <iostream>
 
+// This class should make WeakPtr feel like a normal ptr, so i dont need all the boilerplate
 template<typename T>
 class WeakPtrProxy {
 private:

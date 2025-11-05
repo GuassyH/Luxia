@@ -1,12 +1,10 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-#include <iostream>
-#include <sstream>
-#include <fstream>
 
 #include <glm/common.hpp>
 #include <glm/glm.hpp>
+#include <fstream>
 
 namespace Luxia {
 

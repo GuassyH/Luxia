@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core.h"
-#include "WeakPtrProxy.h"
-#include "Luxia/Events/EventPCH.h"
+#include "Luxia/Core/Core.h"
+#include "Luxia/Core/WeakPtrProxy.h"
+#include "Luxia/Events/EventDefs.h"
 #include "Luxia/Managers/InputManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 #include "Luxia/Platform/PlatformDefinitions.h"

@@ -1,14 +1,9 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-#include "Luxia/Core/Log.h"
 #include "Event.h"
 
-#include <iostream>
 #include <vector>
-#include <memory>
-#include <xmemory>
-
 
 namespace Luxia {
 	class Application;

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-
 #include "Layer.h"
 
 namespace Luxia {

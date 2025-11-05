@@ -21,6 +21,9 @@ project "Luxia"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "lxpch.h"
+	pchsource "Luxia/src/lxpch.cpp"
+
 	-- What files are we looking for / copying
 	files{
 		"%{prj.name}/src/**.h",

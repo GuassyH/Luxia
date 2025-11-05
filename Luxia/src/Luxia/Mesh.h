@@ -3,8 +3,6 @@
 #include "Luxia/Core/Core.h"
 #include "Luxia/Rendering/Vertex.h"
 #include "Luxia/Rendering/API/IRenderBuffers.h"
-#include <vector>
-#include <iostream>
 #include "Luxia/Rendering/API/ITexture.h"
 
 namespace Luxia {

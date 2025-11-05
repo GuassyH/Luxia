@@ -1,3 +1,4 @@
+#include "lxpch.h"
 #include "Mesh.h"
 #include "Luxia/Rendering/RenderingCreation.h"
 

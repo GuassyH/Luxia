@@ -3,7 +3,6 @@
 
 #include "Luxia/Core/Core.h"
 #include "Asset.h"
-#include <vector>
 #include "Luxia/Rendering/API/IModel.h"
 #include "Luxia/Platform/AssetCreation.h"
 

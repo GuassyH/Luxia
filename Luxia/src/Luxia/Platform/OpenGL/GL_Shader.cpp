@@ -1,3 +1,4 @@
+#include "lxpch.h"
 #include "GL_Shader.h"
 
 namespace Luxia::Platform::OpenGL {

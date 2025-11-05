@@ -1,7 +1,5 @@
+#include "lxpch.h"
 #include "GL_Window.h"
-
-#include "Luxia/Core/Log.h"
-#include <stdio.h>
 
 namespace Luxia::Platform::OpenGL {
 

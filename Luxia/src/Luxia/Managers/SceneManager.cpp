@@ -1,5 +1,5 @@
+#include "lxpch.h"
 #include "SceneManager.h"
-
 
 namespace Luxia {
 	bool SceneManager::LoadScenesFromPath(const std::filesystem::path& m_path) {

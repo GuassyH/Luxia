@@ -1,3 +1,4 @@
+#include "lxpch.h"
 #include "ProjectManager.h"
 
 namespace Luxia {

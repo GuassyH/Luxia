@@ -5,7 +5,6 @@
 
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
-#include <glm/gtc/type_ptr.hpp>
 
 namespace Luxia::Platform::OpenGL {
 	class GL_Shader : public IShader {

@@ -1,5 +1,4 @@
 #pragma once
-#include <stdio.h>
 
 #include "Core.h"
 #include "Application.h"

@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <KHR/khrplatform.h>
-#include <Windows.h> 
 
 namespace Luxia::Platform::OpenGL {
 	class GL_Window : public Luxia::IWindow {

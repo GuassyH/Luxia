@@ -5,8 +5,6 @@
 #include "Luxia/Core/Application.h"
 #include "Luxia//Core/Log.h"
 
-#include "lxm/lxm_common.h"
-
 #include "Luxia/Managers/InputManager.h"
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/SceneManager.h"
@@ -14,7 +12,7 @@
 
 
 // Should be precompiled header
-#include "Luxia/Events/EventPCH.h"
+#include "Luxia/Events/EventDefs.h"
 
 // ---- Entry Point ----
 #include "Luxia/Core/EntryPoint.h"

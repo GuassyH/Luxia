@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-#include <filesystem>
 #include "stb/stb_image.h"
-#include "Luxia/Core/Log.h"
+
 #include <filesystem>
 
 namespace Luxia {

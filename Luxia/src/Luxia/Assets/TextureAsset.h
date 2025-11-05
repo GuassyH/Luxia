@@ -5,7 +5,6 @@
 #include "Luxia/Platform/AssetCreation.h"
 
 #include "Asset.h"
-#include <vector>
 
 using Luxia::ITexture;
 

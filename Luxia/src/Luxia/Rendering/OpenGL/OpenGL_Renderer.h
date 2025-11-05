@@ -2,10 +2,6 @@
 
 #include "Luxia/Rendering/API/IRenderer.h"
 
-#include "glfw/glfw3.h"
-#include "glad/glad.h"
-#include "glm/common.hpp"
-
 namespace Luxia::Rendering::OpenGL {
 	class OpenGL_Renderer : public Luxia::Rendering::IRenderer {
 	public:

@@ -1,6 +1,6 @@
+#include "lxpch.h"
 #include "GL_Camera.h"
-#include "glm/common.hpp"
-#include "Luxia/Core/Log.h"
+
 namespace Luxia::Platform::OpenGL {
 
 	void GL_Camera::UpdateMatrix() {

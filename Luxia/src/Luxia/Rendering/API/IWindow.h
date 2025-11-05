@@ -1,7 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include "Luxia/Events/EventPCH.h"
+#include "Luxia/Events/EventDefs.h"
 #include <Luxia/Core/Core.h>
 #include "Luxia/Core/WeakPtrProxy.h"
 
@@ -46,7 +45,6 @@ namespace Luxia
 			return true;
 		}		
 		virtual bool CloseEvent(WindowCloseEvent& e) {
-			LX_CORE_ERROR("Window Close Event Received");
 			Close();
 			return true;
 		}		

@@ -1,14 +1,13 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-#include "Luxia/Core/Log.h"
 #include "Luxia/Mesh.h"
 
 #include "Luxia/Rendering/API/ITexture.h"
 
-#include <filesystem>
 #include <vector>
-#include <memory>
+#include <filesystem>
+#include <iostream>
 
 namespace Luxia {
 	class LUXIA_API IModel {

@@ -1,6 +1,6 @@
+#include "lxpch.h"
 #include "Application.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
-#include "Luxia/Core/Log.h"
 
 #include "Luxia/Layers/InputLayer.h"
 #include "Luxia/Layers/RenderLayer.h"

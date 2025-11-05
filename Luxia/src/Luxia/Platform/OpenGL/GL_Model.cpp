@@ -1,8 +1,7 @@
+#include "lxpch.h"
 #include "GL_Model.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
 
-#include <ostream>
-#include <sstream>
 
 namespace Luxia::Platform::OpenGL {
 

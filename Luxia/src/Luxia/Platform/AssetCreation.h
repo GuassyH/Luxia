@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "Luxia/Core/Core.h"
 #include "Luxia/Rendering/API/IWindow.h"
 #include "Luxia/Rendering/API/ITexture.h"

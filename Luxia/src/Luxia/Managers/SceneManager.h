@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-#include "Luxia/Core/Log.h"
+
 #include <filesystem>
 
 namespace Luxia {

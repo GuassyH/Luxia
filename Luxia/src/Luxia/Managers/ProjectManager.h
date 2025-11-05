@@ -1,12 +1,11 @@
 #pragma once
 
-#include <filesystem>
-#include <iostream>
-
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/SceneManager.h"
-#include "Luxia/Core/Log.h"
 #include "Luxia/Core/Core.h"
+
+#include <filesystem>
+#include <iostream>
 
 namespace Luxia {
 	class LUXIA_API ProjectManager {

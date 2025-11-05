@@ -2,8 +2,6 @@
 
 #include "Luxia/Core/Core.h"
 
-#include <iostream>
-
 #include "Luxia/Rendering/API/IRenderer.h"
 #include "Luxia/Rendering/OpenGL/OpenGL_Renderer.h"
 

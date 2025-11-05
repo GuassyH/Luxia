@@ -1,6 +1,9 @@
+#include "lxpch.h"
 #include "OpenGL_Renderer.h"
 
-#include <glm/glm.hpp>
+#include "glfw/glfw3.h"
+#include "glad/glad.h"
+
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Luxia::Rendering::OpenGL {

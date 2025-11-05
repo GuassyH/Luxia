@@ -1,3 +1,4 @@
+#include "lxpch.h"
 #include "AssetManager.h"
 
 namespace Luxia {
