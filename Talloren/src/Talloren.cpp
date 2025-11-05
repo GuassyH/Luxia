@@ -32,13 +32,12 @@ public:
 	}
 };
 
-Luxia::Application* Luxia::CreateApplication(){
-	Application* app = new TallorenApp();
+std::unique_ptr<Luxia::Application> Luxia::CreateApplication(){
+	std::unique_ptr<Luxia::Application> app = std::make_unique<TallorenApp>();
 
 	// LOAD FIRST
 	std::filesystem::path new_path = "E:/BuiltLuxia/NewProject";
 	app->GetProjectManager()->OpenProject(new_path);
-
 
 	return app;
 };

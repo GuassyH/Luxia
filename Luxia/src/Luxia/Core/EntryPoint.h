@@ -6,7 +6,7 @@
 
 #ifdef LUXIA_PLATFORM_WINDOWS
 
-extern Luxia::Application* Luxia::CreateApplication();
+extern std::unique_ptr<Luxia::Application> Luxia::CreateApplication();
 
 int main(int argc, char** argv)
 {
@@ -14,15 +14,14 @@ int main(int argc, char** argv)
 	LX_CORE_WARN("Initialized Logger");
 
 	// Create the application using externally defined function
-	Luxia::Application* app = Luxia::CreateApplication();
+	std::unique_ptr<Luxia::Application> app = Luxia::CreateApplication();
 
 	app->CoreStartup();
 	app->Startup();
 	app->Run();
 	app->Shutdown();
+	app->CoreShutdown();
 
-	delete app;
-	
 	return 0;
 }
 

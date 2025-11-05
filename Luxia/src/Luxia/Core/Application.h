@@ -26,7 +26,10 @@ namespace Luxia
 		void CoreStartup();
 		virtual void Startup() {}
 		void Run();
-		virtual void Shutdown();
+		virtual void Shutdown() {}
+		void CoreShutdown();
+
+
 
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { 
 			m_LayerStack->PushLayer(layer, m_EventHandler, m_ProjectManager, m_Renderer); 
@@ -50,7 +53,7 @@ namespace Luxia
 		std::shared_ptr<Luxia::Rendering::IRenderer> m_Renderer;
 	};
 
-	Application* CreateApplication();
+	std::unique_ptr<Application> CreateApplication();
 
 }
 
