@@ -50,10 +50,10 @@ namespace Luxia::Rendering::OpenGL {
 
 		glm::mat4 modelmat = glm::mat4(1.0f);
 		modelmat = glm::translate(modelmat, glm::vec3(0.0f, -1.0f, -7.0f));
-		modelmat = glm::scale (modelmat, glm::vec3(0.02f));
+		//modelmat = glm::scale (modelmat, glm::vec3(0.02f));
 
 		glm::quat rotY = glm::angleAxis(glm::radians((float)glfwGetTime() * 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::quat rotX = glm::angleAxis(glm::radians(-0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		glm::quat rotX = glm::angleAxis(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		glm::quat rotZ = glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 		glm::quat rotationQuat = rotY * rotX * rotZ; // Apply Z rotation first, then X, then Y
 
