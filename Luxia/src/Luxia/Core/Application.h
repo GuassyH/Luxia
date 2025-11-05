@@ -23,11 +23,14 @@ namespace Luxia
 		Application();
 		virtual ~Application() = default;
 
-		virtual void Startup();
+		void CoreStartup();
+		virtual void Startup() {}
 		void Run();
 		virtual void Shutdown();
 
-		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { m_LayerStack->PushLayer(layer); }
+		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { 
+			m_LayerStack->PushLayer(layer, m_EventHandler, m_ProjectManager, m_Renderer); 
+		}
 		bool OnEvent(Luxia::Event& e);
 
 		inline std::shared_ptr<Luxia::IWindow> GetWindow() { return m_Window; }

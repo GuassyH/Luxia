@@ -5,6 +5,7 @@
 #include "Luxia/Core/Application.h"
 #include "Luxia//Core/Log.h"
 
+
 #include "Luxia/Managers/InputManager.h"
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/SceneManager.h"

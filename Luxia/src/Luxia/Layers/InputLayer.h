@@ -11,11 +11,6 @@ namespace Luxia::Layers
 	public:
 		InputLayer() = default;
 		~InputLayer() = default;
-		InputLayer(
-			const std::shared_ptr<EventHandler>& handler, 
-			const std::shared_ptr<ProjectManager>& manager,
-			const std::shared_ptr<Rendering::IRenderer>& m_renderer)
-			: Layer(handler, manager, m_renderer) { }
 
 		
 		virtual void OnAttach() override;

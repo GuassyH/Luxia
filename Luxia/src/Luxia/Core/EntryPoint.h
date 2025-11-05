@@ -15,7 +15,12 @@ int main(int argc, char** argv)
 
 	// Create the application using externally defined function
 	Luxia::Application* app = Luxia::CreateApplication();
+
+	app->CoreStartup();
+	app->Startup();
 	app->Run();
+	app->Shutdown();
+
 	delete app;
 	
 	return 0;

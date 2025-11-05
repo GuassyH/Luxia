@@ -6,12 +6,6 @@ namespace Luxia {
 	public:
 		ExtraLayer() = default;
 		~ExtraLayer() = default;
-		ExtraLayer(
-			const std::shared_ptr<EventHandler>& handler,
-			const std::shared_ptr<ProjectManager>& manager,
-			const std::shared_ptr<Rendering::IRenderer>& m_renderer)
-			: Layer(handler, manager, m_renderer) {
-		}
 
 		virtual void OnAttach() override { 
 			LX_CORE_WARN("ExtraLayer Attached");
@@ -30,6 +24,12 @@ class TallorenApp : public Luxia::Application {
 public:
 	TallorenApp() = default;
 	~TallorenApp() = default;
+
+	virtual void Startup() override {
+		// Push extra layers used
+		PushLayer(std::make_shared<Luxia::ExtraLayer>());		
+		GetWindow()->SetTitle("Island Application");
+	}
 };
 
 Luxia::Application* Luxia::CreateApplication(){
@@ -38,11 +38,7 @@ Luxia::Application* Luxia::CreateApplication(){
 	// LOAD FIRST
 	std::filesystem::path new_path = "E:/BuiltLuxia/NewProject";
 	app->GetProjectManager()->OpenProject(new_path);
-	app->GetWindow()->SetTitle("Island Application");
 
-
-	// PUSH LAST
-	app->PushLayer(std::make_shared<ExtraLayer>(app->GetEventHandler(), app->GetProjectManager(), app->GetRenderer()));
 
 	return app;
 };

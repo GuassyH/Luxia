@@ -26,27 +26,23 @@ namespace Luxia
 		m_Window->SetHandler(m_EventHandler);
 
 
-		// ==== Initialise layerstack ==== 
+		// Initialise layerstack 
 		m_LayerStack = std::make_shared<LayerStack>();
 		m_LayerStack->m_Layers.clear();	m_LayerStack->m_Layers.resize(0);
-
-		// Push universal layers (used by all applications) MUST BE DONE IN ORDER BOTTOM TO TOP
-		m_LayerStack->PushLayer(std::make_shared<Layers::InputLayer>(m_EventHandler, m_ProjectManager, m_Renderer));
-		m_LayerStack->PushLayer(std::make_shared<Layers::GameLayer>(m_EventHandler, m_ProjectManager, m_Renderer));
-		m_LayerStack->PushLayer(std::make_shared<Layers::RenderLayer>(m_EventHandler, m_ProjectManager, m_Renderer));
 	}
 
-
-	// Create layers, instantiate
-	void Application::Startup() {
+	void Application::CoreStartup() {
 		LX_CORE_INFO("Application Started\n");
+
+		// Core Layers
+		PushLayer(std::make_shared<Layers::InputLayer>());
+		PushLayer(std::make_shared<Layers::GameLayer>());
+		PushLayer(std::make_shared<Layers::RenderLayer>());
 	}
 
 	// Run
 	void Application::Run()
 	{
-		Startup();
-
 		// While the window is running loop
 		while (m_Window->isRunning()) {
 			m_Window->BeginFrame();
@@ -61,8 +57,6 @@ namespace Luxia
 			m_Window->EndFrame();
 			input.Clear();
 		}
-
-		Shutdown();
 	}
 
 	void Application::Shutdown() {

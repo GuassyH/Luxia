@@ -11,12 +11,6 @@ namespace Luxia::Layers
 	public:
 		RenderLayer() = default;
 		~RenderLayer() = default;
-		RenderLayer(
-			const std::shared_ptr<EventHandler>& handler,
-			const std::shared_ptr<ProjectManager>& manager,
-			const std::shared_ptr<Rendering::IRenderer>& m_renderer)
-			: Layer(handler, manager, m_renderer) {
-		}
 		
 		std::shared_ptr<ICamera> cam = Luxia::Platform::Assets::CreateCamera(1920, 1080);
 		std::shared_ptr<IShader> shader = 
