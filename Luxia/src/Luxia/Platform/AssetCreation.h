@@ -1,22 +1,22 @@
 #pragma once
 
-#include "Luxia/Core.h"
-#include "Luxia/Rendering/API/IWindow.h"
-#include "Luxia/Platform/OpenGL/GL_Window.h"
-
-#include "Luxia/Rendering/API/ITexture.h"
-#include "Luxia/Platform/OpenGL/GL_Texture.h"
-
-#include "Luxia/Rendering/API/IModel.h"
-#include "Luxia/Platform/OpenGL/GL_Model.h"
-
-#include "Luxia/Rendering/API/ICamera.h"
-#include "Luxia/Platform/OpenGL/GL_Camera.h"
-
-#include "Luxia/Rendering/API/IShader.h"
-#include "Luxia/Platform/OpenGL/GL_Shader.h"
-
 #include <iostream>
+
+#include "Luxia/Core/Core.h"
+#include "Luxia/Rendering/API/IWindow.h"
+#include "Luxia/Rendering/API/ITexture.h"
+#include "Luxia/Rendering/API/IModel.h"
+#include "Luxia/Rendering/API/ICamera.h"
+#include "Luxia/Rendering/API/IShader.h"
+
+#ifdef LUXIA_RENDERER_OPENGL
+	#include "Luxia/Platform/OpenGL/GL_Window.h"
+	#include "Luxia/Platform/OpenGL/GL_Texture.h"
+	#include "Luxia/Platform/OpenGL/GL_Model.h"
+	#include "Luxia/Platform/OpenGL/GL_Camera.h"
+	#include "Luxia/Platform/OpenGL/GL_Shader.h"
+#endif
+
 
 namespace Luxia::Platform::Assets
 {
@@ -28,7 +28,7 @@ namespace Luxia::Platform::Assets
 		#ifdef LUXIA_RENDERER_OPENGL
 			win = std::make_shared<Luxia::Platform::OpenGL::GL_Window>();
 		#else 
-		#error Luxia doesnt support your Renderer!
+			#error Luxia doesnt support your Renderer!
 		#endif
 
 		win->Create(1920, 1080, "Luxia Application");
@@ -41,9 +41,8 @@ namespace Luxia::Platform::Assets
 		#ifdef LUXIA_RENDERER_OPENGL
 			tex = std::make_shared<Luxia::Platform::OpenGL::GL_Texture>();
 		#else 
-		#error Luxia doesnt support your Renderer!
+			#error Luxia doesnt support your Renderer!
 		#endif
-
 		return tex;
 	}
 
@@ -53,7 +52,7 @@ namespace Luxia::Platform::Assets
 		#ifdef LUXIA_RENDERER_OPENGL
 			mod = std::make_shared<Luxia::Platform::OpenGL::GL_Model>();
 		#else 
-		#error Luxia doesnt support your Renderer!
+			#error Luxia doesnt support your Renderer!
 		#endif
 
 		return mod;
@@ -63,9 +62,9 @@ namespace Luxia::Platform::Assets
 		std::shared_ptr<Luxia::ICamera> cam;
 
 		#ifdef LUXIA_RENDERER_OPENGL
-			cam = std::make_shared<Luxia::Platform::OpenGL::GL_Camera>(width, height);
+				cam = std::make_shared<Luxia::Platform::OpenGL::GL_Camera>(width, height);
 		#else 
-		#error Luxia doesnt support your Renderer!
+			#error Luxia doesnt support your Renderer!
 		#endif
 
 		return cam;
@@ -77,7 +76,7 @@ namespace Luxia::Platform::Assets
 		#ifdef LUXIA_RENDERER_OPENGL
 			shader = std::make_shared<Luxia::Platform::OpenGL::GL_Shader>(fragSrc, vertSrc);
 		#else 
-		#error Luxia doesnt support your Renderer!
+			#error Luxia doesnt support your Renderer!
 		#endif
 
 		return shader;

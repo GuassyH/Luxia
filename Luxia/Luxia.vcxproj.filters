@@ -48,7 +48,7 @@
     <ClInclude Include="src\Luxia.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Application.h">
+    <ClInclude Include="src\Luxia\Core\Application.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Assets\Asset.h">
@@ -60,10 +60,10 @@
     <ClInclude Include="src\Luxia\Assets\TextureAsset.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Core.h">
+    <ClInclude Include="src\Luxia\Core\Core.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\EntryPoint.h">
+    <ClInclude Include="src\Luxia\Core\EntryPoint.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\Event.h">
@@ -99,7 +99,7 @@
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h">
       <Filter>src\Luxia\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Log.h">
+    <ClInclude Include="src\Luxia\Core\Log.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\AssetManager.h">
@@ -159,7 +159,7 @@
     <ClInclude Include="src\Luxia\Rendering\Vertex.h">
       <Filter>src\Luxia\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\WeakPtrProxy.h">
+    <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h">
       <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\lxm\lxm_common.h">
@@ -182,13 +182,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Application.cpp">
+    <ClCompile Include="src\Luxia\Core\Application.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp">
       <Filter>src\Luxia\Events</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Log.cpp">
+    <ClCompile Include="src\Luxia\Core\Log.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp">
@@ -215,7 +215,7 @@
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp">
       <Filter>src\Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\stb.cpp">
+    <ClCompile Include="src\Luxia\Core\stb.cpp">
       <Filter>src\Luxia</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">

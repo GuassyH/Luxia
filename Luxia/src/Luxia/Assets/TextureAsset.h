@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 #include "Luxia/Rendering/API/ITexture.h"
 #include "Luxia/Platform/AssetCreation.h"
 
@@ -18,7 +18,7 @@ namespace Luxia::Assets {
 			type = AssetType::Texture; 
 			loaded = false;
 		}
-		virtual void Load(const std::filesystem::path& m_path) override { 
+		virtual void Load(const std::filesystem::path& m_path, const std::string& m_name) override {
 			path = m_path; 
 
 			// Create OS specific Texture
@@ -36,8 +36,15 @@ namespace Luxia::Assets {
 					}
 				}
 
-				std::string name_path = path.stem().string();
-				name = name_path;
+
+
+				if (m_name == "no_name") {
+					std::string name_path = path.stem().string();
+					name = name_path;
+				}
+				else {
+					name = m_name;
+				}
 			}
 
 			if (suffix_found) {

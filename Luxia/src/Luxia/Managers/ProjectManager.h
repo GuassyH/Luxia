@@ -5,8 +5,8 @@
 
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/SceneManager.h"
-#include "Luxia/Log.h"
-#include "Luxia/Core.h"
+#include "Luxia/Core/Log.h"
+#include "Luxia/Core/Core.h"
 
 namespace Luxia {
 	class LUXIA_API ProjectManager {

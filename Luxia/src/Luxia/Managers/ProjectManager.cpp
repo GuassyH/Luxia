@@ -15,6 +15,7 @@ namespace Luxia {
 			return false;
 		}
 
+
 		m_ProjectPath = folder_path;
 		// Create a ProjectFile (.lux?)
 		
@@ -27,7 +28,7 @@ namespace Luxia {
 			return false;
 		}
 
-		LX_CORE_INFO("Project Manager: created project at {}", folder_path.string());
+		LX_CORE_INFO("Project Manager: created project at - {}", folder_path.string());
 		return true;
 	}
 
@@ -43,20 +44,19 @@ namespace Luxia {
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
 		
+		bool complete = 
+			(m_AssetManager->LoadAssetPoolFromPath(folder_path) &&
+			m_SceneManager->LoadScenesFromPath(folder_path));
 
-		m_AssetManager->LoadAssetPoolFromPath(folder_path);
-		m_SceneManager->LoadScenesFromPath(folder_path);
 
 		LX_CORE_INFO("Project Manager: opened project at {}", folder_path.string());
 		return true;
 	}
 
 	bool ProjectManager::SaveProject() {
-		bool complete;
-
-		complete = 
-			m_AssetManager->SaveAssetPool(m_ProjectPath) &&
-			m_SceneManager->SaveScenes(m_ProjectPath);
+		bool complete =
+			(m_AssetManager->SaveAssetPool(m_ProjectPath) &&
+				m_SceneManager->SaveScenes(m_ProjectPath));
 
 		return complete;
 	}

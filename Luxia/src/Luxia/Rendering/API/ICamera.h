@@ -1,25 +1,30 @@
 #pragma once
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Luxia/Rendering/API/ITexture.h"
 
 namespace Luxia {
 	class LUXIA_API ICamera {
 	public:
 		float FOVdeg = 70.0f;
 
-		ICamera(int w, int h) : width(w), height(h) {}
+		ICamera(const int w, const int h) : width(w), height(h) {}
 		virtual ~ICamera() = default;
 
+		virtual std::shared_ptr<ITexture>& Render() = 0;
 		virtual void UpdateMatrix() = 0;
 
 		glm::mat4& GetViewMat() { return m_View; }
 		glm::mat4& GetProjMat() { return m_Proj; }
 		glm::vec2 GetRes() { return glm::vec2(width, height); }
+		void SetRes(const int w, const int h) { width = w; height = h; }
 	protected:
+		std::shared_ptr<ITexture> output_texture;
+
 		int width = 10, height = 10;
 		float nearPlane = 0.01f, farPlane = 1000.0f;
 

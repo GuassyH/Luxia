@@ -39,6 +39,7 @@ namespace Luxia::Rendering::OpenGL {
 
 			// Set shader texture value
 			m_shader->SetInt(name.c_str(), i); // Set the sampler to the correct texture unit
+
 			// Bind
 			m_mesh.textures[i]->Use();
 		}

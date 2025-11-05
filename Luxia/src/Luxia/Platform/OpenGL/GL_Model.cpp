@@ -72,6 +72,7 @@ namespace Luxia::Platform::OpenGL {
 		valid = true;
 		
 		directory = path.parent_path();
+		name = scene->mName.C_Str();
 ;		processNode(scene->mRootNode, scene);
 	}
 
@@ -157,6 +158,7 @@ namespace Luxia::Platform::OpenGL {
 
 		Mesh newMesh(vertices, indices, textures);
 		newMesh.CalculateMesh();
+		newMesh.name = mesh->mName.C_Str();
 		return newMesh;
 	}
 

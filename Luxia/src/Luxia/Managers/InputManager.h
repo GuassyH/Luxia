@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 
 #include <unordered_set>
 #include "Luxia/Events/EventPCH.h"

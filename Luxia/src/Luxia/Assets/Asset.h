@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 #include <iostream>
 #include <sstream>
 #include <filesystem>
@@ -19,7 +19,7 @@ namespace Luxia::Assets {
 		Asset() = default;
 		virtual ~Asset() = default;
 
-		virtual void Load(const std::filesystem::path& m_path) = 0; // Load the asset
+		virtual void Load(const std::filesystem::path& m_path, const std::string& m_name = "no_name") = 0; // Load the asset
 		virtual void Unload() = 0; // Unload the asset
 		virtual void Delete() = 0;
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Luxia/Core.h"
-#include "Luxia/Log.h"
+#include "Luxia/Core/Core.h"
+#include "Luxia/Core/Log.h"
 #include "Event.h"
 
 #include <iostream>

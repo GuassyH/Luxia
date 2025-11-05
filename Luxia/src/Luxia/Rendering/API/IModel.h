@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Luxia/Core.h"
-#include "Luxia/Log.h"
+#include "Luxia/Core/Core.h"
+#include "Luxia/Core/Log.h"
 #include "Luxia/Mesh.h"
 
 #include "Luxia/Rendering/API/ITexture.h"
@@ -23,8 +23,10 @@ namespace Luxia {
 		virtual void Cleanup() = 0;
 		virtual void Delete() = 0;
 
-		bool IsValid() { return valid; }
+		bool IsValid() const { return valid; }
 		std::vector<Mesh>& GetMeshes() { return meshes; }
+
+		std::string name = "no_name";
 	protected:
 		std::vector<Mesh> meshes;
 		std::vector<std::shared_ptr<ITexture>> loaded_textures;

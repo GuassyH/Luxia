@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
+#include "Luxia/Core/Log.h"
 #include <filesystem>
 
 namespace Luxia {
@@ -9,11 +10,11 @@ namespace Luxia {
 		SceneManager() = default;
 		~SceneManager() = default;
 
-		void Cleanup() {} 
+		void Cleanup();
 
-		bool LoadScenesFromPath(const std::filesystem::path& m_path) { scene_pool_path = m_path; return true; }
-		bool SaveScenes(const std::filesystem::path& m_path) { return true; }
+		bool LoadScenesFromPath(const std::filesystem::path& m_path);
+		bool SaveScenes(const std::filesystem::path& m_path);
 	private:
-		std::filesystem::path scene_pool_path;
+		std::filesystem::path scene_pool_dir;
 	};
 }

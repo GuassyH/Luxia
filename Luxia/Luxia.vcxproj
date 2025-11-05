@@ -161,12 +161,12 @@
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Shader.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Camera.h" />
     <ClInclude Include="src\Luxia.h" />
-    <ClInclude Include="src\Luxia\Application.h" />
+    <ClInclude Include="src\Luxia\Core\Application.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
     <ClInclude Include="src\Luxia\Assets\ModelAsset.h" />
     <ClInclude Include="src\Luxia\Assets\TextureAsset.h" />
-    <ClInclude Include="src\Luxia\Core.h" />
-    <ClInclude Include="src\Luxia\EntryPoint.h" />
+    <ClInclude Include="src\Luxia\Core\Core.h" />
+    <ClInclude Include="src\Luxia\Core\EntryPoint.h" />
     <ClInclude Include="src\Luxia\Events\Event.h" />
     <ClInclude Include="src\Luxia\Events\EventHandler.h" />
     <ClInclude Include="src\Luxia\Events\EventPCH.h" />
@@ -178,7 +178,7 @@
     <ClInclude Include="src\Luxia\Layers\Layer.h" />
     <ClInclude Include="src\Luxia\Layers\LayerStack.h" />
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h" />
-    <ClInclude Include="src\Luxia\Log.h" />
+    <ClInclude Include="src\Luxia\Core\Log.h" />
     <ClInclude Include="src\Luxia\Managers\AssetManager.h" />
     <ClInclude Include="src\Luxia\Managers\InputManager.h" />
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
@@ -200,16 +200,16 @@
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
     <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
-    <ClInclude Include="src\Luxia\WeakPtrProxy.h" />
+    <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h" />
     <ClInclude Include="src\lxm\lxm_common.h" />
     <ClInclude Include="src\lxm\lxm_vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Shader.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp" />
-    <ClCompile Include="src\Luxia\Application.cpp" />
+    <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
-    <ClCompile Include="src\Luxia\Log.cpp" />
+    <ClCompile Include="src\Luxia\Core\Log.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
@@ -219,7 +219,7 @@
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp" />
-    <ClCompile Include="src\Luxia\stb.cpp" />
+    <ClCompile Include="src\Luxia\Core\stb.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

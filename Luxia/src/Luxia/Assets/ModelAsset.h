@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 #include "Asset.h"
 #include <vector>
 #include "Luxia/Rendering/API/IModel.h"
@@ -19,7 +19,7 @@ namespace Luxia::Assets {
 			type = AssetType::Model;
 			loaded = false;
 		}
-		virtual void Load(const std::filesystem::path& m_path) override {
+		virtual void Load(const std::filesystem::path& m_path, const std::string& m_name) override {
 			path = m_path;
 
 			model = Luxia::Platform::Assets::CreateModel();
@@ -35,12 +35,10 @@ namespace Luxia::Assets {
 						break;
 					}
 				}
-
-				std::string name_path = path.stem().string();
-				name = name_path;
 			}
 
 			model->LoadFromFile(path);
+			name = model->name;
 
 			loaded = model->IsValid();
 

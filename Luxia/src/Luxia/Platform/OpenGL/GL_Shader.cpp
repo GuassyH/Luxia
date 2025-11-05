@@ -53,8 +53,6 @@ namespace Luxia::Platform::OpenGL {
 
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
-
-		LX_CORE_INFO("Succesfully Created shader!");
 	}
 
 	void GL_Shader::Use() {

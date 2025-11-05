@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 #include "glm/glm.hpp"
 
 namespace Luxia::Rendering {

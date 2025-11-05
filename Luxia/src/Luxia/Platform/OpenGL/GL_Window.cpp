@@ -1,6 +1,6 @@
 #include "GL_Window.h"
 
-#include "Luxia/Log.h"
+#include "Luxia/Core/Log.h"
 #include <stdio.h>
 
 namespace Luxia::Platform::OpenGL {
@@ -8,7 +8,7 @@ namespace Luxia::Platform::OpenGL {
 	GL_Window::GL_Window() = default;
 	GL_Window::~GL_Window() = default;
 
-	int GL_Window::Create(int width, int height, const std::string& title)
+	int GL_Window::Create(const int width, const int height, const std::string& title)
 	{
 		m_Width = width;
 		m_Height = height;

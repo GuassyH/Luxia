@@ -1,18 +1,19 @@
 #pragma once
 
-#include "Luxia/Core.h"
+#include "Luxia/Core/Core.h"
 #include <filesystem>
 #include "stb/stb_image.h"
-#include "Luxia/Log.h"
+#include "Luxia/Core/Log.h"
 #include <filesystem>
 
 namespace Luxia {
 
 	enum TextureType {
-		LX_TEXTURE_DIFFUSE = 0,
-		LX_TEXTURE_SPECULAR = 1,
-		LX_TEXTURE_NORMALS = 2,
-		LX_TEXTURE_ROUGHNESS = 3,
+		LX_TEXTURE_DIFFUSE		= 0,
+		LX_TEXTURE_SPECULAR		= 1,
+		LX_TEXTURE_NORMALS		= 2,
+		LX_TEXTURE_ROUGHNESS	= 3,
+		LX_TEXTURE_FBO			= 4
 	};
 
 	class LUXIA_API ITexture {
@@ -31,9 +32,9 @@ namespace Luxia {
 
 		bool IsValid() { return valid; }
 		bool HasPath() { return hasPath; }
-		int GetWidth() { return imgWidth; }
-		int GetHeight() { return imgHeight; }
-		int GetNumColCh() { return numColCh; }
+		int GetWidth() const { return imgWidth; }
+		int GetHeight() const { return imgHeight; }
+		int GetNumColCh() const { return numColCh; }
 
 		TextureType type;
 		std::filesystem::path path;

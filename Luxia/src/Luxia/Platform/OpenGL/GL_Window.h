@@ -17,7 +17,7 @@ namespace Luxia::Platform::OpenGL {
 		GLFWwindow* m_Window = nullptr;
 		GLFWmonitor* m_Monitor = nullptr;
 
-		virtual int Create(int width, int height, const std::string& title) override;
+		virtual int Create(const int width, const int height, const std::string& title) override;
 		virtual void BeginFrame() override;
 		virtual void EndFrame() override;
 		virtual void Close() override;

@@ -1,12 +1,12 @@
 #include "Application.h"
-#include "Platform/PlatformDefinitions.h"
-#include "Log.h"
+#include "Luxia/Platform/PlatformDefinitions.h"
+#include "Luxia/Core/Log.h"
 
-#include "Layers/InputLayer.h"
-#include "Layers/RenderLayer.h"
-#include "Layers/GameLayer.h"
+#include "Luxia/Layers/InputLayer.h"
+#include "Luxia/Layers/RenderLayer.h"
+#include "Luxia/Layers/GameLayer.h"
 
-#include "Mesh.h"
+#include "Luxia/Mesh.h"
 
 namespace Luxia
 {
@@ -34,6 +34,7 @@ namespace Luxia
 	}
 
 
+
 	void Application::Startup() {
 		LX_CORE_INFO("Application Started\n");
 
@@ -41,8 +42,8 @@ namespace Luxia
 		for (auto& layer : m_LayerStack->m_Layers) 
 			layer->SetDeps(m_EventHandler, m_ProjectManager, m_Renderer);
 
-		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>("C:/dev/Luxia/assets/Lovely.jpg");
-		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("C:/dev/Luxia/assets/lotr_troll/scene.gltf");
+		m_ProjectManager->GetAssetManager()->Load<Assets::TextureAsset>("Lovely.jpg");
+		m_ProjectManager->GetAssetManager()->Load<Assets::ModelAsset>("lotr_troll/scene.gltf");
 	}
 
 	void Application::Run()

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Luxia/Rendering/API/IShader.h"
-#include "Luxia/Log.h"
+#include "Luxia/Core/Log.h"
 
 #include "glfw/glfw3.h"
 #include "glad/glad.h"

@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Core.h"
+#include "Luxia/Core/Core.h"
 
-#include "Rendering/API/IWindow.h"
-#include "Rendering/API/IRenderer.h"
+#include "Luxia/Rendering/API/IWindow.h"
+#include "Luxia/Rendering/API/IRenderer.h"
 
-#include "Managers/InputManager.h"
-#include "Managers/AssetManager.h"
-#include "Managers/ProjectManager.h"
+#include "Luxia/Managers/InputManager.h"
+#include "Luxia/Managers/AssetManager.h"
+#include "Luxia/Managers/ProjectManager.h"
 
-#include "Events/EventPCH.h"
-#include "Layers/LayerStack.h"
-#include "Layers/Layer.h"
+#include "Luxia/Events/EventPCH.h"
+#include "Luxia/Layers/LayerStack.h"
+#include "Luxia/Layers/Layer.h"
 
 
 #include <iostream>

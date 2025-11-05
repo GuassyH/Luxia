@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include "Luxia/Events/EventPCH.h"
-#include <Luxia/Core.h>
-#include "Luxia/WeakPtrProxy.h"
+#include <Luxia/Core/Core.h>
+#include "Luxia/Core/WeakPtrProxy.h"
 
 namespace Luxia
 {
@@ -13,7 +13,7 @@ namespace Luxia
 		virtual ~IWindow() = default;
 
 		// Basic runtime functions
-		virtual int Create(int width, int height, const std::string& title = "Luxia") = 0;
+		virtual int Create(const int width, const int height, const std::string& title = "Luxia") = 0;
 		virtual void BeginFrame() = 0; // Poll events and clear window
 		virtual void EndFrame() = 0; // Swap buffers
 		virtual void Close() = 0;
