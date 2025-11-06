@@ -13,8 +13,6 @@ namespace Luxia::Layers
 		~RenderLayer() = default;
 		
 		std::shared_ptr<ICamera> cam = Luxia::Platform::Assets::CreateCamera(1920, 1080);
-		std::shared_ptr<IShader> shader = 
-			Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;

@@ -6,6 +6,10 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Luxia/Rendering/API/ITexture.h"
+#include "Luxia/Rendering/API/IRenderer.h"
+
+#include <entt/entt.hpp>
+#include "Luxia/Components/MeshRenderer.h"
 
 namespace Luxia {
 	class LUXIA_API ICamera {
@@ -15,7 +19,7 @@ namespace Luxia {
 		ICamera(const int w, const int h) : width(w), height(h) {}
 		virtual ~ICamera() = default;
 
-		virtual std::shared_ptr<ITexture>& Render() = 0;
+		virtual void Render(entt::registry& reg, std::shared_ptr<Luxia::Rendering::IRenderer> rend) = 0;
 		virtual void UpdateMatrix() = 0;
 
 		glm::mat4& GetViewMat() { return m_View; }

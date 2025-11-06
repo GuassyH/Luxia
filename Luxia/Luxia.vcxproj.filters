@@ -78,9 +78,6 @@
     <ClInclude Include="src\Luxia\Events\EventHandler.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Events\EventPCH.h">
-      <Filter>src\Luxia\Events</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\Events\KeyEvent.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
@@ -177,6 +174,9 @@
     <ClInclude Include="src\lxpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Events\EventDefs.h" />
+    <ClInclude Include="src\Luxia\Scene.h" />
+    <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
@@ -230,5 +230,9 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Layers\GameLayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\InputLayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp" />
+    <ClCompile Include="src\Luxia\Scene.cpp" />
   </ItemGroup>
 </Project>

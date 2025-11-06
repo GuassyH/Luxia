@@ -8,12 +8,12 @@
 
 namespace Luxia::Rendering::OpenGL {
 
-	void OpenGL_Renderer::RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const std::shared_ptr<ICamera> m_camera) {
+	void OpenGL_Renderer::RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		for (auto& mesh : m_model->GetMeshes()) {
-			RenderMesh(mesh, m_shader, m_camera);
+			RenderMesh(mesh, m_shader, viewMat, projMat);
 		}
 	}
-	void OpenGL_Renderer::RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const std::shared_ptr<ICamera> m_camera) {
+	void OpenGL_Renderer::RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
 
 		m_shader->Use();
@@ -63,8 +63,8 @@ namespace Luxia::Rendering::OpenGL {
 		glm::mat4 rotationMat = glm::mat4_cast(rotationQuat);
 		modelmat *= rotationMat;
 		m_shader->SetMat4("modelMat", modelmat);
-		m_shader->SetMat4("viewMat", m_camera->GetViewMat());
-		m_shader->SetMat4("projMat", m_camera->GetProjMat());
+		m_shader->SetMat4("viewMat", viewMat);
+		m_shader->SetMat4("projMat", projMat);
 
 		m_mesh.vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);

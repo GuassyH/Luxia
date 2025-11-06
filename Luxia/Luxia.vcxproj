@@ -161,6 +161,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
     <ClInclude Include="src\Luxia\Assets\ModelAsset.h" />
@@ -207,6 +209,7 @@
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Scene.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />
     <ClCompile Include="src\Luxia\Core\stb.cpp" />

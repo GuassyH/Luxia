@@ -14,7 +14,7 @@ namespace Luxia::Platform::OpenGL {
 		}
 		~GL_Camera() = default;
 
-		virtual std::shared_ptr<ITexture>& Render() override { return output_texture; }
+		virtual void Render(entt::registry& reg, std::shared_ptr<Luxia::Rendering::IRenderer> rend) override;
 		virtual void UpdateMatrix() override;
 	};
 }
