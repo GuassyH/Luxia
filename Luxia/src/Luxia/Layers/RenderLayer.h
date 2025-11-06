@@ -12,8 +12,6 @@ namespace Luxia::Layers
 		RenderLayer() = default;
 		~RenderLayer() = default;
 		
-		std::shared_ptr<ICamera> cam = Luxia::Platform::Assets::CreateCamera(1920, 1080);
-
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
 		virtual void OnUpdate() override;

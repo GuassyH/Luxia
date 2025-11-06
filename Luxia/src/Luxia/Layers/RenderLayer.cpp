@@ -2,6 +2,7 @@
 #include "RenderLayer.h"
 #include "Luxia/Scene.h"
 #include "Luxia/Components/MeshRenderer.h"
+#include "Luxia/Components/Camera.h"
 
 namespace Luxia::Layers {
 
@@ -17,23 +18,29 @@ namespace Luxia::Layers {
 
 		const auto entity = s->registry.create();
 		s->registry.emplace<Luxia::Components::MeshRenderer>(entity, model, shader);
+
+		const auto camEnt = s->registry.create();
+		s->registry.emplace<Luxia::Components::Camera>(camEnt, Platform::Assets::CreateCamera(1920, 1080));
 	}
 	void RenderLayer::OnDetach() {
 		LX_CORE_WARN("RenderLayer Detached");
 	}
 	void RenderLayer::OnUpdate() {
-		cam->UpdateMatrix();
+	
 	}
 	void RenderLayer::OnRender() {
 		bool hasScene = project_manager->GetSceneManager()->HasActiveScene();
 
 		if (hasScene && project_manager->GetSceneManager() != nullptr) {
 			std::shared_ptr<Luxia::Scene> scene = project_manager->GetSceneManager()->GetActiveScene();
-			
-			cam->Render(scene->registry, renderer.lock());
-		}
-		else {
-			LX_CORE_ERROR("No active scene!");
+
+			auto view = scene->registry.view<Luxia::Components::Camera>();
+
+			for (auto entity : view) {
+				auto& cam = view.get<Luxia::Components::Camera>(entity);
+				cam.camera->UpdateMatrix();
+				cam.camera->Render(scene->registry, renderer.lock());
+			}
 		}
 	}
 	void RenderLayer::OnEvent(Event& e) {

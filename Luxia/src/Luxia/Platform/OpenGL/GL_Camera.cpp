@@ -6,7 +6,6 @@ namespace Luxia::Platform::OpenGL {
 
 	void GL_Camera::UpdateMatrix() {
 		// Initialise the matrices
-		
 		m_View = glm::lookAt(Position, Position + Orientation, glm::vec3(0.0f, 1.0f, 0.0f));
 		m_Proj = glm::perspective(glm::radians(FOVdeg), (float)width / (float)height, nearPlane, farPlane);
 

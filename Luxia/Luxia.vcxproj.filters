@@ -177,6 +177,7 @@
     <ClInclude Include="src\Luxia\Events\EventDefs.h" />
     <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Luxia\Components\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
