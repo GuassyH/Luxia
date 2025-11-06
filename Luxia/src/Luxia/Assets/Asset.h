@@ -25,6 +25,8 @@ namespace Luxia::Assets {
 		virtual void Load(const std::filesystem::path& metaPath) = 0; // Load the metafile
 		virtual void Unload() = 0; // Unload the asset
 
+		int GetGUID() const { return guid; }
+
 		AssetType type = AssetType::NoAsset;
 
 		std::string suffix			= ".none"; // .png, .obj, etc. Helps to decide how to load
@@ -32,6 +34,8 @@ namespace Luxia::Assets {
 		std::string name			= "no_name";
 
 		bool loaded = false;
+	protected:
+		int guid = 0;
 	};
 
 }

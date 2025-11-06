@@ -4,7 +4,6 @@
 #include "Luxia/Core/Core.h"
 
 #include "Luxia/Events/EventDefs.h"
-#include "glm/glm/common.hpp"
 #include "glm/glm.hpp"
 
 #include <unordered_set>

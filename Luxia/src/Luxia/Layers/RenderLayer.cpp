@@ -13,15 +13,9 @@ namespace Luxia::Layers {
 	}
 	void RenderLayer::OnUpdate() {
 		cam->UpdateMatrix();
-
 	}
 	void RenderLayer::OnRender() {
-		for (auto [path, model] : project_manager->GetAssetManager()->GetAssets()) {
-			if (model->type == Assets::AssetType::Model) {
-				auto ma = std::static_pointer_cast<Assets::ModelAsset>(model);
-				if (ma) renderer->RenderModel(ma->model, shader, cam);
-			}
-		}
+		cam->Render();
 	}
 	void RenderLayer::OnEvent(Event& e) {
 

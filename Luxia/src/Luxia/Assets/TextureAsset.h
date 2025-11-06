@@ -1,17 +1,12 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-#include "Luxia/Rendering/API/ITexture.h"
-#include "Luxia/Platform/AssetCreation.h"
 
 #include "Asset.h"
-
-using Luxia::ITexture;
 
 namespace Luxia::Assets {
 	class LUXIA_API TextureAsset : public Asset {
 	public:
-		std::shared_ptr<Luxia::ITexture> texture = nullptr;
 
 		TextureAsset() { 
 			type = AssetType::Texture; 
@@ -22,7 +17,6 @@ namespace Luxia::Assets {
 			srcPath = sourcePath;
 
 			// Create OS specific Texture
-			texture = Luxia::Platform::Assets::CreateTexture();
 
 			bool suffix_found = false;
 			if (srcPath.has_extension()) {
@@ -40,11 +34,7 @@ namespace Luxia::Assets {
 				name = name_path;
 			}
 
-			if (suffix_found) {
-				texture->LoadFromFile(srcPath);
-			}
-			
-			loaded = texture->IsValid();	
+			loaded = true;
 
 			if (loaded)
 				LX_CORE_TRACE("Created Texture Asset: '{}', {}", name, suffix);
@@ -59,7 +49,7 @@ namespace Luxia::Assets {
 
 
 		virtual void Unload() override {
-			texture->Delete();
+		
 		}
 
 

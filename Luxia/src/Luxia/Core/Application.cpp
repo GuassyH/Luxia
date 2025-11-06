@@ -38,8 +38,6 @@ namespace Luxia
 		PushLayer(std::make_shared<Layers::InputLayer>());
 		PushLayer(std::make_shared<Layers::GameLayer>());
 		PushLayer(std::make_shared<Layers::RenderLayer>());
-
-		m_ProjectManager->GetAssetManager()->Create<Assets::ModelAsset>("cute_ghost/scene.gltf");
 	}
 
 	// Run
