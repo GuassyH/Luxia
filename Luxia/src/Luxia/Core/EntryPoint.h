@@ -22,6 +22,10 @@ int main(int argc, char** argv)
 	app->Shutdown();
 	app->CoreShutdown();
 
+
+	// Found a very weird fix for the crashing on close
+	// For some reason this one line stops the crash. Maybe because it flushes? idk
+	std::cout << "\nThank you for using Luxia" << std::endl;
 	return 0;
 }
 

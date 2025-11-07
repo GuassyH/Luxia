@@ -7,7 +7,7 @@
 #include "glad/glad.h"
 
 namespace Luxia::Platform::OpenGL {
-	class GL_Shader : public IShader {
+	class LUXIA_API GL_Shader : public IShader {
 	public:
 		GL_Shader() = default;
 		GL_Shader(const char* frag_path, const char* vert_path);

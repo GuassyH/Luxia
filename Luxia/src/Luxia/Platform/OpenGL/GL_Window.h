@@ -6,7 +6,7 @@
 #include <KHR/khrplatform.h>
 
 namespace Luxia::Platform::OpenGL {
-	class GL_Window : public Luxia::IWindow {
+	class LUXIA_API GL_Window : public Luxia::IWindow {
 	public:
 		GL_Window();
 		~GL_Window();

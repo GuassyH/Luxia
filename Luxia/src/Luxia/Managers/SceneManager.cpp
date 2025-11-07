@@ -1,5 +1,6 @@
 #include "lxpch.h"
 #include "SceneManager.h"
+#include "Luxia/Scene.h"
 
 namespace Luxia {
 	bool SceneManager::LoadScenesFromPath(const std::filesystem::path& m_path) {
@@ -36,8 +37,20 @@ namespace Luxia {
 		return true;
 	}
 
-	void SceneManager::Cleanup() {
+	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene) {
+		if (active_scene) { active_scene->Cleanup(); }
+		active_scene = m_scene;
+		active_scene->Load();
 
+		LX_CORE_INFO("Loaded Scene: {}", 0);
+
+		return active_scene;
+	}
+
+	void SceneManager::Cleanup() {
+		LX_CORE_TRACE("Scene manager cleaned up");
+
+		active_scene->Cleanup();
 		// Unload all assets
 	}
 }

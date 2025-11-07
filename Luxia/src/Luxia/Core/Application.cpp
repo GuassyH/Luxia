@@ -72,7 +72,6 @@ namespace Luxia
 		m_EventHandler.reset();
 
 		m_ProjectManager->CloseProject();
-
 		LX_CORE_ERROR("Application Ended");
 	}
 

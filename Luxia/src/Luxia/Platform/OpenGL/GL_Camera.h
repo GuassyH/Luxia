@@ -6,7 +6,7 @@
 
 
 namespace Luxia::Platform::OpenGL {
-	class GL_Camera : public ICamera {
+	class LUXIA_API GL_Camera : public ICamera {
 	public:
 		GL_Camera(const int w, const int h) : ICamera(w, h) { 
 			output_texture = std::make_shared<GL_Texture>(); 

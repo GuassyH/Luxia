@@ -7,7 +7,7 @@
 #include <assimp/postprocess.h>
 
 namespace Luxia::Platform::OpenGL {
-	class GL_Model : public IModel {
+	class LUXIA_API GL_Model : public IModel {
 	public:
 		GL_Model() = default;
 		~GL_Model() = default;

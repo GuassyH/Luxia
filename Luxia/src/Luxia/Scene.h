@@ -10,6 +10,9 @@ namespace Luxia {
 		Scene() : registry(entt::registry()) {}
 		~Scene() = default;
 
+		void Cleanup() { registry.clear(); }
+		void Load() { registry = entt::registry(); }
+
 		entt::registry registry;
 	private:
 		// guid

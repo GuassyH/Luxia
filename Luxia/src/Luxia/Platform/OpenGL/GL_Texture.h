@@ -3,7 +3,7 @@
 #include "Luxia/Rendering/API/ITexture.h"
 
 namespace Luxia::Platform::OpenGL {
-	class GL_Texture : public ITexture {
+	class LUXIA_API GL_Texture : public ITexture {
 	public:
 		GL_Texture() = default;
 		~GL_Texture() = default;

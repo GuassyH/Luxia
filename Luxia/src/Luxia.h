@@ -11,11 +11,19 @@
 #include "Luxia/Managers/SceneManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 
+#include "Luxia/Scene.h"
+
 
 // Events
 #include "Luxia/Events/EventDefs.h"
 #include "Luxia/Events/EventHandler.h"
 
+// Components
+#include <entt/entt.hpp>
+
+#include "Luxia/Components/Camera.h"
+#include "Luxia/Components/MeshRenderer.h"
+#include "Luxia/Components/Transform.h"
 
 // Rendering API
 #include "Luxia/Platform/PlatformDefinitions.h"

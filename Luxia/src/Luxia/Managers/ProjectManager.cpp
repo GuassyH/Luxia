@@ -66,9 +66,9 @@ namespace Luxia {
 		SaveProject();
 
 		m_AssetManager->Cleanup();
-		m_AssetManager.reset();
-
 		m_SceneManager->Cleanup();
-		m_SceneManager.reset();
+
+		// m_AssetManager.reset();
+		// m_SceneManager.reset();
 	}
 };
