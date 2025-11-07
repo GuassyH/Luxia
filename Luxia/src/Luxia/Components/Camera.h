@@ -4,8 +4,10 @@
 #include "Luxia/Rendering/API/ICamera.h"
 #include <iostream>
 
+#include "Component.h"
+
 namespace Luxia::Components {
-	struct LUXIA_API Camera {
+	struct LUXIA_API Camera : public Component {
 		std::shared_ptr<ICamera> camera;
 
 		Camera(std::shared_ptr<ICamera> m_camera) :

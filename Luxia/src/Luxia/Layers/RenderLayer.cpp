@@ -3,6 +3,7 @@
 #include "Luxia/Scene.h"
 #include "Luxia/Components/MeshRenderer.h"
 #include "Luxia/Components/Camera.h"
+#include "Luxia/Components/Transform.h"
 
 namespace Luxia::Layers {
 
@@ -16,11 +17,15 @@ namespace Luxia::Layers {
 
 		std::shared_ptr<IShader> shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
 
-		const auto entity = s->registry.create();
-		s->registry.emplace<Luxia::Components::MeshRenderer>(entity, model, shader);
+		entt::entity entity = s->registry.create();
+		auto& et = s->registry.emplace<Luxia::Components::Transform>(entity);
+		et.ent_id = entity;
+		et.AddComponent<Luxia::Components::MeshRenderer>(s->registry, model, shader);
 
-		const auto camEnt = s->registry.create();
-		s->registry.emplace<Luxia::Components::Camera>(camEnt, Platform::Assets::CreateCamera(1920, 1080));
+		entt::entity camEnt = s->registry.create();
+		auto& ct = s->registry.emplace<Luxia::Components::Transform>(camEnt);
+		ct.ent_id = camEnt;
+		ct.AddComponent<Luxia::Components::Camera>(s->registry, Platform::Assets::CreateCamera(1920, 1080));
 	}
 	void RenderLayer::OnDetach() {
 		LX_CORE_WARN("RenderLayer Detached");

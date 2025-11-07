@@ -5,8 +5,10 @@
 #include "Luxia/Rendering/API/IShader.h"
 #include <iostream>
 
+#include "Component.h"
+
 namespace Luxia::Components {
-	struct LUXIA_API MeshRenderer {
+	struct LUXIA_API MeshRenderer : public Component {
 		std::shared_ptr<IModel> model;
 		std::shared_ptr<IShader> shader;
 
