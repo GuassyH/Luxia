@@ -14,5 +14,6 @@ namespace Luxia::Components {
 
 		MeshRenderer(std::shared_ptr<IModel> m_model, std::shared_ptr<IShader> m_shader) :
 			model(m_model), shader(m_shader) {}
+
 	};
 }

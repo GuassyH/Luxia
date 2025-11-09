@@ -5,6 +5,7 @@
 #include "Luxia/Components/Camera.h"
 #include "Luxia/Components/Transform.h"
 
+
 namespace Luxia::Layers {
 
 	void RenderLayer::OnAttach() {
@@ -22,12 +23,19 @@ namespace Luxia::Layers {
 		if (hasScene && project_manager->GetSceneManager() != nullptr) {
 			std::shared_ptr<Luxia::Scene> scene = project_manager->GetSceneManager()->GetActiveScene();
 
-			auto view = scene->registry.view<Luxia::Components::Camera>();
+			auto view = scene->GetEntitiesWith<Luxia::Components::Camera>();
 
 			for (auto entity : view) {
 				auto& cam = view.get<Luxia::Components::Camera>(entity);
-				cam.camera->UpdateMatrix();
-				cam.camera->Render(scene->registry, renderer.lock());
+				auto cam_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
+
+				if (cam_t) {
+					cam.camera->UpdateMatrix(cam_t->position, cam_t->GetRotVec());
+					cam.camera->Render(scene, renderer.lock());
+				}
+				else {
+					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);
+				}
 			}
 		}
 	}

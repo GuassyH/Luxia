@@ -4,10 +4,12 @@
 #include <iostream>
 #include <entt/entt.hpp>
 
+
 namespace Luxia::Components {
+	struct Transform;
+
 	struct LUXIA_API Component {
-	public:
 		// data
-		// std::shared_ptr<Transform> transform;
+		std::shared_ptr<Transform> transform;
 	};
 }

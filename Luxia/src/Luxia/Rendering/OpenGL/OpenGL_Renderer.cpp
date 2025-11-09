@@ -4,16 +4,15 @@
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
 
-#include <glm/gtc/type_ptr.hpp>
-
 namespace Luxia::Rendering::OpenGL {
 
-	void OpenGL_Renderer::RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const glm::mat4& viewMat, const glm::mat4& projMat) {
+	void OpenGL_Renderer::RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
+		if (!m_model || !m_shader) { LX_CORE_ERROR("Tried to render null meshrenderer!"); return; }
 		for (auto& mesh : m_model->GetMeshes()) {
-			RenderMesh(mesh, m_shader, viewMat, projMat);
+			RenderMesh(mesh, m_shader, modMat, viewMat, projMat);
 		}
 	}
-	void OpenGL_Renderer::RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const glm::mat4& viewMat, const glm::mat4& projMat) {
+	void OpenGL_Renderer::RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
 
 		m_shader->Use();
@@ -50,19 +49,8 @@ namespace Luxia::Rendering::OpenGL {
 		m_shader->SetBool("hasDiffuse", diffuseIdx > 0);
 		m_shader->SetBool("hasSpecular", specularIdx > 0);
 		m_shader->SetBool("hasNormals", normalIdx > 0);
-
-		glm::mat4 modelmat = glm::mat4(1.0f);
-		modelmat = glm::translate(modelmat, glm::vec3(0.0f, -1.0f, -7.0f));
-		//modelmat = glm::scale (modelmat, glm::vec3(0.02f));
-
-		glm::quat rotY = glm::angleAxis(glm::radians((float)glfwGetTime() * 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::quat rotX = glm::angleAxis(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		glm::quat rotZ = glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		glm::quat rotationQuat = rotY * rotX * rotZ; // Apply Z rotation first, then X, then Y
-
-		glm::mat4 rotationMat = glm::mat4_cast(rotationQuat);
-		modelmat *= rotationMat;
-		m_shader->SetMat4("modelMat", modelmat);
+		
+		m_shader->SetMat4("modelMat", modMat);
 		m_shader->SetMat4("viewMat", viewMat);
 		m_shader->SetMat4("projMat", projMat);
 

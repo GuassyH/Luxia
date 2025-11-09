@@ -14,8 +14,8 @@ namespace Luxia::Platform::OpenGL {
 		}
 		~GL_Camera() = default;
 
-		virtual void Render(entt::registry& reg, std::shared_ptr<Luxia::Rendering::IRenderer> rend) override;
-		virtual void UpdateMatrix() override;
+		virtual void Render(std::shared_ptr<Luxia::Scene> scene, std::shared_ptr<Luxia::Rendering::IRenderer> rend) override;
+		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot) override;
 	};
 }
 

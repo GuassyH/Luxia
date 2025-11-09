@@ -11,7 +11,7 @@ namespace Luxia::Rendering {
 		IRenderer() = default;
 		virtual ~IRenderer() = default;
 
-		virtual void RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
-		virtual void RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
+		virtual void RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
+		virtual void RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
 	};
 }
