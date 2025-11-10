@@ -1,15 +1,22 @@
 #ifndef TRANSFORM_COMPONENT_H
 #define TRANSFORM_COMPONENT_H
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include "Luxia/Core/Core.h"
-#include "glm/glm.hpp"
+
+#include "glm/common.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/rotate_vector.hpp>
+#include <glm/gtx/vector_angle.hpp>
+
 #include <entt/entt.hpp>
 #include "Luxia/Components/Component.h"
 
 namespace Luxia::Components {
 	struct LUXIA_API Transform : public Component {
 	private:
-		glm::mat4 modelMatrix = glm::mat4(1.0f);
 	public:
 		// glm::vec3 vec_rotation = glm::vec3(0.0f);
 		glm::vec3 position = glm::vec3(0.0f);
@@ -17,6 +24,7 @@ namespace Luxia::Components {
 		glm::vec3 scale = glm::vec3(1.0f);
 
 		entt::entity ent_id;
+		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 		glm::mat4& GetMatrix() { return modelMatrix; }
 		void UpdateMatrix(){
@@ -51,37 +59,39 @@ namespace Luxia::Components {
 
 		Transform() = default;
 
+		entt::registry* reg = nullptr;
+
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
-			AddComponent(entt::registry& reg, Args&&... args) {
-			auto cb = reg.emplace<T>(ent_id, std::forward<Args>(args)...);
+			AddComponent(Args&&... args) {
+			auto cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
 			Component* c = &cb;
 			c->transform = this->transform;
-			return reg.get<T>(ent_id);
+			return reg->get<T>(ent_id);
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
-			GetComponent(entt::registry& reg) {
-			return reg.get<T>(ent_id);
+			GetComponent() {
+			return reg->get<T>(ent_id);
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T*>
-			TryGetComponent(entt::registry& reg) {
-			return reg.try_get<T>(ent_id);
+			TryGetComponent() {
+			return reg->try_get<T>(ent_id);
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, bool>
-			HasComponent(entt::registry& reg) {
-			return reg.try_get<T>(ent_id) != nullptr ? true : false;
+			HasComponent() {
+			return reg->try_get<T>(ent_id) != nullptr ? true : false;
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, void>
-			RemoveComponent(entt::registry& reg) {
-			reg.remove<T>(ent_id);
+			RemoveComponent() {
+			reg->remove<T>(ent_id);
 		}
 	};
 }

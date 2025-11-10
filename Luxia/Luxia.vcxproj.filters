@@ -181,6 +181,7 @@
     <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
     <ClInclude Include="src\Luxia\GUID.h" />
+    <ClInclude Include="src\Luxia\Components\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp">

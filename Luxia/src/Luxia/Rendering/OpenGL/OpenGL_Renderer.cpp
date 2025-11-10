@@ -6,12 +6,26 @@
 
 namespace Luxia::Rendering::OpenGL {
 
-	void OpenGL_Renderer::RenderModel(const std::shared_ptr<IModel> m_model, const std::shared_ptr<IShader> m_shader, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!m_model || !m_shader) { LX_CORE_ERROR("Tried to render null meshrenderer!"); return; }
-		for (auto& mesh : m_model->GetMeshes()) {
-			RenderMesh(mesh, m_shader, modMat, viewMat, projMat);
+	void OpenGL_Renderer::RenderModel(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {
+		if (!ro.mesh_rend->model) {
+			LX_CORE_ERROR("Tried to render null model!");
+			return;	}
+		else if (!ro.mesh_rend->material || !ro.mesh_rend->material->shader){
+			LX_CORE_ERROR("Tried to render null material!");
+			return; }
+		else if (!ro.transform){
+			LX_CORE_ERROR("Tried to render null transform!");
+			return; }
+
+
+		ro.transform->UpdateMatrix();
+
+		glm::mat4& modMat = ro.transform->GetMatrix();
+		for (auto& mesh : ro.mesh_rend->model->GetMeshes()) {
+			RenderMesh(mesh, ro.mesh_rend->material->shader, modMat, viewMat, projMat);
 		}
 	}
+
 	void OpenGL_Renderer::RenderMesh(const Mesh& m_mesh, const std::shared_ptr<IShader> m_shader, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
 

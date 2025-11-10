@@ -21,11 +21,10 @@ namespace Luxia {
 		bool SaveAssetPool(const std::filesystem::path& m_path);
 
 		// TEMP, THIS SHOULD BE HANDLED BY SCENE
-		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> GetAssets() { return loaded_assets; }
+		const std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
 
 		void Cleanup(); // Before app closes, save everything, etc
 		
-
 		template <typename T> // Load an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>> 
 			Create(const std::string& sourcePath) {
@@ -93,7 +92,6 @@ namespace Luxia {
 		~AssetManager() = default;
 		AssetManager() = default;
 	private:
-		// std::unordered_set<std::string> loaded_paths; // Stores the path
 		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> loaded_assets;
 		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> asset_pool;
 

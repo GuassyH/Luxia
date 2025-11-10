@@ -22,12 +22,14 @@ namespace Luxia::Platform::OpenGL {
 			auto mr_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
 			if (mr_t) {
-				mr_t->UpdateMatrix();
-				rend->RenderModel(mr.model, mr.shader, mr_t->GetMatrix(), GetViewMat(), GetProjMat());
+				Luxia::Rendering::RenderObject ro { mr_t, &mr };
+				rend->Submit(ro);
 			}
 			else {
 				LX_CORE_ERROR("MeshRenderer ({}) has no transform!", (int)entity);
 			}
 		}
+
+		rend->Flush(GetViewMat(), GetProjMat());
 	}
 }

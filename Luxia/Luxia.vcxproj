@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
+    <ClInclude Include="src\Luxia\Components\Material.h" />
     <ClInclude Include="src\Luxia\GUID.h" />
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
     <ClInclude Include="src\Luxia\Components\Transform.h" />
