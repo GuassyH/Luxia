@@ -64,6 +64,7 @@ namespace Luxia::Components {
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			AddComponent(Args&&... args) {
+			// assert(reg.valid(ent_id));
 			auto cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
 			Component* c = &cb;
 			c->transform = this->transform;
@@ -73,6 +74,7 @@ namespace Luxia::Components {
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			GetComponent() {
+			assert(reg.valid(ent_id));
 			return reg->get<T>(ent_id);
 		}
 

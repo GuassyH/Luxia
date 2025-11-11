@@ -43,7 +43,7 @@ project "Luxia"
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		-- Define what should be defined
@@ -68,15 +68,17 @@ project "Luxia"
 	-- Specify how to build different configs
 	filter "configurations:Debug"
 		defines "LUXIA_DEBUG"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LUXIA_RELEASE"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Distribution"
 		defines "LUXIA_DIST"
-		optimize "On"
+		optimize "Full"
 
 
 
@@ -118,7 +120,7 @@ project "Talloren"
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		-- Define what should be defined

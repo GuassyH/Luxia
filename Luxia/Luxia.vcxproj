@@ -27,21 +27,18 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,12 +81,12 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,11 +112,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,11 +142,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -188,8 +183,8 @@
     <ClInclude Include="src\Luxia\Events\RenderEvent.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />
     <ClInclude Include="src\Luxia\GUID.h" />
-    <ClInclude Include="src\Luxia\Layers\GameLayer.h" />
     <ClInclude Include="src\Luxia\Layers\EventLayer.h" />
+    <ClInclude Include="src\Luxia\Layers\GameLayer.h" />
     <ClInclude Include="src\Luxia\Layers\Layer.h" />
     <ClInclude Include="src\Luxia\Layers\LayerStack.h" />
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h" />
@@ -224,8 +219,8 @@
     <ClCompile Include="src\Luxia\Core\Log.cpp" />
     <ClCompile Include="src\Luxia\Core\stb.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />
-    <ClCompile Include="src\Luxia\Layers\GameLayer.cpp" />
     <ClCompile Include="src\Luxia\Layers\EventLayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\GameLayer.cpp" />
     <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
@@ -243,9 +238,9 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
