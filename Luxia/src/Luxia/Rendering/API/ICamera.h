@@ -16,21 +16,16 @@ namespace Luxia {
 	public:
 		float FOVdeg = 70.0f;
 
-		ICamera(const int w, const int h) : width(w), height(h) {}
+		ICamera() = default;
 		virtual ~ICamera() = default;
 
-		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend) = 0;
-		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot) = 0;
+		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height) = 0;
+		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float FOVdeg, const int width, const int height, const float nearPlane, const float farPlane) = 0;
 
 		glm::mat4& GetViewMat() { return m_View; }
 		glm::mat4& GetProjMat() { return m_Proj; }
-		glm::vec2 GetRes() { return glm::vec2(width, height); }
-		void SetRes(const int w, const int h) { width = w; height = h; }
 	protected:
 		std::shared_ptr<ITexture> output_texture;
-
-		int width = 10, height = 10;
-		float nearPlane = 0.01f, farPlane = 1000.0f;
 
 		glm::mat4 m_Proj = glm::mat4(1.0f);
 		glm::mat4 m_View = glm::mat4(1.0f);

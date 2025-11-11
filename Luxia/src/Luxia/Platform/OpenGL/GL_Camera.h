@@ -8,14 +8,14 @@
 namespace Luxia::Platform::OpenGL {
 	class LUXIA_API GL_Camera : public ICamera {
 	public:
-		GL_Camera(const int w, const int h) : ICamera(w, h) { 
+		GL_Camera(int w, int h) { 
 			output_texture = std::make_shared<GL_Texture>(); 
 			output_texture->CreateFBOTex(w, h);
 		}
 		~GL_Camera() = default;
 
-		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend) override;
-		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot) override;
+		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height) override;
+		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float FOVdeg, const int width, const int height, const float nearPlane, const float farPlane) override;
 	};
 }
 

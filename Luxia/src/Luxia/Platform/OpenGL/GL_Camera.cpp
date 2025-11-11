@@ -7,7 +7,7 @@
 
 namespace Luxia::Platform::OpenGL {
 
-	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot) {
+	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float FOVdeg, const int width, const int height, const float nearPlane, const float farPlane) {
 		// Initialise the matrices
 		m_View = glm::lookAt(pos, pos + rot, glm::vec3(0.0f, 1.0f, 0.0f));
 		m_Proj = glm::perspective(glm::radians(FOVdeg), (float)width / (float)height, nearPlane, farPlane);
@@ -17,7 +17,7 @@ namespace Luxia::Platform::OpenGL {
 		Up = glm::normalize(glm::cross(Right, Forward));
 	}
 	
-	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend) {
+	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height) {
 		glBindFramebuffer(GL_FRAMEBUFFER, output_texture->GetFBO());
 		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

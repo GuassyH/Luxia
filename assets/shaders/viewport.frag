@@ -66,7 +66,7 @@ vec4 Fill(){
 	vec2 coord_in_screen = vec2(window_size.x * texCoords.x, window_size.y * texCoords.y);
 	vec2 trans_coord = vec2(coord_in_screen.x - tex_pos.x, coord_in_screen.y - tex_pos.y);
 
-	if(trans_coord.x >= 0.0 && trans_coord.x <= tex_size.x && trans_coord.y >= 0.0 && trans_coord.y <= tex_size.y){
+	if(trans_coord.x >= 0.0 && trans_coord.x < tex_size.x && trans_coord.y >= 0.0 && trans_coord.y < tex_size.y){
 		vec2 calc_coord = vec2(trans_coord.x / tex_size.x, trans_coord.y / tex_size.y);
 		return texture(cam_texture, calc_coord);
 	}else{
