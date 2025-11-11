@@ -30,8 +30,7 @@ namespace Luxia::Layers {
 				auto cam_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
 				if (cam_t && cam.main) {
-					cam.camera->UpdateMatrix(cam_t->position, cam_t->GetRotVec());
-					PUSH_EVENT(RenderCameraEvent, cam.camera->Render(scene, renderer.lock()));
+					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()));
 				}
 				else if(!cam_t) { 
 					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);

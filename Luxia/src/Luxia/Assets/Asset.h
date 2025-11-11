@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
+#include "Luxia/Core/GUID.h"
 
 #include <filesystem>
 #include <iostream>
@@ -25,7 +26,7 @@ namespace Luxia::Assets {
 		virtual void Load(const std::filesystem::path& metaPath) = 0; // Load the metafile
 		virtual void Unload() = 0; // Unload the asset
 
-		int GetGUID() const { return guid; }
+		uint64_t GetGUID() const { return guid.Get(); }
 
 		AssetType type = AssetType::NoAsset;
 
@@ -34,8 +35,9 @@ namespace Luxia::Assets {
 		std::string name			= "no_name";
 
 		bool loaded = false;
+
 	protected:
-		int guid = 0;
+		GUID guid;
 	};
 
 }

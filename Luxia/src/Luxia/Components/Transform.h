@@ -3,6 +3,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 
 #include "Luxia/Core/Core.h"
+#include "Luxia/Core/Log.h"
 
 #include "glm/common.hpp"
 #include <glm/glm.hpp>
@@ -65,10 +66,10 @@ namespace Luxia::Components {
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			AddComponent(Args&&... args) {
 			// assert(reg.valid(ent_id));
-			auto cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
+			auto& cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
 			Component* c = &cb;
-			c->transform = this->transform;
-			return reg->get<T>(ent_id);
+			c->transform = reg->try_get<Luxia::Components::Transform>(ent_id);
+			return cb;
 		}
 
 		template <typename T, typename... Args>

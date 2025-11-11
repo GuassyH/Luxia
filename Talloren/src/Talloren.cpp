@@ -39,7 +39,7 @@ namespace Talloren::Layer {
 			lotrEntity.AddComponent<Luxia::Components::MeshRenderer>(lotrModel, mat);
 
 			auto& camEnt = s->CreateEntity();
-			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(Luxia::Platform::Assets::CreateCamera(2560, 1440));
+			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			cam.main = true;
 		}
 		virtual void OnDetach() override {

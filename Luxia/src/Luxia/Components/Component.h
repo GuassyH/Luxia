@@ -10,6 +10,6 @@ namespace Luxia::Components {
 
 	struct LUXIA_API Component {
 		// data
-		std::shared_ptr<Transform> transform;
+		Transform* transform;
 	};
 }
