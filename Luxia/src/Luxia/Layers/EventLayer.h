@@ -4,12 +4,12 @@
 
 namespace Luxia::Layers
 {
-	class LUXIA_API InputLayer : public Layer {
+	class LUXIA_API EventLayer : public Layer {
 	private:
 		Luxia::EventManager& event_manager = Luxia::EventManager::Get();
 	public:
-		InputLayer() = default;
-		~InputLayer() = default;
+		EventLayer() = default;
+		~EventLayer() = default;
 
 		
 		virtual void OnAttach() override;

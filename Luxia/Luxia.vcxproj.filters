@@ -117,7 +117,7 @@
     <ClInclude Include="src\Luxia\Layers\GameLayer.h">
       <Filter>src\Luxia\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Layers\InputLayer.h">
+    <ClInclude Include="src\Luxia\Layers\EventLayer.h">
       <Filter>src\Luxia\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\Layer.h">
@@ -221,7 +221,7 @@
     <ClCompile Include="src\Luxia\Layers\GameLayer.cpp">
       <Filter>src\Luxia\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Layers\InputLayer.cpp">
+    <ClCompile Include="src\Luxia\Layers\EventLayer.cpp">
       <Filter>src\Luxia\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp">

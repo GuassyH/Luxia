@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
 
-#include "Luxia/Layers/InputLayer.h"
+#include "Luxia/Layers/EventLayer.h"
 #include "Luxia/Layers/RenderLayer.h"
 #include "Luxia/Layers/GameLayer.h"
 
@@ -33,7 +33,7 @@ namespace Luxia
 		LX_CORE_INFO("Application Started\n");
 
 		// Core Layers
-		PushLayer(std::make_shared<Layers::InputLayer>());
+		PushLayer(std::make_shared<Layers::EventLayer>());
 		PushLayer(std::make_shared<Layers::GameLayer>());
 		PushLayer(std::make_shared<Layers::RenderLayer>());
 	}

@@ -96,7 +96,8 @@ namespace Luxia::Rendering::OpenGL {
 
 		glActiveTexture(GL_TEXTURE0);
 		fs_shader->SetInt("cam_texture", 0);
-		fs_shader->SetVec2("windowSize", Luxia::Screen::GetWindowSize());
+		fs_shader->SetVec2("window_size", Luxia::Screen::GetWindowSize());
+
 
 		m_quad.vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_quad.indices.size(), GL_UNSIGNED_INT, 0);

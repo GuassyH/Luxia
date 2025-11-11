@@ -29,12 +29,13 @@ namespace Luxia::Layers {
 				auto& cam = view.get<Luxia::Components::Camera>(entity);
 				auto cam_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
-				if (cam_t) {
+				if (cam_t && !cam.main) {
 					cam.camera->UpdateMatrix(cam_t->position, cam_t->GetRotVec());
 					PUSH_EVENT(RenderCameraEvent, cam.camera->Render(scene, renderer.lock()));
 				}
 				else {
-					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);
+					if(!cam_t) LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);
+					if(!cam.main) LX_CORE_ERROR("Camera ({}) not main!", (int)entity);
 				}
 			}
 		}

@@ -1,22 +1,22 @@
 #include "lxpch.h"
-#include "InputLayer.h"
+#include "EventLayer.h"
 
 namespace Luxia::Layers {
 
 
-	void InputLayer::OnAttach() {
-		LX_CORE_WARN("InputLayer Attached");
+	void EventLayer::OnAttach() {
+		LX_CORE_WARN("EventLayer Attached");
 	}
-	void InputLayer::OnDetach() {
-		LX_CORE_WARN("InputLayer Detached");
+	void EventLayer::OnDetach() {
+		LX_CORE_WARN("EventLayer Detached");
 	}
-	void InputLayer::OnUpdate() {
+	void EventLayer::OnUpdate() {
 
 	}
-	void InputLayer::OnRender() {
+	void EventLayer::OnRender() {
 
 	}
-	void InputLayer::OnEvent(Event& e) {
+	void EventLayer::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);
 
 		bool shouldConsume = true;
@@ -53,7 +53,8 @@ namespace Luxia::Layers {
 
 		dispatcher.Dispatch<WindowResizeEvent>([&](WindowResizeEvent& event) {
 			event_manager.windowSize = glm::vec2(event.GetX(), event.GetY());
-			return shouldConsume; // Check each event type and update input
+			return false; // Check each event type and update input
 			});
+	
 	}
 }
