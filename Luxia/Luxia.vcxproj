@@ -27,18 +27,21 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -81,12 +84,12 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,10 +115,11 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,10 +146,11 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -161,35 +166,35 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\Components\Camera.h" />
-    <ClInclude Include="src\Luxia\Components\Component.h" />
-    <ClInclude Include="src\Luxia\Components\Material.h" />
-    <ClInclude Include="src\Luxia\GUID.h" />
-    <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
-    <ClInclude Include="src\Luxia\Components\Transform.h" />
-    <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Assets\Asset.h" />
     <ClInclude Include="src\Luxia\Assets\ModelAsset.h" />
     <ClInclude Include="src\Luxia\Assets\TextureAsset.h" />
+    <ClInclude Include="src\Luxia\Components\Camera.h" />
+    <ClInclude Include="src\Luxia\Components\Component.h" />
+    <ClInclude Include="src\Luxia\Components\Material.h" />
+    <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Core\Application.h" />
     <ClInclude Include="src\Luxia\Core\Core.h" />
     <ClInclude Include="src\Luxia\Core\EntryPoint.h" />
     <ClInclude Include="src\Luxia\Core\Log.h" />
     <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h" />
     <ClInclude Include="src\Luxia\Events\Event.h" />
-    <ClInclude Include="src\Luxia\Events\EventHandler.h" />
     <ClInclude Include="src\Luxia\Events\EventDefs.h" />
+    <ClInclude Include="src\Luxia\Events\EventHandler.h" />
     <ClInclude Include="src\Luxia\Events\KeyEvent.h" />
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
+    <ClInclude Include="src\Luxia\Events\RenderEvent.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />
+    <ClInclude Include="src\Luxia\GUID.h" />
     <ClInclude Include="src\Luxia\Layers\GameLayer.h" />
     <ClInclude Include="src\Luxia\Layers\InputLayer.h" />
     <ClInclude Include="src\Luxia\Layers\Layer.h" />
     <ClInclude Include="src\Luxia\Layers\LayerStack.h" />
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h" />
     <ClInclude Include="src\Luxia\Managers\AssetManager.h" />
-    <ClInclude Include="src\Luxia\Managers\InputManager.h" />
+    <ClInclude Include="src\Luxia\Managers\EventManager.h" />
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
     <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
     <ClInclude Include="src\Luxia\Mesh.h" />
@@ -211,10 +216,10 @@
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
     <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
+    <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Scene.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />
     <ClCompile Include="src\Luxia\Core\stb.cpp" />
@@ -233,6 +238,7 @@
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp" />
+    <ClCompile Include="src\Luxia\Scene.cpp" />
     <ClCompile Include="src\lxpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

@@ -1,5 +1,6 @@
 #include "lxpch.h"
 #include "OpenGL_Renderer.h"
+#include "Luxia/Managers/EventManager.h"
 
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
@@ -74,5 +75,36 @@ namespace Luxia::Rendering::OpenGL {
 		m_mesh.vao->Unbind();
 		glActiveTexture(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	void OpenGL_Renderer::RenderMeshPure(const Mesh& m_mesh) {
+		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
+
+		m_mesh.vao->Bind();
+		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);
+
+		m_mesh.vao->Unbind();
+		glActiveTexture(0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	void OpenGL_Renderer::RenderFBO(const Mesh& m_quad, std::shared_ptr<IShader> fs_shader, std::shared_ptr<ITexture> cam_tex) {
+		if (!m_quad.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
+
+		cam_tex->Use();
+		fs_shader->Use();
+
+		glActiveTexture(GL_TEXTURE0);
+		fs_shader->SetInt("cam_texture", 0);
+		fs_shader->SetVec2("windowSize", Luxia::Screen::GetWindowSize());
+
+		m_quad.vao->Bind();
+		glDrawElements(GL_TRIANGLES, m_quad.indices.size(), GL_UNSIGNED_INT, 0);
+
+		m_quad.vao->Unbind();
+		glActiveTexture(0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 	}
 }

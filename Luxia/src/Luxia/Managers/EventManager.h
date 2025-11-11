@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Luxia/Core/Core.h"
 
 #include "Luxia/Events/EventDefs.h"
@@ -9,16 +8,17 @@
 #include <unordered_set>
 #include <iostream>
 
-namespace Luxia::Input {
-	
-	class LUXIA_API InputManager {
+namespace Luxia {
+	class LUXIA_API EventManager {
 	private:
-		InputManager() = default;
+		EventManager() = default;
 	public:
-		static InputManager& Get() {
-			static InputManager instance;
+		static EventManager& Get() {
+			static EventManager instance;
 			return instance;
 		}
+
+		// ==== INPUT ====
 
 		// Store an unordered set of the keys (O(1) lookup time)
 		std::unordered_set<int> pressedKeys;
@@ -29,8 +29,12 @@ namespace Luxia::Input {
 		std::unordered_set<int> justPressedMouseButtons;
 		std::unordered_set<int> justReleasedMouseButtons;
 
-		glm::vec2 scrollOffset;
-		glm::vec2 mousePosition;
+		glm::vec2 scrollOffset = glm::vec2(0.0f);
+		glm::vec2 mousePosition = glm::vec2(0.0f);
+
+		// ==== SCREEN ====
+		glm::vec2 windowSize = glm::vec2(0.0f);
+		glm::vec2 monitorSize = glm::vec2(0.0f);
 
 		// KEYBOARD
 
@@ -65,7 +69,6 @@ namespace Luxia::Input {
 			mousePosition.x = x;
 			mousePosition.y = y;
 		}
-
 		void MouseScrolled(float xOffset, float yOffset) {
 			scrollOffset.x = xOffset;
 			scrollOffset.y = yOffset;
@@ -87,50 +90,64 @@ namespace Luxia::Input {
 		}
 	};
 
+}
+
+namespace Luxia::Input {
 	// Easy to call functions, just say "if(Input::IsKeyPressed(YOUR_KEY))"
 	inline LUXIA_API bool AnyKeyPressed() {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return !input.pressedKeys.empty();
 	}
 	inline LUXIA_API bool IsKeyPressed(int keycode) {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.pressedKeys.contains(keycode);
 	}
 	inline LUXIA_API bool IsKeyJustPressed(int keycode) {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.justPressedKeys.contains(keycode);
 	}
 	inline LUXIA_API bool IsKeyJustReleased(int keycode) {
-		auto& input = Input::InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.justReleasedKeys.contains(keycode);
 	}
 
 	inline LUXIA_API bool AnyMouseButtonPressed() {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return !input.pressedMouseButtons.empty();
 	}
 	inline LUXIA_API bool IsMouseButtonPressed(int button) {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.pressedMouseButtons.contains(button);
 	}
 	inline LUXIA_API bool IsMouseButtonJustPressed(int button) {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.justPressedMouseButtons.contains(button);
 	}
 	inline LUXIA_API bool IsMouseButtonJustReleased(int button) {
-		auto& input = Input::InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.justReleasedMouseButtons.contains(button);
 	}
 
 	// Self explanatory
 	inline LUXIA_API glm::vec2 GetMousePosition() {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.mousePosition;
 	}
 
 	// x is left & right, y is up & down
 	inline LUXIA_API glm::vec2 GetScrollOffset() {
-		auto& input = InputManager::Get();
+		auto& input = EventManager::Get();
 		return input.scrollOffset;
+	}
+}
+
+namespace Luxia::Screen {
+	inline LUXIA_API glm::vec2 GetWindowSize() {
+		auto& screen = EventManager::Get();
+		return screen.windowSize;
+	}
+	inline LUXIA_API glm::vec2 GetMonitorSize() {
+		auto& screen = EventManager::Get();
+		return screen.monitorSize;
 	}
 }

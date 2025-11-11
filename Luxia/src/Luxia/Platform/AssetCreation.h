@@ -19,7 +19,7 @@
 namespace Luxia::Platform::Assets
 {
 	// Create the window, with width, height, and title, this will change automatically based on the OS
-	inline std::shared_ptr<Luxia::IWindow> CreateAppWindow(int width, int height, std::string title)
+	inline std::shared_ptr<Luxia::IWindow> CreateAppWindow(int width, int height, std::string title, std::shared_ptr<EventHandler> handler)
 	{
 		std::shared_ptr<Luxia::IWindow> win;
 
@@ -29,6 +29,7 @@ namespace Luxia::Platform::Assets
 			#error Luxia doesnt support your Renderer!
 		#endif
 
+		win->SetHandler(handler);
 		win->Create(1920, 1080, "Luxia Application");
 		return win;
 	}

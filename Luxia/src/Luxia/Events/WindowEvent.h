@@ -44,7 +44,7 @@ namespace Luxia {
 	public:
 		WindowMoveEvent(int x, int y) : xPos(x), yPos(y) {}
 
-		GET_EVENT_TYPE(EventType::WindowResize)
+		GET_EVENT_TYPE(EventType::WindowMoved)
 		GET_EVENT_CATEGORY(EventCategoryWindow)
 
 		int GetX() { return xPos; }

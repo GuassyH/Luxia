@@ -19,7 +19,7 @@ namespace Luxia {
 		ICamera(const int w, const int h) : width(w), height(h) {}
 		virtual ~ICamera() = default;
 
-		virtual void Render(std::shared_ptr<Luxia::Scene> scene, std::shared_ptr<Luxia::Rendering::IRenderer> rend) = 0;
+		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend) = 0;
 		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot) = 0;
 
 		glm::mat4& GetViewMat() { return m_View; }

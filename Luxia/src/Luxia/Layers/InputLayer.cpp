@@ -22,34 +22,38 @@ namespace Luxia::Layers {
 		bool shouldConsume = true;
 
 		dispatcher.Dispatch<KeyPressEvent>([&](KeyPressEvent& event) {
-			input.KeyPressed(event.GetKeyCode());
+			event_manager.KeyPressed(event.GetKeyCode());
 			return shouldConsume; // Check each event type and update input
 			});
 
 		dispatcher.Dispatch<KeyReleaseEvent>([&](KeyReleaseEvent& event) {
-			input.KeyReleased(event.GetKeyCode());
+			event_manager.KeyReleased(event.GetKeyCode());
 			return shouldConsume; // Check each event type and update input
 			});
 
 		dispatcher.Dispatch<MouseButtonPressEvent>([&](MouseButtonPressEvent& event) {
-			input.MouseButtonPressed(event.GetKeyCode());
+			event_manager.MouseButtonPressed(event.GetKeyCode());
 			return shouldConsume; // Check each event type and update input
 			});
 
 		dispatcher.Dispatch<MouseButtonReleaseEvent>([&](MouseButtonReleaseEvent& event) {
-			input.MouseButtonReleased(event.GetKeyCode());
+			event_manager.MouseButtonReleased(event.GetKeyCode());
 			return shouldConsume; // Check each event type and update input
 			});
 
 		dispatcher.Dispatch<MouseMoveEvent>([&](MouseMoveEvent& event) {
-			input.SetMousePosition(event.GetX(), event.GetY());
+			event_manager.SetMousePosition(event.GetX(), event.GetY());
 			return shouldConsume; // Check each event type and update input
 			});
 
 		dispatcher.Dispatch<MouseScrollEvent>([&](MouseScrollEvent& event) {
-			input.MouseScrolled(event.GetX(), event.GetY());
+			event_manager.MouseScrolled(event.GetX(), event.GetY());
 			return shouldConsume; // Check each event type and update input
 			});
 
+		dispatcher.Dispatch<WindowResizeEvent>([&](WindowResizeEvent& event) {
+			event_manager.windowSize = glm::vec2(event.GetX(), event.GetY());
+			return shouldConsume; // Check each event type and update input
+			});
 	}
 }

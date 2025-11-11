@@ -17,7 +17,7 @@ project "Luxia"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	
--- Set target build directories
+	-- Set target build directories
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -80,8 +80,6 @@ project "Luxia"
 
 
 
-
-
 project "Talloren"
 	location "Talloren"
 	kind "ConsoleApp"
@@ -104,7 +102,8 @@ project "Talloren"
 		"Luxia/vendor",
 		"Luxia/vendor/spdlog/include",
 		"Luxia/vendor/glm",
-		"Luxia/src"
+		"Luxia/src",
+		-- "Talloren/src"
 	}
 
 	libdirs {

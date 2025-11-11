@@ -5,7 +5,7 @@
 #include "Luxia/Rendering/API/IWindow.h"
 #include "Luxia/Rendering/API/IRenderer.h"
 
-#include "Luxia/Managers/InputManager.h"
+#include "Luxia/Managers/EventManager.h"
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 
@@ -47,7 +47,7 @@ namespace Luxia
 		std::shared_ptr<Luxia::IWindow> m_Window;
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
 		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
-		Input::InputManager& input = Input::InputManager::Get();
+		Luxia::EventManager& eventManager = Luxia::EventManager::Get();
 		
 		std::shared_ptr<Luxia::ProjectManager> m_ProjectManager;
 		std::shared_ptr<Luxia::Rendering::IRenderer> m_Renderer;

@@ -31,7 +31,7 @@ namespace Luxia::Layers {
 
 				if (cam_t) {
 					cam.camera->UpdateMatrix(cam_t->position, cam_t->GetRotVec());
-					cam.camera->Render(scene, renderer.lock());
+					PUSH_EVENT(RenderCameraEvent, cam.camera->Render(scene, renderer.lock()));
 				}
 				else {
 					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);

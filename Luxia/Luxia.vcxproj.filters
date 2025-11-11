@@ -10,6 +10,9 @@
     <Filter Include="src\Luxia\Assets">
       <UniqueIdentifier>{814B44DA-6D44-632C-9676-48B182CE4238}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Luxia\Components">
+      <UniqueIdentifier>{34211EA2-20B0-A76B-C9CE-BB66B53CB811}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Luxia\Core">
       <UniqueIdentifier>{3775F313-2343-E719-0CD7-5740F843C37E}</UniqueIdentifier>
     </Filter>
@@ -57,6 +60,21 @@
     <ClInclude Include="src\Luxia\Assets\TextureAsset.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Camera.h">
+      <Filter>src\Luxia\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Component.h">
+      <Filter>src\Luxia\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Material.h">
+      <Filter>src\Luxia\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\MeshRenderer.h">
+      <Filter>src\Luxia\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Transform.h">
+      <Filter>src\Luxia\Components</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Core\Application.h">
       <Filter>src\Luxia\Core</Filter>
     </ClInclude>
@@ -75,6 +93,9 @@
     <ClInclude Include="src\Luxia\Events\Event.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Events\EventDefs.h">
+      <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Events\EventHandler.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
@@ -84,8 +105,14 @@
     <ClInclude Include="src\Luxia\Events\MouseEvent.h">
       <Filter>src\Luxia\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Events\RenderEvent.h">
+      <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Events\WindowEvent.h">
       <Filter>src\Luxia\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\GUID.h">
+      <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\GameLayer.h">
       <Filter>src\Luxia\Layers</Filter>
@@ -105,7 +132,7 @@
     <ClInclude Include="src\Luxia\Managers\AssetManager.h">
       <Filter>src\Luxia\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Managers\InputManager.h">
+    <ClInclude Include="src\Luxia\Managers\EventManager.h">
       <Filter>src\Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h">
@@ -171,17 +198,12 @@
     <ClInclude Include="src\Luxia\Rendering\Vertex.h">
       <Filter>src\Luxia\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Scene.h">
+      <Filter>src\Luxia</Filter>
+    </ClInclude>
     <ClInclude Include="src\lxpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Events\EventDefs.h" />
-    <ClInclude Include="src\Luxia\Scene.h" />
-    <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
-    <ClInclude Include="src\Luxia\Components\Camera.h" />
-    <ClInclude Include="src\Luxia\Components\Transform.h" />
-    <ClInclude Include="src\Luxia\Components\Component.h" />
-    <ClInclude Include="src\Luxia\GUID.h" />
-    <ClInclude Include="src\Luxia\Components\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
@@ -195,6 +217,15 @@
     </ClCompile>
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp">
       <Filter>src\Luxia\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Layers\GameLayer.cpp">
+      <Filter>src\Luxia\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Layers\InputLayer.cpp">
+      <Filter>src\Luxia\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp">
+      <Filter>src\Luxia\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp">
       <Filter>src\Luxia\Managers</Filter>
@@ -229,15 +260,14 @@
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp">
       <Filter>src\Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Scene.cpp">
+      <Filter>src\Luxia</Filter>
+    </ClCompile>
     <ClCompile Include="src\lxpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Layers\GameLayer.cpp" />
-    <ClCompile Include="src\Luxia\Layers\InputLayer.cpp" />
-    <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp" />
-    <ClCompile Include="src\Luxia\Scene.cpp" />
   </ItemGroup>
 </Project>

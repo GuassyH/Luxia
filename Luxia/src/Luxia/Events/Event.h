@@ -11,6 +11,7 @@ namespace Luxia {
 		None = 0,
 		AppRender,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
+		RenderCamera,
 		KeyPressed, KeyReleased,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
@@ -23,7 +24,8 @@ namespace Luxia {
 		EventCategoryInput			= 0b1 << 2,
 		EventCategoryKeyboard		= 0b1 << 3,
 		EventCategoryMouse			= 0b1 << 4,
-		EventCategoryMouseButton	= 0b1 << 5
+		EventCategoryMouseButton	= 0b1 << 5,
+		EventCategoryRender			= 0b1 << 6
 	};
 }
 

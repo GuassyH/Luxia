@@ -11,7 +11,7 @@ namespace Luxia {
 		Mesh() = default;
 		~Mesh() = default;
 
-		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds, std::vector<std::shared_ptr<ITexture>> texs) 
+		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds, std::vector<std::shared_ptr<ITexture>> texs = {})
 			: vertices(verts), indices(inds), textures(texs) {}
 		bool CalculateMesh();
 

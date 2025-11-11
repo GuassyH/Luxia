@@ -47,15 +47,10 @@ namespace Luxia::Platform::OpenGL {
 		m_MonitorWidth = mode->width;
 		m_MonitorHeight = mode->height;
 
-		// Set Size
-		glfwSetWindowSize(m_Window, m_Width, m_Height);
-		glfwSetWindowPos(m_Window, (m_MonitorWidth - m_Width) / 2, (m_MonitorHeight - m_Height) / 2);
-
 
 		glfwSetWindowUserPointer(m_Window, this);
-
 	
-		// Set all the callbacks: AKA, when resizing send a WindowResizeEvent to the EventHandler
+		// Set all the callbacks: ie, when resizing send a WindowResizeEvent to the EventHandler
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) {
@@ -71,9 +66,7 @@ namespace Luxia::Platform::OpenGL {
 			});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
-			if (!win) return;
 			if (action == GLFW_PRESS)
-				// PUSH_EVENT(MouseButtonPressEvent, button);
 				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonPressEvent>(button));
 			else if (action == GLFW_RELEASE)
 				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonReleaseEvent>(button));
@@ -100,6 +93,14 @@ namespace Luxia::Platform::OpenGL {
 			focused == 1 ? win->GetEventHandler().PushEvent(std::make_shared<WindowFocusEvent>())
 				: win->GetEventHandler().PushEvent(std::make_shared<WindowLoseFocusEvent>());
 			});
+
+		m_PosX = (m_MonitorWidth - m_Width) / 2;
+		m_PosY = (m_MonitorHeight - m_Height) / 2;
+
+		// Set Size
+		GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(m_Width, m_Height));
+		GetEventHandler().PushEvent(std::make_shared<WindowMoveEvent>(m_PosX, m_PosY));
+
 
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);

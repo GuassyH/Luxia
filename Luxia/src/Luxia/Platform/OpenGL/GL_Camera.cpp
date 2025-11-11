@@ -2,6 +2,9 @@
 #include "GL_Camera.h"
 #include "Luxia/Components/Transform.h"
 
+#include "glfw/glfw3.h"
+#include "glad/glad.h"
+
 namespace Luxia::Platform::OpenGL {
 
 	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot) {
@@ -13,8 +16,13 @@ namespace Luxia::Platform::OpenGL {
 		Right = glm::normalize(glm::cross(Forward, glm::vec3(0.0f, 1.0f, 0.0f)));
 		Up = glm::normalize(glm::cross(Right, Forward));
 	}
+	
+	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend) {
+		glBindFramebuffer(GL_FRAMEBUFFER, output_texture->GetFBO());
+		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glViewport(0, 0, width, height);
 
-	void GL_Camera::Render(std::shared_ptr<Luxia::Scene> scene, std::shared_ptr<Luxia::Rendering::IRenderer> rend) {
 		auto view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
 
 		for (auto entity : view) {
@@ -31,5 +39,9 @@ namespace Luxia::Platform::OpenGL {
 		}
 
 		rend->Flush(GetViewMat(), GetProjMat());
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		return output_texture;
 	}
 }

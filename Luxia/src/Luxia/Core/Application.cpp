@@ -21,12 +21,10 @@ namespace Luxia
 		// Initialise event handler
 		m_EventHandler = std::make_shared<Luxia::EventHandler>();	
 
-		// Initialise window
-		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application");
-		m_Window->SetHandler(m_EventHandler);
+		// Initialise window 
+		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application", m_EventHandler);
 
-
-		// Initialise layerstack 
+		// Initialise layer stack 
 		m_LayerStack = std::make_shared<LayerStack>();
 		m_LayerStack->m_Layers.clear();	m_LayerStack->m_Layers.resize(0);
 	}
@@ -55,7 +53,7 @@ namespace Luxia
 				layer->OnRender();
 
 			m_Window->EndFrame();
-			input.Clear();
+			eventManager.Clear();
 		}
 	}
 

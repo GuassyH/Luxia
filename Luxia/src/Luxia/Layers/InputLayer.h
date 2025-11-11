@@ -4,10 +4,9 @@
 
 namespace Luxia::Layers
 {
-	class LUXIA_API InputLayer : public Layer
-	{
+	class LUXIA_API InputLayer : public Layer {
 	private:
-		Input::InputManager& input = Input::InputManager::Get();
+		Luxia::EventManager& event_manager = Luxia::EventManager::Get();
 	public:
 		InputLayer() = default;
 		~InputLayer() = default;
