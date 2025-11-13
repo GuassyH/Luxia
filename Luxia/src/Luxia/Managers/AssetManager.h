@@ -3,9 +3,12 @@
 #include "Luxia/Core/Core.h"
 #include "Luxia/Core/Log.h"
 
-#include "Luxia/Assets/Asset.h"
-#include "Luxia/Assets/TextureAsset.h"
-#include "Luxia/Assets/ModelAsset.h"
+#include "Luxia/Asset/AssetFile.h"
+#include "Luxia/Asset/TextureAsset.h"
+#include "Luxia/Asset/ModelAsset.h"
+#include "Luxia/Asset/Asset.h"
+
+#include "Luxia/Platform/PlatformDefinitions.h"
 
 #include <unordered_map>
 #include <iostream>
@@ -25,9 +28,17 @@ namespace Luxia {
 
 		void Cleanup(); // Before app closes, save everything, etc
 		
-		template <typename T> // Load an asset from a path
-		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>> 
-			Create(const std::string& sourcePath) {
+
+		template <typename T>
+		std::shared_ptr<T> Import(const std::filesystem::path& m_path) {
+
+			return nullptr;
+		}
+
+
+
+		template <typename T, typename... Args> // Load an asset from a path
+		std::shared_ptr<T> Create(const std::string& sourcePath, Luxia::AssetType type, Args&&... args) {
 			std::filesystem::path full_path = asset_dir.string() + std::string("/") + sourcePath;
 
 			if (loaded_assets.contains(full_path)) {
@@ -35,46 +46,29 @@ namespace Luxia {
 				return std::static_pointer_cast<T>(loaded_assets[full_path]);
 			}
 
-			auto asset = std::make_shared<T>();
+			std::shared_ptr<T> asset = nullptr;
 
-			if (asset->type == Assets::AssetType::NoAsset) {
-				LX_CORE_ERROR("Asset at path: {}. Does not have asset type!", full_path.string());
-				return asset;
+			switch (type) {
+			case Luxia::AssetType::Model: {
+				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
+				model->LoadFromFile(full_path);
+				asset = model;
+				break;
+			}
+			default: {
+				break;
+			}
 			}
 
-			asset->Create(full_path);
 			loaded_assets[full_path] = asset;
 
 			return asset;
 		}
 
-
-		template <typename T> // Load an asset from a path
-		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, std::shared_ptr<T>>
-			Load(const std::string& metaPath) {
-			std::filesystem::path full_path = asset_dir.string() + std::string("/") + metaPath;
-
-			if (loaded_assets.contains(full_path)) {
-				LX_CORE_WARN("Asset at path: {}. Already exists!", full_path.string());
-				return std::static_pointer_cast<T>(loaded_assets[full_path]);
-			}
-
-			auto asset = std::make_shared<T>();
-
-			if (asset->type == Assets::AssetType::NoAsset) {
-				LX_CORE_ERROR("Asset at path: {}. Does not have asset type!", full_path.string());
-				return asset;
-			}
-
-			asset->Load(full_path);
-			loaded_assets[full_path] = asset;
-
-			return asset;
-		}
 
 
 		template <typename T> // Unload an asset from a path
-		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void> 
+		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void>
 			Unload(const std::string& m_path) {
 			std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path;
 
@@ -84,7 +78,7 @@ namespace Luxia {
 			}
 
 			auto& asset = loaded_assets.find(full_path)->second;
-			asset->Unload();
+			asset->~Asset();
 
 			loaded_assets.erase(full_path);
 		}
@@ -93,7 +87,7 @@ namespace Luxia {
 		AssetManager() = default;
 	private:
 		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> loaded_assets;
-		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> asset_pool;
+		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::AssetFile>> asset_pool;
 
 		std::filesystem::path asset_dir;
 	};

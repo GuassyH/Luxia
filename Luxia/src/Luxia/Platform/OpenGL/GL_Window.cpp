@@ -48,8 +48,12 @@ namespace Luxia::Platform::OpenGL {
 		m_MonitorHeight = mode->height;
 
 
+		m_PosX = (m_MonitorWidth - m_Width) / 2;
+		m_PosY = (m_MonitorHeight - m_Height) / 2;
+
 		glfwSetWindowUserPointer(m_Window, this);
-	
+		glfwSetWindowPos(m_Window, m_PosX, m_PosY);
+
 		// Set all the callbacks: ie, when resizing send a WindowResizeEvent to the EventHandler
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
@@ -94,8 +98,6 @@ namespace Luxia::Platform::OpenGL {
 				: win->GetEventHandler().PushEvent(std::make_shared<WindowLoseFocusEvent>());
 			});
 
-		m_PosX = (m_MonitorWidth - m_Width) / 2;
-		m_PosY = (m_MonitorHeight - m_Height) / 2;
 
 		// Set Size
 		GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(m_Width, m_Height));
@@ -116,41 +118,31 @@ namespace Luxia::Platform::OpenGL {
 		return 1;
 	}
 	
-	void GL_Window::BeginFrame()
-	{
+	void GL_Window::BeginFrame() {
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, m_Width, m_Height);
 
-		glfwPollEvents(); // AKA, SEND EVENTS!!!
+		// SEND EVENTS!!!
+		glfwPollEvents(); 
 	}
 
-	void GL_Window::EndFrame()
-	{
+	void GL_Window::EndFrame() {
 		// Poll the events and swap the buffer
 		glfwSwapBuffers(m_Window);
-	}
+	}	
 
-	void GL_Window::Close() {
+	void GL_Window::Close() {	
 		// Destroy the context and glfw, and set running to false
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 		running = false; // Dont consume, since other layers might have an onwindowclose function
-	}
+	}	
 
-	void GL_Window::SetTitle(const std::string& title)
-	{
+	void GL_Window::SetTitle(const std::string& title) {
 		m_Title = title;
 		glfwSetWindowTitle(m_Window, m_Title.c_str());
-	}
-
-	bool GL_Window::ResizeEvent(WindowResizeEvent& e) {
-		// Resize viewport and set the m_width and height params
-		glViewport(0, 0, e.GetX(), e.GetY());
-		m_Width = e.GetX();
-		m_Height = e.GetY();
-		return true;
 	}
 
 	void GL_Window::OnEvent(Event& e) {
@@ -163,6 +155,4 @@ namespace Luxia::Platform::OpenGL {
 		dispatcher.Dispatch<WindowLoseFocusEvent>(LX_BIND_EVENT_FN(LoseFocusEvent));
 		dispatcher.Dispatch<WindowCloseEvent>(LX_BIND_EVENT_FN(CloseEvent));
 	}
-
-
 }

@@ -14,7 +14,7 @@ namespace Luxia::Platform::OpenGL {
 		}
 		~GL_Camera() = default;
 
-		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height) override;
+		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) override;
 		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float FOVdeg, const int width, const int height, const float nearPlane, const float farPlane) override;
 	};
 }

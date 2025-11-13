@@ -5,12 +5,14 @@
 
 #include "Luxia/Rendering/API/ITexture.h"
 
+#include "Luxia/Asset/Asset.h"
+
 #include <vector>
 #include <filesystem>
 #include <iostream>
 
 namespace Luxia {
-	class LUXIA_API IModel {
+	class LUXIA_API IModel : public Luxia::Assets::Asset {
 	public:
 
 		IModel() = default;

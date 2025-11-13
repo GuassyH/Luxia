@@ -41,13 +41,13 @@ namespace Luxia {
 
 		// Unload all assets
 		for (auto& [path, asset] : loaded_assets) {
-			if (asset && asset->loaded) {
-				asset->Unload();
-			}
+			if (asset) 
+				asset->~Asset();
 		}
 
 		// Clear the unordered_map (kill the shared_ptrs)
 		loaded_assets.clear();
+		asset_pool.clear();
 		LX_CORE_TRACE("Asset Manager cleaned up");
 	}
 

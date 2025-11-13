@@ -5,7 +5,6 @@ uniform vec2 window_size;
 
 in vec2 texCoords;
 
-// Should it calculate so it fills? or so it stretches? 
 
 vec4 Fit(){
 	vec2 tex_raw_size = textureSize(cam_texture, 0);
@@ -41,7 +40,6 @@ vec4 Fit(){
 }
 
 vec4 Fill(){
-
 	vec2 tex_raw_size = textureSize(cam_texture, 0);
 	float cam_aspect = tex_raw_size.x / tex_raw_size.y;
 	float window_aspect = window_size.x / window_size.y;

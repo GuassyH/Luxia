@@ -1,11 +1,11 @@
 #pragma once
-#include "Asset.h"
+#include "AssetFile.h"
 
 #include "Luxia/Core/Core.h"
 
 namespace Luxia::Assets {
 
-	class LUXIA_API ModelAsset : public Asset {
+	class LUXIA_API ModelAsset : public AssetFile {
 	public:
 
 		ModelAsset() {

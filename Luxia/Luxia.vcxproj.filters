@@ -51,13 +51,13 @@
     <ClInclude Include="src\Luxia.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Assets\Asset.h">
+    <ClInclude Include="src\Luxia\Asset\AssetFile.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Assets\ModelAsset.h">
+    <ClInclude Include="src\Luxia\Asset\ModelAsset.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Assets\TextureAsset.h">
+    <ClInclude Include="src\Luxia\Asset\TextureAsset.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Camera.h">
@@ -110,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\WindowEvent.h">
       <Filter>src\Luxia\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\GUID.h">
-      <Filter>src\Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\EventLayer.h">
       <Filter>src\Luxia\Layers</Filter>
@@ -204,6 +201,8 @@
     <ClInclude Include="src\lxpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Core\GUID.h" />
+    <ClInclude Include="src\Luxia\Asset\Asset.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp">

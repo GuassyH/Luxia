@@ -26,7 +26,6 @@ namespace Luxia
 
 		// Initialise layer stack 
 		m_LayerStack = std::make_shared<LayerStack>();
-		m_LayerStack->m_Layers.clear();	m_LayerStack->m_Layers.resize(0);
 	}
 
 	void Application::CoreStartup() {

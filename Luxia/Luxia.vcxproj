@@ -162,9 +162,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia.h" />
-    <ClInclude Include="src\Luxia\Assets\Asset.h" />
-    <ClInclude Include="src\Luxia\Assets\ModelAsset.h" />
-    <ClInclude Include="src\Luxia\Assets\TextureAsset.h" />
+    <ClInclude Include="src\Luxia\Asset\Asset.h" />
+    <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
+    <ClInclude Include="src\Luxia\Asset\ModelAsset.h" />
+    <ClInclude Include="src\Luxia\Asset\TextureAsset.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
     <ClInclude Include="src\Luxia\Components\Material.h" />

@@ -2,12 +2,12 @@
 
 #include "Luxia/Core/Core.h"
 #include "Luxia/Core/GUID.h"
+#include "Luxia/Core/Log.h"
 
 #include <filesystem>
 #include <iostream>
 
-namespace Luxia::Assets {
-
+namespace Luxia {
 	enum LUXIA_API AssetType {
 		NoAsset = 0,
 		Model = 1,
@@ -16,11 +16,14 @@ namespace Luxia::Assets {
 		Shader = 4,
 		Audio = 5,
 	};
+}
 
-	class LUXIA_API Asset {
+namespace Luxia::Assets {
+
+	class LUXIA_API AssetFile {
 	public:
-		Asset() = default;
-		virtual ~Asset() = default;
+		AssetFile() = default;
+		virtual ~AssetFile() = default;
 
 		virtual void Create(const std::filesystem::path& sourcePath) = 0; // Create the metafile from a source
 		virtual void Load(const std::filesystem::path& metaPath) = 0; // Load the metafile
@@ -34,8 +37,9 @@ namespace Luxia::Assets {
 		std::filesystem::path srcPath = "no/path";
 		std::string name			= "no_name";
 
-		bool loaded = false;
+		std::string metadata;
 
+		bool loaded = false;
 	protected:
 		GUID guid;
 	};

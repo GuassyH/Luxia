@@ -16,16 +16,11 @@ namespace Talloren::Layer {
 
 			WeakPtrProxy<Luxia::Scene> s = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			std::shared_ptr<Luxia::Assets::ModelAsset> gma = project_manager->GetAssetManager()->Create<Luxia::Assets::ModelAsset>("cute_ghost/scene.gltf");
-			std::shared_ptr<Luxia::Assets::ModelAsset> lma = project_manager->GetAssetManager()->Create<Luxia::Assets::ModelAsset>("lotr_troll/scene.gltf");
-			std::shared_ptr<Luxia::IModel> ghostModel = Luxia::Platform::Assets::CreateModel();
-			std::shared_ptr<Luxia::IModel> lotrModel = Luxia::Platform::Assets::CreateModel();
+			auto ghostModel = asset_manager->Create<Luxia::IModel>("cute_ghost/scene.gltf", Luxia::AssetType::Model);
+			auto lotrModel = asset_manager->Create<Luxia::IModel>("lotr_troll/scene.gltf", Luxia::AssetType::Model);
 
-			ghostModel->LoadFromFile(gma->srcPath);
-			lotrModel->LoadFromFile(lma->srcPath);
-
-			std::shared_ptr<Luxia::IShader> shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
-			std::shared_ptr<Luxia::Components::Material> mat = std::make_shared<Luxia::Components::Material>(shader);
+			auto shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
+			auto mat = std::make_shared<Luxia::Components::Material>(shader);
 			
 			auto& ghostEntity = s->CreateEntity();
 			ghostEntity.position = glm::vec3(0.0f, 0.0f, -10.0f);

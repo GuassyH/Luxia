@@ -21,16 +21,16 @@ namespace Luxia::Components {
 
 		std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene>& scene, const std::shared_ptr<Luxia::Rendering::IRenderer>& rend) {
 			camera->UpdateMatrix(transform->position, transform->GetRotVec(), FOVdeg, width, height, nearPlane, farPlane);
-			return camera->Render(scene, rend, width, height);
+			return camera->Render(scene, rend, width, height, clearColor);
 		}
 
 		float FOVdeg = 70.0f;
 		float nearPlane = 0.03f, farPlane = 1000.0f;
 		int width = 1920, height = 1080;
+		bool main = false;
 
 		glm::vec4 clearColor = glm::vec4(0.3f, 0.5f, 0.4f, 1.0f);
-		bool main = false;
 	private:
-		std::shared_ptr<ICamera> camera;
+		std::shared_ptr<ICamera> camera = nullptr;
 	};
 }

@@ -17,9 +17,9 @@ namespace Luxia::Platform::OpenGL {
 		Up = glm::normalize(glm::cross(Right, Forward));
 	}
 	
-	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height) {
+	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) {
 		glBindFramebuffer(GL_FRAMEBUFFER, output_texture->GetFBO());
-		glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
+		glClearColor(clear_col.r, clear_col.g, clear_col.b, clear_col.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, width, height);
 

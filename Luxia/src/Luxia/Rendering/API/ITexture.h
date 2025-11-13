@@ -3,6 +3,8 @@
 #include "Luxia/Core/Core.h"
 #include "stb/stb_image.h"
 
+#include "Luxia/Asset/Asset.h"
+
 #include <filesystem>
 
 namespace Luxia {
@@ -15,7 +17,7 @@ namespace Luxia {
 		LX_TEXTURE_FBO			= 4
 	};
 
-	class LUXIA_API ITexture {
+	class LUXIA_API ITexture : public Luxia::Assets::Asset {
 	public:
 		unsigned int texID = 0;
 

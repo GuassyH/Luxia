@@ -2,10 +2,10 @@
 
 #include "Luxia/Core/Core.h"
 
-#include "Asset.h"
+#include "AssetFile.h"
 
 namespace Luxia::Assets {
-	class LUXIA_API TextureAsset : public Asset {
+	class LUXIA_API TextureAsset : public AssetFile {
 	public:
 
 		TextureAsset() { 
