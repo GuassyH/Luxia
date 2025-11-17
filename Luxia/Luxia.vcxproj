@@ -217,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
+    <ClCompile Include="src\Luxia\Core\GUID.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />
     <ClCompile Include="src\Luxia\Core\stb.cpp" />
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp" />

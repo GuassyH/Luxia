@@ -16,35 +16,19 @@ namespace Luxia::Assets {
 		virtual void Create(const std::filesystem::path& sourcePath) override {
 			srcPath = sourcePath;
 
-			// Create OS specific Texture
-
-			bool suffix_found = false;
-			if (srcPath.has_extension()) {
-				std::string m_suf = srcPath.extension().string();
-
-				for (auto& t_suf : p_suf) {
-					if (t_suf == m_suf) {
-						suffix = m_suf;
-						suffix_found = true;
-						break;
-					}
-				}
-
-				std::string name_path = srcPath.stem().string();
-				name = name_path;
-			}
-
 			loaded = true;
 
 			if (loaded)
-				LX_CORE_TRACE("Created Texture Asset: '{}', {}", name, suffix);
+				LX_CORE_TRACE("Created Model Asset: '{}'", name);
 			else
-				LX_CORE_ERROR("Failed Created Texture Asset: {}", srcPath.string());
+				LX_CORE_ERROR("Failed Created Model Asset: {}", srcPath.string());
 		}
 
 
 		virtual void Load(const std::filesystem::path& metaFile) {
 
+
+			guid = 0; // EQUALS METAFILE
 		}
 
 
@@ -54,10 +38,5 @@ namespace Luxia::Assets {
 
 
 	private:
-		std::array<std::string, 3> p_suf{
-			".png",
-			".jpg",
-			".bmp"
-		};
 	};
 }

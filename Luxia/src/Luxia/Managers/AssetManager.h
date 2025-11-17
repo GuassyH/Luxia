@@ -16,6 +16,7 @@
 
 namespace Luxia {
 
+
 	class LUXIA_API AssetManager {
 	public:
 		int NumLoaded() { return loaded_assets.size(); }
@@ -27,41 +28,34 @@ namespace Luxia {
 		const std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
 
 		void Cleanup(); // Before app closes, save everything, etc
+		GUID Import(const std::string& m_path);
 		
 
-		template <typename T>
-		std::shared_ptr<T> Import(const std::filesystem::path& m_path) {
-
-			return nullptr;
-		}
-
-
-
 		template <typename T, typename... Args> // Load an asset from a path
-		std::shared_ptr<T> Create(const std::string& sourcePath, Luxia::AssetType type, Args&&... args) {
-			std::filesystem::path full_path = asset_dir.string() + std::string("/") + sourcePath;
+		std::shared_ptr<T> CreateAsset(const GUID& assetfile_guid, Args&&... args) {
+			if (!asset_pool.contains(assetfile_guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)assetfile_guid); return nullptr; }
+			std::shared_ptr<Assets::AssetFile> ast_file = asset_pool.find(assetfile_guid)->second;
 
-			if (loaded_assets.contains(full_path)) {
-				LX_CORE_WARN("Asset at path: {}. Already exists!", full_path.string());
-				return std::static_pointer_cast<T>(loaded_assets[full_path]);
+			if (loaded_assets.contains(ast_file->srcPath)) {
+				LX_CORE_WARN("Asset at path: {}. Already exists!", 0);
+				return std::static_pointer_cast<T>(loaded_assets[ast_file->srcPath.string()]);
 			}
 
 			std::shared_ptr<T> asset = nullptr;
 
-			switch (type) {
-			case Luxia::AssetType::Model: {
+			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
 				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
-				model->LoadFromFile(full_path);
+				model->LoadFromFile(ast_file->srcPath);
 				asset = model;
-				break;
 			}
-			default: {
-				break;
+			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
+				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
+				texture->LoadFromFile(ast_file->srcPath);
+				asset = texture;
 			}
-			}
+			
 
-			loaded_assets[full_path] = asset;
-
+			loaded_assets[ast_file->srcPath] = asset;
 			return asset;
 		}
 
@@ -69,7 +63,7 @@ namespace Luxia {
 
 		template <typename T> // Unload an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void>
-			Unload(const std::string& m_path) {
+			UnloadAsset(const std::string& m_path) {
 			std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path;
 
 			if (!loaded_assets.contains(full_path)) {
@@ -87,7 +81,7 @@ namespace Luxia {
 		AssetManager() = default;
 	private:
 		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> loaded_assets;
-		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::AssetFile>> asset_pool;
+		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>> asset_pool;
 
 		std::filesystem::path asset_dir;
 	};

@@ -1,20 +1,27 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-
 #include <iostream>
-
+#include <xhash>
 
 namespace Luxia {
-	struct GUID {
-		uint64_t Get() const { return guid; }
-		uint64_t Create() {
-			// Create GUID
+	class LUXIA_API GUID {
+	public:
+		GUID();
+		GUID(uint64_t guid);
+		GUID(const GUID&) = default;
 
-			return guid;
-		}
-
+		operator uint64_t() const { return m_guid; }
 	private:
-		uint64_t guid;
+		uint64_t m_guid;
+	};
+}
+
+namespace std {
+	template <>
+	struct hash<Luxia::GUID> {
+		std::size_t operator()(const Luxia::GUID& guid) const {
+			return hash<uint64_t>()((uint64_t)guid);
+		}
 	};
 }

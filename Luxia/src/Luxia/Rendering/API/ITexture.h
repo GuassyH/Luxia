@@ -8,8 +8,7 @@
 #include <filesystem>
 
 namespace Luxia {
-
-	enum TextureType {
+	enum LUXIA_API TextureType {
 		LX_TEXTURE_DIFFUSE		= 0,
 		LX_TEXTURE_SPECULAR		= 1,
 		LX_TEXTURE_NORMALS		= 2,
@@ -39,8 +38,8 @@ namespace Luxia {
 		unsigned int GetFBO() const { return fbo; }
 		unsigned int GetRBO() const { return rbo; }
 
-		TextureType type;
-		std::filesystem::path path;
+		TextureType type = TextureType::LX_TEXTURE_DIFFUSE;
+		std::filesystem::path path = "";
 	protected:
 		int imgWidth = 0, imgHeight = 0, numColCh = 3;
 		unsigned int fbo = 0, rbo = 0;

@@ -268,5 +268,6 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Core\GUID.cpp" />
   </ItemGroup>
 </Project>
