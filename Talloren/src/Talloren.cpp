@@ -16,11 +16,11 @@ namespace Talloren::Layer {
 
 			WeakPtrProxy<Luxia::Scene> s = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			uint64_t gid = asset_manager->Import("cute_ghost/scene.gltf");
-			uint64_t tid = asset_manager->Import("lotr_troll/scene.gltf");
+			auto gas = asset_manager->Import("cute_ghost/scene.gltf");
+			auto tas = asset_manager->Import("lotr_troll/scene.gltf");
 
-			auto ghostModel = asset_manager->CreateAsset<Luxia::IModel>(gid);
-			auto lotrModel = asset_manager->CreateAsset<Luxia::IModel>(tid);
+			auto ghostModel = asset_manager->CreateAsset<Luxia::IModel>(gas);
+			auto lotrModel = asset_manager->CreateAsset<Luxia::IModel>(tas);
 
 			auto shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
 			auto mat = std::make_shared<Luxia::Components::Material>(shader);
@@ -39,6 +39,7 @@ namespace Talloren::Layer {
 			auto& camEnt = s->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			cam.main = true;
+
 		}
 		virtual void OnDetach() override {
 			LX_CORE_WARN("ExtraLayer Detached");

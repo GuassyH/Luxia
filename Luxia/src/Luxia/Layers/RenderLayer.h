@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Layer.h"
-#include "Luxia/Asset/ModelAsset.h"
 
 
 namespace Luxia::Layers

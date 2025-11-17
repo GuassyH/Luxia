@@ -54,12 +54,6 @@
     <ClInclude Include="src\Luxia\Asset\AssetFile.h">
       <Filter>src\Luxia\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Asset\ModelAsset.h">
-      <Filter>src\Luxia\Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Asset\TextureAsset.h">
-      <Filter>src\Luxia\Assets</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\Components\Camera.h">
       <Filter>src\Luxia\Components</Filter>
     </ClInclude>
@@ -269,5 +263,6 @@
       <Filter>vendor\glad</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
+    <ClCompile Include="src\Luxia\Asset\AssetFile.cpp" />
   </ItemGroup>
 </Project>

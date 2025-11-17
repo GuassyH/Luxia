@@ -4,8 +4,6 @@
 #include "Luxia/Core/Log.h"
 
 #include "Luxia/Asset/AssetFile.h"
-#include "Luxia/Asset/TextureAsset.h"
-#include "Luxia/Asset/ModelAsset.h"
 #include "Luxia/Asset/Asset.h"
 
 #include "Luxia/Platform/PlatformDefinitions.h"
@@ -20,26 +18,24 @@ namespace Luxia {
 	class LUXIA_API AssetManager {
 	public:
 		int NumLoaded() { return loaded_assets.size(); }
-		bool IsLoaded(const std::filesystem::path& m_path) { return loaded_assets.contains(m_path); }
+
 		bool LoadAssetPoolFromPath(const std::filesystem::path& m_path);
 		bool SaveAssetPool(const std::filesystem::path& m_path);
+		void Cleanup(); // Before app closes, save everything, etc
+
+		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
+		std::shared_ptr<Luxia::Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
+		GUID AssetFileGUIDFromPath(const std::filesystem::path& m_path); // returns asset file GUID
 
 		// TEMP, THIS SHOULD BE HANDLED BY SCENE
-		const std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
 
-		void Cleanup(); // Before app closes, save everything, etc
-		GUID Import(const std::string& m_path);
+		std::shared_ptr<Luxia::Assets::AssetFile> Import(const std::string& m_path);
 		
 
-		template <typename T, typename... Args> // Load an asset from a path
-		std::shared_ptr<T> CreateAsset(const GUID& assetfile_guid, Args&&... args) {
-			if (!asset_pool.contains(assetfile_guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)assetfile_guid); return nullptr; }
-			std::shared_ptr<Assets::AssetFile> ast_file = asset_pool.find(assetfile_guid)->second;
-
-			if (loaded_assets.contains(ast_file->srcPath)) {
-				LX_CORE_WARN("Asset at path: {}. Already exists!", 0);
-				return std::static_pointer_cast<T>(loaded_assets[ast_file->srcPath.string()]);
-			}
+		template <typename T> // Load an asset from an asset file
+		std::shared_ptr<T> CreateAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
+			if (!asset_pool.contains(asset_file->guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)asset_file->guid); return nullptr; }
+			std::shared_ptr<Assets::AssetFile> ast_file = asset_pool.find(asset_file->guid)->second;
 
 			std::shared_ptr<T> asset = nullptr;
 
@@ -55,32 +51,71 @@ namespace Luxia {
 			}
 			
 
-			loaded_assets[ast_file->srcPath] = asset;
+			loaded_assets[asset->guid] = asset;
+			return asset;
+		}
+
+		template <typename T> // Load an independant asset with an assigned guid
+		std::shared_ptr<T> CreateAsset(const GUID& assigned_guid) {
+			if (!asset_pool.contains(assigned_guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)assigned_guid); return nullptr; }
+
+			std::shared_ptr<T> asset = nullptr;
+
+			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
+				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
+				model->guid = assigned_guid;
+				asset = model;
+			}
+			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
+				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
+				texture->guid = assigned_guid;
+				asset = texture;
+			}
+
+			loaded_assets[asset->guid] = asset;
+			return asset;
+		}
+
+		template <typename T> // Load an independant asset with a new guid
+		std::shared_ptr<T> CreateAsset() {
+
+			std::shared_ptr<T> asset = nullptr;
+			GUID m_guid;
+
+			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
+				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
+				m_guid = model->guid;
+				asset = model;
+			}
+			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
+				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
+				m_guid = texture->guid;
+				asset = texture;
+			}
+
+			if (!asset_pool.contains(m_guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)m_guid); return nullptr; }
+			
+			loaded_assets[m_guid] = asset;
 			return asset;
 		}
 
 
-
 		template <typename T> // Unload an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void>
-			UnloadAsset(const std::string& m_path) {
-			std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path;
+			UnloadAsset(const GUID& guid) {
 
-			if (!loaded_assets.contains(full_path)) {
-				LX_CORE_TRACE("Asset ({}) already unloaded", full_path.string());
-				return;
-			}
+			if (!loaded_assets.contains(guid)) { return; }
 
-			auto& asset = loaded_assets.find(full_path)->second;
+			auto& asset = loaded_assets.find(guid)->second;
 			asset->~Asset();
 
-			loaded_assets.erase(full_path);
+			loaded_assets.erase(guid);
 		}
 
 		~AssetManager() = default;
 		AssetManager() = default;
 	private:
-		std::unordered_map<std::filesystem::path, std::shared_ptr<Assets::Asset>> loaded_assets;
+		std::unordered_map<GUID, std::shared_ptr<Assets::Asset>> loaded_assets;
 		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>> asset_pool;
 
 		std::filesystem::path asset_dir;

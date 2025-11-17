@@ -39,11 +39,19 @@ namespace Luxia {
 	}
 
 	void AssetManager::Cleanup() {
-
 		// Unload all assets
-		for (auto& [path, asset] : loaded_assets) {
-			if (asset) 
+		for (auto& [guid, asset] : loaded_assets) {
+			if (asset) {
+				// asset->Cleanup?
 				asset->~Asset();
+			}
+		}
+
+		for (auto& [guid, assetfile] : asset_pool) {
+			if (assetfile) {
+				assetfile->Unload();
+				assetfile->~AssetFile();
+			}
 		}
 
 		// Clear the unordered_map (kill the shared_ptrs)
@@ -60,10 +68,12 @@ namespace Luxia {
 		{".bmp",  Luxia::AssetType::Texture},
 		{".obj",  Luxia::AssetType::Model},
 		{".fbx",  Luxia::AssetType::Model},
-		{".gltf",  Luxia::AssetType::Model }
+		{".gltf",  Luxia::AssetType::Model },
+		{".wav",  Luxia::AssetType::Audio },
+		{".mp3",  Luxia::AssetType::Audio },
 	};
 
-	GUID AssetManager::Import(const std::string& m_path) {
+	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::Import(const std::string& m_path) {
 		std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path;
 
 		if (!full_path.has_extension()) { return 0; }
@@ -74,7 +84,7 @@ namespace Luxia {
 		std::string af_ext = full_path.extension().string();
 
 		for (auto& [ext, ext_type] : extensions) {
-			if (af_ext.compare(ext)) {
+			if (af_ext == ext) {
 				type = ext_type;
 				break;
 			}
@@ -82,40 +92,30 @@ namespace Luxia {
 
 		if (type == Luxia::AssetType::NoAsset) { return 0; }
 
-		switch (type)
-		{
-		case Luxia::NoAsset:
-			break;
-		case Luxia::Model:
-			asset_file = std::make_shared<Luxia::Assets::ModelAsset>();
-			break;
-		case Luxia::Texture:
-			asset_file = std::make_shared<Luxia::Assets::TextureAsset>();
-			break;
-		case Luxia::Material:
-			break;
-		case Luxia::Shader:
-			break;
-		case Luxia::Audio:
-			break;
-		default:
-			break;
-		}
+		asset_file = std::make_shared<Luxia::Assets::AssetFile>();
+		// Check if there is metafile
 
 		// if no metafile
-		asset_file->Create(full_path);
-		asset_file->srcPath = full_path;
-		asset_file->extension = full_path.extension().string();
-		asset_file->name = full_path.filename().string();
-
-
+		asset_file->Create(full_path, type);
+		// otherwise if metafile
+		// asset_file->Load(full_path);
 
 		asset_pool[asset_file->guid] = asset_file;
 		LX_CORE_INFO("GUID: {}", (uint64_t)asset_file->guid);
 
 		// return guid
-		return asset_file->guid;
+		return asset_file;
 	}
 
+	GUID AssetManager::AssetFileGUIDFromPath(const std::filesystem::path& m_path) {
+		std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path.string();
+
+		for (auto& [t_guid, ast_file] : asset_pool) {
+			if (ast_file->srcPath == full_path) {
+				return t_guid;
+			}
+		}
+		return GUID(0);
+	}
 
 }
