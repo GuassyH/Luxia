@@ -57,8 +57,6 @@ namespace Luxia {
 
 		template <typename T> // Load an independant asset with an assigned guid
 		std::shared_ptr<T> CreateAsset(const GUID& assigned_guid) {
-			if (!asset_pool.contains(assigned_guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)assigned_guid); return nullptr; }
-
 			std::shared_ptr<T> asset = nullptr;
 
 			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
@@ -93,8 +91,6 @@ namespace Luxia {
 				asset = texture;
 			}
 
-			if (!asset_pool.contains(m_guid)) { LX_CORE_ERROR("Asset pool doesnt have {}", (uint64_t)m_guid); return nullptr; }
-			
 			loaded_assets[m_guid] = asset;
 			return asset;
 		}
