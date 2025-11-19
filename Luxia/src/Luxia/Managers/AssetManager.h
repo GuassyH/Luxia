@@ -24,12 +24,15 @@ namespace Luxia {
 		void Cleanup(); // Before app closes, save everything, etc
 
 		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
+		
+
 		std::shared_ptr<Luxia::Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
-		GUID AssetFileGUIDFromPath(const std::filesystem::path& m_path); // returns asset file GUID
+		std::shared_ptr<Luxia::Assets::AssetFile> GetAssetFileFromPath(const std::filesystem::path& m_path);
 
 		// TEMP, THIS SHOULD BE HANDLED BY SCENE
 
-		std::shared_ptr<Luxia::Assets::AssetFile> Import(const std::string& m_path);
+		std::shared_ptr<Luxia::Assets::AssetFile> Import(const std::filesystem::path& src_path, const std::string ast_name);
+		std::shared_ptr<Luxia::Assets::AssetFile> SerializeAssetFile(const std::filesystem::path& meta_path);
 		
 
 		template <typename T> // Load an asset from an asset file

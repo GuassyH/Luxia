@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <iostream>
 
+
 namespace Luxia {
 	class LUXIA_API ProjectManager {
 	public:

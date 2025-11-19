@@ -28,7 +28,9 @@ project "Luxia"
 	files{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		"%{prj.name}/vendor/glad/glad.c"
+		"%{prj.name}/vendor/glad/glad.c",
+		--"%{prj.name}/vendor/glm/glm/**.cpp",
+		--"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 
@@ -37,7 +39,8 @@ project "Luxia"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/vendor/glm"
+		"%{prj.name}/vendor/glm",
+		--"%{prj.name}/vendor/yaml-cpp/include",
 	}
 
 
@@ -105,12 +108,12 @@ project "Talloren"
 		"Luxia/vendor/spdlog/include",
 		"Luxia/vendor/glm",
 		"Luxia/src",
-		-- "Talloren/src"
+		--"Luxia/vendor/yaml-cpp/include",
 	}
 
 	libdirs {
 		"Luxia/vendor/glfw",
-		"Luxia/vendor/assimp/lib"
+		"Luxia/vendor/assimp/lib",
 	}
 	links{
 		"Luxia",

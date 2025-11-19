@@ -172,6 +172,7 @@
     <ClInclude Include="src\Luxia\Core\Application.h" />
     <ClInclude Include="src\Luxia\Core\Core.h" />
     <ClInclude Include="src\Luxia\Core\EntryPoint.h" />
+    <ClInclude Include="src\Luxia\Core\GUID.h" />
     <ClInclude Include="src\Luxia\Core\Log.h" />
     <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h" />
     <ClInclude Include="src\Luxia\Events\Event.h" />
@@ -181,7 +182,6 @@
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\Events\RenderEvent.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />
-    <ClInclude Include="src\Luxia\Core\GUID.h" />
     <ClInclude Include="src\Luxia\Layers\EventLayer.h" />
     <ClInclude Include="src\Luxia\Layers\GameLayer.h" />
     <ClInclude Include="src\Luxia\Layers\Layer.h" />
@@ -239,9 +239,9 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

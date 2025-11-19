@@ -15,6 +15,7 @@ namespace Luxia {
 		Material = 3,
 		Shader = 4,
 		Audio = 5,
+	//	Scene = 6
 	};
 }
 
@@ -25,14 +26,16 @@ namespace Luxia::Assets {
 		AssetFile() = default;
 		virtual ~AssetFile() = default;
 
-		virtual void Create(const std::filesystem::path& sourcePath, const AssetType& m_type); // Create the metafile from a source
-		virtual void Load(const std::filesystem::path& metaPath); // Load the metafile
+		virtual void Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type); // Create the metafile from a source
+		virtual void Load(const std::filesystem::path& m_metaPath); // Load the metafile
+		virtual bool Save();
 		virtual void Unload(); // Unload the asset
 
 		AssetType type = AssetType::NoAsset;
 
 		std::string extension = ".none"; // .png, .obj, etc. Helps to decide how to load
 		std::filesystem::path srcPath = "no/path";
+		std::filesystem::path metaPath = "no/path";
 		std::string name= "no_name";
 
 		std::string metadata;

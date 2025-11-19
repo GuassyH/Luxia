@@ -7,8 +7,8 @@
     <Filter Include="src\Luxia">
       <UniqueIdentifier>{7F895DB3-EBF3-112A-3432-C3CFA0DBEF7E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Assets">
-      <UniqueIdentifier>{814B44DA-6D44-632C-9676-48B182CE4238}</UniqueIdentifier>
+    <Filter Include="src\Luxia\Asset">
+      <UniqueIdentifier>{4E214092-BAAC-AD56-C3BD-304B2FC80957}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Luxia\Components">
       <UniqueIdentifier>{34211EA2-20B0-A76B-C9CE-BB66B53CB811}</UniqueIdentifier>
@@ -51,8 +51,11 @@
     <ClInclude Include="src\Luxia.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\Asset.h">
+      <Filter>src\Luxia\Asset</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Asset\AssetFile.h">
-      <Filter>src\Luxia\Assets</Filter>
+      <Filter>src\Luxia\Asset</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Camera.h">
       <Filter>src\Luxia\Components</Filter>
@@ -76,6 +79,9 @@
       <Filter>src\Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\EntryPoint.h">
+      <Filter>src\Luxia\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Core\GUID.h">
       <Filter>src\Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\Log.h">
@@ -195,11 +201,15 @@
     <ClInclude Include="src\lxpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Core\GUID.h" />
-    <ClInclude Include="src\Luxia\Asset\Asset.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Asset\AssetFile.cpp">
+      <Filter>src\Luxia\Asset</Filter>
+    </ClCompile>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
+      <Filter>src\Luxia\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Core\GUID.cpp">
       <Filter>src\Luxia\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Core\Log.cpp">
@@ -262,7 +272,5 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Core\GUID.cpp" />
-    <ClCompile Include="src\Luxia\Asset\AssetFile.cpp" />
   </ItemGroup>
 </Project>
