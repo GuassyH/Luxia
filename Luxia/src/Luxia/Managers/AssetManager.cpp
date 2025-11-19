@@ -4,7 +4,7 @@
 namespace Luxia {
 
 	bool AssetManager::LoadAssetPoolFromPath(const std::filesystem::path& m_path) { 
-		asset_dir = m_path / "assets";
+		asset_dir = m_path.string() + "/assets";
 
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_INFO("Asset Manager: creating asset dir - {}", asset_dir.string());
@@ -21,17 +21,21 @@ namespace Luxia {
 		for (auto& entry : std::filesystem::recursive_directory_iterator(asset_dir)) {
 			if (!entry.is_regular_file()) continue;
 
-			const auto& p = entry.path().lexically_normal();
-			if (p.extension() == ".meta") {
-				std::string s = p.string();
-				std::replace(s.begin(), s.end(), '\\', '/');
-
-				auto path = std::filesystem::path(s);
-				LX_CORE_TRACE("{}", path.string());
+			auto path = entry.path().lexically_normal();
+			if (path.extension() == ".meta") {
+				std::string logPath = path.string();
+				std::replace(logPath.begin(), logPath.end(), '\\', '/');
+				
+				LX_CORE_TRACE("Loading meta file: {}", logPath);
 
 				// Call your import function here
-				std::shared_ptr<Luxia::Assets::AssetFile> new_astf = SerializeAssetFile(path); // <-- implement this
-				asset_pool[new_astf->guid] = new_astf;
+				std::shared_ptr<Luxia::Assets::AssetFile> new_astf = SerializeAssetFile(logPath); // <-- implement this
+				if (new_astf) {
+					asset_pool[new_astf->guid] = new_astf;
+				}
+				else {
+					LX_CORE_WARN("Failed to load asset from meta file: {}", logPath);
+				}
 			}
 		}
 
@@ -40,7 +44,7 @@ namespace Luxia {
 	}
 
 	bool AssetManager::SaveAssetPool(const std::filesystem::path& m_path) {
-		asset_dir = m_path / "assets";
+		asset_dir = m_path.string() + "/assets";
 
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_ERROR("Asset Manager: creating asset dir - {}", asset_dir.string());
@@ -111,7 +115,6 @@ namespace Luxia {
 			has_metafile = true;
 		}
 
-		// Choose accordingly
 		if (!has_metafile) {
 			Luxia::AssetType type = Luxia::AssetType::NoAsset;
 			std::string af_ext = full_path.extension().string();
@@ -125,7 +128,9 @@ namespace Luxia {
 			asset_file->Create(full_path, metafile_path, ast_name, type);
 		}
 		else {
-			LX_CORE_ERROR("Already imported asset: {}", full_path.string());
+			// Reimport
+			asset_file->srcPath = full_path;
+			asset_file->Load(metafile_path);
 		}
 
 		asset_pool[asset_file->guid] = asset_file;
@@ -138,9 +143,13 @@ namespace Luxia {
 
 		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
 
-		asset_file->Load(meta_path);
+		if (asset_file->Load(meta_path)) {
+			return asset_file;
+		}
+		else {
+			return nullptr;
+		}
 
-		return asset_file;
 	}
 
 

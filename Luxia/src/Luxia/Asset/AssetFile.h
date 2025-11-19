@@ -27,7 +27,7 @@ namespace Luxia::Assets {
 		virtual ~AssetFile() = default;
 
 		virtual void Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type); // Create the metafile from a source
-		virtual void Load(const std::filesystem::path& m_metaPath); // Load the metafile
+		virtual bool Load(const std::filesystem::path& m_metaPath); // Load the metafile
 		virtual bool Save();
 		virtual void Unload(); // Unload the asset
 
@@ -37,8 +37,6 @@ namespace Luxia::Assets {
 		std::filesystem::path srcPath = "no/path";
 		std::filesystem::path metaPath = "no/path";
 		std::string name= "no_name";
-
-		std::string metadata;
 
 		bool loaded = false;
 
