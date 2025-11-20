@@ -16,9 +16,9 @@ namespace Talloren::Layer {
 
 			WeakPtrProxy<Luxia::Scene> s = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			auto gasf = asset_manager->GetAssetFileFromPath("cute_ghost/scene.gltf");
-			auto tasf = asset_manager->GetAssetFileFromPath("lotr_troll/scene.gltf");
-			// auto sasf = asset_manager->GetAssetFileFromPath("shaders/defaultshader.shader");
+			auto gasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::AssetFile>("cute_ghost/scene.gltf");
+			auto tasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::AssetFile>("lotr_troll/scene.gltf");
+			// auto sasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ShaderFile>("shaders/defaultshader.shader");
 			auto sasf = asset_manager->Import("shaders/defaultshader.shader", "DefaultShader", "E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
 
 			auto ghostModel = asset_manager->CreateAsset<Luxia::IModel>(gasf);

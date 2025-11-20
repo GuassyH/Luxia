@@ -30,7 +30,6 @@ namespace Luxia {
 		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
 
 		std::shared_ptr<Luxia::Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
-		std::shared_ptr<Luxia::Assets::AssetFile> GetAssetFileFromPath(const std::filesystem::path& rel_path);
 		std::shared_ptr<Luxia::Assets::AssetFile> SerializeAssetFile(const std::filesystem::path& metafile_path);
 		
 		template <typename... Args>
@@ -78,7 +77,19 @@ namespace Luxia {
 			return asset_file;
 		}
 		
+		template <typename T>
+		std::shared_ptr<T> GetAssetFileFromPath(const std::filesystem::path& rel_path) {
+			std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
 
+			for (auto& [t_guid, ast_file] : asset_pool) {
+				if (ast_file->srcPath == full_path) {
+					if(ast_file)
+						return std::dynamic_pointer_cast<T>(asset_pool.find(t_guid)->second);
+				}
+			}
+
+			return nullptr;
+		}
 
 		template <typename T> // Load an asset from an asset file
 		std::shared_ptr<T> CreateAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {

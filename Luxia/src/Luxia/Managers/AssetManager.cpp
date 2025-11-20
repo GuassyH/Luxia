@@ -137,18 +137,4 @@ namespace Luxia {
 		return asset_file;
 	}
 
-
-	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::GetAssetFileFromPath(const std::filesystem::path& rel_path) {
-		std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
-
-		for (auto& [t_guid, ast_file] : asset_pool) {
-			if (ast_file->srcPath == full_path) {
-				LX_CORE_TRACE("Found assetfile from path!: {}", rel_path.string());
-				return ast_file;
-			}
-		}
-
-		return nullptr;
-	}
-
 }
