@@ -3,7 +3,7 @@
 
 
 namespace Luxia::Assets {
-	void AssetFile::Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
+	bool AssetFile::Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
 		type = m_type;
 		srcPath = m_srcPath;
 		metaPath = m_metaPath;
@@ -11,9 +11,9 @@ namespace Luxia::Assets {
 		name = m_name;
 		
 		// Save 
-		Save();
+		loaded = Save();
 
-		loaded = true;
+		return loaded;
 	}
 	bool AssetFile::Load(const std::filesystem::path& m_metaPath){
 		// Open file
@@ -27,28 +27,35 @@ namespace Luxia::Assets {
 		}
 
 		// temp
+		int success = 0;
 		std::string line;
 		while (std::getline(infile, line)) {
 			// Trim whitespace if needed
 			if (line.rfind("type=", 0) == 0) {            // starts with "guid="
 				uint64_t val = std::stoull(line.substr(5));
 				type = static_cast<Luxia::AssetType>(val);
+				success++;
 			}
 			else if (line.rfind("guid=", 0) == 0) {            // starts with "guid="
 				guid = std::stoull(line.substr(5));
+				success++;
 			}
 			else if (line.rfind("path=", 0) == 0) {       // starts with "src="
 				srcPath = line.substr(5);
+				success++;
 			}
 			else if (line.rfind("name=", 0) == 0) {            // starts with "guid="
 				name = line.substr(5);
+				success++;
 			}
 			else if (line.rfind("extn=", 0) == 0) {            // starts with "guid="
 				extension = line.substr(5);
+				success++;
 			}
 		}
 
-		// if no path no guid etc, return false
+		// if all lines werent found, return false
+		if (success != 5) { return false; }
 
 		return true;
 	}

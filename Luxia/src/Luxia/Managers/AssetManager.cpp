@@ -4,38 +4,38 @@
 namespace Luxia {
 
 	bool AssetManager::LoadAssetPoolFromPath(const std::filesystem::path& m_path) { 
+		// Doing the m_path / "assets" made ...\assets for some reason
 		asset_dir = m_path.string() + "/assets";
 
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_INFO("Asset Manager: creating asset dir - {}", asset_dir.string());
 
-			// Check if creating folder is successful
 			if (!std::filesystem::create_directory(asset_dir)) {
 				LX_CORE_ERROR("Asset Manager: failed to create assets dir at - {}", asset_dir.string());
 				return false;
 			}
 		}
 
-		// Load
-			// Load: iterate through all .meta files
+		// Load: iterate through all .meta files
 		for (auto& entry : std::filesystem::recursive_directory_iterator(asset_dir)) {
 			if (!entry.is_regular_file()) continue;
 
 			auto path = entry.path().lexically_normal();
 			if (path.extension() == ".meta") {
+				// Replaces '\' with '/', '\\' means '\'
 				std::string logPath = path.string();
 				std::replace(logPath.begin(), logPath.end(), '\\', '/');
-				
-				LX_CORE_TRACE("Loading meta file: {}", logPath);
 
-				// Call your import function here
-				std::shared_ptr<Luxia::Assets::AssetFile> new_astf = SerializeAssetFile(logPath); // <-- implement this
-				if (new_astf) {
+				// LX_CORE_TRACE("Loading meta file: {}", logPath);
+
+				// Serializes (loads) Asset File at the path
+				std::shared_ptr<Luxia::Assets::AssetFile> new_astf = SerializeAssetFile(logPath);
+
+				if (new_astf)
 					asset_pool[new_astf->guid] = new_astf;
-				}
-				else {
+				else
 					LX_CORE_WARN("Failed to load asset from meta file: {}", logPath);
-				}
+				
 			}
 		}
 
@@ -44,20 +44,23 @@ namespace Luxia {
 	}
 
 	bool AssetManager::SaveAssetPool(const std::filesystem::path& m_path) {
+		// Doing the m_path / "assets" made ...\assets for some reason
 		asset_dir = m_path.string() + "/assets";
 
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_ERROR("Asset Manager: creating asset dir - {}", asset_dir.string());
 
-			// Check if creating folder is successful
 			if (!std::filesystem::create_directory(asset_dir)) {
 				LX_CORE_ERROR("Asset Manager: failed to create assets dir at - {}", asset_dir.string());
 				return false;
 			}
 		}
 
+		// For each asset, save
 		for (auto& [guid, asset_file] : asset_pool) {
-			asset_file->Save();
+			// assert !nullptr
+			if(asset_file)
+				asset_file->Save();
 		}
 
 		return true;
@@ -100,7 +103,7 @@ namespace Luxia {
 	};
 
 	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::Import(const std::filesystem::path& src_path, const std::string ast_name) {
-		std::filesystem::path full_path = asset_dir.string() + std::string("/") + src_path.string();
+		std::filesystem::path full_path = asset_dir.string() + "/" + src_path.string();
 
 		if (!full_path.has_extension()) { return 0; }
 
@@ -115,6 +118,7 @@ namespace Luxia {
 			has_metafile = true;
 		}
 
+		// If there isnt a metafile, create a new assetfile
 		if (!has_metafile) {
 			Luxia::AssetType type = Luxia::AssetType::NoAsset;
 			std::string af_ext = full_path.extension().string();
@@ -125,31 +129,35 @@ namespace Luxia {
 				}
 			}
 			if (type == Luxia::AssetType::NoAsset) { return 0; }
-			asset_file->Create(full_path, metafile_path, ast_name, type);
+
+			// If assetfile creation failed, return nullptr
+			if (!asset_file->Create(full_path, metafile_path, ast_name, type)) { return nullptr; }
 		}
+		// If there is one, reimport the assetfile (save with new path / name) but keep GUID
 		else {
-			// Reimport
 			asset_file->srcPath = full_path;
-			asset_file->Load(metafile_path);
+			asset_file->name = ast_name;
+
+			// If the assetfile couldnt load, return nullptr
+			if (!asset_file->Load(metafile_path)) { return nullptr; }
 		}
 
+		// Set asset_pool entry
 		asset_pool[asset_file->guid] = asset_file;
 
 		return asset_file;
 	}
 
-	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::SerializeAssetFile(const std::filesystem::path& meta_path) {
-		if (!meta_path.has_extension() || !std::filesystem::exists(meta_path)) { return 0; }
+	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::SerializeAssetFile(const std::filesystem::path& metafile_path) {
+		// Make sure meta_path is valid
+		if (!metafile_path.has_extension() || !std::filesystem::exists(metafile_path)) { return 0; }
 
 		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
 
-		if (asset_file->Load(meta_path)) {
-			return asset_file;
-		}
-		else {
-			return nullptr;
-		}
-
+		// If failed a load, return nullptr
+		if (!asset_file->Load(metafile_path)) { return nullptr; }
+		
+		return asset_file;
 	}
 
 
