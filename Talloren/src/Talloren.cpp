@@ -16,14 +16,15 @@ namespace Talloren::Layer {
 
 			WeakPtrProxy<Luxia::Scene> s = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			auto gasf = asset_manager->Import("cute_ghost/scene.gltf", "Ghost");
-			auto tasf = asset_manager->Import("lotr_troll/scene.gltf", "Troll");
+			auto gasf = asset_manager->GetAssetFileFromPath("cute_ghost/scene.gltf");
+			auto tasf = asset_manager->GetAssetFileFromPath("lotr_troll/scene.gltf");
+			// auto sasf = asset_manager->GetAssetFileFromPath("shaders/defaultshader.shader");
+			auto sasf = asset_manager->Import("shaders/defaultshader.shader", "DefaultShader", "E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
 
-			// auto ghostModel = nullptr;
 			auto ghostModel = asset_manager->CreateAsset<Luxia::IModel>(gasf);
 			auto lotrModel = asset_manager->CreateAsset<Luxia::IModel>(tasf);
+			auto shader = asset_manager->CreateAsset<Luxia::IShader>(sasf);
 
-			auto shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/assets/shaders/default.frag", "C:/dev/Luxia/assets/shaders/default.vert");
 			auto mat = std::make_shared<Luxia::Components::Material>(shader);
 			
 			auto& ghostEntity = s->CreateEntity();
@@ -37,11 +38,9 @@ namespace Talloren::Layer {
 			lotrEntity.scale = glm::vec3(0.02f);
 			lotrEntity.AddComponent<Luxia::Components::MeshRenderer>(lotrModel, mat);
 
-
 			auto& camEnt = s->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			cam.main = true;
-
 		}
 		virtual void OnDetach() override {
 			LX_CORE_WARN("ExtraLayer Detached");
@@ -63,7 +62,7 @@ namespace Talloren {
 			// Push extra layers used
 			PushLayer(std::make_shared<Talloren::Layer::ExtraLayer>());
 			PushLayer(std::make_shared<Talloren::Layer::ViewportLayer>());
-			GetWindow()->SetTitle(GetProjectManager()->GetProjectName());
+			m_Window->SetTitle(m_ProjectManager->GetProjectName());
 		}
 	};
 }

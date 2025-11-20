@@ -68,7 +68,7 @@ namespace Luxia::Components {
 			// assert(reg.valid(ent_id));
 			auto& cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
 			Component* c = &cb;
-			c->transform = reg->try_get<Luxia::Components::Transform>(ent_id);
+			c->transform = this;
 			return cb;
 		}
 

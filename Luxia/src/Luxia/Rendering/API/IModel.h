@@ -19,10 +19,7 @@ namespace Luxia {
 		virtual ~IModel() = default;
 
 		virtual void LoadFromFile(const std::filesystem::path& m_path) = 0;
-		virtual void Unload() = 0;
-
-		virtual void Cleanup() = 0;
-		virtual void Delete() = 0;
+		virtual bool Unload() override = 0;
 
 		bool IsValid() const { return valid; }
 		std::vector<Mesh>& GetMeshes() { return meshes; }

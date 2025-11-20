@@ -201,6 +201,7 @@
     <ClInclude Include="src\lxpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\AssetFile.cpp">
@@ -272,5 +273,6 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Asset\ShaderFile.cpp" />
   </ItemGroup>
 </Project>

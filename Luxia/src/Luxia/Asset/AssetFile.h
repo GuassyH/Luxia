@@ -17,6 +17,7 @@ namespace Luxia {
 		Audio = 5,
 	//	Scene = 6
 	};
+	AssetType PeakAssetType(const std::filesystem::path& metafile_path);
 }
 
 namespace Luxia::Assets {
@@ -27,9 +28,12 @@ namespace Luxia::Assets {
 		virtual ~AssetFile() = default;
 
 		virtual bool Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_relativePath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type); // Create the metafile from a source
-		virtual bool Load(const std::filesystem::path& m_metaPath); // Load the metafile
-		virtual bool Save();
+		bool Load(const std::filesystem::path& m_metaPath); // Load the metafile
+		bool Save();
 		virtual void Unload(); // Unload the asset
+
+		virtual bool LoadExtra(std::ifstream& m_infile) { return true; }
+		virtual bool SaveExtra(std::ofstream& m_outfile) { return true; }
 
 		AssetType type = AssetType::NoAsset;
 

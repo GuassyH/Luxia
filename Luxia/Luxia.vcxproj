@@ -164,6 +164,7 @@
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Asset\Asset.h" />
     <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
+    <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
     <ClInclude Include="src\Luxia\Components\Material.h" />
@@ -215,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\AssetFile.cpp" />
+    <ClCompile Include="src\Luxia\Asset\ShaderFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />

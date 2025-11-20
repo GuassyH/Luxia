@@ -16,6 +16,7 @@ namespace Luxia::Platform::OpenGL {
 		virtual void Compile(const char* fragSrc, const char* vertSrc) override;
 		virtual void Use() override;
 		virtual void Delete() override;
+		virtual bool Unload() override { return true; }
 
 		virtual void SetBool(const std::string& name, bool value) const override;
 		virtual void SetInt(const std::string& name, int value) const override;

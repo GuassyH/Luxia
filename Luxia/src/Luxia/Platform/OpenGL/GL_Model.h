@@ -13,10 +13,8 @@ namespace Luxia::Platform::OpenGL {
 		~GL_Model() = default;
 
 		virtual void LoadFromFile(const std::filesystem::path& m_path) override;
-		virtual void Unload() override {} // Implement?
+		virtual bool Unload() override; // Implement?
 	
-		virtual void Cleanup() override;
-		virtual void Delete() override {} // Implement?
 	protected:
 		void processNode(aiNode* node, const aiScene* scene);
 		Mesh processMesh(aiMesh* mesh, const aiScene* scene);

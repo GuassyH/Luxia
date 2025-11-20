@@ -20,7 +20,6 @@ namespace Luxia {
 		m_ProjectPath = folder_path;
 		m_ProjectName = project_name;
 		m_ConfigPath = folder_path.string() + "/config.lux";
-		// Create a ProjectFile (.lux?)
 		
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
@@ -47,6 +46,7 @@ namespace Luxia {
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
 		
+		// Try to load project
 		if (!LoadProjectConfigs()) {
 			LX_CORE_ERROR("Error loading project configs at: {}", m_ConfigPath.string());
 		}
@@ -55,7 +55,7 @@ namespace Luxia {
 		return true;
 	}
 
-	// Should be YAML
+	// Should be YAML!
 	bool ProjectManager::SaveProjectConfigs() {
 		bool complete =
 			(m_AssetManager->SaveAssetPool(m_ProjectPath) &&
@@ -72,18 +72,18 @@ namespace Luxia {
 
 	// Should be YAML
 	bool ProjectManager::LoadProjectConfigs() {
-		std::fstream infile(m_ConfigPath);
+		std::ifstream infile(m_ConfigPath);
 		if (!infile.is_open()) { return false; }
 
 		int success = 0;
 		std::string line;
 		while (std::getline(infile, line)) {
 			// Trim whitespace if needed
-			if (line.rfind("path=", 0) == 0) {            // starts with "guid="
+			if (line.rfind("path=", 0) == 0) {				
 				m_ProjectPath = line.substr(5);;
 				success++;
 			}
-			else if (line.rfind("name=", 0) == 0) {            // starts with "guid="
+			else if (line.rfind("name=", 0) == 0) {	
 				m_ProjectName = line.substr(5);
 				success++;
 			}
@@ -91,7 +91,6 @@ namespace Luxia {
 
 		// if all lines werent found, return false
 		if (success != 2) { return false; }
-
 
 		m_AssetManager->LoadAssetPoolFromPath(m_ProjectPath);
 		m_SceneManager->LoadScenesFromPath(m_ProjectPath);
@@ -103,7 +102,7 @@ namespace Luxia {
 		m_AssetManager->Cleanup();
 		m_SceneManager->Cleanup();
 
-		// m_AssetManager.reset();
-		// m_SceneManager.reset();
+		m_AssetManager.reset();
+		m_SceneManager.reset();
 	}
 };

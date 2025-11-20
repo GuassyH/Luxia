@@ -11,6 +11,7 @@ namespace Luxia::Platform::OpenGL {
 		virtual void CreateFBOTex(const int width, const int height) override;
 		virtual void CreateEmpty(const int width, const int height, const int colCh) override;
 		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) override;
+		virtual bool Unload() override { return true; }
 		virtual void Delete() override;
 		virtual void Use() override;
 	};

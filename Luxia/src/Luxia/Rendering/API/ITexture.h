@@ -26,6 +26,7 @@ namespace Luxia {
 		virtual void CreateFBOTex(const int width, const int height) = 0;
 		virtual void CreateEmpty(const int width, const int height, const int colCh) = 0; // For custom textures created through code, such as FBO tex
 		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) = 0; // Loading textures
+		virtual bool Unload() override = 0;
 		virtual void Delete() = 0;
 		virtual void Use() = 0;
 

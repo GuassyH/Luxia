@@ -162,10 +162,11 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Model::Cleanup() {
+	bool GL_Model::Unload() {
 		for (Mesh& mesh : meshes) {
 			mesh.Cleanup();
 		}
+		return true;
 	}
 
 }

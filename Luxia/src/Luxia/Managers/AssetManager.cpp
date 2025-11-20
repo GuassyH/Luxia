@@ -1,6 +1,7 @@
 #include "lxpch.h"
 #include "AssetManager.h"
 
+
 namespace Luxia {
 
 	bool AssetManager::LoadAssetPoolFromPath(const std::filesystem::path& m_path) { 
@@ -70,7 +71,7 @@ namespace Luxia {
 		// Unload all assets
 		for (auto& [guid, asset] : loaded_assets) {
 			if (asset) {
-				// asset->Cleanup?
+				asset->Unload();
 				asset->~Asset();
 			}
 		}
@@ -88,8 +89,8 @@ namespace Luxia {
 		LX_CORE_TRACE("Asset Manager cleaned up");
 	}
 
-
-	static std::unordered_map<std::string, Luxia::AssetType> extensions = {
+	
+	std::unordered_map<std::string, Luxia::AssetType> AssetManager::extensions = {
 		{".png",  Luxia::AssetType::Texture},
 		{".jpg",  Luxia::AssetType::Texture},
 		{".jpeg", Luxia::AssetType::Texture},
@@ -99,64 +100,50 @@ namespace Luxia {
 		{".gltf",  Luxia::AssetType::Model},
 		{".wav",  Luxia::AssetType::Audio},
 		{".mp3",  Luxia::AssetType::Audio},
-		// {".scene", Luxia::AssetType::Scene}
+		{".shader",  Luxia::AssetType::Shader},
 	};
-
-	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::Import(const std::filesystem::path& rel_path, const std::string ast_name) {
-
-		if (!rel_path.has_extension()) { return 0; }
-		std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
-
-		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
-
-		// Check if there is metafile
-		bool has_metafile = false;
-		std::filesystem::path metafile_path = full_path;
-		metafile_path.replace_extension(".meta");
-
-		if (std::filesystem::exists(metafile_path)) {
-			has_metafile = true;
-		}
-
-
-		Luxia::AssetType type = Luxia::AssetType::NoAsset;
-		std::string af_ext = full_path.extension().string();
-		for (auto& [ext, ext_type] : extensions) {
-			if (af_ext == ext) {
-				type = ext_type;
-				break;
-			}
-		}
-		if (type == Luxia::AssetType::NoAsset) { return 0; }
-
-		// If assetfile creation failed, return nullptr
-		if (!asset_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
-
-		// Set asset_pool entry
-		asset_pool[asset_file->guid] = asset_file;
-
-		return asset_file;
-	}
 
 	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::SerializeAssetFile(const std::filesystem::path& metafile_path) {
 		// Make sure meta_path is valid
-		if (!metafile_path.has_extension() || !std::filesystem::exists(metafile_path)) { return 0; }
+		if (!metafile_path.has_extension() || !std::filesystem::exists(metafile_path)) { return nullptr; }
 
 		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
 
-		// If failed a load, return nullptr
-		if (!asset_file->Load(metafile_path)) { return nullptr; }
+		// Loads the minimal, basic data
+		Luxia::AssetType type = Luxia::PeakAssetType(metafile_path);
+
+		switch (type)
+		{
+		case Luxia::AssetType::Shader: 
+			asset_file = std::make_shared<Luxia::Assets::ShaderFile>();
+			break;
+		case Luxia::AssetType::Texture:
+			// asset_file = std::make_shared<Luxia::Assets::TextureFile>();
+			asset_file = std::make_shared<Luxia::Assets::AssetFile>();
+			break;
+
+		case Luxia::AssetType::Model:
+			// asset_file = std::make_shared<Luxia::Assets::ModelFile>();
+			asset_file = std::make_shared<Luxia::Assets::AssetFile>();
+			break;
+		default:
+			LX_CORE_ERROR("Unknown asset type in metafile '{}'", metafile_path.string());
+			return nullptr;
+		}
+
+		// Loads the data specific to shader, texture, etc
+		asset_file->Load(metafile_path);
 		
 		return asset_file;
 	}
 
 
-	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::GetAssetFileFromPath(const std::filesystem::path& m_path) {
-		std::filesystem::path full_path = asset_dir.string() + std::string("/") + m_path.string();
+	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::GetAssetFileFromPath(const std::filesystem::path& rel_path) {
+		std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
 
 		for (auto& [t_guid, ast_file] : asset_pool) {
 			if (ast_file->srcPath == full_path) {
-				LX_CORE_TRACE("Found assetfile from path!: {}", m_path.string());
+				LX_CORE_TRACE("Found assetfile from path!: {}", rel_path.string());
 				return ast_file;
 			}
 		}

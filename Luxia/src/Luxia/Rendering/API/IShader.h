@@ -2,6 +2,7 @@
 
 #include "Luxia/Core/Core.h"
 
+#include "Luxia/Asset/Asset.h"
 #include <glm/common.hpp>
 #include <glm/glm.hpp>
 #include <fstream>
@@ -21,7 +22,7 @@ namespace Luxia {
 		return buffer.str();
 	}
 
-	class LUXIA_API IShader {
+	class LUXIA_API IShader : public Assets::Asset {
 	public:
 		unsigned int ID;
 
@@ -32,6 +33,7 @@ namespace Luxia {
 		virtual void Compile(const char* fragSrc, const char* vertSrc) = 0;
 		virtual void Use() = 0;
 		virtual void Delete() = 0;
+		virtual bool Unload() override = 0;
 
 		virtual void SetBool(const std::string& name, bool value) const = 0;
 		virtual void SetInt(const std::string& name, int value) const = 0;
