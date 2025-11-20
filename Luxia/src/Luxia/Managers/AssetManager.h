@@ -29,7 +29,7 @@ namespace Luxia {
 		std::shared_ptr<Luxia::Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
 		std::shared_ptr<Luxia::Assets::AssetFile> GetAssetFileFromPath(const std::filesystem::path& m_path);
 
-		std::shared_ptr<Luxia::Assets::AssetFile> Import(const std::filesystem::path& src_path, const std::string ast_name);
+		std::shared_ptr<Luxia::Assets::AssetFile> Import(const std::filesystem::path& rel_path, const std::string ast_name);
 		std::shared_ptr<Luxia::Assets::AssetFile> SerializeAssetFile(const std::filesystem::path& metafile_path);
 		
 

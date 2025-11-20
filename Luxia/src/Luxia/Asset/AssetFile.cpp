@@ -3,9 +3,10 @@
 
 
 namespace Luxia::Assets {
-	bool AssetFile::Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
+	bool AssetFile::Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_relativePath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
 		type = m_type;
 		srcPath = m_srcPath;
+		relPath = m_relativePath;
 		metaPath = m_metaPath;
 		extension = m_srcPath.extension().string();
 		name = m_name;
@@ -15,6 +16,8 @@ namespace Luxia::Assets {
 
 		return loaded;
 	}
+
+	// Should be YAML!
 	bool AssetFile::Load(const std::filesystem::path& m_metaPath){
 		// Open file
 		metaPath = m_metaPath;
@@ -26,7 +29,6 @@ namespace Luxia::Assets {
 			return false;
 		}
 
-		// temp
 		int success = 0;
 		std::string line;
 		while (std::getline(infile, line)) {
@@ -44,6 +46,10 @@ namespace Luxia::Assets {
 				srcPath = line.substr(5);
 				success++;
 			}
+			else if (line.rfind("rel_path=", 0) == 0) {       // starts with "src="
+				relPath = line.substr(9);
+				success++;
+			}
 			else if (line.rfind("name=", 0) == 0) {            // starts with "guid="
 				name = line.substr(5);
 				success++;
@@ -55,11 +61,12 @@ namespace Luxia::Assets {
 		}
 
 		// if all lines werent found, return false
-		if (success != 5) { return false; }
+		if (success != 6) { return false; }
 
 		return true;
 	}
 
+	// Should be YAML!
 	bool AssetFile::Save() {
 		// Open file
 	
@@ -84,11 +91,12 @@ namespace Luxia::Assets {
 		}
 
 		// outfile << out.c_str();
-		outfile << "type=" << (int)type					<< "\n";
-		outfile << "guid=" << (uint64_t)guid			<< "\n";
-		outfile << "path=" << srcPath.string().c_str()	<< "\n";
-		outfile << "name=" << name.c_str() << "\n";
-		outfile << "extn=" << extension.c_str()				<< "\n";
+		outfile << "type=" << (int)type				<< "\n";
+		outfile << "guid=" << (uint64_t)guid		<< "\n";
+		outfile << "path=" << srcPath.string()		<< "\n";
+		outfile << "rel_path=" << relPath.string()	<< "\n";
+		outfile << "name=" << name					<< "\n";
+		outfile << "extn=" << extension				<< "\n";
 
 		outfile.close();
 		return true;

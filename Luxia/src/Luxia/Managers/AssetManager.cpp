@@ -102,10 +102,10 @@ namespace Luxia {
 		// {".scene", Luxia::AssetType::Scene}
 	};
 
-	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::Import(const std::filesystem::path& src_path, const std::string ast_name) {
-		std::filesystem::path full_path = asset_dir.string() + "/" + src_path.string();
+	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::Import(const std::filesystem::path& rel_path, const std::string ast_name) {
 
-		if (!full_path.has_extension()) { return 0; }
+		if (!rel_path.has_extension()) { return 0; }
+		std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
 
 		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
 
@@ -118,29 +118,19 @@ namespace Luxia {
 			has_metafile = true;
 		}
 
-		// If there isnt a metafile, create a new assetfile
-		if (!has_metafile) {
-			Luxia::AssetType type = Luxia::AssetType::NoAsset;
-			std::string af_ext = full_path.extension().string();
-			for (auto& [ext, ext_type] : extensions) {
-				if (af_ext == ext) {
-					type = ext_type;
-					break;
-				}
+
+		Luxia::AssetType type = Luxia::AssetType::NoAsset;
+		std::string af_ext = full_path.extension().string();
+		for (auto& [ext, ext_type] : extensions) {
+			if (af_ext == ext) {
+				type = ext_type;
+				break;
 			}
-			if (type == Luxia::AssetType::NoAsset) { return 0; }
-
-			// If assetfile creation failed, return nullptr
-			if (!asset_file->Create(full_path, metafile_path, ast_name, type)) { return nullptr; }
 		}
-		// If there is one, reimport the assetfile (save with new path / name) but keep GUID
-		else {
-			asset_file->srcPath = full_path;
-			asset_file->name = ast_name;
+		if (type == Luxia::AssetType::NoAsset) { return 0; }
 
-			// If the assetfile couldnt load, return nullptr
-			if (!asset_file->Load(metafile_path)) { return nullptr; }
-		}
+		// If assetfile creation failed, return nullptr
+		if (!asset_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
 
 		// Set asset_pool entry
 		asset_pool[asset_file->guid] = asset_file;

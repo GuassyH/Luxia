@@ -3,7 +3,7 @@
 
 namespace Luxia {
 
-	bool ProjectManager::NewProject(const std::filesystem::path& folder_path) {
+	bool ProjectManager::NewProject(const std::filesystem::path& folder_path, const std::string& project_name) {
 		// Check if there is already a folder at that path
 		if (std::filesystem::exists(folder_path)) {
 			LX_CORE_WARN("Project Manager: folder already at path - {}", folder_path.string());
@@ -18,13 +18,15 @@ namespace Luxia {
 
 
 		m_ProjectPath = folder_path;
+		m_ProjectName = project_name;
+		m_ConfigPath = folder_path.string() + "/config.lux";
 		// Create a ProjectFile (.lux?)
 		
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
 
 		// Try to save project
-		if (!SaveProject()) {
+		if (!SaveProjectConfigs()) {
 			LX_CORE_ERROR("Project Manager: failed to save project at - {}", folder_path.string());
 			return false;
 		}
@@ -40,30 +42,63 @@ namespace Luxia {
 		}
 
 		m_ProjectPath = folder_path;
-		// Set ProjectFile and read
+		m_ConfigPath = folder_path.string() + "/config.lux";
 
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
 		
-		bool complete = 
-			(m_AssetManager->LoadAssetPoolFromPath(folder_path) &&
-			m_SceneManager->LoadScenesFromPath(folder_path));
-
+		if (!LoadProjectConfigs()) {
+			LX_CORE_ERROR("Error loading project configs at: {}", m_ConfigPath.string());
+		}
 
 		LX_CORE_INFO("Project Manager: opened project at {}", folder_path.string());
 		return true;
 	}
 
-	bool ProjectManager::SaveProject() {
+	// Should be YAML
+	bool ProjectManager::SaveProjectConfigs() {
 		bool complete =
 			(m_AssetManager->SaveAssetPool(m_ProjectPath) &&
 				m_SceneManager->SaveScenes(m_ProjectPath));
 
+		std::ofstream outfile(m_ConfigPath);
+		if (!outfile.is_open()) { return false; }
+
+		outfile << "path=" << m_ProjectPath.string() << "\n";
+		outfile << "name=" << m_ProjectName << "\n";
+
 		return complete;
 	}
 
+	// Should be YAML
+	bool ProjectManager::LoadProjectConfigs() {
+		std::fstream infile(m_ConfigPath);
+		if (!infile.is_open()) { return false; }
+
+		int success = 0;
+		std::string line;
+		while (std::getline(infile, line)) {
+			// Trim whitespace if needed
+			if (line.rfind("path=", 0) == 0) {            // starts with "guid="
+				m_ProjectPath = line.substr(5);;
+				success++;
+			}
+			else if (line.rfind("name=", 0) == 0) {            // starts with "guid="
+				m_ProjectName = line.substr(5);
+				success++;
+			}
+		}
+
+		// if all lines werent found, return false
+		if (success != 2) { return false; }
+
+
+		m_AssetManager->LoadAssetPoolFromPath(m_ProjectPath);
+		m_SceneManager->LoadScenesFromPath(m_ProjectPath);
+	}
+
 	void ProjectManager::CloseProject() {
-		SaveProject();
+		SaveProjectConfigs();
 
 		m_AssetManager->Cleanup();
 		m_SceneManager->Cleanup();
