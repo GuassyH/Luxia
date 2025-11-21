@@ -32,8 +32,8 @@ namespace Luxia::Assets {
 		bool Save();
 		virtual void Unload(); // Unload the asset
 
-		virtual bool LoadExtra(std::ifstream& m_infile) { return true; }
-		virtual bool SaveExtra(std::ofstream& m_outfile) { return true; }
+		virtual bool LoadExtra(const std::filesystem::path& m_metaPath) { return true; }
+		virtual bool SaveExtra(const std::filesystem::path& m_metaPath) { return true; }
 
 		AssetType type = AssetType::NoAsset;
 

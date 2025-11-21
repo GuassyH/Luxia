@@ -68,14 +68,7 @@ namespace Luxia {
 	}
 
 	void AssetManager::Cleanup() {
-		// Unload all assets
-		for (auto& [guid, asset] : loaded_assets) {
-			if (asset) {
-				asset->Unload();
-				asset->~Asset();
-			}
-		}
-
+		// Unload all asset files
 		for (auto& [guid, assetfile] : asset_pool) {
 			if (assetfile) {
 				assetfile->Unload();
@@ -84,7 +77,6 @@ namespace Luxia {
 		}
 
 		// Clear the unordered_map (kill the shared_ptrs)
-		loaded_assets.clear();
 		asset_pool.clear();
 		LX_CORE_TRACE("Asset Manager cleaned up");
 	}
@@ -110,30 +102,37 @@ namespace Luxia {
 		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
 
 		// Loads the minimal, basic data
+		// LX_CORE_TRACE("{}", metafile_path.string());
+		// asset_file->Load(metafile_path);
 		Luxia::AssetType type = Luxia::PeakAssetType(metafile_path);
+		LX_CORE_TRACE("{}", (int)type);
 
 		switch (type)
 		{
-		case Luxia::AssetType::Shader: 
-			asset_file = std::make_shared<Luxia::Assets::ShaderFile>();
+		case Luxia::AssetType::Shader: {
+			std::shared_ptr<Luxia::Assets::ShaderFile> sh = std::make_shared<Luxia::Assets::ShaderFile>();
+			sh->Load(metafile_path);
+			asset_file = sh;
 			break;
-		case Luxia::AssetType::Texture:
-			// asset_file = std::make_shared<Luxia::Assets::TextureFile>();
-			asset_file = std::make_shared<Luxia::Assets::AssetFile>();
+		}
+		case Luxia::AssetType::Texture: {
+			std::shared_ptr<Luxia::Assets::TextureFile> tex = std::make_shared<Luxia::Assets::TextureFile>();
+			tex->Load(metafile_path);
+			asset_file = tex;
 			break;
-
-		case Luxia::AssetType::Model:
-			// asset_file = std::make_shared<Luxia::Assets::ModelFile>();
-			asset_file = std::make_shared<Luxia::Assets::AssetFile>();
+		}
+		case Luxia::AssetType::Model: {
+			std::shared_ptr<Luxia::Assets::ModelFile> mod = std::make_shared<Luxia::Assets::ModelFile>();
+			mod->Load(metafile_path);
+			asset_file = mod;
 			break;
+		}
 		default:
 			LX_CORE_ERROR("Unknown asset type in metafile '{}'", metafile_path.string());
 			return nullptr;
 		}
 
 		// Loads the data specific to shader, texture, etc
-		asset_file->Load(metafile_path);
-		
 		return asset_file;
 	}
 

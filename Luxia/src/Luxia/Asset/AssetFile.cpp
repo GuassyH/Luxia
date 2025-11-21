@@ -4,6 +4,7 @@
 namespace Luxia {
 	AssetType PeakAssetType(const std::filesystem::path& metafile_path) {
 		if (!std::filesystem::exists(metafile_path)) { return Luxia::AssetType::NoAsset; }
+
 		std::ifstream infile(metafile_path);
 		if (!infile.is_open()) { return Luxia::AssetType::NoAsset; }
 
@@ -16,6 +17,7 @@ namespace Luxia {
 				type = static_cast<Luxia::AssetType>(val);
 			}
 		}
+		infile.close();
 		return type;
 	}
 }
@@ -78,10 +80,12 @@ namespace Luxia::Assets {
 			}
 		}
 		
+		infile.close();
+
 		// if all lines werent found, return false
 		if (success != 6) { return false; }
 		
-		LoadExtra(infile);
+		LoadExtra(metaPath);
 
 		return true;
 	}
@@ -89,7 +93,7 @@ namespace Luxia::Assets {
 	// Should be YAML!
 	bool AssetFile::Save() {
 		// Open file
-		std::ofstream outfile(metaPath);
+		std::ofstream outfile(metaPath, std::ios::out, std::ios::trunc);
 		if (!outfile.is_open()) {
 			LX_CORE_ERROR("Failed to save metafile: {}", metaPath.string());
 			return false;
@@ -103,9 +107,10 @@ namespace Luxia::Assets {
 		outfile << "name=" << name					<< "\n";
 		outfile << "extn=" << extension				<< "\n";
 
-		SaveExtra(outfile);
-
 		outfile.close();
+
+		SaveExtra(metaPath);
+
 		return true;
 	}
 

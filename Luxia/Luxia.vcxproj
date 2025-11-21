@@ -161,6 +161,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Asset\ModelFile.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Asset\Asset.h" />
     <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
@@ -213,10 +214,10 @@
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
     <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\lxpch.h" />
+    <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\AssetFile.cpp" />
-    <ClCompile Include="src\Luxia\Asset\ShaderFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />

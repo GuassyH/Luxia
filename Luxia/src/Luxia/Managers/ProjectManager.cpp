@@ -67,6 +67,8 @@ namespace Luxia {
 		outfile << "path=" << m_ProjectPath.string() << "\n";
 		outfile << "name=" << m_ProjectName << "\n";
 
+		outfile.close();
+
 		return complete;
 	}
 
@@ -89,6 +91,8 @@ namespace Luxia {
 			}
 		}
 
+		infile.close();
+		
 		// if all lines werent found, return false
 		if (success != 2) { return false; }
 

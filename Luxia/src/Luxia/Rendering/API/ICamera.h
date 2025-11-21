@@ -9,9 +9,10 @@
 #include "Luxia/Rendering/API/IRenderer.h"
 
 #include "Luxia/Components/MeshRenderer.h"
-#include "Luxia/Scene.h"
+
 
 namespace Luxia {
+	class Scene;
 	class LUXIA_API ICamera {
 	public:
 		float FOVdeg = 70.0f;
