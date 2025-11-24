@@ -22,12 +22,12 @@ namespace Luxia {
 	}
 }
 
-namespace Luxia::Assets {
+namespace Luxia::Assets { 
 	bool AssetFile::Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_relativePath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
 		type = m_type;
-		srcPath = m_srcPath;
-		relPath = m_relativePath;
-		metaPath = m_metaPath;
+		srcPath = m_srcPath.lexically_normal();
+		relPath = m_relativePath.lexically_normal();
+		metaPath = m_metaPath.lexically_normal();
 		extension = m_srcPath.extension().string();
 		name = m_name;
 		
@@ -86,9 +86,7 @@ namespace Luxia::Assets {
 		// if all lines werent found, return false
 		if (success != 6) { return false; }
 		
-		LoadExtra(metaPath);
-
-		return true;
+		return LoadExtra(metaPath);
 	}
 
 	// Should be YAML!
@@ -110,9 +108,7 @@ namespace Luxia::Assets {
 
 		outfile.close();
 
-		SaveExtra(metaPath);
-
-		return true;
+		return SaveExtra(metaPath);
 	}
 
 	void AssetFile::Unload(){

@@ -36,6 +36,10 @@ namespace Luxia::Assets {
 
 		}
 		virtual bool SaveExtra(const std::filesystem::path& m_metaPath) {
+			// Temporary solution
+			// This copies the metadata in to the file
+
+
 			std::string full;
 			std::string line;
 

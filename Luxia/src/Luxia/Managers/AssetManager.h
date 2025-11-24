@@ -29,55 +29,30 @@ namespace Luxia {
 		void Cleanup(); // Before app closes, save everything, etc
 
 
-		std::shared_ptr<Luxia::Assets::AssetFile> SerializeAssetFile(const std::filesystem::path& metafile_path);
+		std::shared_ptr<Luxia::Assets::AssetFile> SerializeAssetFile(std::filesystem::path& metafile_path);
 		
 		template <typename... Args>
 		std::shared_ptr<Luxia::Assets::AssetFile> Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
-
-			if (!rel_path.has_extension()) { return 0; }
-			std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
+			if (!rel_path.has_extension()) { return nullptr; }
+			std::filesystem::path full_path = asset_dir / rel_path.lexically_normal();
 
 			std::shared_ptr<Luxia::Assets::AssetFile> asset_file = nullptr;
 
 			// Check if there is metafile
-			bool has_metafile = false;
 			std::filesystem::path metafile_path = full_path;
 			metafile_path.replace_extension(".meta");
 
-			if (std::filesystem::exists(metafile_path)) {
-				has_metafile = true;
-			}
-
-
 			Luxia::AssetType type = Luxia::AssetType::NoAsset;
 			std::string af_ext = full_path.extension().string();
-			for (auto& [ext, ext_type] : extensions) {
-				if (af_ext == ext) {
-					type = ext_type;
-					break;
-				}
-			}
+			auto it = extensions.find(af_ext);
+			if (it != extensions.end())
+				type = it->second;
 
-			if (type == Luxia::AssetType::NoAsset) { return 0; }
-			else if (type == Luxia::AssetType::Shader) {
-				std::shared_ptr<Luxia::Assets::ShaderFile> shader_file = std::make_shared<Luxia::Assets::ShaderFile>(std::forward<Args>(args)...);
-				if (!shader_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
-				asset_file = shader_file;
-			}
-			else if (type == Luxia::AssetType::Texture) {
-				std::shared_ptr<Luxia::Assets::TextureFile> texture_file = std::make_shared<Luxia::Assets::TextureFile>();
-				if (!texture_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
-				asset_file = texture_file;
-			}
-			else if (type == Luxia::AssetType::Model) {
-				std::shared_ptr<Luxia::Assets::ModelFile> model_file = std::make_shared<Luxia::Assets::ModelFile>();
-				if (!model_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
-				asset_file = model_file;
-			}
-			else {
-				asset_file = std::make_shared<Luxia::Assets::AssetFile>();
-				if (!asset_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
-			}
+			// Create different metafiles depending on the type
+			asset_file = MakeSharedFileFromType(type);
+
+			if (!asset_file) { return nullptr; }
+			if (!asset_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
 
 			// Set asset_pool entry
 			asset_pool[asset_file->guid] = asset_file;
@@ -87,15 +62,13 @@ namespace Luxia {
 		
 		template <typename T>
 		std::shared_ptr<T> GetAssetFileFromPath(const std::filesystem::path& rel_path) {
-			std::filesystem::path full_path = asset_dir.string() + "/" + rel_path.string();
+			std::filesystem::path full_path = asset_dir / rel_path.lexically_normal();
 
 			for (auto& [t_guid, ast_file] : asset_pool) {
 				if (ast_file->srcPath == full_path) {
 					std::shared_ptr<T> cast_file = std::dynamic_pointer_cast<T>(asset_pool.find(t_guid)->second);
-					if (cast_file) {
-						LX_CORE_TRACE("Casted!");
+					if (cast_file)
 						return cast_file;
-					}
 				}
 			}
 
@@ -103,7 +76,25 @@ namespace Luxia {
 			return nullptr;
 		}
 
+		template <typename... Args>
+		std::shared_ptr<Luxia::Assets::AssetFile> MakeSharedFileFromType(const Luxia::AssetType type, Args&&... args) {
 
+			switch (type)
+			{
+			case Luxia::AssetType::Shader: {
+				return std::make_shared<Luxia::Assets::ShaderFile>(std::forward<Args>(args)...);
+			}
+			case Luxia::AssetType::Texture: {
+				return std::make_shared<Luxia::Assets::TextureFile>();
+			}
+			case Luxia::AssetType::Model: {
+				return std::make_shared<Luxia::Assets::ModelFile>();
+			}
+			default:
+				LX_CORE_ERROR("Make Shared from type failed, unknown type");
+				return nullptr;
+			}
+		}
 
 		~AssetManager() = default;
 		AssetManager() = default;
