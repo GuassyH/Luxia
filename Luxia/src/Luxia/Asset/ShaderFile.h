@@ -57,7 +57,6 @@ namespace Luxia::Assets {
 
 			outfile << full;
 			outfile << "Shader:\n";
-			outfile << "Test:\n";
 			outfile << "frag=" << fragPath.string() << "\n";
 			outfile << "vert=" << vertPath.string() << "\n";
 

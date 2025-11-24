@@ -19,7 +19,6 @@ namespace Talloren::Layer {
 			auto gasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ModelFile>("cute_ghost/scene.gltf");
 			auto tasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ModelFile>("lotr_troll/scene.gltf");
 			auto sasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ShaderFile>("shaders/testingshader.shader");
-			// auto sasf = asset_manager->Import("shaders/testingshader.shader", "TestingShader", "E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
 
 			auto ghostModel = scene->CreateAsset<Luxia::IModel>(gasf);
 			auto lotrModel = scene->CreateAsset<Luxia::IModel>(tasf);

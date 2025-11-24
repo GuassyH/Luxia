@@ -3,13 +3,13 @@
 
 namespace Luxia {
 	AssetType PeakAssetType(const std::filesystem::path& metafile_path) {
-		if (!std::filesystem::exists(metafile_path)) { return Luxia::AssetType::NoAsset; }
+		if (!std::filesystem::exists(metafile_path)) { return Luxia::AssetType::NoType; }
 
 		std::ifstream infile(metafile_path);
-		if (!infile.is_open()) { return Luxia::AssetType::NoAsset; }
+		if (!infile.is_open()) { return Luxia::AssetType::NoType; }
 
 		std::string line;
-		Luxia::AssetType type = Luxia::AssetType::NoAsset;
+		Luxia::AssetType type = Luxia::AssetType::NoType;
 		while (std::getline(infile, line)) {
 			// Trim whitespace if needed
 			if (line.rfind("type=", 0) == 0) {

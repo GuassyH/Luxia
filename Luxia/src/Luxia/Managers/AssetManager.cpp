@@ -4,7 +4,7 @@
 
 namespace Luxia {
 
-	bool AssetManager::LoadAssetPoolFromPath(const std::filesystem::path& m_path) { 
+	bool AssetManager::LoadAssetPool(const std::filesystem::path& m_path) {
 		asset_dir = m_path / "assets";
 		asset_dir = asset_dir.lexically_normal();
 
@@ -40,7 +40,7 @@ namespace Luxia {
 		return true; 
 	}
 
-	bool AssetManager::SaveAssetPool(const std::filesystem::path& m_path) {
+	bool AssetManager::SaveAssetPool() {
 
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_ERROR("Asset Manager: creating asset dir - {}", asset_dir.string());
@@ -73,16 +73,17 @@ namespace Luxia {
 
 	
 	std::unordered_map<std::string, Luxia::AssetType> AssetManager::extensions = {
-		{".png",	Luxia::AssetType::Texture},
-		{".jpg",	Luxia::AssetType::Texture},
-		{".jpeg",	Luxia::AssetType::Texture},
-		{".bmp",	Luxia::AssetType::Texture},
-		{".obj",	Luxia::AssetType::Model},
-		{".fbx",	Luxia::AssetType::Model},
-		{".gltf",	Luxia::AssetType::Model},
-		{".wav",	Luxia::AssetType::Audio},
-		{".mp3",	Luxia::AssetType::Audio},
-		{".shader",	Luxia::AssetType::Shader},
+		{".png",	Luxia::AssetType::TextureType},
+		{".jpg",	Luxia::AssetType::TextureType},
+		{".jpeg",	Luxia::AssetType::TextureType},
+		{".bmp",	Luxia::AssetType::TextureType},
+		{".obj",	Luxia::AssetType::ModelType},
+		{".fbx",	Luxia::AssetType::ModelType},
+		{".gltf",	Luxia::AssetType::ModelType},
+		{".wav",	Luxia::AssetType::AudioType},
+		{".mp3",	Luxia::AssetType::AudioType},
+		{".shader",	Luxia::AssetType::ShaderType},
+		{".scene",	Luxia::AssetType::SceneType},
 	};
 
 	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::SerializeAssetFile(std::filesystem::path& metafile_path) {
@@ -101,6 +102,10 @@ namespace Luxia {
 		}
 
 		asset_file->Load(metafile_path);
+
+		if (!std::filesystem::exists(asset_file->srcPath)) {
+			return nullptr;
+		}
 
 		return asset_file;
 	}

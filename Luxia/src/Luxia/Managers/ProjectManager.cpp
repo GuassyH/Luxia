@@ -17,9 +17,9 @@ namespace Luxia {
 		}
 
 
-		m_ProjectPath = folder_path;
+		m_ProjectPath = folder_path.lexically_normal();
 		m_ProjectName = project_name;
-		m_ConfigPath = folder_path.string() + "/config.lux";
+		m_ConfigPath = (folder_path / "config.lux").lexically_normal();
 		
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
@@ -40,8 +40,9 @@ namespace Luxia {
 			return false;
 		}
 
-		m_ProjectPath = folder_path;
-		m_ConfigPath = folder_path.string() + "/config.lux";
+		m_ProjectPath = folder_path.lexically_normal();
+		m_ConfigPath = (folder_path / "config.lux").lexically_normal();
+
 
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
@@ -57,9 +58,7 @@ namespace Luxia {
 
 	// Should be YAML!
 	bool ProjectManager::SaveProjectConfigs() {
-		bool complete =
-			(m_AssetManager->SaveAssetPool(m_ProjectPath) &&
-				m_SceneManager->SaveScenes(m_ProjectPath));
+		bool complete = m_AssetManager->SaveAssetPool();
 
 		std::ofstream outfile(m_ConfigPath);
 		if (!outfile.is_open()) { return false; }
@@ -96,17 +95,19 @@ namespace Luxia {
 		// if all lines werent found, return false
 		if (success != 2) { return false; }
 
-		m_AssetManager->LoadAssetPoolFromPath(m_ProjectPath);
-		m_SceneManager->LoadScenesFromPath(m_ProjectPath);
+		bool complete = (m_AssetManager->LoadAssetPool(m_ProjectPath) &&
+			m_SceneManager->LoadScenePool(m_AssetManager));
+
+		return complete;
 	}
 
 	void ProjectManager::CloseProject() {
 		SaveProjectConfigs();
 
-		m_AssetManager->Cleanup();
 		m_SceneManager->Cleanup();
+		m_AssetManager->Cleanup();
 
-		m_AssetManager.reset();
 		m_SceneManager.reset();
+		m_AssetManager.reset();
 	}
 };

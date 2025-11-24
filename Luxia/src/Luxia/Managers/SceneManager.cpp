@@ -3,34 +3,31 @@
 #include "Luxia/Scene.h"
 
 namespace Luxia {
-	bool SceneManager::LoadScenesFromPath(const std::filesystem::path& m_path) {
-		scene_pool_dir = m_path.string() + "/scenes";
-
-		if (!std::filesystem::exists(scene_pool_dir)) {
-			LX_CORE_INFO("Scene Manager: creating asset dir - {}", scene_pool_dir.string());
-
-			// Check if creating folder is successful
-			if (!std::filesystem::create_directory(scene_pool_dir)) {
-				LX_CORE_ERROR("Scene Manager: failed to create assets dir at - {}", scene_pool_dir.string());
-				return false;
+	bool SceneManager::LoadScenePool(const std::shared_ptr<AssetManager> m_asset_manager) {
+		asset_manager = m_asset_manager;
+		
+		for (auto& [guid, asset] : asset_manager->GetAssetFiles()) {
+			if (asset) {
+				if (asset->type == AssetType::SceneType && !scene_pool.contains(asset)) {
+					scene_pool.insert(asset);
+				}
+			}
+			else {
+				LX_CORE_ERROR("SceneManager: Error assigning scene to scene_pool {}", (uint64_t)guid);
 			}
 		}
-
-		// Load
 
 		return true;
 	}
 
-	bool SceneManager::SaveScenes(const std::filesystem::path& m_path) {
-		scene_pool_dir = m_path.string() + "/scenes";
+	bool SceneManager::SaveScenes() {
 
-		if (!std::filesystem::exists(scene_pool_dir)) {
-			LX_CORE_INFO("Scene Manager: creating asset dir - {}", scene_pool_dir.string());
-
-			// Check if creating folder is successful
-			if (!std::filesystem::create_directory(scene_pool_dir)) {
-				LX_CORE_ERROR("Scene Manager: failed to create assets dir at - {}", scene_pool_dir.string());
-				return false;
+		for (auto& asset : scene_pool) {
+			if (asset) {
+				asset->Save();
+			}
+			else {
+				LX_CORE_ERROR("SceneManager: Error saving scene");
 			}
 		}
 
@@ -51,6 +48,7 @@ namespace Luxia {
 		LX_CORE_TRACE("Scene manager cleaned up");
 
 		active_scene->Cleanup();
-		// Unload all assets
+	
+		scene_pool.clear();
 	}
 }

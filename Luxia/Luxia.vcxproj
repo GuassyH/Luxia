@@ -165,6 +165,7 @@
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Asset\Asset.h" />
     <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
+    <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
     <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />

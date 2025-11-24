@@ -8,14 +8,14 @@
 #include <iostream>
 
 namespace Luxia {
-	enum LUXIA_API AssetType {
-		NoAsset = 0,
-		Model = 1,
-		Texture = 2,
-		Material = 3,
-		Shader = 4,
-		Audio = 5,
-		// Scene = 6
+	static enum class LUXIA_API AssetType {
+		NoType = 0,
+		ModelType = 1,
+		TextureType = 2,
+		MaterialType = 3,
+		ShaderType = 4,
+		AudioType = 5,
+		SceneType = 6
 	};
 	AssetType LUXIA_API PeakAssetType(const std::filesystem::path& metafile_path);
 }
@@ -35,7 +35,7 @@ namespace Luxia::Assets {
 		virtual bool LoadExtra(const std::filesystem::path& m_metaPath) { return true; }
 		virtual bool SaveExtra(const std::filesystem::path& m_metaPath) { return true; }
 
-		AssetType type = AssetType::NoAsset;
+		AssetType type = AssetType::NoType;
 
 		std::string extension = ".none"; // .png, .obj, etc. Helps to decide how to load
 		std::filesystem::path srcPath = "no/path";
