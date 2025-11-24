@@ -32,8 +32,7 @@ namespace Luxia::Assets {
 		name = m_name;
 		
 		// Save 
-		Save();
-		loaded = true;
+		loaded = Save();;
 
 		return loaded;
 	}
@@ -86,7 +85,9 @@ namespace Luxia::Assets {
 		// if all lines werent found, return false
 		if (success != 6) { return false; }
 		
-		return LoadExtra(metaPath);
+		loaded = LoadExtra(metaPath);
+
+		return loaded;
 	}
 
 	// Should be YAML!

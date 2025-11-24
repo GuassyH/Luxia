@@ -24,6 +24,7 @@ namespace Luxia {
 
 		void Cleanup() { reg.clear(); }
 		void Load() { reg = entt::registry(); }
+		void LoadFromFile(const std::filesystem::path& m_metaPath);
 
 		Components::Transform& CreateEntity();
 		

@@ -10,4 +10,8 @@ namespace Luxia {
 		t.ent_id = new_ent;
 		return t;
 	}
+
+	void Scene::LoadFromFile(const std::filesystem::path& m_metaPath) {
+
+	}
 }

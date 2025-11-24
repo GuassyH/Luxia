@@ -58,7 +58,8 @@ namespace Luxia {
 
 	// Should be YAML!
 	bool ProjectManager::SaveProjectConfigs() {
-		bool complete = m_AssetManager->SaveAssetPool();
+		m_SceneManager->SaveScenes();
+		m_AssetManager->SaveAssetPool();
 
 		std::ofstream outfile(m_ConfigPath);
 		if (!outfile.is_open()) { return false; }
@@ -68,7 +69,7 @@ namespace Luxia {
 
 		outfile.close();
 
-		return complete;
+		return true;
 	}
 
 	// Should be YAML
@@ -95,10 +96,10 @@ namespace Luxia {
 		// if all lines werent found, return false
 		if (success != 2) { return false; }
 
-		bool complete = (m_AssetManager->LoadAssetPool(m_ProjectPath) &&
-			m_SceneManager->LoadScenePool(m_AssetManager));
+		m_AssetManager->LoadAssetPool(m_ProjectPath);
+		m_SceneManager->LoadScenePool(m_AssetManager);
 
-		return complete;
+		return true;
 	}
 
 	void ProjectManager::CloseProject() {
