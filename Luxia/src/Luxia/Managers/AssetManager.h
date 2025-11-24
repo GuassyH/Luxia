@@ -38,7 +38,6 @@ namespace Luxia {
 
 			std::shared_ptr<Luxia::Assets::AssetFile> asset_file = nullptr;
 
-			// Check if there is metafile
 			std::filesystem::path metafile_path = full_path;
 			metafile_path.replace_extension(".meta");
 
@@ -48,7 +47,6 @@ namespace Luxia {
 			if (it != extensions.end())
 				type = it->second;
 
-			// Create different metafiles depending on the type
 			asset_file = MakeSharedFileFromType(type);
 
 			if (!asset_file) { return nullptr; }
@@ -56,6 +54,7 @@ namespace Luxia {
 
 			// Set asset_pool entry
 			asset_pool[asset_file->guid] = asset_file;
+			asset_SrcToGuid[asset_file->srcPath] = asset_file->guid;
 
 			return asset_file;
 		}
@@ -64,15 +63,13 @@ namespace Luxia {
 		std::shared_ptr<T> GetAssetFileFromPath(const std::filesystem::path& rel_path) {
 			std::filesystem::path full_path = asset_dir / rel_path.lexically_normal();
 
-			for (auto& [t_guid, ast_file] : asset_pool) {
-				if (ast_file->srcPath == full_path) {
-					std::shared_ptr<T> cast_file = std::dynamic_pointer_cast<T>(asset_pool.find(t_guid)->second);
-					if (cast_file)
-						return cast_file;
-				}
+			if (asset_SrcToGuid.contains(full_path)) {
+				std::shared_ptr<T> cast_file = std::dynamic_pointer_cast<T>(asset_pool.find(asset_SrcToGuid.find(full_path)->second)->second);
+				if (cast_file)
+					return cast_file;
 			}
 
-			LX_CORE_ERROR("GetAssetFileFromPath: Asset file nullptr");
+			LX_CORE_ERROR("'GetAssetFileFromPath': Asset file nullptr");
 			return nullptr;
 		}
 
@@ -81,15 +78,18 @@ namespace Luxia {
 
 			switch (type)
 			{
-			case Luxia::AssetType::Shader: {
+			case Luxia::AssetType::Shader: 
 				return std::make_shared<Luxia::Assets::ShaderFile>(std::forward<Args>(args)...);
-			}
-			case Luxia::AssetType::Texture: {
+			case Luxia::AssetType::Texture: 
 				return std::make_shared<Luxia::Assets::TextureFile>();
-			}
-			case Luxia::AssetType::Model: {
+			case Luxia::AssetType::Model:
 				return std::make_shared<Luxia::Assets::ModelFile>();
-			}
+			case Luxia::AssetType::Audio:
+				return nullptr;
+				// return std::make_shared<Luxia::Assets::ModelFile>();
+			case Luxia::AssetType::Material:
+				return nullptr;
+				// return std::make_shared<Luxia::Assets::ModelFile>();
 			default:
 				LX_CORE_ERROR("Make Shared from type failed, unknown type");
 				return nullptr;
@@ -100,6 +100,7 @@ namespace Luxia {
 		AssetManager() = default;
 	private:
 		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>> asset_pool;
+		std::unordered_map<std::filesystem::path, GUID> asset_SrcToGuid;
 		std::filesystem::path asset_dir;
 	};
 

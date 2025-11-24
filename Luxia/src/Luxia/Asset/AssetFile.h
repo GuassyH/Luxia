@@ -15,9 +15,9 @@ namespace Luxia {
 		Material = 3,
 		Shader = 4,
 		Audio = 5,
-	//	Scene = 6
+		// Scene = 6
 	};
-	AssetType PeakAssetType(const std::filesystem::path& metafile_path);
+	AssetType LUXIA_API PeakAssetType(const std::filesystem::path& metafile_path);
 }
 
 namespace Luxia::Assets {

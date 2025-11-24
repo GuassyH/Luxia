@@ -5,13 +5,10 @@
 namespace Luxia {
 
 	bool AssetManager::LoadAssetPoolFromPath(const std::filesystem::path& m_path) { 
-		// Doing the m_path / "assets" made ...\assets for some reason
 		asset_dir = m_path / "assets";
 		asset_dir = asset_dir.lexically_normal();
 
-		LX_CORE_INFO(asset_dir.string());
-
-
+		// Check if the dir exists already
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_INFO("Asset Manager: creating asset dir - {}", asset_dir.string());
 
@@ -29,8 +26,10 @@ namespace Luxia {
 			if (path.extension() == ".meta") {
 				std::shared_ptr<Luxia::Assets::AssetFile> new_astf = SerializeAssetFile(path);
 
-				if (new_astf)
+				if (new_astf) {
 					asset_pool[new_astf->guid] = new_astf;
+					asset_SrcToGuid[new_astf->srcPath] = new_astf->guid;
+				}
 				else
 					LX_CORE_WARN("Failed to load asset from meta file: {}", path.string());
 				
@@ -52,9 +51,7 @@ namespace Luxia {
 			}
 		}
 
-		// For each asset, save
 		for (auto& [guid, asset_file] : asset_pool) {
-			// assert !nullptr
 			if (asset_file) {
 				asset_file->Save();
 			}
@@ -64,7 +61,6 @@ namespace Luxia {
 	}
 
 	void AssetManager::Cleanup() {
-		// Unload all asset files
 		for (auto& [guid, assetfile] : asset_pool) {
 			if (assetfile) {
 				assetfile->Unload();
@@ -106,7 +102,6 @@ namespace Luxia {
 
 		asset_file->Load(metafile_path);
 
-		// Loads the data specific to shader, texture, etc
 		return asset_file;
 	}
 
