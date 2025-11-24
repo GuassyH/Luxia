@@ -60,8 +60,9 @@ namespace Luxia {
 		// For each asset, save
 		for (auto& [guid, asset_file] : asset_pool) {
 			// assert !nullptr
-			if(asset_file)
+			if (asset_file) {
 				asset_file->Save();
+			}
 		}
 
 		return true;
@@ -96,14 +97,10 @@ namespace Luxia {
 	};
 
 	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::SerializeAssetFile(const std::filesystem::path& metafile_path) {
-		// Make sure meta_path is valid
 		if (!metafile_path.has_extension() || !std::filesystem::exists(metafile_path)) { return nullptr; }
 
 		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = std::make_shared<Luxia::Assets::AssetFile>();
 
-		// Loads the minimal, basic data
-		// LX_CORE_TRACE("{}", metafile_path.string());
-		// asset_file->Load(metafile_path);
 		Luxia::AssetType type = Luxia::PeakAssetType(metafile_path);
 		LX_CORE_TRACE("{}", (int)type);
 
@@ -131,6 +128,9 @@ namespace Luxia {
 			LX_CORE_ERROR("Unknown asset type in metafile '{}'", metafile_path.string());
 			return nullptr;
 		}
+
+		if (!asset_file)
+			LX_CORE_ERROR("Serializing nullptr");
 
 		// Loads the data specific to shader, texture, etc
 		return asset_file;

@@ -61,14 +61,23 @@ namespace Luxia {
 			if (type == Luxia::AssetType::NoAsset) { return 0; }
 			else if (type == Luxia::AssetType::Shader) {
 				std::shared_ptr<Luxia::Assets::ShaderFile> shader_file = std::make_shared<Luxia::Assets::ShaderFile>(std::forward<Args>(args)...);
+				if (!shader_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
 				asset_file = shader_file;
+			}
+			else if (type == Luxia::AssetType::Texture) {
+				std::shared_ptr<Luxia::Assets::TextureFile> texture_file = std::make_shared<Luxia::Assets::TextureFile>();
+				if (!texture_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
+				asset_file = texture_file;
+			}
+			else if (type == Luxia::AssetType::Model) {
+				std::shared_ptr<Luxia::Assets::ModelFile> model_file = std::make_shared<Luxia::Assets::ModelFile>();
+				if (!model_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
+				asset_file = model_file;
 			}
 			else {
 				asset_file = std::make_shared<Luxia::Assets::AssetFile>();
+				if (!asset_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
 			}
-
-			// If assetfile creation failed, return nullptr
-			if (!asset_file->Create(full_path, rel_path, metafile_path, ast_name, type)) { return nullptr; }
 
 			// Set asset_pool entry
 			asset_pool[asset_file->guid] = asset_file;
@@ -84,14 +93,13 @@ namespace Luxia {
 				if (ast_file->srcPath == full_path) {
 					std::shared_ptr<T> cast_file = std::dynamic_pointer_cast<T>(asset_pool.find(t_guid)->second);
 					if (cast_file) {
+						LX_CORE_TRACE("Casted!");
 						return cast_file;
-					}
-					else {
-						LX_CORE_TRACE("GetAssetFileFromPath: Asset file nullptr");
 					}
 				}
 			}
 
+			LX_CORE_ERROR("GetAssetFileFromPath: Asset file nullptr");
 			return nullptr;
 		}
 

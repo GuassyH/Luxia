@@ -32,7 +32,8 @@ namespace Luxia::Assets {
 		name = m_name;
 		
 		// Save 
-		loaded = Save();
+		Save();
+		loaded = true;
 
 		return loaded;
 	}
@@ -41,7 +42,7 @@ namespace Luxia::Assets {
 	bool AssetFile::Load(const std::filesystem::path& m_metaPath){
 		// Open file
 		metaPath = m_metaPath;
-		std::ifstream infile(metaPath);
+		std::ifstream infile(metaPath, std::ios::in);
 
 		// Throw runtime error
 		if (!infile.is_open()) {
@@ -93,7 +94,7 @@ namespace Luxia::Assets {
 	// Should be YAML!
 	bool AssetFile::Save() {
 		// Open file
-		std::ofstream outfile(metaPath, std::ios::out, std::ios::trunc);
+		std::ofstream outfile(metaPath);
 		if (!outfile.is_open()) {
 			LX_CORE_ERROR("Failed to save metafile: {}", metaPath.string());
 			return false;

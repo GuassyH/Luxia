@@ -11,7 +11,7 @@ namespace Luxia::Assets {
 			: fragPath(frag_path), vertPath(vert_path) { }
 
 		virtual bool LoadExtra(const std::filesystem::path& m_metaPath) {
-			std::ifstream infile(m_metaPath);
+			std::ifstream infile(m_metaPath, std::ios::in);
 
 			int success = 0;
 			std::string line;
@@ -27,10 +27,8 @@ namespace Luxia::Assets {
 				}
 			}
 
-			// LX_CORE_ERROR("f:{} \nv:{}", fragPath.string(), vertPath.string());
 
 			if (success != 2) { return false; }
-			// LX_CORE_ERROR("LOADED SHADER, type {}", (int)type);
 
 			infile.close();
 
@@ -38,9 +36,24 @@ namespace Luxia::Assets {
 
 		}
 		virtual bool SaveExtra(const std::filesystem::path& m_metaPath) {
-			std::ofstream outfile(m_metaPath, std::ios::out | std::ios::app);
+			std::string full;
+			std::string line;
 
+			// Whyyyyyyyyyy
+			std::ifstream infile(m_metaPath, std::ios::in);
+
+			while (std::getline(infile, line)) {
+				// Trim whitespace if needed
+				full += line + "\n";
+			}
+
+			infile.close();
+
+			std::ofstream outfile(m_metaPath);
+
+			outfile << full;
 			outfile << "Shader:\n";
+			outfile << "Test:\n";
 			outfile << "frag=" << fragPath.string() << "\n";
 			outfile << "vert=" << vertPath.string() << "\n";
 
