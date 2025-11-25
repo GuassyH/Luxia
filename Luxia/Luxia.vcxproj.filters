@@ -205,6 +205,7 @@
     <ClInclude Include="src\Luxia\Asset\ModelFile.h" />
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
     <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
+    <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\AssetFile.cpp">
@@ -276,5 +277,6 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
   </ItemGroup>
 </Project>
