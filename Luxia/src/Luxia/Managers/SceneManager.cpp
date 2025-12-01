@@ -4,40 +4,39 @@
 namespace Luxia {
 	bool SceneManager::LoadScenePool(const std::shared_ptr<AssetManager> m_asset_manager) {
 		asset_manager = m_asset_manager;
-		/*
-		for (auto& [guid, asset] : asset_manager->GetAssetFiles()) {
-			if (asset) {
-				if (asset->type == AssetType::SceneType && asset->loaded) {
-					scene_file_pool.push_back(asset);
-					std::shared_ptr<Scene> new_scene = std::make_shared<Scene>();
 
-					new_scene->LoadFromFile(asset->srcPath);
-					scene_asset_pool.push_back(new_scene);
+		for (auto& [guid, metafile] : asset_manager->GetMetaFilePool()) {
+			if (metafile) {
+				if (metafile->type == AssetType::SceneType) {
+					if (asset_manager->GetAssetFilePool().contains(metafile->guid)) {
+						auto asset = asset_manager->GetAssetFile<Assets::SceneFile>(metafile->guid);
+						std::shared_ptr<Scene> new_scene = std::make_shared<Scene>();
 
-					// LX_CORE_TRACE("SceneManager: Loaded scene {}", asset->srcPath.string());
+						new_scene->LoadFromFile(asset);
+
+						scene_map[asset] = new_scene;
+						
+						LX_CORE_TRACE("SceneManager: Loaded scene {}", metafile->assetPath.string());
+					}
 				}
 			}
 			else {
 				LX_CORE_ERROR("SceneManager: Error assigning scene to scene_pool {}", (uint64_t)guid);
 			}
 		}
-		*/
 
 		return true;
 	}
 
 	bool SceneManager::SaveScenes() {
-		/*
-		for (auto& asset : scene_file_pool) {
-			if (asset) {
-				asset->Save();
+		for (auto& [file, scene] : scene_map) {
+			if (scene) {
+				scene->SaveToFile(file);
 			}
 			else {
 				LX_CORE_ERROR("SceneManager: Error saving scene");
 			}
 		}
-		*/
-
 		return true;
 	}
 
@@ -52,11 +51,7 @@ namespace Luxia {
 	}
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index) {
-		if (active_scene) { active_scene->Cleanup(); }
-		active_scene = scene_asset_pool[index];
-		active_scene->Load();
-
-		LX_CORE_INFO("Loaded Scene: {}", 0);
+		LX_CORE_ERROR("SceneManager: SetActiveScene by index not implemented yet");
 
 		return active_scene;
 	}
@@ -65,12 +60,11 @@ namespace Luxia {
 		LX_CORE_TRACE("Scene manager cleaned up");
 
 		active_scene->Cleanup();
-	
-		for (auto& scene : scene_asset_pool) {
+
+		for (auto& [file, scene] : scene_map) {
 			scene->Cleanup();
 		}
 
-		scene_file_pool.clear();
-		scene_asset_pool.clear();
+		scene_map.clear();
 	}
 }

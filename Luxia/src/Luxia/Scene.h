@@ -13,6 +13,7 @@
 
 #include "Luxia/Core/GUID.h"
 #include "entt/entt.hpp"
+#include "Luxia/Asset/SceneFile.h"
 
 namespace Luxia {
 
@@ -24,7 +25,9 @@ namespace Luxia {
 
 		void Cleanup() { reg.clear(); }
 		void Load() { reg = entt::registry(); }
-		void LoadFromFile(const std::filesystem::path& m_metaPath);
+		
+		void SaveToFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
+		void LoadFromFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
 
 		Components::Transform& CreateEntity();
 		

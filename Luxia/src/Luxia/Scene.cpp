@@ -11,7 +11,12 @@ namespace Luxia {
 		return t;
 	}
 
-	void Scene::LoadFromFile(const std::filesystem::path& m_metaPath) {
+	void Scene::SaveToFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file) {
+
+	}
+
+	void Scene::LoadFromFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file) {
+		Load();
 
 	}
 }

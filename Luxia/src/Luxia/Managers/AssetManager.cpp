@@ -58,7 +58,7 @@ namespace Luxia {
 
 			meta_pool.find(guid)->second->Save();
 			if (asset_file) {
-				asset_file->Save();
+				asset_file->Save(meta_pool.find(guid)->second->assetPath);
 			}
 		}
 

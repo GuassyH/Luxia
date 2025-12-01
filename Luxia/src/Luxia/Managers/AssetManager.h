@@ -29,6 +29,9 @@ namespace Luxia {
 		bool SaveAssetPool();
 		void Cleanup(); // Before app closes, save everything, etc
 
+		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return asset_pool; }
+		std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>>& GetMetaFilePool() { return meta_pool; }
+
 		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
 			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
 			// Search meta pool for matching srcPath
@@ -72,6 +75,8 @@ namespace Luxia {
 
 			// Get the absolute path
 			std::filesystem::path abs_path = asset_dir / where_rel_path.lexically_normal() / ast_name;
+
+			LX_CORE_TRACE("Asset Manager: CreateAssetFile - Creating asset at path {}", abs_path.string());
 
 			// Create paths 
 			std::filesystem::path assetfile_path = abs_path.replace_extension(suf);

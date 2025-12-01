@@ -19,10 +19,21 @@ namespace Luxia::Assets {
 
 		virtual bool Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
+
+			std::ifstream infile(m_assetPath, std::ios::in);
+
+
+			infile.close();
+
 			return true;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
+
+			std::ofstream outfile(m_assetPath);
+
+			outfile.close();
+
 			return true;
 		}
 
