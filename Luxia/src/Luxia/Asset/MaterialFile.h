@@ -29,6 +29,18 @@ namespace Luxia::Assets {
 					shader_path = line.substr(7);
 					success++;
 				}
+				if (line.rfind("diff_guid=", 0) == 0) {
+					diffuse_guid = GUID(std::stoull(line.substr(10)));
+					success++;
+				}
+				if (line.rfind("spec_guid=", 0) == 0) {
+					specular_guid = GUID(std::stoull(line.substr(10)));
+					success++;
+				}
+				if (line.rfind("norm_guid=", 0) == 0) {
+					normal_guid = GUID(std::stoull(line.substr(10)));
+					success++;
+				}
 				if (line.rfind("color=", 0) == 0) {
 					std::string color_str = line.substr(6);
 					sscanf(color_str.c_str(), "%f,%f,%f,%f", &color.r, &color.g, &color.b, &color.a);
@@ -46,8 +58,7 @@ namespace Luxia::Assets {
 
 			infile.close();
 
-
-			if (success != 4) { return false; }
+			if (success != 7) { return false; }
 
 			std::ifstream guid_infile(shader_path, std::ios::in);
 			while (std::getline(guid_infile, line)) {
@@ -69,6 +80,9 @@ namespace Luxia::Assets {
 			std::ofstream outfile(m_assetPath);
 
 			outfile << "shader=" << shader_path.lexically_normal().string() << "\n";
+			outfile << "diff_guid=" << (uint64_t)diffuse_guid << "\n";
+			outfile << "spec_guid=" << (uint64_t)specular_guid << "\n";
+			outfile << "norm_guid=" << (uint64_t)normal_guid << "\n";
 			outfile << "color=" << color.r << "," << color.g << "," << color.b << "," << color.a << "\n";
 			outfile << "roughness=" << roughness << "\n";
 			outfile << "metallic=" << metallic << "\n";
@@ -78,8 +92,16 @@ namespace Luxia::Assets {
 			return true;
 		}
 
+		// Shader
 		std::filesystem::path shader_path;
 		GUID shader_guid = GUID(0);
+
+		// Input Textures
+		GUID diffuse_guid = GUID(0);
+		GUID specular_guid = GUID(0);
+		GUID normal_guid = GUID(0);
+		
+		// Material Properties
 		glm::vec4 color = glm::vec4(1.0f);
 		float roughness = 1.0f;
 		float metallic = 1.0f;

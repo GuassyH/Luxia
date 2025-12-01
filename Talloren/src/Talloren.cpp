@@ -10,18 +10,18 @@ namespace Talloren::Layer {
 	public:
 		ExtraLayer() = default;
 		~ExtraLayer() = default;
-		std::shared_ptr<Luxia::Components::Material> DefaultMat = nullptr;
 		virtual void OnAttach() override { 
 			LX_CORE_WARN("ExtraLayer Attached");
 
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
+			// Create Shader runtime Asset
 			auto MatFile = asset_manager->GetAssetFile<Luxia::Assets::MaterialFile>(asset_manager->GetAssetFileGUID("materials/DefaultMaterial.luxmat"));
 			auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(MatFile->shader_guid);
 			auto DefaultShader = scene->CreateRuntimeAsset<Luxia::IShader>(SHFile);
 
 			// Create Material runtime Asset
-			DefaultMat = std::make_shared<Luxia::Components::Material>(MatFile, DefaultShader);
+			std::shared_ptr<Luxia::Components::Material> DefaultMat = std::make_shared<Luxia::Components::Material>(MatFile, DefaultShader);
 
 			// Create Model runtime Asset (from existing ModelFile)
 			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
