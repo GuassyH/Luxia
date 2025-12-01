@@ -24,22 +24,18 @@ namespace Luxia {
 					LX_CORE_ERROR("Asset Manager: LoadAssetPool failed to load metafile for - {}", path.string());
 					continue;
 				}
-				else {
-					LX_CORE_TRACE("Loaded MetaFile - {}", path.string());
-				}
 				
 				std::shared_ptr<Assets::AssetFile> asset_file = LoadAssetFile(meta_file->srcPath, meta_file->type);
 				if (!asset_file) {
 					LX_CORE_ERROR("Asset Manager: LoadAssetPool failed to load assetfile for - {}", meta_file->srcPath.string());
 					continue;
 				}
-				else {
-					LX_CORE_TRACE("Loaded AssetFile - {}", asset_file->assetPath.string());
-				}
 
 				// Assign both files pools
 				asset_pool[meta_file->guid] = asset_file;
 				meta_pool[meta_file->guid] = meta_file;
+
+				LX_CORE_TRACE("Loaded files - GUID({})", (uint64_t)meta_file->guid);
 			}
 		}
 

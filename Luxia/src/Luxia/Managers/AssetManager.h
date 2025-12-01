@@ -29,6 +29,29 @@ namespace Luxia {
 		bool SaveAssetPool();
 		void Cleanup(); // Before app closes, save everything, etc
 
+
+		// Casts the file to the requested type
+		template <typename T>
+		std::shared_ptr<T> GetAssetFile(const GUID& guid) {
+			if (!asset_pool.contains(guid)) {
+				LX_CORE_ERROR("Asset Manager: GetAssetFile - GUID not found {}", static_cast<uint64_t>(guid));
+				return nullptr;
+			}
+			std::shared_ptr<Assets::AssetFile> asset_file = asset_pool.find(guid)->second;
+			if (!asset_file) {
+				LX_CORE_ERROR("Asset Manager: GetAssetFile - AssetFile is nullptr for GUID {}", static_cast<uint64_t>(guid));
+				return nullptr;
+			}
+			// Dynamic cast to the requested type
+			std::shared_ptr<T> casted_asset_file = std::dynamic_pointer_cast<T>(asset_file);
+			if (!casted_asset_file) {
+				LX_CORE_ERROR("Asset Manager: GetAssetFile - Dynamic cast failed for GUID {}", static_cast<uint64_t>(guid));
+				return nullptr;
+			}
+			return casted_asset_file;
+		}
+
+		// Creates an asset file of the given type at the given relative path with the given name
 		template <Luxia::AssetType type, typename... Args> // where_rel_path is where it should be created 
 		GUID CreateAssetFile(const std::filesystem::path& where_rel_path, const std::string ast_name, Args&&... args) 
 		{
@@ -64,6 +87,7 @@ namespace Luxia {
 			return meta_file->guid;
 		}
 		
+		// Import, used for models (.gltf etc) and textures (.png, .jpg etc)
 		template <typename... Args>
 		GUID Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
 			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
