@@ -17,26 +17,26 @@ namespace Talloren::Layer {
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
 			// Create Shader runtime Asset (from existing ShaderFile)
-			Luxia::GUID SHGUID = Luxia::GUID(2917587342041854607);
-			auto DefaultShader = scene->CreateAsset<Luxia::IShader>(asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(SHGUID));
-
+			Luxia::GUID SHGUID = Luxia::GUID(1573444618664531577);
+			auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(SHGUID);
+			auto DefaultShader = scene->CreateRuntimeAsset<Luxia::IShader>(SHFile);
 
 			// Create Material runtime Asset
 			DefaultMat = std::make_shared<Luxia::Components::Material>(DefaultShader);
 
 			// Create Model runtime Asset (from existing ModelFile)
-			Luxia::GUID GMGUID = Luxia::GUID(7668727354195686449);
+			Luxia::GUID GMGUID = Luxia::GUID(6556753832772741404);
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
-			auto GhostModelAsset = scene->CreateAsset<Luxia::IModel>(GhostModelFile);
-
+			auto GhostModelAsset = scene->CreateRuntimeAsset<Luxia::IModel>(GhostModelFile);
 
 			// Create Entities
-			auto& trollEnt = scene->CreateEntity();
-			trollEnt.AddComponent<Luxia::Components::MeshRenderer>(GhostModelAsset, DefaultMat);
+			auto& ghostEnt = scene->CreateEntity();
+			ghostEnt.AddComponent<Luxia::Components::MeshRenderer>(GhostModelAsset, DefaultMat);
+			ghostEnt.euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
 
 			auto& camEnt = scene->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
-			camEnt.position = glm::vec3(0.0f, 1.0f, 5.0f);
+			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
 			cam.main = true;
 		}
 		virtual void OnDetach() override {

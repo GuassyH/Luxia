@@ -11,7 +11,7 @@ namespace Luxia::Assets {
 		MetaFile() = default;
 		~MetaFile() = default;
 
-		bool Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type); // Create the metafile from a source
+		bool Create(const std::filesystem::path& m_assetPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type); // Create the metafile from a source
 		bool Load(const std::filesystem::path& m_metaPath);
 		bool Reload() { return Load(metaPath); }
 		bool Save();
@@ -19,7 +19,7 @@ namespace Luxia::Assets {
 
 		AssetType type = AssetType::NoType;
 
-		std::filesystem::path srcPath = "no/path";
+		std::filesystem::path assetPath = "no/path";
 		std::filesystem::path metaPath = "no/path";
 		std::string name = "no_name";
 

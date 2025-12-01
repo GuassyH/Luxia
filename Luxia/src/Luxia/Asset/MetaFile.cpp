@@ -3,9 +3,9 @@
 
 
 namespace Luxia::Assets {
-	bool MetaFile::Create(const std::filesystem::path& m_srcPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
+	bool MetaFile::Create(const std::filesystem::path& m_assetPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type) {
 		type = m_type;
-		srcPath = m_srcPath.lexically_normal();
+		assetPath = m_assetPath.lexically_normal();
 		metaPath = m_metaPath.lexically_normal();
 		name = m_name;
 
@@ -41,8 +41,12 @@ namespace Luxia::Assets {
 				guid = std::stoull(line.substr(5));
 				success++;
 			}
-			else if (line.rfind("path=", 0) == 0) {
-				srcPath = line.substr(5);
+			else if (line.rfind("assetPath=", 0) == 0) {
+				assetPath = line.substr(10);
+				success++;
+			}
+			else if (line.rfind("metaPath=", 0) == 0) {
+				metaPath = line.substr(9);
 				success++;
 			}
 			else if (line.rfind("name=", 0) == 0) {
@@ -54,7 +58,7 @@ namespace Luxia::Assets {
 		infile.close();
 
 		// if all lines werent found, return false
-		if (success != 4) { return false; }
+		if (success != 5) { return false; }
 
 		loaded = true;
 		return loaded;
@@ -72,7 +76,8 @@ namespace Luxia::Assets {
 		// outfile << out.c_str();
 		outfile << "type=" << (int)type << "\n";
 		outfile << "guid=" << (uint64_t)guid << "\n";
-		outfile << "path=" << srcPath.string() << "\n";
+		outfile << "assetPath=" << assetPath.string() << "\n";
+		outfile << "metaPath=" << metaPath.string() << "\n";
 		outfile << "name=" << name << "\n";
 
 		outfile.close();

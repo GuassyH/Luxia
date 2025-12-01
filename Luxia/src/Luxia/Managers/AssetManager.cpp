@@ -25,9 +25,9 @@ namespace Luxia {
 					continue;
 				}
 				
-				std::shared_ptr<Assets::AssetFile> asset_file = LoadAssetFile(meta_file->srcPath, meta_file->type);
+				std::shared_ptr<Assets::AssetFile> asset_file = LoadAssetFile(meta_file->assetPath, meta_file->type);
 				if (!asset_file) {
-					LX_CORE_ERROR("Asset Manager: LoadAssetPool failed to load assetfile for - {}", meta_file->srcPath.string());
+					LX_CORE_ERROR("Asset Manager: LoadAssetPool failed to load assetfile for - {}", meta_file->assetPath.string());
 					continue;
 				}
 
@@ -55,10 +55,10 @@ namespace Luxia {
 
 		// Save metafile, then save asset_file
 		for (auto& [guid, asset_file] : asset_pool) {
-			meta_pool.find(guid)->second->Save();
 
+			meta_pool.find(guid)->second->Save();
 			if (asset_file) {
-				asset_file->Save(meta_pool.find(guid)->second->srcPath);
+				asset_file->Save();
 			}
 		}
 

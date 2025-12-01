@@ -54,7 +54,7 @@ namespace Luxia {
 
 
 		template <typename T> // Load an asset from an asset file
-		std::shared_ptr<T> CreateAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
+		std::shared_ptr<T> CreateRuntimeAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
 			if (asset_file == nullptr) { LX_CORE_ERROR("Asset file is nullptr"); return nullptr; }
 
 			// Insantiate the assetfile and asset

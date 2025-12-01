@@ -29,7 +29,7 @@ namespace Luxia::Assets {
 
 			std::ifstream infile(m_assetPath, std::ios::in);
 
-			int wanted = (shaderType == ShaderFileType::Other) ? 2 : 3;
+			int wanted = 0;
 			int success = 0;
 			std::string line;
 			while (std::getline(infile, line)) {
@@ -37,6 +37,17 @@ namespace Luxia::Assets {
 				if (line.rfind("type=", 0) == 0) {
 					uint64_t val = std::stoull(line.substr(5));
 					shaderType = static_cast<ShaderFileType>(val);
+					switch (shaderType) {
+					case ShaderFileType::Other:
+						wanted = 2; // type + shader
+						break;
+					case ShaderFileType::VertexFragment:
+						wanted = 3; // type + frag + vert
+						break;
+					default:
+						LX_CORE_ERROR("ShaderFile: Load - Unknown shader type");
+						return false;
+					}
 					success++;
 				}
 				if(shaderType == ShaderFileType::Other) {
@@ -71,11 +82,11 @@ namespace Luxia::Assets {
 			outfile << "type=" << (int)shaderType << "\n";
 
 			if (shaderType == ShaderFileType::Other) {
-				outfile << "shader=" << shaderPath.string() << "\n";
+				outfile << "shader=" << shaderPath.lexically_normal().string() << "\n";
 			}
 			else if (shaderType == ShaderFileType::VertexFragment) {
-				outfile << "frag=" << fragPath.string() << "\n";
-				outfile << "vert=" << vertPath.string() << "\n";
+				outfile << "frag=" << fragPath.lexically_normal().string() << "\n";
+				outfile << "vert=" << vertPath.lexically_normal().string() << "\n";
 			}
 
 			outfile.close();

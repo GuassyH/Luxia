@@ -29,6 +29,17 @@ namespace Luxia {
 		bool SaveAssetPool();
 		void Cleanup(); // Before app closes, save everything, etc
 
+		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
+			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
+			// Search meta pool for matching srcPath
+			for (auto& [guid, meta_file] : meta_pool) {
+				if (meta_file->assetPath == abs_path) {
+					return guid;
+				}
+			}
+			LX_CORE_ERROR("Asset Manager: GetAssetFileGUID - No matching GUID found for path {}", abs_path.string());
+			return GUID(0);
+		}
 
 		// Casts the file to the requested type
 		template <typename T>
@@ -179,11 +190,11 @@ namespace Luxia {
 			return asset_file;
 		}
 
-		std::shared_ptr<Assets::MetaFile> LoadMetaFile(const std::filesystem::path& abs_path) {
+		std::shared_ptr<Assets::MetaFile> LoadMetaFile(const std::filesystem::path& meta_path) {
 			// Load metafile
 			std::shared_ptr<Assets::MetaFile> meta_file = std::make_shared<Assets::MetaFile>();
-			if(!meta_file->Load(abs_path)) {
-				LX_CORE_ERROR("Asset Manager: LoadMetaFile failed to load metafile for - {}", abs_path.string());
+			if(!meta_file->Load(meta_path)) {
+				LX_CORE_ERROR("Asset Manager: LoadMetaFile failed to load metafile for - {}", meta_path.string());
 				return nullptr;
 			}
 			
