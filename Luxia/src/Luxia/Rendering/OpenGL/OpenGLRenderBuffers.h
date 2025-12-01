@@ -4,7 +4,7 @@
 
 namespace Luxia::Rendering::OpenGL::Buffers {
 
-	class OpenGL_VAO : public Luxia::Rendering::Buffers::VAO {
+	class LUXIA_API OpenGL_VAO : public Luxia::Rendering::Buffers::VAO {
 	public:
 		OpenGL_VAO();
 		~OpenGL_VAO() = default;
@@ -15,7 +15,7 @@ namespace Luxia::Rendering::OpenGL::Buffers {
 		virtual void Delete() override;
 	};
 
-	class OpenGL_VBO : public Luxia::Rendering::Buffers::VBO {
+	class LUXIA_API OpenGL_VBO : public Luxia::Rendering::Buffers::VBO {
 	public:
 		OpenGL_VBO();
 		~OpenGL_VBO() = default;
@@ -26,7 +26,7 @@ namespace Luxia::Rendering::OpenGL::Buffers {
 		virtual void Delete() override;
 	};
 
-	class OpenGL_EBO : public Luxia::Rendering::Buffers::EBO {
+	class LUXIA_API OpenGL_EBO : public Luxia::Rendering::Buffers::EBO {
 	public:
 		OpenGL_EBO();
 		~OpenGL_EBO() = default;

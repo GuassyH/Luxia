@@ -161,6 +161,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
     <ClInclude Include="src\Luxia\Asset\AssetType.h" />
     <ClInclude Include="src\Luxia\Asset\MaterialFile.h" />
     <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
@@ -172,7 +173,6 @@
     <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
-    <ClInclude Include="src\Luxia\Components\Material.h" />
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
     <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Core\Application.h" />
@@ -206,6 +206,7 @@
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h" />
     <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h" />
     <ClInclude Include="src\Luxia\Rendering\API\ICamera.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IMaterial.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IModel.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
@@ -221,6 +222,7 @@
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp" />
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
@@ -250,6 +252,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

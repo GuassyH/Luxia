@@ -29,7 +29,6 @@
 #include "Luxia/Components/Camera.h"
 #include "Luxia/Components/MeshRenderer.h"
 #include "Luxia/Components/Transform.h"
-#include "Luxia/Components/Material.h"
 
 
 // Rendering API

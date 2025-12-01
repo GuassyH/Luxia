@@ -10,7 +10,7 @@
 
 namespace Luxia::Platform::Rendering {
 
-	inline std::shared_ptr<Luxia::Rendering::IRenderer> CreateRenderer() {
+	inline std::shared_ptr<Luxia::Rendering::IRenderer> LUXIA_API CreateRenderer() {
 		std::shared_ptr<Luxia::Rendering::IRenderer> renderer;
 		#ifdef LUXIA_RENDERER_OPENGL
 			renderer = std::make_shared<Luxia::Rendering::OpenGL::OpenGL_Renderer>();
@@ -20,7 +20,7 @@ namespace Luxia::Platform::Rendering {
 		return renderer;
 	}
 
-	inline std::shared_ptr<Luxia::Rendering::Buffers::VAO> CreateVAO() {
+	inline std::shared_ptr<Luxia::Rendering::Buffers::VAO> LUXIA_API CreateVAO() {
 		std::shared_ptr<Luxia::Rendering::Buffers::VAO> vao;
 		#ifdef LUXIA_RENDERER_OPENGL
 			vao = std::make_shared<Luxia::Rendering::OpenGL::Buffers::OpenGL_VAO>();
@@ -31,7 +31,7 @@ namespace Luxia::Platform::Rendering {
 		return vao;
 	}
 
-	inline std::shared_ptr<Luxia::Rendering::Buffers::VBO> CreateVBO() {
+	inline std::shared_ptr<Luxia::Rendering::Buffers::VBO> LUXIA_API CreateVBO() {
 		std::shared_ptr<Luxia::Rendering::Buffers::VBO> vbo;
 		#ifdef LUXIA_RENDERER_OPENGL
 			vbo = std::make_shared<Luxia::Rendering::OpenGL::Buffers::OpenGL_VBO>();
@@ -42,7 +42,7 @@ namespace Luxia::Platform::Rendering {
 		return vbo;
 	}
 
-	inline std::shared_ptr<Luxia::Rendering::Buffers::EBO> CreateEBO() {
+	inline std::shared_ptr<Luxia::Rendering::Buffers::EBO> LUXIA_API CreateEBO() {
 		std::shared_ptr<Luxia::Rendering::Buffers::EBO> ebo;
 		#ifdef LUXIA_RENDERER_OPENGL
 			ebo = std::make_shared<Luxia::Rendering::OpenGL::Buffers::OpenGL_EBO>();

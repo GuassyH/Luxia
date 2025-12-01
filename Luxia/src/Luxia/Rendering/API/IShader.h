@@ -24,10 +24,10 @@ namespace Luxia {
 
 	class LUXIA_API IShader : public Assets::Asset {
 	public:
-		unsigned int ID;
+		unsigned int ID = 0;
 
 		IShader() = default;
-		IShader(const char* frag_path, const char* vert_path);
+		IShader(const char* frag_path, const char* vert_path) {}
 		virtual ~IShader() = default;
 
 		virtual void Compile(const char* fragSrc, const char* vertSrc) = 0;

@@ -6,6 +6,7 @@
 #include "Luxia/Rendering/API/IModel.h"
 #include "Luxia/Rendering/API/ICamera.h"
 #include "Luxia/Rendering/API/IShader.h"
+#include "Luxia/Rendering/API/IMaterial.h"
 
 #ifdef LUXIA_RENDERER_OPENGL
 	#include "Luxia/Platform/OpenGL/GL_Window.h"
@@ -13,6 +14,7 @@
 	#include "Luxia/Platform/OpenGL/GL_Model.h"
 	#include "Luxia/Platform/OpenGL/GL_Camera.h"
 	#include "Luxia/Platform/OpenGL/GL_Shader.h"
+	#include "Luxia/Platform/OpenGL/GL_Material.h"
 #endif
 
 
@@ -79,5 +81,18 @@ namespace Luxia::Platform::Assets
 		#endif
 
 		return shader;
+	}
+
+	template<typename... Args>
+	inline std::shared_ptr<Luxia::IMaterial> CreateMaterial(Args&&... args) {
+		std::shared_ptr<Luxia::IMaterial> mat;
+
+		#ifdef LUXIA_RENDERER_OPENGL
+			mat = std::make_shared<Luxia::Platform::OpenGL::GL_Material>(std::forward<Args>(args)...);
+		#else 
+			#error Luxia doesnt support your Renderer!
+		#endif
+
+		return mat;
 	}
 }

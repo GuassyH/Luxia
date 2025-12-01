@@ -24,7 +24,7 @@ namespace Luxia::Components {
 		glm::vec3 euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 scale = glm::vec3(1.0f);
 
-		entt::entity ent_id;
+		entt::entity ent_id = entt::entity(0);
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 		glm::mat4& GetMatrix() { return modelMatrix; }

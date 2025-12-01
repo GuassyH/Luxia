@@ -3,7 +3,7 @@
 #include "Luxia/Rendering/API/IRenderer.h"
 
 namespace Luxia::Rendering::OpenGL {
-	class OpenGL_Renderer : public Luxia::Rendering::IRenderer {
+	class LUXIA_API OpenGL_Renderer : public Luxia::Rendering::IRenderer {
 	public:
 		OpenGL_Renderer() = default;
 		~OpenGL_Renderer() = default;

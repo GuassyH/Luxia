@@ -21,7 +21,7 @@ namespace Talloren::Layer {
 			auto DefaultShader = scene->CreateRuntimeAsset<Luxia::IShader>(SHFile);
 
 			// Create Material runtime Asset
-			std::shared_ptr<Luxia::Components::Material> DefaultMat = std::make_shared<Luxia::Components::Material>(MatFile, DefaultShader);
+			std::shared_ptr<Luxia::IMaterial> DefaultMat = Luxia::Platform::Assets::CreateMaterial(DefaultShader);
 
 			// Create Model runtime Asset (from existing ModelFile)
 			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
