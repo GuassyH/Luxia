@@ -10,7 +10,8 @@ namespace Luxia::Assets {
 
 		virtual bool Unload() = 0;
 
-		Asset() = default;
+		// Asset() = default;
+		Asset() : guid(GUID()) {}
 		virtual ~Asset() = default;
 	};
 }

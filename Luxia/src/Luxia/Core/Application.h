@@ -29,8 +29,6 @@ namespace Luxia
 		virtual void Shutdown() {}
 		void CoreShutdown();
 
-
-
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { 
 			m_LayerStack->PushLayer(layer, m_EventHandler, m_ProjectManager, m_Renderer); 
 		}

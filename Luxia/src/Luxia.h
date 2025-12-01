@@ -3,8 +3,8 @@
 
 // APP SIDE ONLY
 #include "Luxia/Core/Core.h"
-#include "Luxia/Core/Application.h"
 #include "Luxia//Core/Log.h"
+#include "Luxia/Core/Application.h"
 
 // Managers
 #include "Luxia/Managers/EventManager.h"
@@ -12,29 +12,22 @@
 #include "Luxia/Managers/SceneManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 
-#include "Luxia/Scene.h"
-
-// Asset Stuff
-#include "Luxia/Asset/AssetType.h"
-#include "Luxia/Asset/MetaFile.h"
-#include "Luxia/Asset/AssetFile.h"
-
 // Events
 #include "Luxia/Events/EventDefs.h"
 #include "Luxia/Events/EventHandler.h"
 
 // Components
-#include <entt/entt.hpp>
-
 #include "Luxia/Components/Camera.h"
 #include "Luxia/Components/MeshRenderer.h"
 #include "Luxia/Components/Transform.h"
+#include "Luxia/Components/Component.h"
 
 
 // Rendering API
 #include "Luxia/Platform/PlatformDefinitions.h"
 
 // ---- Entry Point ----
+// Now included in the actual main.cpp file of the application
 // ---------------------
 
 #endif

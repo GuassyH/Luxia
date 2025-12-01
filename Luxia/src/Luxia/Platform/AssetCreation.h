@@ -17,6 +17,10 @@
 	#include "Luxia/Platform/OpenGL/GL_Material.h"
 #endif
 
+#ifdef LUXIA_RENDERER_VULKAN
+	#error Vulkan Renderer not yet supported in Luxia!
+#endif
+
 
 namespace Luxia::Platform::Assets
 {
