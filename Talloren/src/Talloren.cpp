@@ -17,7 +17,7 @@ namespace Talloren::Layer {
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
 			// Create Shader runtime Asset (from existing ShaderFile)
-			Luxia::GUID SHGUID = Luxia::GUID(1573444618664531577);
+			Luxia::GUID SHGUID = asset_manager->GetAssetFileGUID("shaders/DefaultShader.luxshader");
 			auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(SHGUID);
 			auto DefaultShader = scene->CreateRuntimeAsset<Luxia::IShader>(SHFile);
 
@@ -25,7 +25,7 @@ namespace Talloren::Layer {
 			DefaultMat = std::make_shared<Luxia::Components::Material>(DefaultShader);
 
 			// Create Model runtime Asset (from existing ModelFile)
-			Luxia::GUID GMGUID = Luxia::GUID(6556753832772741404);
+			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->CreateRuntimeAsset<Luxia::IModel>(GhostModelFile);
 
