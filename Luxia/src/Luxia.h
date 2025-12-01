@@ -14,6 +14,9 @@
 
 #include "Luxia/Scene.h"
 
+#include "Luxia/Asset/AssetType.h"
+#include "Luxia/Asset/MetaFile.h"
+#include "Luxia/Asset/AssetFile.h"
 
 // Events
 #include "Luxia/Events/EventDefs.h"

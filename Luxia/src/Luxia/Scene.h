@@ -57,6 +57,7 @@ namespace Luxia {
 		std::shared_ptr<T> CreateAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
 			if (asset_file == nullptr) { LX_CORE_ERROR("Asset file is nullptr"); return nullptr; }
 
+			/*
 			// Insantiate the assetfile and asset
 			std::shared_ptr<T> asset = nullptr;
 
@@ -88,13 +89,16 @@ namespace Luxia {
 
 
 			loaded_assets[asset->guid] = asset;
-			return asset;
+			*/
+
+			return nullptr;
 		}
 
 		template <typename T> // Load an independant asset with an assigned guid
 		std::shared_ptr<T> CreateAsset(const GUID& assigned_guid) {
 			std::shared_ptr<T> asset = nullptr;
 
+			/*
 			// load differently
 			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
 				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
@@ -108,11 +112,13 @@ namespace Luxia {
 			}
 
 			loaded_assets[asset->guid] = asset;
-			return asset;
+			*/
+			return nullptr;
 		}
 
 		template <typename T> // Load an independant asset with a new guid
 		std::shared_ptr<T> CreateAsset() {
+			/*
 			std::shared_ptr<T> asset = nullptr;
 			GUID m_guid;
 
@@ -128,19 +134,21 @@ namespace Luxia {
 			}
 
 			loaded_assets[m_guid] = asset;
-			return asset;
+			*/
+			return nullptr;
 		}
 
 		template <typename T> // Unload an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void>
 			UnloadAsset(const GUID& guid) {
-
+			/*
 			if (!loaded_assets.contains(guid)) { return; }
 
 			auto& asset = loaded_assets.find(guid)->second;
 			asset->~Asset();
 
 			loaded_assets.erase(guid);
+			*/
 		}
 	private:
 		entt::registry reg;

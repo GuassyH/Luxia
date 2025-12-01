@@ -206,11 +206,9 @@
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
     <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
     <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
+    <ClInclude Include="src\Luxia\Asset\AssetType.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Asset\AssetFile.cpp">
-      <Filter>src\Luxia\Asset</Filter>
-    </ClCompile>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
       <Filter>src\Luxia\Core</Filter>
     </ClCompile>

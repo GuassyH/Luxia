@@ -24,15 +24,27 @@ namespace Luxia {
 
 			auto path = entry.path().lexically_normal();
 			if (path.extension() == ".meta") {
-				std::shared_ptr<Luxia::Assets::AssetFile> new_astf = SerializeAssetFile(path);
-
-				if (new_astf) {
-					asset_pool[new_astf->guid] = new_astf;
-					asset_SrcToGuid[new_astf->srcPath] = new_astf->guid;
+				std::shared_ptr<Assets::MetaFile> meta_file = LoadMetaFile(path);
+				if (!meta_file) {
+					LX_CORE_ERROR("Asset Manager: LoadAssetPool failed to load metafile for - {}", path.string());
+					continue;
 				}
-				else
-					LX_CORE_WARN("Failed to load asset from meta file: {}", path.string());
+				else {
+					LX_CORE_TRACE("Loaded MetaFile - {}", path.string());
+				}
 				
+				std::shared_ptr<Assets::AssetFile> asset_file = LoadAssetFile(meta_file->srcPath, meta_file->type);
+				if (!asset_file) {
+					LX_CORE_ERROR("Asset Manager: LoadAssetPool failed to load assetfile for - {}", meta_file->srcPath.string());
+					continue;
+				}
+				else {
+					LX_CORE_TRACE("Loaded AssetFile - {}", asset_file->assetPath.string());
+				}
+
+				// Assign both files pools
+				asset_pool[meta_file->guid] = asset_file;
+				meta_pool[meta_file->guid] = meta_file;
 			}
 		}
 
@@ -53,7 +65,7 @@ namespace Luxia {
 
 		for (auto& [guid, asset_file] : asset_pool) {
 			if (asset_file) {
-				asset_file->Save();
+				asset_file->Save(meta_pool.find(guid)->second->srcPath);
 			}
 		}
 
@@ -82,32 +94,14 @@ namespace Luxia {
 		{".gltf",	Luxia::AssetType::ModelType},
 		{".wav",	Luxia::AssetType::AudioType},
 		{".mp3",	Luxia::AssetType::AudioType},
-		{".shader",	Luxia::AssetType::ShaderType},
-		{".scene",	Luxia::AssetType::SceneType},
+	};
+	std::unordered_map<Luxia::AssetType, std::string> AssetManager::asset_extensions = {
+		{Luxia::AssetType::ShaderType, ".luxshader"},
+		{Luxia::AssetType::SceneType, ".luxscene"},
+		{Luxia::AssetType::ModelType, ".luxmodel"},
+		{Luxia::AssetType::TextureType, ".luxtexture"},
+		{Luxia::AssetType::MaterialType, ".luxmaterial"},
 	};
 
-	std::shared_ptr<Luxia::Assets::AssetFile> AssetManager::SerializeAssetFile(std::filesystem::path& metafile_path) {
-		if (!metafile_path.has_extension() || !std::filesystem::exists(metafile_path)) { return nullptr; }
-		metafile_path = metafile_path.lexically_normal();
-
-		std::shared_ptr<Luxia::Assets::AssetFile> asset_file = nullptr;
-
-		Luxia::AssetType type = Luxia::PeakAssetType(metafile_path);
-
-		asset_file = MakeSharedFileFromType(type);
-
-		if (!asset_file) {
-			LX_CORE_ERROR("Serializing nullptr");
-			return nullptr;
-		}
-
-		asset_file->Load(metafile_path);
-
-		if (!std::filesystem::exists(asset_file->srcPath)) {
-			return nullptr;
-		}
-
-		return asset_file;
-	}
 
 }

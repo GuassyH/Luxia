@@ -16,27 +16,6 @@ namespace Talloren::Layer {
 
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			auto gasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ModelFile>("cute_ghost/scene.gltf");
-			auto tasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ModelFile>("lotr_troll/scene.gltf");
-			auto sasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ShaderFile>("shaders/testingshader.shader");
-
-			auto ghostModel = scene->CreateAsset<Luxia::IModel>(gasf);
-			auto lotrModel = scene->CreateAsset<Luxia::IModel>(tasf);
-			auto shader = scene->CreateAsset<Luxia::IShader>(sasf);
-
-			auto mat = std::make_shared<Luxia::Components::Material>(shader);
-			
-			auto& ghostEntity = scene->CreateEntity();
-			ghostEntity.position = glm::vec3(0.0f, 0.0f, -10.0f);
-			ghostEntity.euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
-			ghostEntity.AddComponent<Luxia::Components::MeshRenderer>(ghostModel, mat);
-
-			auto& lotrEntity = scene->CreateEntity();
-			lotrEntity.position = glm::vec3(-4.0f, 0.0f, -10.0f);
-			lotrEntity.euler_angles = glm::vec3(0.0f, 45.0f, 0.0f);
-			lotrEntity.scale = glm::vec3(0.02f);
-			lotrEntity.AddComponent<Luxia::Components::MeshRenderer>(lotrModel, mat);
-
 			auto& camEnt = scene->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			cam.main = true;

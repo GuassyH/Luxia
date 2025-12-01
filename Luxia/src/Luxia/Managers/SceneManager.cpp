@@ -4,7 +4,7 @@
 namespace Luxia {
 	bool SceneManager::LoadScenePool(const std::shared_ptr<AssetManager> m_asset_manager) {
 		asset_manager = m_asset_manager;
-		
+		/*
 		for (auto& [guid, asset] : asset_manager->GetAssetFiles()) {
 			if (asset) {
 				if (asset->type == AssetType::SceneType && asset->loaded) {
@@ -21,12 +21,13 @@ namespace Luxia {
 				LX_CORE_ERROR("SceneManager: Error assigning scene to scene_pool {}", (uint64_t)guid);
 			}
 		}
+		*/
 
 		return true;
 	}
 
 	bool SceneManager::SaveScenes() {
-
+		/*
 		for (auto& asset : scene_file_pool) {
 			if (asset) {
 				asset->Save();
@@ -35,6 +36,7 @@ namespace Luxia {
 				LX_CORE_ERROR("SceneManager: Error saving scene");
 			}
 		}
+		*/
 
 		return true;
 	}

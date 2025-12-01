@@ -5,13 +5,26 @@ namespace Luxia::Assets {
 	class LUXIA_API TextureFile : public AssetFile {
 	public:
 		TextureFile() = default;
+		TextureFile(const std::filesystem::path m_texturePath)
+			: texture_path(m_texturePath) {
+			type = AssetType::TextureType;
+		}
 		~TextureFile() = default;
 
-		virtual bool LoadExtra(const std::filesystem::path& m_metaPath) {
+		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			Save(m_assetPath);
 			return true;
 		}
-		virtual bool SaveExtra(const std::filesystem::path& m_metaPath) {
+
+		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
 			return true;
 		}
+		virtual bool Save(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+			return true;
+		}
+
+		std::filesystem::path texture_path;
 	};
 }
