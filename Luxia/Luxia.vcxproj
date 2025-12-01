@@ -161,6 +161,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Asset\AssetType.h" />
     <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
     <ClInclude Include="src\Luxia\Asset\ModelFile.h" />
     <ClInclude Include="src\Luxia.h" />
@@ -220,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
-    <ClCompile Include="src\Luxia\Asset\AssetFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />

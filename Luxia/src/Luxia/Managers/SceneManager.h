@@ -29,8 +29,8 @@ namespace Luxia {
 		bool HasActiveScene() const { return active_scene != nullptr; }
 		std::shared_ptr<Scene> GetActiveScene() { return active_scene; }
 	private:
-		std::vector<std::shared_ptr<Assets::AssetFile>> scene_file_pool;
-		std::vector<std::shared_ptr<Luxia::Scene>> scene_asset_pool;
+		std::unordered_map<std::shared_ptr<Assets::SceneFile>, std::shared_ptr<Luxia::Scene>> scene_map;
+
 		std::shared_ptr<AssetManager> asset_manager;
 		std::shared_ptr<Scene> active_scene;
 	};

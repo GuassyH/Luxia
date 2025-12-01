@@ -10,35 +10,33 @@ namespace Talloren::Layer {
 	public:
 		ExtraLayer() = default;
 		~ExtraLayer() = default;
-		
+		std::shared_ptr<Luxia::Components::Material> DefaultMat = nullptr;
 		virtual void OnAttach() override { 
 			LX_CORE_WARN("ExtraLayer Attached");
 
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			auto gasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ModelFile>("cute_ghost/scene.gltf");
-			auto tasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ModelFile>("lotr_troll/scene.gltf");
-			auto sasf = asset_manager->GetAssetFileFromPath<Luxia::Assets::ShaderFile>("shaders/testingshader.shader");
+			// Create Shader runtime Asset (from existing ShaderFile)
+			Luxia::GUID SHGUID = Luxia::GUID(1573444618664531577);
+			auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(SHGUID);
+			auto DefaultShader = scene->CreateRuntimeAsset<Luxia::IShader>(SHFile);
 
-			auto ghostModel = scene->CreateAsset<Luxia::IModel>(gasf);
-			auto lotrModel = scene->CreateAsset<Luxia::IModel>(tasf);
-			auto shader = scene->CreateAsset<Luxia::IShader>(sasf);
+			// Create Material runtime Asset
+			DefaultMat = std::make_shared<Luxia::Components::Material>(DefaultShader);
 
-			auto mat = std::make_shared<Luxia::Components::Material>(shader);
-			
-			auto& ghostEntity = scene->CreateEntity();
-			ghostEntity.position = glm::vec3(0.0f, 0.0f, -10.0f);
-			ghostEntity.euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
-			ghostEntity.AddComponent<Luxia::Components::MeshRenderer>(ghostModel, mat);
+			// Create Model runtime Asset (from existing ModelFile)
+			Luxia::GUID GMGUID = Luxia::GUID(6556753832772741404);
+			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
+			auto GhostModelAsset = scene->CreateRuntimeAsset<Luxia::IModel>(GhostModelFile);
 
-			auto& lotrEntity = scene->CreateEntity();
-			lotrEntity.position = glm::vec3(-4.0f, 0.0f, -10.0f);
-			lotrEntity.euler_angles = glm::vec3(0.0f, 45.0f, 0.0f);
-			lotrEntity.scale = glm::vec3(0.02f);
-			lotrEntity.AddComponent<Luxia::Components::MeshRenderer>(lotrModel, mat);
+			// Create Entities
+			auto& ghostEnt = scene->CreateEntity();
+			ghostEnt.AddComponent<Luxia::Components::MeshRenderer>(GhostModelAsset, DefaultMat);
+			ghostEnt.euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
 
 			auto& camEnt = scene->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
+			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
 			cam.main = true;
 		}
 		virtual void OnDetach() override {

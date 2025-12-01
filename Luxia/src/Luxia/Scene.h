@@ -13,6 +13,7 @@
 
 #include "Luxia/Core/GUID.h"
 #include "entt/entt.hpp"
+#include "Luxia/Asset/SceneFile.h"
 
 namespace Luxia {
 
@@ -24,7 +25,9 @@ namespace Luxia {
 
 		void Cleanup() { reg.clear(); }
 		void Load() { reg = entt::registry(); }
-		void LoadFromFile(const std::filesystem::path& m_metaPath);
+		
+		void SaveToFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
+		void LoadFromFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
 
 		Components::Transform& CreateEntity();
 		
@@ -54,7 +57,7 @@ namespace Luxia {
 
 
 		template <typename T> // Load an asset from an asset file
-		std::shared_ptr<T> CreateAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
+		std::shared_ptr<T> CreateRuntimeAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
 			if (asset_file == nullptr) { LX_CORE_ERROR("Asset file is nullptr"); return nullptr; }
 
 			// Insantiate the assetfile and asset
@@ -63,12 +66,18 @@ namespace Luxia {
 			// load differently
 			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
 				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
-				model->LoadFromFile(asset_file->srcPath);
+				std::shared_ptr<Luxia::Assets::ModelFile> model_file = std::dynamic_pointer_cast<Luxia::Assets::ModelFile>(asset_file);
+				if (model_file) {
+					model->LoadFromFile(model_file->modelPath);
+				}
 				asset = model;
 			}
 			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
 				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
-				texture->LoadFromFile(asset_file->srcPath);
+				std::shared_ptr<Luxia::Assets::TextureFile> texture_file = std::dynamic_pointer_cast<Luxia::Assets::TextureFile>(asset_file);
+				if (texture_file) {
+					texture->LoadFromFile(texture_file->texture_path);
+				}
 				asset = texture;
 			}
 			else if constexpr (std::is_base_of_v<Luxia::IShader, T>) {
@@ -78,10 +87,13 @@ namespace Luxia {
 					return nullptr;
 				}
 
-				auto shader = Luxia::Platform::Assets::CreateShader(
-					shader_file->fragPath.string().c_str(),
-					shader_file->vertPath.string().c_str()
-				);
+				std::shared_ptr<Luxia::IShader> shader = nullptr;
+				if (shader_file->shaderType == Luxia::Assets::ShaderFile::ShaderFileType::VertexFragment) {
+					shader = Luxia::Platform::Assets::CreateShader(
+						shader_file->fragPath.string().c_str(),
+						shader_file->vertPath.string().c_str()
+					);
+				}
 
 				asset = shader;
 			}
@@ -91,28 +103,9 @@ namespace Luxia {
 			return asset;
 		}
 
-		template <typename T> // Load an independant asset with an assigned guid
-		std::shared_ptr<T> CreateAsset(const GUID& assigned_guid) {
-			std::shared_ptr<T> asset = nullptr;
-
-			// load differently
-			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
-				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
-				model->guid = assigned_guid;
-				asset = model;
-			}
-			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
-				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
-				texture->guid = assigned_guid;
-				asset = texture;
-			}
-
-			loaded_assets[asset->guid] = asset;
-			return asset;
-		}
-
 		template <typename T> // Load an independant asset with a new guid
-		std::shared_ptr<T> CreateAsset() {
+		std::shared_ptr<T> Instantiate() {
+			/*
 			std::shared_ptr<T> asset = nullptr;
 			GUID m_guid;
 
@@ -128,19 +121,21 @@ namespace Luxia {
 			}
 
 			loaded_assets[m_guid] = asset;
-			return asset;
+			*/
+			return nullptr;
 		}
 
 		template <typename T> // Unload an asset from a path
 		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void>
 			UnloadAsset(const GUID& guid) {
-
+			/*
 			if (!loaded_assets.contains(guid)) { return; }
 
 			auto& asset = loaded_assets.find(guid)->second;
 			asset->~Asset();
 
 			loaded_assets.erase(guid);
+			*/
 		}
 	private:
 		entt::registry reg;

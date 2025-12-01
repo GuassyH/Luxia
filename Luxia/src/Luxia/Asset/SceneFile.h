@@ -5,13 +5,38 @@ namespace Luxia::Assets {
 	class LUXIA_API SceneFile : public AssetFile {
 	public:
 		SceneFile() = default;
+		SceneFile(const std::filesystem::path m_scenePath)
+			: scene_path(m_scenePath) {
+			type = AssetType::SceneType;
+		}
+		SceneFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~SceneFile() = default;
 
-		virtual bool LoadExtra(const std::filesystem::path& m_metaPath) {
+		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			Save(m_assetPath);
 			return true;
 		}
-		virtual bool SaveExtra(const std::filesystem::path& m_metaPath) {
+
+		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+
+			std::ifstream infile(m_assetPath, std::ios::in);
+
+
+			infile.close();
+
 			return true;
 		}
+		virtual bool Save(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+
+			std::ofstream outfile(m_assetPath);
+
+			outfile.close();
+
+			return true;
+		}
+
+		std::filesystem::path scene_path;
 	};
 }

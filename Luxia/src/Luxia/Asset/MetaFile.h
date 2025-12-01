@@ -1,8 +1,30 @@
 #pragma once
 
-namespace Luxia::Assets {
-	class MetaFile
-	{
+#include "Luxia/Core/Core.h"
+#include "Luxia/Asset/AssetType.h"
+#include "Luxia/Core/GUID.h"
 
+namespace Luxia::Assets {
+	class LUXIA_API MetaFile
+	{
+	public:
+		MetaFile() = default;
+		~MetaFile() = default;
+
+		bool Create(const std::filesystem::path& m_assetPath, const std::filesystem::path& m_metaPath, const std::string& m_name, const AssetType& m_type); // Create the metafile from a source
+		bool Load(const std::filesystem::path& m_metaPath);
+		bool Reload() { return Load(metaPath); }
+		bool Save();
+		void Unload(); // Unload the asset
+
+		AssetType type = AssetType::NoType;
+
+		std::filesystem::path assetPath = "no/path";
+		std::filesystem::path metaPath = "no/path";
+		std::string name = "no_name";
+
+		bool loaded = false;
+
+		GUID guid;
 	};
 }

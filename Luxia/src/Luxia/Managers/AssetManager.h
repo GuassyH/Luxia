@@ -8,13 +8,14 @@
 #include "Luxia/Asset/TextureFile.h"
 #include "Luxia/Asset/ModelFile.h"
 #include "Luxia/Asset/SceneFile.h"
-#include "Luxia/Asset/Asset.h"
+#include "Luxia/Asset/MetaFile.h"
 
 #include "Luxia/Platform/PlatformDefinitions.h"
 
 #include <unordered_map>
 #include <iostream>
 #include <vector>
+#include <xutility>
 
 namespace Luxia {
 
@@ -22,120 +23,222 @@ namespace Luxia {
 	class LUXIA_API AssetManager {
 	private:
 		static std::unordered_map<std::string, Luxia::AssetType> extensions;
+		static std::unordered_map<Luxia::AssetType, std::string> asset_extensions;
 	public:
-		int NumAssetPool() { return asset_pool.size(); }
-		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFiles() { return asset_pool; }
-
 		bool LoadAssetPool(const std::filesystem::path& m_path);
 		bool SaveAssetPool();
 		void Cleanup(); // Before app closes, save everything, etc
 
+		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return asset_pool; }
+		std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>>& GetMetaFilePool() { return meta_pool; }
 
-		std::shared_ptr<Assets::AssetFile> SerializeAssetFile(std::filesystem::path& metafile_path);
+		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
+			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
+			// Search meta pool for matching srcPath
+			for (auto& [guid, meta_file] : meta_pool) {
+				if (meta_file->assetPath == abs_path) {
+					return guid;
+				}
+			}
+			LX_CORE_ERROR("Asset Manager: GetAssetFileGUID - No matching GUID found for path {}", abs_path.string());
+			return GUID(0);
+		}
+
+		// Casts the file to the requested type
+		template <typename T>
+		std::shared_ptr<T> GetAssetFile(const GUID& guid) {
+			if (!asset_pool.contains(guid)) {
+				LX_CORE_ERROR("Asset Manager: GetAssetFile - GUID not found {}", static_cast<uint64_t>(guid));
+				return nullptr;
+			}
+			std::shared_ptr<Assets::AssetFile> asset_file = asset_pool.find(guid)->second;
+			if (!asset_file) {
+				LX_CORE_ERROR("Asset Manager: GetAssetFile - AssetFile is nullptr for GUID {}", static_cast<uint64_t>(guid));
+				return nullptr;
+			}
+			// Dynamic cast to the requested type
+			std::shared_ptr<T> casted_asset_file = std::dynamic_pointer_cast<T>(asset_file);
+			if (!casted_asset_file) {
+				LX_CORE_ERROR("Asset Manager: GetAssetFile - Dynamic cast failed for GUID {}", static_cast<uint64_t>(guid));
+				return nullptr;
+			}
+			LX_CORE_INFO("Asset Manager: GetAssetFile - Successfully retrieved asset file for GUID {}", static_cast<uint64_t>(guid));
+			return casted_asset_file;
+		}
+
+		// Creates an asset file of the given type at the given relative path with the given name
+		template <Luxia::AssetType type, typename... Args> // where_rel_path is where it should be created 
+		GUID CreateAssetFile(const std::filesystem::path& where_rel_path, const std::string ast_name, Args&&... args) 
+		{
+			if (type == AssetType::NoType) { LX_CORE_ERROR("Asset Manager: CreateAssetFile - NoType given"); return GUID(0); }
+			std::string suf = asset_extensions.find(type)->second;
+
+			// Get the absolute path
+			std::filesystem::path abs_path = asset_dir / where_rel_path.lexically_normal() / ast_name;
+
+			LX_CORE_TRACE("Asset Manager: CreateAssetFile - Creating asset at path {}", abs_path.string());
+
+			// Create paths 
+			std::filesystem::path assetfile_path = abs_path.replace_extension(suf);
+			std::filesystem::path metafile_path = abs_path.replace_extension(".meta");
+
+			if (std::filesystem::exists(abs_path) || std::filesystem::exists(metafile_path) || std::filesystem::exists(assetfile_path)) {
+				LX_CORE_ERROR("Asset Manager: Cannot CreateAssetFile since one of the paths exists");
+				return GUID(0);
+			}
+
+			std::shared_ptr<Assets::AssetFile> asset_file = NewAssetFile(assetfile_path, type, std::forward<Args>(args)...);
+			std::shared_ptr<Assets::MetaFile> meta_file = NewMetaFile(metafile_path, assetfile_path, ast_name, type);
+
+			// Check both created
+			if (!asset_file || !meta_file) {
+				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {}", abs_path.string());
+				return GUID(0);
+			}
+
+			// Assign both files pools
+			asset_pool[meta_file->guid] = asset_file;
+			meta_pool[meta_file->guid] = meta_file;
+
+			// Return guid
+			return meta_file->guid;
+		}
 		
+		// Import, used for models (.gltf etc) and textures (.png, .jpg etc)
 		template <typename... Args>
-		std::shared_ptr<Assets::AssetFile> Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
-			std::filesystem::path full_path = asset_dir / rel_path.lexically_normal();
-			if (!std::filesystem::exists(full_path)) { LX_CORE_ERROR("AssetManager: Import, file doesnt exist {}", full_path.string()); return nullptr; }
+		GUID Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
+			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
 
-			std::shared_ptr<Assets::AssetFile> asset_file = nullptr;
+			if (!std::filesystem::exists(abs_path)) { LX_CORE_ERROR("AssetManager: Import - Cannot import non existent file"); return GUID(0); }
 
-			std::filesystem::path metafile_path = full_path;
-			metafile_path.replace_extension(".meta");
+			// Get type from extension
+			std::filesystem::path assetfile_path = abs_path;
+			std::filesystem::path metafile_path = abs_path;
 
 			AssetType type = AssetType::NoType;
-			std::string af_ext = full_path.extension().string();
-			auto it = extensions.find(af_ext);
-			if (it != extensions.end())
-				type = it->second;
+			std::string typesuf = "";
+			for (auto& [a_suf, atype] : extensions) {
+				if (abs_path.string().find(a_suf, abs_path.string().size() - a_suf.size()) != std::string::npos) {
+					type = atype;
+					typesuf = asset_extensions.find(type)->second;
+					break;
+				}
+			}
+			if (type == AssetType::NoType || typesuf == "") {
+				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {} (unknown extension)", rel_path.string());
+				return GUID(0);
+			}
 
-			asset_file = MakeSharedFileFromType(type);
+			assetfile_path.replace_extension(typesuf);
+			metafile_path += ".meta";
 
-			if (!asset_file) { return nullptr; }
-			if (!asset_file->Load(metafile_path)) { return nullptr; }
+			// Create both files
+			std::shared_ptr<Assets::AssetFile> asset_file = NewAssetFile(assetfile_path, type, std::forward<Args>(args)...);
+			std::shared_ptr<Assets::MetaFile> meta_file = NewMetaFile(metafile_path, assetfile_path, ast_name, type);
+
+			// Check both created
+			if(!asset_file || !meta_file) {
+				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {}", rel_path.string());
+				return GUID(0);
+			}
+
+			// Assign both files pools
+			asset_pool[meta_file->guid] = asset_file;
+			meta_pool[meta_file->guid] = meta_file;
+
+			// Return guid
+			return meta_file->guid;
+		}
 
 
-			// Set asset_pool entry
-			asset_pool[asset_file->guid] = asset_file;
-			asset_SrcToGuid[asset_file->srcPath] = asset_file->guid;
+		template <typename... Args>
+		std::shared_ptr<Assets::AssetFile> NewAssetFile(const std::filesystem::path& assetfile_path, const AssetType type, Args&&... args) {
+			if (std::filesystem::exists(assetfile_path)) {
+				LX_CORE_ERROR("Asset Manager: NewAssetFile failed, asset path exists - {}", assetfile_path.string());
+				return nullptr;
+			}
+
+			// Create assetfile
+			std::shared_ptr<Assets::AssetFile> asset_file = MakeAssetFileFromType(type, std::forward<Args>(args)...);
+			LX_CORE_TRACE("Asset File path - {}", assetfile_path.string());
+			
+			if (!asset_file->Create(assetfile_path)) {
+				LX_CORE_ERROR("Asset Manager: NewAssetFile failed to create metafile for - {}", assetfile_path.string());
+				return nullptr;
+			}
+
+			// Return it
+			return asset_file;
+		}
+
+		std::shared_ptr<Assets::MetaFile> NewMetaFile(std::filesystem::path& metafile_path, std::filesystem::path& assetfile_path, const std::string& name, const AssetType type) {
+			// Create metafile
+			std::shared_ptr<Assets::MetaFile> meta_file = std::make_shared<Assets::MetaFile>();
+			if(!meta_file->Create(assetfile_path, metafile_path, name, type)) {
+				LX_CORE_ERROR("Asset Manager: NewMetaFile failed to create metafile for - {}", metafile_path.string());
+				return nullptr;
+			}
+
+			// Return it
+			return meta_file;
+		}
+
+		std::shared_ptr<Assets::AssetFile> LoadAssetFile(const std::filesystem::path& abs_path, const AssetType type) {
+			// Load metafile
+			// Creates an EMPTY asset file of the given type, no "Args&&... args"
+			std::shared_ptr<Assets::AssetFile> asset_file = MakeAssetFileFromType(type);
+			if (!asset_file->Load(abs_path)) {
+				LX_CORE_ERROR("Asset Manager: LoadMetaFile failed to load metafile for - {}", abs_path.string());
+				return nullptr;
+			}
 
 			return asset_file;
 		}
 
-
-		template <typename... Args>
-		std::shared_ptr<Assets::AssetFile> CreateAssetFile (const std::filesystem::path& rel_path, const std::string ast_name, const AssetType type, Args&&... args) {
-			if (!rel_path.has_extension()) { return nullptr; }
-			std::filesystem::path full_path = asset_dir / rel_path.lexically_normal();
-
-			if (std::filesystem::exists(full_path)) { LX_CORE_ERROR("AssetManager: File already exists and cant be created {}", full_path.string()); }
-			else {
-				std::ofstream new_file(full_path);
-				if (!new_file.is_open()) { LX_CORE_ERROR("AssetManager: Failed creating new assetfile"); return nullptr; }
-				new_file.close();
+		std::shared_ptr<Assets::MetaFile> LoadMetaFile(const std::filesystem::path& meta_path) {
+			// Load metafile
+			std::shared_ptr<Assets::MetaFile> meta_file = std::make_shared<Assets::MetaFile>();
+			if(!meta_file->Load(meta_path)) {
+				LX_CORE_ERROR("Asset Manager: LoadMetaFile failed to load metafile for - {}", meta_path.string());
+				return nullptr;
 			}
-
-
-			if (std::filesystem::exists(full_path.replace_extension(".meta"))) { LX_CORE_ERROR("AssetManager: File already exists and cant be created {}", full_path.replace_extension(".meta").string()); }
-			else {
-				std::ofstream new_metafile(full_path.replace_extension(".meta"));
-				if (!new_metafile.is_open()) { LX_CORE_ERROR("AssetManager: Failed creating new asset meta-file"); return nullptr; }
-				new_metafile.close();
-			}
-
-
-			std::filesystem::path metafile_path = full_path;
-			metafile_path.replace_extension(".meta");
-
-			std::shared_ptr<Assets::AssetFile> ast_file = std::make_shared<Luxia::Assets::AssetFile>();
-			ast_file->Create(full_path, rel_path, metafile_path, ast_name, type);
-
-			return ast_file;
-		}
-
-		
-		template <typename T>
-		std::shared_ptr<T> GetAssetFileFromPath(const std::filesystem::path& rel_path) {
-			std::filesystem::path full_path = asset_dir / rel_path.lexically_normal();
-
-			if (asset_SrcToGuid.contains(full_path)) {
-				std::shared_ptr<T> cast_file = std::dynamic_pointer_cast<T>(asset_pool.find(asset_SrcToGuid.find(full_path)->second)->second);
-				if (cast_file)
-					return cast_file;
-			}
-
-			LX_CORE_ERROR("'GetAssetFileFromPath': Asset file nullptr");
-			return nullptr;
+			
+			return meta_file;
 		}
 
 		template <typename... Args>
-		std::shared_ptr<Luxia::Assets::AssetFile> MakeSharedFileFromType(const Luxia::AssetType type, Args&&... args) {
-
+		std::shared_ptr<Luxia::Assets::AssetFile> MakeAssetFileFromType(const Luxia::AssetType type, Args&&... args)
+		{
 			switch (type)
 			{
-			case AssetType::ShaderType: 
-				return std::make_shared<Luxia::Assets::ShaderFile>(std::forward<Args>(args)...);
-			case AssetType::TextureType: 
-				return std::make_shared<Luxia::Assets::TextureFile>();
-			case AssetType::ModelType:
-				return std::make_shared<Luxia::Assets::ModelFile>();
-			case AssetType::AudioType:
-				return nullptr;
-			case AssetType::MaterialType:
-				return nullptr;
-			case AssetType::SceneType:
-				return std::make_shared<Luxia::Assets::SceneFile>();;
-			default:
-				LX_CORE_ERROR("Make Shared from type failed, unknown type");
-				return nullptr;
+				case AssetType::NoType:
+					LX_CORE_ERROR("Make Shared from type failed, NoType given");
+					return nullptr;
+				case AssetType::MaterialType:
+					LX_CORE_ERROR("Make Shared from type failed, MaterialType not implemented");
+					return nullptr;
+				case AssetType::AudioType:
+					LX_CORE_ERROR("Make Shared from type failed, AudioType not implemented");
+					return nullptr;
+				case AssetType::ModelType:
+					return std::make_shared<Assets::ModelFile>(std::forward<Args>(args)...);
+				case AssetType::TextureType:
+					return std::make_shared<Assets::TextureFile>(std::forward<Args>(args)...);
+				case AssetType::SceneType:
+					return std::make_shared<Assets::SceneFile>(std::forward<Args>(args)...);;
+				case AssetType::ShaderType:
+					return std::make_shared<Assets::ShaderFile>(std::forward<Args>(args)...);;
+				default:
+					return nullptr;
 			}
+
 		}
 
 		~AssetManager() = default;
 		AssetManager() = default;
 	private:
 		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>> asset_pool;
-		std::unordered_map<std::filesystem::path, GUID> asset_SrcToGuid;
+		std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>> meta_pool;
 		std::filesystem::path asset_dir;
 	};
 
