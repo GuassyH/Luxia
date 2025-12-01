@@ -6,9 +6,11 @@
 #include "Luxia/Asset/AssetFile.h"
 #include "Luxia/Asset/ShaderFile.h"
 #include "Luxia/Asset/TextureFile.h"
+#include "Luxia/Asset/MaterialFile.h"
 #include "Luxia/Asset/ModelFile.h"
 #include "Luxia/Asset/SceneFile.h"
 #include "Luxia/Asset/MetaFile.h"
+
 
 #include "Luxia/Platform/PlatformDefinitions.h"
 
@@ -215,8 +217,7 @@ namespace Luxia {
 					LX_CORE_ERROR("Make Shared from type failed, NoType given");
 					return nullptr;
 				case AssetType::MaterialType:
-					LX_CORE_ERROR("Make Shared from type failed, MaterialType not implemented");
-					return nullptr;
+					return std::make_shared<Assets::MaterialFile>(std::forward<Args>(args)...);
 				case AssetType::AudioType:
 					LX_CORE_ERROR("Make Shared from type failed, AudioType not implemented");
 					return nullptr;

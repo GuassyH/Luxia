@@ -12,6 +12,7 @@ namespace Luxia::Assets {
 		ModelFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~ModelFile() = default;
 
+
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			Save(m_assetPath);
 			return true;

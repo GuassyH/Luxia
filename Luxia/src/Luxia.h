@@ -14,6 +14,7 @@
 
 #include "Luxia/Scene.h"
 
+// Asset Stuff
 #include "Luxia/Asset/AssetType.h"
 #include "Luxia/Asset/MetaFile.h"
 #include "Luxia/Asset/AssetFile.h"

@@ -92,8 +92,8 @@ namespace Luxia {
 		{Luxia::AssetType::ShaderType, ".luxshader"},
 		{Luxia::AssetType::SceneType, ".luxscene"},
 		{Luxia::AssetType::ModelType, ".luxmodel"},
-		{Luxia::AssetType::TextureType, ".luxtexture"},
-		{Luxia::AssetType::MaterialType, ".luxmaterial"},
+		{Luxia::AssetType::TextureType, ".luxtex"},
+		{Luxia::AssetType::MaterialType, ".luxmat"},
 	};
 
 
