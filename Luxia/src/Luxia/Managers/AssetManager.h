@@ -29,10 +29,46 @@ namespace Luxia {
 		bool SaveAssetPool();
 		void Cleanup(); // Before app closes, save everything, etc
 
+		template <Luxia::AssetType type, typename... Args> // where_rel_path is where it should be created 
+		GUID CreateAssetFile(const std::filesystem::path& where_rel_path, const std::string ast_name, Args&&... args) 
+		{
+			if (type == AssetType::NoType) { LX_CORE_ERROR("Asset Manager: CreateAssetFile - NoType given"); return GUID(0); }
+			std::string suf = asset_extensions.find(type)->second;
+
+			// Get the absolute path
+			std::filesystem::path abs_path = asset_dir / where_rel_path.lexically_normal() / ast_name;
+
+			// Create paths 
+			std::filesystem::path assetfile_path = abs_path.replace_extension(suf);
+			std::filesystem::path metafile_path = abs_path.replace_extension(".meta");
+
+			if (std::filesystem::exists(abs_path) || std::filesystem::exists(metafile_path) || std::filesystem::exists(assetfile_path)) {
+				LX_CORE_ERROR("Asset Manager: Cannot CreateAssetFile since one of the paths exists");
+				return GUID(0);
+			}
+
+			std::shared_ptr<Assets::AssetFile> asset_file = NewAssetFile(assetfile_path, type, std::forward<Args>(args)...);
+			std::shared_ptr<Assets::MetaFile> meta_file = NewMetaFile(metafile_path, assetfile_path, ast_name, type);
+
+			// Check both created
+			if (!asset_file || !meta_file) {
+				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {}", abs_path.string());
+				return GUID(0);
+			}
+
+			// Assign both files pools
+			asset_pool[meta_file->guid] = asset_file;
+			meta_pool[meta_file->guid] = meta_file;
+
+			// Return guid
+			return meta_file->guid;
+		}
 		
 		template <typename... Args>
 		GUID Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
 			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
+
+			if (!std::filesystem::exists(abs_path)) { LX_CORE_ERROR("AssetManager: Import - Cannot import non existent file"); return GUID(0); }
 
 			// Get type from extension
 			std::filesystem::path assetfile_path = abs_path;

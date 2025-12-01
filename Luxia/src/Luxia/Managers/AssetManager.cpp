@@ -11,11 +11,6 @@ namespace Luxia {
 		// Check if the dir exists already
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_INFO("Asset Manager: creating asset dir - {}", asset_dir.string());
-
-			if (!std::filesystem::create_directory(asset_dir)) {
-				LX_CORE_ERROR("Asset Manager: failed to create assets dir at - {}", asset_dir.string());
-				return false;
-			}
 		}
 
 		// Load: iterate through all .meta files
@@ -53,7 +48,6 @@ namespace Luxia {
 	}
 
 	bool AssetManager::SaveAssetPool() {
-
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_ERROR("Asset Manager: creating asset dir - {}", asset_dir.string());
 
@@ -63,7 +57,10 @@ namespace Luxia {
 			}
 		}
 
+		// Save metafile, then save asset_file
 		for (auto& [guid, asset_file] : asset_pool) {
+			meta_pool.find(guid)->second->Save();
+
 			if (asset_file) {
 				asset_file->Save(meta_pool.find(guid)->second->srcPath);
 			}

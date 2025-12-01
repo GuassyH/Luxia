@@ -29,11 +29,16 @@ namespace Luxia::Assets {
 
 			std::ifstream infile(m_assetPath, std::ios::in);
 
-			int wanted = (shaderType == ShaderFileType::Other) ? 1 : 2;
+			int wanted = (shaderType == ShaderFileType::Other) ? 2 : 3;
 			int success = 0;
 			std::string line;
 			while (std::getline(infile, line)) {
 				// Trim whitespace if needed
+				if (line.rfind("type=", 0) == 0) {
+					uint64_t val = std::stoull(line.substr(5));
+					shaderType = static_cast<ShaderFileType>(val);
+					success++;
+				}
 				if(shaderType == ShaderFileType::Other) {
 					if (line.rfind("shader=", 0) == 0) {
 						shaderPath = line.substr(7);
@@ -63,7 +68,7 @@ namespace Luxia::Assets {
 			assetPath = m_assetPath;
 
 			std::ofstream outfile(m_assetPath);
-			outfile << (int)shaderType << "\n";
+			outfile << "type=" << (int)shaderType << "\n";
 
 			if (shaderType == ShaderFileType::Other) {
 				outfile << "shader=" << shaderPath.string() << "\n";

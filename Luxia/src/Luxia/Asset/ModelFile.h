@@ -9,6 +9,7 @@ namespace Luxia::Assets {
 			: modelPath(m_modelPath) {
 			type = AssetType::ModelType;
 		}
+		ModelFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~ModelFile() = default;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {

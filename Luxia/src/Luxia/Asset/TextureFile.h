@@ -9,6 +9,7 @@ namespace Luxia::Assets {
 			: texture_path(m_texturePath) {
 			type = AssetType::TextureType;
 		}
+		TextureFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~TextureFile() = default;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {

@@ -9,6 +9,7 @@ namespace Luxia::Assets {
 			: scene_path(m_scenePath) {
 			type = AssetType::SceneType;
 		}
+		SceneFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~SceneFile() = default;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
