@@ -28,7 +28,7 @@ namespace Talloren::Layer {
 			Luxia::GUID GMGUID = Luxia::GUID(7668727354195686449);
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->CreateAsset<Luxia::IModel>(GhostModelFile);
-			GhostModelAsset->LoadFromFile(GhostModelFile->modelPath);
+
 
 			// Create Entities
 			auto& trollEnt = scene->CreateEntity();

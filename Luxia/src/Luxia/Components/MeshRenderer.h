@@ -15,7 +15,7 @@ namespace Luxia::Components {
 		std::shared_ptr<Material> material = nullptr;
 
 		MeshRenderer() = default;
-		MeshRenderer(const std::shared_ptr<IModel>& m_model, const std::shared_ptr<Material>& m_material) {
+		MeshRenderer(const std::shared_ptr<Luxia::IModel>& m_model, const std::shared_ptr<Material>& m_material) {
 			model = m_model;
 			material = m_material;
 		}

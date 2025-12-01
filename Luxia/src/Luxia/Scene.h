@@ -66,16 +66,16 @@ namespace Luxia {
 				std::shared_ptr<Luxia::Assets::ModelFile> model_file = std::dynamic_pointer_cast<Luxia::Assets::ModelFile>(asset_file);
 				if (model_file) {
 					model->LoadFromFile(model_file->modelPath);
-					asset = model;
 				}
+				asset = model;
 			}
 			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
 				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
 				std::shared_ptr<Luxia::Assets::TextureFile> texture_file = std::dynamic_pointer_cast<Luxia::Assets::TextureFile>(asset_file);
 				if (texture_file) {
 					texture->LoadFromFile(texture_file->texture_path);
-					asset = texture;
 				}
+				asset = texture;
 			}
 			else if constexpr (std::is_base_of_v<Luxia::IShader, T>) {
 				auto shader_file = std::dynamic_pointer_cast<Luxia::Assets::ShaderFile>(asset_file);
@@ -97,7 +97,7 @@ namespace Luxia {
 
 
 			loaded_assets[asset->guid] = asset;
-			return nullptr;
+			return asset;
 		}
 
 		template <typename T> // Load an independant asset with a new guid

@@ -12,7 +12,7 @@ namespace Luxia::Rendering::OpenGL {
 			LX_CORE_ERROR("Tried to render null model!");
 			return;	}
 		else if (!ro.mesh_rend->material || !ro.mesh_rend->material->shader){
-			// LX_CORE_ERROR("Tried to render null material!");
+			LX_CORE_ERROR("Tried to render null material!");
 			return; }
 		else if (!ro.transform){
 			LX_CORE_ERROR("Tried to render null transform!");
