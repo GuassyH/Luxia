@@ -78,3 +78,20 @@ void OnEvent(Event& e){
 ### IDE
 I am using visual studio code 2022 with C++20 and commiting everything to github. The repo is currently private since I've noticed that when I share projects I easily lose motivation since I feel pressure to do what I once wanted to do myself. 
 
+## How are assets handled?
+### Asset Manager
+The Luxia engine uses an Asset Manager. Said Asset Manager has certain functions such as **Import**, and **CreateAssetFile**. As well as the LoadPool and SavePool functions.
+
+### Import
+Import takes an existing file (such as a .obj, or .png) and creates a Luxia file as well as a meta file. It is called using **AssetManager.Import(relative_path, asset_name, arguments);**.
+The arguments in question vary from type to type. The modelfile takes the models path, the texture file takes the texture path. 
+
+### CreateAssetFile
+CreateAssetFile creates a Luxia file and a meta file without using any existing data. Such as creating a shader, and giving it it's frag and vert paths. 
+
+## How are scenes handled?
+### Scenes
+Scenes are actually assets themselves! These assets are therefore stored in the AssetManager, and are loaded at start (metafiles, not actual runtime instances)
+
+### SceneManager
+Luxia engine uses a SceneManager which keeps track of which scene is active as well as loading and unloading scenes and loading the ScenePool.
