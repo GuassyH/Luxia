@@ -16,7 +16,6 @@ namespace Luxia {
 	class Scene;
 	class LUXIA_API IModel : public Luxia::Assets::Asset {
 	public:
-
 		IModel() = default;
 		virtual ~IModel() = default;
 

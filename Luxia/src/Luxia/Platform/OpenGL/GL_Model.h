@@ -5,6 +5,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "Luxia/Components/Transform.h"
 
 namespace Luxia::Platform::OpenGL {
 	class LUXIA_API GL_Model : public IModel {
@@ -16,8 +17,8 @@ namespace Luxia::Platform::OpenGL {
 		virtual bool Unload() override; // Implement?
 	
 	protected:
-		void processNode(aiNode* node, const aiScene* ai_scene, Scene* scene);
-		Mesh processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene);
+		void processNode(aiNode* node, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity);
+		Mesh processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity);
 		std::vector<std::shared_ptr<ITexture>> loadTextures(aiMaterial* material, aiTextureType type);
 	};
 }

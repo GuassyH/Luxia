@@ -29,11 +29,6 @@ namespace Luxia::Rendering::OpenGL {
 		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);
 
 		m_mesh->vao->Unbind();
-
-		glActiveTexture(0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		glUseProgram(0);
 	}
 
 	void OpenGL_Renderer::RenderMeshPure(const Mesh& m_mesh) {
@@ -43,6 +38,7 @@ namespace Luxia::Rendering::OpenGL {
 		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);
 
 		m_mesh.vao->Unbind();
+
 		glActiveTexture(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

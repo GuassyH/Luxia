@@ -57,8 +57,10 @@ namespace Luxia::Platform::OpenGL {
 		Assimp::Importer import;
 		path = model_asset->modelPath;
 
-		const aiScene* scene = import.ReadFile(path.string(), aiProcess_Triangulate | aiProcess_FlipUVs);
+		auto& base_entity = active_scene->CreateEntity();
+		LX_CORE_TRACE("Created Node Ent: {}", (int)base_entity.ent_id);
 
+		const aiScene* scene = import.ReadFile(path.string(), aiProcess_Triangulate | aiProcess_FlipUVs);
 		std::vector<Mesh>().swap(meshes);
 
 		valid = false;
@@ -72,23 +74,27 @@ namespace Luxia::Platform::OpenGL {
 		
 		directory = path.parent_path();
 		name = scene->mName.C_Str();
-		processNode(scene->mRootNode, scene, active_scene);
+		processNode(scene->mRootNode, scene, active_scene, &base_entity);
 	}
 
-	void GL_Model::processNode(aiNode* node, const aiScene* ai_scene, Scene* scene) {
+	void GL_Model::processNode(aiNode* node, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity) {
 		// process all meshes
 		for (unsigned int i = 0; i < node->mNumMeshes; i++) {
 			aiMesh* mesh = ai_scene->mMeshes[node->mMeshes[i]];
-			meshes.push_back(processMesh(mesh, ai_scene, scene));
+			meshes.push_back(processMesh(mesh, ai_scene, scene, root_entity));
 		}
 
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
-			processNode(node->mChildren[i], ai_scene, scene);
+			auto& child_entity = scene->CreateEntity();
+			child_entity.parent = root_entity;
+			LX_CORE_TRACE("Created Node Ent: {}", (int)child_entity.ent_id);
+
+			processNode(node->mChildren[i], ai_scene, scene, &child_entity);
 		}
 	}
 
-	Mesh GL_Model::processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene) {
+	Mesh GL_Model::processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity) {
 		std::vector<Luxia::Rendering::Vertex> vertices;
 		std::vector<GLuint> indices;
 		std::vector<std::shared_ptr<ITexture>> textures;
@@ -145,26 +151,30 @@ namespace Luxia::Platform::OpenGL {
 
 			// diffuse
 			std::vector<std::shared_ptr<ITexture>> diffuseMaps = loadTextures(material, aiTextureType_DIFFUSE);
-			// textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 			mat->diffuse_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
 
 			// specular
 			std::vector<std::shared_ptr<ITexture>> specularMaps = loadTextures(material, aiTextureType_SPECULAR);
-			// textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-			mat->specular_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
+			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+			mat->specular_texture = specularMaps.size() > 0 ? specularMaps[0] : nullptr;
 
 			// normals
 			std::vector<std::shared_ptr<ITexture>> normalMaps = loadTextures(material, aiTextureType_NORMALS);
-			// textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-			mat->normal_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
+			textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+			mat->normal_texture = normalMaps.size() > 0 ? normalMaps[0] : nullptr;
 		}
 
 		Mesh newMesh(vertices, indices);
 		newMesh.CalculateMesh();
 		newMesh.name = mesh->mName.C_Str();
 
+		// Create mesh entity and said parent to root_entity
 		auto& meshEnt = scene->CreateEntity();
+		meshEnt.parent = root_entity;
 		meshEnt.AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
+
+		LX_CORE_TRACE("Processed Mesh Ent: {} parent: {}", (int)meshEnt.ent_id, (int)root_entity->ent_id);
 
 		return newMesh;
 	}

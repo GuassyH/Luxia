@@ -27,6 +27,8 @@ namespace Luxia::Components {
 		entt::entity ent_id = entt::entity(0);
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
+		Transform* parent = nullptr;
+
 		glm::mat4& GetMatrix() { return modelMatrix; }
 		void UpdateMatrix(){
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), scale);

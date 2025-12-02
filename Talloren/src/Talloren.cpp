@@ -28,11 +28,6 @@ namespace Talloren::Layer {
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
 
-			// Create Entities
-			// auto& ghostEnt = scene->CreateEntity();
-			// ghostEnt.AddComponent<Luxia::Components::MeshRenderer>(GhostModelAsset, DefaultMat);
-			// ghostEnt.euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
-
 			auto& camEnt = scene->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
