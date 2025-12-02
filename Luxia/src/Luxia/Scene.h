@@ -57,7 +57,8 @@ namespace Luxia {
 
 
 		template <typename T> // Load an asset from an asset file
-		std::shared_ptr<T> CreateRuntimeAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<T>> 
+			LoadRuntimeAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
 			if (asset_file == nullptr) { LX_CORE_ERROR("Asset file is nullptr"); return nullptr; }
 
 			// Insantiate the assetfile and asset
@@ -68,7 +69,7 @@ namespace Luxia {
 				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
 				std::shared_ptr<Luxia::Assets::ModelFile> model_file = std::dynamic_pointer_cast<Luxia::Assets::ModelFile>(asset_file);
 				if (model_file) {
-					model->LoadFromFile(model_file->modelPath);
+					model->LoadFromFile(model_file);
 				}
 				asset = model;
 			}
@@ -86,7 +87,6 @@ namespace Luxia {
 					LX_CORE_ERROR("Failed to cast AssetFile to ShaderFile");
 					return nullptr;
 				}
-
 				std::shared_ptr<Luxia::IShader> shader = nullptr;
 				if (shader_file->shaderType == Luxia::Assets::ShaderFile::ShaderFileType::VertexFragment) {
 					shader = Luxia::Platform::Assets::CreateShader(
@@ -94,48 +94,45 @@ namespace Luxia {
 						shader_file->vertPath.string().c_str()
 					);
 				}
-
 				asset = shader;
 			}
 
-
+			asset->guid = GUID();
 			loaded_assets[asset->guid] = asset;
 			return asset;
 		}
 
-		template <typename T> // Load an independant asset with a new guid
-		std::shared_ptr<T> Instantiate() {
-			/*
+		template <typename T, typename... Args> // Load an independant asset with a new guid
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<T>>  
+			CreateRuntimeAsset() {
 			std::shared_ptr<T> asset = nullptr;
-			GUID m_guid;
 
+			// load differently
 			if constexpr (std::is_base_of_v<Luxia::IModel, T>) {
-				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
-				m_guid = model->guid;
-				asset = model;
+				asset = Luxia::Platform::Assets::CreateModel();
 			}
 			else if constexpr (std::is_base_of_v<Luxia::ITexture, T>) {
-				std::shared_ptr<Luxia::ITexture> texture = Luxia::Platform::Assets::CreateTexture();
-				m_guid = texture->guid;
-				asset = texture;
+				asset = Luxia::Platform::Assets::CreateTexture();
+			}
+			else if constexpr (std::is_base_of_v<Luxia::IShader, T>) {
+				asset = Luxia::Platform::Assets::CreateShader();
 			}
 
-			loaded_assets[m_guid] = asset;
-			*/
-			return nullptr;
+			asset->guid = GUID();
+			loaded_assets[asset->guid] = asset;
+			return asset;
 		}
 
 		template <typename T> // Unload an asset from a path
-		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, void>
+		std::enable_if_t<std::is_base_of_v<Assets::Asset, T>, bool>
 			UnloadAsset(const GUID& guid) {
-			/*
-			if (!loaded_assets.contains(guid)) { return; }
+			if (!loaded_assets.contains(guid)) { return false; }
 
 			auto& asset = loaded_assets.find(guid)->second;
-			asset->~Asset();
+			asset->Unload();
 
 			loaded_assets.erase(guid);
-			*/
+			return true;
 		}
 	private:
 		entt::registry reg;

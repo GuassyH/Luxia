@@ -32,9 +32,7 @@ namespace Luxia {
 	void Mesh::Cleanup() {
 		vertices.clear(); 
 		indices.clear(); 
-		for (auto& tex : textures) {
-			tex->Delete();
-		}
+		material = nullptr;
 		valid = false; 
 	}
 }

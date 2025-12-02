@@ -53,9 +53,9 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Model::LoadFromFile(const std::filesystem::path& m_path) {
+	void GL_Model::LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset) {
 		Assimp::Importer import;
-		path = m_path;
+		path = model_asset->modelPath;
 
 		const aiScene* scene = import.ReadFile(path.string(), aiProcess_Triangulate | aiProcess_FlipUVs);
 
@@ -137,25 +137,29 @@ namespace Luxia::Platform::OpenGL {
 		}
 
 
+		std::shared_ptr<Luxia::IMaterial> mat = Platform::Assets::CreateMaterial();
+		
 		// Texture
 		if (mesh->mMaterialIndex >= 0) {
 			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
 			// diffuse
 			std::vector<std::shared_ptr<ITexture>> diffuseMaps = loadTextures(material, aiTextureType_DIFFUSE);
-			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+			// textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+			mat->diffuse_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
 
 			// specular
 			std::vector<std::shared_ptr<ITexture>> specularMaps = loadTextures(material, aiTextureType_SPECULAR);
-			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+			// textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+			mat->specular_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
 
 			// normals
 			std::vector<std::shared_ptr<ITexture>> normalMaps = loadTextures(material, aiTextureType_NORMALS);
-			textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+			// textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+			mat->normal_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
 		}
 
-
-		Mesh newMesh(vertices, indices, textures);
+		Mesh newMesh(vertices, indices, mat);
 		newMesh.CalculateMesh();
 		newMesh.name = mesh->mName.C_Str();
 		return newMesh;

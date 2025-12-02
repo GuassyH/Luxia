@@ -12,7 +12,7 @@ namespace Luxia::Platform::OpenGL {
 		GL_Model() = default;
 		~GL_Model() = default;
 
-		virtual void LoadFromFile(const std::filesystem::path& m_path) override;
+		virtual void LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset) override;
 		virtual bool Unload() override; // Implement?
 	
 	protected:

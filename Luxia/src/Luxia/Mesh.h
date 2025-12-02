@@ -3,7 +3,8 @@
 #include "Luxia/Core/Core.h"
 #include "Luxia/Rendering/Vertex.h"
 #include "Luxia/Rendering/API/IRenderBuffers.h"
-#include "Luxia/Rendering/API/ITexture.h"
+#include "Luxia/Rendering/API/IMaterial.h"
+
 
 namespace Luxia {
 	class LUXIA_API Mesh {
@@ -11,8 +12,8 @@ namespace Luxia {
 		Mesh() = default;
 		~Mesh() = default;
 
-		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds, std::vector<std::shared_ptr<ITexture>> texs = {})
-			: vertices(verts), indices(inds), textures(texs) {}
+		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds, std::shared_ptr<IMaterial> mat = {})
+			: vertices(verts), indices(inds), material(mat) {}
 		bool CalculateMesh();
 
 		void Cleanup();
@@ -25,7 +26,8 @@ namespace Luxia {
 
 		std::vector<Rendering::Vertex> vertices;
 		std::vector<uint32_t> indices;
-		std::vector<std::shared_ptr<ITexture>> textures;
+
+		std::shared_ptr<Luxia::IMaterial> material = nullptr;
 
 		std::string name = "no_name";
 	private:

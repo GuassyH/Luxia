@@ -1,10 +1,15 @@
 #include "lxpch.h"
 #include "GL_Material.h"
 #include "glad/glad.h"
+#include "Luxia/Platform/AssetCreation.h"
 
 namespace Luxia::Platform::OpenGL {
 
-	void GL_Material::LoadFromFile(const std::shared_ptr<Assets::MaterialFile> matFile) {
+	GL_Material::GL_Material() {
+		shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
+	}
+
+	void GL_Material::LoadFromFile(const std::shared_ptr<Luxia::Assets::MaterialFile> matFile) {
 		
 	}
 

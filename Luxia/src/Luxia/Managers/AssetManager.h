@@ -144,6 +144,9 @@ namespace Luxia {
 				return GUID(0);
 			}
 
+
+			asset_file->guid = meta_file->guid;
+
 			// Assign both files pools
 			asset_pool[meta_file->guid] = asset_file;
 			meta_pool[meta_file->guid] = meta_file;

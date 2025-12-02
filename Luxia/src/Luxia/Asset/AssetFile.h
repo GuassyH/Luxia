@@ -25,6 +25,7 @@ namespace Luxia::Assets {
 
 		bool loaded = false;
 
+		GUID guid;
 		AssetType type = AssetType::NoType;
 		std::filesystem::path assetPath = "no/path";
 	};
