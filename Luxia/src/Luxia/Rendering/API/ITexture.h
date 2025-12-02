@@ -30,11 +30,11 @@ namespace Luxia {
 		virtual void Delete() = 0;
 		virtual void Use() = 0;
 
-		bool IsValid() { return valid; }
-		bool HasPath() { return hasPath; }
-		int GetWidth() const { return imgWidth; }
-		int GetHeight() const { return imgHeight; }
-		int GetNumColCh() const { return numColCh; }
+		bool IsValid() const	{ return valid; }
+		bool HasPath() const	{ return hasPath; }
+		int GetWidth() const	{ return imgWidth; }
+		int GetHeight() const	{ return imgHeight; }
+		int GetNumColCh() const	{ return numColCh; }
 
 		unsigned int GetFBO() const { return fbo; }
 		unsigned int GetRBO() const { return rbo; }

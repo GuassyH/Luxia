@@ -13,13 +13,18 @@ namespace Luxia::Platform::OpenGL {
 		
 	}
 
-	void GL_Material::Use() {
+	void GL_Material::Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (shader) {
 			shader->Use();
 			// Set material properties
 			shader->SetVec4("mat_color", color);
 			shader->SetFloat("mat_roughness", roughness);
 			shader->SetFloat("mat_metallic", metallic);
+
+			shader->SetMat4("modelMat", modMat);
+			shader->SetMat4("viewMat", viewMat);
+			shader->SetMat4("projMat", projMat);
+
 			// Bind textures if they exist
 			if (diffuse_texture && diffuse_texture->IsValid()) {
 				glActiveTexture(GL_TEXTURE0);

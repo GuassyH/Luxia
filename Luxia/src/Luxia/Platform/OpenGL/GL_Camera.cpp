@@ -28,11 +28,11 @@ namespace Luxia::Platform::OpenGL {
 		auto view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
 
 		for (auto entity : view) {
-			auto& mr = view.get<Luxia::Components::MeshRenderer>(entity);
+			auto mr = scene->TryGetFromEntity<Luxia::Components::MeshRenderer>(entity);
 			auto mr_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
-			if (mr_t) {
-				Luxia::Rendering::RenderObject ro { mr_t, &mr };
+			if (mr_t && mr) {
+				Luxia::Rendering::RenderObject ro { mr_t, mr };
 				rend->Submit(ro);
 			}
 			else {

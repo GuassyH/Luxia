@@ -13,13 +13,14 @@
 #include <iostream>
 
 namespace Luxia {
+	class Scene;
 	class LUXIA_API IModel : public Luxia::Assets::Asset {
 	public:
 
 		IModel() = default;
 		virtual ~IModel() = default;
 
-		virtual void LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset) = 0; // temp shader
+		virtual void LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset, Scene* active_scene) = 0; // temp shader
 		virtual bool Unload() override = 0;
 
 		bool IsValid() const { return valid; }

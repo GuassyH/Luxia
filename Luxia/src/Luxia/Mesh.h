@@ -12,8 +12,8 @@ namespace Luxia {
 		Mesh() = default;
 		~Mesh() = default;
 
-		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds, std::shared_ptr<IMaterial> mat = {})
-			: vertices(verts), indices(inds), material(mat) {}
+		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds)
+			: vertices(verts), indices(inds) {}
 		bool CalculateMesh();
 
 		void Cleanup();
@@ -26,8 +26,6 @@ namespace Luxia {
 
 		std::vector<Rendering::Vertex> vertices;
 		std::vector<uint32_t> indices;
-
-		std::shared_ptr<Luxia::IMaterial> material = nullptr;
 
 		std::string name = "no_name";
 	private:

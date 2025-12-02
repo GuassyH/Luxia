@@ -7,45 +7,29 @@
 
 namespace Luxia::Rendering::OpenGL {
 
-	void OpenGL_Renderer::RenderModel(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!ro.mesh_rend->model) {
-			LX_CORE_ERROR("Tried to render null model!");
-			return;	}
-		else if (!ro.mesh_rend->material || !ro.mesh_rend->material->shader){
-			LX_CORE_ERROR("Tried to render null material!");
-			return; }
-		else if (!ro.transform){
-			LX_CORE_ERROR("Tried to render null transform!");
-			return; }
-
-
+	// Render the render object (meshrenderer mesh with material and transform)
+	void OpenGL_Renderer::RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		ro.transform->UpdateMatrix();
-
-		glm::mat4& modMat = ro.transform->GetMatrix();
-		for (auto& mesh : ro.mesh_rend->model->GetMeshes()) {
-			RenderMesh(mesh, modMat, viewMat, projMat);
-		}
+		RenderMesh(ro.mesh_rend->mesh, ro.mesh_rend->material, ro.transform->GetMatrix(), viewMat, projMat);
 	}
 
-	void OpenGL_Renderer::RenderMesh(const Mesh& m_mesh, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render invalid mesh"); return; }
-		if (!m_mesh.material || !m_mesh.material->shader) {
+	void OpenGL_Renderer::RenderMesh(const std::shared_ptr<Luxia::Mesh> m_mesh, const std::shared_ptr<Luxia::IMaterial> m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
+		if (!m_mesh || !m_material->shader) {
 			LX_CORE_ERROR("Tried to render mesh with invalid material or shader");
+			return;
+		} if (!m_mesh->IsValid()) {
+			LX_CORE_ERROR("Tried to render in-valid mesh");
 			return;
 		}
 
 		// Use Material
-		m_mesh.material->Use();
-		
-		m_mesh.material->shader->Use();
-		m_mesh.material->shader->SetMat4("modelMat", modMat);
-		m_mesh.material->shader->SetMat4("viewMat", viewMat);
-		m_mesh.material->shader->SetMat4("projMat", projMat);
+		m_material->Use(modMat, viewMat, projMat);
 
-		m_mesh.vao->Bind();
-		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);
+		m_mesh->vao->Bind();
+		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);
 
-		m_mesh.vao->Unbind();
+		m_mesh->vao->Unbind();
+
 		glActiveTexture(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 

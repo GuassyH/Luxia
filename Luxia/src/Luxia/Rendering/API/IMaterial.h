@@ -21,7 +21,7 @@ namespace Luxia {
 		virtual ~IMaterial() = default;
 
 		virtual void LoadFromFile(const std::shared_ptr<Assets::MaterialFile> matFile) = 0;
-		virtual void Use() = 0;
+		virtual void Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
 		virtual bool Unload() override = 0;
 
 		std::shared_ptr<IShader> shader = nullptr;

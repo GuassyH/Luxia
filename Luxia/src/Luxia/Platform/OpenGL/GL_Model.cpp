@@ -1,7 +1,7 @@
 #include "lxpch.h"
 #include "GL_Model.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
-
+#include "Luxia/Scene.h"
 
 namespace Luxia::Platform::OpenGL {
 
@@ -53,7 +53,7 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Model::LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset) {
+	void GL_Model::LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset, Scene* active_scene) {
 		Assimp::Importer import;
 		path = model_asset->modelPath;
 
@@ -72,23 +72,23 @@ namespace Luxia::Platform::OpenGL {
 		
 		directory = path.parent_path();
 		name = scene->mName.C_Str();
-;		processNode(scene->mRootNode, scene);
+		processNode(scene->mRootNode, scene, active_scene);
 	}
 
-	void GL_Model::processNode(aiNode* node, const aiScene* scene) {
+	void GL_Model::processNode(aiNode* node, const aiScene* ai_scene, Scene* scene) {
 		// process all meshes
 		for (unsigned int i = 0; i < node->mNumMeshes; i++) {
-			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			meshes.push_back(processMesh(mesh, scene));
+			aiMesh* mesh = ai_scene->mMeshes[node->mMeshes[i]];
+			meshes.push_back(processMesh(mesh, ai_scene, scene));
 		}
 
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
-			processNode(node->mChildren[i], scene);
+			processNode(node->mChildren[i], ai_scene, scene);
 		}
 	}
 
-	Mesh GL_Model::processMesh(aiMesh* mesh, const aiScene* scene) {
+	Mesh GL_Model::processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene) {
 		std::vector<Luxia::Rendering::Vertex> vertices;
 		std::vector<GLuint> indices;
 		std::vector<std::shared_ptr<ITexture>> textures;
@@ -141,7 +141,7 @@ namespace Luxia::Platform::OpenGL {
 		
 		// Texture
 		if (mesh->mMaterialIndex >= 0) {
-			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+			aiMaterial* material = ai_scene->mMaterials[mesh->mMaterialIndex];
 
 			// diffuse
 			std::vector<std::shared_ptr<ITexture>> diffuseMaps = loadTextures(material, aiTextureType_DIFFUSE);
@@ -159,9 +159,13 @@ namespace Luxia::Platform::OpenGL {
 			mat->normal_texture = diffuseMaps.size() > 0 ? diffuseMaps[0] : nullptr;
 		}
 
-		Mesh newMesh(vertices, indices, mat);
+		Mesh newMesh(vertices, indices);
 		newMesh.CalculateMesh();
 		newMesh.name = mesh->mName.C_Str();
+
+		auto& meshEnt = scene->CreateEntity();
+		meshEnt.AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
+
 		return newMesh;
 	}
 

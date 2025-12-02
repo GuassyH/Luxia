@@ -12,12 +12,12 @@ namespace Luxia::Platform::OpenGL {
 		GL_Model() = default;
 		~GL_Model() = default;
 
-		virtual void LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset) override;
+		virtual void LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset, Scene* active_scene) override;
 		virtual bool Unload() override; // Implement?
 	
 	protected:
-		void processNode(aiNode* node, const aiScene* scene);
-		Mesh processMesh(aiMesh* mesh, const aiScene* scene);
+		void processNode(aiNode* node, const aiScene* ai_scene, Scene* scene);
+		Mesh processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene);
 		std::vector<std::shared_ptr<ITexture>> loadTextures(aiMaterial* material, aiTextureType type);
 	};
 }

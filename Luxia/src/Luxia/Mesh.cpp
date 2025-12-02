@@ -32,7 +32,6 @@ namespace Luxia {
 	void Mesh::Cleanup() {
 		vertices.clear(); 
 		indices.clear(); 
-		material = nullptr;
 		valid = false; 
 	}
 }

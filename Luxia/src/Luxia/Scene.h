@@ -69,7 +69,7 @@ namespace Luxia {
 				std::shared_ptr<Luxia::IModel> model = Luxia::Platform::Assets::CreateModel();
 				std::shared_ptr<Luxia::Assets::ModelFile> model_file = std::dynamic_pointer_cast<Luxia::Assets::ModelFile>(asset_file);
 				if (model_file) {
-					model->LoadFromFile(model_file);
+					model->LoadFromFile(model_file, this);
 				}
 				asset = model;
 			}

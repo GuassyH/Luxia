@@ -16,7 +16,7 @@ namespace Luxia::Platform::OpenGL {
 		~GL_Material() = default;
 
 		virtual void LoadFromFile(const std::shared_ptr<Luxia::Assets::MaterialFile> matFile) override;
-		virtual void Use() override;
+		virtual void Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) override;
 		virtual bool Unload() override;
     };
 }
