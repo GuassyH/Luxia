@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -106,7 +106,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -136,7 +136,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -161,17 +161,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\Layers\ViewportLayer.h" />
-    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
+    <ClInclude Include="src\Luxia.h" />
+    <ClInclude Include="src\Luxia\Asset\Asset.h" />
+    <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
     <ClInclude Include="src\Luxia\Asset\AssetType.h" />
     <ClInclude Include="src\Luxia\Asset\MaterialFile.h" />
     <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
     <ClInclude Include="src\Luxia\Asset\ModelFile.h" />
-    <ClInclude Include="src\Luxia.h" />
-    <ClInclude Include="src\Luxia\Asset\Asset.h" />
-    <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
     <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
     <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
+    <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
@@ -194,6 +193,8 @@
     <ClInclude Include="src\Luxia\Layers\Layer.h" />
     <ClInclude Include="src\Luxia\Layers\LayerStack.h" />
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h" />
+    <ClInclude Include="src\Luxia\Layers\UILayer.h" />
+    <ClInclude Include="src\Luxia\Layers\ViewportLayer.h" />
     <ClInclude Include="src\Luxia\Managers\AssetManager.h" />
     <ClInclude Include="src\Luxia\Managers\EventManager.h" />
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="src\Luxia\Mesh.h" />
     <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Camera.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Shader.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h" />
@@ -220,11 +222,8 @@
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
     <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\lxpch.h" />
-    <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp" />
-    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp" />
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
@@ -234,11 +233,14 @@
     <ClCompile Include="src\Luxia\Layers\EventLayer.cpp" />
     <ClCompile Include="src\Luxia\Layers\GameLayer.cpp" />
     <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\UILayer.cpp" />
+    <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
     <ClCompile Include="src\Luxia\Mesh.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp" />
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Model.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Shader.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Texture.cpp" />
@@ -249,14 +251,11 @@
     <ClCompile Include="src\lxpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="vendor\glad\glad.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <ProjectReference Include="vendor\LuxiaVendor.vcxproj">
+      <Project>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

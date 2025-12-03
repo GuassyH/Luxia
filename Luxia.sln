@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Luxia", "Luxia\Luxia.vcxproj", "{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuxiaVendor", "Luxia\vendor\LuxiaVendor.vcxproj", "{F693E7D7-6249-60CD-EB3D-5AA457F256D1}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Talloren", "Talloren\Talloren.vcxproj", "{C673EC2F-B240-473B-DB59-35E3C7857CC9}"
 EndProject
 Global
@@ -18,6 +20,12 @@ Global
 		{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}.Distribution|x64.Build.0 = Distribution|x64
 		{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}.Release|x64.ActiveCfg = Release|x64
 		{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}.Release|x64.Build.0 = Release|x64
+		{F693E7D7-6249-60CD-EB3D-5AA457F256D1}.Debug|x64.ActiveCfg = Debug|x64
+		{F693E7D7-6249-60CD-EB3D-5AA457F256D1}.Debug|x64.Build.0 = Debug|x64
+		{F693E7D7-6249-60CD-EB3D-5AA457F256D1}.Distribution|x64.ActiveCfg = Distribution|x64
+		{F693E7D7-6249-60CD-EB3D-5AA457F256D1}.Distribution|x64.Build.0 = Distribution|x64
+		{F693E7D7-6249-60CD-EB3D-5AA457F256D1}.Release|x64.ActiveCfg = Release|x64
+		{F693E7D7-6249-60CD-EB3D-5AA457F256D1}.Release|x64.Build.0 = Release|x64
 		{C673EC2F-B240-473B-DB59-35E3C7857CC9}.Debug|x64.ActiveCfg = Debug|x64
 		{C673EC2F-B240-473B-DB59-35E3C7857CC9}.Debug|x64.Build.0 = Debug|x64
 		{C673EC2F-B240-473B-DB59-35E3C7857CC9}.Distribution|x64.ActiveCfg = Distribution|x64

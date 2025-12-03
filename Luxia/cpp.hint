@@ -3,3 +3,5 @@
 // For more information see https://go.microsoft.com/fwlink/?linkid=865984
 #define LUXIA_API __declspec(dllexport)
 #define LUXIA_API __declspec(dllimport)
+#define GET_EVENT_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+#define GET_EVENT_TYPE(type) static EventType GetStaticType() { return type; } virtual EventType GetEventType() const override { return GetStaticType(); }

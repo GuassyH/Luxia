@@ -13,7 +13,6 @@ namespace Talloren::Layers {
 	void EditorLayer::OnRender() {
 	}
 	void EditorLayer::OnEvent(Luxia::Event& e) {
-
 	}
 
 }

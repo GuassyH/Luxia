@@ -8,8 +8,40 @@ workspace "Luxia"
 		"Distribution"
 	}
 
--- this will be Debug-Windows-x64
 
+-- All cpp / c files that need to be included
+project "LuxiaVendor"
+    location "Luxia/vendor"
+    kind "StaticLib"
+    language "C++"
+
+    files { 
+		"Luxia/vendor/imgui/**.cpp",
+		"Luxia/vendor/glad/**.c",
+	}
+    includedirs { 
+		"Luxia/vendor/imgui", 
+		"Luxia/vendor",
+	}
+
+	filter "system:windows"
+		cppdialect "C++20"
+		staticruntime "Off"
+		systemversion "latest"
+
+		-- Define what should be defined
+		defines{
+			"LUXIA_EXPORT",
+			"LUXIA_PLATFORM_WINDOWS",
+			"LUXIA_RENDERER_OPENGL", 
+		}
+
+		buildoptions { "/utf-8" }
+		linkoptions { "/SUBSYSTEM:CONSOLE" }
+
+	
+
+-- this will be Debug-Windows-x64
 project "Luxia"
 	location "Luxia"
 	kind "SharedLib"
@@ -28,9 +60,6 @@ project "Luxia"
 	files{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		"%{prj.name}/vendor/glad/glad.c",
-		--"%{prj.name}/vendor/glm/glm/**.cpp",
-		--"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 
@@ -40,9 +69,11 @@ project "Luxia"
 		"%{prj.name}/vendor",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/vendor/glm",
+		"%{prj.name}/vendor/imgui",
 		--"%{prj.name}/vendor/yaml-cpp/include",
 	}
 
+	links { "LuxiaVendor" }
 
 	filter "system:windows"
 		cppdialect "C++20"
@@ -53,7 +84,7 @@ project "Luxia"
 		defines{
 			"LUXIA_EXPORT",
 			"LUXIA_PLATFORM_WINDOWS",
-			"LUXIA_RENDERER_OPENGL"
+			"LUXIA_RENDERER_OPENGL", 
 		}
 
 		buildoptions { "/utf-8" }

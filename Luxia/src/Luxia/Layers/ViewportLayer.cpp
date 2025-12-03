@@ -36,8 +36,10 @@ namespace Luxia::Layers {
 	bool ViewportLayer::RenderCameraToVP(Luxia::RenderCameraEvent& e) {
 		std::shared_ptr<Luxia::ITexture> output_tex = e.GetTexture();
 
-		if (!output_tex->IsValid()) { LX_CORE_ERROR("INVALID TEX"); return false; }
-		if (!fs_shader) { LX_CORE_ERROR("INVALID SHADER"); return false; }
+		// If any of these fail, we don't render to the viewport, and dont consume the event
+		if (!e.IsMainCamera() || e.IsEditorCamera()) { LX_CORE_ERROR("ViewportLayer: Camera is editor or not main"); return false; }
+		if (!output_tex) { LX_CORE_ERROR("ViewportLayer: Camera Tex is nullptr"); return false; }
+		if (!output_tex->IsValid()) { LX_CORE_ERROR("ViewportLayer: Camera Tex is not valid"); return false; }
 
 		renderer->RenderFBO(fs_quad, fs_shader, output_tex);
 

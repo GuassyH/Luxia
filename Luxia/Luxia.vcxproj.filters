@@ -1,286 +1,297 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    <Filter Include="Luxia">
+      <UniqueIdentifier>{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia">
-      <UniqueIdentifier>{7F895DB3-EBF3-112A-3432-C3CFA0DBEF7E}</UniqueIdentifier>
+    <Filter Include="Luxia\Asset">
+      <UniqueIdentifier>{B7ED657A-23A3-DE6F-AC97-D846184CD573}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Asset">
-      <UniqueIdentifier>{4E214092-BAAC-AD56-C3BD-304B2FC80957}</UniqueIdentifier>
+    <Filter Include="Luxia\Components">
+      <UniqueIdentifier>{3D17B13A-2910-D08C-5242-B5113E9AAF98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Components">
-      <UniqueIdentifier>{34211EA2-20B0-A76B-C9CE-BB66B53CB811}</UniqueIdentifier>
+    <Filter Include="Luxia\Core">
+      <UniqueIdentifier>{80D8ECDC-6C90-2E2A-D597-0786C16EC91A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Core">
-      <UniqueIdentifier>{3775F313-2343-E719-0CD7-5740F843C37E}</UniqueIdentifier>
+    <Filter Include="Luxia\Events">
+      <UniqueIdentifier>{0C0AA7D0-F86C-3675-A1F2-6E2B8D3402F8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Events">
-      <UniqueIdentifier>{83B0C7E3-6FA9-E635-98DB-CBBA8433C641}</UniqueIdentifier>
+    <Filter Include="Luxia\Layers">
+      <UniqueIdentifier>{E7F489DF-D357-1984-7CDD-513A681FE506}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Layers">
-      <UniqueIdentifier>{5E9BAAF2-4A94-C944-73C6-AEC95F1EA950}</UniqueIdentifier>
+    <Filter Include="Luxia\Managers">
+      <UniqueIdentifier>{054A25BC-F117-19C2-DAAB-89E8C618F526}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Managers">
-      <UniqueIdentifier>{3C6A091A-284E-CA6F-91AE-C4C27DB1B4F1}</UniqueIdentifier>
+    <Filter Include="Luxia\Platform">
+      <UniqueIdentifier>{7CC4AFB2-6892-A3B8-5126-14DF3D937F1D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Platform">
-      <UniqueIdentifier>{B3E49310-9FC8-5466-0829-4FB9F42B3FE8}</UniqueIdentifier>
+    <Filter Include="Luxia\Platform\OpenGL">
+      <UniqueIdentifier>{300A0BB1-9C76-C6AB-656A-5E09D195E813}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Platform\OpenGL">
-      <UniqueIdentifier>{87E62F03-F3A8-638D-3C59-F219A85A3C6B}</UniqueIdentifier>
+    <Filter Include="Luxia\Rendering">
+      <UniqueIdentifier>{7556263F-E1E1-9303-EAF2-16F856FDEF03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Rendering">
-      <UniqueIdentifier>{8C7D8E59-F8DE-6B67-814C-B219EDACA226}</UniqueIdentifier>
+    <Filter Include="Luxia\Rendering\API">
+      <UniqueIdentifier>{DE6DC17E-4ACF-9E8C-D33C-E53E3F9DD54B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Luxia\Rendering\API">
-      <UniqueIdentifier>{75488550-E17F-CDE7-EA89-310B5640F4E0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Luxia\Rendering\OpenGL">
-      <UniqueIdentifier>{40F11C89-2C01-C959-95BA-2D7881E9B7F2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="vendor">
-      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="vendor\glad">
-      <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
+    <Filter Include="Luxia\Rendering\OpenGL">
+      <UniqueIdentifier>{098A5CF2-F583-8544-DEF0-1B55CA89EBB0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Asset\Asset.h">
-      <Filter>src\Luxia\Asset</Filter>
+      <Filter>Luxia\Asset</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Asset\AssetFile.h">
-      <Filter>src\Luxia\Asset</Filter>
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\AssetType.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\MaterialFile.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\MetaFile.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\ModelFile.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\SceneFile.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\ShaderFile.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\TextureFile.h">
+      <Filter>Luxia\Asset</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Camera.h">
-      <Filter>src\Luxia\Components</Filter>
+      <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Component.h">
-      <Filter>src\Luxia\Components</Filter>
+      <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h">
-      <Filter>src\Luxia\Components</Filter>
+      <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Transform.h">
-      <Filter>src\Luxia\Components</Filter>
+      <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\Application.h">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\Core.h">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\EntryPoint.h">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\GUID.h">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\Log.h">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\Event.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\EventDefs.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\EventHandler.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\KeyEvent.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\MouseEvent.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\RenderEvent.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\WindowEvent.h">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\EventLayer.h">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\GameLayer.h">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\Layer.h">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\LayerStack.h">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Layers\RenderLayer.h">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layers\UILayer.h">
+      <Filter>Luxia\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Layers\ViewportLayer.h">
+      <Filter>Luxia\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\AssetManager.h">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\EventManager.h">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\SceneManager.h">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Mesh.h">
-      <Filter>src\Luxia</Filter>
+      <Filter>Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\AssetCreation.h">
-      <Filter>src\Luxia\Platform</Filter>
+      <Filter>Luxia\Platform</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Camera.h">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h">
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Model.h">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Shader.h">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Texture.h">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Window.h">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Platform\PlatformDefinitions.h">
-      <Filter>src\Luxia\Platform</Filter>
+      <Filter>Luxia\Platform</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\ICamera.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IMaterial.h">
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\IModel.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\IRenderBuffers.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\IShader.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\ITexture.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\IWindow.h">
-      <Filter>src\Luxia\Rendering\API</Filter>
+      <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h">
-      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+      <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h">
-      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+      <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h">
-      <Filter>src\Luxia\Rendering</Filter>
+      <Filter>Luxia\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\Vertex.h">
-      <Filter>src\Luxia\Rendering</Filter>
+      <Filter>Luxia\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Scene.h">
-      <Filter>src\Luxia</Filter>
+      <Filter>Luxia</Filter>
     </ClInclude>
-    <ClInclude Include="src\lxpch.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
-    <ClInclude Include="src\Luxia\Asset\ModelFile.h" />
-    <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
-    <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
-    <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
-    <ClInclude Include="src\Luxia\Asset\AssetType.h" />
-    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
-    <ClInclude Include="src\Luxia\Asset\MaterialFile.h" />
-    <ClInclude Include="src\Luxia\Rendering\API\IMaterial.h" />
-    <ClInclude Include="src\Luxia\Layers\ViewportLayer.h" />
+    <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">
+      <Filter>Luxia\Asset</Filter>
+    </ClCompile>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Core\GUID.cpp">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Core\Log.cpp">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Core\stb.cpp">
-      <Filter>src\Luxia\Core</Filter>
+      <Filter>Luxia\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Events\EventHandler.cpp">
-      <Filter>src\Luxia\Events</Filter>
+      <Filter>Luxia\Events</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Layers\EventLayer.cpp">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Layers\GameLayer.cpp">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Layers\RenderLayer.cpp">
-      <Filter>src\Luxia\Layers</Filter>
+      <Filter>Luxia\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Layers\UILayer.cpp">
+      <Filter>Luxia\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp">
+      <Filter>Luxia\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp">
-      <Filter>src\Luxia\Managers</Filter>
+      <Filter>Luxia\Managers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Mesh.cpp">
-      <Filter>src\Luxia</Filter>
+      <Filter>Luxia</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp">
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Model.cpp">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Shader.cpp">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Texture.cpp">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp">
-      <Filter>src\Luxia\Platform\OpenGL</Filter>
+      <Filter>Luxia\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp">
-      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+      <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp">
-      <Filter>src\Luxia\Rendering\OpenGL</Filter>
+      <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Scene.cpp">
-      <Filter>src\Luxia</Filter>
+      <Filter>Luxia</Filter>
     </ClCompile>
-    <ClCompile Include="src\lxpch.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\glad\glad.c">
-      <Filter>vendor\glad</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
-    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp" />
-    <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
+    <ClCompile Include="src\lxpch.cpp" />
   </ItemGroup>
 </Project>

@@ -15,27 +15,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C673EC2F-B240-473B-DB59-35E3C7857CC9}</ProjectGuid>
+    <ProjectGuid>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Talloren</RootNamespace>
+    <RootNamespace>LuxiaVendor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
@@ -54,108 +54,89 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)..\bin\Debug-windows-x86_64\Talloren\</OutDir>
-    <IntDir>$(ProjectDir)..\bin-int\Debug-windows-x86_64\Talloren\</IntDir>
-    <TargetName>Talloren</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>$(ProjectDir)bin\Debug\</OutDir>
+    <IntDir>$(ProjectDir)obj\Debug\</IntDir>
+    <TargetName>LuxiaVendor</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)..\bin\Release-windows-x86_64\Talloren\</OutDir>
-    <IntDir>$(ProjectDir)..\bin-int\Release-windows-x86_64\Talloren\</IntDir>
-    <TargetName>Talloren</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>$(ProjectDir)bin\Release\</OutDir>
+    <IntDir>$(ProjectDir)obj\Release\</IntDir>
+    <TargetName>LuxiaVendor</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)..\bin\Distribution-windows-x86_64\Talloren\</OutDir>
-    <IntDir>$(ProjectDir)..\bin-int\Distribution-windows-x86_64\Talloren\</IntDir>
-    <TargetName>Talloren</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>$(ProjectDir)bin\Distribution\</OutDir>
+    <IntDir>$(ProjectDir)obj\Distribution\</IntDir>
+    <TargetName>LuxiaVendor</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\glm;..\Luxia\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>imgui;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Luxia\vendor\glfw;..\Luxia\vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\glm;..\Luxia\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
+      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>imgui;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Luxia\vendor\glfw;..\Luxia\vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\glm;..\Luxia\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
+      <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>imgui;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Luxia\vendor\glfw;..\Luxia\vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\EditorLayer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\EditorLayer.cpp" />
-    <ClCompile Include="src\Talloren.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Luxia\Luxia.vcxproj">
-      <Project>{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}</Project>
-    </ProjectReference>
+    <ClCompile Include="glad\glad.c" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
