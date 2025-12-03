@@ -156,6 +156,9 @@
     <ProjectReference Include="..\Luxia\Luxia.vcxproj">
       <Project>{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Luxia\vendor\LuxiaVendor.vcxproj">
+      <Project>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

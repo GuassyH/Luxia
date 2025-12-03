@@ -1,13 +1,11 @@
 #include "lxpch.h"
 #include "UILayer.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
 
 namespace Luxia::Layers {
 
+	bool opened = true;
 	void UILayer::OnAttach() {
 		LX_CORE_WARN("UILayer Attached");
-		renderer->GetUIRenderer()->Init();
 	}
 	void UILayer::OnDetach() {
 		LX_CORE_WARN("UILayer Detached");
@@ -18,18 +16,23 @@ namespace Luxia::Layers {
 	void UILayer::OnRender() {
 		std::shared_ptr<Rendering::IUIRenderer> uiRenderer = renderer->GetUIRenderer();
 
-		uiRenderer->BeginFrame();
+		// This is FULLY over the ENTIRE window
+		ImGui::SetNextWindowSize(ImVec2(window->GetSize().x, window->GetSize().y));
+		ImGui::SetNextWindowPos(ImVec2(0, 0));
+		if (ImGui::Begin("UI Layer", &opened, flags)) {
+			uiRenderer->RenderElements();
 
-		if(ImGui::Begin("UI Layer")) {
-			ImGui::Text("Hello from UILayer!");
-		}
-		ImGui::End();
-		uiRenderer->Render();
+		}	ImGui::End();
 
-
-		uiRenderer->EndFrame();
 	}
 	void UILayer::OnEvent(Event& e) {
+		Luxia::EventDispatcher dispatcher(e);
 
+		/* If a camera is rendered do something?
+		dispatcher.Dispatch<RenderCameraEvent>([&](RenderCameraEvent& event) {
+			size = glm::vec2(event.GetTexture()->GetWidth(), event.GetTexture()->GetHeight());
+			return false; // Check each event type and update input
+			});
+		*/
 	}
 }

@@ -3,20 +3,20 @@
 
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
 
 #include <GLFW/glfw3.h>
 
 namespace Luxia::Rendering::OpenGL {
 	void OpenGL_UIRenderer::Init() {
 		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
+		m_Context = ImGui::CreateContext();
 
 		ImGui_ImplOpenGL3_Init();
 		ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)glfwGetCurrentContext(), true);
 
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigDockingAlwaysTabBar = true;
 
 		ImGui::StyleColorsDark();
 		LX_CORE_INFO("OpenGL UI Renderer: Initialized ImGui");
@@ -33,7 +33,7 @@ namespace Luxia::Rendering::OpenGL {
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
-	void OpenGL_UIRenderer::Render() {
+	void OpenGL_UIRenderer::RenderElements() {
 		for (const auto& element : m_UIElements) {
 			element->Render();
 		}

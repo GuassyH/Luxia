@@ -199,6 +199,12 @@
     <ClInclude Include="src\Luxia\Rendering\API\ITexture.h">
       <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IUIElement.h">
+      <Filter>Luxia\Rendering\API</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\API\IUIRenderer.h">
+      <Filter>Luxia\Rendering\API</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\API\IWindow.h">
       <Filter>Luxia\Rendering\API</Filter>
     </ClInclude>
@@ -206,6 +212,9 @@
       <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h">
+      <Filter>Luxia\Rendering\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.h">
       <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h">
@@ -287,6 +296,9 @@
       <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp">
+      <Filter>Luxia\Rendering\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.cpp">
       <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Scene.cpp">

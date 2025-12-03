@@ -30,7 +30,7 @@ namespace Luxia
 		void CoreShutdown();
 
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { 
-			m_LayerStack->PushLayer(layer, m_EventHandler, m_ProjectManager, m_Renderer); 
+			m_LayerStack->PushLayer(layer, m_EventHandler, m_ProjectManager, m_Renderer, m_Window); 
 		}
 		bool OnEvent(Luxia::Event& e);
 

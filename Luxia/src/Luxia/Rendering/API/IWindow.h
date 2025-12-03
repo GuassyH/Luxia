@@ -4,6 +4,7 @@
 #include <Luxia/Core/Core.h>
 #include "Luxia/Core/WeakPtrProxy.h"
 #include "Luxia/Core/Core.h"
+#include "glm/glm.hpp"
 
 namespace Luxia
 {
@@ -22,7 +23,9 @@ namespace Luxia
 		void SetHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
 		EventHandler& GetEventHandler() const { return *event_handler.lock(); }
 
+
 		virtual void SetTitle(const std::string& title) = 0;
+		inline glm::vec2 GetSize() { glm::vec2 s = glm::vec2(m_Width, m_Height); return s; }
 		inline bool IsFocused() const { return focused; }
 		inline bool isRunning() const { return running; }
 	protected:

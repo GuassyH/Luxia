@@ -64,8 +64,8 @@ namespace Talloren {
 
 		virtual void Startup() override {
 			// Push extra layers used
-			PushLayer(std::make_shared<Talloren::Layers::ExtraLayer>()); // Used for quick client side testing
 			PushLayer(std::make_shared<Talloren::Layers::EditorLayer>());
+			PushLayer(std::make_shared<Talloren::Layers::ExtraLayer>()); // Used for quick client side testing
 			m_Window->SetTitle(m_ProjectManager->GetProjectName());
 		}
 	};

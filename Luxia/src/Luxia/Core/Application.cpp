@@ -34,6 +34,8 @@ namespace Luxia
 	void Application::CoreStartup() {
 		LX_CORE_INFO("Application Started\n");
 
+		m_Renderer->GetUIRenderer()->Init();
+
 		// Core Layers
 		PushLayer(std::make_shared<Layers::EventLayer>());
 		PushLayer(std::make_shared<Layers::GameLayer>());
@@ -48,6 +50,7 @@ namespace Luxia
 		// While the window is running loop
 		while (m_Window->isRunning()) {
 			m_Window->BeginFrame();
+			m_Renderer->GetUIRenderer()->BeginFrame();
 			m_EventHandler->DispatchAll(this);
 
 			for (auto& layer : m_LayerStack->m_Layers) 
@@ -56,6 +59,7 @@ namespace Luxia
 			for (auto& layer : m_LayerStack->m_Layers) 
 				layer->OnRender();
 
+			m_Renderer->GetUIRenderer()->EndFrame();
 			m_Window->EndFrame();
 			eventManager.Clear();
 		}

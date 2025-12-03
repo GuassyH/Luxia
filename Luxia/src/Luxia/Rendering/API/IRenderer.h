@@ -37,6 +37,6 @@ namespace Luxia::Rendering {
 		std::shared_ptr<IUIRenderer> GetUIRenderer() { return m_UIRenderer; }
 	protected:
 		std::vector<RenderObject> renderObjects;
-		std::shared_ptr<IUIRenderer> m_UIRenderer;
+		std::shared_ptr<IUIRenderer> m_UIRenderer = nullptr;
 	};
 }

@@ -24,11 +24,13 @@ namespace Luxia
 		void SetDeps(
 			const std::shared_ptr<Luxia::EventHandler>& handler,
 			const std::shared_ptr<Luxia::ProjectManager>& manager,
-			const std::shared_ptr<Luxia::Rendering::IRenderer>& m_renderer)
+			const std::shared_ptr<Luxia::Rendering::IRenderer>& m_renderer,
+			const std::shared_ptr<Luxia::IWindow>& m_window)
 		{ 
 		event_handler = handler; project_manager = manager; renderer = m_renderer; 
 		asset_manager = project_manager->GetAssetManager();
 		scene_manager = project_manager->GetSceneManager();
+		window = m_window;
 		}
 
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
@@ -38,6 +40,7 @@ namespace Luxia
 		WeakPtrProxy<Luxia::Rendering::IRenderer> renderer;
 		WeakPtrProxy<Luxia::AssetManager> asset_manager;
 		WeakPtrProxy<Luxia::SceneManager> scene_manager;
+		WeakPtrProxy<Luxia::IWindow> window;
 	};
 }
 

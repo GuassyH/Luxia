@@ -161,7 +161,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Asset\Asset.h" />
     <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
@@ -221,13 +220,13 @@
     <ClInclude Include="src\Luxia\Rendering\API\IWindow.h" />
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.h" />
     <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
     <ClInclude Include="src\Luxia\Scene.h" />
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.cpp" />
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
@@ -251,6 +250,7 @@
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Window.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp" />
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.cpp" />
     <ClCompile Include="src\Luxia\Scene.cpp" />
     <ClCompile Include="src\lxpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

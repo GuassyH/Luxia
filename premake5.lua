@@ -148,8 +148,9 @@ project "Talloren"
 	}
 	links{
 		"Luxia",
+		"LuxiaVendor",
 		"opengl32",
-		"assimp-vc143-mtd"
+		"assimp-vc143-mtd",
 	}
 
 	filter "system:windows"

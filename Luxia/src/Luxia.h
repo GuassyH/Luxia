@@ -6,6 +6,10 @@
 #include "Luxia//Core/Log.h"
 #include "Luxia/Core/Application.h"
 
+// Rendering
+#include "Luxia/Rendering/API/IRenderer.h"
+#include "Luxia/Rendering/API/IUIRenderer.h"
+
 // Managers
 #include "Luxia/Managers/EventManager.h"
 #include "Luxia/Managers/AssetManager.h"
