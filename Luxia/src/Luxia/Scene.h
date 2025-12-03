@@ -51,7 +51,7 @@ namespace Luxia {
 		entt::registry& GetReg() { return reg; }
 
 
-		int NumLoaded() { return loaded_assets.size(); }
+		size_t NumLoaded() { return loaded_assets.size(); }
 		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
 		std::shared_ptr<Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
 

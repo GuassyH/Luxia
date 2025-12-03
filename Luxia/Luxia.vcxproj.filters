@@ -63,9 +63,6 @@
     <ClInclude Include="src\Luxia\Components\Component.h">
       <Filter>src\Luxia\Components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Components\Material.h">
-      <Filter>src\Luxia\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h">
       <Filter>src\Luxia\Components</Filter>
     </ClInclude>
@@ -207,6 +204,10 @@
     <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
     <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
     <ClInclude Include="src\Luxia\Asset\AssetType.h" />
+    <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
+    <ClInclude Include="src\Luxia\Asset\MaterialFile.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IMaterial.h" />
+    <ClInclude Include="src\Luxia\Layers\ViewportLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
@@ -276,5 +277,10 @@
       <Filter>vendor\glad</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
+    <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp" />
+    <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

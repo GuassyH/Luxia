@@ -70,8 +70,6 @@ namespace Luxia::Assets {
 			}
 
 			guid_infile.close();
-			LX_CORE_INFO("Loaded MaterialFile: {} (Shader GUID: {})", m_assetPath.string(), (uint64_t)shader_guid);
-
 			return true;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {

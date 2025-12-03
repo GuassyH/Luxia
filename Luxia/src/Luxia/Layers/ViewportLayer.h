@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Luxia.h"
+#include "Luxia/Layers/Layer.h"
+#include "Luxia/Core/Core.h"
 
-namespace Talloren::Layer {
-	class ViewportLayer : public Luxia::Layer {
+namespace Luxia::Layers {
+	class LUXIA_API ViewportLayer : public Luxia::Layer {
 	public:
 		std::shared_ptr<Luxia::IShader> fs_shader;
 		Luxia::Mesh fs_quad;

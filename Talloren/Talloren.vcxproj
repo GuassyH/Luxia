@@ -146,16 +146,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\ViewportLayer.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\Talloren.cpp" />
-    <ClCompile Include="src\ViewportLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Luxia\Luxia.vcxproj">
       <Project>{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\EditorLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

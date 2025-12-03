@@ -1,3 +1,4 @@
+#include "lxpch.h"
 #include "ViewportLayer.h"
 
 inline std::vector<Luxia::Rendering::Vertex> quad_verts {
@@ -12,7 +13,7 @@ inline std::vector<unsigned int> quad_inds{
 	1, 3, 2
 };
 
-namespace Talloren::Layer {
+namespace Luxia::Layers {
 	void ViewportLayer::OnAttach() {
 		LX_CORE_WARN("ViewportLayer Attached");
 		fs_shader = Luxia::Platform::Assets::CreateShader(

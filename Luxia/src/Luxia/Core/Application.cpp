@@ -5,6 +5,7 @@
 #include "Luxia/Layers/EventLayer.h"
 #include "Luxia/Layers/RenderLayer.h"
 #include "Luxia/Layers/GameLayer.h"
+#include "Luxia/Layers/ViewportLayer.h"
 
 #include "Luxia/Mesh.h"
 
@@ -36,6 +37,7 @@ namespace Luxia
 		PushLayer(std::make_shared<Layers::EventLayer>());
 		PushLayer(std::make_shared<Layers::GameLayer>());
 		PushLayer(std::make_shared<Layers::RenderLayer>());
+		PushLayer(std::make_shared<Layers::ViewportLayer>());
 	}
 
 	// Run

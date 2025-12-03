@@ -161,6 +161,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Layers\ViewportLayer.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
     <ClInclude Include="src\Luxia\Asset\AssetType.h" />
     <ClInclude Include="src\Luxia\Asset\MaterialFile.h" />
@@ -222,6 +223,7 @@
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Material.cpp" />
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />

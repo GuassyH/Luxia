@@ -58,7 +58,7 @@ namespace Luxia::Platform::OpenGL {
 		path = model_asset->modelPath;
 
 		auto& base_entity = active_scene->CreateEntity();
-		LX_CORE_TRACE("Created Node Ent: {}", (int)base_entity.ent_id);
+		LX_CORE_TRACE("Created Root Node Ent: {}", (int)base_entity.ent_id);
 
 		const aiScene* scene = import.ReadFile(path.string(), aiProcess_Triangulate | aiProcess_FlipUVs);
 		std::vector<Mesh>().swap(meshes);
@@ -88,8 +88,6 @@ namespace Luxia::Platform::OpenGL {
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
 			auto& child_entity = scene->CreateEntity();
 			child_entity.SetParent(root_entity);
-			LX_CORE_TRACE("Created Node Ent: {}", (int)child_entity.ent_id);
-
 			processNode(node->mChildren[i], ai_scene, scene, &child_entity);
 		}
 	}
@@ -173,8 +171,6 @@ namespace Luxia::Platform::OpenGL {
 		auto& meshEnt = scene->CreateEntity();
 		meshEnt.SetParent(root_entity);
 		meshEnt.AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
-
-		LX_CORE_TRACE("Processed Mesh Ent: {} parent: {}", (int)meshEnt.ent_id, (int)root_entity->ent_id);
 
 		return newMesh;
 	}
