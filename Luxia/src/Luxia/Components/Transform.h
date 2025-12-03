@@ -24,11 +24,10 @@ namespace Luxia::Components {
 		glm::vec3 scale = glm::vec3(1.0f);
 
 		entt::entity ent_id = entt::entity(0);
-		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
-		Transform* parent = nullptr;
-		std::vector<Transform*> children;
-
+		bool HasParent() const {
+			return parent != nullptr;
+		}
 
 		Transform* SetParent(Transform* new_parent) {
 			// If same parent, nothing to do
@@ -142,6 +141,10 @@ namespace Luxia::Components {
 			reg->remove<T>(ent_id);
 		}
 	private:
+		Transform* parent = nullptr;
+		std::vector<Transform*> children;
+
+		glm::mat4 modelMatrix = glm::mat4(1.0f);
 	};
 }
 

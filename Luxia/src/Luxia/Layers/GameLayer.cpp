@@ -14,11 +14,10 @@ namespace Luxia::Layers {
 
 		auto view = scene->GetEntitiesWith<Components::Transform>();
 		
-
 		for (auto entity : view) {
 			auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
 			// ONLY UPDATE ROOTS, Children will be updated as a consequence
-			if (!transform->parent) {
+			if (!transform->HasParent()) {
 				transform->UpdateMatrix();
 			}
 		}
