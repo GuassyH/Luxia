@@ -1,11 +1,16 @@
 #include "lxpch.h"
 #include "OpenGL_Renderer.h"
 #include "Luxia/Managers/EventManager.h"
+#include "Luxia/Rendering/OpenGL/OpenGL_UIRenderer.h"
 
 #include "glfw/glfw3.h"
 #include "glad/glad.h"
 
 namespace Luxia::Rendering::OpenGL {
+
+	OpenGL_Renderer::OpenGL_Renderer() {
+		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
+	}
 
 	// Render the render object (meshrenderer mesh with material and transform)
 	void OpenGL_Renderer::RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {

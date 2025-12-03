@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -106,7 +106,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -136,7 +136,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\glm;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -161,6 +161,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.h" />
     <ClInclude Include="src\Luxia.h" />
     <ClInclude Include="src\Luxia\Asset\Asset.h" />
     <ClInclude Include="src\Luxia\Asset\AssetFile.h" />
@@ -215,6 +216,8 @@
     <ClInclude Include="src\Luxia\Rendering\API\IRenderer.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IShader.h" />
     <ClInclude Include="src\Luxia\Rendering\API\ITexture.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IUIElement.h" />
+    <ClInclude Include="src\Luxia\Rendering\API\IUIRenderer.h" />
     <ClInclude Include="src\Luxia\Rendering\API\IWindow.h" />
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.h" />
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.cpp" />
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />

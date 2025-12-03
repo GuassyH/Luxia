@@ -5,7 +5,7 @@
 namespace Luxia::Rendering::OpenGL {
 	class LUXIA_API OpenGL_Renderer : public Luxia::Rendering::IRenderer {
 	public:
-		OpenGL_Renderer() = default;
+		OpenGL_Renderer();
 		~OpenGL_Renderer() = default;
 
 		void RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) override;

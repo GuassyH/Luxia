@@ -67,9 +67,9 @@ project "Luxia"
 	includedirs{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor",
-		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/vendor/glm",
 		"%{prj.name}/vendor/imgui",
+		"%{prj.name}/vendor/spdlog/include",
 		--"%{prj.name}/vendor/yaml-cpp/include",
 	}
 
