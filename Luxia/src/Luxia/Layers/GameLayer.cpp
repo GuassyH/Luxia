@@ -14,10 +14,13 @@ namespace Luxia::Layers {
 
 		auto view = scene->GetEntitiesWith<Components::Transform>();
 		
-		// Should set the parent matrices first, but for now just update all
+
 		for (auto entity : view) {
 			auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
-			transform->UpdateMatrix();
+			// ONLY UPDATE ROOTS, Children will be updated as a consequence
+			if (!transform->parent) {
+				transform->UpdateMatrix();
+			}
 		}
 	}
 	void GameLayer::OnRender() {

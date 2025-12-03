@@ -38,11 +38,9 @@ namespace Talloren::Layer {
 			LX_CORE_WARN("ExtraLayer Detached");
 		}
 		virtual void OnUpdate() override {
-			auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
-			ghostEnt.euler_angles.x += 0.01f;
 
-			auto& nodeTest = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(4));
-			nodeTest.euler_angles.z += 0.01f;
+			auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
+			ghostEnt.euler_angles.x += 0.1f;
 		}
 		virtual void OnRender() override {}
 		virtual void OnEvent(Luxia::Event& event) override {}

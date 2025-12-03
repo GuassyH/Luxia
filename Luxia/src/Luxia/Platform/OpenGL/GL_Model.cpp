@@ -87,7 +87,7 @@ namespace Luxia::Platform::OpenGL {
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
 			auto& child_entity = scene->CreateEntity();
-			child_entity.parent = root_entity;
+			child_entity.SetParent(root_entity);
 			LX_CORE_TRACE("Created Node Ent: {}", (int)child_entity.ent_id);
 
 			processNode(node->mChildren[i], ai_scene, scene, &child_entity);
@@ -171,7 +171,7 @@ namespace Luxia::Platform::OpenGL {
 
 		// Create mesh entity and said parent to root_entity
 		auto& meshEnt = scene->CreateEntity();
-		meshEnt.parent = root_entity;
+		meshEnt.SetParent(root_entity);
 		meshEnt.AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
 
 		LX_CORE_TRACE("Processed Mesh Ent: {} parent: {}", (int)meshEnt.ent_id, (int)root_entity->ent_id);
