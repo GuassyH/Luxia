@@ -35,9 +35,6 @@ namespace Luxia::Platform::OpenGL {
 				Luxia::Rendering::RenderObject ro { mr_t, mr };
 				rend->Submit(ro);
 			}
-			else {
-				LX_CORE_ERROR("MeshRenderer ({}) has no transform!", (int)entity);
-			}
 		}
 
 		rend->Flush(GetViewMat(), GetProjMat());

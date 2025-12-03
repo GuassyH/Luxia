@@ -75,13 +75,14 @@ namespace Luxia::Platform::Assets
 		return cam;
 	}
 
+
 	inline std::shared_ptr<Luxia::IShader> CreateShader(const char* fragSrc, const char* vertSrc) {
 		std::shared_ptr<Luxia::IShader> shader;
 
 		#ifdef LUXIA_RENDERER_OPENGL
-			shader = std::make_shared<Luxia::Platform::OpenGL::GL_Shader>(fragSrc, vertSrc);
+				shader = std::make_shared<Luxia::Platform::OpenGL::GL_Shader>(fragSrc, vertSrc);
 		#else 
-			#error Luxia doesnt support your Renderer!
+		#error Luxia doesnt support your Renderer!
 		#endif
 
 		return shader;

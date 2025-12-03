@@ -6,7 +6,10 @@
 namespace Luxia::Platform::OpenGL {
 
 	GL_Material::GL_Material() {
-		shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
+		shader = Platform::Assets::CreateShader(
+			"E:/BuiltLuxia/Sandbox/assets/shaders/default.frag",
+			"E:/BuiltLuxia/Sandbox/assets/shaders/default.vert"
+		);
 	}
 
 	void GL_Material::LoadFromFile(const std::shared_ptr<Luxia::Assets::MaterialFile> matFile) {

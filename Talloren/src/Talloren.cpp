@@ -28,6 +28,7 @@ namespace Talloren::Layer {
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
 
+
 			auto& camEnt = scene->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
@@ -36,7 +37,13 @@ namespace Talloren::Layer {
 		virtual void OnDetach() override {
 			LX_CORE_WARN("ExtraLayer Detached");
 		}
-		virtual void OnUpdate() override {}
+		virtual void OnUpdate() override {
+			auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
+			ghostEnt.euler_angles.x += 0.01f;
+
+			auto& nodeTest = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(4));
+			nodeTest.euler_angles.z += 0.01f;
+		}
 		virtual void OnRender() override {}
 		virtual void OnEvent(Luxia::Event& event) override {}
 	};

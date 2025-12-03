@@ -31,6 +31,8 @@ namespace Luxia::Components {
 
 		glm::mat4& GetMatrix() { return modelMatrix; }
 		void UpdateMatrix(){
+			modelMatrix = parent ? parent->modelMatrix : glm::mat4(1.0f);
+
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
 
 			// Construct rotation quat (Y > X > Z)
@@ -43,7 +45,7 @@ namespace Luxia::Components {
 			glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
 
 			// Combine to get model matrix: translate * rotate * scale
-			modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
+			modelMatrix *= translationMatrix * rotationMatrix * scaleMatrix;
 		}
 		glm::vec3 GetRotVec() const {
 			float pitch = glm::radians(euler_angles.x);

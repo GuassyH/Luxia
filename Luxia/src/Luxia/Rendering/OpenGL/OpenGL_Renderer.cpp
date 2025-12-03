@@ -9,7 +9,6 @@ namespace Luxia::Rendering::OpenGL {
 
 	// Render the render object (meshrenderer mesh with material and transform)
 	void OpenGL_Renderer::RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		ro.transform->UpdateMatrix();
 		RenderMesh(ro.mesh_rend->mesh, ro.mesh_rend->material, ro.transform->GetMatrix(), viewMat, projMat);
 	}
 
