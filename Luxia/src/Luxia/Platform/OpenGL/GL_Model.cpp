@@ -83,7 +83,7 @@ namespace Luxia::Platform::OpenGL {
 			aiMesh* mesh = ai_scene->mMeshes[node->mMeshes[i]];
 			meshes.push_back(processMesh(mesh, ai_scene, scene, root_entity));
 		}
-
+			
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
 			auto& child_entity = scene->CreateEntity();
