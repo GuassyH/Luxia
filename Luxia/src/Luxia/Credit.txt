@@ -1,0 +1,15 @@
+Credit:
+
+All code and content in this project unless otherwise specified was created by the Luxia dev team (me, Gustav Haag).
+All open source libraries and assets used in this project are credited in the respective folders where they are stored.
+
+Thank you to TheCherno, whose first few episodes on Game Engine Development with C++ inspired me to start this project.
+I did make use of TheCherno's Logging system (one of the first episodes) as well as his premake tutorial to set up the build system.
+I also referred to his information on structure the folder hierarchy, as my last project had a very flat structure which made it hard to navigate.
+So thank you TheCherno for your educational content! You are a great inspiration to many, including me.
+
+Thank you to all the open source contributors whose libraries and assets I have used in this project. Your work is greatly appreciated!
+
+If there is any content in this project that you believe requires credit and is not mentioned here, please reach out to me so I can update this file accordingly.
+
+- Gustav Haag
