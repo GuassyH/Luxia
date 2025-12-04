@@ -139,6 +139,7 @@ project "Talloren"
 		"Luxia/vendor/spdlog/include",
 		"Luxia/vendor/glm",
 		"Luxia/src",
+		"Talloren/src",
 		--"Luxia/vendor/yaml-cpp/include",
 	}
 

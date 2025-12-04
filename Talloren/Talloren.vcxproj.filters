@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="EditorPanels">
+      <UniqueIdentifier>{6FDCDA8C-5B3F-6A31-04C5-A2E7F00636B4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\EditorLayer.h" />
+    <ClInclude Include="src\EditorPanels\GameViewport.h">
+      <Filter>EditorPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IEditorPanel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\EditorLayer.cpp" />
+    <ClCompile Include="src\EditorPanels\GameViewport.cpp">
+      <Filter>EditorPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Talloren.cpp" />
+  </ItemGroup>
+</Project>

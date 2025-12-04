@@ -1,0 +1,64 @@
+#include "GameViewport.h"
+#include "EditorLayer.h"
+
+namespace Talloren::Editor::Panel {
+	void GameViewport::Init() {
+		LX_CORE_ERROR("Editor - ViewportPanel: Init");
+	}
+	void GameViewport::Render(Talloren::Layers::EditorLayer* editorLayer) {
+		ImGui::Begin("Game View");
+
+		if (!output_texture) { ImGui::End(); return; }
+
+		ImVec2 windowSize = ImGui::GetContentRegionAvail();
+		ImVec2 windowPos = ImGui::GetWindowPos(); // top-left of the window in screen coordinates
+
+		windowSize.y -= 1;
+
+		// Camera aspect ratio (width / height)
+		float cameraAspect = (float)output_texture->GetWidth() / (float)output_texture->GetHeight();
+		float windowAspect = windowSize.x / windowSize.y;
+
+		ImVec2 imageSize;
+
+		if (windowAspect > cameraAspect) {
+			// Window is wider than camera -> match height
+			imageSize.y = windowSize.y;
+			imageSize.x = windowSize.y * cameraAspect;
+		}
+		else {
+			// Window is taller than camera -> match width
+			imageSize.x = windowSize.x;
+			imageSize.y = windowSize.x / cameraAspect;
+		}
+
+		ImVec2 imagePosInWindow;
+		imagePosInWindow.x = ((windowSize.x - imageSize.x) * 0.5f) + ImGui::GetCursorPosX();
+		imagePosInWindow.y = ((windowSize.y - imageSize.y) * 0.5f) + ImGui::GetCursorPosY();
+
+		ImGui::SetCursorPosX(imagePosInWindow.x);
+		ImGui::SetCursorPosY(imagePosInWindow.y);
+
+		ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, imageSize, ImVec2(0, 1), ImVec2(1, 0));
+
+		ImGui::End();
+	}
+	void GameViewport::Unload() {
+
+	}
+
+	bool GameViewport::RenderImage(Luxia::RenderCameraEvent& e) {
+		if (!e.GetTexture()) { return false; }
+		if (e.IsEditorCamera()) { return false; }
+
+		output_texture = e.GetTexture();
+
+		return true; // Consume
+	}
+
+	void GameViewport::OnEvent(Luxia::Event& e) {
+		Luxia::EventDispatcher dispatcher(e);
+
+		dispatcher.Dispatch<Luxia::RenderCameraEvent>(LX_BIND_EVENT_FN(RenderImage));
+	}
+}

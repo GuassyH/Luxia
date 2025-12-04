@@ -1,9 +1,12 @@
 #include "EditorLayer.h"
+#include "EditorPanels/GameViewport.h"
 
 namespace Talloren::Layers {
 	void EditorLayer::OnAttach() {
 		LX_CORE_WARN("EditorLayer Attached");
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
+
+		PushPanel(std::make_shared<Talloren::Editor::Panel::GameViewport>());
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
@@ -18,7 +21,7 @@ namespace Talloren::Layers {
 		static bool opt_fullscreen = true;
 		static bool dockspaceOpen = true;
 
-		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_MenuBar;
 		if (opt_fullscreen)
 		{
 			const ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -53,26 +56,20 @@ namespace Talloren::Layers {
 		}
 
 		// RENDER WINDOWS
-
-		if (ImGui::Begin("Test 1 Win")) {
-			ImGui::Text("ASD");
-		} ImGui::End();
-
-
-		if (ImGui::Begin("Test 2 Win")) {
-			ImGui::Text("ASD");
-		} ImGui::End();
-
-		if (ImGui::Begin("Test 3 Win")) {
-			ImGui::Text("ASD");
-		} ImGui::End();
+		for (auto panel : panels) {
+			panel->Render(this);
+		}
 
 		ImGui::End();
 
 
 	}
-	void EditorLayer::OnEvent(Luxia::Event& e) {
 
+	void EditorLayer::OnEvent(Luxia::Event& e) {
+		// FORWARD EVENT WINDOWS
+		for (auto panel : panels) {
+			panel->OnEvent(e);
+		}
 	}
 
 }
