@@ -1,5 +1,6 @@
 #include "EditorLayer.h"
 #include "EditorPanels/GameViewport.h"
+#include "EditorPanels/HierarchyPanel.h"
 
 namespace Talloren::Layers {
 	void EditorLayer::OnAttach() {
@@ -7,6 +8,7 @@ namespace Talloren::Layers {
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
 
 		PushPanel(std::make_shared<Talloren::Editor::Panel::GameViewport>());
+		PushPanel(std::make_shared<Talloren::Editor::Panel::HierarchyPanel>());
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
@@ -16,7 +18,6 @@ namespace Talloren::Layers {
 	}
 	void EditorLayer::OnRender() {
 		std::shared_ptr<Luxia::Rendering::IUIRenderer> uiRenderer = renderer->GetUIRenderer();
-
 
 		static bool opt_fullscreen = true;
 		static bool dockspaceOpen = true;
@@ -57,7 +58,7 @@ namespace Talloren::Layers {
 
 		// RENDER WINDOWS
 		for (auto panel : panels) {
-			panel->Render(this);
+			panel->Render(this, scene_manager->GetActiveScene());
 		}
 
 		ImGui::End();

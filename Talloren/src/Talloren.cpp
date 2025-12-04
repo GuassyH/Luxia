@@ -11,7 +11,7 @@ namespace Talloren::Layers {
 		ExtraLayer() = default;
 		~ExtraLayer() = default;
 		virtual void OnAttach() override { 
-			LX_CORE_WARN("ExtraLayer Attached");
+			LX_WARN("ExtraLayer Attached");
 
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
@@ -47,7 +47,7 @@ namespace Talloren::Layers {
 			lotrEnt.position = glm::vec3(5.0f, 0.0f, 0.0f);
 		}
 		virtual void OnDetach() override {
-			LX_CORE_WARN("ExtraLayer Detached");
+			LX_WARN("ExtraLayer Detached");
 		}
 		virtual void OnUpdate() override {}
 		virtual void OnRender() override {}

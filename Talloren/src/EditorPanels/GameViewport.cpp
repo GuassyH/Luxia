@@ -3,9 +3,9 @@
 
 namespace Talloren::Editor::Panel {
 	void GameViewport::Init() {
-		LX_CORE_ERROR("Editor - ViewportPanel: Init");
+		LX_INFO("Editor - GameView Panel: Init");
 	}
-	void GameViewport::Render(Talloren::Layers::EditorLayer* editorLayer) {
+	void GameViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Game View");
 
 		if (!output_texture) { ImGui::End(); return; }
