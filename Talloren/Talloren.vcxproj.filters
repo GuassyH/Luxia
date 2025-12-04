@@ -12,6 +12,7 @@
     </ClInclude>
     <ClInclude Include="src\IEditorPanel.h" />
     <ClInclude Include="src\EditorPanels\HierarchyPanel.h" />
+    <ClInclude Include="src\EditorPanels\InspectorPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
@@ -20,5 +21,6 @@
     </ClCompile>
     <ClCompile Include="src\Talloren.cpp" />
     <ClCompile Include="src\EditorPanels\HierarchyPanel.cpp" />
+    <ClCompile Include="src\EditorPanels\InspectorPanel.cpp" />
   </ItemGroup>
 </Project>

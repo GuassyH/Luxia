@@ -4,6 +4,8 @@
 #include <iostream>
 #include <entt/entt.hpp>
 
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
 
 namespace Luxia::Components {
 	struct Transform;
@@ -11,5 +13,7 @@ namespace Luxia::Components {
 	struct LUXIA_API Component {
 		// data
 		Transform* transform;
+
+		virtual void OnInspectorDraw() {}
 	};
 }

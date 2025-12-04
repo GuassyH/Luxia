@@ -140,6 +140,13 @@ namespace Luxia::Components {
 			RemoveComponent() {
 			reg->remove<T>(ent_id);
 		}
+
+		virtual void OnInspectorDraw() override {
+			ImGui::DragFloat3("Position", &position.x, 0.1f);
+			ImGui::DragFloat3("Scale", &scale.x, 0.1f);
+			ImGui::DragFloat3("Rotation", &euler_angles.x, 0.1f);
+		}
+
 	private:
 		Transform* parent = nullptr;
 		std::vector<Transform*> children;
