@@ -12,12 +12,18 @@ namespace Talloren::Editor::Panel {
 
 		auto view = scene->GetEntitiesWith<Luxia::Components::Transform>();
 		for (auto entity : view) {
+			auto t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
-			std::ostringstream s; s << (int)entity;
-			if(ImGui::Selectable(s.str().c_str(), editorLayer->selected_entity == entity && editorLayer->is_entity_selected))
-			{
-				editorLayer->selected_entity = entity;
-				editorLayer->is_entity_selected = true;
+			if (t) {
+				std::ostringstream s; s << (int)entity;
+				if(ImGui::Selectable(s.str().c_str(), editorLayer->selected_entity == entity && editorLayer->is_entity_selected))
+				{
+					editorLayer->selected_entity = entity;
+					editorLayer->is_entity_selected = true;
+				}
+				// Go through each child and draw. 
+				// Root node should ALWAYS draw first and THEN the child node
+				// Recursion here maybe? Like with the matrix updates?
 			}
 		}
 
