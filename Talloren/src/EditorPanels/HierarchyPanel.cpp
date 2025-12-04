@@ -11,11 +11,14 @@ namespace Talloren::Editor::Panel {
 		if (!scene) { ImGui::End(); return; }
 
 		auto view = scene->GetEntitiesWith<Luxia::Components::Transform>();
-		bool selected = false;
 		for (auto entity : view) {
 
 			std::ostringstream s; s << (int)entity;
-			ImGui::Selectable(s.str().c_str(), &selected);
+			if(ImGui::Selectable(s.str().c_str(), editorLayer->selected_entity == entity && editorLayer->is_entity_selected))
+			{
+				editorLayer->selected_entity = entity;
+				editorLayer->is_entity_selected = true;
+			}
 		}
 
 		ImGui::End();

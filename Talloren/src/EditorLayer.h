@@ -9,6 +9,9 @@ namespace Talloren::Layers {
 		EditorLayer() = default;
 		~EditorLayer() = default;
 
+		entt::entity selected_entity = entt::entity(0);
+		bool is_entity_selected = false;
+
 		std::vector<std::shared_ptr<Talloren::Editor::IEditorPanel>> panels;
 
 		void PushPanel(std::shared_ptr<Talloren::Editor::IEditorPanel> m_panel) {

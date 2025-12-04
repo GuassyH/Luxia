@@ -13,8 +13,6 @@ namespace Talloren::Editor::Panel {
 		ImVec2 windowSize = ImGui::GetContentRegionAvail();
 		ImVec2 windowPos = ImGui::GetWindowPos(); // top-left of the window in screen coordinates
 
-		windowSize.y -= 1;
-
 		// Camera aspect ratio (width / height)
 		float cameraAspect = (float)output_texture->GetWidth() / (float)output_texture->GetHeight();
 		float windowAspect = windowSize.x / windowSize.y;
