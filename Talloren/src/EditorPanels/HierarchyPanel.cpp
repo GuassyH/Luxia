@@ -7,6 +7,7 @@ namespace Talloren::Editor::Panel {
 	}
 
 	void HierarchyPanel::DrawEntitySelectable(Luxia::Components::Transform* entity, Talloren::Layers::EditorLayer* editorLayer, int level) {
+
 		int m_level = level;
 		std::ostringstream s; s <<  "> " << (int)entity->ent_id;
 
@@ -17,12 +18,16 @@ namespace Talloren::Editor::Panel {
 			editorLayer->is_entity_selected = true;
 		}
 
+		ImGui::SetCursorPosX(15 * level);
+		ImGui::Separator();
+		
 		m_level++;
 		for (auto child : entity->children)
 		{
 			if (!child) continue;
 			DrawEntitySelectable(child, editorLayer, m_level);
 		}
+
 	}
 
 
@@ -42,6 +47,7 @@ namespace Talloren::Editor::Panel {
 			}
 		}
 
+		// ImGui::Separator();
 		ImGui::End();
 	}
 	void HierarchyPanel::Unload() {

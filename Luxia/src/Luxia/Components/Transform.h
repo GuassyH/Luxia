@@ -18,10 +18,15 @@
 namespace Luxia::Components {
 	struct LUXIA_API Transform : public Component {
 	public:
-		// glm::vec3 vec_rotation = glm::vec3(0.0f);
-		glm::vec3 position = glm::vec3(0.0f);
-		glm::vec3 euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 scale = glm::vec3(1.0f);
+		// Local variables (set)
+		glm::vec3 position = glm::vec3(0.0f); // (get & set)
+		glm::vec3 euler_angles = glm::vec3(0.0f, 0.0f, 0.0f); // (get & set)
+		glm::vec3 scale = glm::vec3(1.0f); // (get & set)
+
+		// Global variables (get)
+		glm::vec3 world_position = glm::vec3(0.0f); // (get only)
+		glm::vec3 world_euler_angles = glm::vec3(0.0f); // (get only)
+		glm::vec3 world_scale = glm::vec3(0.0f);  // (get only)
 
 		entt::entity ent_id = entt::entity(0);
 		std::vector<Transform*> children;
@@ -78,10 +83,18 @@ namespace Luxia::Components {
 			glm::mat4 localMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
 			// Combine with parent matrix
-			if (parent)
+			if (parent) {
 				modelMatrix = parent->modelMatrix * localMatrix;
-			else
+				world_euler_angles = parent->world_euler_angles + euler_angles;
+				world_position = parent->world_position + position;
+				world_scale = parent->world_scale + euler_angles;
+			}
+			else {
 				modelMatrix = localMatrix;
+				world_euler_angles = euler_angles;
+				world_position = position;
+				world_scale = euler_angles;
+			}
 
 			// NOW update children
 			for (auto child : children)
@@ -103,10 +116,11 @@ namespace Luxia::Components {
 			return glm::degrees(rad);
 		}
 
-		Transform() = default;
+		Transform() { name = "Transform"; }
 
 		entt::registry* reg = nullptr;
 
+		// Inline header?
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			AddComponent(Args&&... args) {
