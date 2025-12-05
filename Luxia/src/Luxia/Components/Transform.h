@@ -24,6 +24,7 @@ namespace Luxia::Components {
 		glm::vec3 scale = glm::vec3(1.0f);
 
 		entt::entity ent_id = entt::entity(0);
+		std::vector<Transform*> children;
 
 		bool HasParent() const {
 			return parent != nullptr;
@@ -149,7 +150,6 @@ namespace Luxia::Components {
 
 	private:
 		Transform* parent = nullptr;
-		std::vector<Transform*> children;
 
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 	};

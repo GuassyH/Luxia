@@ -5,6 +5,27 @@ namespace Talloren::Editor::Panel {
 	void HierarchyPanel::Init() {
 		LX_INFO("Editor - Hierarchy Panel: Init");
 	}
+
+	void HierarchyPanel::DrawEntitySelectable(Luxia::Components::Transform* entity, Talloren::Layers::EditorLayer* editorLayer, int level) {
+		int m_level = level;
+		std::ostringstream s; s <<  "> " << (int)entity->ent_id;
+
+		ImGui::SetCursorPosX(15 * level);
+		if (ImGui::Selectable(s.str().c_str(), editorLayer->selected_entity == entity->ent_id && editorLayer->is_entity_selected))
+		{
+			editorLayer->selected_entity = entity->ent_id;
+			editorLayer->is_entity_selected = true;
+		}
+
+		m_level++;
+		for (auto child : entity->children)
+		{
+			if (!child) continue;
+			DrawEntitySelectable(child, editorLayer, m_level);
+		}
+	}
+
+
 	void HierarchyPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Hierarchy Panel");
 
@@ -15,15 +36,9 @@ namespace Talloren::Editor::Panel {
 			auto t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
 			if (t) {
-				std::ostringstream s; s << (int)entity;
-				if(ImGui::Selectable(s.str().c_str(), editorLayer->selected_entity == entity && editorLayer->is_entity_selected))
-				{
-					editorLayer->selected_entity = entity;
-					editorLayer->is_entity_selected = true;
+				if (!t->HasParent()) {
+					DrawEntitySelectable(t, editorLayer, 0);
 				}
-				// Go through each child and draw. 
-				// Root node should ALWAYS draw first and THEN the child node
-				// Recursion here maybe? Like with the matrix updates?
 			}
 		}
 
