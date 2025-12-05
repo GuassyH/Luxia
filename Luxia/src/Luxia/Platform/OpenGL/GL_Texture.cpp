@@ -49,7 +49,10 @@ namespace Luxia::Platform::OpenGL {
 		imgWidth = width;
 		imgHeight = height;
 		numColCh = 4;
+
 		valid = true;
+		hasPath = false;
+		is_fbo_tex = true;
 	}
 
 
@@ -155,7 +158,15 @@ namespace Luxia::Platform::OpenGL {
 		hasPath = false;
 		valid = false;
 		glDeleteTextures(1, &texID);
+
+		if (IsFBOTex()) {
+			glDeleteFramebuffers(1, &fbo);
+			glDeleteRenderbuffers(1, &rbo);
+		}
+
+		is_fbo_tex = false;
 	}
+
 
 	void GL_Texture::Use() {
 		if (!IsValid()) { LX_CORE_ERROR("Tried to use unvalid texture: {}", path.string()); }

@@ -38,6 +38,7 @@ namespace Luxia {
 
 		unsigned int GetFBO() const { return fbo; }
 		unsigned int GetRBO() const { return rbo; }
+		bool IsFBOTex() const { return is_fbo_tex; }
 
 		TextureType type = TextureType::LX_TEXTURE_DIFFUSE;
 		std::filesystem::path path = "";
@@ -46,5 +47,6 @@ namespace Luxia {
 		unsigned int fbo = 0, rbo = 0;
 		bool hasPath = false;
 		bool valid = false;
+		bool is_fbo_tex = false;
 	};
 }
