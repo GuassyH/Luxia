@@ -2,6 +2,7 @@
 
 #include "IEditorPanel.h"
 
+
 namespace Talloren::Editor::Panel {
 	class HierarchyPanel : public Talloren::Editor::IEditorPanel {
 	public:

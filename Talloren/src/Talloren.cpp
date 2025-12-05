@@ -66,7 +66,8 @@ namespace Talloren {
 			// Push extra layers used
 			PushLayer(std::make_shared<Talloren::Layers::EditorLayer>());
 			PushLayer(std::make_shared<Talloren::Layers::ExtraLayer>()); // Used for quick client side testing
-			m_Window->SetTitle(m_ProjectManager->GetProjectName());
+			m_Window->SetTitle("Luxia Editor");
+			// m_Window->SetIcon("core/Luxia.png")
 		}
 	};
 }
