@@ -9,7 +9,7 @@
 namespace Talloren::Layers {
 	class EditorLayer;
 };
-namespace Talloren::Editor {
+namespace Talloren {
 	class IEditorPanel {
 	public:
 		virtual ~IEditorPanel() = default;

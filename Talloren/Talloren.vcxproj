@@ -151,6 +151,7 @@
     <ClInclude Include="src\EditorPanels\HierarchyPanel.h" />
     <ClInclude Include="src\EditorLayer.h" />
     <ClInclude Include="src\EditorPanels\GameViewport.h" />
+    <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
     <ClInclude Include="src\IEditorPanel.h" />
   </ItemGroup>
   <ItemGroup>

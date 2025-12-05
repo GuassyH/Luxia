@@ -1,7 +1,8 @@
 #include "SceneViewport.h"
 #include "EditorLayer.h"
+#include "EditorScripts/SceneCameraScript.h"
 
-namespace Talloren::Editor::Panel {
+namespace Talloren::Panel {
 	void SceneViewport::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
 
@@ -12,12 +13,14 @@ namespace Talloren::Editor::Panel {
 		cam_ent->reg = &editorLayer->editor_reg;
 
 		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080);
+		cam_ent->AddComponent<Talloren::Scripts::SceneCameraScript>();
 	}
 
 	void SceneViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Scene View", (bool*)0, ImGuiWindowFlags_NoScrollbar);
 
 		Luxia::Components::Camera& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
+		Talloren::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Talloren::Scripts::SceneCameraScript>();
 
 		if (output_texture) { 
 			ImVec2 windowSize = ImGui::GetContentRegionAvail();
@@ -40,6 +43,18 @@ namespace Talloren::Editor::Panel {
 		// Render last, so that the next frame instantly displays the render output
 		cam.width = ImGui::GetWindowWidth();
 		cam.height = ImGui::GetWindowHeight() - 20;  // Some sort of padding
+
+		if (ImGui::IsWindowHovered()) {
+			if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_1)) {
+				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_1)) {
+					cam_script.last_mouseX = Luxia::Input::GetMousePosition().x;
+					cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
+				}
+
+				cam_script.Move();
+				cam_script.Look();
+			}
+		}
 
 		ImGui::End();
 

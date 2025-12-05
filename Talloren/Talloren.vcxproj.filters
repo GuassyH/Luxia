@@ -14,6 +14,7 @@
     <ClInclude Include="src\EditorPanels\HierarchyPanel.h" />
     <ClInclude Include="src\EditorPanels\InspectorPanel.h" />
     <ClInclude Include="src\EditorPanels\SceneViewport.h" />
+    <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />

@@ -1,7 +1,7 @@
 #include "InspectorPanel.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Editor::Panel {
+namespace Talloren::Panel {
 	void InspectorPanel::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - Inspector Panel: Init");
 	}
