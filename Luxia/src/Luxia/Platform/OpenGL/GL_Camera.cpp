@@ -22,7 +22,6 @@ namespace Luxia::Platform::OpenGL {
 	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) {
 		if (width != output_texture->GetWidth() || height != output_texture->GetHeight()) {
 			output_texture->Delete();
-			output_texture = std::make_shared<GL_Texture>();
 			output_texture->CreateFBOTex(width, height);
 		}
 		
