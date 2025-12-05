@@ -7,7 +7,7 @@ namespace Talloren::Scripts {
 	class SceneCameraScript : public Luxia::Components::Component {
 	public:
 		float speed = 0.01f;
-		float sensitivity = 0.001f;
+		float sensitivity = 0.002f;
 
 		glm::vec3 moveDir;
 		float horizontal = 0.0f;
