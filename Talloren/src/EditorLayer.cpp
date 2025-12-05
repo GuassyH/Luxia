@@ -16,6 +16,9 @@ namespace Talloren::Layers {
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
+		for (auto panel : panels) {
+			panel->Unload(this, scene_manager->GetActiveScene());
+		}
 	}
 	void EditorLayer::OnUpdate() {
 

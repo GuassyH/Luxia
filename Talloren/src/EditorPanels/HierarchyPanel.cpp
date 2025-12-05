@@ -58,7 +58,7 @@ namespace Talloren::Editor::Panel {
 		// ImGui::Separator();
 		ImGui::End();
 	}
-	void HierarchyPanel::Unload() {
+	void HierarchyPanel::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 
 	}
 

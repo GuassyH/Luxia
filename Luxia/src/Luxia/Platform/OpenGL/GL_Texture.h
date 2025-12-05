@@ -14,5 +14,6 @@ namespace Luxia::Platform::OpenGL {
 		virtual bool Unload() override { return true; }
 		virtual void Delete() override;
 		virtual void Use() override;
+
 	};
 }

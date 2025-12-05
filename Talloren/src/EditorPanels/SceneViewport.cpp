@@ -37,17 +37,23 @@ namespace Talloren::Editor::Panel {
 
 			ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, imageSize, ImVec2(0, 1), ImVec2(1, 0));
 		}
-		ImGui::End();
-
 		// Render last, so that the next frame instantly displays the render output
 		cam.width = ImGui::GetWindowWidth();
 		cam.height = ImGui::GetWindowHeight() - 20;  // Some sort of padding
+
+		ImGui::End();
+
 		std::shared_ptr<Luxia::ITexture> tex = cam.Render(scene, editorLayer->GetRenderer());
 
 		editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::RenderCameraEvent>(tex, false, true));
 	}
-	void SceneViewport::Unload() {
-
+	void SceneViewport::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		// Remove component
+		cam_ent->RemoveComponent<Luxia::Components::Camera>();
+		editorLayer->editor_reg.remove<Luxia::Components::Transform>(cam_ent->ent_id);
+		
+		cam_ent = nullptr;
+		output_texture = nullptr;
 	}
 
 	bool SceneViewport::RenderImage(Luxia::RenderCameraEvent& e) {

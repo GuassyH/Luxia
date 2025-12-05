@@ -26,7 +26,7 @@ namespace Talloren::Editor::Panel {
 
 		ImGui::End();
 	}
-	void InspectorPanel::Unload() {
+	void InspectorPanel::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 
 	}
 

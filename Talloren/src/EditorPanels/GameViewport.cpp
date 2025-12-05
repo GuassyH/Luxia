@@ -41,7 +41,7 @@ namespace Talloren::Editor::Panel {
 
 		ImGui::End();
 	}
-	void GameViewport::Unload() {
+	void GameViewport::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 
 	}
 

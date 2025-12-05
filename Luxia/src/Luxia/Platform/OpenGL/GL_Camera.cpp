@@ -20,10 +20,18 @@ namespace Luxia::Platform::OpenGL {
 	}
 	
 	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) {
+		if (width != output_texture->GetWidth() || height != output_texture->GetHeight()) {
+			output_texture->Delete();
+			output_texture = std::make_shared<GL_Texture>();
+			output_texture->CreateFBOTex(width, height);
+		}
+		
 		glBindFramebuffer(GL_FRAMEBUFFER, output_texture->GetFBO());
 		glClearColor(clear_col.r, clear_col.g, clear_col.b, clear_col.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, width, height);
+
+		
 
 		auto view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
 
