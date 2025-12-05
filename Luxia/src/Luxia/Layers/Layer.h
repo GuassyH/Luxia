@@ -33,6 +33,8 @@ namespace Luxia
 		window = m_window;
 		}
 
+		std::shared_ptr<Luxia::Rendering::IRenderer> GetRenderer() { return renderer.lock(); }
+
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
 	protected:
 		WeakPtrProxy<Luxia::EventHandler> event_handler;

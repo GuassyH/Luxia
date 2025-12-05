@@ -14,9 +14,11 @@ namespace Talloren::Editor {
 	public:
 		virtual ~IEditorPanel() = default;
 
-		virtual void Init() {}
+		virtual void Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
 		virtual void Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) = 0;
 		virtual void Unload() = 0;
+
+		bool opened = true;
 
 		virtual void OnEvent(Luxia::Event& e) = 0;
 	};

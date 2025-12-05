@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\EditorPanels\SceneViewport.h" />
     <ClInclude Include="src\EditorPanels\InspectorPanel.h" />
     <ClInclude Include="src\EditorPanels\HierarchyPanel.h" />
     <ClInclude Include="src\EditorLayer.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="src\IEditorPanel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
     <ClCompile Include="src\EditorPanels\InspectorPanel.cpp" />
     <ClCompile Include="src\EditorPanels\HierarchyPanel.cpp" />
     <ClCompile Include="src\EditorLayer.cpp" />

@@ -2,6 +2,7 @@
 #include "EditorPanels/GameViewport.h"
 #include "EditorPanels/HierarchyPanel.h"
 #include "EditorPanels/InspectorPanel.h"
+#include "EditorPanels/SceneViewport.h"
 
 namespace Talloren::Layers {
 	void EditorLayer::OnAttach() {
@@ -11,6 +12,7 @@ namespace Talloren::Layers {
 		PushPanel(std::make_shared<Talloren::Editor::Panel::GameViewport>());
 		PushPanel(std::make_shared<Talloren::Editor::Panel::HierarchyPanel>());
 		PushPanel(std::make_shared<Talloren::Editor::Panel::InspectorPanel>());
+		PushPanel(std::make_shared<Talloren::Editor::Panel::SceneViewport>());
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");

@@ -2,7 +2,7 @@
 #include "EditorLayer.h"
 
 namespace Talloren::Editor::Panel {
-	void GameViewport::Init() {
+	void GameViewport::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - GameView Panel: Init");
 	}
 	void GameViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {

@@ -2,7 +2,7 @@
 #include "EditorLayer.h"
 
 namespace Talloren::Editor::Panel {
-	void HierarchyPanel::Init() {
+	void HierarchyPanel::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - Hierarchy Panel: Init");
 	}
 

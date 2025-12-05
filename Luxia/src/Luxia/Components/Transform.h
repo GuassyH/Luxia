@@ -134,7 +134,7 @@ namespace Luxia::Components {
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			GetComponent() {
-			assert(reg.valid(ent_id));
+			// assert(reg.valid(ent_id));
 			return reg->get<T>(ent_id);
 		}
 

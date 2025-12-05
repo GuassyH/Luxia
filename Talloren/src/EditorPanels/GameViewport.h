@@ -5,7 +5,7 @@
 namespace Talloren::Editor::Panel {
 	class GameViewport : public Talloren::Editor::IEditorPanel {
 	public:
-		virtual void Init() override;
+		virtual void Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 		virtual void Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 		virtual void Unload() override;
 
