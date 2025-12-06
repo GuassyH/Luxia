@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Luxia.h"
+#include "glm/glm.hpp"
 
 namespace Talloren::Scripts {
 
 	class SceneCameraScript : public Luxia::Components::Component {
 	public:
-		float speed = 0.01f;
+		float speed = 1.0f;
 		float sensitivity = 0.002f;
 
 		glm::vec3 moveDir;
@@ -35,7 +36,7 @@ namespace Talloren::Scripts {
 
 			moveDir = right * horizontal + forward * vertical;
 			
-			transform->position += moveDir * speed; // Should multiply with delta time
+			transform->position += moveDir * speed * 0.01f; // Should multiply with delta time
 		}
 
 		double last_mouseX;
@@ -72,6 +73,9 @@ namespace Talloren::Scripts {
 			// if (display.scroll != 0) {
 				// moveSpeed = glm::fclamp(moveSpeed * (display.scroll > 0 ? 2.0f : 0.5f), 0.5f, 256.0f);
 			// }
+			if (Luxia::Input::GetScrollOffset().y != 0) {
+				speed = glm::fclamp(speed * (Luxia::Input::GetScrollOffset().y > 0 ? 2.0f : 0.5f), 0.5f, 256.0f);
+			}
 
 			last_mouseX = mouseX;
 			last_mouseY = mouseY;
