@@ -22,6 +22,8 @@ project "LuxiaVendor"
     includedirs { 
 		"Luxia/vendor/imgui", 
 		"Luxia/vendor",
+		"Luxia/vendor/yaml-cpp/include",
+		"Luxia/vendor/yaml-cpp",
 	}
 
 	filter "system:windows"
@@ -70,7 +72,8 @@ project "Luxia"
 		"%{prj.name}/vendor/glm",
 		"%{prj.name}/vendor/imgui",
 		"%{prj.name}/vendor/spdlog/include",
-		--"%{prj.name}/vendor/yaml-cpp/include",
+		"%{prj.name}/vendor/yaml-cpp/include",
+		"%{prj.name}/vendor/yaml-cpp",
 	}
 
 	links { "LuxiaVendor" }
@@ -97,7 +100,11 @@ project "Luxia"
 
 		
 		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib" }
-		links { "glfw3dll", "opengl32", "assimp-vc143-mtd" }
+		links { 
+			"glfw3dll",
+			"opengl32", 
+			"assimp-vc143-mtd" 
+		}
 
 	-- Specify how to build different configs
 	filter "configurations:Debug"
@@ -137,10 +144,11 @@ project "Talloren"
 	includedirs{
 		"Luxia/vendor",
 		"Luxia/vendor/spdlog/include",
+		"Luxia/vendor/yaml-cpp/include",
+		"Luxia/vendor/yaml-cpp",
 		"Luxia/vendor/glm",
 		"Luxia/src",
 		"Talloren/src",
-		--"Luxia/vendor/yaml-cpp/include",
 	}
 
 	libdirs {
@@ -151,7 +159,7 @@ project "Talloren"
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
-		"assimp-vc143-mtd",
+		"assimp-vc143-mtd"
 	}
 
 	filter "system:windows"

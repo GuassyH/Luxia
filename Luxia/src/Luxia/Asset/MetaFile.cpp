@@ -20,52 +20,44 @@ namespace Luxia::Assets {
 	bool MetaFile::Load(const std::filesystem::path& m_metaPath) {
 		// Open file
 		metaPath = m_metaPath;
-		std::ifstream infile(metaPath, std::ios::in);
 
-		// Throw runtime error
-		if (!infile.is_open()) {
-			LX_CORE_ERROR("Failed to open metafile: {}", metaPath.string());
-			return false;
+		try {
+			YAML::Node config = YAML::LoadFile(metaPath.string());
+
+			type = static_cast<Luxia::AssetType>(config["type"].as<int>());
+			guid = Luxia::GUID(config["guid"].as<uint64_t>());
+			assetPath = std::filesystem::path(config["assetPath"].as<std::string>());
+			metaPath = std::filesystem::path(config["metaPath"].as<std::string>());
+			name = config["name"].as<std::string>();
+		
+			loaded = true;
 		}
+		catch (const YAML::Exception& ex) {
+			std::cerr << "YAML error: " << ex.what() << "\n";
+			loaded = false;
+		} 
 
-		int success = 0;
-		std::string line;
-		while (std::getline(infile, line)) {
-			// Trim whitespace if needed
-			if (line.rfind("type=", 0) == 0) {
-				uint64_t val = std::stoull(line.substr(5));
-				type = static_cast<Luxia::AssetType>(val);
-				success++;
-			}
-			else if (line.rfind("guid=", 0) == 0) {
-				guid = std::stoull(line.substr(5));
-				success++;
-			}
-			else if (line.rfind("assetPath=", 0) == 0) {
-				assetPath = line.substr(10);
-				success++;
-			}
-			else if (line.rfind("metaPath=", 0) == 0) {
-				metaPath = line.substr(9);
-				success++;
-			}
-			else if (line.rfind("name=", 0) == 0) {
-				name = line.substr(5);
-				success++;
-			}
-		}
-
-		infile.close();
-
-		// if all lines werent found, return false
-		if (success != 5) { return false; }
-
-		loaded = true;
 		return loaded;
 	}
 
 	// Should be YAML!
 	bool MetaFile::Save() {
+		
+		YAML::Emitter out;
+		
+		out << YAML::BeginMap;
+		out << YAML::Key << "type";
+		out << YAML::Value << (int)type;
+		out << YAML::Key << "guid";
+		out << YAML::Value << (uint64_t)guid;
+		out << YAML::Key << "assetPath";
+		out << YAML::Value << assetPath.string();
+		out << YAML::Key << "metaPath";
+		out << YAML::Value << metaPath.string();
+		out << YAML::Key << "name";
+		out << YAML::Value << name;
+		out << YAML::EndMap;
+
 		// Open file
 		std::ofstream outfile(metaPath);
 		if (!outfile.is_open()) {
@@ -73,12 +65,7 @@ namespace Luxia::Assets {
 			return false;
 		}
 
-		// outfile << out.c_str();
-		outfile << "type=" << (int)type << "\n";
-		outfile << "guid=" << (uint64_t)guid << "\n";
-		outfile << "assetPath=" << assetPath.string() << "\n";
-		outfile << "metaPath=" << metaPath.string() << "\n";
-		outfile << "name=" << name << "\n";
+		outfile << out.c_str();
 
 		outfile.close();
 

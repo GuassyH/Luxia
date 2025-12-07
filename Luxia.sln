@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20 d17.14
-MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Luxia", "Luxia\Luxia.vcxproj", "{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuxiaVendor", "Luxia\vendor\LuxiaVendor.vcxproj", "{F693E7D7-6249-60CD-EB3D-5AA457F256D1}"

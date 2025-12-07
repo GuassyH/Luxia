@@ -4,26 +4,43 @@
     <Filter Include="EditorPanels">
       <UniqueIdentifier>{6FDCDA8C-5B3F-6A31-04C5-A2E7F00636B4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EditorScripts">
+      <UniqueIdentifier>{F4161A14-60D7-954A-2912-DFC79591DA26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h" />
     <ClInclude Include="src\EditorPanels\GameViewport.h">
       <Filter>EditorPanels</Filter>
     </ClInclude>
+    <ClInclude Include="src\EditorPanels\HierarchyPanel.h">
+      <Filter>EditorPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorPanels\InspectorPanel.h">
+      <Filter>EditorPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorPanels\SceneViewport.h">
+      <Filter>EditorPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorScripts\SceneCameraScript.h">
+      <Filter>EditorScripts</Filter>
+    </ClInclude>
     <ClInclude Include="src\IEditorPanel.h" />
-    <ClInclude Include="src\EditorPanels\HierarchyPanel.h" />
-    <ClInclude Include="src\EditorPanels\InspectorPanel.h" />
-    <ClInclude Include="src\EditorPanels\SceneViewport.h" />
-    <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\EditorPanels\GameViewport.cpp">
       <Filter>EditorPanels</Filter>
     </ClCompile>
+    <ClCompile Include="src\EditorPanels\HierarchyPanel.cpp">
+      <Filter>EditorPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorPanels\InspectorPanel.cpp">
+      <Filter>EditorPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorPanels\SceneViewport.cpp">
+      <Filter>EditorPanels</Filter>
+    </ClCompile>
     <ClCompile Include="src\Talloren.cpp" />
-    <ClCompile Include="src\EditorPanels\HierarchyPanel.cpp" />
-    <ClCompile Include="src\EditorPanels\InspectorPanel.cpp" />
-    <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
   </ItemGroup>
 </Project>
