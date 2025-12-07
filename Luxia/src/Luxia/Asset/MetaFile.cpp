@@ -48,22 +48,8 @@ namespace Luxia::Assets {
 
 	// Should be YAML!
 	bool MetaFile::Save() {
-		LX_CORE_ERROR("SAVE PIOASDIOS");
-
 		YAML::Emitter out;
 
-		// Write to emitter
-		out << YAML::BeginMap;
-		out << YAML::Key << "test" << YAML::Value << "hello";
-		out << YAML::EndMap;
-
-		LX_CORE_INFO("Emitter:\n{}", out.c_str());
-
-		if (!out.good()) {
-			LX_CORE_ERROR("Emitter failed!");
-			return false;
-		}
-		/*
 		out << YAML::BeginMap;
 		out << YAML::Key << "type";
 		out << YAML::Value << (int)type;
@@ -76,7 +62,12 @@ namespace Luxia::Assets {
 		out << YAML::Key << "name";
 		out << YAML::Value << name;
 		out << YAML::EndMap;
-		*/
+
+		if (!out.good()) {
+			LX_CORE_ERROR("Emitter failed!");
+			return false;
+		}
+		LX_CORE_INFO("Emitter:\n{}", out.c_str());
 
 
 		// Write to file

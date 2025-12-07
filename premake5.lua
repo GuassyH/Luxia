@@ -26,12 +26,12 @@ project "LuxiaVendor"
 		"Luxia/vendor/yaml-cpp/include",
 	}
 
-	libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
+	libdirs { "Luxia/vendor/yaml-cpp/build" }
 	links { "yaml-cpp" }
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "Off"
+		staticruntime "On"
 		systemversion "latest"
 
 		-- Define what should be defined
@@ -101,7 +101,7 @@ project "Luxia"
 		}
 
 		
-		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib", "Luxia/vendor/yaml-cpp/build/Release" }
+		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib", "Luxia/vendor/yaml-cpp/build" }
 		links { 
 			"glfw3dll",
 			"opengl32", 
@@ -156,7 +156,7 @@ project "Talloren"
 	libdirs {
 		"Luxia/vendor/glfw",
 		"Luxia/vendor/assimp/lib",
-		"Luxia/vendor/yaml-cpp/build/Release"
+		"Luxia/vendor/yaml-cpp/build"
 	}
 	links{
 		"Luxia",
