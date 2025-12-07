@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\yaml-cpp;..\Luxia\vendor\glm;..\Luxia\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\glm;..\Luxia\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -100,7 +100,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\yaml-cpp;..\Luxia\vendor\glm;..\Luxia\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\glm;..\Luxia\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -125,7 +125,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\yaml-cpp;..\Luxia\vendor\glm;..\Luxia\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\glm;..\Luxia\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

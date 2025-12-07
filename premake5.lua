@@ -18,12 +18,12 @@ project "LuxiaVendor"
     files { 
 		"Luxia/vendor/imgui/**.cpp",
 		"Luxia/vendor/glad/**.c",
+		-- "Luxia/vendor/yaml-cpp/**.cpp",
 	}
     includedirs { 
 		"Luxia/vendor/imgui", 
 		"Luxia/vendor",
 		"Luxia/vendor/yaml-cpp/include",
-		"Luxia/vendor/yaml-cpp",
 	}
 
 	libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
@@ -41,8 +41,8 @@ project "LuxiaVendor"
 			"LUXIA_RENDERER_OPENGL", 
 		}
 
-		buildoptions { "/utf-8" }
-		linkoptions { "/SUBSYSTEM:CONSOLE" }
+		-- buildoptions { "/utf-8" }
+		-- linkoptions { "/SUBSYSTEM:CONSOLE" }
 
 	
 
@@ -76,7 +76,6 @@ project "Luxia"
 		"%{prj.name}/vendor/imgui",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/vendor/yaml-cpp/include",
-		"%{prj.name}/vendor/yaml-cpp",
 	}
 
 	links { "LuxiaVendor" }
@@ -149,7 +148,6 @@ project "Talloren"
 		"Luxia/vendor",
 		"Luxia/vendor/spdlog/include",
 		"Luxia/vendor/yaml-cpp/include",
-		"Luxia/vendor/yaml-cpp",
 		"Luxia/vendor/glm",
 		"Luxia/src",
 		"Talloren/src",
@@ -176,7 +174,7 @@ project "Talloren"
 		-- Define what should be defined
 		defines{
 			"LUXIA_PLATFORM_WINDOWS",
-			"LUXIA_RENDERER_OPENGL"
+			"LUXIA_RENDERER_OPENGL",
 		}
 
 		buildoptions { "/utf-8" }

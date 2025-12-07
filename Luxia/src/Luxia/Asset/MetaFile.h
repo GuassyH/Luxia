@@ -1,9 +1,10 @@
 #pragma once
 
+
 #include "Luxia/Core/Core.h"
 #include "Luxia/Asset/AssetType.h"
 #include "Luxia/Core/GUID.h"
-#include "yaml-cpp/yaml.h"
+#include <yaml-cpp/yaml.h>
 
 namespace Luxia::Assets {
 	class LUXIA_API MetaFile

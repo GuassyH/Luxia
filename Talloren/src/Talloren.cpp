@@ -26,11 +26,7 @@ namespace Talloren::Layers {
 
 			asset_manager->Import("cute_ghost/scene.gltf", "Ghost", "E:/BuiltLuxia/Sandbox/assets/cute_ghost/scene.gltf");
 
-
 			// Create Model runtime Asset (from existing ModelFile)
-			// Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
-			// auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
-			// auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
 
 			// Luxia::GUID LTGUID = asset_manager->GetAssetFileGUID("lotr_troll/scene.luxmodel");
 			// auto LTModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(LTGUID);
@@ -41,9 +37,14 @@ namespace Talloren::Layers {
 			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
 			cam.main = true;
 
-			// auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
-			// ghostEnt.position = glm::vec3(-5.0f, 0.0f, 0.0f);
-			// ghostEnt.euler_angles.x = -90.0f;
+			/*
+			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
+			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
+			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
+			auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
+			ghostEnt.position = glm::vec3(-5.0f, 0.0f, 0.0f);
+			ghostEnt.euler_angles.x = -90.0f;
+			*/
 			
 			// auto& lotrEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(15));
 			// lotrEnt.scale = glm::vec3(0.02f);

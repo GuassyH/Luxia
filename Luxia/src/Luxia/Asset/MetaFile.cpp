@@ -20,9 +20,15 @@ namespace Luxia::Assets {
 	bool MetaFile::Load(const std::filesystem::path& m_metaPath) {
 		// Open file
 		metaPath = m_metaPath;
+		loaded = false;
 
 		try {
 			YAML::Node config = YAML::LoadFile(metaPath.string());
+
+			if (!config["type"] || !config["guid"] || !config["assetPath"] || !config["metaPath"] || !config["name"]) {
+				std::cerr << "YAML missing required fields in: " << metaPath << "\n";
+				return false;
+			}
 
 			type = static_cast<Luxia::AssetType>(config["type"].as<int>());
 			guid = Luxia::GUID(config["guid"].as<uint64_t>());
@@ -42,9 +48,22 @@ namespace Luxia::Assets {
 
 	// Should be YAML!
 	bool MetaFile::Save() {
-		
+		LX_CORE_ERROR("SAVE PIOASDIOS");
+
 		YAML::Emitter out;
-		
+
+		// Write to emitter
+		out << YAML::BeginMap;
+		out << YAML::Key << "test" << YAML::Value << "hello";
+		out << YAML::EndMap;
+
+		LX_CORE_INFO("Emitter:\n{}", out.c_str());
+
+		if (!out.good()) {
+			LX_CORE_ERROR("Emitter failed!");
+			return false;
+		}
+		/*
 		out << YAML::BeginMap;
 		out << YAML::Key << "type";
 		out << YAML::Value << (int)type;
@@ -57,15 +76,17 @@ namespace Luxia::Assets {
 		out << YAML::Key << "name";
 		out << YAML::Value << name;
 		out << YAML::EndMap;
+		*/
 
-		// Open file
-		std::ofstream outfile(metaPath);
+
+		// Write to file
+		std::ofstream outfile(metaPath); // text mode
 		if (!outfile.is_open()) {
 			LX_CORE_ERROR("Failed to save metafile: {}", metaPath.string());
 			return false;
 		}
 
-		outfile << out.c_str();
+		outfile << out.c_str(); // write YAML text
 
 		outfile.close();
 
