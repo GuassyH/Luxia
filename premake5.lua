@@ -26,6 +26,9 @@ project "LuxiaVendor"
 		"Luxia/vendor/yaml-cpp",
 	}
 
+	libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
+	links { "yaml-cpp" }
+
 	filter "system:windows"
 		cppdialect "C++20"
 		staticruntime "Off"
@@ -95,15 +98,16 @@ project "Luxia"
 
 		-- Copy file from the buildtarget to bin/outputdir/Talloren
 		postbuildcommands{
-			('{COPY} %{cfg.buildtarget.relpath} ../bin/' .. outputdir .. '/Talloren')
+			('{COPY} %{cfg.buildtarget.relpath} ../bin/' .. outputdir .. '/Talloren'),
 		}
 
 		
-		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib" }
+		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib", "Luxia/vendor/yaml-cpp/build/Release" }
 		links { 
 			"glfw3dll",
 			"opengl32", 
-			"assimp-vc143-mtd" 
+			"assimp-vc143-mtd",
+			"yaml-cpp"
 		}
 
 	-- Specify how to build different configs
@@ -154,12 +158,14 @@ project "Talloren"
 	libdirs {
 		"Luxia/vendor/glfw",
 		"Luxia/vendor/assimp/lib",
+		"Luxia/vendor/yaml-cpp/build/Release"
 	}
 	links{
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
-		"assimp-vc143-mtd"
+		"assimp-vc143-mtd",
+		"yaml-cpp"
 	}
 
 	filter "system:windows"
