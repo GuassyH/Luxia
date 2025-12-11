@@ -28,7 +28,7 @@ namespace Luxia {
 		static std::unordered_map<Luxia::AssetType, std::string> asset_extensions;
 	public:
 		bool LoadAssetPool(const std::filesystem::path& m_path);
-		bool SaveAssetPool();
+		bool SaveAssetPool(const std::filesystem::path& m_path);
 		void Cleanup(); // Before app closes, save everything, etc
 
 		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return asset_pool; }

@@ -21,6 +21,7 @@ namespace Luxia {
 		m_ProjectName = project_name;
 		m_ConfigPath = (folder_path / "config.lux").lexically_normal();
 		
+
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
 		m_SceneManager = std::make_shared<Luxia::SceneManager>();
 
@@ -59,13 +60,23 @@ namespace Luxia {
 	// Should be YAML!
 	bool ProjectManager::SaveProjectConfigs() {
 		m_SceneManager->SaveScenes();
-		m_AssetManager->SaveAssetPool();
+		m_AssetManager->SaveAssetPool(m_ProjectPath);
+
+		YAML::Emitter out;
+
+		out << YAML::BeginMap;
+		
+		out << YAML::Key << "project_path";
+		out << YAML::Value << m_ProjectPath.string();
+		out << YAML::Key << "project_name";
+		out << YAML::Value << m_ProjectName;
+
+		out << YAML::EndMap;
 
 		std::ofstream outfile(m_ConfigPath);
 		if (!outfile.is_open()) { return false; }
 
-		outfile << "path=" << m_ProjectPath.string() << "\n";
-		outfile << "name=" << m_ProjectName << "\n";
+		outfile << out.c_str();
 
 		outfile.close();
 
@@ -74,27 +85,16 @@ namespace Luxia {
 
 	// Should be YAML
 	bool ProjectManager::LoadProjectConfigs() {
-		std::ifstream infile(m_ConfigPath);
-		if (!infile.is_open()) { return false; }
+		try {
+			YAML::Node config = YAML::LoadFile(m_ConfigPath.string());
 
-		int success = 0;
-		std::string line;
-		while (std::getline(infile, line)) {
-			// Trim whitespace if needed
-			if (line.rfind("path=", 0) == 0) {				
-				m_ProjectPath = line.substr(5);;
-				success++;
-			}
-			else if (line.rfind("name=", 0) == 0) {	
-				m_ProjectName = line.substr(5);
-				success++;
-			}
+			// Check if missing
+			m_ProjectPath = config["project_path"].as<std::string>();
+			m_ProjectName = config["project_name"].as<std::string>();
 		}
-
-		infile.close();
-		
-		// if all lines werent found, return false
-		if (success != 2) { return false; }
+		catch (const YAML::Exception& ex) {
+			std::cerr << "YAML error: " << ex.what() << "\n";
+		}
 
 		m_AssetManager->LoadAssetPool(m_ProjectPath);
 		m_SceneManager->LoadScenePool(m_AssetManager);

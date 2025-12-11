@@ -45,7 +45,10 @@ namespace Luxia {
 		return true; 
 	}
 
-	bool AssetManager::SaveAssetPool() {
+	bool AssetManager::SaveAssetPool(const std::filesystem::path& m_path) {
+		asset_dir = m_path / "assets";
+		asset_dir = asset_dir.lexically_normal();
+
 		if (!std::filesystem::exists(asset_dir)) {
 			LX_CORE_ERROR("Asset Manager: creating asset dir - {}", asset_dir.string());
 

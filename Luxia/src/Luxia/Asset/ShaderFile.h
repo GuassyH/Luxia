@@ -19,81 +19,6 @@ namespace Luxia::Assets {
 			shaderType = ShaderFileType::VertexFragment;
 		}
 
-		virtual bool Create(const std::filesystem::path& m_assetPath) override {
-			Save(m_assetPath);
-			return true;
-		}
-
-		virtual bool Load(const std::filesystem::path& m_assetPath) {
-			assetPath = m_assetPath;
-
-			std::ifstream infile(m_assetPath, std::ios::in);
-
-			int wanted = 0;
-			int success = 0;
-			std::string line;
-			while (std::getline(infile, line)) {
-				// Trim whitespace if needed
-				if (line.rfind("type=", 0) == 0) {
-					uint64_t val = std::stoull(line.substr(5));
-					shaderType = static_cast<ShaderFileType>(val);
-					switch (shaderType) {
-					case ShaderFileType::Other:
-						wanted = 2; // type + shader
-						break;
-					case ShaderFileType::VertexFragment:
-						wanted = 3; // type + frag + vert
-						break;
-					default:
-						LX_CORE_ERROR("ShaderFile: Load - Unknown shader type");
-						return false;
-					}
-					success++;
-				}
-				if(shaderType == ShaderFileType::Other) {
-					if (line.rfind("shader=", 0) == 0) {
-						shaderPath = line.substr(7);
-						success++;
-					}
-				}
-				else if (shaderType == ShaderFileType::VertexFragment) {
-					if (line.rfind("frag=", 0) == 0) {
-						fragPath = line.substr(5);
-						success++;
-					}
-					else if (line.rfind("vert=", 0) == 0) {
-						vertPath = line.substr(5);
-						success++;
-					}
-				}
-			}
-
-			if (success != wanted) { return false; }
-
-			infile.close();
-
-			return true;
-
-		}
-		virtual bool Save(const std::filesystem::path& m_assetPath) {
-			assetPath = m_assetPath;
-
-			std::ofstream outfile(m_assetPath);
-			outfile << "type=" << (int)shaderType << "\n";
-
-			if (shaderType == ShaderFileType::Other) {
-				outfile << "shader=" << shaderPath.lexically_normal().string() << "\n";
-			}
-			else if (shaderType == ShaderFileType::VertexFragment) {
-				outfile << "frag=" << fragPath.lexically_normal().string() << "\n";
-				outfile << "vert=" << vertPath.lexically_normal().string() << "\n";
-			}
-
-			outfile.close();
-
-			return true;
-		}
-
 
 		enum class ShaderFileType {
 			VertexFragment,
@@ -101,7 +26,7 @@ namespace Luxia::Assets {
 			Other,
 			None
 		};
-		
+
 		ShaderFileType shaderType = ShaderFileType::None;
 
 		// In case its vert and frag
@@ -110,6 +35,84 @@ namespace Luxia::Assets {
 
 		// In case its something else, eg compute shader
 		std::filesystem::path shaderPath;
-	
+
+		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			Save(m_assetPath);
+			return true;
+		}
+
+		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+			loaded = false;
+
+			try {
+				YAML::Node config = YAML::LoadFile(assetPath.string());
+
+				// Check if missing
+				shaderType = static_cast<ShaderFileType>(config["shader_type"].as<int>());
+
+				if (shaderType == ShaderFileType::VertexFragment) {
+					fragPath = config["frag_path"].as<std::string>();
+					vertPath = config["vert_path"].as<std::string>();
+				}
+				else {
+					shaderPath = config["shader_path"].as<std::string>();
+				}
+
+				loaded = true;
+			}
+			catch (const YAML::Exception& ex) {
+				std::cerr << "YAML error: " << ex.what() << "\n";
+				loaded = false;
+			}
+
+			return loaded;
+			return true;
+		}
+		virtual bool Save(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+
+			YAML::Emitter out;
+
+			out << YAML::BeginMap;
+
+			out << YAML::Key << "shader_type";
+			out << YAML::Value << (int)shaderType;
+
+			if (shaderType == ShaderFileType::VertexFragment) {
+				out << YAML::Key << "frag_path";
+				out << YAML::Value << fragPath.string();
+
+				out << YAML::Key << "vert_path";
+				out << YAML::Value << vertPath.string();
+			}
+			else {
+				out << YAML::Key << "shader_path";
+				out << YAML::Value << shaderPath.string();
+			}
+
+			out << YAML::EndMap;
+
+			if (!out.good()) {
+				LX_CORE_ERROR("Emitter failed!");
+				return false;
+			}
+
+
+			// Write to file
+			std::ofstream outfile(assetPath); // text mode
+			if (!outfile.is_open()) {
+				LX_CORE_ERROR("Failed to save metafile: {}", assetPath.string());
+				return false;
+			}
+
+			outfile << out.c_str(); // write YAML text
+
+			outfile.close();
+
+			return true;
+		}
+
+
 	};
 }

@@ -67,8 +67,6 @@ namespace Luxia::Assets {
 			LX_CORE_ERROR("Emitter failed!");
 			return false;
 		}
-		LX_CORE_INFO("Emitter:\n{}", out.c_str());
-
 
 		// Write to file
 		std::ofstream outfile(metaPath); // text mode

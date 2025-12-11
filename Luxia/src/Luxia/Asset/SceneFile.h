@@ -19,18 +19,46 @@ namespace Luxia::Assets {
 
 		virtual bool Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
+			loaded = false;
 
-			std::ifstream infile(m_assetPath, std::ios::in);
+			try {
+				YAML::Node config = YAML::LoadFile(assetPath.string());
+
+				// Check if missing
 
 
-			infile.close();
+				loaded = true;
+			}
+			catch (const YAML::Exception& ex) {
+				std::cerr << "YAML error: " << ex.what() << "\n";
+				loaded = false;
+			}
 
+			return loaded;
 			return true;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 
-			std::ofstream outfile(m_assetPath);
+			YAML::Emitter out;
+
+			out << YAML::BeginMap;
+			out << YAML::EndMap;
+
+			if (!out.good()) {
+				LX_CORE_ERROR("Emitter failed!");
+				return false;
+			}
+
+
+			// Write to file
+			std::ofstream outfile(assetPath); // text mode
+			if (!outfile.is_open()) {
+				LX_CORE_ERROR("Failed to save metafile: {}", assetPath.string());
+				return false;
+			}
+
+			outfile << out.c_str(); // write YAML text
 
 			outfile.close();
 

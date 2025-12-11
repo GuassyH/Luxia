@@ -11,84 +11,6 @@ namespace Luxia::Assets {
 		MaterialFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~MaterialFile() = default;
 
-		virtual bool Create(const std::filesystem::path& m_assetPath) override {
-			Save(m_assetPath);
-			return true;
-		}
-
-		virtual bool Load(const std::filesystem::path& m_assetPath) override {
-			assetPath = m_assetPath;
-		
-			std::ifstream infile(m_assetPath, std::ios::in);
-
-			int success = 0;
-			std::string line;
-			while (std::getline(infile, line)) {
-				// Trim whitespace if needed
-				if (line.rfind("shader=", 0) == 0) {
-					shader_path = line.substr(7);
-					success++;
-				}
-				if (line.rfind("diff_guid=", 0) == 0) {
-					diffuse_guid = GUID(std::stoull(line.substr(10)));
-					success++;
-				}
-				if (line.rfind("spec_guid=", 0) == 0) {
-					specular_guid = GUID(std::stoull(line.substr(10)));
-					success++;
-				}
-				if (line.rfind("norm_guid=", 0) == 0) {
-					normal_guid = GUID(std::stoull(line.substr(10)));
-					success++;
-				}
-				if (line.rfind("color=", 0) == 0) {
-					std::string color_str = line.substr(6);
-					sscanf(color_str.c_str(), "%f,%f,%f,%f", &color.r, &color.g, &color.b, &color.a);
-					success++;
-				}
-				if (line.rfind("roughness=", 0) == 0) {
-					roughness = std::stof(line.substr(10));
-					success++;
-				}
-				if (line.rfind("metallic=", 0) == 0) {
-					metallic = std::stof(line.substr(9));
-					success++;
-				}
-			}
-
-			infile.close();
-
-			if (success != 7) { return false; }
-
-			std::ifstream guid_infile(shader_path, std::ios::in);
-			while (std::getline(guid_infile, line)) {
-				// Trim whitespace if needed
-				if (line.rfind("guid=", 0) == 0) {
-					shader_guid = std::stoull(line.substr(5));
-					break;
-				}
-			}
-
-			guid_infile.close();
-			return true;
-		}
-		virtual bool Save(const std::filesystem::path& m_assetPath) override {
-			assetPath = m_assetPath;
-
-			std::ofstream outfile(m_assetPath);
-
-			outfile << "shader=" << shader_path.lexically_normal().string() << "\n";
-			outfile << "diff_guid=" << (uint64_t)diffuse_guid << "\n";
-			outfile << "spec_guid=" << (uint64_t)specular_guid << "\n";
-			outfile << "norm_guid=" << (uint64_t)normal_guid << "\n";
-			outfile << "color=" << color.r << "," << color.g << "," << color.b << "," << color.a << "\n";
-			outfile << "roughness=" << roughness << "\n";
-			outfile << "metallic=" << metallic << "\n";
-
-			outfile.close();
-
-			return true;
-		}
 
 		// Shader
 		std::filesystem::path shader_path;
@@ -98,10 +20,86 @@ namespace Luxia::Assets {
 		GUID diffuse_guid = GUID(0);
 		GUID specular_guid = GUID(0);
 		GUID normal_guid = GUID(0);
-		
+
 		// Material Properties
 		glm::vec4 color = glm::vec4(1.0f);
 		float roughness = 1.0f;
 		float metallic = 1.0f;
+
+
+		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			Save(m_assetPath);
+			return true;
+		}
+
+		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+			loaded = false;
+
+			try {
+				YAML::Node config = YAML::LoadFile(assetPath.string());
+
+				// Check if missing
+
+				shader_guid =	Luxia::GUID(config["shader_guid"].as<uint64_t>());
+				diffuse_guid =	Luxia::GUID(config["diff_guid"].as<uint64_t>());
+				specular_guid = Luxia::GUID(config["spec_guid"].as<uint64_t>());
+				normal_guid =	Luxia::GUID(config["norm_guid"].as<uint64_t>());
+				//color =			config["color"].as<glm::vec4>();
+				roughness =		config["roughness"].as<float>();
+				metallic =		config["metallic"].as<float>();
+
+				loaded = true;
+			}
+			catch (const YAML::Exception& ex) {
+				std::cerr << "YAML error: " << ex.what() << "\n";
+				loaded = false;
+			}
+
+			return loaded;
+			return true;
+		}
+		virtual bool Save(const std::filesystem::path& m_assetPath) override {
+			assetPath = m_assetPath;
+
+			YAML::Emitter out;
+
+			out << YAML::BeginMap;
+			out << YAML::Key << "shader_guid";
+			out << YAML::Value << (uint64_t)shader_guid;
+			out << YAML::Key << "diff_guid";
+			out << YAML::Value << (uint64_t)diffuse_guid;
+			out << YAML::Key << "spec_guid";
+			out << YAML::Value << (uint64_t)specular_guid;
+			out << YAML::Key << "norm_guid";
+			out << YAML::Value << (uint64_t)normal_guid;
+			out << YAML::Key << "color";
+			out << YAML::Value << YAML::BeginSeq << color.r << color.g << color.b << color.a << YAML::EndSeq;
+			out << YAML::Key << "roughness";
+			out << YAML::Value << roughness;
+			out << YAML::Key << "metallic";
+			out << YAML::Value << metallic;
+			out << YAML::EndMap;
+
+			if (!out.good()) {
+				LX_CORE_ERROR("Emitter failed!");
+				return false;
+			}
+
+
+			// Write to file
+			std::ofstream outfile(assetPath); // text mode
+			if (!outfile.is_open()) {
+				LX_CORE_ERROR("Failed to save metafile: {}", assetPath.string());
+				return false;
+			}
+
+			outfile << out.c_str(); // write YAML text
+
+			outfile.close();
+
+			return true;
+		}
+
 	};
 }

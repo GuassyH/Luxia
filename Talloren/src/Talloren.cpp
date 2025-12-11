@@ -15,17 +15,13 @@ namespace Talloren::Layers {
 
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-
 			// Create Shader runtime Asset
-			// auto MatFile = asset_manager->GetAssetFile<Luxia::Assets::MaterialFile>(asset_manager->GetAssetFileGUID("materials/DefaultMaterial.luxmat"));
-			// auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(MatFile->shader_guid);
-			// auto DefaultShader = scene->LoadRuntimeAsset<Luxia::IShader>(SHFile);
+			auto MatFile = asset_manager->GetAssetFile<Luxia::Assets::MaterialFile>(asset_manager->GetAssetFileGUID("materials/defaultmat.luxmat"));
+			auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(MatFile->shader_guid);
+			auto DefaultShader = scene->LoadRuntimeAsset<Luxia::IShader>(SHFile);
+			std::shared_ptr<Luxia::IMaterial> DefaultMat = Luxia::Platform::Assets::CreateMaterial(DefaultShader);
 
 			// Create Material runtime Asset
-			// std::shared_ptr<Luxia::IMaterial> DefaultMat = Luxia::Platform::Assets::CreateMaterial(DefaultShader);
-
-			//asset_manager->Import("cute_ghost/scene.gltf", "Ghost", "E:/BuiltLuxia/Sandbox/assets/cute_ghost/scene.gltf");
-			
 
 			// Create Model runtime Asset (from existing ModelFile)
 
@@ -33,20 +29,18 @@ namespace Talloren::Layers {
 			// auto LTModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(LTGUID);
 			// auto LTModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(LTModelFile);
 
+
+			
+			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
+			LX_CORE_ERROR((uint64_t)GMGUID);
+			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
+			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
+			
 			auto& camEnt = scene->CreateEntity();
 			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
 			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
+			camEnt.euler_angles = glm::vec3(0.0f);
 			cam.main = true;
-
-			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
-			LX_CORE_ERROR((uint64_t)GMGUID);
-			/*
-			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
-			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
-			auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
-			ghostEnt.position = glm::vec3(-5.0f, 0.0f, 0.0f);
-			ghostEnt.euler_angles.x = -90.0f;
-			*/
 			
 			// auto& lotrEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(15));
 			// lotrEnt.scale = glm::vec3(0.02f);

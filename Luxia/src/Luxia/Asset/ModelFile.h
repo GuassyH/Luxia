@@ -20,28 +20,52 @@ namespace Luxia::Assets {
 
 		virtual bool Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
-			std::ifstream infile(m_assetPath, std::ios::binary);
+			loaded = false;
 
-			int success = 0;
-			std::string line;
-			while (std::getline(infile, line)) {
-				// Trim whitespace if needed
-				if (line.rfind("path=", 0) == 0) {
-					modelPath = line.substr(5);
-					success++;
-				}
+			try {
+				YAML::Node config = YAML::LoadFile(assetPath.string());
+
+				// Check if missing
+
+				modelPath = config["model_path"].as<std::string>();
+
+				loaded = true;
+			}
+			catch (const YAML::Exception& ex) {
+				std::cerr << "YAML error: " << ex.what() << "\n";
+				loaded = false;
 			}
 
-			infile.close();
+			return loaded;
 			return true;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
-			std::ofstream outfile(m_assetPath, std::ios::binary);
 
-			outfile << "path=" << modelPath.string() << "\n";
+			YAML::Emitter out;
+
+			out << YAML::BeginMap;
+			out << YAML::Key << "model_path";
+			out << YAML::Value << modelPath.string();
+			out << YAML::EndMap;
+
+			if (!out.good()) {
+				LX_CORE_ERROR("Emitter failed!");
+				return false;
+			}
+
+
+			// Write to file
+			std::ofstream outfile(assetPath); // text mode
+			if (!outfile.is_open()) {
+				LX_CORE_ERROR("Failed to save metafile: {}", assetPath.string());
+				return false;
+			}
+
+			outfile << out.c_str(); // write YAML text
 
 			outfile.close();
+
 			return true;
 		}
 
