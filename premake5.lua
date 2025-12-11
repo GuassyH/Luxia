@@ -18,7 +18,6 @@ project "LuxiaVendor"
     files { 
 		"Luxia/vendor/imgui/**.cpp",
 		"Luxia/vendor/glad/**.c",
-		-- "Luxia/vendor/yaml-cpp/**.cpp",
 	}
     includedirs { 
 		"Luxia/vendor/imgui", 
@@ -26,8 +25,8 @@ project "LuxiaVendor"
 		"Luxia/vendor/yaml-cpp/include",
 	}
 
-	libdirs { "Luxia/vendor/yaml-cpp/build" }
-	links { "yaml-cpp" }
+	libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
+	links { "yaml-cppd" }
 
 	filter "system:windows"
 		cppdialect "C++20"
@@ -101,12 +100,12 @@ project "Luxia"
 		}
 
 		
-		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib", "Luxia/vendor/yaml-cpp/build" }
+		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib", "Luxia/vendor/yaml-cpp/build/Debug" }
 		links { 
 			"glfw3dll",
 			"opengl32", 
 			"assimp-vc143-mtd",
-			"yaml-cpp"
+			"yaml-cppd"
 		}
 
 	-- Specify how to build different configs
@@ -156,14 +155,14 @@ project "Talloren"
 	libdirs {
 		"Luxia/vendor/glfw",
 		"Luxia/vendor/assimp/lib",
-		"Luxia/vendor/yaml-cpp/build"
+		"Luxia/vendor/yaml-cpp/build/Debug"
 	}
 	links{
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
 		"assimp-vc143-mtd",
-		"yaml-cpp"
+		"yaml-cppd"
 	}
 
 	filter "system:windows"

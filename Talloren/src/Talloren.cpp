@@ -24,7 +24,8 @@ namespace Talloren::Layers {
 			// Create Material runtime Asset
 			// std::shared_ptr<Luxia::IMaterial> DefaultMat = Luxia::Platform::Assets::CreateMaterial(DefaultShader);
 
-			asset_manager->Import("cute_ghost/scene.gltf", "Ghost", "E:/BuiltLuxia/Sandbox/assets/cute_ghost/scene.gltf");
+			//asset_manager->Import("cute_ghost/scene.gltf", "Ghost", "E:/BuiltLuxia/Sandbox/assets/cute_ghost/scene.gltf");
+			
 
 			// Create Model runtime Asset (from existing ModelFile)
 
@@ -37,8 +38,9 @@ namespace Talloren::Layers {
 			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
 			cam.main = true;
 
-			/*
 			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
+			LX_CORE_ERROR((uint64_t)GMGUID);
+			/*
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
 			auto& ghostEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(0));
