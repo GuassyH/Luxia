@@ -5,7 +5,6 @@
 #include "Luxia/Core/Core.h"
 #include "Luxia/Core/Log.h"
 
-#include "glm/common.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -128,6 +127,7 @@ namespace Luxia::Components {
 			auto& cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
 			Component* c = &cb;
 			c->transform = this;
+			c->ent_guid = this->ent_guid;
 			return cb;
 		}
 

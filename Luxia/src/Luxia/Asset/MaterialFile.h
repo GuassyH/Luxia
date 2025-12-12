@@ -1,7 +1,7 @@
 #pragma once
 #include "Luxia/Asset/AssetFile.h"
 #include "Luxia/Asset/ShaderFile.h"
-#include "glm/glm.hpp"
+#include "glm/vec4.hpp"
 
 namespace Luxia::Assets {
 	class LUXIA_API MaterialFile : public AssetFile {
@@ -65,20 +65,14 @@ namespace Luxia::Assets {
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
-			out << YAML::Key << "shader_guid";
-			out << YAML::Value << (uint64_t)shader_guid;
-			out << YAML::Key << "diff_guid";
-			out << YAML::Value << (uint64_t)diffuse_guid;
-			out << YAML::Key << "spec_guid";
-			out << YAML::Value << (uint64_t)specular_guid;
-			out << YAML::Key << "norm_guid";
-			out << YAML::Value << (uint64_t)normal_guid;
+			out << YAML::Key << "shader_guid"	<< YAML::Value << (uint64_t)shader_guid;
+			out << YAML::Key << "diff_guid"		<< YAML::Value << (uint64_t)diffuse_guid;
+			out << YAML::Key << "spec_guid"		<< YAML::Value << (uint64_t)specular_guid;
+			out << YAML::Key << "norm_guid"		<< YAML::Value << (uint64_t)normal_guid;
 			out << YAML::Key << "color";
 			out << YAML::Value << YAML::BeginSeq << color.r << color.g << color.b << color.a << YAML::EndSeq;
-			out << YAML::Key << "roughness";
-			out << YAML::Value << roughness;
-			out << YAML::Key << "metallic";
-			out << YAML::Value << metallic;
+			out << YAML::Key << "roughness"		<< YAML::Value << roughness;
+			out << YAML::Key << "metallic"		<< YAML::Value << metallic;
 			out << YAML::EndMap;
 
 			if (!out.good()) {

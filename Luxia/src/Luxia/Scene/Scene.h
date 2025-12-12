@@ -4,6 +4,7 @@
 #include "Luxia/Components/Transform.h"
 
 #include "Luxia/Platform/PlatformDefinitions.h"
+#include "Luxia/Entity.h"
 
 #include "Luxia/Asset/AssetFile.h"
 #include "Luxia/Asset/ShaderFile.h"
@@ -29,7 +30,7 @@ namespace Luxia {
 		void SaveToFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
 		void LoadFromFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
 
-		Components::Transform& CreateEntity();
+		Entity& CreateEntity(std::string name = "Entity");
 		
 		// Copied and modified entt/entt.hpp view func to forward
 		template<typename Type, typename... Other, typename... Exclude>
@@ -55,7 +56,7 @@ namespace Luxia {
 		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
 		std::shared_ptr<Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
 
-
+		/// Might rethink this structure
 		template <typename T> // Load an asset from an asset file
 		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<T>> 
 			LoadRuntimeAsset(const std::shared_ptr<Luxia::Assets::AssetFile> asset_file) {
@@ -134,7 +135,10 @@ namespace Luxia {
 			loaded_assets.erase(guid);
 			return true;
 		}
+
+		std::unordered_map<GUID, Entity> runtime_entities;
 	private:
+		friend class SceneSerializer;
 		entt::registry reg;
 		std::unordered_map<GUID, std::shared_ptr<Assets::Asset>> loaded_assets;
 	};

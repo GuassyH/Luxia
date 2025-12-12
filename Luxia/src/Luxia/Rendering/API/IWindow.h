@@ -4,7 +4,8 @@
 #include <Luxia/Core/Core.h>
 #include "Luxia/Core/WeakPtrProxy.h"
 #include "Luxia/Core/Core.h"
-#include "glm/glm.hpp"
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
 
 namespace Luxia
 {

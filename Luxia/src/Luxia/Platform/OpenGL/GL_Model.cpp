@@ -1,7 +1,7 @@
 #include "lxpch.h"
 #include "GL_Model.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
-#include "Luxia/Scene.h"
+#include "Luxia/Scene//Scene.h"
 
 namespace Luxia::Platform::OpenGL {
 
@@ -58,7 +58,7 @@ namespace Luxia::Platform::OpenGL {
 		path = model_asset->modelPath;
 
 		auto& base_entity = active_scene->CreateEntity();
-		LX_CORE_TRACE("Created Root Node Ent: {}", (int)base_entity.ent_id);
+		LX_CORE_TRACE("Created Root Node Ent: {}", (int)base_entity.transform->ent_id);
 
 		const aiScene* scene = import.ReadFile(path.string(), aiProcess_Triangulate | aiProcess_FlipUVs);
 		std::vector<Mesh>().swap(meshes);
@@ -74,7 +74,7 @@ namespace Luxia::Platform::OpenGL {
 		
 		directory = path.parent_path();
 		name = scene->mName.C_Str();
-		processNode(scene->mRootNode, scene, active_scene, &base_entity);
+		processNode(scene->mRootNode, scene, active_scene, base_entity.transform);
 	}
 
 	void GL_Model::processNode(aiNode* node, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity) {
@@ -87,8 +87,8 @@ namespace Luxia::Platform::OpenGL {
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
 			auto& child_entity = scene->CreateEntity();
-			child_entity.SetParent(root_entity);
-			processNode(node->mChildren[i], ai_scene, scene, &child_entity);
+			child_entity.transform->SetParent(root_entity);
+			processNode(node->mChildren[i], ai_scene, scene, child_entity.transform);
 		}
 	}
 
@@ -169,8 +169,8 @@ namespace Luxia::Platform::OpenGL {
 
 		// Create mesh entity and said parent to root_entity
 		auto& meshEnt = scene->CreateEntity();
-		meshEnt.SetParent(root_entity);
-		meshEnt.AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
+		meshEnt.transform->SetParent(root_entity);
+		meshEnt.transform->AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
 
 		return newMesh;
 	}

@@ -10,7 +10,7 @@ namespace Talloren::Layers {
 		~EditorLayer() = default;
 
 		entt::registry editor_reg;
-		entt::entity selected_entity = entt::entity(0);
+		Luxia::GUID selected_entity = Luxia::GUID(0);
 		bool is_entity_selected = false;
 
 		std::vector<std::shared_ptr<Talloren::IEditorPanel>> panels;

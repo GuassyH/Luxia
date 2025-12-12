@@ -37,6 +37,9 @@
     <Filter Include="Luxia\Rendering\OpenGL">
       <UniqueIdentifier>{098A5CF2-F583-8544-DEF0-1B55CA89EBB0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Luxia\Scene">
+      <UniqueIdentifier>{45A6A27B-B15B-1B71-3A50-1548A6041275}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Luxia.h" />
@@ -223,10 +226,12 @@
     <ClInclude Include="src\Luxia\Rendering\Vertex.h">
       <Filter>Luxia\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Scene.h">
-      <Filter>Luxia</Filter>
+    <ClInclude Include="src\Luxia\Scene\Scene.h">
+      <Filter>Luxia\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
+    <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
+    <ClInclude Include="src\Luxia\Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">
@@ -301,9 +306,10 @@
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.cpp">
       <Filter>Luxia\Rendering\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Luxia\Scene.cpp">
-      <Filter>Luxia</Filter>
+    <ClCompile Include="src\Luxia\Scene\Scene.cpp">
+      <Filter>Luxia\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\lxpch.cpp" />
+    <ClCompile Include="src\Luxia\Scene\SceneSerializer.cpp" />
   </ItemGroup>
 </Project>

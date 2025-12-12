@@ -26,6 +26,8 @@
 #include "Luxia/Components/Transform.h"
 #include "Luxia/Components/Component.h"
 
+#include "Luxia/Entity.h"
+
 // Rendering API
 #include "Luxia/Platform/PlatformDefinitions.h"
 

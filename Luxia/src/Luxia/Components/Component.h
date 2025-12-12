@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
+#include "Luxia/Core/GUID.h"
+
 #include <iostream>
 #include <entt/entt.hpp>
 
@@ -14,6 +16,7 @@ namespace Luxia::Components {
 		const char* name = "unnamed_component";
 		// data
 		Transform* transform;
+		Luxia::GUID ent_guid;
 
 		virtual void OnInspectorDraw() {}
 	};

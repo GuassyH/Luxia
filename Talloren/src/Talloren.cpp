@@ -29,17 +29,15 @@ namespace Talloren::Layers {
 			// auto LTModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(LTGUID);
 			// auto LTModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(LTModelFile);
 
-
-			
 			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
 			LX_CORE_ERROR((uint64_t)GMGUID);
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
 			
 			auto& camEnt = scene->CreateEntity();
-			auto& cam = camEnt.AddComponent<Luxia::Components::Camera>(2560, 1440);
-			camEnt.position = glm::vec3(0.0f, 1.0f, 10.0f);
-			camEnt.euler_angles = glm::vec3(0.0f);
+			auto& cam = camEnt.transform->AddComponent<Luxia::Components::Camera>(2560, 1440);
+			camEnt.transform->position = glm::vec3(0.0f, 1.0f, 10.0f);
+			camEnt.transform->euler_angles = glm::vec3(0.0f);
 			cam.main = true;
 			
 			// auto& lotrEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(15));

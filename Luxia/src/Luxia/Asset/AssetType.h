@@ -4,7 +4,7 @@
 #include "Luxia/Core/Core.h"
 
 namespace Luxia {
-	static const enum class LUXIA_API AssetType {
+	const enum class LUXIA_API AssetType {
 		NoType			= 0,
 		ModelType		= 1,
 		TextureType		= 2,

@@ -6,7 +6,7 @@
 
 #include "Component.h"
 
-#include "Luxia/Scene.h"
+#include "Luxia/Scene/Scene.h"
 #include "Luxia/Rendering/API/IRenderer.h"
 #include "Luxia/Components/Transform.h"
 

@@ -66,10 +66,8 @@ namespace Luxia {
 
 		out << YAML::BeginMap;
 		
-		out << YAML::Key << "project_path";
-		out << YAML::Value << m_ProjectPath.string();
-		out << YAML::Key << "project_name";
-		out << YAML::Value << m_ProjectName;
+		out << YAML::Key << "project_path" << YAML::Value << m_ProjectPath.string();
+		out << YAML::Key << "project_name" << YAML::Value << m_ProjectName;
 
 		out << YAML::EndMap;
 

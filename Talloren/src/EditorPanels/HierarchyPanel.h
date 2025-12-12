@@ -10,7 +10,7 @@ namespace Talloren::Panel {
 		virtual void Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 		virtual void Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 
-		void DrawEntitySelectable(Luxia::Components::Transform* entity, Talloren::Layers::EditorLayer* editorLayer, int level);
+		void DrawEntitySelectable(Luxia::Entity& entity, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, int level);
 
 		virtual void OnEvent(Luxia::Event& e) override;
 	};

@@ -2,7 +2,7 @@
 #include "GL_Camera.h"
 #include "Luxia/Components/Transform.h"
 
-#include "Luxia/Scene.h"
+#include "Luxia/Scene/Scene.h"
 
 #include "glfw/glfw3.h"
 #include "glad/glad.h"

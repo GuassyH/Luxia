@@ -91,7 +91,7 @@ project "Luxia"
 			"LUXIA_RENDERER_OPENGL", 
 		}
 
-		buildoptions { "/utf-8" }
+		buildoptions { "/utf-8", "/wd4251" } -- Ignores the "needs to be dll interfaced warning"
 		linkoptions { "/SUBSYSTEM:CONSOLE" }
 
 		-- Copy file from the buildtarget to bin/outputdir/Talloren
@@ -176,7 +176,7 @@ project "Talloren"
 			"LUXIA_RENDERER_OPENGL",
 		}
 
-		buildoptions { "/utf-8" }
+		buildoptions { "/utf-8", "/wd4251" }
 		linkoptions { "/SUBSYSTEM:CONSOLE" }
 
 

@@ -84,7 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /wd4251 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -113,7 +113,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /wd4251 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -143,7 +143,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /wd4251 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -181,6 +181,7 @@
     <ClInclude Include="src\Luxia\Core\GUID.h" />
     <ClInclude Include="src\Luxia\Core\Log.h" />
     <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h" />
+    <ClInclude Include="src\Luxia\Entity.h" />
     <ClInclude Include="src\Luxia\Events\Event.h" />
     <ClInclude Include="src\Luxia\Events\EventDefs.h" />
     <ClInclude Include="src\Luxia\Events\EventHandler.h" />
@@ -223,7 +224,8 @@
     <ClInclude Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.h" />
     <ClInclude Include="src\Luxia\Rendering\RenderingCreation.h" />
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
-    <ClInclude Include="src\Luxia\Scene.h" />
+    <ClInclude Include="src\Luxia\Scene\Scene.h" />
+    <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +253,8 @@
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGLRenderBuffers.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_Renderer.cpp" />
     <ClCompile Include="src\Luxia\Rendering\OpenGL\OpenGL_UIRenderer.cpp" />
-    <ClCompile Include="src\Luxia\Scene.cpp" />
+    <ClCompile Include="src\Luxia\Scene\Scene.cpp" />
+    <ClCompile Include="src\Luxia\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\lxpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -260,9 +263,6 @@
     <ProjectReference Include="vendor\LuxiaVendor.vcxproj">
       <Project>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\INFO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,16 +8,18 @@ namespace Talloren::Panel {
 	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Inspector Panel");
 		if (!editorLayer->is_entity_selected) { ImGui::End(); return; }
+		if (!scene->runtime_entities.contains(editorLayer->selected_entity)) { ImGui::End(); return; }
 
-		std::ostringstream info; info << "Entity ID: " << (int)editorLayer->selected_entity;
+		Luxia::Entity& ent = scene->runtime_entities.find(editorLayer->selected_entity)->second;
+
+		std::ostringstream info; info << "Entity ID: " << (uint64_t)editorLayer->selected_entity;
 		// Draw GUID information (currently just entity id, but entity should be made into a class)
 		ImGui::Text(info.str().c_str());
 
 		// Draw transform component first
-		auto t = scene->TryGetFromEntity<Luxia::Components::Transform>(editorLayer->selected_entity);
-		if (t) {
-			if (ImGui::CollapsingHeader(t->name, ImGuiTreeNodeFlags_DefaultOpen)) {
-				t->OnInspectorDraw();
+		if (ent.transform) {
+			if (ImGui::CollapsingHeader(ent.transform->name, ImGuiTreeNodeFlags_DefaultOpen)) {
+				ent.transform->OnInspectorDraw();
 			}
 		}
 

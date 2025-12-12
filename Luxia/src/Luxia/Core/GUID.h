@@ -12,6 +12,12 @@ namespace Luxia {
 		GUID(const GUID&) = default;
 
 		operator uint64_t() const { return m_guid; }
+		bool operator==(const GUID& lhs) const {
+			return m_guid == lhs.m_guid;
+		}
+		bool operator!=(const GUID& lhs) const {
+			return !(*this == lhs);
+		}
 	private:
 		uint64_t m_guid;
 	};

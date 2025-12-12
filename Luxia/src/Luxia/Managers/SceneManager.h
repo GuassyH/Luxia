@@ -9,7 +9,7 @@
 #include <iostream>
 #include <unordered_set>
 
-#include "Luxia/Scene.h"
+#include "Luxia/Scene/Scene.h"
 
 namespace Luxia {
 	class Scene;

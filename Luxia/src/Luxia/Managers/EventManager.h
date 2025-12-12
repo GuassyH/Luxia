@@ -3,7 +3,7 @@
 #include "Luxia/Core/Core.h"
 
 #include "Luxia/Events/EventDefs.h"
-#include "glm/glm.hpp"
+#include "glm/vec2.hpp"
 
 #include <unordered_set>
 #include <iostream>

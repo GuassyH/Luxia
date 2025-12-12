@@ -45,8 +45,7 @@ namespace Luxia::Assets {
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
-			out << YAML::Key << "model_path";
-			out << YAML::Value << modelPath.string();
+			out << YAML::Key << "model_path" << YAML::Value << modelPath.string();
 			out << YAML::EndMap;
 
 			if (!out.good()) {

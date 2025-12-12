@@ -1,6 +1,6 @@
 #include "lxpch.h"
 #include "RenderLayer.h"
-#include "Luxia/Scene.h"
+#include "Luxia/Scene/Scene.h"
 #include "Luxia/Components/MeshRenderer.h"
 #include "Luxia/Components/Camera.h"
 #include "Luxia/Components/Transform.h"

@@ -76,19 +76,14 @@ namespace Luxia::Assets {
 
 			out << YAML::BeginMap;
 
-			out << YAML::Key << "shader_type";
-			out << YAML::Value << (int)shaderType;
+			out << YAML::Key << "shader_type" << YAML::Value << (int)shaderType;
 
 			if (shaderType == ShaderFileType::VertexFragment) {
-				out << YAML::Key << "frag_path";
-				out << YAML::Value << fragPath.string();
-
-				out << YAML::Key << "vert_path";
-				out << YAML::Value << vertPath.string();
+				out << YAML::Key << "frag_path" << YAML::Value << fragPath.string();
+				out << YAML::Key << "vert_path" << YAML::Value << vertPath.string();
 			}
 			else {
-				out << YAML::Key << "shader_path";
-				out << YAML::Value << shaderPath.string();
+				out << YAML::Key << "shader_path" << YAML::Value << shaderPath.string();
 			}
 
 			out << YAML::EndMap;
