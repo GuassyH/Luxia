@@ -21,6 +21,8 @@ namespace Luxia {
 	class LUXIA_API Scene
 	{
 	public:
+		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;
+
 		Scene() : reg(entt::registry()) {}
 		~Scene() = default;
 

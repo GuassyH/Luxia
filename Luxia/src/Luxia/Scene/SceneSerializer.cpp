@@ -27,6 +27,32 @@ namespace YAML {
 			return true;
 		}
 	};
+
+	template<>
+	struct convert<glm::vec4>
+	{
+		static Node encode(const glm::vec4& rhs)
+		{
+			Node node;
+			node.push_back(rhs.x);
+			node.push_back(rhs.y);
+			node.push_back(rhs.z);
+			node.push_back(rhs.w);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::vec4& rhs)
+		{
+			if (!node.IsSequence() || node.size() != 4)
+				return false;
+
+			rhs.x = node[0].as<float>();
+			rhs.y = node[1].as<float>();
+			rhs.z = node[2].as<float>();
+			rhs.w = node[3].as<float>();
+			return true;
+		}
+	};
 }
 
 namespace Luxia {
@@ -41,7 +67,7 @@ namespace Luxia {
 		return out;
 	}
 
-	SceneSerializer::SceneSerializer(std::shared_ptr<Luxia::Assets::SceneFile>& sceneFile) {
+	SceneSerializer::SceneSerializer(std::shared_ptr<Luxia::Assets::SceneFile> sceneFile) {
 		m_SceneFile = sceneFile;
 	}
 
@@ -137,10 +163,19 @@ namespace Luxia {
 		}
 
 		if (auto camNode = components["Camera"]) {
+			int width = camNode["Width"].as<int>();
+			int height = camNode["Height"].as<int>();
 
+			auto& cam = entity.transform->AddComponent<Luxia::Components::Camera>(width, height);
+			cam.FOVdeg = camNode["FOV"].as<float>();
+			cam.farPlane = camNode["FarPlane"].as<float>();
+			cam.nearPlane = camNode["NearPlane"].as<float>();
+			cam.main = camNode["Main"].as<bool>();
+			cam.clearColor = camNode["ClearColor"].as<glm::vec4>();
 		}
 
 		if (auto meshRendNode = components["MeshRenderer"]) {
+
 		}
 
 		return entity;
@@ -150,6 +185,8 @@ namespace Luxia {
 	bool SceneSerializer::Deserialize(Luxia::Scene& scene) {
 		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return false; }
 		
+
+		scene.scene_file = m_SceneFile;
 
 		try {
 			YAML::Node config = YAML::LoadFile(m_SceneFile->scene_path.string());

@@ -13,7 +13,6 @@ namespace Talloren::Panel {
 		Luxia::Entity& ent = scene->runtime_entities.find(editorLayer->selected_entity)->second;
 
 		std::ostringstream info; info << "Entity ID: " << (uint64_t)editorLayer->selected_entity;
-		// Draw GUID information (currently just entity id, but entity should be made into a class)
 		ImGui::Text(info.str().c_str());
 
 		// Draw transform component first
@@ -23,8 +22,21 @@ namespace Talloren::Panel {
 			}
 		}
 
-		// Draw other components
-		// foreach component, make collapsingheader, draw
+		// Draw Other Components
+		auto cam = ent.transform->TryGetComponent<Luxia::Components::Camera>();
+		if (cam) {
+			if (ImGui::CollapsingHeader(cam->name, ImGuiTreeNodeFlags_DefaultOpen)) {
+				cam->OnInspectorDraw();
+			}
+		}
+
+
+		auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+		if (meshrend) {
+			if (ImGui::CollapsingHeader(meshrend->name, ImGuiTreeNodeFlags_DefaultOpen)) {
+				meshrend->OnInspectorDraw();
+			}
+		}
 
 		ImGui::End();
 	}

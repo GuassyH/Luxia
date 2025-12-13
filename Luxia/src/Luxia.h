@@ -16,6 +16,8 @@
 #include "Luxia/Managers/SceneManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 
+#include "Luxia/Scene/SceneSerializer.h"
+
 // Events
 #include "Luxia/Events/EventDefs.h"
 #include "Luxia/Events/EventHandler.h"
