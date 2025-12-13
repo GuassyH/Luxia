@@ -14,19 +14,11 @@ namespace Luxia {
 		t->ent_guid = ent.guid;
 
 		ent.transform = t;
+		ent.transform->ent_guid = ent.guid;
 		ent.name = name;
 
 		runtime_entities[ent.guid] = ent;
 
 		return runtime_entities.find(ent.guid)->second;
-	}
-
-	void Scene::SaveToFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file) {
-
-	}
-
-	void Scene::LoadFromFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file) {
-		Load();
-
 	}
 }

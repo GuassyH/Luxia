@@ -26,9 +26,6 @@ namespace Luxia {
 
 		void Cleanup() { reg.clear(); }
 		void Load() { reg = entt::registry(); }
-		
-		void SaveToFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
-		void LoadFromFile(const std::shared_ptr<Luxia::Assets::SceneFile> scene_file);
 
 		Entity& CreateEntity(std::string name = "Entity");
 		
@@ -43,9 +40,19 @@ namespace Luxia {
 		T* TryGetFromEntity(const entt::entity entity) { // Only implemented to make it more readable to me
 			return reg.try_get<T>(entity);
 		}
+		template<typename T>
+		T* TryGetFromEntity(const Luxia::Entity& entity) { // Only implemented to make it more readable to me
+			entt::entity = runtime_entities.find(entity.guid)->second.transform->ent_id;
+			return reg.try_get<T>(entity);
+		}
 
 		template<typename T>
 		T& GetFromEntity(const entt::entity entity) { // Only implemented to make it more readable to me
+			return reg.get<T>(entity);
+		}
+		template<typename T>
+		T& GetFromEntity(const Luxia::Entity& entity) { // Only implemented to make it more readable to me
+			entt::entity = runtime_entities.find(entity.guid)->second.transform->ent_id;
 			return reg.get<T>(entity);
 		}
 

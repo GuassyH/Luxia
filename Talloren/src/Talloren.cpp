@@ -4,6 +4,8 @@
 #include "Luxia/Core/EntryPoint.h"
 #include "EditorLayer.h"
 
+#include "Luxia/Scene/SceneSerializer.h"
+
 namespace Talloren::Layers {
 
 	class ExtraLayer : public Luxia::Layer {
@@ -21,6 +23,7 @@ namespace Talloren::Layers {
 			auto DefaultShader = scene->LoadRuntimeAsset<Luxia::IShader>(SHFile);
 			std::shared_ptr<Luxia::IMaterial> DefaultMat = Luxia::Platform::Assets::CreateMaterial(DefaultShader);
 
+
 			// Create Material runtime Asset
 
 			// Create Model runtime Asset (from existing ModelFile)
@@ -28,18 +31,26 @@ namespace Talloren::Layers {
 			// Luxia::GUID LTGUID = asset_manager->GetAssetFileGUID("lotr_troll/scene.luxmodel");
 			// auto LTModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(LTGUID);
 			// auto LTModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(LTModelFile);
-
+			/*
 			Luxia::GUID GMGUID = asset_manager->GetAssetFileGUID("cute_ghost/scene.luxmodel");
 			LX_CORE_ERROR((uint64_t)GMGUID);
 			auto GhostModelFile = asset_manager->GetAssetFile<Luxia::Assets::ModelFile>(GMGUID);
 			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
+			*/
 			
 			auto& camEnt = scene->CreateEntity();
+			camEnt.name = "Main Camera";
 			auto& cam = camEnt.transform->AddComponent<Luxia::Components::Camera>(2560, 1440);
 			camEnt.transform->position = glm::vec3(0.0f, 1.0f, 10.0f);
 			camEnt.transform->euler_angles = glm::vec3(0.0f);
 			cam.main = true;
-			
+
+			auto& charley = scene->CreateEntity();
+			charley.name = "Charley";
+
+			Luxia::SceneSerializer serializer(scene_manager->scene_files[0]);
+			serializer.Serialize(*scene.lock());
+
 			// auto& lotrEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(15));
 			// lotrEnt.scale = glm::vec3(0.02f);
 			// lotrEnt.position = glm::vec3(5.0f, 0.0f, 0.0f);

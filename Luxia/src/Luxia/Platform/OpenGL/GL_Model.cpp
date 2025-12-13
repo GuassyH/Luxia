@@ -71,7 +71,8 @@ namespace Luxia::Platform::OpenGL {
 		}
 
 		valid = true;
-		
+		base_entity.name = scene->mName.C_Str();
+
 		directory = path.parent_path();
 		name = scene->mName.C_Str();
 		processNode(scene->mRootNode, scene, active_scene, base_entity.transform);
@@ -86,9 +87,10 @@ namespace Luxia::Platform::OpenGL {
 			
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
-			auto& child_entity = scene->CreateEntity();
-			child_entity.transform->SetParent(root_entity);
-			processNode(node->mChildren[i], ai_scene, scene, child_entity.transform);
+			// auto& child_entity = scene->CreateEntity(); // Maybe?
+			// child_entity.transform->SetParent(root_entity);
+			// child_entity.name = node->mName.C_Str();
+			processNode(node->mChildren[i], ai_scene, scene, root_entity);
 		}
 	}
 
@@ -169,6 +171,7 @@ namespace Luxia::Platform::OpenGL {
 
 		// Create mesh entity and said parent to root_entity
 		auto& meshEnt = scene->CreateEntity();
+		meshEnt.name = mesh->mName.C_Str();
 		meshEnt.transform->SetParent(root_entity);
 		meshEnt.transform->AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
 

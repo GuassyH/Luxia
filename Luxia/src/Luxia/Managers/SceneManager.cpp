@@ -10,18 +10,10 @@ namespace Luxia {
 				if (metafile->type == AssetType::SceneType) {
 					if (asset_manager->GetAssetFilePool().contains(metafile->guid)) {
 						auto asset = asset_manager->GetAssetFile<Assets::SceneFile>(metafile->guid);
-						std::shared_ptr<Scene> new_scene = std::make_shared<Scene>();
 
-						new_scene->LoadFromFile(asset);
-
-						scene_map[asset] = new_scene;
-						
-						LX_CORE_TRACE("SceneManager: Loaded scene {}", metafile->assetPath.string());
+						scene_files.push_back(std::move(asset));
 					}
 				}
-			}
-			else {
-				LX_CORE_ERROR("SceneManager: Error assigning scene to scene_pool {}", (uint64_t)guid);
 			}
 		}
 
@@ -29,14 +21,6 @@ namespace Luxia {
 	}
 
 	bool SceneManager::SaveScenes() {
-		for (auto& [file, scene] : scene_map) {
-			if (scene) {
-				scene->SaveToFile(file);
-			}
-			else {
-				LX_CORE_ERROR("SceneManager: Error saving scene");
-			}
-		}
 		return true;
 	}
 
@@ -60,11 +44,6 @@ namespace Luxia {
 		LX_CORE_TRACE("Scene manager cleaned up");
 
 		active_scene->Cleanup();
-
-		for (auto& [file, scene] : scene_map) {
-			scene->Cleanup();
-		}
-
-		scene_map.clear();
+		scene_files.clear();
 	}
 }

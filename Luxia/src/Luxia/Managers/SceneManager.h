@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <iostream>
 #include <unordered_set>
+#include <vector>
 
 #include "Luxia/Scene/Scene.h"
 
@@ -28,8 +29,9 @@ namespace Luxia {
 
 		bool HasActiveScene() const { return active_scene != nullptr; }
 		std::shared_ptr<Scene> GetActiveScene() { return active_scene; }
+
+		std::vector<std::shared_ptr<Luxia::Assets::SceneFile>> scene_files;
 	private:
-		std::unordered_map<std::shared_ptr<Assets::SceneFile>, std::shared_ptr<Luxia::Scene>> scene_map;
 
 		std::shared_ptr<AssetManager> asset_manager;
 		std::shared_ptr<Scene> active_scene;
