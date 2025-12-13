@@ -38,6 +38,7 @@ namespace Talloren::Layers {
 			auto GhostModelAsset = scene->LoadRuntimeAsset<Luxia::IModel>(GhostModelFile);
 			*/
 			
+			/*
 			auto& camEnt = scene->CreateEntity();
 			camEnt.name = "Main Camera";
 			auto& cam = camEnt.transform->AddComponent<Luxia::Components::Camera>(2560, 1440);
@@ -48,8 +49,9 @@ namespace Talloren::Layers {
 			auto& charley = scene->CreateEntity();
 			charley.name = "Charley";
 
+			*/
 			Luxia::SceneSerializer serializer(scene_manager->scene_files[0]);
-			serializer.Serialize(*scene.lock());
+			serializer.Deserialize(*scene.lock());
 
 			// auto& lotrEnt = scene_manager->GetActiveScene()->GetFromEntity<Luxia::Components::Transform>(entt::entity(15));
 			// lotrEnt.scale = glm::vec3(0.02f);

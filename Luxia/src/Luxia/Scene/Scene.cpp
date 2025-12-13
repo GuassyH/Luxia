@@ -2,8 +2,12 @@
 #include "Scene.h"
 
 namespace Luxia {
-	Entity& Scene::CreateEntity(std::string name) {
+	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {
 		Entity ent = Entity();
+
+		if (guid != GUID(0)) {
+			ent.guid = guid;
+		}
 
 		entt::entity new_entt = reg.create();
 		reg.emplace<Luxia::Components::Transform>(new_entt);
