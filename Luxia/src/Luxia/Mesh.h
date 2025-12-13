@@ -4,13 +4,15 @@
 #include "Luxia/Rendering/Vertex.h"
 #include "Luxia/Rendering/API/IRenderBuffers.h"
 #include "Luxia/Rendering/API/IMaterial.h"
-
+#include "Luxia/Core/GUID.h"
 
 namespace Luxia {
 	class LUXIA_API Mesh {
 	public:
 		Mesh() = default;
 		~Mesh() = default;
+
+		GUID guid;
 
 		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds)
 			: vertices(verts), indices(inds) {}

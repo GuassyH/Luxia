@@ -39,6 +39,8 @@ namespace Talloren::Panel {
 
 		ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, imageSize, ImVec2(0, 1), ImVec2(1, 0));
 
+		output_texture = nullptr;
+
 		ImGui::End();
 	}
 	void GameViewport::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
@@ -48,6 +50,8 @@ namespace Talloren::Panel {
 	bool GameViewport::RenderImage(Luxia::RenderCameraEvent& e) {
 		if (!e.GetTexture()) { return false; }
 		if (e.IsEditorCamera()) { return false; }
+		if (!e.IsMainCamera()) { return false; }
+
 
 		output_texture = e.GetTexture();
 

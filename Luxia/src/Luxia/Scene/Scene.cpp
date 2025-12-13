@@ -1,6 +1,8 @@
 #include "lxpch.h"
 #include "Scene.h"
 
+#include "Luxia/Components/Camera.h"
+
 namespace Luxia {
 	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {
 		Entity ent = Entity();
@@ -24,5 +26,17 @@ namespace Luxia {
 		runtime_entities[ent.guid] = ent;
 
 		return runtime_entities.find(ent.guid)->second;
+	}
+
+	void Scene::DeleteEntity(Luxia::GUID EntityGUID){
+		if (runtime_entities.contains(EntityGUID)) {
+			Entity& ent = runtime_entities.find(EntityGUID)->second;
+			
+			// Temporarily do this manually, should go through all components automatically
+			ent.transform->RemoveComponent<Luxia::Components::Camera>();
+			ent.transform->RemoveComponent<Luxia::Components::MeshRenderer>();
+			
+			runtime_entities.erase(EntityGUID);
+		}
 	}
 }

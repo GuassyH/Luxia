@@ -14,11 +14,28 @@ namespace Luxia::Components {
 		std::shared_ptr<Luxia::Mesh> mesh = nullptr;
 		std::shared_ptr<Luxia::IMaterial> material = nullptr;
 
-		MeshRenderer() = default;
+		MeshRenderer() { name = "Mesh Renderer"; }
 		MeshRenderer(const std::shared_ptr<Luxia::Mesh>& m_mesh, const std::shared_ptr<IMaterial>& m_material) {
 			mesh = m_mesh;
 			material = m_material;
+			name = "Mesh Renderer";
 		}
 
+
+		virtual void OnInspectorDraw() override {
+			if (!mesh) 
+				ImGui::Text("Mesh: nullptr");
+			else {
+				std::ostringstream s; s << "Mesh: " << mesh->name;
+				ImGui::Text(s.str().c_str());
+			}
+
+			if (!material)
+				ImGui::Text("Material: nullptr");
+			else {
+				std::ostringstream s; s << "Mesh: " << material->guid;
+				ImGui::Text(s.str().c_str());
+			}
+		}
 	};
 }

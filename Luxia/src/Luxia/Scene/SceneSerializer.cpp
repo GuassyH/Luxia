@@ -111,7 +111,8 @@ namespace Luxia {
 			out << YAML::Key << "MeshRenderer";
 			out << YAML::BeginMap; // Camera
 
-			out << YAML::Key << "Material" << YAML::Value << meshrend->material->guid;
+			out << YAML::Key << "Material" << YAML::Value << (meshrend->material ? (uint64_t)meshrend->material->guid : 0);
+			out << YAML::Key << "Mesh" << YAML::Value << (meshrend->mesh ? (uint64_t)meshrend->mesh->guid : 0);
 			// out << YAML::Key << "Mesh" << YAML::Value << meshrend->mesh->guid;
 
 			out << YAML::EndMap;
@@ -124,6 +125,7 @@ namespace Luxia {
 
 	// Save
 	void SceneSerializer::Serialize(Luxia::Scene& scene) {
+		if (!m_SceneFile) { LX_CORE_ERROR("Scene Serializer: scene file nullptr"); return; }
 		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return; }
 
 		YAML::Emitter out;
@@ -175,7 +177,21 @@ namespace Luxia {
 		}
 
 		if (auto meshRendNode = components["MeshRenderer"]) {
+			auto& meshRend = entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
 
+			uint64_t mesh = 0;
+			uint64_t mat = 0;
+
+			if(auto meshNode = meshRendNode["Mesh"])
+				mesh = meshNode.as<uint64_t>();
+			if (auto matNode = meshRendNode["Material"])
+				mat = matNode.as<uint64_t>();
+
+			// Check asset/scene manager for mesh w guid and assign, etc
+			if (mesh == 0)
+				meshRend.mesh == nullptr;
+			if (mat == 0)
+				meshRend.material == nullptr;
 		}
 
 		return entity;
@@ -183,9 +199,9 @@ namespace Luxia {
 
 	// Load
 	bool SceneSerializer::Deserialize(Luxia::Scene& scene) {
+		if (!m_SceneFile) { LX_CORE_ERROR("Scene Serializer: scene file nullptr"); return false; }
 		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return false; }
 		
-
 		scene.scene_file = m_SceneFile;
 
 		try {

@@ -38,6 +38,38 @@ namespace Talloren::Panel {
 			}
 		}
 
+		ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.0f) - 50);
+		ImGui::SetCursorPosY(ImGui::GetWindowSize().y - 50);
+		if (ImGui::Button("Add Component")) {
+			ImGui::OpenPopup("Add Component");
+		}
+
+		// should be menu
+		float x = ImGui::GetWindowPos().x + (ImGui::GetWindowSize().x / 3.0f);
+		float y = ImGui::GetWindowPos().y + 1.5*(ImGui::GetWindowSize().y / 2.0f);
+		ImGui::SetNextWindowPos(ImVec2(x, y));
+		if (ImGui::BeginPopup("Add Component", ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize)) {
+			ImVec2 button_size = ImVec2(150, 20);
+
+			// Temporarily do this manually, should go through all components automatically
+			if (!ent.transform->HasComponent<Luxia::Components::Camera>()) {
+				if (ImGui::Button("Camera Component", button_size)) {
+					ent.transform->AddComponent<Luxia::Components::Camera>(1920, 1080);
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			// Temporarily do this manually, should go through all components automatically
+			if (!ent.transform->HasComponent<Luxia::Components::MeshRenderer>()) {
+				if (ImGui::Button("Mesh Component", button_size)) {
+					ent.transform->AddComponent<Luxia::Components::MeshRenderer>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			ImGui::EndPopup();
+		}
+
 		ImGui::End();
 	}
 	void InspectorPanel::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {

@@ -45,12 +45,50 @@ namespace Talloren::Panel {
 		}
 
 		if (ImGui::IsWindowHovered()) {
-			if (!ImGui::IsItemHovered()) {
+			if (!ImGui::IsAnyItemHovered()) {
 				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_1)) {
 					editorLayer->is_entity_selected = false;
 				}
+				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_2)) {
+					editorLayer->is_entity_selected = false;
+					ImGui::OpenPopup("Create Object");
+				}
+			}
+			else {
+				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_2)) {
+					if (editorLayer->is_entity_selected) {
+						ImGui::OpenPopup("Change Object");
+					}
+				}
 			}
 		}
+
+		// should be menu
+		if (ImGui::BeginPopup("Create Object", ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize)) {
+			ImVec2 button_size = ImVec2(150, 20);
+			ImGui::Text("Create Object");
+			if (ImGui::Button("Create Empty Entity", button_size)) {
+				auto& new_ntt = scene->CreateEntity();
+				editorLayer->selected_entity = new_ntt.guid;
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
+		}
+
+		// should be menu
+		if (ImGui::BeginPopup("Change Object", ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize)) {
+			ImVec2 button_size = ImVec2(150, 20);
+			ImGui::Text("Change SELECTED Object");
+			if (ImGui::Button("Delete", button_size)) {
+				scene->DeleteEntity(editorLayer->selected_entity);
+				editorLayer->is_entity_selected = false;
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
+		}
+
 
 		// ImGui::Separator();
 		ImGui::End();

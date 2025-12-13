@@ -30,7 +30,8 @@ namespace Luxia {
 		void Load() { reg = entt::registry(); }
 
 		Entity& CreateEntity(std::string name = "Entity", Luxia::GUID guid = GUID(0));
-		
+		void DeleteEntity(Luxia::GUID EntityGUID);
+
 		// Copied and modified entt/entt.hpp view func to forward
 		template<typename Type, typename... Other, typename... Exclude>
 		entt::basic_view<entt::get_t<entt::storage_for_t<Type>, entt::storage_for_t<Other>...>, entt::exclude_t<entt::storage_for_t<Exclude>...>>

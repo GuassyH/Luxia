@@ -7,3 +7,7 @@ YAML
 Model Loading
 	Should not create entities, should instead create meshes with materials
 	Entities should then be able to reference these, or use ref_model or something
+
+Mesh
+	Should be its own asset stored in the luxmodel file, with guid and that. So when entity is loaded
+	it can have the meshes GUID if it has a meshrenderer

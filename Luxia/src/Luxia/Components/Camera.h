@@ -17,6 +17,7 @@ namespace Luxia::Components {
 			width = m_width;
 			height = m_height;
 			camera = Platform::Assets::CreateCamera(width, height);
+			name = "Camera";
 		}
 
 		std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene>& scene, const std::shared_ptr<Luxia::Rendering::IRenderer>& rend) {
