@@ -6,6 +6,7 @@
 #include "Luxia/Core/Core.h"
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
+#include <filesystem>
 
 namespace Luxia
 {
@@ -26,6 +27,7 @@ namespace Luxia
 
 
 		virtual void SetTitle(const std::string& title) = 0;
+		virtual void SetIcon(const std::filesystem::path& path) = 0;
 		inline glm::vec2 GetSize() { glm::vec2 s = glm::vec2(m_Width, m_Height); return s; }
 		inline bool IsFocused() const { return focused; }
 		inline bool isRunning() const { return running; }

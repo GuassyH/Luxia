@@ -14,16 +14,13 @@ namespace Talloren::Panel {
 
 		Luxia::Entity& ent = scene->runtime_entities.find(editorLayer->selected_entity)->second;
 
-		std::ostringstream info; info << "Entity ID: " << (uint64_t)editorLayer->selected_entity;
-		ImGui::Text(info.str().c_str());
 
 		// Name
-		std::ostringstream ss; ss << ent.name;
-		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - ImGui::CalcTextSize(ss.str().c_str()).x * 0.5f);
+		std::ostringstream entname; entname << ent.name;
+		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - ImGui::CalcTextSize(entname.str().c_str()).x * 0.5f);
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - 180 * 0.5f);
 		ImGui::SetNextItemWidth(180);
-
-		if (ImGui::InputTextWithHint(" ", ss.str().c_str(), buff, sizeof(buff), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll)) {
+		if (ImGui::InputTextWithHint(" ", entname.str().c_str(), buff, sizeof(buff), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll)) {
 			ent.name = buff;
 			memset(buff, 0, 255);
 		}
@@ -35,13 +32,18 @@ namespace Talloren::Panel {
 			return;
 		}
 
+		// GUID
+		std::ostringstream info; info << "Entity ID: " << (uint64_t)editorLayer->selected_entity;
+		ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.0f) - (ImGui::CalcTextSize(info.str().c_str()).x / 2.0f));
+		ImGui::Text(info.str().c_str());
+
+
 		// Draw transform component first
 		if (ent.transform) {
 			if (ImGui::CollapsingHeader(ent.transform->name, ImGuiTreeNodeFlags_DefaultOpen)) {
 				ent.transform->OnInspectorDraw();
 			}
 		}
-
 		// Draw Other Components
 		auto cam = ent.transform->TryGetComponent<Luxia::Components::Camera>();
 		if (cam) {
@@ -49,8 +51,6 @@ namespace Talloren::Panel {
 				cam->OnInspectorDraw();
 			}
 		}
-
-
 		auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
 		if (meshrend) {
 			if (ImGui::CollapsingHeader(meshrend->name, ImGuiTreeNodeFlags_DefaultOpen)) {
@@ -58,6 +58,8 @@ namespace Talloren::Panel {
 			}
 		}
 
+
+		// TEMP ADD COMPONENT
 		ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.0f) - 50);
 		ImGui::SetCursorPosY(ImGui::GetWindowSize().y - 50);
 		if (ImGui::Button("Add Component")) {

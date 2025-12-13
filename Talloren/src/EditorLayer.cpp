@@ -3,6 +3,8 @@
 #include "EditorPanels/HierarchyPanel.h"
 #include "EditorPanels/InspectorPanel.h"
 #include "EditorPanels/SceneViewport.h"
+#include "EditorPanels/AssetView.h"
+
 
 namespace Talloren::Layers {
 	void EditorLayer::OnAttach() {
@@ -13,6 +15,7 @@ namespace Talloren::Layers {
 		PushPanel(std::make_shared<Talloren::Panel::HierarchyPanel>());
 		PushPanel(std::make_shared<Talloren::Panel::InspectorPanel>());
 		PushPanel(std::make_shared<Talloren::Panel::SceneViewport>());
+		PushPanel(std::make_shared<Talloren::Panel::AssetView>());
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
