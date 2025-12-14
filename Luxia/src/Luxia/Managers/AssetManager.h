@@ -52,7 +52,7 @@ namespace Luxia {
 		// Casts the file to the requested type
 		template <typename T>
 		std::shared_ptr<T> GetAssetFile(const GUID& guid) {
-			if (!asset_pool.contains(guid)) {
+			if (!assetfile_pool.contains(guid)) {
 				LX_CORE_ERROR("Asset Manager: GetAssetFile - GUID not found {}", static_cast<uint64_t>(guid));
 				return nullptr;
 			}
