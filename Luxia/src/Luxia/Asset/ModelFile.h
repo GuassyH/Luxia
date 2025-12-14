@@ -1,5 +1,7 @@
 #pragma once
 #include "Luxia/Asset/AssetFile.h"
+#include "Luxia/Platform/PlatformDefinitions.h"
+#include "Luxia/Mesh.h"
 
 namespace Luxia::Assets {
 	class LUXIA_API ModelFile : public AssetFile {
@@ -12,22 +14,42 @@ namespace Luxia::Assets {
 		ModelFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~ModelFile() = default;
 
+		std::filesystem::path modelPath;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			Save(m_assetPath);
 			return true;
 		}
 
-		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+		void SerializeMesh(YAML::Emitter& out, std::shared_ptr<Asset> mesh) {
+
+		}
+
+		void DeserializeMesh(YAML::Node& node) {
+			std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		}
+
+		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 			loaded = false;
+
+			std::vector<std::shared_ptr<Asset>> meshes = std::vector<std::shared_ptr<Asset>>(0);
+
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
 				// Check if missing
-
 				modelPath = config["model_path"].as<std::string>();
+				auto meshNodes = config["Meshes"];
+				if (!meshNodes || !meshNodes.IsSequence()) {
+					assets = meshes;
+					return assets;
+				}
+
+				for (auto meshNode : meshNodes) {
+					DeserializeMesh(meshNode);
+				}
 
 				loaded = true;
 			}
@@ -36,16 +58,19 @@ namespace Luxia::Assets {
 				loaded = false;
 			}
 
-			return loaded;
-			return true;
+			assets = meshes;
+
+			return assets;
 		}
+
+
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
-			out << YAML::Key << "model_path" << YAML::Value << modelPath.string();
+
 			out << YAML::EndMap;
 
 			if (!out.good()) {
@@ -68,6 +93,5 @@ namespace Luxia::Assets {
 			return true;
 		}
 
-		std::filesystem::path modelPath;
 	};
 }

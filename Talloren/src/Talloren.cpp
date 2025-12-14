@@ -17,15 +17,12 @@ namespace Talloren::Layers {
 
 			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
 
-			// Create Shader runtime Asset
-			auto MatFile = asset_manager->GetAssetFile<Luxia::Assets::MaterialFile>(asset_manager->GetAssetFileGUID("materials/defaultmat.luxmat"));
-			auto SHFile = asset_manager->GetAssetFile<Luxia::Assets::ShaderFile>(MatFile->shader_guid);
-			// auto DefaultShader = scene->LoadRuntimeAsset<Luxia::IShader>(SHFile);
-			// std::shared_ptr<Luxia::IMaterial> DefaultMat = Luxia::Platform::Assets::CreateMaterial(DefaultShader);
-
-			Luxia::SceneSerializer serializer(scene_manager->scene_files[0]);
-			serializer.Deserialize(*scene.lock());
-
+			if (scene_manager->scene_files[0] != nullptr) {
+				Luxia::SceneSerializer serializer(scene_manager->scene_files[0]);
+				if(scene)
+					serializer.Deserialize(*scene.lock());
+			}
+			
 		}
 		virtual void OnDetach() override {
 			LX_WARN("ExtraLayer Detached");

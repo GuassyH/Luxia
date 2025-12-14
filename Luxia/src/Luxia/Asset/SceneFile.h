@@ -1,5 +1,6 @@
 #pragma once
 #include "Luxia/Asset/AssetFile.h"
+#include "Luxia/Scene/Scene.h"
 
 namespace Luxia::Assets {
 	class LUXIA_API SceneFile : public AssetFile {
@@ -17,14 +18,18 @@ namespace Luxia::Assets {
 			return true;
 		}
 
-		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 			scene_path = assetPath;
 
+			std::shared_ptr<Asset> scene = std::make_shared<Scene>();
+
 			LX_CORE_INFO("Scene Files are not loaded regularly");
 
+			assets.push_back(scene);
 			loaded = true;
-			return true;
+
+			return assets;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;

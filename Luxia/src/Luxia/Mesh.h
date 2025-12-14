@@ -5,20 +5,19 @@
 #include "Luxia/Rendering/API/IRenderBuffers.h"
 #include "Luxia/Rendering/API/IMaterial.h"
 #include "Luxia/Core/GUID.h"
+#include "Luxia/Asset/Asset.h"
 
 namespace Luxia {
-	class LUXIA_API Mesh {
+	class LUXIA_API Mesh : public Assets::Asset {
 	public:
 		Mesh() = default;
 		~Mesh() = default;
 
-		GUID guid;
-
 		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds)
-			: vertices(verts), indices(inds) {}
+			: vertices(verts), indices(inds) {}	
 		bool CalculateMesh();
-
-		void Cleanup();
+			
+		virtual bool Unload() override;
 
 		bool IsValid() const { return valid; }
 		

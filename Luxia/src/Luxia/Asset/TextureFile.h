@@ -1,5 +1,6 @@
 #pragma once
 #include "Luxia/Asset/AssetFile.h"
+#include "Luxia/Platform/PlatformDefinitions.h"
 
 namespace Luxia::Assets {
 	class LUXIA_API TextureFile : public AssetFile {
@@ -18,9 +19,11 @@ namespace Luxia::Assets {
 		}
 
 
-		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 			loaded = false;
+
+			std::shared_ptr<Asset> texture = Platform::Assets::CreateTexture();
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
@@ -35,8 +38,9 @@ namespace Luxia::Assets {
 				loaded = false;
 			}
 
-			return loaded;
-			return true;
+			assets.push_back(texture);
+
+			return assets;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;

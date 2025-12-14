@@ -3,7 +3,6 @@
 #include "Luxia/Core/Core.h"
 #include "Luxia/Rendering/API/ITexture.h"
 #include "Luxia/Rendering/API/IShader.h"
-#include "Luxia/Asset/MaterialFile.h"
 #include "Luxia/Asset/Asset.h"
 
 #include <glm/glm.hpp>
@@ -14,15 +13,13 @@ namespace Luxia {
 	class LUXIA_API IMaterial : public Luxia::Assets::Asset {
 	public:
 		IMaterial() = default;
-		IMaterial(const std::shared_ptr<Assets::MaterialFile> matFile) {}
 		IMaterial(const std::shared_ptr<IShader> matShader) {
 			shader = matShader;
 		}
 		virtual ~IMaterial() = default;
 
-		virtual void LoadFromFile(const std::shared_ptr<Assets::MaterialFile> matFile) = 0;
 		virtual void Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
-		virtual bool Unload() override = 0;
+		virtual bool Unload() override { return true; }
 
 		std::shared_ptr<IShader> shader = nullptr;
 

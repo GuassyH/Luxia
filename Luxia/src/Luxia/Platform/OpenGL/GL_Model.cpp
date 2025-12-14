@@ -53,48 +53,42 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Model::LoadFromFile(const std::shared_ptr<Luxia::Assets::ModelFile> model_asset, Scene* active_scene) {
+	std::vector<std::shared_ptr<Mesh>> GL_Model::LoadFromPath(const std::filesystem::path& src_path) {
 		Assimp::Importer import;
-		path = model_asset->modelPath;
-
-		auto& base_entity = active_scene->CreateEntity();
-		LX_CORE_TRACE("Created Root Node Ent: {}", (int)base_entity.transform->ent_id);
+		path = src_path;
 
 		const aiScene* scene = import.ReadFile(path.string(), aiProcess_Triangulate | aiProcess_FlipUVs);
-		std::vector<Mesh>().swap(meshes);
+		std::vector<std::shared_ptr<Mesh>>().swap(meshes);
 
 		valid = false;
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 			LX_CORE_ERROR("Could not load model at {}\n{}", path.string().c_str(), import.GetErrorString());
-			return;
+			return meshes;
 		}
 
 		valid = true;
-		base_entity.name = scene->mName.C_Str();
 
 		directory = path.parent_path();
 		name = scene->mName.C_Str();
-		processNode(scene->mRootNode, scene, active_scene, base_entity.transform);
+		processNode(scene->mRootNode, scene);
+		return meshes;
 	}
 
-	void GL_Model::processNode(aiNode* node, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity) {
+	void GL_Model::processNode(aiNode* node, const aiScene* ai_scene) {
 		// process all meshes
 		for (unsigned int i = 0; i < node->mNumMeshes; i++) {
 			aiMesh* mesh = ai_scene->mMeshes[node->mMeshes[i]];
-			meshes.push_back(processMesh(mesh, ai_scene, scene, root_entity));
+			meshes.push_back(processMesh(mesh, ai_scene));
 		}
 			
 		// process child nodes
 		for (unsigned int i = 0; i < node->mNumChildren; i++) {
-			// auto& child_entity = scene->CreateEntity(); // Maybe?
-			// child_entity.transform->SetParent(root_entity);
-			// child_entity.name = node->mName.C_Str();
-			processNode(node->mChildren[i], ai_scene, scene, root_entity);
+			processNode(node->mChildren[i], ai_scene);
 		}
 	}
 
-	Mesh GL_Model::processMesh(aiMesh* mesh, const aiScene* ai_scene, Scene* scene, Luxia::Components::Transform* root_entity) {
+	std::shared_ptr<Mesh> GL_Model::processMesh(aiMesh* mesh, const aiScene* ai_scene) {
 		std::vector<Luxia::Rendering::Vertex> vertices;
 		std::vector<GLuint> indices;
 		std::vector<std::shared_ptr<ITexture>> textures;
@@ -165,23 +159,18 @@ namespace Luxia::Platform::OpenGL {
 			mat->normal_texture = normalMaps.size() > 0 ? normalMaps[0] : nullptr;
 		}
 
-		Mesh newMesh(vertices, indices);
-		newMesh.CalculateMesh();
-		newMesh.name = mesh->mName.C_Str();
+		std::shared_ptr<Mesh> newMesh = std::make_shared<Mesh>(vertices, indices);
+		newMesh->CalculateMesh();
+		newMesh->name = mesh->mName.C_Str();
 
 		// Create mesh entity and said parent to root_entity
-		auto& meshEnt = scene->CreateEntity();
-		meshEnt.name = mesh->mName.C_Str();
-		meshEnt.transform->SetParent(root_entity);
-		meshEnt.transform->AddComponent<Components::MeshRenderer>(std::make_shared<Mesh>(newMesh), mat);
-
 		return newMesh;
 	}
 
 
 	bool GL_Model::Unload() {
-		for (Mesh& mesh : meshes) {
-			mesh.Cleanup();
+		for (std::shared_ptr<Mesh> mesh : meshes) {
+			mesh->Unload();
 		}
 		return true;
 	}

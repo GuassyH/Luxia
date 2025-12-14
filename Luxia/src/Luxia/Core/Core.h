@@ -1,6 +1,5 @@
 #pragma once
 
-
 // Definitions for different platforms
 #ifdef LUXIA_PLATFORM_WINDOWS
 	#ifdef LUXIA_EXPORT // export or import dll

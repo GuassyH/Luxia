@@ -10,7 +10,6 @@ namespace Luxia {
 				if (metafile->type == AssetType::SceneType) {
 					if (asset_manager->GetAssetFilePool().contains(metafile->guid)) {
 						auto asset = asset_manager->GetAssetFile<Assets::SceneFile>(metafile->guid);
-
 						scene_files.push_back(std::move(asset));
 					}
 				}
@@ -25,7 +24,7 @@ namespace Luxia {
 	}
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene) {
-		if (active_scene) { active_scene->Cleanup(); }
+		if (active_scene) { active_scene->Unload(); }
 		active_scene = m_scene;
 		active_scene->Load();
 
@@ -43,7 +42,7 @@ namespace Luxia {
 	void SceneManager::Cleanup() {
 		LX_CORE_TRACE("Scene manager cleaned up");
 
-		active_scene->Cleanup();
+		active_scene->Unload();
 		scene_files.clear();
 	}
 }

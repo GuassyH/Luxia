@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Luxia/Asset/AssetFile.h"
+#include "Luxia/Platform/PlatformDefinitions.h"
 
 namespace Luxia::Assets {
 	class LUXIA_API ShaderFile : public AssetFile {
@@ -41,24 +42,17 @@ namespace Luxia::Assets {
 			return true;
 		}
 
-		virtual bool Load(const std::filesystem::path& m_assetPath) override {
+		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 			loaded = false;
+
+			std::shared_ptr<Asset> shader = nullptr;
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
 				// Check if missing
-				shaderType = static_cast<ShaderFileType>(config["shader_type"].as<int>());
-
-				if (shaderType == ShaderFileType::VertexFragment) {
-					fragPath = config["frag_path"].as<std::string>();
-					vertPath = config["vert_path"].as<std::string>();
-				}
-				else {
-					shaderPath = config["shader_path"].as<std::string>();
-				}
-
+				assets.push_back(shader);
 				loaded = true;
 			}
 			catch (const YAML::Exception& ex) {
@@ -66,8 +60,8 @@ namespace Luxia::Assets {
 				loaded = false;
 			}
 
-			return loaded;
-			return true;
+
+			return assets;
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
@@ -75,16 +69,6 @@ namespace Luxia::Assets {
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
-
-			out << YAML::Key << "shader_type" << YAML::Value << (int)shaderType;
-
-			if (shaderType == ShaderFileType::VertexFragment) {
-				out << YAML::Key << "frag_path" << YAML::Value << fragPath.string();
-				out << YAML::Key << "vert_path" << YAML::Value << vertPath.string();
-			}
-			else {
-				out << YAML::Key << "shader_path" << YAML::Value << shaderPath.string();
-			}
 
 			out << YAML::EndMap;
 

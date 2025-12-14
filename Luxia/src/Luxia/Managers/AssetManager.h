@@ -31,8 +31,11 @@ namespace Luxia {
 		bool SaveAssetPool(const std::filesystem::path& m_path);
 		void Cleanup(); // Before app closes, save everything, etc
 
-		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return asset_pool; }
+		#pragma region Files
+
+		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return assetfile_pool; }
 		std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>>& GetMetaFilePool() { return meta_pool; }
+
 
 		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
 			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
@@ -53,7 +56,7 @@ namespace Luxia {
 				LX_CORE_ERROR("Asset Manager: GetAssetFile - GUID not found {}", static_cast<uint64_t>(guid));
 				return nullptr;
 			}
-			std::shared_ptr<Assets::AssetFile> asset_file = asset_pool.find(guid)->second;
+			std::shared_ptr<Assets::AssetFile> asset_file = assetfile_pool.find(guid)->second;
 			if (!asset_file) {
 				LX_CORE_ERROR("Asset Manager: GetAssetFile - AssetFile is nullptr for GUID {}", static_cast<uint64_t>(guid));
 				return nullptr;
@@ -99,7 +102,7 @@ namespace Luxia {
 			}
 
 			// Assign both files pools
-			asset_pool[meta_file->guid] = asset_file;
+			assetfile_pool[meta_file->guid] = asset_file;
 			meta_pool[meta_file->guid] = meta_file;
 
 			// Return guid
@@ -148,7 +151,7 @@ namespace Luxia {
 			asset_file->guid = meta_file->guid;
 
 			// Assign both files pools
-			asset_pool[meta_file->guid] = asset_file;
+			assetfile_pool[meta_file->guid] = asset_file;
 			meta_pool[meta_file->guid] = meta_file;
 
 			// Return guid
@@ -172,6 +175,12 @@ namespace Luxia {
 				return nullptr;
 			}
 
+			for(auto asset : asset_file->assets){
+				if (asset_pool.contains(asset->guid)) continue;
+
+				asset_pool[asset->guid] = asset.lock();
+			}
+
 			// Return it
 			return asset_file;
 		}
@@ -192,9 +201,16 @@ namespace Luxia {
 			// Load metafile
 			// Creates an EMPTY asset file of the given type, no "Args&&... args"
 			std::shared_ptr<Assets::AssetFile> asset_file = MakeAssetFileFromType(type);
-			if (!asset_file->Load(abs_path)) {
+			if (asset_file->Load(abs_path).size() == 0) {
 				LX_CORE_ERROR("Asset Manager: LoadMetaFile failed to load metafile for - {}", abs_path.string());
 				return nullptr;
+
+			}
+			for (auto asset : asset_file->assets) {
+				if (asset) {
+					if (asset_pool.contains(asset->guid)) continue;
+					asset_pool[asset->guid] = asset;
+				}
 			}
 
 			return asset_file;
@@ -238,11 +254,29 @@ namespace Luxia {
 
 		}
 
+	#pragma endregion
+
+		#pragma region Runtime Assets
+
+		template <typename T>
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<Assets::Asset>>
+			GetAsset(GUID guid) {
+			std::shared_ptr<T> asset = nullptr;
+			if (asset_pool.contains(guid)) {
+				asset = std::dynamic_pointer_cast<T>(asset_pool.find(guid)->second);
+			}
+			return asset;
+		}
+
+		#pragma endregion
+
+
 		~AssetManager() = default;
 		AssetManager() = default;
 	private:
-		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>> asset_pool;
+		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>> assetfile_pool;
 		std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>> meta_pool;
+		std::unordered_map<GUID, std::shared_ptr<Assets::Asset>> asset_pool;
 		std::filesystem::path asset_dir;
 	};
 

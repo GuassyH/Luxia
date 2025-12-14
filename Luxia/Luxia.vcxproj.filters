@@ -232,6 +232,7 @@
     <ClInclude Include="src\lxpch.h" />
     <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
     <ClInclude Include="src\Luxia\Entity.h" />
+    <ClInclude Include="src\Luxia\CustomYAML.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

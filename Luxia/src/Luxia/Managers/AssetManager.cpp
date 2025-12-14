@@ -34,7 +34,7 @@ namespace Luxia {
 				asset_file->guid = meta_file->guid;
 
 				// Assign both files pools
-				asset_pool[meta_file->guid] = asset_file;
+				assetfile_pool[meta_file->guid] = asset_file;
 				meta_pool[meta_file->guid] = meta_file;
 
 				LX_CORE_TRACE("Loaded files - GUID({})", (uint64_t)meta_file->guid);
@@ -59,7 +59,7 @@ namespace Luxia {
 		}
 
 		// Save metafile, then save asset_file
-		for (auto& [guid, asset_file] : asset_pool) {
+		for (auto& [guid, asset_file] : assetfile_pool) {
 
 			meta_pool.find(guid)->second->Save();
 			if (asset_file) {

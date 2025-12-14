@@ -12,9 +12,6 @@ namespace Luxia::Platform::OpenGL {
 		);
 	}
 
-	void GL_Material::LoadFromFile(const std::shared_ptr<Luxia::Assets::MaterialFile> matFile) {
-		
-	}
 
 	void GL_Material::Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (shader) {

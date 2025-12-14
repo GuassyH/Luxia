@@ -29,9 +29,10 @@ namespace Luxia {
 	}
 
 
-	void Mesh::Cleanup() {
+	bool Mesh::Unload() {
 		vertices.clear(); 
 		indices.clear(); 
 		valid = false; 
+		return true;
 	}
 }

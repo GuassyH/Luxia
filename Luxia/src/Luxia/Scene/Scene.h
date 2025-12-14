@@ -6,19 +6,20 @@
 #include "Luxia/Platform/PlatformDefinitions.h"
 #include "Luxia/Entity.h"
 
-#include "Luxia/Asset/AssetFile.h"
-#include "Luxia/Asset/ShaderFile.h"
-#include "Luxia/Asset/TextureFile.h"
-#include "Luxia/Asset/ModelFile.h"
 #include "Luxia/Asset/Asset.h"
 
 #include "Luxia/Core/GUID.h"
+#include "Luxia/Asset/Asset.h"
+
 #include "entt/entt.hpp"
-#include "Luxia/Asset/SceneFile.h"
+
+namespace Luxia::Assets {
+	class SceneFile;
+}
 
 namespace Luxia {
 
-	class LUXIA_API Scene
+	class LUXIA_API Scene : public Luxia::Assets::Asset
 	{
 	public:
 		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;
@@ -26,7 +27,7 @@ namespace Luxia {
 		Scene() : reg(entt::registry()) {}
 		~Scene() = default;
 
-		void Cleanup() { reg.clear(); }
+		virtual bool Unload() override { reg.clear(); return true; }
 		void Load() { reg = entt::registry(); }
 
 		Entity& CreateEntity(std::string name = "Entity", Luxia::GUID guid = GUID(0));
@@ -38,6 +39,19 @@ namespace Luxia {
 			GetEntitiesWith(entt::exclude_t<Exclude...> = entt::exclude_t{}) {
 			return reg.view<Type>();
 		}
+
+		/*
+		template<typename T>
+		std::vector<Luxia::Entity*> GetEntitiesWith() {
+			std::vector<Luxia::Entity*> ents;
+			for (auto& [guid, entity] : runtime_entities) {
+				if (entity.transform->HasComponent<T>()) {
+					ents.push_back(&entity);
+				}
+			}
+			return ents;
+		}
+		*/
 
 		template<typename T>
 		T* TryGetFromEntity(const entt::entity entity) { // Only implemented to make it more readable to me
@@ -61,11 +75,7 @@ namespace Luxia {
 
 		entt::registry& GetReg() { return reg; }
 
-
-		size_t NumLoaded() { return loaded_assets.size(); }
-		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssets() { return loaded_assets; }
-		std::shared_ptr<Assets::Asset> GetAssetFromGUID(const GUID& m_guid) { return loaded_assets.contains(m_guid) ? loaded_assets.find(m_guid)->second : nullptr; }
-
+		/*
 		/// Might rethink this structure
 		template <typename T> // Load an asset from an asset file
 		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<T>> 
@@ -145,12 +155,12 @@ namespace Luxia {
 			loaded_assets.erase(guid);
 			return true;
 		}
+		*/
 
 		std::unordered_map<GUID, Entity> runtime_entities;
 	private:
 		friend class SceneSerializer;
 		entt::registry reg;
-		std::unordered_map<GUID, std::shared_ptr<Assets::Asset>> loaded_assets;
 	};
 }
 
