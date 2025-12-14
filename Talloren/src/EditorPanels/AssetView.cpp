@@ -12,6 +12,7 @@ namespace Talloren::Panel {
 		ImGui::Begin("Asset View");
 
 		// Render all the asset stuff. Not dependant on scene
+		// For now maybe just create an item with a description of if its a model, its path, and GUID
 
 		ImGui::End();
 	}
@@ -24,3 +25,5 @@ namespace Talloren::Panel {
 
 	}
 }
+
+

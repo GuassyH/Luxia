@@ -83,12 +83,11 @@ namespace Talloren::Panel {
 
 			// Temporarily do this manually, should go through all components automatically
 			if (!ent.transform->HasComponent<Luxia::Components::MeshRenderer>()) {
-				if (ImGui::Button("Mesh Component", button_size)) {
+				if (ImGui::Button("Mesh Renderer Component", button_size)) {
 					ent.transform->AddComponent<Luxia::Components::MeshRenderer>();
 					ImGui::CloseCurrentPopup();
 				}
 			}
-
 			ImGui::EndPopup();
 		}
 

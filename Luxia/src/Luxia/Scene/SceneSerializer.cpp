@@ -189,9 +189,10 @@ namespace Luxia {
 
 			// Check asset/scene manager for mesh w guid and assign, etc
 			if (mesh == 0)
-				meshRend.mesh == nullptr;
+				meshRend.mesh = nullptr;
 			if (mat == 0)
-				meshRend.material == nullptr;
+				meshRend.material = nullptr;
+
 		}
 
 		return entity;
