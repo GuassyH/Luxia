@@ -52,7 +52,6 @@ namespace Talloren::Panel {
 		if (e.IsEditorCamera()) { return false; }
 		if (!e.IsMainCamera()) { return false; }
 
-
 		output_texture = e.GetTexture();
 
 		return true; // Consume

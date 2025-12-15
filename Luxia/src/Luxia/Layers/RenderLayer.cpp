@@ -18,23 +18,21 @@ namespace Luxia::Layers {
 	
 	}
 	void RenderLayer::OnRender() {
-		bool hasScene = project_manager->GetSceneManager()->HasActiveScene();
+		auto scene = project_manager->GetSceneManager()->GetActiveScene();
 
-		if (hasScene && project_manager->GetSceneManager() != nullptr) {
-			std::shared_ptr<Luxia::Scene> scene = project_manager->GetSceneManager()->GetActiveScene();
-
+		if (scene) {
 			auto view = scene->GetEntitiesWith<Luxia::Components::Camera>();
 
 			for (auto entity : view) {
 				auto& cam = view.get<Luxia::Components::Camera>(entity);
 				auto cam_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
-				if (cam_t && cam.main) {
+				// LX_CORE_INFO("Color {}, {}r{}g{}b", (uint64_t)cam.ent_guid, cam.clearColor.r, cam.clearColor.g, cam.clearColor.b);
+
+				if (cam_t && cam.main) 
 					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()), cam.main);
-				}
-				else if(!cam_t) { 
+				else if(!cam_t)  
 					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);
-				}
 			}
 		}
 	}

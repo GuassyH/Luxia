@@ -22,11 +22,23 @@ namespace Luxia::Assets {
 		}
 
 		void SerializeMesh(YAML::Emitter& out, std::shared_ptr<Asset> mesh) {
-
+			/* Save mesh name
+			* Mesh GUID
+			* Mesh LUID
+			* Etc
+			*/
 		}
 
-		void DeserializeMesh(YAML::Node& node) {
+		std::shared_ptr<Mesh> DeserializeMesh(YAML::Node& node) {
 			std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+
+			/* Load mesh name
+			* Mesh GUID
+			* Mesh LUID
+			* Etc
+			*/
+
+			return mesh;
 		}
 
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
@@ -48,7 +60,10 @@ namespace Luxia::Assets {
 				}
 
 				for (auto meshNode : meshNodes) {
-					DeserializeMesh(meshNode);
+					auto mesh = DeserializeMesh(meshNode);
+					if (mesh) {
+						assets.push_back(mesh);
+					}
 				}
 
 				loaded = true;
