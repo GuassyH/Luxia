@@ -20,10 +20,10 @@ namespace Luxia::Assets {
 		AssetFile() = default;
 		virtual ~AssetFile() = default;
 
-		virtual bool Create(const std::filesystem::path& m_assetPath) { return false; } 
-		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath)
+		virtual bool Create(const std::filesystem::path& m_assetPath) { return false; }				// Should create the file, assumes no save
+		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath)	// Should assume there is saved data
 		{ return assets; }
-		virtual bool Save(const std::filesystem::path& m_assetPath)	{ return false; }
+		virtual bool Save(const std::filesystem::path& m_assetPath)	{ return false; }				// Should save data
 		virtual void Unload() {} // Unload the asset
 
 		std::vector<std::shared_ptr<Asset>> Load()

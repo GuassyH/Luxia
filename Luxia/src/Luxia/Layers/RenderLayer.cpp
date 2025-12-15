@@ -27,8 +27,6 @@ namespace Luxia::Layers {
 				auto& cam = view.get<Luxia::Components::Camera>(entity);
 				auto cam_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
 
-				// LX_CORE_INFO("Color {}, {}r{}g{}b", (uint64_t)cam.ent_guid, cam.clearColor.r, cam.clearColor.g, cam.clearColor.b);
-
 				if (cam_t && cam.main) 
 					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()), cam.main);
 				else if(!cam_t)  

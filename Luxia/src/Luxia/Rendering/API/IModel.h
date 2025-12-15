@@ -21,12 +21,11 @@ namespace Luxia {
 		virtual bool Unload() override = 0;
 
 		bool IsValid() const { return valid; }
-		const std::vector<std::shared_ptr<Mesh>>& GetMeshes() { return meshes; }
 
 		std::string name = "no_name";
+		std::vector<std::shared_ptr<Mesh>> meshes;
 	protected:
 		std::vector<std::shared_ptr<ITexture>> loaded_textures; // to prevent duplicates
-		std::vector<std::shared_ptr<Mesh>> meshes;
 		std::filesystem::path path; // the name
 		std::filesystem::path directory; // the way to the folder
 

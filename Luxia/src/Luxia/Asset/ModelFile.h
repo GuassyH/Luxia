@@ -15,28 +15,45 @@ namespace Luxia::Assets {
 		~ModelFile() = default;
 
 		std::filesystem::path modelPath;
+		std::shared_ptr<Luxia::IModel> base_model;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			base_model = Platform::Assets::CreateModel();
+
+
+			std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
+
+			for (auto& mesh : meshes) {
+				assets.push_back(mesh);
+			}
+
 			Save(m_assetPath);
 			return true;
 		}
 
-		void SerializeMesh(YAML::Emitter& out, std::shared_ptr<Asset> mesh) {
-			/* Save mesh name
-			* Mesh GUID
-			* Mesh LUID
-			* Etc
-			*/
+		void SerializeMesh(YAML::Emitter& out, std::shared_ptr<Mesh> mesh) {
+			out << YAML::BeginMap;
+			out << YAML::Key << "Mesh" << YAML::Value << mesh->name;
+			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)mesh->guid;
+			out << YAML::Key << "LocalID" << YAML::Value << (uint64_t)mesh->local_id;
+			out << YAML::EndMap;
 		}
 
-		std::shared_ptr<Mesh> DeserializeMesh(YAML::Node& node) {
-			std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		std::shared_ptr<Mesh> DeserializeMesh(YAML::Node& meshNode, std::shared_ptr<IModel> model) {
+			// get the data from the mesh node
+			std::string name = meshNode["Mesh"].as<std::string>();
+			uint64_t guid = meshNode["GUID"].as<uint64_t>();
+			uint16_t lid = meshNode["LocalID"].as<uint16_t>();
 
-			/* Load mesh name
-			* Mesh GUID
-			* Mesh LUID
-			* Etc
-			*/
+			// Get the mesh from the model, assumes same model saved and loaded
+			std::shared_ptr<Mesh>& mesh = model->meshes[lid];
+
+			if (!mesh)
+				return nullptr;
+
+			mesh->name = name;
+			mesh->guid = guid;
+			mesh->local_id = lid; // useless but why not
 
 			return mesh;
 		}
@@ -45,22 +62,24 @@ namespace Luxia::Assets {
 			assetPath = m_assetPath;
 			loaded = false;
 
-			std::vector<std::shared_ptr<Asset>> meshes = std::vector<std::shared_ptr<Asset>>(0);
-
+			base_model = Platform::Assets::CreateModel();
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
 				// Check if missing
-				modelPath = config["model_path"].as<std::string>();
+				modelPath = config["ModelPath"].as<std::string>();
+
+				std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
+
 				auto meshNodes = config["Meshes"];
 				if (!meshNodes || !meshNodes.IsSequence()) {
-					assets = meshes;
 					return assets;
 				}
 
+				// For each meshNode, Deserialize
 				for (auto meshNode : meshNodes) {
-					auto mesh = DeserializeMesh(meshNode);
+					auto mesh = DeserializeMesh(meshNode, base_model);
 					if (mesh) {
 						assets.push_back(mesh);
 					}
@@ -73,8 +92,6 @@ namespace Luxia::Assets {
 				loaded = false;
 			}
 
-			assets = meshes;
-
 			return assets;
 		}
 
@@ -85,6 +102,20 @@ namespace Luxia::Assets {
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
+
+			out << YAML::Key << "ModelPath" << YAML::Value << modelPath.string();
+			out << YAML::Key << "Meshes" << YAML::Value << YAML::BeginSeq;
+
+			for (auto& meshptr : assets) {
+				if (meshptr) {
+					std::shared_ptr<Mesh> mesh = std::dynamic_pointer_cast<Mesh>(meshptr);
+					if (mesh) {
+						SerializeMesh(out, mesh);
+					}
+				}
+			}
+
+			out << YAML::EndSeq;
 
 			out << YAML::EndMap;
 

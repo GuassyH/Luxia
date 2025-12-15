@@ -178,7 +178,7 @@ namespace Luxia {
 			for(auto asset : asset_file->assets){
 				if (asset_pool.contains(asset->guid)) continue;
 
-				asset_pool[asset->guid] = asset.lock();
+				asset_pool[asset->guid] = asset;
 			}
 
 			// Return it
