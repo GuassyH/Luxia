@@ -15,12 +15,12 @@ namespace Talloren::Layers {
 		virtual void OnAttach() override { 
 			LX_WARN("ExtraLayer Attached");
 
-			WeakPtrProxy<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(std::make_shared<Luxia::Scene>());
+			std::shared_ptr<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(0);
 
 			if (scene_manager->scene_files[0] != nullptr) {
 				Luxia::SceneSerializer serializer(scene_manager->scene_files[0]);
-				if(scene)
-					serializer.Deserialize(*scene.lock());
+				if (scene_manager->scene_files[0]->assets[0] != nullptr);
+					serializer.Deserialize();
 			}
 			
 		}

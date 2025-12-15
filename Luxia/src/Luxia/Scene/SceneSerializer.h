@@ -13,8 +13,8 @@ namespace Luxia {
 	public:
 		SceneSerializer(std::shared_ptr<Luxia::Assets::SceneFile> sceneFile);
 
-		void Serialize(Luxia::Scene& scene); // save to file
-		bool Deserialize(Luxia::Scene& scene); // load from file
+		void Serialize(); // save to file
+		bool Deserialize(); // load from file
 	private:
 		WeakPtrProxy<Luxia::Assets::SceneFile> m_SceneFile;
 	};

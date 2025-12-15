@@ -76,7 +76,7 @@ namespace Talloren::Layers {
 			if (scene && scene->scene_file) {
 				Luxia::SceneSerializer serializer(scene->scene_file.lock());
 
-				serializer.Serialize(*scene);
+				serializer.Serialize();
 
 				LX_INFO("Saved Scene");
 			}

@@ -1,5 +1,6 @@
 #include "lxpch.h"
 #include "SceneManager.h"
+#include "Luxia/Scene/SceneSerializer.h"
 
 namespace Luxia {
 	bool SceneManager::LoadScenePool(const std::shared_ptr<AssetManager> m_asset_manager) {
@@ -23,20 +24,27 @@ namespace Luxia {
 		return true;
 	}
 
-	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene) {
-		if (active_scene) { active_scene->Unload(); }
-		active_scene = m_scene;
-		active_scene->Load();
+	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile) {
+		if (active_scene) { 
+			SceneSerializer oldserializer(active_scene);
+			oldserializer.Serialize();
+		}
+		active_scene = m_sceneFile;
+
+		SceneSerializer serializer(m_sceneFile);
+		serializer.Deserialize();
 
 		LX_CORE_INFO("Loaded Scene: {}", 0);
 
-		return active_scene;
+		return GetActiveScene();
 	}
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index) {
-		LX_CORE_ERROR("SceneManager: SetActiveScene by index not implemented yet");
+		if (!scene_files[index]) { LX_CORE_ERROR("SceneManager: Set Scene failed, no scene at index: {}", index); return nullptr; }
+		
+		SetActiveScene(scene_files[index]);
 
-		return active_scene;
+		return GetActiveScene();
 	}
 	 
 	void SceneManager::Cleanup() {

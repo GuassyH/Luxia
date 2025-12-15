@@ -63,11 +63,17 @@ namespace Luxia {
 	}
 
 	// Save
-	void SceneSerializer::Serialize(Luxia::Scene& scene) {
+	void SceneSerializer::Serialize() {
 		if (!m_SceneFile) { LX_CORE_ERROR("Scene Serializer: scene file nullptr"); return; }
 		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return; }
 
-		YAML::Emitter out;
+
+		std::shared_ptr<Scene> scene_raw = std::dynamic_pointer_cast<Scene>(m_SceneFile->assets[0]);
+		if (!scene_raw) { return; }
+		Scene& scene = *scene_raw;
+		scene.scene_file = m_SceneFile;
+
+		YAML::Emitter out;	
 
 		out << YAML::BeginMap;
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
@@ -84,7 +90,7 @@ namespace Luxia {
 		outfile << out.c_str();
 		outfile.close();
 
-		scene.scene_file = m_SceneFile;
+
 	} // save to file
 	
 	static Luxia::Entity& DeserializeEntity(YAML::Node& entityNode, Luxia::Scene& scene) {
@@ -139,10 +145,13 @@ namespace Luxia {
 	}
 
 	// Load
-	bool SceneSerializer::Deserialize(Luxia::Scene& scene) {
+	bool SceneSerializer::Deserialize() {
 		if (!m_SceneFile) { LX_CORE_ERROR("Scene Serializer: scene file nullptr"); return false; }
 		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return false; }
 		
+		std::shared_ptr<Scene> scene_raw = std::dynamic_pointer_cast<Scene>(m_SceneFile->assets[0]);
+		if (!scene_raw) { return false; }
+		Scene& scene = *scene_raw;
 		scene.scene_file = m_SceneFile;
 
 		try {
