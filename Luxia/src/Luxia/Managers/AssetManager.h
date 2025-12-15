@@ -33,8 +33,8 @@ namespace Luxia {
 
 	#pragma region Files
 
-		std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return assetfile_pool; }
-		std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>>& GetMetaFilePool() { return meta_pool; }
+		const std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return assetfile_pool; }
+		const std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>>& GetMetaFilePool() { return meta_pool; }
 
 
 		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
@@ -256,6 +256,7 @@ namespace Luxia {
 	#pragma endregion
 
 	#pragma region Runtime Assets
+		const std::unordered_map<GUID, std::shared_ptr<Assets::Asset>>& GetAssetPool() { return asset_pool; }
 
 		template <typename T>
 		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<T>>

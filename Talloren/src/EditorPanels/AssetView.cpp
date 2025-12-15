@@ -11,6 +11,12 @@ namespace Talloren::Panel {
 	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Asset View");
 
+		// TEMPORARY
+		for (auto [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
+			std::ostringstream data; 
+			data << asset->name << " - GUID: " << asset->guid;
+			ImGui::Text(data.str().c_str());
+		}
 		// Render all the asset stuff. Not dependant on scene
 		// For now maybe just create an item with a description of if its a model, its path, and GUID
 

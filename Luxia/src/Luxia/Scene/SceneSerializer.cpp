@@ -77,6 +77,7 @@ namespace Luxia {
 		YAML::Emitter out;	
 
 		out << YAML::BeginMap;
+		out << YAML::Key << "Name" << YAML::Value << scene.name;
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
 
 		for (auto& [guid, entity] : scene.runtime_entities) {
@@ -172,6 +173,7 @@ namespace Luxia {
 
 		try {
 			YAML::Node config = YAML::LoadFile(m_SceneFile->scene_path.string());
+			scene.name = config["Name"].as<std::string>();
 
 			auto entities = config["Entities"];
 			if (!entities || !entities.IsSequence()) {

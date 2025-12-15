@@ -7,11 +7,11 @@ namespace Luxia::Assets {
 	class LUXIA_API Asset {
 	public:
 		GUID guid;
-
-		virtual bool Unload() = 0;
+		std::string name;
 
 		// Asset() = default;
-		Asset() : guid(GUID()) {}
+		Asset() : guid(GUID()), name("no_name") {}
 		virtual ~Asset() = default;
+		virtual bool Unload() = 0;
 	};
 }

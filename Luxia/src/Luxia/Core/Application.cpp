@@ -18,13 +18,15 @@ namespace Luxia
 	{
 		// Open the project
 		m_ProjectManager = std::make_shared<ProjectManager>();
-		m_Renderer = Luxia::Platform::Rendering::CreateRenderer();
-
+		
 		// Initialise event handler
 		m_EventHandler = std::make_shared<Luxia::EventHandler>();	
 
 		// Initialise window 
 		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application", m_EventHandler);
+		
+		// Create Renderer
+		m_Renderer = Luxia::Platform::Rendering::CreateRenderer();
 
 		// Initialise layer stack 
 		m_LayerStack = std::make_shared<LayerStack>();

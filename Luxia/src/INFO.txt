@@ -4,10 +4,4 @@ YAML
 	For some reason you NEED to use the debug build in debug mode and the release build in release.
 	No clue why, but i want to fix in the future, for now im just going to focus on advancing
 
-Model Loading
-	Should not create entities, should instead create meshes with materials
-	Entities should then be able to reference these, or use ref_model or something
-
-Mesh
-	Should be its own asset stored in the luxmodel file, with guid and that. So when entity is loaded
-	it can have the meshes GUID if it has a meshrenderer
+Initializing OpenGL should happen in the openGL renderer, NOT the Window

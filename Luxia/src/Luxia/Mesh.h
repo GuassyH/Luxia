@@ -29,8 +29,6 @@ namespace Luxia {
 
 		std::vector<Rendering::Vertex> vertices;
 		std::vector<uint32_t> indices;
-
-		std::string name = "no_name";
 	private:
 		bool valid = false;
 	};

@@ -35,6 +35,7 @@ namespace Luxia::Rendering {
 	
 		// UI Renderer access
 		std::shared_ptr<IUIRenderer> GetUIRenderer() { return m_UIRenderer; }
+		std::shared_ptr<Luxia::IShader> default_shader = nullptr;
 	protected:
 		std::vector<RenderObject> renderObjects;
 		std::shared_ptr<IUIRenderer> m_UIRenderer = nullptr;

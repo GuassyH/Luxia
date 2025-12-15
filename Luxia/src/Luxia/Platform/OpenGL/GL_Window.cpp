@@ -41,7 +41,6 @@ namespace Luxia::Platform::OpenGL {
 		LX_CORE_TRACE("Renderer: {}", (char*)glGetString(GL_RENDERER));
 		LX_CORE_TRACE("Vendor: {} \n", (char*)glGetString(GL_VENDOR));
 
-
 		// Get monitor height
 		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		m_MonitorWidth = mode->width;

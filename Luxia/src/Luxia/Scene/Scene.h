@@ -21,8 +21,6 @@ namespace Luxia {
 	class LUXIA_API Scene : public Luxia::Assets::Asset
 	{
 	public:
-		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;
-
 		Scene() : reg(entt::registry()) {}
 		~Scene() = default;
 
@@ -59,8 +57,9 @@ namespace Luxia {
 			return reg.get<T>(entity);
 		}
 
-		entt::registry& GetReg() { return reg; }
 
+		entt::registry& GetReg() { return reg; }
+		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;
 		std::unordered_map<GUID, Entity> runtime_entities;
 	private:
 		friend class SceneSerializer;

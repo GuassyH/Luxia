@@ -3,13 +3,20 @@
 #include "Luxia/Managers/EventManager.h"
 #include "Luxia/Rendering/OpenGL/OpenGL_UIRenderer.h"
 
+#include "Luxia/Platform/AssetCreation.h"
+#include "Luxia/Core/Log.h"
+
 #include "glfw/glfw3.h"
+#include <KHR/khrplatform.h>
 #include "glad/glad.h"
 
 namespace Luxia::Rendering::OpenGL {
 
 	OpenGL_Renderer::OpenGL_Renderer() {
 		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
+
+		// Should be baked into the engine somehow
+		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
 	}
 
 	// Render the render object (meshrenderer mesh with material and transform)
@@ -18,16 +25,32 @@ namespace Luxia::Rendering::OpenGL {
 	}
 
 	void OpenGL_Renderer::RenderMesh(const std::shared_ptr<Luxia::Mesh> m_mesh, const std::shared_ptr<Luxia::IMaterial> m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!m_mesh || !m_material) {
-			// LX_CORE_ERROR("Tried to render mesh with invalid material or shader");
+		if (!m_mesh) 
 			return;
-		} if (!m_mesh->IsValid() || !m_material->shader) {
-			// LX_CORE_ERROR("Tried to render in-valid mesh");
+		if (!m_mesh->IsValid())
 			return;
-		}
+		
 
-		// Use Material
-		m_material->Use(modMat, viewMat, projMat);
+		bool valid_mat = false;
+
+		if (m_material)
+			if (m_material->shader)
+				valid_mat = true;
+		
+		if(valid_mat)
+			m_material->Use(modMat, viewMat, projMat);
+
+		// If no material exists use the default null shader
+		else if (!valid_mat && default_shader) {
+			default_shader->Use();
+			default_shader->SetVec4("mat_color", glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
+			default_shader->SetMat4("modelMat", modMat);
+			default_shader->SetMat4("viewMat", viewMat);
+			default_shader->SetMat4("projMat", projMat);
+			default_shader->SetBool("hasDiffuse", false);
+			default_shader->SetBool("hasSpecular", false);
+			default_shader->SetBool("hasNormals", false);
+		}
 
 		m_mesh->vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);
