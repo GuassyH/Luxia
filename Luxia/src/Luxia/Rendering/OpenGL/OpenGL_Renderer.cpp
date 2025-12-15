@@ -18,10 +18,10 @@ namespace Luxia::Rendering::OpenGL {
 	}
 
 	void OpenGL_Renderer::RenderMesh(const std::shared_ptr<Luxia::Mesh> m_mesh, const std::shared_ptr<Luxia::IMaterial> m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!m_mesh || !m_material->shader) {
+		if (!m_mesh || !m_material) {
 			// LX_CORE_ERROR("Tried to render mesh with invalid material or shader");
 			return;
-		} if (!m_mesh->IsValid()) {
+		} if (!m_mesh->IsValid() || !m_material->shader) {
 			// LX_CORE_ERROR("Tried to render in-valid mesh");
 			return;
 		}

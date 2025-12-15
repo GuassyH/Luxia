@@ -258,7 +258,7 @@ namespace Luxia {
 	#pragma region Runtime Assets
 
 		template <typename T>
-		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<Assets::Asset>>
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, std::shared_ptr<T>>
 			GetAsset(GUID guid) {
 			std::shared_ptr<T> asset = nullptr;
 			if (asset_pool.contains(guid)) {

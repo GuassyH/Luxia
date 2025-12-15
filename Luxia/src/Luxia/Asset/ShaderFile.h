@@ -52,7 +52,8 @@ namespace Luxia::Assets {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
 				// Check if missing
-				assets.push_back(shader);
+				// shader = Platform::Assets::CreateShader();
+				// assets.push_back(shader);
 				loaded = true;
 			}
 			catch (const YAML::Exception& ex) {

@@ -74,7 +74,7 @@ namespace Talloren::Layers {
 		if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL) && Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
 			auto scene = scene_manager->GetActiveScene();
 			if (scene && scene->scene_file) {
-				Luxia::SceneSerializer serializer(scene->scene_file.lock());
+				Luxia::SceneSerializer serializer(scene->scene_file.lock(), asset_manager.lock());
 
 				serializer.Serialize();
 

@@ -6,8 +6,9 @@
 
 namespace Luxia {
 
-	SceneSerializer::SceneSerializer(std::shared_ptr<Luxia::Assets::SceneFile> sceneFile) {
+	SceneSerializer::SceneSerializer(std::shared_ptr<Luxia::Assets::SceneFile> sceneFile, std::shared_ptr<Luxia::AssetManager> assetManager) {
 		m_SceneFile = sceneFile;
+		m_AssetManager = assetManager;
 	}
 
 	static void SerializeEntity(Luxia::Entity& entity, YAML::Emitter& out) {
@@ -93,7 +94,7 @@ namespace Luxia {
 
 	} // save to file
 	
-	static Luxia::Entity& DeserializeEntity(YAML::Node& entityNode, Luxia::Scene& scene) {
+	static Luxia::Entity& DeserializeEntity(YAML::Node& entityNode, Luxia::Scene& scene, std::shared_ptr<Luxia::AssetManager> assetManager) {
 		std::string name = entityNode["Entity"].as<std::string>();
 		uint64_t guid = entityNode["GUID"].as<uint64_t>();
 
@@ -125,19 +126,34 @@ namespace Luxia {
 		if (auto meshRendNode = components["MeshRenderer"]) {
 			auto& meshRend = entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
 
-			uint64_t mesh = 0;
-			uint64_t mat = 0;
+			uint64_t mesh_guid = 0;
+			uint64_t mat_guid = 0;
 
 			if(auto meshNode = meshRendNode["Mesh"])
-				mesh = meshNode.as<uint64_t>();
+				mesh_guid = meshNode.as<uint64_t>();
 			if (auto matNode = meshRendNode["Material"])
-				mat = matNode.as<uint64_t>();
+				mat_guid = matNode.as<uint64_t>();
 
 			// Check asset/scene manager for mesh w guid and assign, etc
-			if (mesh == 0)
+			if (mesh_guid == 0) {
 				meshRend.mesh = nullptr;
-			if (mat == 0)
+			}
+			else {
+				std::shared_ptr<Mesh> mesh = assetManager->GetAsset<Luxia::Mesh>(mesh_guid);
+				if (mesh) {
+					meshRend.mesh = mesh;
+					LX_CORE_INFO("SceneSerializer: Deserializing Entity MeshRenderer Succeeded");
+				}
+				else {
+					LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mesh at GUID: {} - not found", (uint64_t)mesh_guid);
+				}
+			}
+			if (mat_guid == 0) {
 				meshRend.material = nullptr;
+			}
+			else {
+
+			}
 
 		}
 
@@ -163,7 +179,7 @@ namespace Luxia {
 			}
 
 			for (auto entityNode : entities) {
-				DeserializeEntity(entityNode, scene);
+				DeserializeEntity(entityNode, scene, m_AssetManager.lock());
 			}
 		
 		}

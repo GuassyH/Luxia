@@ -26,12 +26,12 @@ namespace Luxia {
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile) {
 		if (active_scene) { 
-			SceneSerializer oldserializer(active_scene);
+			SceneSerializer oldserializer(active_scene, asset_manager);
 			oldserializer.Serialize();
 		}
 		active_scene = m_sceneFile;
 
-		SceneSerializer serializer(m_sceneFile);
+		SceneSerializer serializer(m_sceneFile, asset_manager);
 		serializer.Deserialize();
 
 		LX_CORE_INFO("Loaded Scene: {}", 0);
