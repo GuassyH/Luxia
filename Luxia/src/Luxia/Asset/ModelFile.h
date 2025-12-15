@@ -20,7 +20,6 @@ namespace Luxia::Assets {
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			base_model = Platform::Assets::CreateModel();
 
-
 			std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
 
 			for (auto& mesh : meshes) {
@@ -69,8 +68,10 @@ namespace Luxia::Assets {
 
 				// Check if missing
 				modelPath = config["ModelPath"].as<std::string>();
-
 				std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
+
+				base_model->name = config["Model"].as<std::string>();
+				base_model->guid = config["GUID"].as<uint64_t>();
 
 				auto meshNodes = config["Meshes"];
 				if (!meshNodes || !meshNodes.IsSequence()) {
@@ -104,6 +105,8 @@ namespace Luxia::Assets {
 			out << YAML::BeginMap;
 
 			out << YAML::Key << "ModelPath" << YAML::Value << modelPath.string();
+			out << YAML::Key << "Model" << YAML::Value << base_model->name;
+			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)base_model->guid;
 			out << YAML::Key << "Meshes" << YAML::Value << YAML::BeginSeq;
 
 			for (auto& meshptr : assets) {

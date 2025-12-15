@@ -22,7 +22,6 @@ namespace Luxia {
 
 		bool IsValid() const { return valid; }
 
-		std::string name = "no_name";
 		std::vector<std::shared_ptr<Mesh>> meshes;
 	protected:
 		std::vector<std::shared_ptr<ITexture>> loaded_textures; // to prevent duplicates
