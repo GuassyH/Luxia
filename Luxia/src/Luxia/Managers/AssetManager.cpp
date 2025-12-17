@@ -36,11 +36,29 @@ namespace Luxia {
 				// Assign both files pools
 				assetfile_pool[meta_file->guid] = asset_file;
 				meta_pool[meta_file->guid] = meta_file;
-
-				LX_CORE_TRACE("Loaded files - GUID({})", (uint64_t)meta_file->guid);
 			}
 		}
 
+		// Iterate through assets and do what you need
+
+		// Since shaders should be loaded now, we can now load the material files
+		for (auto [guid, assetfile] : assetfile_pool) {
+			if (assetfile->type == Luxia::AssetType::MaterialType) {
+				std::shared_ptr<Luxia::Assets::MaterialFile> matfile = std::dynamic_pointer_cast<Luxia::Assets::MaterialFile>(assetfile);
+				std::shared_ptr<Luxia::IMaterial> mat = std::dynamic_pointer_cast<Luxia::IMaterial>(assetfile->assets[0]);
+				if (matfile && mat) {
+					if (HasAsset<Luxia::IShader>(matfile->shaderGUID)) {
+						mat->shader = GetAsset<Luxia::IShader>(matfile->shaderGUID);
+					}
+					else {
+						LX_CORE_ERROR("AssetManager: Failed loading Material Shader, Shader GUID {} doesnt exist", (uint64_t)matfile->shaderGUID);
+					}
+				}
+				else {
+					LX_CORE_ERROR("AssetManager: Failed loading Material {}", (uint64_t)matfile->guid);
+				}
+			}
+		}
 
 		return true; 
 	}

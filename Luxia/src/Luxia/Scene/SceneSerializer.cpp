@@ -18,6 +18,7 @@ namespace Luxia {
 
 		out << YAML::Key << "Components" << YAML::BeginMap;
 
+
 		if (entity.transform) {
 			out << YAML::Key << "Transform";
 
@@ -28,36 +29,34 @@ namespace Luxia {
 			out << YAML::Key << "Scale" << YAML::Value << entity.transform->scale;
 
 			out << YAML::EndMap;
+
+			auto cam = entity.transform->TryGetComponent<Luxia::Components::Camera>();
+			if (cam) {
+				out << YAML::Key << "Camera";
+				out << YAML::BeginMap; // Camera
+
+				out << YAML::Key << "FOV" << YAML::Value << cam->FOVdeg;
+				out << YAML::Key << "FarPlane" << YAML::Value << cam->farPlane;
+				out << YAML::Key << "NearPlane" << YAML::Value << cam->nearPlane;
+				out << YAML::Key << "Main" << YAML::Value << cam->main;
+				out << YAML::Key << "Width" << YAML::Value << cam->width;
+				out << YAML::Key << "Height" << YAML::Value << cam->height;
+				out << YAML::Key << "ClearColor" << YAML::Value << cam->clearColor;
+
+				out << YAML::EndMap;
+			}
+
+			auto meshrend = entity.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+			if (meshrend) {
+				out << YAML::Key << "MeshRenderer";
+				out << YAML::BeginMap; // Camera
+
+				out << YAML::Key << "Mesh" << YAML::Value << (meshrend->mesh ? (uint64_t)meshrend->mesh->guid : 0);
+				out << YAML::Key << "Material" << YAML::Value << (meshrend->material ? (uint64_t)meshrend->material->guid : 0);
+
+				out << YAML::EndMap;
+			}
 		}
-
-		auto cam = entity.transform->TryGetComponent<Luxia::Components::Camera>();
-		if (cam) {
-			out << YAML::Key << "Camera";
-			out << YAML::BeginMap; // Camera
-
-			out << YAML::Key << "FOV" << YAML::Value << cam->FOVdeg;
-			out << YAML::Key << "FarPlane" << YAML::Value << cam->farPlane;
-			out << YAML::Key << "NearPlane" << YAML::Value << cam->nearPlane;
-			out << YAML::Key << "Main" << YAML::Value << cam->main;
-			out << YAML::Key << "Width" << YAML::Value << cam->width;
-			out << YAML::Key << "Height" << YAML::Value << cam->height;
-			out << YAML::Key << "ClearColor" << YAML::Value << cam->clearColor;
-
-			out << YAML::EndMap;
-		}
-
-		auto meshrend = entity.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-		if (meshrend) {
-			out << YAML::Key << "MeshRenderer";
-			out << YAML::BeginMap; // Camera
-
-			out << YAML::Key << "Material" << YAML::Value << (meshrend->material ? (uint64_t)meshrend->material->guid : 0);
-			out << YAML::Key << "Mesh" << YAML::Value << (meshrend->mesh ? (uint64_t)meshrend->mesh->guid : 0);
-			// out << YAML::Key << "Mesh" << YAML::Value << meshrend->mesh->guid;
-
-			out << YAML::EndMap;
-		}
-
 
 		out << YAML::EndMap;
 		out << YAML::EndMap;
@@ -106,7 +105,6 @@ namespace Luxia {
 			return entity;
 
 		if (auto transNode = components["Transform"]) {
-			LX_CORE_INFO("Serializing Transform");
 			entity.transform->position = transNode["Position"].as<glm::vec3>();
 			entity.transform->euler_angles = transNode["EulerAngles"].as<glm::vec3>();
 			entity.transform->scale = transNode["Scale"].as<glm::vec3>();
@@ -135,25 +133,24 @@ namespace Luxia {
 			if (auto matNode = meshRendNode["Material"])
 				mat_guid = matNode.as<uint64_t>();
 
-			// Check asset/scene manager for mesh w guid and assign, etc
-			if (mesh_guid == 0) {
+			// Mesh
+			if (mesh_guid == 0) 
 				meshRend.mesh = nullptr;
-			}
 			else {
-				std::shared_ptr<Mesh> mesh = assetManager->GetAsset<Luxia::Mesh>(mesh_guid);
-				if (mesh) {
-					meshRend.mesh = mesh;
-					LX_CORE_INFO("SceneSerializer: Deserializing Entity MeshRenderer Succeeded");
-				}
-				else {
+				if (assetManager->HasAsset<Luxia::Mesh>(mesh_guid)) 
+					meshRend.mesh = assetManager->GetAsset<Luxia::Mesh>(mesh_guid);
+				else 
 					LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mesh at GUID: {} - not found", (uint64_t)mesh_guid);
-				}
 			}
-			if (mat_guid == 0) {
-				meshRend.material = nullptr;
-			}
-			else {
 
+			// Mat
+			if (mat_guid == 0) 
+				meshRend.material = nullptr;
+			else {
+				if (assetManager->HasAsset<Luxia::IMaterial>(mat_guid)) 
+					meshRend.material = assetManager->GetAsset<Luxia::IMaterial>(mat_guid);
+				else 
+					LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mat at GUID: {} - not found", (uint64_t)mat_guid);
 			}
 
 		}

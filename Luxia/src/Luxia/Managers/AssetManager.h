@@ -67,7 +67,7 @@ namespace Luxia {
 				LX_CORE_ERROR("Asset Manager: GetAssetFile - Dynamic cast failed for GUID {}", static_cast<uint64_t>(guid));
 				return nullptr;
 			}
-			LX_CORE_INFO("Asset Manager: GetAssetFile - Successfully retrieved asset file for GUID {}", static_cast<uint64_t>(guid));
+			// LX_CORE_INFO("Asset Manager: GetAssetFile - Successfully retrieved asset file for GUID {}", static_cast<uint64_t>(guid));
 			return casted_asset_file;
 		}
 

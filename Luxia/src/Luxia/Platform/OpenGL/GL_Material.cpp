@@ -5,13 +5,7 @@
 
 namespace Luxia::Platform::OpenGL {
 
-	GL_Material::GL_Material() {
-		shader = Platform::Assets::CreateShader(
-			"E:/BuiltLuxia/Sandbox/assets/shaders/default.frag",
-			"E:/BuiltLuxia/Sandbox/assets/shaders/default.vert"
-		);
-	}
-
+	GL_Material::GL_Material() = default;
 
 	void GL_Material::Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (shader) {

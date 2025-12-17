@@ -106,7 +106,7 @@ namespace Talloren::Panel {
 				if (ImGui::InputTextWithHint("##MaterialInput", matHint.c_str(), matbuff, sizeof(matbuff), flags)) {
 					Luxia::GUID matguid(std::strtoull(matbuff, nullptr, 10));
 
-					if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(matguid))
+					if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(matguid))
 						meshrend->material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(matguid);
 					else
 						LX_ERROR("Tried to assign asset that is not material or has invalid guid: {}", (uint64_t)matguid);

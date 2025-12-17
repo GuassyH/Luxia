@@ -39,6 +39,8 @@ namespace Luxia::Assets {
 		std::filesystem::path shaderPath;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			type = Luxia::AssetType::ShaderType;
+
 			shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
 			assets.push_back(shader);
 
@@ -47,6 +49,8 @@ namespace Luxia::Assets {
 		}
 
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
+			type = Luxia::AssetType::ShaderType;
+
 			assetPath = m_assetPath;
 			loaded = false;
 

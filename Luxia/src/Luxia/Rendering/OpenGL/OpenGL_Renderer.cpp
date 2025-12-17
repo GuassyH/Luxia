@@ -17,11 +17,10 @@ namespace Luxia::Rendering::OpenGL {
 
 		// Should be baked into the engine somehow
 		null_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
-		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
-	
 		null_mat = Platform::Assets::CreateMaterial(null_shader);
 		null_mat->color = glm::vec4(1.0f, 0.0f, 1.0f, 1.0f);
-
+	
+		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
 		default_mat = Platform::Assets::CreateMaterial(default_shader);
 	}
 
