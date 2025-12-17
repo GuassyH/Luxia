@@ -16,7 +16,13 @@ namespace Luxia::Rendering::OpenGL {
 		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
 
 		// Should be baked into the engine somehow
+		null_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
 		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
+	
+		null_mat = Platform::Assets::CreateMaterial(null_shader);
+		null_mat->color = glm::vec4(1.0f, 0.0f, 1.0f, 1.0f);
+
+		default_mat = Platform::Assets::CreateMaterial(default_shader);
 	}
 
 	// Render the render object (meshrenderer mesh with material and transform)
@@ -39,18 +45,9 @@ namespace Luxia::Rendering::OpenGL {
 		
 		if(valid_mat)
 			m_material->Use(modMat, viewMat, projMat);
-
-		// If no material exists use the default null shader
-		else if (!valid_mat && default_shader) {
-			default_shader->Use();
-			default_shader->SetVec4("mat_color", glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
-			default_shader->SetMat4("modelMat", modMat);
-			default_shader->SetMat4("viewMat", viewMat);
-			default_shader->SetMat4("projMat", projMat);
-			default_shader->SetBool("hasDiffuse", false);
-			default_shader->SetBool("hasSpecular", false);
-			default_shader->SetBool("hasNormals", false);
-		}
+		else if (null_mat)
+			null_mat->Use(modMat, viewMat, projMat);
+	
 
 		m_mesh->vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);

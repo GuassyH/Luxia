@@ -29,6 +29,7 @@ namespace Luxia::Assets {
 		};
 
 		ShaderFileType shaderType = ShaderFileType::None;
+		std::shared_ptr<Luxia::IShader> shader = nullptr;
 
 		// In case its vert and frag
 		std::filesystem::path fragPath;
@@ -38,6 +39,9 @@ namespace Luxia::Assets {
 		std::filesystem::path shaderPath;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
+			shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
+			assets.push_back(shader);
+
 			Save(m_assetPath);
 			return true;
 		}
@@ -51,9 +55,21 @@ namespace Luxia::Assets {
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
-				// Check if missing
-				// shader = Platform::Assets::CreateShader();
-				// assets.push_back(shader);
+				shaderType = static_cast<ShaderFileType>(config["ShaderType"].as<int>());
+
+				if (shaderType == ShaderFileType::VertexFragment) {
+					fragPath = config["FragPath"].as<std::string>();
+					vertPath = config["VertPath"].as<std::string>();
+					shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
+					assets.push_back(shader);
+					
+					shader->guid = GUID(config["GUID"].as<uint64_t>());
+					shader->name = config["Name"].as<std::string>();
+				}
+				else {
+					shaderPath = config["ShaderPath"].as<std::string>();
+				}
+
 				loaded = true;
 			}
 			catch (const YAML::Exception& ex) {
@@ -70,6 +86,18 @@ namespace Luxia::Assets {
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
+
+			out << YAML::Key << "ShaderType" << YAML::Value << (int)shaderType;
+			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)shader->guid;
+			out << YAML::Key << "Name" << YAML::Value << shader->name;
+
+			if (shaderType == ShaderFileType::VertexFragment) {
+				out << YAML::Key << "FragPath" << YAML::Value << fragPath.string().c_str();
+				out << YAML::Key << "VertPath" << YAML::Value << vertPath.string().c_str();
+			}
+			else {
+				out << YAML::Key << "ShaderPath" << YAML::Value << shaderPath.string().c_str();
+			}
 
 			out << YAML::EndMap;
 

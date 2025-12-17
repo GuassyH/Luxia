@@ -6,7 +6,7 @@ namespace Talloren::Panel {
 		LX_INFO("Editor - Inspector Panel: Init");
 	}
 
-	char buff[255];
+	char namebuff[255];
 	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Inspector Panel");
 		if (!editorLayer->is_entity_selected) { ImGui::End(); return; }
@@ -20,9 +20,9 @@ namespace Talloren::Panel {
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - ImGui::CalcTextSize(entname.str().c_str()).x * 0.5f);
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - 180 * 0.5f);
 		ImGui::SetNextItemWidth(180);
-		if (ImGui::InputTextWithHint(" ", entname.str().c_str(), buff, sizeof(buff), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll)) {
-			ent.name = buff;
-			memset(buff, 0, 255);
+		if (ImGui::InputTextWithHint("##NameBar", entname.str().c_str(), namebuff, sizeof(namebuff), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll)) {
+			ent.name = namebuff;
+			memset(namebuff, 0, 255);
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("U")) {	// You can now delete entities but adding new ones after deleting doesnt work
