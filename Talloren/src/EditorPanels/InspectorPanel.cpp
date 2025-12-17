@@ -7,6 +7,8 @@ namespace Talloren::Panel {
 	}
 
 	char namebuff[255];
+	char meshbuff[255];
+	char matbuff[255];
 	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Inspector Panel");
 		if (!editorLayer->is_entity_selected) { ImGui::End(); return; }
@@ -20,9 +22,9 @@ namespace Talloren::Panel {
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - ImGui::CalcTextSize(entname.str().c_str()).x * 0.5f);
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - 180 * 0.5f);
 		ImGui::SetNextItemWidth(180);
-		if (ImGui::InputTextWithHint("##NameBar", entname.str().c_str(), namebuff, sizeof(namebuff), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll)) {
+		if (ImGui::InputTextWithHint("##NameInput", entname.str().c_str(), namebuff, sizeof(namebuff), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll)) {
 			ent.name = namebuff;
-			memset(namebuff, 0, 255);
+			memset(namebuff, 0, sizeof(namebuff));
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("U")) {	// You can now delete entities but adding new ones after deleting doesnt work
@@ -51,10 +53,61 @@ namespace Talloren::Panel {
 				cam->OnInspectorDraw();
 			}
 		}
+
+		// Needs to be here to use asset_manager
 		auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
 		if (meshrend) {
 			if (ImGui::CollapsingHeader(meshrend->name, ImGuiTreeNodeFlags_DefaultOpen)) {
 				meshrend->OnInspectorDraw();
+
+				// This needs to be here due to asset manager usage 
+
+				int flags = ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll |
+					ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal;
+
+
+				// MESH
+				std::ostringstream mesht; mesht << "Mesh: ";
+				if (!meshrend->mesh)
+					mesht << "nullptr";
+				else {
+					mesht << meshrend->mesh->name;
+				}
+
+				ImGui::Text(mesht.str().c_str());
+
+				std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "0";
+				ImGui::SameLine();
+				if (ImGui::InputTextWithHint("##MeshInput", meshHint.c_str(), meshbuff, sizeof(meshbuff), flags)) {
+					// meshguid = (uint64_t)meshbuff;
+					Luxia::GUID meshguid(std::strtoull(meshbuff, nullptr, 10));
+
+					if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
+						meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
+					else 
+						LX_ERROR("Tried to assign asset that is not mesh or has invalid guid: {}", (uint64_t)meshguid);
+
+					memset(meshbuff, 0, sizeof(meshbuff));
+				}
+
+
+				// MATERIAL
+				std::ostringstream matt; matt << "Material: ";
+				if (!meshrend->material)
+					matt << "nullptr";
+				else {
+					matt << meshrend->material->name;
+				}
+
+				ImGui::Text(matt.str().c_str());
+
+
+				std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "0";
+				ImGui::SameLine();
+				if (ImGui::InputTextWithHint("##MaterialInput", matHint.c_str(), matbuff, sizeof(matbuff), flags)) {
+					// matguid = (uint64_t)matbuff;
+					memset(matbuff, 0, sizeof(matbuff));
+				}
 			}
 		}
 

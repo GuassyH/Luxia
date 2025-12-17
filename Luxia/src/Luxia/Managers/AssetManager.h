@@ -268,6 +268,15 @@ namespace Luxia {
 			return asset;
 		}
 
+		template <typename T>
+		bool HasAsset(GUID guid) {
+			std::shared_ptr<T> asset = nullptr;
+			if (asset_pool.contains(guid)) {
+				asset = std::dynamic_pointer_cast<T>(asset_pool.find(guid)->second);
+			}
+			return asset ? true : false;
+		}
+
 	#pragma endregion
 
 

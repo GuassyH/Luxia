@@ -21,44 +21,8 @@ namespace Luxia::Components {
 			name = "Mesh Renderer";
 		}
 
-		GUID meshguid = GUID(0);
-		GUID matguid = GUID(0);
-
-		char meshguidbuff[255] = "";
-		char matguidbuff[255] = "";
 		virtual void OnInspectorDraw() override {
-			int flags = ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll | 
-				ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal;
-
-
-			std::ostringstream mesht; mesht << "Mesh: ";
-			if (!mesh)
-				mesht << "nullptr";
-			else
-				mesht << mesh->name;
-			
-			ImGui::Text(mesht.str().c_str());
-			
-			ImGui::SameLine();
-			if(ImGui::InputTextWithHint("##MeshBar", (char*)(uint64_t)meshguid, meshguidbuff, sizeof(meshguidbuff), flags)) {
-				meshguid = (uint64_t)meshguidbuff;
-				memset(meshguidbuff, 0, 255);
-			}
-
-			std::ostringstream matt; matt << "Material: ";
-			if (!material)
-				matt << "nullptr";
-			else
-				matt << material->name;
-
-			ImGui::Text(matt.str().c_str());
-
-
-			ImGui::SameLine();
-			if (ImGui::InputTextWithHint("##MaterialBar", (char*)(uint64_t)matguid, matguidbuff, sizeof(matguidbuff), flags)) {
-				matguid = (uint64_t)matguidbuff;
-				memset(matguidbuff, 0, 255);
-			}
+		
 		}
 	};
 }
