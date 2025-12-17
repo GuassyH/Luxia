@@ -65,7 +65,7 @@ namespace Luxia {
 	// Save
 	void SceneSerializer::Serialize() {
 		if (!m_SceneFile) { LX_CORE_ERROR("Scene Serializer: scene file nullptr"); return; }
-		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return; }
+		if (!m_SceneFile->loaded || m_SceneFile->assets.empty()) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return; }
 
 
 		std::shared_ptr<Scene> scene_raw = std::dynamic_pointer_cast<Scene>(m_SceneFile->assets[0]);
@@ -161,7 +161,8 @@ namespace Luxia {
 	// Load
 	bool SceneSerializer::Deserialize() {
 		if (!m_SceneFile) { LX_CORE_ERROR("Scene Serializer: scene file nullptr"); return false; }
-		if (!m_SceneFile->loaded) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return false; }
+		if (!m_SceneFile->loaded || m_SceneFile->assets.empty()) { LX_CORE_ERROR("Scene Serializer: scene file not loaded"); return false; }
+
 		
 		std::shared_ptr<Scene> scene_raw = std::dynamic_pointer_cast<Scene>(m_SceneFile->assets[0]);
 		if (!scene_raw) { return false; }

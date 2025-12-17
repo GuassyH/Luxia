@@ -15,7 +15,9 @@ namespace Luxia::Assets {
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::SceneType;
-			
+
+			assetPath = m_assetPath;
+			scene_path = assetPath;
 			std::shared_ptr<Asset> scene = std::make_shared<Scene>();
 
 			LX_CORE_INFO("Scene Files are not loaded regularly");
@@ -45,7 +47,7 @@ namespace Luxia::Assets {
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 			scene_path = assetPath;
-
+			
 			LX_CORE_INFO("Scene Files are not saved regularly");
 
 			return true;
