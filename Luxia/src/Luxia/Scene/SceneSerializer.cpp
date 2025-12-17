@@ -100,6 +100,7 @@ namespace Luxia {
 
 		Luxia::Entity& entity = scene.CreateEntity(name, guid);
 
+
 		auto components = entityNode["Components"];
 		if (!components)
 			return entity;
