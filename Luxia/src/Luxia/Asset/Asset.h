@@ -7,7 +7,7 @@
 namespace Luxia::Assets {
 	class LUXIA_API Asset {
 	public:
-		GUID guid;
+		GUID guid = GUID(0);
 		std::string name;
 		Luxia::AssetType type;
 

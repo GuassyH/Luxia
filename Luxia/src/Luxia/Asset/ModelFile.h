@@ -102,6 +102,9 @@ namespace Luxia::Assets {
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 
+			if (assets.empty()) return false;
+			if (!base_model) return false;
+
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;

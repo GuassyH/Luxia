@@ -63,10 +63,9 @@ namespace Luxia::Assets {
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 
-			if (assets.size() == 0) return false;
+			if (assets.empty()) return false;
 
 			std::shared_ptr<Luxia::IMaterial> mat = std::dynamic_pointer_cast<Luxia::IMaterial>(assets[0]);
-
 			if (!mat) return false;
 
 			YAML::Emitter out;

@@ -29,7 +29,7 @@ namespace Luxia::Assets {
 		};
 
 		ShaderFileType shaderType = ShaderFileType::None;
-		std::shared_ptr<Luxia::IShader> shader = nullptr;
+		// std::shared_ptr<Luxia::IShader> shader = nullptr;
 
 		// In case its vert and frag
 		std::filesystem::path fragPath;
@@ -40,8 +40,10 @@ namespace Luxia::Assets {
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::ShaderType;
+			shaderType = ShaderFileType::VertexFragment;
 
-			shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
+			std::shared_ptr<Luxia::IShader> shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
+
 			assets.push_back(shader);
 
 			Save(m_assetPath);
@@ -54,7 +56,7 @@ namespace Luxia::Assets {
 			assetPath = m_assetPath;
 			loaded = false;
 
-			std::shared_ptr<Asset> shader = nullptr;
+			std::shared_ptr<Luxia::IShader> shader = nullptr;
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
@@ -86,6 +88,10 @@ namespace Luxia::Assets {
 		}
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
+
+			if (assets.empty()) return false;
+			std::shared_ptr<Luxia::IShader> shader = std::dynamic_pointer_cast<Luxia::IShader>(assets[0]);
+			if (!shader) return false;
 
 			YAML::Emitter out;
 
