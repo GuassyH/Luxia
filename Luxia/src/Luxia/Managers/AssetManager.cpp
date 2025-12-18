@@ -47,12 +47,17 @@ namespace Luxia {
 				std::shared_ptr<Luxia::Assets::MaterialFile> matfile = std::dynamic_pointer_cast<Luxia::Assets::MaterialFile>(assetfile);
 				std::shared_ptr<Luxia::IMaterial> mat = std::dynamic_pointer_cast<Luxia::IMaterial>(assetfile->assets[0]);
 				if (matfile && mat) {
-					if (HasAsset<Luxia::IShader>(matfile->shaderGUID)) {
+					if (HasAsset<Luxia::IShader>(matfile->shaderGUID)) 
 						mat->shader = GetAsset<Luxia::IShader>(matfile->shaderGUID);
-					}
-					else {
+					else 
 						LX_CORE_ERROR("AssetManager: Failed loading Material Shader, Shader GUID {} doesnt exist", (uint64_t)matfile->shaderGUID);
-					}
+
+					if (HasAsset<Luxia::ITexture>(matfile->diffuseGUID))		// Get Texture
+						mat->diffuse_texture = GetAsset<Luxia::ITexture>(matfile->diffuseGUID);
+					if (HasAsset<Luxia::ITexture>(matfile->specularGUID))		// Get Texture
+						mat->specular_texture = GetAsset<Luxia::ITexture>(matfile->specularGUID);
+					if (HasAsset<Luxia::ITexture>(matfile->normalsGUID))		// Get Texture
+						mat->normal_texture = GetAsset<Luxia::ITexture>(matfile->normalsGUID);
 				}
 				else {
 					LX_CORE_ERROR("AssetManager: Failed loading Material {}", (uint64_t)matfile->guid);

@@ -18,7 +18,6 @@ namespace Luxia {
 
 		out << YAML::Key << "Components" << YAML::BeginMap;
 
-
 		if (entity.transform) {
 			out << YAML::Key << "Transform";
 
@@ -100,7 +99,6 @@ namespace Luxia {
 
 		Luxia::Entity& entity = scene.CreateEntity(name, guid);
 
-
 		auto components = entityNode["Components"];
 		if (!components)
 			return entity;
@@ -109,52 +107,53 @@ namespace Luxia {
 			entity.transform->position = transNode["Position"].as<glm::vec3>();
 			entity.transform->euler_angles = transNode["EulerAngles"].as<glm::vec3>();
 			entity.transform->scale = transNode["Scale"].as<glm::vec3>();
-		}
 
-		if (auto camNode = components["Camera"]) {
-			int width = camNode["Width"].as<int>();
-			int height = camNode["Height"].as<int>();
+			if (auto camNode = components["Camera"]) {
+				int width = camNode["Width"].as<int>();
+				int height = camNode["Height"].as<int>();
 
-			auto& cam = entity.transform->AddComponent<Luxia::Components::Camera>(width, height);
-			cam.FOVdeg = camNode["FOV"].as<float>();
-			cam.farPlane = camNode["FarPlane"].as<float>();
-			cam.nearPlane = camNode["NearPlane"].as<float>();
-			cam.main = camNode["Main"].as<bool>();
-			cam.clearColor = camNode["ClearColor"].as<glm::vec4>();
-		}
-
-		if (auto meshRendNode = components["MeshRenderer"]) {
-			auto& meshRend = entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
-
-			uint64_t mesh_guid = 0;
-			uint64_t mat_guid = 0;
-
-			if(auto meshNode = meshRendNode["Mesh"])
-				mesh_guid = meshNode.as<uint64_t>();
-			if (auto matNode = meshRendNode["Material"])
-				mat_guid = matNode.as<uint64_t>();
-
-			// Mesh
-			if (mesh_guid == 0) 
-				meshRend.mesh = nullptr;
-			else {
-				if (assetManager->HasAsset<Luxia::Mesh>(mesh_guid)) 
-					meshRend.mesh = assetManager->GetAsset<Luxia::Mesh>(mesh_guid);
-				else 
-					LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mesh at GUID: {} - not found", (uint64_t)mesh_guid);
+				auto& cam = entity.transform->AddComponent<Luxia::Components::Camera>(width, height);
+				cam.FOVdeg = camNode["FOV"].as<float>();
+				cam.farPlane = camNode["FarPlane"].as<float>();
+				cam.nearPlane = camNode["NearPlane"].as<float>();
+				cam.main = camNode["Main"].as<bool>();
+				cam.clearColor = camNode["ClearColor"].as<glm::vec4>();
 			}
 
-			// Mat
-			if (mat_guid == 0) 
-				meshRend.material = nullptr;
-			else {
-				if (assetManager->HasAsset<Luxia::IMaterial>(mat_guid)) 
-					meshRend.material = assetManager->GetAsset<Luxia::IMaterial>(mat_guid);
-				else 
-					LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mat at GUID: {} - not found", (uint64_t)mat_guid);
-			}
+			if (auto meshRendNode = components["MeshRenderer"]) {
+				auto& meshRend = entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
 
+				uint64_t mesh_guid = 0;
+				uint64_t mat_guid = 0;
+
+				if(auto meshNode = meshRendNode["Mesh"])
+					mesh_guid = meshNode.as<uint64_t>();
+				if (auto matNode = meshRendNode["Material"])
+					mat_guid = matNode.as<uint64_t>();
+
+				// Mesh
+				if (mesh_guid == 0) 
+					meshRend.mesh = nullptr;
+				else {
+					if (assetManager->HasAsset<Luxia::Mesh>(mesh_guid)) 
+						meshRend.mesh = assetManager->GetAsset<Luxia::Mesh>(mesh_guid);
+					else 
+						LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mesh at GUID: {} - not found", (uint64_t)mesh_guid);
+				}
+
+				// Mat
+				if (mat_guid == 0) 
+					meshRend.material = nullptr;
+				else {
+					if (assetManager->HasAsset<Luxia::IMaterial>(mat_guid)) 
+						meshRend.material = assetManager->GetAsset<Luxia::IMaterial>(mat_guid);
+					else 
+						LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mat at GUID: {} - not found", (uint64_t)mat_guid);
+				}
+
+			}
 		}
+
 
 		return entity;
 	}

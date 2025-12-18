@@ -95,8 +95,10 @@ namespace Luxia::Platform::OpenGL {
 		hasPath = false;
 	}
 
-	void GL_Texture::LoadFromFile(const std::filesystem::path& m_path, const bool flip) {
+	void GL_Texture::LoadFromFile(const std::filesystem::path& m_path, const bool m_flip) {
 		// Load Texture
+		flip = m_flip;
+
 		stbi_set_flip_vertically_on_load(flip);
 
 		unsigned char* bytes = stbi_load(m_path.string().c_str(), &imgWidth, &imgHeight, &numColCh, 0);

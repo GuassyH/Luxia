@@ -25,13 +25,14 @@ namespace Luxia {
 
 		virtual void CreateFBOTex(const int width, const int height) = 0;
 		virtual void CreateEmpty(const int width, const int height, const int colCh) = 0; // For custom textures created through code, such as FBO tex
-		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool flip = false) = 0; // Loading textures
+		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool m_flip = false) = 0; // Loading textures
 		virtual bool Unload() override = 0;
 		virtual void Delete() = 0;
 		virtual void Use() = 0;
 
 		bool IsValid() const	{ return valid; }
 		bool HasPath() const	{ return hasPath; }
+		bool GetFlip() const	{ return flip; }
 		int GetWidth() const	{ return imgWidth; }
 		int GetHeight() const	{ return imgHeight; }
 		int GetNumColCh() const	{ return numColCh; }
@@ -48,5 +49,6 @@ namespace Luxia {
 		bool hasPath = false;
 		bool valid = false;
 		bool is_fbo_tex = false;
+		bool flip = false;
 	};
 }

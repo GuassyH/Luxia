@@ -15,6 +15,10 @@ namespace Luxia::Assets {
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::TextureType;
 
+			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
+			texture->LoadFromFile(texture_path);
+			assets.push_back(texture);
+
 			Save(m_assetPath);
 			return true;
 		}
@@ -26,14 +30,19 @@ namespace Luxia::Assets {
 			assetPath = m_assetPath;
 			loaded = false;
 
-			std::shared_ptr<Asset> texture = Platform::Assets::CreateTexture();
+			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
 				// Check if missing
+				texture->name = config["Name"].as<std::string>();
+				texture->guid = GUID(config["GUID"].as<uint64_t>());
+				texture->LoadFromFile(config["Path"].as<std::string>(), config["Properties"]["Flip"].as<bool>());
 				
-				
+				auto propConfig = config["Properties"];
+				// Set num colch etc
+
 				loaded = true;
 			}
 			catch (const YAML::Exception& ex) {
@@ -48,11 +57,26 @@ namespace Luxia::Assets {
 		virtual bool Save(const std::filesystem::path& m_assetPath) override {
 			assetPath = m_assetPath;
 
+			if (assets.empty()) return false;
+			std::shared_ptr<Luxia::ITexture> texture = std::dynamic_pointer_cast<Luxia::ITexture>(assets[0]);
+			if (!texture) return false;
+
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
 
+			out << YAML::Key << "Name" << YAML::Value << texture->name;
+			out << YAML::Key << "GUID" << YAML::Value << texture->guid;
+			out << YAML::Key << "Path" << YAML::Value << texture->path.string();
+			out << YAML::Key << "Properties" << YAML::BeginMap;
+
+			out << YAML::Key << "Flip" << YAML::Value << texture->GetFlip();
+			out << YAML::Key << "Width" << YAML::Value << texture->GetWidth();
+			out << YAML::Key << "Height" << YAML::Value << texture->GetHeight();
+			out << YAML::Key << "NumColCh" << YAML::Value << texture->GetNumColCh();
+
 			out << YAML::EndMap;
+
 
 			if (!out.good()) {
 				LX_CORE_ERROR("Emitter failed!");

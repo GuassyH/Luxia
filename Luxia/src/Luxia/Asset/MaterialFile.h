@@ -12,6 +12,9 @@ namespace Luxia::Assets {
 		~MaterialFile() = default;
 
 		GUID shaderGUID = GUID(0);
+		GUID diffuseGUID = GUID(0);
+		GUID specularGUID = GUID(0);
+		GUID normalsGUID = GUID(0);
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::MaterialType;
@@ -42,6 +45,9 @@ namespace Luxia::Assets {
 					mat->color = propConfig["Color"].as<glm::vec4>();
 					mat->metallic = propConfig["Metallic"].as<float>();
 					mat->roughness = propConfig["Roughness"].as<float>();
+					diffuseGUID = GUID(propConfig["Diffuse"].as<uint64_t>());
+					specularGUID = GUID(propConfig["Specular"].as<uint64_t>());
+					normalsGUID = GUID(propConfig["Normals"].as<uint64_t>());
 				}
 
 				loaded = true;
@@ -71,11 +77,13 @@ namespace Luxia::Assets {
 			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)mat->guid;
 			out << YAML::Key << "Properties" << YAML::BeginMap;
 
-			uint64_t shaderguid = mat->shader ? (uint64_t)mat->shader->guid : 0;
-			out << YAML::Key << "Shader" << YAML::Value << shaderguid;
+			out << YAML::Key << "Shader" << YAML::Value << (mat->shader ? (uint64_t)mat->shader->guid : 0);
 			out << YAML::Key << "Color" << YAML::Value << mat->color;
 			out << YAML::Key << "Metallic" << YAML::Value << mat->metallic;
 			out << YAML::Key << "Roughness" << YAML::Value << mat->roughness;
+			out << YAML::Key << "Diffuse" << YAML::Value << (mat->diffuse_texture ? (uint64_t)mat->diffuse_texture->guid : 0);
+			out << YAML::Key << "Specular" << YAML::Value << (mat->specular_texture ? (uint64_t)mat->specular_texture->guid : 0);
+			out << YAML::Key << "Normals" << YAML::Value << (mat->normal_texture ? (uint64_t)mat->normal_texture->guid : 0);
 
 			out << YAML::EndMap;
 			out << YAML::EndMap;

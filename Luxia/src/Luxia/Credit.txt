@@ -12,4 +12,7 @@ Thank you to all the open source contributors whose libraries and assets I have 
 
 If there is any content in this project that you believe requires credit and is not mentioned here, please reach out to me so I can update this file accordingly.
 
+Special Thanks to CarBrix, for adding the logo of Luxia to his game.
+-Check credits panel, if you click his button it takes you to his steam page
+
 - Gustav Haag

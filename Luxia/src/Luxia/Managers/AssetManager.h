@@ -113,6 +113,7 @@ namespace Luxia {
 		template <typename... Args>
 		GUID Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
 			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
+			// uses path/name.ext
 
 			if (!std::filesystem::exists(abs_path)) { LX_CORE_ERROR("AssetManager: Import - Cannot import non existent file"); return GUID(0); }
 
@@ -168,7 +169,6 @@ namespace Luxia {
 
 			// Create assetfile
 			std::shared_ptr<Assets::AssetFile> asset_file = MakeAssetFileFromType(type, std::forward<Args>(args)...);
-			LX_CORE_TRACE("Asset File path - {}", assetfile_path.string());
 			
 			if (!asset_file->Create(assetfile_path)) {
 				LX_CORE_ERROR("Asset Manager: NewAssetFile failed to create metafile for - {}", assetfile_path.string());
