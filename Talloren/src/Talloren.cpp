@@ -18,7 +18,7 @@ namespace Talloren::Layers {
 			std::shared_ptr<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(0);
 			
 			// asset_manager->CreateAssetFile<Luxia::AssetType::ModelType>("cute_ghost", "CuteGhost", "E:/BuiltLuxia/Sandbox/assets/cute_ghost/scene.gltf");
-			// asset_manager->CreateAssetFile<Luxia::AssetType::ShaderType>("shaders", "DefaultShader", "E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
+			// asset_manager->Import("cute_ghost/textures/M_Ground_baseColor.png", "GhostGroundBase", "E:/BuiltLuxia/Sandbox/assets/cute_ghost/textures/M_Ground_baseColor.png");
 		}
 		virtual void OnDetach() override {
 			LX_WARN("ExtraLayer Detached");

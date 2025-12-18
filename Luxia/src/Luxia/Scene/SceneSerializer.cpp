@@ -15,6 +15,7 @@ namespace Luxia {
 		out << YAML::BeginMap;
 		out << YAML::Key << "Entity" << YAML::Value << entity.name;
 		out << YAML::Key << "GUID" << YAML::Value << (uint64_t)entity.guid;
+		out << YAML::Key << "Parent" << YAML::Value << (entity.transform->HasParent() ? (uint64_t)entity.transform->parent->ent_guid : 0);
 
 		out << YAML::Key << "Components" << YAML::BeginMap;
 
@@ -173,6 +174,7 @@ namespace Luxia {
 			YAML::Node config = YAML::LoadFile(m_SceneFile->scene_path.string());
 			scene.name = config["Name"].as<std::string>();
 
+			// Initialize the entities
 			auto entities = config["Entities"];
 			if (!entities || !entities.IsSequence()) {
 				return false;
@@ -182,6 +184,18 @@ namespace Luxia {
 				DeserializeEntity(entityNode, scene, m_AssetManager.lock());
 			}
 		
+			// Set parents
+			for (auto entityNode : entities) {
+				Luxia::GUID entGUID = GUID(entityNode["GUID"].as<uint64_t>());
+				if (scene.runtime_entities.contains(entGUID)) {
+					Luxia::Entity& entity = scene.runtime_entities[entGUID];
+					Luxia::GUID parentGUID = GUID(entityNode["Parent"].as<uint64_t>());
+					if (scene.runtime_entities.contains(parentGUID)) {
+						Luxia::Entity& parentEntity = scene.runtime_entities[parentGUID];
+						entity.transform->SetParent(parentEntity.transform);
+					}
+				}
+			}
 		}
 		catch (const YAML::Exception& ex) {
 			std::cerr << "YAML error: " << ex.what() << "\n";

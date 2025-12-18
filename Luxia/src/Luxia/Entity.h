@@ -7,7 +7,7 @@
 namespace Luxia{
 	class LUXIA_API Entity {
 	public:
-		Luxia::GUID guid;
+		Luxia::GUID guid = Luxia::GUID(0);
 		std::string name;
 
 		Entity() : guid(GUID()), name("Entity") {}

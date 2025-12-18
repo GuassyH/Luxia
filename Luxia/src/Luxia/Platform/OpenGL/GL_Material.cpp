@@ -15,6 +15,7 @@ namespace Luxia::Platform::OpenGL {
 			shader->SetFloat("mat_roughness", roughness);
 			shader->SetFloat("mat_metallic", metallic);
 
+
 			shader->SetMat4("modelMat", modMat);
 			shader->SetMat4("viewMat", viewMat);
 			shader->SetMat4("projMat", projMat);

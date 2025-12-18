@@ -16,7 +16,7 @@ namespace Luxia::Components {
 		const char* name = "unnamed_component";
 		// data
 		Transform* transform;
-		Luxia::GUID ent_guid;
+		Luxia::GUID ent_guid = Luxia::GUID(0);
 
 		virtual void OnInspectorDraw() {}
 	};
