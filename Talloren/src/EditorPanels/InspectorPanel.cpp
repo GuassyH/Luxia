@@ -9,10 +9,9 @@ namespace Talloren::Panel {
 	char namebuff[255];
 	char meshbuff[255];
 	char matbuff[255];
-	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		ImGui::Begin("Inspector Panel");
-		if (!editorLayer->is_entity_selected) { ImGui::End(); return; }
-		if (!scene->runtime_entities.contains(editorLayer->selected_entity)) { ImGui::End(); return; }
+	void RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		if (!editorLayer->is_entity_selected) { return; }
+		if (!scene->runtime_entities.contains(editorLayer->selected_entity)) { return; }
 
 		Luxia::Entity& ent = scene->runtime_entities.find(editorLayer->selected_entity)->second;
 
@@ -83,7 +82,7 @@ namespace Talloren::Panel {
 
 					if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
 						meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
-					else 
+					else
 						LX_ERROR("Tried to assign asset that is not mesh or has invalid guid: {}", (uint64_t)meshguid);
 
 					memset(meshbuff, 0, sizeof(meshbuff));
@@ -126,7 +125,7 @@ namespace Talloren::Panel {
 
 		// should be menu
 		float x = ImGui::GetWindowPos().x + (ImGui::GetWindowSize().x / 3.0f);
-		float y = ImGui::GetWindowPos().y + 1.5*(ImGui::GetWindowSize().y / 2.0f);
+		float y = ImGui::GetWindowPos().y + 1.5 * (ImGui::GetWindowSize().y / 2.0f);
 		ImGui::SetNextWindowPos(ImVec2(x, y));
 		if (ImGui::BeginPopup("Add Component", ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImVec2 button_size = ImVec2(150, 20);
@@ -148,6 +147,16 @@ namespace Talloren::Panel {
 			}
 			ImGui::EndPopup();
 		}
+	}
+
+
+	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		ImGui::Begin("Inspector Panel");
+
+
+		// ENTITY STUFF
+		// if (editorLayer->SelectedIsTypeEntity)
+		RenderEntity(editorLayer, scene);
 
 		ImGui::End();
 	}

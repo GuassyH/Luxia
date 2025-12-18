@@ -34,6 +34,7 @@ namespace Luxia {
 		}
 
 		std::vector<std::shared_ptr<Luxia::Assets::SceneFile>> scene_files;
+		// std::vector<Luxia::GUID> scene_order; /* Not implemented */
 	private:
 		std::shared_ptr<AssetManager> asset_manager;
 		std::shared_ptr<Assets::SceneFile> active_scene;
