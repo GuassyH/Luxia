@@ -16,6 +16,7 @@ namespace Talloren::Layers {
 			LX_WARN("ExtraLayer Attached");
 
 			std::shared_ptr<Luxia::Scene> scene = project_manager->GetSceneManager()->SetActiveScene(0);
+		
 		}
 		virtual void OnDetach() override {
 			LX_WARN("ExtraLayer Detached");
