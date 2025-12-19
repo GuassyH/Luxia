@@ -88,7 +88,7 @@ namespace Talloren::Panel {
 			}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Create Empty")) {
-				auto& new_entity = CreateHierarchyEntity("", editorLayer, scene);
+				auto& new_entity = CreateHierarchyEntity("Entity", editorLayer, scene);
 				ImGui::CloseCurrentPopup();
 			}
 

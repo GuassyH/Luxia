@@ -4,6 +4,14 @@
 #include "Luxia/Components/ComponentRegistry.h"
 
 namespace Luxia {
+	bool name_exists(std::string name, std::unordered_map<GUID, Entity>& entities) {
+		return std::any_of(entities.begin(), entities.end(),
+			[&](const auto& pair) {
+				return pair.second.name == name;
+			});
+	}
+
+
 	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {
 		Entity ent = Entity();
 
@@ -21,6 +29,20 @@ namespace Luxia {
 
 		ent.transform = t;
 		ent.transform->ent_guid = ent.guid;
+
+		int tries = 0;
+		std::string new_name = name;
+		// Go through each variation of the name until a new one is found
+		while (name_exists(new_name, runtime_entities)) {
+			tries++;
+			new_name = name + " (" + std::to_string(tries) + ")";
+		}
+
+		if (tries > 0) {
+			name = new_name;
+		}
+
+
 		ent.name = name;
 
 		runtime_entities[ent.guid] = ent;
