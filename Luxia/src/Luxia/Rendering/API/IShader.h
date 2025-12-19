@@ -3,7 +3,6 @@
 #include "Luxia/Core/Core.h"
 
 #include "Luxia/Asset/Asset.h"
-#include <glm/common.hpp>
 #include <glm/glm.hpp>
 #include <fstream>
 

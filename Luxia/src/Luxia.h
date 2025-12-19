@@ -23,10 +23,7 @@
 #include "Luxia/Events/EventHandler.h"
 
 // Components
-#include "Luxia/Components/Camera.h"
-#include "Luxia/Components/MeshRenderer.h"
-#include "Luxia/Components/Transform.h"
-#include "Luxia/Components/Component.h"
+#include "Luxia/Components/ComponentRegistry.h"
 
 #include "Luxia/Entity.h"
 

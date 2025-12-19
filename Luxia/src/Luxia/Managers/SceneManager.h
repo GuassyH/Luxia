@@ -7,7 +7,6 @@
 
 #include <filesystem>
 #include <iostream>
-#include <unordered_set>
 #include <vector>
 
 #include "Luxia/Scene/Scene.h"

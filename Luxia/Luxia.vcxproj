@@ -178,6 +178,7 @@
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
+    <ClInclude Include="src\Luxia\Components\ComponentRegistry.h" />
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
     <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Core\Application.h" />
@@ -236,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp" />
+    <ClCompile Include="src\Luxia\Components\ComponentRegistry.cpp" />
     <ClCompile Include="src\Luxia\Core\Application.cpp" />
     <ClCompile Include="src\Luxia\Core\GUID.cpp" />
     <ClCompile Include="src\Luxia\Core\Log.cpp" />

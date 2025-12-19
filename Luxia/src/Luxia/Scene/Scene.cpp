@@ -35,6 +35,11 @@ namespace Luxia {
 			// Temporarily do this manually, should go through all components automatically
 			ent.transform->RemoveComponent<Luxia::Components::Camera>();
 			ent.transform->RemoveComponent<Luxia::Components::MeshRenderer>();
+
+			// Delete all children
+			for (auto child : ent.transform->children) {
+				DeleteEntity(child->ent_guid);
+			}
 			
 			runtime_entities.erase(EntityGUID);
 		}

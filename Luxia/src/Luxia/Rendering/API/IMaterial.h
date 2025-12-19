@@ -5,7 +5,8 @@
 #include "Luxia/Rendering/API/IShader.h"
 #include "Luxia/Asset/Asset.h"
 
-#include <glm/glm.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 

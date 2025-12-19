@@ -38,6 +38,22 @@ namespace Talloren::Panel {
 		// Render all the asset stuff. Not dependant on scene
 		// For now maybe just create an item with a description of if its a model, its path, and GUID
 
+		// Right Click stuff
+		if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2) && !ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered()) {
+			ImGui::OpenPopup("Asset View Popup");
+		}
+
+		// should be menu
+		if (ImGui::BeginPopupContextWindow("Asset Viewer")) {
+			if (ImGui::MenuItem("Import")) {
+				// Open Folder, if you choose something of supported type, import correctly
+				
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
+		}
+
 		ImGui::End();
 	}
 	void AssetView::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {

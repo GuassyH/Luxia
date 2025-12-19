@@ -43,8 +43,8 @@ namespace Talloren::Panel {
 		cam.height = ImGui::GetWindowHeight() - 20;  // Some sort of padding
 
 		if (ImGui::IsWindowHovered()) {
-			if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_2)) {
-				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_2)) {
+			if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_2)) {
+				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2)) {
 					cam_script.last_mouseX = Luxia::Input::GetMousePosition().x;
 					cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
 				}

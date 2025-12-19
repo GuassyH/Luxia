@@ -117,32 +117,33 @@ namespace Talloren::Panel {
 
 
 		// TEMP ADD COMPONENT
-		ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.0f) - 50);
-		ImGui::SetCursorPosY(ImGui::GetWindowSize().y - 50);
-		if (ImGui::Button("Add Component")) {
+		float avail = ImGui::GetContentRegionAvail().x;
+		float buttonWidth = 120.0f; // make it big enough
+		ImGui::SetCursorPosX((avail - buttonWidth) / 2.0f);
+		if (ImGui::Button("Add Component", ImVec2(buttonWidth, 0))) {
 			ImGui::OpenPopup("Add Component");
 		}
 
 		// should be menu
-		float x = ImGui::GetWindowPos().x + (ImGui::GetWindowSize().x / 3.0f);
-		float y = ImGui::GetWindowPos().y + 1.5 * (ImGui::GetWindowSize().y / 2.0f);
-		ImGui::SetNextWindowPos(ImVec2(x, y));
+		ImVec2 windowSize = ImGui::GetWindowSize();
+		ImVec2 contentSize = ImGui::CalcTextSize("Add Component");
+		float popupWidth = 200.0f;
+		float popupHeight = contentSize.y * Luxia::componentRegistry.size() + 50; // estimate
+
+		ImGui::SetNextWindowSize(ImVec2(popupWidth, popupHeight), ImGuiCond_Always);
+		ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowPos().x + (windowSize.x - popupWidth) / 2.0f,ImGui::GetWindowPos().y + (windowSize.y - popupHeight) / 2.0f));
 		if (ImGui::BeginPopup("Add Component", ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize)) {
-			ImVec2 button_size = ImVec2(150, 20);
+			ImGui::Text("Add Component");
+			ImGui::Separator();
 
-			// Temporarily do this manually, should go through all components automatically
-			if (!ent.transform->HasComponent<Luxia::Components::Camera>()) {
-				if (ImGui::Button("Camera Component", button_size)) {
-					ent.transform->AddComponent<Luxia::Components::Camera>(1920, 1080);
-					ImGui::CloseCurrentPopup();
-				}
-			}
-
-			// Temporarily do this manually, should go through all components automatically
-			if (!ent.transform->HasComponent<Luxia::Components::MeshRenderer>()) {
-				if (ImGui::Button("Mesh Renderer Component", button_size)) {
-					ent.transform->AddComponent<Luxia::Components::MeshRenderer>();
-					ImGui::CloseCurrentPopup();
+			for (auto& comp : Luxia::componentRegistry) {
+				if (ent.transform){
+					if (!comp.hasFunc(ent.transform)) {
+						if (ImGui::MenuItem(comp.name.c_str())) {
+							comp.addFunc(ent.transform);
+							ImGui::CloseCurrentPopup();
+						}
+					}
 				}
 			}
 			ImGui::EndPopup();

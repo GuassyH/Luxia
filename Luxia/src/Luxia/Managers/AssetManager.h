@@ -20,8 +20,6 @@
 #include <xutility>
 
 namespace Luxia {
-
-
 	class LUXIA_API AssetManager {
 	private:
 		static std::unordered_map<std::string, Luxia::AssetType> extensions;

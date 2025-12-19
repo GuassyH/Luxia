@@ -2,12 +2,9 @@
 
 #include "Luxia/Core/Core.h"
 #include "Luxia/Components/Transform.h"
-
 #include "Luxia/Platform/PlatformDefinitions.h"
 #include "Luxia/Entity.h"
-
 #include "Luxia/Asset/Asset.h"
-
 #include "Luxia/Core/GUID.h"
 
 #include "entt/entt.hpp"

@@ -233,6 +233,7 @@
     <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
     <ClInclude Include="src\Luxia\Entity.h" />
     <ClInclude Include="src\Luxia\CustomYAML.h" />
+    <ClInclude Include="src\Luxia\Components\ComponentRegistry.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">
@@ -312,5 +313,6 @@
     </ClCompile>
     <ClCompile Include="src\lxpch.cpp" />
     <ClCompile Include="src\Luxia\Scene\SceneSerializer.cpp" />
+    <ClCompile Include="src\Luxia\Components\ComponentRegistry.cpp" />
   </ItemGroup>
 </Project>

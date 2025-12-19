@@ -122,10 +122,10 @@
 	#define LX_KEY_RIGHT_ALT		GLFW_KEY_RIGHT_ALT		
 	#define LX_KEY_RIGHT_SUPER		GLFW_KEY_RIGHT_SUPER		
 	#define LX_KEY_MENU				GLFW_KEY_MENU				
-	#define LX_MOUSE_1 GLFW_MOUSE_BUTTON_1  /* left */
-	#define LX_MOUSE_2 GLFW_MOUSE_BUTTON_2  /* right */
-	#define LX_MOUSE_3 GLFW_MOUSE_BUTTON_3  /* middle */
-	#define LX_MOUSE_4 GLFW_MOUSE_BUTTON_4  /* back */
+	#define LX_MOUSE_BUTTON_1 GLFW_MOUSE_BUTTON_1  /* left */
+	#define LX_MOUSE_BUTTON_2 GLFW_MOUSE_BUTTON_2  /* right */
+	#define LX_MOUSE_BUTTON_3 GLFW_MOUSE_BUTTON_3  /* middle */
+	#define LX_MOUSE_BUTTON_4 GLFW_MOUSE_BUTTON_4  /* back */
 #else
 	/* Printable Keys */
 	#define LX_KEY_A constexpr 0
@@ -241,10 +241,10 @@
 
 	/* Mouse */
 	// (1 = left, 2 = right, 3 = middle, 4 = back, 5 = forward)
-	#define LX_MOUSE_1 constexpr 0 /* left */
-	#define LX_MOUSE_2 constexpr 1 /* right */
-	#define LX_MOUSE_3 constexpr 2 /* middle */
-	#define LX_MOUSE_4 constexpr 3 /* back */
-	#define LX_MOUSE_5 constexpr 4 /* left */
+	#define LX_MOUSE_BUTTON_1 constexpr 0 /* left */
+	#define LX_MOUSE_BUTTON_2 constexpr 1 /* right */
+	#define LX_MOUSE_BUTTON_3 constexpr 2 /* middle */
+	#define LX_MOUSE_BUTTON_4 constexpr 3 /* back */
+	#define LX_MOUSE_BUTTON_5 constexpr 4 /* left */
 
 #endif
