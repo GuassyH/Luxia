@@ -6,9 +6,9 @@ namespace Talloren::Panel {
 		LX_INFO("Editor - Inspector Panel: Init");
 	}
 
-	char namebuff[255];
-	char meshbuff[255];
-	char matbuff[255];
+	static char namebuff[255] = {};
+	static char meshbuff[255] = {};
+	static char matbuff[255] = {};
 	void RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		if (!editorLayer->is_entity_selected) { return; }
 		if (!scene->runtime_entities.contains(editorLayer->selected_entity)) { return; }
@@ -42,80 +42,67 @@ namespace Talloren::Panel {
 		// Draw transform component first
 		if (!ent.transform) { return; }
 
-		if (ImGui::CollapsingHeader(ent.transform->name, ImGuiTreeNodeFlags_DefaultOpen)) {
+		if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ent.transform->OnInspectorDraw();
 		}
 
-		// Draw Other Components
-		auto cam = ent.transform->TryGetComponent<Luxia::Components::Camera>();
-		if (cam) {
-			if (ImGui::CollapsingHeader(cam->name, ImGuiTreeNodeFlags_DefaultOpen)) {
-				cam->OnInspectorDraw();
+		// Loop through all components and render them
+		for (auto& comp : Luxia::componentRegistry) {
+			if (comp.hasFunc(ent.transform)) {
+				if (comp.name == "Mesh Renderer") {
+					// Needs to be here to use asset_manager
+					auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+					if (ImGui::CollapsingHeader("Mesh Renderer", ImGuiTreeNodeFlags_DefaultOpen)) {
+						meshrend->OnInspectorDraw();
+
+						// This needs to be here due to asset manager usage 
+
+						int flags = ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll |
+							ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal;
+
+						// MESH
+						std::ostringstream mesht;
+						mesht << "Mesh: " << (meshrend->mesh ? meshrend->mesh->name : "nullptr") << "##MeshInput";
+						std::string meshLabel = mesht.str();
+						std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "0";
+
+						if (ImGui::InputTextWithHint(meshLabel.c_str(), meshHint.c_str(), meshbuff, sizeof(meshbuff), flags)) {
+							Luxia::GUID meshguid(std::strtoull(meshbuff, nullptr, 10));
+
+							if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
+								meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
+							else
+								LX_ERROR("Tried to assign asset that is not mesh or has invalid guid: {}", (uint64_t)meshguid);
+
+							memset(meshbuff, 0, sizeof(meshbuff));
+						}
+
+						// MATERIAL
+						std::ostringstream matt;
+						matt << "Material: " << (meshrend->material ? meshrend->material->name : "nullptr") << "##MaterialInput";
+						std::string matLabel = matt.str(); 
+						std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "0";
+
+						if (ImGui::InputTextWithHint(matLabel.c_str(), matHint.c_str(), matbuff, sizeof(matbuff), flags)) {
+							Luxia::GUID matguid(std::strtoull(matbuff, nullptr, 10));
+							
+							if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(matguid))
+								meshrend->material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(matguid);
+							else
+								LX_ERROR("Tried to assign asset that is not material or has invalid guid: {}", (uint64_t)matguid);
+
+							memset(matbuff, 0, sizeof(matbuff));
+						}
+					}
+				}
+
+				// Draw Regular
+				else if (ImGui::CollapsingHeader(comp.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+					comp.getFunc(ent.transform)->OnInspectorDraw();
+				}
+				
 			}
 		}
-
-		// Needs to be here to use asset_manager
-		auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-		if (meshrend) {
-			if (ImGui::CollapsingHeader(meshrend->name, ImGuiTreeNodeFlags_DefaultOpen)) {
-				meshrend->OnInspectorDraw();
-
-				// This needs to be here due to asset manager usage 
-
-				int flags = ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll |
-					ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal;
-
-
-				// MESH
-				std::ostringstream mesht; mesht << "Mesh: ";
-				if (!meshrend->mesh)
-					mesht << "nullptr";
-				else {
-					mesht << meshrend->mesh->name;
-				}
-
-				ImGui::Text(mesht.str().c_str());
-
-				std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "0";
-				ImGui::SameLine();
-				if (ImGui::InputTextWithHint("##MeshInput", meshHint.c_str(), meshbuff, sizeof(meshbuff), flags)) {
-					Luxia::GUID meshguid(std::strtoull(meshbuff, nullptr, 10));
-
-					if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
-						meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
-					else
-						LX_ERROR("Tried to assign asset that is not mesh or has invalid guid: {}", (uint64_t)meshguid);
-
-					memset(meshbuff, 0, sizeof(meshbuff));
-				}
-
-
-				// MATERIAL
-				std::ostringstream matt; matt << "Material: ";
-				if (!meshrend->material)
-					matt << "nullptr";
-				else {
-					matt << meshrend->material->name;
-				}
-
-				ImGui::Text(matt.str().c_str());
-
-
-				std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "0";
-				ImGui::SameLine();
-				if (ImGui::InputTextWithHint("##MaterialInput", matHint.c_str(), matbuff, sizeof(matbuff), flags)) {
-					Luxia::GUID matguid(std::strtoull(matbuff, nullptr, 10));
-
-					if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(matguid))
-						meshrend->material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(matguid);
-					else
-						LX_ERROR("Tried to assign asset that is not material or has invalid guid: {}", (uint64_t)matguid);
-
-					memset(matbuff, 0, sizeof(matbuff));
-				}
-			}
-		}
-
 
 		// TEMP ADD COMPONENT
 		float avail = ImGui::GetContentRegionAvail().x;

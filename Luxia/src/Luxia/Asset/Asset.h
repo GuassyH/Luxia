@@ -8,11 +8,11 @@ namespace Luxia::Assets {
 	class LUXIA_API Asset {
 	public:
 		GUID guid = GUID(0);
-		std::string name;
-		Luxia::AssetType type;
+		std::string name = "no_name";
+		Luxia::AssetType type = Luxia::AssetType::NoType;
 
 		// Asset() = default;
-		Asset() : guid(GUID()), name("no_name"), type(Luxia::AssetType::NoType) {}
+		Asset() = default;
 		virtual ~Asset() = default;
 		virtual bool Unload() = 0;
 	};

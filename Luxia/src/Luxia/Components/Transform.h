@@ -116,7 +116,7 @@ namespace Luxia::Components {
 			return glm::degrees(rad);
 		}
 
-		Transform() { name = "Transform"; }
+		Transform() = default;
 
 		entt::registry* reg = nullptr;
 

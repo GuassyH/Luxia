@@ -10,6 +10,7 @@
 
 namespace Talloren::Panel {
 
+
 	static std::string OpenFileDialogue() {
 		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 		if (FAILED(hr)) return {};

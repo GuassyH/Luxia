@@ -14,6 +14,7 @@ namespace Luxia {
         std::function<bool(Components::Transform*)> hasFunc;
         std::function<void(Components::Transform*)> addFunc;
         std::function<void(Components::Transform*)> removeFunc;
+        std::function<Components::Component*(Components::Transform*)> getFunc;
     };
 
     extern LUXIA_API std::vector<ComponentInfo> componentRegistry;
@@ -24,12 +25,14 @@ namespace Luxia {
     ::Luxia::componentRegistry.push_back({ COMP_NAME, \
         [](Components::Transform* t){ return t->HasComponent<TYPE>(); }, \
         [](Components::Transform* t){ t->AddComponent<TYPE>(__VA_ARGS__); }, \
-        [](Components::Transform* t) { t->RemoveComponent<TYPE>(); } \
+        [](Components::Transform* t) { t->RemoveComponent<TYPE>(); }, \
+        [](Components::Transform* t) { return t->TryGetComponent<TYPE>(); } \
     });
 
 #define LX_CREATE_COMPONENT_INFO(TYPE, COMP_NAME, ...) \
     ::Luxia::ComponentInfo{ COMP_NAME, \
         [](Components::Transform* t){ return t->HasComponent<TYPE>(); }, \
         [](Components::Transform* t){ t->AddComponent<TYPE>(__VA_ARGS__); }, \
-        [](Components::Transform* t) { t->RemoveComponent<TYPE>(); } \
+        [](Components::Transform* t) { t->RemoveComponent<TYPE>(); }, \
+        [](Components::Transform* t) { return t->TryGetComponent<TYPE>(); } \
     }

@@ -70,7 +70,7 @@ namespace Luxia::Platform::OpenGL {
 		valid = true;
 
 		directory = path.parent_path();
-		name = scene->mName.C_Str();
+		name = std::string(scene->mName.C_Str(), scene->mName.length);;
 		processNode(scene->mRootNode, scene);
 		return meshes;
 	}
@@ -161,7 +161,7 @@ namespace Luxia::Platform::OpenGL {
 
 		std::shared_ptr<Mesh> newMesh = std::make_shared<Mesh>(vertices, indices);
 		newMesh->CalculateMesh();
-		newMesh->name = mesh->mName.C_Str();
+		newMesh->name = std::string(mesh->mName.C_Str(), mesh->mName.length);
 		newMesh->local_id = meshes.size();
 		// Create mesh entity and said parent to root_entity
 		return newMesh;
@@ -174,5 +174,4 @@ namespace Luxia::Platform::OpenGL {
 		}
 		return true;
 	}
-
 }

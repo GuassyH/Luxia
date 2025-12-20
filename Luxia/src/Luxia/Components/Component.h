@@ -13,7 +13,7 @@ namespace Luxia::Components {
 	struct Transform;
 
 	struct LUXIA_API Component {
-		const char* name = "unnamed_component";
+		// const char* name = "unnamed_component";
 		// data
 		Transform* transform;
 		Luxia::GUID ent_guid = Luxia::GUID(0);
