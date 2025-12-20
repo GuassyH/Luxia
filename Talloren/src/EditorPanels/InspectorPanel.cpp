@@ -6,6 +6,28 @@ namespace Talloren::Panel {
 		LX_INFO("Editor - Inspector Panel: Init");
 	}
 
+	static std::string PasteFromClipboard()
+	{
+		std::string result;
+
+		if (!OpenClipboard(nullptr))
+			return result;
+
+		HANDLE hData = GetClipboardData(CF_TEXT);
+		if (hData)
+		{
+			char* pszText = static_cast<char*>(GlobalLock(hData));
+			if (pszText)
+			{
+				result = pszText;
+				GlobalUnlock(hData);
+			}
+		}
+
+		CloseClipboard();
+		return result;
+	}
+
 	static char namebuff[255] = {};
 	static char meshbuff[255] = {};
 	static char matbuff[255] = {};
@@ -61,8 +83,16 @@ namespace Talloren::Panel {
 							ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal;
 
 						// MESH
-						std::ostringstream mesht;
-						mesht << "Mesh: ";
+						if (ImGui::Button("Paste##MeshGUIDPaste")) {
+							std::string paste = PasteFromClipboard();
+							Luxia::GUID meshguid(std::strtoull(paste.c_str(), nullptr, 10));
+							if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
+								meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
+							else
+								LX_ERROR("Tried to assign asset that is not mesh or has invalid guid: {}", (uint64_t)meshguid);
+						}
+
+						std::ostringstream mesht; mesht << "Mesh: ";
 						if (meshrend->mesh) 
 							mesht << meshrend->mesh->name;
 						else 
@@ -72,9 +102,9 @@ namespace Talloren::Panel {
 						std::string meshLabel = mesht.str();
 						std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "0";
 
+						ImGui::SameLine();
 						if (ImGui::InputTextWithHint(meshLabel.c_str(), meshHint.c_str(), meshbuff, sizeof(meshbuff), flags)) {
 							Luxia::GUID meshguid(std::strtoull(meshbuff, nullptr, 10));
-
 							if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
 								meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
 							else
@@ -84,8 +114,16 @@ namespace Talloren::Panel {
 						}
 
 						// MATERIAL
-						std::ostringstream matt;
-						matt << "Material: ";
+						if (ImGui::Button("Paste##MatGUIDPaste")) {
+							std::string paste = PasteFromClipboard();
+							Luxia::GUID matguid(std::strtoull(paste.c_str(), nullptr, 10));
+							if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(matguid))
+								meshrend->material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(matguid);
+							else
+								LX_ERROR("Tried to assign asset that is not material or has invalid guid: {}", (uint64_t)matguid);
+						}
+
+						std::ostringstream matt; matt << "Material: ";
 						if (meshrend->material) 
 							matt << meshrend->material->name;
 						else 
@@ -95,9 +133,10 @@ namespace Talloren::Panel {
 						std::string matLabel = matt.str(); 
 						std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "0";
 
+						ImGui::SameLine();
+
 						if (ImGui::InputTextWithHint(matLabel.c_str(), matHint.c_str(), matbuff, sizeof(matbuff), flags)) {
 							Luxia::GUID matguid(std::strtoull(matbuff, nullptr, 10));
-							
 							if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(matguid))
 								meshrend->material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(matguid);
 							else
