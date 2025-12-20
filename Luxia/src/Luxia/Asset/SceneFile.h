@@ -21,6 +21,7 @@ namespace Luxia::Assets {
 
 			std::shared_ptr<Asset> scene = std::make_shared<Scene>();
 			scene->name = m_assetPath.filename().replace_extension("").string();
+			scene->guid = GUID();
 
 			LX_CORE_INFO("Scene Files are not loaded regularly");
 

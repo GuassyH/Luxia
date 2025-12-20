@@ -79,6 +79,15 @@ namespace Talloren::Panel {
 		for (auto [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
 			// Display name
 			ImGui::Text(asset->name.c_str());
+			if (ImGui::IsItemHovered())
+			{
+				std::ostringstream astHint; astHint << asset->name << " GUID";
+				ImGui::BeginTooltip();
+				ImGui::Text(astHint.str().c_str());
+				ImGui::Separator();
+				ImGui::TextColored(ImVec4(1, 1, 0, 1), std::to_string(asset->guid).c_str());
+				ImGui::EndTooltip();
+			}
 			ImGui::SameLine();
 
 			// To easily copy GUID

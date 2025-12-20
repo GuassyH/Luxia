@@ -80,7 +80,7 @@ namespace Talloren::Panel {
 						// This needs to be here due to asset manager usage 
 
 						int flags = ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoHorizontalScroll | ImGuiInputTextFlags_AutoSelectAll |
-							ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal;
+							ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsDecimal | ImGuiInputTextFlags_ElideLeft;
 
 						// MESH
 						if (ImGui::Button("Paste##MeshGUIDPaste")) {
@@ -97,20 +97,18 @@ namespace Talloren::Panel {
 							mesht << meshrend->mesh->name;
 						else 
 							mesht << "nullptr";
-
-						mesht << "##MeshInput";
 						std::string meshLabel = mesht.str();
-						std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "0";
+						std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "none";
 
 						ImGui::SameLine();
-						if (ImGui::InputTextWithHint(meshLabel.c_str(), meshHint.c_str(), meshbuff, sizeof(meshbuff), flags)) {
-							Luxia::GUID meshguid(std::strtoull(meshbuff, nullptr, 10));
-							if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(meshguid))
-								meshrend->mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(meshguid);
-							else
-								LX_ERROR("Tried to assign asset that is not mesh or has invalid guid: {}", (uint64_t)meshguid);
-
-							memset(meshbuff, 0, sizeof(meshbuff));
+						ImGui::Text(meshLabel.c_str());
+						if (ImGui::IsItemHovered())
+						{
+							ImGui::BeginTooltip();
+							ImGui::Text("Mesh GUID");
+							ImGui::Separator();
+							ImGui::TextColored(ImVec4(1, 1, 0, 1), meshHint.c_str());
+							ImGui::EndTooltip();
 						}
 
 						// MATERIAL
@@ -129,20 +127,18 @@ namespace Talloren::Panel {
 						else 
 							matt << "nullptr";
 
-						matt << "##MaterialInput";
 						std::string matLabel = matt.str(); 
-						std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "0";
+						std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "none";
 
 						ImGui::SameLine();
-
-						if (ImGui::InputTextWithHint(matLabel.c_str(), matHint.c_str(), matbuff, sizeof(matbuff), flags)) {
-							Luxia::GUID matguid(std::strtoull(matbuff, nullptr, 10));
-							if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(matguid))
-								meshrend->material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(matguid);
-							else
-								LX_ERROR("Tried to assign asset that is not material or has invalid guid: {}", (uint64_t)matguid);
-
-							memset(matbuff, 0, sizeof(matbuff));
+						ImGui::Text(matLabel.c_str());
+						if (ImGui::IsItemHovered())
+						{
+							ImGui::BeginTooltip();
+							ImGui::Text("Material GUID");
+							ImGui::Separator();
+							ImGui::TextColored(ImVec4(1, 1, 0, 1), matHint.c_str());
+							ImGui::EndTooltip();
 						}
 					}
 				}
