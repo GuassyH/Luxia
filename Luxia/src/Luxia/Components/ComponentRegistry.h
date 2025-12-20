@@ -9,14 +9,14 @@
 #include "MeshRenderer.h"
 
 namespace Luxia {
-	struct ComponentInfo {
-		std::string name;
-		std::function<bool(Components::Transform*)> hasFunc;
+    struct LUXIA_API ComponentInfo {
+        std::string name;
+        std::function<bool(Components::Transform*)> hasFunc;
         std::function<void(Components::Transform*)> addFunc;
         std::function<void(Components::Transform*)> removeFunc;
-	};
+    };
 
-	extern std::vector<ComponentInfo> componentRegistry;
+    extern LUXIA_API std::vector<ComponentInfo> componentRegistry;
 
 };
 

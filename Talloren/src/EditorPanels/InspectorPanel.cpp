@@ -40,11 +40,12 @@ namespace Talloren::Panel {
 
 
 		// Draw transform component first
-		if (ent.transform) {
-			if (ImGui::CollapsingHeader(ent.transform->name, ImGuiTreeNodeFlags_DefaultOpen)) {
-				ent.transform->OnInspectorDraw();
-			}
+		if (!ent.transform) { return; }
+
+		if (ImGui::CollapsingHeader(ent.transform->name, ImGuiTreeNodeFlags_DefaultOpen)) {
+			ent.transform->OnInspectorDraw();
 		}
+
 		// Draw Other Components
 		auto cam = ent.transform->TryGetComponent<Luxia::Components::Camera>();
 		if (cam) {
@@ -136,8 +137,8 @@ namespace Talloren::Panel {
 			ImGui::Text("Add Component");
 			ImGui::Separator();
 
-			for (auto& comp : Luxia::componentRegistry) {
-				if (ent.transform){
+			if (ent.transform){
+				for (auto& comp : Luxia::componentRegistry) {
 					if (!comp.hasFunc(ent.transform)) {
 						if (ImGui::MenuItem(comp.name.c_str())) {
 							comp.addFunc(ent.transform);

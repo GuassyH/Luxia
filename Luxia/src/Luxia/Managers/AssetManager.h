@@ -33,6 +33,7 @@ namespace Luxia {
 
 		const std::unordered_map<GUID, std::shared_ptr<Assets::AssetFile>>& GetAssetFilePool() { return assetfile_pool; }
 		const std::unordered_map<GUID, std::shared_ptr<Assets::MetaFile>>& GetMetaFilePool() { return meta_pool; }
+		const std::filesystem::path& GetAssetDir() { return asset_dir; }
 
 
 		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
@@ -71,13 +72,17 @@ namespace Luxia {
 
 		// Creates an asset file of the given type at the given relative path with the given name
 		template <Luxia::AssetType type, typename... Args> // where_rel_path is where it should be created 
-		GUID CreateAssetFile(const std::filesystem::path& where_rel_path, const std::string ast_name, Args&&... args) 
+		GUID CreateAssetFile(const std::filesystem::path& where_path, const bool relative, const std::string ast_name, Args&&... args) 
 		{
 			if (type == AssetType::NoType) { LX_CORE_ERROR("Asset Manager: CreateAssetFile - NoType given"); return GUID(0); }
 			std::string suf = asset_extensions.find(type)->second;
 
 			// Get the absolute path
-			std::filesystem::path abs_path = asset_dir / where_rel_path.lexically_normal() / ast_name;
+			std::filesystem::path abs_path;
+			if (relative)
+				abs_path = asset_dir / where_path.lexically_normal();
+			else
+				abs_path = where_path.lexically_normal();
 
 			LX_CORE_TRACE("Asset Manager: CreateAssetFile - Creating asset at path {}", abs_path.string());
 
@@ -109,9 +114,12 @@ namespace Luxia {
 		
 		// Import, used for models (.gltf etc) and textures (.png, .jpg etc)
 		template <typename... Args>
-		GUID Import(const std::filesystem::path& rel_path, const std::string ast_name, Args&&... args) {
-			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
-			// uses path/name.ext
+		GUID Import(const std::filesystem::path& where_path, const bool relative, const std::string ast_name, Args&&... args) {
+			std::filesystem::path abs_path;
+			if(relative)
+				abs_path = asset_dir / where_path.lexically_normal();
+			else
+				abs_path = where_path.lexically_normal();
 
 			if (!std::filesystem::exists(abs_path)) { LX_CORE_ERROR("AssetManager: Import - Cannot import non existent file"); return GUID(0); }
 
@@ -129,20 +137,31 @@ namespace Luxia {
 				}
 			}
 			if (type == AssetType::NoType || typesuf == "") {
-				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {} (unknown extension)", rel_path.string());
+				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {} (unknown extension)", where_path.string());
 				return GUID(0);
 			}
 
 			assetfile_path.replace_extension(typesuf);
 			metafile_path += ".meta";
 
+			std::shared_ptr<Assets::AssetFile> asset_file = nullptr;
+
+			switch (type) {
+			case AssetType::ModelType:
+				asset_file = NewAssetFile(assetfile_path, type, abs_path);
+				break;
+			default:
+				asset_file = NewAssetFile(assetfile_path, type, std::forward<Args>(args)...);
+				break;
+			}
+
 			// Create both files
-			std::shared_ptr<Assets::AssetFile> asset_file = NewAssetFile(assetfile_path, type, std::forward<Args>(args)...);
+			// std::shared_ptr<Assets::AssetFile> asset_file = NewAssetFile(assetfile_path, type, std::forward<Args>(args)...);
 			std::shared_ptr<Assets::MetaFile> meta_file = NewMetaFile(metafile_path, assetfile_path, ast_name, type);
 
 			// Check both created
 			if(!asset_file || !meta_file) {
-				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {}", rel_path.string());
+				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {}", where_path.string());
 				return GUID(0);
 			}
 
@@ -152,6 +171,8 @@ namespace Luxia {
 			// Assign both files pools
 			assetfile_pool[meta_file->guid] = asset_file;
 			meta_pool[meta_file->guid] = meta_file;
+
+			LX_CORE_INFO("AssetManager: Loaded {}", abs_path.string());
 
 			// Return guid
 			return meta_file->guid;

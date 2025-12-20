@@ -4,7 +4,7 @@
 #include "Luxia/Components/ComponentRegistry.h"
 
 namespace Luxia {
-	bool name_exists(std::string name, std::unordered_map<GUID, Entity>& entities) {
+	static bool name_exists(std::string name, std::unordered_map<GUID, Entity>& entities) {
 		return std::any_of(entities.begin(), entities.end(),
 			[&](const auto& pair) {
 				return pair.second.name == name;
@@ -71,6 +71,8 @@ namespace Luxia {
 					}
 				}
 			}
+
+			reg.remove<Luxia::Components::Transform>(ent.transform->ent_id);
 
 			runtime_entities.erase(EntityGUID);
 		}
