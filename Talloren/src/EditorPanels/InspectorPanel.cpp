@@ -62,7 +62,13 @@ namespace Talloren::Panel {
 
 						// MESH
 						std::ostringstream mesht;
-						mesht << "Mesh: " << (meshrend->mesh ? meshrend->mesh->name : "nullptr") << "##MeshInput";
+						mesht << "Mesh: ";
+						if (meshrend->mesh) 
+							mesht << meshrend->mesh->name;
+						else 
+							mesht << "nullptr";
+
+						mesht << "##MeshInput";
 						std::string meshLabel = mesht.str();
 						std::string meshHint = meshrend->mesh ? std::to_string(meshrend->mesh->guid) : "0";
 
@@ -79,7 +85,13 @@ namespace Talloren::Panel {
 
 						// MATERIAL
 						std::ostringstream matt;
-						matt << "Material: " << (meshrend->material ? meshrend->material->name : "nullptr") << "##MaterialInput";
+						matt << "Material: ";
+						if (meshrend->material) 
+							matt << meshrend->material->name;
+						else 
+							matt << "nullptr";
+
+						matt << "##MaterialInput";
 						std::string matLabel = matt.str(); 
 						std::string matHint = meshrend->material ? std::to_string(meshrend->material->guid) : "0";
 
