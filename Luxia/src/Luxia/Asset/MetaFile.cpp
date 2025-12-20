@@ -7,8 +7,8 @@ namespace Luxia::Assets {
 		type = m_type;
 		assetPath = m_assetPath.lexically_normal();
 		metaPath = m_metaPath.lexically_normal();
-		name = m_name;
 
+		guid = Luxia::GUID();
 		// Save 
 		Save();
 		loaded = true;
@@ -25,16 +25,15 @@ namespace Luxia::Assets {
 		try {
 			YAML::Node config = YAML::LoadFile(metaPath.string());
 
-			if (!config["type"] || !config["guid"] || !config["assetPath"] || !config["metaPath"] || !config["name"]) {
+			if (!config["Type"] || !config["GUID"] || !config["AssetPath"] || !config["MetaPath"]) {
 				std::cerr << "YAML missing required fields in: " << metaPath << "\n";
 				return false;
 			}
 
-			type = static_cast<Luxia::AssetType>(config["type"].as<int>());
-			guid = Luxia::GUID(config["guid"].as<uint64_t>());
-			assetPath = std::filesystem::path(config["assetPath"].as<std::string>());
-			metaPath = std::filesystem::path(config["metaPath"].as<std::string>());
-			name = config["name"].as<std::string>();
+			type = static_cast<Luxia::AssetType>(config["Type"].as<int>());
+			guid = Luxia::GUID(config["GUID"].as<uint64_t>());
+			assetPath = std::filesystem::path(config["AssetPath"].as<std::string>());
+			metaPath = std::filesystem::path(config["MetaPath"].as<std::string>());
 		
 			loaded = true;
 		}
@@ -51,16 +50,10 @@ namespace Luxia::Assets {
 		YAML::Emitter out;
 
 		out << YAML::BeginMap;
-		out << YAML::Key << "type";
-		out << YAML::Value << (int)type;
-		out << YAML::Key << "guid";
-		out << YAML::Value << (uint64_t)guid;
-		out << YAML::Key << "assetPath";
-		out << YAML::Value << assetPath.string();
-		out << YAML::Key << "metaPath";
-		out << YAML::Value << metaPath.string();
-		out << YAML::Key << "name";
-		out << YAML::Value << name;
+		out << YAML::Key << "Type" << YAML::Value << (int)type;
+		out << YAML::Key << "GUID" << YAML::Value << (uint64_t)guid;
+		out << YAML::Key << "AssetPath" << YAML::Value << assetPath.string();
+		out << YAML::Key << "MetaPath" << YAML::Value << metaPath.string();
 		out << YAML::EndMap;
 
 		if (!out.good()) {

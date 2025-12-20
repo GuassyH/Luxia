@@ -72,12 +72,12 @@ namespace Talloren::Panel {
 	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Asset View");
 
+		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
+
 		// TEMPORARY
 		for (auto [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
 			// Display name
-			std::ostringstream data; 
-			data << asset->name << " - GUID: " << asset->guid;
-			ImGui::Text(data.str().c_str());
+			ImGui::Text(asset->name.c_str());
 			ImGui::SameLine();
 
 			// To easily copy GUID
@@ -96,16 +96,9 @@ namespace Talloren::Panel {
 			}
 			ImGui::Separator();
 		}
-		// Render all the asset stuff. Not dependant on scene
-		// For now maybe just create an item with a description of if its a model, its path, and GUID
-
-		// Right Click stuff
-		if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2) && !ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered()) {
-			ImGui::OpenPopup("Asset View Popup");
-		}
 
 		// should be menu
-		if (ImGui::BeginPopupContextWindow("Asset Viewer")) {
+		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
 			if (ImGui::MenuItem("Import")) {
 				// Open Folder, if you choose something of supported type, import correctly
 				// ShellExecuteA(NULL, "open", editorLayer->GetAssetManager()->GetAssetDir().string().c_str(), NULL, NULL, SW_SHOWNORMAL);
@@ -113,11 +106,24 @@ namespace Talloren::Panel {
 				std::filesystem::path filepath = fp;
 				if (!filepath.empty() && std::filesystem::exists(filepath)) {
 					LX_INFO("Selected Path: {}", filepath.string());
-					editorLayer->GetAssetManager()->Import(filepath, false, filepath.filename().string());
+					asset_manager->Import(filepath, false, filepath.filename().string());
 				}
 				ImGui::CloseCurrentPopup();
 			}
+			if (ImGui::BeginMenu("Create")) {
+				// Should be created in the folder you are in
+				if (ImGui::MenuItem("Material")) {
+					asset_manager->CreateAssetFile<Luxia::AssetType::MaterialType>("materials", true, "NewMaterial");					
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Scene")) {
+					// its very weird, need to look into scene management
+					// asset_manager->CreateAssetFile<Luxia::AssetType::SceneType>("scenes", true, "NewScene");
+					ImGui::CloseCurrentPopup();
+				}
 
+				ImGui::EndMenu();
+			}
 			ImGui::EndPopup();
 		}
 

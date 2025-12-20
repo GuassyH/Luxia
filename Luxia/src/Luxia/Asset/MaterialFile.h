@@ -20,6 +20,7 @@ namespace Luxia::Assets {
 			type = Luxia::AssetType::MaterialType;
 
 			std::shared_ptr<Luxia::IMaterial> mat = Platform::Assets::CreateMaterial();
+			mat->name = m_assetPath.filename().replace_extension("").string();
 			assets.push_back(mat);
 
 			Save(m_assetPath);

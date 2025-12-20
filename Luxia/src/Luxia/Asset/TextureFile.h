@@ -16,6 +16,7 @@ namespace Luxia::Assets {
 			type = Luxia::AssetType::TextureType;
 
 			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
+			texture->name = m_assetPath.filename().replace_extension("").string();
 			texture->LoadFromFile(texture_path);
 			assets.push_back(texture);
 

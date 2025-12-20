@@ -80,9 +80,9 @@ namespace Luxia {
 			// Get the absolute path
 			std::filesystem::path abs_path;
 			if (relative)
-				abs_path = asset_dir / where_path.lexically_normal();
+				abs_path = asset_dir / where_path.lexically_normal() / ast_name;
 			else
-				abs_path = where_path.lexically_normal();
+				abs_path = where_path.lexically_normal() / ast_name;
 
 			LX_CORE_TRACE("Asset Manager: CreateAssetFile - Creating asset at path {}", abs_path.string());
 
@@ -148,6 +148,9 @@ namespace Luxia {
 
 			switch (type) {
 			case AssetType::ModelType:
+				asset_file = NewAssetFile(assetfile_path, type, abs_path);
+				break;
+			case AssetType::TextureType:
 				asset_file = NewAssetFile(assetfile_path, type, abs_path);
 				break;
 			default:
