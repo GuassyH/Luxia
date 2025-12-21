@@ -7,39 +7,29 @@ namespace Talloren::Panel {
 	}
 
 	std::vector<Luxia::GUID> entitiesToDelete;
-	void HierarchyPanel::DrawEntitySelectable(Luxia::Entity& entity, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, int level) {
+	void HierarchyPanel::DrawEntitySelectable(Luxia::Entity& entity, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		std::ostringstream enttext; enttext << entity.name << "##" << std::to_string(entity.guid);
+		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanFullWidth;
 
-		int m_level = level;
-		std::ostringstream enttext; enttext << "> " << entity.name << "##" << std::to_string(entity.guid);
+		if (editorLayer->selected_entity == entity.guid && editorLayer->is_entity_selected) flags |= ImGuiTreeNodeFlags_Selected;
 
-		// CAN be collapsing header
-		ImGui::SetCursorPosX(15 * level);
-		ImGui::Selectable(enttext.str().c_str(), editorLayer->selected_entity == entity.guid && editorLayer->is_entity_selected);
+		bool open = ImGui::TreeNodeEx(enttext.str().c_str(), flags);
 
-		if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
-		{
-			editorLayer->selected_entity = entity.guid;
-			editorLayer->is_entity_selected = true;
-		}
-		if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
-		{
+		if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
 			editorLayer->selected_entity = entity.guid;
 			editorLayer->is_entity_selected = true;
 		}
 
-
-		ImGui::SetCursorPosX(15 * level);
-		ImGui::Separator();
-		
-		m_level++;
-		for (auto child : entity.transform->children) {
-			if (!child) continue;
-			auto it = scene->runtime_entities.find(child->ent_guid);
-			if (it != scene->runtime_entities.end()) {
-				DrawEntitySelectable(it->second, editorLayer, scene, m_level);
+		if (open) {
+			for (auto child : entity.transform->children) {
+				if (!child) continue;
+				auto it = scene->runtime_entities.find(child->ent_guid);
+				if (it != scene->runtime_entities.end()) {
+					DrawEntitySelectable(it->second, editorLayer, scene);
+				}
 			}
+			ImGui::TreePop();
 		}
-
 	}
 
 	static Luxia::Entity& CreateHierarchyEntity(std::string name, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
@@ -70,7 +60,7 @@ namespace Talloren::Panel {
 		for (auto& [guid, entity] : scene->runtime_entities) {
 			if (entity.transform) {
 				if (!entity.transform->HasParent()) {
-					DrawEntitySelectable(entity, editorLayer, scene, 0);
+					DrawEntitySelectable(entity, editorLayer, scene);
 				}
 			}
 		}
