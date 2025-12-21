@@ -118,6 +118,27 @@ namespace Talloren::Panel {
 		}
 	}
 
+	// Same Setup as hierarchy inspector
+	static void DrawPathSelectable(const std::filesystem::directory_entry& entry, std::filesystem::path& sel_fol) {
+		if (!entry.is_directory()) return;
+		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanFullWidth;
+
+		if (sel_fol == entry.path()) flags |= ImGuiTreeNodeFlags_Selected;
+
+		bool open = ImGui::TreeNodeEx(entry.path().stem().string().c_str(), flags);
+
+		if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
+			sel_fol = entry.path();
+		}
+
+		if (open) {
+			for (const auto& subentry : std::filesystem::directory_iterator(entry.path())) {
+				DrawPathSelectable(subentry, sel_fol);
+			}
+			ImGui::TreePop();
+		}
+	}
+
 	std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> AssetView::DrawFolderHierarchy(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		// Popup
 		if (ImGui::BeginPopupContextWindow("Asset Hierarchy Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
@@ -129,12 +150,8 @@ namespace Talloren::Panel {
 		}
 		
 		// Loop through each sub-directory in the projects asset directory
-		for (auto& entry : std::filesystem::recursive_directory_iterator(editorLayer->GetAssetManager()->GetAssetDir())) {
-			if (!entry.path().has_extension()) {
-				if (ImGui::Selectable(entry.path().string().c_str(), selected_folder == entry.path())) {
-					selected_folder = entry.path();
-				}
-			}
+		for (auto& entry : std::filesystem::directory_iterator(editorLayer->GetAssetManager()->GetAssetDir())) {
+			DrawPathSelectable(entry, selected_folder);
 		}
 
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw;
