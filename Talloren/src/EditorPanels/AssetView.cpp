@@ -5,7 +5,6 @@
 
 // THIS IS ONLY FOR WINDOWS 
 #include <Windows.h>
-#include <shellapi.h>
 #include <shobjidl.h>
 
 namespace Talloren::Panel {
@@ -49,34 +48,16 @@ namespace Talloren::Panel {
 
 		if (filePath.empty()) return {};
 
-		int sizeNeeded = WideCharToMultiByte(
-			CP_UTF8, 0,
-			filePath.c_str(), (int)filePath.size(),
-			nullptr, 0, nullptr, nullptr
-		);
-
+		int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), (int)filePath.size(), nullptr, 0, nullptr, nullptr);
 		std::string result(sizeNeeded, 0);
-		WideCharToMultiByte(
-			CP_UTF8, 0,
-			filePath.c_str(), (int)filePath.size(),
-			result.data(), sizeNeeded,
-			nullptr, nullptr
-		);
+		WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), (int)filePath.size(), result.data(), sizeNeeded, nullptr, nullptr);
 
 		return result;
 	}
 
-	void AssetView::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		LX_INFO("Editor - AssetView Panel: Init");
-	}
-
-	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		ImGui::Begin("Asset View");
-
-		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
-
-		// TEMPORARY
-		for (auto [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
+	static void DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw) {
+		// For each asset in the assets_to_draw map, draw it (will be more polished later)
+		for (auto [guid, asset] : assets_to_draw) {
 			// Display name
 			ImGui::Text(asset->name.c_str());
 			if (ImGui::IsItemHovered())
@@ -106,24 +87,23 @@ namespace Talloren::Panel {
 			}
 			ImGui::Separator();
 		}
-
-		// should be menu
+		
+		// Popup
 		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
 			if (ImGui::MenuItem("Import")) {
 				// Open Folder, if you choose something of supported type, import correctly
-				// ShellExecuteA(NULL, "open", editorLayer->GetAssetManager()->GetAssetDir().string().c_str(), NULL, NULL, SW_SHOWNORMAL);
 				std::string fp = OpenFileDialogue();
 				std::filesystem::path filepath = fp;
 				if (!filepath.empty() && std::filesystem::exists(filepath)) {
 					LX_INFO("Selected Path: {}", filepath.string());
-					asset_manager->Import(filepath, false, filepath.filename().string());
+					editorLayer->GetAssetManager()->Import(filepath, false, filepath.filename().string());
 				}
 				ImGui::CloseCurrentPopup();
 			}
 			if (ImGui::BeginMenu("Create")) {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("Material")) {
-					asset_manager->CreateAssetFile<Luxia::AssetType::MaterialType>("materials", true, "NewMaterial");					
+					editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>("materials", true, "NewMaterial");
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Scene")) {
@@ -136,10 +116,127 @@ namespace Talloren::Panel {
 			}
 			ImGui::EndPopup();
 		}
+	}
+
+	std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> AssetView::DrawFolderHierarchy(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		// Popup
+		if (ImGui::BeginPopupContextWindow("Asset Hierarchy Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
+			if (ImGui::MenuItem("Refresh All")) {
+				RefreshAPFs(editorLayer);
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
+		}
+		
+		// Loop through each sub-directory in the projects asset directory
+		for (auto& entry : std::filesystem::recursive_directory_iterator(editorLayer->GetAssetManager()->GetAssetDir())) {
+			if (!entry.path().has_extension()) {
+				if (ImGui::Selectable(entry.path().string().c_str(), selected_folder == entry.path())) {
+					selected_folder = entry.path();
+				}
+			}
+		}
+
+		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw;
+
+		// If its a valid folder, go through each asset, and see if its guid in the a_p_f path is the selected folder
+		if (std::filesystem::exists(selected_folder)) {
+			for (auto& [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
+				if (asset) {
+					if (!assets_to_draw.contains(guid) && asset_parent_folders.find(guid)->second == selected_folder) {
+						assets_to_draw[guid] = asset;
+					}
+				}
+			}
+		}
+
+		return assets_to_draw;
+	}
+
+	// Goes through each assetfile, checks its assets, sets asset parent folder
+	void AssetView::RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer) {
+		// Holy nested for if statement
+		asset_parent_folders.clear();
+
+		for (auto& [guid, assetfile] : editorLayer->GetAssetManager()->GetAssetFilePool()) {
+			if (assetfile) {
+				for (auto& asset : assetfile->assets) {
+					if (asset) {
+						asset_parent_folders[asset->guid] = assetfile->assetPath.parent_path();
+					}
+				}
+			}
+		}
+
+		LX_INFO("AssetView: Refreshed Asset Parent Folders");
+	}
+
+
+	// CORE
+	void AssetView::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		LX_INFO("Editor - AssetView Panel: Init");
+		RefreshAPFs(editorLayer);
+	}
+
+	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		bool const shouldDrawWindowContents = ImGui::Begin("Asset View");
+
+		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
+
+
+		// RENDERING EXPLORER
+#pragma region Dockspace
+		ImGuiID const dockspaceID = ImGui::GetID("AssetView_Dockspace");
+		ImGuiWindowClass workspaceWindowClass;
+		workspaceWindowClass.ClassId = dockspaceID;
+		workspaceWindowClass.DockingAllowUnclassed = false;
+
+		if (!ImGui::DockBuilderGetNode(dockspaceID)) {
+			ImGui::DockBuilderAddNode(dockspaceID, ImGuiDockNodeFlags_DockSpace | ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton);
+			ImGui::DockBuilderSetNodeSize(dockspaceID, ImGui::GetContentRegionAvail());
+
+			ImGuiID leftDockID = 0, rightDockID = 0;
+			ImGui::DockBuilderSplitNode(dockspaceID, ImGuiDir_Left, 0.5f, &leftDockID, &rightDockID);
+
+			ImGuiDockNode* pLeftNode = ImGui::DockBuilderGetNode(leftDockID);
+			ImGuiDockNode* pRightNode = ImGui::DockBuilderGetNode(rightDockID);
+			pLeftNode->LocalFlags |= ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDockingSplit | ImGuiDockNodeFlags_NoDockingOverMe;
+			pRightNode->LocalFlags |= ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDockingSplit | ImGuiDockNodeFlags_NoDockingOverMe;
+			// Dock windows
+			ImGui::DockBuilderDockWindow("LeftWindow", leftDockID);
+			ImGui::DockBuilderDockWindow("RightWindow", rightDockID);
+
+			ImGui::DockBuilderFinish(dockspaceID);
+		}
+
+		ImGuiDockNodeFlags const dockFlags = shouldDrawWindowContents ? ImGuiDockNodeFlags_None : ImGuiDockNodeFlags_KeepAliveOnly;
+		ImGui::DockSpace(dockspaceID, ImGui::GetContentRegionAvail(), dockFlags, &workspaceWindowClass);
+#pragma endregion
+
+		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw = {};
+
+		if (ImGui::Begin("LeftWindow")) {
+			ImGui::Text("Asset Hierarchy"); ImGui::Separator();
+			assets_to_draw = DrawFolderHierarchy(editorLayer, scene);
+			ImGui::End();
+		}
+
+		if (ImGui::Begin("RightWindow")) {
+			ImGui::Text("Asset View"); ImGui::Separator();
+			DrawAssetFiles(editorLayer, scene, assets_to_draw);
+			ImGui::End();
+		}
+
+		// END OF EXPLORER
+
+		// should be menu
+
 
 		ImGui::End();
 	}
+	
 	void AssetView::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	
 	}
 
 

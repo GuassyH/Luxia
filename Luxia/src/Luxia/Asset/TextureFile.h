@@ -7,7 +7,7 @@ namespace Luxia::Assets {
 	public:
 		TextureFile() = default;
 		TextureFile(const std::filesystem::path m_texturePath)
-			: texture_path(m_texturePath) {
+			: texture_path(m_texturePath.lexically_normal()) {
 		}
 		TextureFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~TextureFile() = default;
@@ -28,7 +28,7 @@ namespace Luxia::Assets {
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::TextureType;
 
-			assetPath = m_assetPath;
+			assetPath = m_assetPath.lexically_normal();
 			loaded = false;
 
 			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();

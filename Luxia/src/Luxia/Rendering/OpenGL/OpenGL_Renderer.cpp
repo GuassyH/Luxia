@@ -19,7 +19,7 @@ namespace Luxia::Rendering::OpenGL {
 		null_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/null.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/null.vert");
 		null_mat = Platform::Assets::CreateMaterial(null_shader);
 	
-		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default.vert");
+		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default_lit.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default_lit.vert");
 		default_mat = Platform::Assets::CreateMaterial(default_shader);
 	}
 

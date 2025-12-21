@@ -8,7 +8,7 @@ namespace Luxia::Assets {
 	public:
 		ModelFile() = default;
 		ModelFile(const std::filesystem::path m_modelPath)
-			: modelPath(m_modelPath) {}
+			: modelPath(m_modelPath.lexically_normal()) {}
 		ModelFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~ModelFile() = default;
 
@@ -60,7 +60,7 @@ namespace Luxia::Assets {
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::ModelType;
 
-			assetPath = m_assetPath;
+			assetPath = m_assetPath.lexically_normal();
 			loaded = false;
 
 			base_model = Platform::Assets::CreateModel();
