@@ -17,7 +17,7 @@ namespace Talloren::Panels {
 		bool open = ImGui::TreeNodeEx(enttext.str().c_str(), flags);
 		ImGui::PopID();
 
-		if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
+		if ((ImGui::IsItemClicked(ImGuiMouseButton_Left) || ImGui::IsItemClicked(ImGuiMouseButton_Right)) && !ImGui::IsItemToggledOpen()) {
 			editorLayer->selected_entity = entity.guid;
 			editorLayer->is_entity_selected = true;
 		}

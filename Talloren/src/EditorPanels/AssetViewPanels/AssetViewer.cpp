@@ -5,6 +5,7 @@
 // THIS IS ONLY FOR WINDOWS 
 #include <Windows.h>
 #include <shobjidl.h>
+#include <shellapi.h>
 
 namespace Talloren::Panels {
 
@@ -80,12 +81,21 @@ namespace Talloren::Panels {
 		// Make the selectable span the entire group
 		bool is_selected = asset_view->selected_assets.contains(asset->guid);
 		ImGui::SetCursorPosY(ImGui::GetCursorPosY() - groupSize.y);
-		if (ImGui::Selectable("##AssetSelectable", is_selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize))
-		{
+		if (ImGui::Selectable("##AssetSelectable", is_selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize)) {
 			if (ImGui::GetIO().KeyCtrl) {
 				if (is_selected)
 					asset_view->selected_assets.erase(asset->guid);
 				else
+					asset_view->selected_assets.insert(asset->guid);
+			}
+			else {
+				asset_view->selected_assets.clear();
+				asset_view->selected_assets.insert(asset->guid);
+			}
+		}
+		if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+			if (ImGui::GetIO().KeyCtrl) {
+				if (!is_selected)
 					asset_view->selected_assets.insert(asset->guid);
 			}
 			else {
@@ -137,15 +147,28 @@ namespace Talloren::Panels {
 			}
 		}
 
+		bool areNoneSelected = (asset_view->selected_assets.empty());
+		bool isOneSelected = (asset_view->selected_assets.size() == 1);
+		bool areMultipleSelected = (asset_view->selected_assets.size() > 1);
+
 		// Popup
 		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight)) {
-			if (ImGui::MenuItem("Copy", nullptr, nullptr, asset_view->selected_assets.size() == 1)) {
+			if (ImGui::MenuItem("Copy", nullptr, nullptr, isOneSelected)) {
 				for (auto& guid : asset_view->selected_assets) {
 					CopyToClipboard(std::to_string((uint64_t)guid));
 				}
 			}
+			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, isOneSelected)) {
+				for (auto& guid : asset_view->selected_assets) {
+					auto it = asset_view->asset_parent_folders.find(guid);
+					if (it != asset_view->asset_parent_folders.end()) {
+						const std::string pathStr = it->second.string(); // keep the string alive
+						ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
+					}
+				}
+			}
 
-			if (ImGui::MenuItem("Import", nullptr, nullptr, asset_view->selected_assets.empty())) {
+			if (ImGui::MenuItem("Import", nullptr, nullptr, areNoneSelected)) {
 				// Open Folder, if you choose something of supported type, import correctly
 				std::string fp = OpenFileDialogue();
 				std::filesystem::path filepath = fp;
@@ -157,7 +180,7 @@ namespace Talloren::Panels {
 				ImGui::CloseCurrentPopup();
 			}
 
-			if (ImGui::BeginMenu("Create", asset_view->selected_assets.empty())) {
+			if (ImGui::BeginMenu("Create", areNoneSelected)) {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
