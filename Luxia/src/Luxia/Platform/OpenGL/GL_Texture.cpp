@@ -103,7 +103,7 @@ namespace Luxia::Platform::OpenGL {
 
 		unsigned char* bytes = stbi_load(m_path.string().c_str(), &imgWidth, &imgHeight, &numColCh, 0);
 
-		if (!bytes) { LX_CORE_ERROR("BYTES NULLPTR"); return; }
+		if (!bytes) { LX_CORE_ERROR("Texture Loading failed (bytes null): {}", m_path.string()); return; }
 
 		glGenTextures(1, &texID);
 		glActiveTexture(GL_TEXTURE0);

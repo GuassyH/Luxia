@@ -20,6 +20,8 @@ namespace Talloren::Panel {
 			editorLayer->is_entity_selected = true;
 		}
 
+		ImGui::Separator();
+
 		if (open) {
 			for (auto child : entity.transform->children) {
 				if (!child) continue;

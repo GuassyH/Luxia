@@ -55,16 +55,19 @@ namespace Talloren::Panel {
 		return result;
 	}
 
-	static void DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw) {
+	void AssetView::DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw) {
 		// For each asset in the assets_to_draw map, draw it (will be more polished later)
-		for (auto [guid, asset] : assets_to_draw) {
+		for (auto& [guid, asset] : assets_to_draw) {
+			if (!asset) continue;
+
 			// Display name
 			ImGui::Text(asset->name.c_str());
 			if (ImGui::IsItemHovered())
 			{
 				std::ostringstream astHint; astHint << asset->name << " GUID";
+				std::string hint = astHint.str();
 				ImGui::BeginTooltip();
-				ImGui::Text(astHint.str().c_str());
+				ImGui::TextUnformatted(hint.c_str());
 				ImGui::Separator();
 				ImGui::TextColored(ImVec4(1, 1, 0, 1), std::to_string(asset->guid).c_str());
 				ImGui::EndTooltip();
@@ -103,7 +106,10 @@ namespace Talloren::Panel {
 			if (ImGui::BeginMenu("Create")) {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("Material")) {
-					editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>("materials", true, "NewMaterial");
+					if (!selected_folder.empty() && std::filesystem::exists(selected_folder)) {
+						editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(selected_folder, false, "NewMaterial");
+						RefreshAPFs(editorLayer);
+					}
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Scene")) {
@@ -125,7 +131,8 @@ namespace Talloren::Panel {
 
 		if (sel_fol == entry.path()) flags |= ImGuiTreeNodeFlags_Selected;
 
-		bool open = ImGui::TreeNodeEx(entry.path().stem().string().c_str(), flags);
+		std::ostringstream label; label << "../" << entry.path().stem().string().c_str();
+		bool open = ImGui::TreeNodeEx(label.str().c_str(), flags);
 
 		if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
 			sel_fol = entry.path();
@@ -148,19 +155,25 @@ namespace Talloren::Panel {
 			}
 			ImGui::EndPopup();
 		}
-		
-		// Loop through each sub-directory in the projects asset directory
-		for (auto& entry : std::filesystem::directory_iterator(editorLayer->GetAssetManager()->GetAssetDir())) {
-			DrawPathSelectable(entry, selected_folder);
-		}
 
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw;
+		
+		if (!selected_folder.empty() && std::filesystem::exists(selected_folder)) {
+		
+			// Loop through each sub-directory in the projects asset directory
+			for (auto& entry : std::filesystem::directory_iterator(editorLayer->GetProjectManager()->GetProjectPath())) {
+				DrawPathSelectable(entry, selected_folder);
+			}
 
-		// If its a valid folder, go through each asset, and see if its guid in the a_p_f path is the selected folder
-		if (std::filesystem::exists(selected_folder)) {
+			// If its a valid folder, go through each asset, and see if its guid in the a_p_f path is the selected folder
 			for (auto& [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
 				if (asset) {
-					if (!assets_to_draw.contains(guid) && asset_parent_folders.find(guid)->second == selected_folder) {
+					// if its the same condition itll crash
+					auto it = asset_parent_folders.find(guid);
+					if (it == asset_parent_folders.end())
+						continue;
+
+					if (it->second == selected_folder) {
 						assets_to_draw[guid] = asset;
 					}
 				}
@@ -201,8 +214,7 @@ namespace Talloren::Panel {
 		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
 
 
-		// RENDERING EXPLORER
-#pragma region Dockspace
+		#pragma region Dockspace
 		ImGuiID const dockspaceID = ImGui::GetID("AssetView_Dockspace");
 		ImGuiWindowClass workspaceWindowClass;
 		workspaceWindowClass.ClassId = dockspaceID;
@@ -244,18 +256,17 @@ namespace Talloren::Panel {
 			ImGui::End();
 		}
 
-		// END OF EXPLORER
 
 		// should be menu
 
 
 		ImGui::End();
 	}
+
 	
 	void AssetView::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 	
 	}
-
 
 	void AssetView::OnEvent(Luxia::Event& e) {
 		Luxia::EventDispatcher dispatcher(e);

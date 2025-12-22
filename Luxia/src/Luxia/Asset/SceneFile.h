@@ -7,7 +7,7 @@ namespace Luxia::Assets {
 	public:
 		SceneFile() = default;
 		SceneFile(const std::filesystem::path m_scenePath)
-			: scene_path(m_scenePath) {
+			: scene_path(m_scenePath.lexically_normal()) {
 			type = Luxia::AssetType::SceneType;
 		}
 		SceneFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
@@ -17,7 +17,7 @@ namespace Luxia::Assets {
 			type = Luxia::AssetType::SceneType;
 
 			assetPath = m_assetPath;
-			scene_path = assetPath;
+			scene_path = assetPath.lexically_normal();
 
 			std::shared_ptr<Asset> scene = std::make_shared<Scene>();
 			scene->name = m_assetPath.filename().replace_extension("").string();

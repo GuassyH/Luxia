@@ -43,6 +43,7 @@ namespace Luxia::Assets {
 			shaderType = ShaderFileType::VertexFragment;
 
 			std::shared_ptr<Luxia::IShader> shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
+			shader->guid = GUID();
 
 			assets.push_back(shader);
 
@@ -92,6 +93,7 @@ namespace Luxia::Assets {
 			if (assets.empty()) return false;
 			std::shared_ptr<Luxia::IShader> shader = std::dynamic_pointer_cast<Luxia::IShader>(assets[0]);
 			if (!shader) return false;
+			// Only save if the assetfile path already exists??
 
 			YAML::Emitter out;
 

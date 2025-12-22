@@ -23,6 +23,7 @@ namespace Luxia::Assets {
 			std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
 
 			for (auto& mesh : meshes) {
+				mesh->guid = GUID();
 				assets.push_back(mesh);
 			}
 
@@ -104,6 +105,7 @@ namespace Luxia::Assets {
 
 			if (assets.empty()) return false;
 			if (!base_model) return false;
+			// Only save if the assetfile path already exists??
 
 			YAML::Emitter out;
 

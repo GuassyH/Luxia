@@ -18,6 +18,8 @@ namespace Luxia::Assets {
 			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
 			texture->name = m_assetPath.filename().replace_extension("").string();
 			texture->LoadFromFile(texture_path);
+			texture->guid = GUID();
+
 			assets.push_back(texture);
 
 			Save(m_assetPath);
@@ -30,6 +32,7 @@ namespace Luxia::Assets {
 
 			assetPath = m_assetPath.lexically_normal();
 			loaded = false;
+			// Only save if the assetfile path already exists??
 
 			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
 
@@ -40,7 +43,8 @@ namespace Luxia::Assets {
 				texture->name = config["Name"].as<std::string>();
 				texture->guid = GUID(config["GUID"].as<uint64_t>());
 				texture->LoadFromFile(config["Path"].as<std::string>(), config["Properties"]["Flip"].as<bool>());
-				
+				texture_path = config["Path"].as<std::string>();
+
 				auto propConfig = config["Properties"];
 				// Set num colch etc
 

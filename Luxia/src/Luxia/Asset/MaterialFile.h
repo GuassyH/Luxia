@@ -21,6 +21,7 @@ namespace Luxia::Assets {
 
 			std::shared_ptr<Luxia::IMaterial> mat = Platform::Assets::CreateMaterial();
 			mat->name = m_assetPath.filename().replace_extension("").string();
+			mat->guid = GUID();
 			assets.push_back(mat);
 
 			Save(m_assetPath);
@@ -65,6 +66,7 @@ namespace Luxia::Assets {
 			assetPath = m_assetPath;
 
 			if (assets.empty()) return false;
+			// Only save if the assetfile path already exists??
 
 			std::shared_ptr<Luxia::IMaterial> mat = std::dynamic_pointer_cast<Luxia::IMaterial>(assets[0]);
 			if (!mat) return false;
