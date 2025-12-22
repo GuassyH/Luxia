@@ -71,12 +71,12 @@ namespace Talloren::Panels {
 
 		if (ImGui::BeginPopupContextWindow("Create Object", ImGuiPopupFlags_MouseButtonRight)) {
 			// On Creation you should get the option to name the entity
-			if (ImGui::MenuItem("Delete", (const char*)0, (bool*)0, editorLayer->is_entity_selected)) {
+			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->is_entity_selected)) {
 				entitiesToDelete.push_back(editorLayer->selected_entity);
 				editorLayer->is_entity_selected = false;
 				ImGui::CloseCurrentPopup();
 			}
-			if (ImGui::MenuItem("Rename", (const char*)0, (bool*)0, editorLayer->is_entity_selected)) {
+			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->is_entity_selected)) {
 				// entity.name = thing;
 				ImGui::CloseCurrentPopup();
 			}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IEditorPanel.h"
+#include "Luxia.h"
 #include <memory>
 
 namespace Talloren::Panels {

@@ -36,6 +36,7 @@ namespace Talloren::Panels {
 	void AssetView::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - AssetView Panel: Init");
 		RefreshAPFs(editorLayer);
+		astviewer.Init();
 	}
 
 	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {

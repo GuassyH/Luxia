@@ -2,6 +2,7 @@
 #include "EditorLayer.h"
 #include "EditorPanels/AssetView.h"
 
+
 // THIS IS ONLY FOR WINDOWS 
 #include <Windows.h>
 #include <shobjidl.h>
@@ -66,14 +67,48 @@ namespace Talloren::Panels {
 		return result;
 	}
 
-	static void DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, AssetView* asset_view) {
+	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, AssetView* asset_view) {
 		// Thumbnail
 		ImGui::PushID(asset->guid);
 
 		ImGui::BeginGroup(); // Start group so selectable spans all content
 
-		// Draw image
-		ImGui::Image(nullptr, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+		unsigned int thumbnail = 0;
+		bool hasThumbnail = false;
+
+		// Inefficient but works
+		auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
+		auto meshasset = std::dynamic_pointer_cast<Luxia::Mesh>(asset);
+		auto matasset = std::dynamic_pointer_cast<Luxia::IMaterial>(asset);
+		auto shaderasset = std::dynamic_pointer_cast<Luxia::IShader>(asset);
+		auto sceneasset = std::dynamic_pointer_cast<Luxia::Scene>(asset);
+
+		if (texasset) {
+			thumbnail = texasset->texID;
+			hasThumbnail = texasset->IsValid();
+		}
+		else if (meshasset) {
+			thumbnail = mesh_default_thumbnail->texID;
+			hasThumbnail = mesh_default_thumbnail->IsValid();
+		}
+		else if (matasset) {
+			thumbnail = mat_default_thumbnail->texID;
+			hasThumbnail = mat_default_thumbnail->IsValid();
+		}
+		else if (shaderasset) {
+			thumbnail = shader_default_thumbnail->texID;
+			hasThumbnail = shader_default_thumbnail->IsValid();
+		}
+		else if (sceneasset) {
+			thumbnail = scene_default_thumbnail->texID;
+			hasThumbnail = scene_default_thumbnail->IsValid();
+		}
+
+		if (hasThumbnail)
+			ImGui::Image((ImTextureRef)thumbnail, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+		else
+			ImGui::Image(nullptr, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+
 
 		// Get size of the group
 		ImVec2 groupSize = ImVec2(ImGui::GetItemRectMax().x - ImGui::GetItemRectMin().x, ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y + 5);
@@ -112,10 +147,24 @@ namespace Talloren::Panels {
 		ImGui::PopID();
 	}
 
+
+	void AssetViewer::Init() {
+		mesh_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
+		mesh_default_thumbnail->LoadFromFile("resources/AssetIcons/MeshDefaultThumbnail.png");
+
+		mat_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
+		mat_default_thumbnail->LoadFromFile("resources/AssetIcons/MatDefaultThumbnail.png");
+
+		shader_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
+		shader_default_thumbnail->LoadFromFile("resources/AssetIcons/ShaderDefaultThumbnail.png");
+
+		scene_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
+		scene_default_thumbnail->LoadFromFile("resources/AssetIcons/SceneDefaultThumbnail.png");
+	}
+
 	void AssetViewer::DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)
 	{
 		// For each asset in the assets_to_draw map, draw it (will be more polished later)
-
 		float cellSize = 100.0f;
 		float padding = 10.0f;
 		float panelWidth = ImGui::GetContentRegionAvail().x;
@@ -123,6 +172,8 @@ namespace Talloren::Panels {
 		if (columns < 1) columns = 1;
 
 		ImGui::Columns(columns, nullptr, false);
+
+		// Should draw sub folders here
 
 		for (auto& [guid, asset] : assets_to_draw) {
 			if (!asset) continue;
