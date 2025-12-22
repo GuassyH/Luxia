@@ -16,17 +16,26 @@ namespace Luxia::Assets {
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::SceneType;
 
-			assetPath = m_assetPath;
+			assetPath = m_assetPath.lexically_normal();
 			scene_path = assetPath.lexically_normal();
 
-			std::shared_ptr<Asset> scene = std::make_shared<Scene>();
+			std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 			scene->name = m_assetPath.filename().replace_extension("").string();
 			scene->guid = GUID();
 
-			LX_CORE_INFO("Scene Files are not loaded regularly");
-
 			assets.push_back(scene);
 			loaded = true;
+
+			YAML::Emitter out;
+
+			out << YAML::BeginMap;
+			out << YAML::Key << "Name" << YAML::Value << scene->name;
+			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)scene->guid;
+			out << YAML::EndMap;
+
+			std::ofstream outfile(scene_path.string());
+			outfile << out.c_str();
+			outfile.close();
 
 			Save(m_assetPath);
 			return true;
@@ -35,12 +44,21 @@ namespace Luxia::Assets {
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::SceneType;
 
-			assetPath = m_assetPath;
-			scene_path = assetPath;
+			assetPath = m_assetPath.lexically_normal();
+			scene_path = assetPath.lexically_normal();
 
 			std::shared_ptr<Asset> scene = std::make_shared<Scene>();
 
-			LX_CORE_INFO("Scene Files are not loaded regularly");
+			// This loads asset information, such as name and GUID
+			// The rest (entities) is loaded through asset serializer
+			try {
+				YAML::Node config = YAML::LoadFile(scene_path.string());
+				scene->name = config["Name"].as<std::string>();
+				scene->guid = GUID(config["GUID"].as<uint64_t>());
+			}
+			catch (const YAML::Exception& ex) {
+				std::cerr << "YAML error: " << ex.what() << "\n";
+			}
 
 			assets.push_back(scene);
 			loaded = true;

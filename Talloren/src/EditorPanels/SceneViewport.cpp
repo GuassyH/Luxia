@@ -2,7 +2,7 @@
 #include "EditorLayer.h"
 #include "EditorScripts/SceneCameraScript.h"
 
-namespace Talloren::Panel {
+namespace Talloren::Panels {
 	void SceneViewport::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
 

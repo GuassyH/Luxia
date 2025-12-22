@@ -11,11 +11,11 @@ namespace Talloren::Layers {
 		LX_CORE_WARN("EditorLayer Attached");
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
 
-		PushPanel(std::make_shared<Talloren::Panel::GameViewport>());
-		PushPanel(std::make_shared<Talloren::Panel::HierarchyPanel>());
-		PushPanel(std::make_shared<Talloren::Panel::InspectorPanel>());
-		PushPanel(std::make_shared<Talloren::Panel::SceneViewport>());
-		PushPanel(std::make_shared<Talloren::Panel::AssetView>());
+		PushPanel(std::make_shared<Talloren::Panels::GameViewport>());
+		PushPanel(std::make_shared<Talloren::Panels::HierarchyPanel>());
+		PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
+		PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
+		PushPanel(std::make_shared<Talloren::Panels::AssetView>());
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");

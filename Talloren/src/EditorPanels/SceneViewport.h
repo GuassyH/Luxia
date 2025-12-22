@@ -2,7 +2,7 @@
 
 #include "IEditorPanel.h"
 
-namespace Talloren::Panel {
+namespace Talloren::Panels {
 	class SceneViewport : public Talloren::IEditorPanel {
 	public:
 		virtual void Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;

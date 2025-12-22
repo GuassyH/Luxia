@@ -1,19 +1,21 @@
 ﻿#include "HierarchyPanel.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Panel {
+namespace Talloren::Panels {
 	void HierarchyPanel::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - Hierarchy Panel: Init");
 	}
 
 	std::vector<Luxia::GUID> entitiesToDelete;
 	void HierarchyPanel::DrawEntitySelectable(Luxia::Entity& entity, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		std::ostringstream enttext; enttext << entity.name << "##" << std::to_string(entity.guid);
+		std::ostringstream enttext; enttext << entity.name;
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanFullWidth;
 
 		if (editorLayer->selected_entity == entity.guid && editorLayer->is_entity_selected) flags |= ImGuiTreeNodeFlags_Selected;
 
+		ImGui::PushID(std::to_string((uint64_t)entity.guid).c_str());
 		bool open = ImGui::TreeNodeEx(enttext.str().c_str(), flags);
+		ImGui::PopID();
 
 		if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
 			editorLayer->selected_entity = entity.guid;

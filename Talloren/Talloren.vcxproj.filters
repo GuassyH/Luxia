@@ -27,6 +27,8 @@
     </ClInclude>
     <ClInclude Include="src\IEditorPanel.h" />
     <ClInclude Include="src\EditorPanels\AssetView.h" />
+    <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.h" />
+    <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
@@ -44,5 +46,7 @@
     </ClCompile>
     <ClCompile Include="src\Talloren.cpp" />
     <ClCompile Include="src\EditorPanels\AssetView.cpp" />
+    <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp" />
+    <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetViewer.cpp" />
   </ItemGroup>
 </Project>

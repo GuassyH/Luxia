@@ -173,8 +173,6 @@ namespace Luxia {
 
 		try {
 			YAML::Node config = YAML::LoadFile(m_SceneFile->scene_path.string());
-			scene.name = config["Name"].as<std::string>();
-			scene.guid = GUID(config["GUID"].as<uint64_t>());
 
 			// Initialize the entities
 			auto entities = config["Entities"];
