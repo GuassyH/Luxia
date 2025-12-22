@@ -8,6 +8,17 @@
 
 namespace Talloren::Panels {
 
+	static void CopyToClipboard(std::string to_copy) {
+		const char* cdata = to_copy.c_str();
+		const size_t len = to_copy.size() + 1;
+		HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
+		memcpy(GlobalLock(hMem), cdata, len);
+		GlobalUnlock(hMem);
+		OpenClipboard(0);
+		EmptyClipboard();
+		SetClipboardData(CF_TEXT, hMem);
+		CloseClipboard();
+	}
 
 	static std::string OpenFileDialogue() {
 		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
@@ -54,6 +65,43 @@ namespace Talloren::Panels {
 		return result;
 	}
 
+	static void DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, AssetView* asset_view) {
+		// Thumbnail
+		ImGui::PushID(asset->guid);
+
+		ImGui::BeginGroup(); // Start group so selectable spans all content
+
+		// Draw image
+		ImGui::Image(nullptr, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+
+		// Get size of the group
+		ImVec2 groupSize = ImVec2(ImGui::GetItemRectMax().x - ImGui::GetItemRectMin().x, ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y + 5);
+
+		// Make the selectable span the entire group
+		bool is_selected = asset_view->selected_assets.contains(asset->guid);
+		ImGui::SetCursorPosY(ImGui::GetCursorPosY() - groupSize.y);
+		if (ImGui::Selectable("##AssetSelectable", is_selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize))
+		{
+			if (ImGui::GetIO().KeyCtrl) {
+				if (is_selected)
+					asset_view->selected_assets.erase(asset->guid);
+				else
+					asset_view->selected_assets.insert(asset->guid);
+			}
+			else {
+				asset_view->selected_assets.clear();
+				asset_view->selected_assets.insert(asset->guid);
+			}
+		}
+
+		// Draw text below image
+		ImGui::TextWrapped(asset->name.c_str());
+
+		ImGui::EndGroup(); // End group
+
+		ImGui::PopID();
+	}
+
 	void AssetViewer::DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)
 	{
 		// For each asset in the assets_to_draw map, draw it (will be more polished later)
@@ -69,20 +117,35 @@ namespace Talloren::Panels {
 		for (auto& [guid, asset] : assets_to_draw) {
 			if (!asset) continue;
 
-			// Thumbnail
-			ImGui::Image(nullptr, ImVec2(cellSize, cellSize));
-
-			// Name under icon
-			ImGui::TextWrapped(asset->name.c_str());
+			DrawFileIcon(asset.lock(), cellSize, asset_view);
 
 			ImGui::NextColumn();
 		}
 
 		ImGui::Columns(1);
 
+		if (ImGui::IsWindowHovered()) {
+			if (ImGui::GetIO().MouseClicked[0]) {
+				if (!ImGui::IsAnyItemHovered()) {
+					asset_view->selected_assets.clear();
+				}
+			}		
+			if (ImGui::GetIO().MouseClicked[1]) {
+				if (!ImGui::IsAnyItemHovered()) {
+					asset_view->selected_assets.clear();
+				}
+			}
+		}
+
 		// Popup
-		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
-			if (ImGui::MenuItem("Import")) {
+		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight)) {
+			if (ImGui::MenuItem("Copy", nullptr, nullptr, asset_view->selected_assets.size() == 1)) {
+				for (auto& guid : asset_view->selected_assets) {
+					CopyToClipboard(std::to_string((uint64_t)guid));
+				}
+			}
+
+			if (ImGui::MenuItem("Import", nullptr, nullptr, asset_view->selected_assets.empty())) {
 				// Open Folder, if you choose something of supported type, import correctly
 				std::string fp = OpenFileDialogue();
 				std::filesystem::path filepath = fp;
@@ -93,7 +156,8 @@ namespace Talloren::Panels {
 				asset_view->RefreshAPFs(editorLayer);
 				ImGui::CloseCurrentPopup();
 			}
-			if (ImGui::BeginMenu("Create")) {
+
+			if (ImGui::BeginMenu("Create", asset_view->selected_assets.empty())) {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {

@@ -15,6 +15,7 @@ namespace Talloren::Panels {
 		
 		std::unordered_map<Luxia::GUID, std::filesystem::path> asset_parent_folders;
 		std::filesystem::path selected_folder;
+		std::unordered_set<Luxia::GUID> selected_assets;
 	private:
 	};
 }

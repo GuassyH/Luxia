@@ -54,7 +54,7 @@ namespace Talloren::Panels {
 		if (!scene) { ImGui::End(); return; }
 
 		if (ImGui::IsWindowHovered()) {
-			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1) || Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2)) {
+			if (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]) {
 				if (!ImGui::IsAnyItemHovered()) {
 					editorLayer->is_entity_selected = false;
 				}
