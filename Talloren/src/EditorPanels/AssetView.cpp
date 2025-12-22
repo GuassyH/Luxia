@@ -158,13 +158,12 @@ namespace Talloren::Panel {
 
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw;
 		
-		if (!selected_folder.empty() && std::filesystem::exists(selected_folder)) {
-		
-			// Loop through each sub-directory in the projects asset directory
-			for (auto& entry : std::filesystem::directory_iterator(editorLayer->GetProjectManager()->GetProjectPath())) {
-				DrawPathSelectable(entry, selected_folder);
-			}
+		// Loop through each sub-directory in the projects asset directory
+		for (auto& entry : std::filesystem::directory_iterator(editorLayer->GetProjectManager()->GetProjectPath())) {
+			DrawPathSelectable(entry, selected_folder);
+		}
 
+		if (!selected_folder.empty() && std::filesystem::exists(selected_folder)) {
 			// If its a valid folder, go through each asset, and see if its guid in the a_p_f path is the selected folder
 			for (auto& [guid, asset] : editorLayer->GetAssetManager()->GetAssetPool()) {
 				if (asset) {
