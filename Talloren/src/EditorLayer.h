@@ -10,10 +10,19 @@ namespace Talloren::Layers {
 		~EditorLayer() = default;
 
 		entt::registry editor_reg;
-		Luxia::GUID selected_entity = Luxia::GUID(0);
-		bool is_entity_selected = false;
+		std::unordered_set<Luxia::GUID> selected_assets;
+
+		bool areNoneSelected = false;
+		bool isOneSelected = false;
+		bool areMultipleSelected = false;
 
 		std::vector<std::shared_ptr<Talloren::IEditorPanel>> panels;
+
+		void ClearSelected();
+		void InsertSelected(Luxia::GUID guid);
+		void EraseSelected(Luxia::GUID guid);
+
+		void UpdateSelectedConditions();
 
 		void PushPanel(std::shared_ptr<Talloren::IEditorPanel> m_panel) {
 			m_panel->Init(this, scene_manager->GetActiveScene()); 

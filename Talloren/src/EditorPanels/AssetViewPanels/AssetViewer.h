@@ -12,7 +12,7 @@ namespace Talloren::Panels {
 	public:
 		void Init();
 		void DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw);
-		void DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, AssetView* asset_view);
+		void DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Talloren::Layers::EditorLayer* editor_layer);
 
 		std::shared_ptr<Luxia::ITexture> mesh_default_thumbnail;
 		std::shared_ptr<Luxia::ITexture> mat_default_thumbnail;

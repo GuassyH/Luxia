@@ -11,15 +11,24 @@ namespace Talloren::Panels {
 		std::ostringstream enttext; enttext << entity.name;
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanFullWidth;
 
-		if (editorLayer->selected_entity == entity.guid && editorLayer->is_entity_selected) flags |= ImGuiTreeNodeFlags_Selected;
+		if (editorLayer->selected_assets.contains(entity.guid)) flags |= ImGuiTreeNodeFlags_Selected;
 
 		ImGui::PushID(std::to_string((uint64_t)entity.guid).c_str());
 		bool open = ImGui::TreeNodeEx(enttext.str().c_str(), flags);
 		ImGui::PopID();
 
+		bool is_selected = editorLayer->selected_assets.contains(entity.guid);
 		if ((ImGui::IsItemClicked(ImGuiMouseButton_Left) || ImGui::IsItemClicked(ImGuiMouseButton_Right)) && !ImGui::IsItemToggledOpen()) {
-			editorLayer->selected_entity = entity.guid;
-			editorLayer->is_entity_selected = true;
+			if (ImGui::GetIO().KeyCtrl) {
+				if (is_selected)
+					editorLayer->EraseSelected(entity.guid);
+				else
+					editorLayer->InsertSelected(entity.guid);
+			}
+			else {
+				editorLayer->ClearSelected();
+				editorLayer->InsertSelected(entity.guid);
+			}
 		}
 
 		ImGui::Separator();
@@ -38,13 +47,17 @@ namespace Talloren::Panels {
 
 	static Luxia::Entity& CreateHierarchyEntity(std::string name, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		auto& new_ntt = scene->CreateEntity(name);
-		if (editorLayer->is_entity_selected) { // Set parent if there is a currently selected
-			auto& parent_ent = scene->runtime_entities.find(editorLayer->selected_entity)->second;
-			new_ntt.transform->SetParent(parent_ent.transform);
+		if (editorLayer->isOneSelected) { // Set parent if there is a currently selected
+			Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+
+			if (scene->runtime_entities.contains(e_guid)) {
+				auto& parent_ent = scene->runtime_entities.find(e_guid)->second;
+				new_ntt.transform->SetParent(parent_ent.transform);
+			}
 		}
 
-		editorLayer->selected_entity = new_ntt.guid;
-		editorLayer->is_entity_selected = true;
+		editorLayer->ClearSelected();
+		editorLayer->InsertSelected(new_ntt.guid);
 		return new_ntt;
 	}
 
@@ -56,7 +69,7 @@ namespace Talloren::Panels {
 		if (ImGui::IsWindowHovered()) {
 			if (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]) {
 				if (!ImGui::IsAnyItemHovered()) {
-					editorLayer->is_entity_selected = false;
+					editorLayer->ClearSelected();
 				}
 			}
 		}
@@ -71,12 +84,13 @@ namespace Talloren::Panels {
 
 		if (ImGui::BeginPopupContextWindow("Create Object", ImGuiPopupFlags_MouseButtonRight)) {
 			// On Creation you should get the option to name the entity
-			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->is_entity_selected)) {
-				entitiesToDelete.push_back(editorLayer->selected_entity);
-				editorLayer->is_entity_selected = false;
-				ImGui::CloseCurrentPopup();
+			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->areMultipleSelected)) {
+				for (auto& guid : editorLayer->selected_assets) {
+					entitiesToDelete.push_back(guid);
+					ImGui::CloseCurrentPopup();
+				}
 			}
-			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->is_entity_selected)) {
+			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->areMultipleSelected)) {
 				// entity.name = thing;
 				ImGui::CloseCurrentPopup();
 			}

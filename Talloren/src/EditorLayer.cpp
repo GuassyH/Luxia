@@ -7,6 +7,26 @@
 
 
 namespace Talloren::Layers {
+	
+	void EditorLayer::ClearSelected() {
+		selected_assets.clear();
+		UpdateSelectedConditions();
+	}
+	void EditorLayer::InsertSelected(Luxia::GUID guid){
+		selected_assets.insert(guid);
+		UpdateSelectedConditions();
+	}
+	void EditorLayer::EraseSelected(Luxia::GUID guid){
+		selected_assets.erase(guid);
+		UpdateSelectedConditions();
+	}
+
+	void EditorLayer::UpdateSelectedConditions() {
+		areNoneSelected = (selected_assets.empty());
+		isOneSelected = (selected_assets.size() == 1);
+		areMultipleSelected = (selected_assets.size() >= 1);
+	}
+	
 	void EditorLayer::OnAttach() {
 		LX_CORE_WARN("EditorLayer Attached");
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
@@ -24,7 +44,7 @@ namespace Talloren::Layers {
 		}
 	}
 	void EditorLayer::OnUpdate() {
-
+		UpdateSelectedConditions();
 	}
 	void EditorLayer::OnRender() {
 		std::shared_ptr<Luxia::Rendering::IUIRenderer> uiRenderer = renderer->GetUIRenderer();
@@ -66,6 +86,7 @@ namespace Talloren::Layers {
 
 		}
 
+		
 		// RENDER WINDOWS
 		for (auto panel : panels) {
 			panel->Render(this, scene_manager->GetActiveScene());

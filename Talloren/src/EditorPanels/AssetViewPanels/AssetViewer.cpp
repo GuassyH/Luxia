@@ -67,7 +67,7 @@ namespace Talloren::Panels {
 		return result;
 	}
 
-	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, AssetView* asset_view) {
+	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Talloren::Layers::EditorLayer* editor_layer) {
 		// Thumbnail
 		ImGui::PushID(asset->guid);
 
@@ -114,28 +114,28 @@ namespace Talloren::Panels {
 		ImVec2 groupSize = ImVec2(ImGui::GetItemRectMax().x - ImGui::GetItemRectMin().x, ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y + 5);
 
 		// Make the selectable span the entire group
-		bool is_selected = asset_view->selected_assets.contains(asset->guid);
+		bool is_selected = editor_layer->selected_assets.contains(asset->guid);
 		ImGui::SetCursorPosY(ImGui::GetCursorPosY() - groupSize.y);
 		if (ImGui::Selectable("##AssetSelectable", is_selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize)) {
 			if (ImGui::GetIO().KeyCtrl) {
 				if (is_selected)
-					asset_view->selected_assets.erase(asset->guid);
+					editor_layer->EraseSelected(asset->guid);
 				else
-					asset_view->selected_assets.insert(asset->guid);
+					editor_layer->InsertSelected(asset->guid);
 			}
 			else {
-				asset_view->selected_assets.clear();
-				asset_view->selected_assets.insert(asset->guid);
+				editor_layer->ClearSelected();
+				editor_layer->InsertSelected(asset->guid);
 			}
 		}
 		if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
 			if (ImGui::GetIO().KeyCtrl) {
 				if (!is_selected)
-					asset_view->selected_assets.insert(asset->guid);
+					editor_layer->InsertSelected(asset->guid);
 			}
 			else {
-				asset_view->selected_assets.clear();
-				asset_view->selected_assets.insert(asset->guid);
+				editor_layer->ClearSelected();
+				editor_layer->InsertSelected(asset->guid);
 			}
 		}
 
@@ -178,7 +178,7 @@ namespace Talloren::Panels {
 		for (auto& [guid, asset] : assets_to_draw) {
 			if (!asset) continue;
 
-			DrawFileIcon(asset.lock(), cellSize, asset_view);
+			DrawFileIcon(asset.lock(), cellSize, editorLayer);
 
 			ImGui::NextColumn();
 		}
@@ -188,38 +188,33 @@ namespace Talloren::Panels {
 		if (ImGui::IsWindowHovered()) {
 			if (ImGui::GetIO().MouseClicked[0]) {
 				if (!ImGui::IsAnyItemHovered()) {
-					asset_view->selected_assets.clear();
+					editorLayer->ClearSelected();
 				}
 			}		
 			if (ImGui::GetIO().MouseClicked[1]) {
 				if (!ImGui::IsAnyItemHovered()) {
-					asset_view->selected_assets.clear();
+					editorLayer->ClearSelected();
 				}
 			}
 		}
 
-		bool areNoneSelected = (asset_view->selected_assets.empty());
-		bool isOneSelected = (asset_view->selected_assets.size() == 1);
-		bool areMultipleSelected = (asset_view->selected_assets.size() > 1);
 
 		// Popup
 		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight)) {
-			if (ImGui::MenuItem("Copy", nullptr, nullptr, isOneSelected)) {
-				for (auto& guid : asset_view->selected_assets) {
-					CopyToClipboard(std::to_string((uint64_t)guid));
-				}
+			if (ImGui::MenuItem("Copy", nullptr, nullptr, editorLayer->isOneSelected)) {
+				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+				CopyToClipboard(std::to_string((uint64_t)e_guid));
 			}
-			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, isOneSelected)) {
-				for (auto& guid : asset_view->selected_assets) {
-					auto it = asset_view->asset_parent_folders.find(guid);
-					if (it != asset_view->asset_parent_folders.end()) {
-						const std::string pathStr = it->second.string(); // keep the string alive
-						ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
-					}
+			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, editorLayer->isOneSelected)) {
+				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+				auto it = asset_view->asset_parent_folders.find(e_guid);
+				if (it != asset_view->asset_parent_folders.end()) {
+					const std::string pathStr = it->second.string(); // keep the string alive
+					ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
 				}
 			}
 
-			if (ImGui::MenuItem("Import", nullptr, nullptr, areNoneSelected)) {
+			if (ImGui::MenuItem("Import", nullptr, nullptr, editorLayer->areNoneSelected)) {
 				// Open Folder, if you choose something of supported type, import correctly
 				std::string fp = OpenFileDialogue();
 				std::filesystem::path filepath = fp;
@@ -231,7 +226,7 @@ namespace Talloren::Panels {
 				ImGui::CloseCurrentPopup();
 			}
 
-			if (ImGui::BeginMenu("Create", areNoneSelected)) {
+			if (ImGui::BeginMenu("Create", editorLayer->areNoneSelected)) {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
