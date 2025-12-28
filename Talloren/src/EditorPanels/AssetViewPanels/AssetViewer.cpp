@@ -67,6 +67,38 @@ namespace Talloren::Panels {
 		return result;
 	}
 
+	static void RenameAsset(Luxia::GUID guid, const std::string& new_name, AssetView* asset_view, Talloren::Layers::EditorLayer* editorLayer) {
+		auto it = editorLayer->GetAssetManager()->GetAssetPool().find(guid);
+		LX_CORE_ASSERT(it->second, "Tried to rename invalid asset!");
+		auto asset = it->second;
+
+		asset->name = new_name;
+		if (asset->type == Luxia::AssetType::MeshType) {
+			return;
+		}
+
+		if (asset_view->asset_assetfile_path.contains(guid) && asset_view->asset_metafile_path.contains(guid)) {
+			// Rename Assetfile
+			std::filesystem::path old_astfile_p = asset_view->asset_assetfile_path.at(guid);
+			std::filesystem::path new_astfile_p = old_astfile_p;
+			std::filesystem::path afext = old_astfile_p.extension();
+			new_astfile_p.replace_filename(new_name + afext.string());
+			std::filesystem::rename(old_astfile_p, new_astfile_p);
+
+			// Rename Metafile
+			std::filesystem::path old_metafile_p = asset_view->asset_metafile_path.at(guid);
+			std::filesystem::path new_metafile_p = old_metafile_p;
+			std::filesystem::path mfext = old_metafile_p.extension();
+			new_metafile_p.replace_filename(new_name + mfext.string());
+			std::filesystem::rename(old_metafile_p, new_metafile_p);
+
+			// Also need to change the actual path INSIDE the metafile and assetfile
+			// Otherwise when saving completely new files are created
+		}
+
+		// Should also rename the actual file on disk, not just the asset name
+	}
+
 	static void OpenAsset(Luxia::GUID guid, Talloren::Layers::EditorLayer* editorLayer) {
 		auto it = editorLayer->GetAssetManager()->GetAssetPool().find(guid);
 		LX_CORE_ASSERT(it->second, "Tried to open invalid asset!");
@@ -320,8 +352,8 @@ namespace Talloren::Panels {
 
 			// Should also rename the actual file on disk, not just the asset name
 			if (ImGui::Button("Rename")) {
-				auto& asset = editorLayer->GetAssetManager()->GetAssetPool().at(guid);
-				asset->name = nameBuffer;
+				std::string namestr = std::string(nameBuffer);
+				RenameAsset(guid, namestr, asset_view, editorLayer);
 				init = false;
 				ImGui::CloseCurrentPopup();
 			}

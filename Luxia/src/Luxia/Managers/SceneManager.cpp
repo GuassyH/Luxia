@@ -26,15 +26,15 @@ namespace Luxia {
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile) {
 		if (active_scene) { 
-			if (!active_scene->assets.empty()) {
-				SceneSerializer oldserializer(active_scene, asset_manager);
-				oldserializer.Serialize();
-				active_scene->assets[0]->Unload();
-			}
+			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager);
+			oldserializer.Serialize();
+			active_scene->Unload();
 		}
 
 		// Set new Active Scene
-		active_scene = m_sceneFile;
+		active_scene = std::dynamic_pointer_cast<Scene>(m_sceneFile->assets[0]);
+
+		if (!active_scene) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, could not cast to Scene"); return nullptr; }
 
 		SceneSerializer serializer(m_sceneFile, asset_manager);
 		serializer.Deserialize();
@@ -43,6 +43,28 @@ namespace Luxia {
 
 		return GetActiveScene();
 	}
+
+	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene) {
+		if (active_scene) {
+			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager);
+			oldserializer.Serialize();
+			active_scene->Unload();
+		}
+
+		// Set new Active Scene
+		active_scene = m_scene;
+
+		if (!active_scene) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, could not cast to Scene"); return nullptr; }
+		if (!active_scene->scene_file) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, Scene has no SceneFile"); return nullptr; }
+
+		SceneSerializer serializer(m_scene->scene_file.lock(), asset_manager);
+		serializer.Deserialize();
+
+		LX_CORE_INFO("Loaded Scene: {}", 0);
+
+		return GetActiveScene();
+	}
+
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index) {
 		if (!scene_files[index]) { LX_CORE_ERROR("SceneManager: Set Scene failed, no scene at index: {}", index); return nullptr; }

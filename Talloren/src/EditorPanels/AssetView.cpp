@@ -19,15 +19,31 @@ namespace Talloren::Panels {
 		// Holy nested for if statement
 		asset_parent_folders.clear();
 
+
 		for (auto& [guid, assetfile] : editorLayer->GetAssetManager()->GetAssetFilePool()) {
 			if (assetfile) {
+				std::vector<Luxia::GUID> guids;
 				for (auto& asset : assetfile->assets) {
 					if (asset) {
-						asset_parent_folders[asset->guid] = assetfile->assetPath.parent_path();
+						guids.push_back(asset->guid);
+					}
+				}
+				if (std::filesystem::exists(assetfile->assetPath)) {
+					for (auto& [guid, metafile] : editorLayer->GetAssetManager()->GetMetaFilePool()) {
+						if (metafile) {
+							if (metafile->assetPath == assetfile->assetPath) {
+								for (auto& guid : guids) {
+									asset_metafile_path[guid] = metafile->metaPath;
+									asset_assetfile_path[guid] = assetfile->assetPath;
+									asset_parent_folders[guid] = assetfile->assetPath.parent_path();
+								}
+							}
+						}
 					}
 				}
 			}
 		}
+
 
 		if(reset_dir)
 			selected_folder = editorLayer->GetAssetManager()->GetAssetDir();
