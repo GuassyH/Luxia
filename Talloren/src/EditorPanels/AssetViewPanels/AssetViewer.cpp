@@ -67,6 +67,29 @@ namespace Talloren::Panels {
 		return result;
 	}
 
+	static void OpenAsset(Luxia::GUID guid, Talloren::Layers::EditorLayer* editorLayer) {
+		auto it = editorLayer->GetAssetManager()->GetAssetPool().find(guid);
+		LX_CORE_ASSERT(it->second, "Tried to open invalid asset!");
+
+		auto asset = it->second;
+
+		switch (asset->type) {
+		case Luxia::AssetType::SceneType: {
+			for (auto& sf : editorLayer->GetSceneManager()->scene_files) {
+				if (sf->assets.empty()) continue;
+				if (sf->assets[0]->guid == guid) {
+					editorLayer->GetSceneManager()->SetActiveScene(sf);
+					break;
+				}
+			}
+			break;
+		}
+		default:
+			LX_ERROR("Opening asset type not implemented yet!");
+			break;
+		}
+	}
+
 	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Talloren::Layers::EditorLayer* editor_layer) {
 		// Thumbnail
 		ImGui::PushID(asset->guid);
@@ -76,33 +99,37 @@ namespace Talloren::Panels {
 		unsigned int thumbnail = 0;
 		bool hasThumbnail = false;
 
-		// Inefficient but works
-		auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
-		auto meshasset = std::dynamic_pointer_cast<Luxia::Mesh>(asset);
-		auto matasset = std::dynamic_pointer_cast<Luxia::IMaterial>(asset);
-		auto shaderasset = std::dynamic_pointer_cast<Luxia::IShader>(asset);
-		auto sceneasset = std::dynamic_pointer_cast<Luxia::Scene>(asset);
-
-		if (texasset) {
+		switch (asset->type) {
+		case Luxia::AssetType::TextureType:{
+			auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
 			thumbnail = texasset->texID;
 			hasThumbnail = texasset->IsValid();
+			break;
 		}
-		else if (meshasset) {
+		case Luxia::AssetType::MeshType: {
 			thumbnail = mesh_default_thumbnail->texID;
 			hasThumbnail = mesh_default_thumbnail->IsValid();
+			break;
 		}
-		else if (matasset) {
+		case Luxia::AssetType::MaterialType: {
 			thumbnail = mat_default_thumbnail->texID;
 			hasThumbnail = mat_default_thumbnail->IsValid();
+			break;
 		}
-		else if (shaderasset) {
+		case Luxia::AssetType::ShaderType: {
 			thumbnail = shader_default_thumbnail->texID;
 			hasThumbnail = shader_default_thumbnail->IsValid();
+			break;
 		}
-		else if (sceneasset) {
+		case Luxia::AssetType::SceneType: {
 			thumbnail = scene_default_thumbnail->texID;
 			hasThumbnail = scene_default_thumbnail->IsValid();
+			break;
 		}
+		default:
+			break;
+		}
+
 
 		if (hasThumbnail)
 			ImGui::Image((ImTextureRef)thumbnail, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
@@ -206,6 +233,10 @@ namespace Talloren::Panels {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
 				CopyToClipboard(std::to_string((uint64_t)e_guid));
 			}
+			if (ImGui::MenuItem("Open", nullptr, nullptr, editorLayer->isOneSelected)) {
+				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+				OpenAsset(e_guid, editorLayer);
+			}
 			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, editorLayer->isOneSelected)) {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
 				auto it = asset_view->asset_parent_folders.find(e_guid);
@@ -230,6 +261,8 @@ namespace Talloren::Panels {
 				}
 			}
 
+			ImGui::Separator();
+			
 			if (ImGui::MenuItem("Import", nullptr, nullptr, editorLayer->areNoneSelected)) {
 				// Open Folder, if you choose something of supported type, import correctly
 				std::string fp = OpenFileDialogue();
@@ -252,8 +285,10 @@ namespace Talloren::Panels {
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Scene")) {
-					// its very weird, need to look into scene management
-					// asset_manager->CreateAssetFile<Luxia::AssetType::SceneType>("scenes", true, "NewScene");
+					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
+						auto scene = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::SceneType>(asset_view->selected_folder, false, "NewScene");
+						asset_view->RefreshAPFs(editorLayer);
+					}
 					ImGui::CloseCurrentPopup();
 				}
 
@@ -283,6 +318,7 @@ namespace Talloren::Panels {
 
 			ImGui::InputText("New Name", nameBuffer, sizeof(nameBuffer));
 
+			// Should also rename the actual file on disk, not just the asset name
 			if (ImGui::Button("Rename")) {
 				auto& asset = editorLayer->GetAssetManager()->GetAssetPool().at(guid);
 				asset->name = nameBuffer;

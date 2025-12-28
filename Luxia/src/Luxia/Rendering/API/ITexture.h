@@ -20,7 +20,7 @@ namespace Luxia {
 	public:
 		unsigned int texID = 0;
 
-		ITexture() = default;
+		ITexture() { type = Luxia::AssetType::TextureType; }
 		virtual ~ITexture() = default;
 
 		virtual void CreateFBOTex(const int width, const int height) = 0;
@@ -41,7 +41,7 @@ namespace Luxia {
 		unsigned int GetRBO() const { return rbo; }
 		bool IsFBOTex() const { return is_fbo_tex; }
 
-		TextureType type = TextureType::LX_TEXTURE_DIFFUSE;
+		TextureType tex_type = TextureType::LX_TEXTURE_DIFFUSE;
 		std::filesystem::path path = "";
 	protected:
 		int imgWidth = 0, imgHeight = 0, numColCh = 3;

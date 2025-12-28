@@ -5,9 +5,10 @@ namespace Luxia::Platform::OpenGL {
     class LUXIA_API GL_Material : public Luxia::IMaterial
     {
 	public:
-		GL_Material();
+		GL_Material() : IMaterial() {} 
 		GL_Material(const std::shared_ptr<IShader> matShader)
 			: Luxia::IMaterial(matShader) {
+			type = Luxia::AssetType::MaterialType;
 		}
 		~GL_Material() = default;
 

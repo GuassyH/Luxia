@@ -18,10 +18,10 @@ namespace Luxia {
 	class LUXIA_API Scene : public Luxia::Assets::Asset
 	{
 	public:
-		Scene() : reg(entt::registry()) {}
+		Scene() : reg(entt::registry()) { type = Luxia::AssetType::SceneType; }
 		~Scene() = default;
 
-		virtual bool Unload() override { reg.clear(); return true; }
+		virtual bool Unload() override;
 		void Load() { reg = entt::registry(); }
 
 		Entity& CreateEntity(std::string name = "Entity", Luxia::GUID guid = GUID(0));

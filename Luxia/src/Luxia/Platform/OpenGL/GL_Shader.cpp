@@ -35,6 +35,8 @@ namespace Luxia::Platform::OpenGL {
 		fragment_path = std::string(frag_path);
 		vertex_path = std::string(vert_path);
 
+		type = Luxia::AssetType::ShaderType;
+
 		Compile(fragSource, vertSource);
 	}
 

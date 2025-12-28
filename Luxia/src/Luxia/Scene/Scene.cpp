@@ -18,6 +18,9 @@ namespace Luxia {
 		if (guid != GUID(0)) {
 			ent.guid = guid;
 		}
+		else {
+			ent.guid = GUID();
+		}
 
 		entt::entity new_entt = reg.create();
 		reg.emplace<Luxia::Components::Transform>(new_entt);
@@ -64,10 +67,7 @@ namespace Luxia {
 			for (auto& comp : Luxia::componentRegistry) {
 				if (ent.transform) {
 					if (comp.hasFunc(ent.transform)) {
-						if (ImGui::MenuItem(comp.name.c_str())) {
-							comp.removeFunc(ent.transform);
-							ImGui::CloseCurrentPopup();
-						}
+						comp.removeFunc(ent.transform);
 					}
 				}
 			}
@@ -76,5 +76,20 @@ namespace Luxia {
 
 			runtime_entities.erase(EntityGUID);
 		}
+	}
+
+	bool Scene::Unload() {
+		std::vector<GUID> toDelete;
+		toDelete.reserve(runtime_entities.size());
+
+		for (auto& [guid, entity] : runtime_entities)
+			toDelete.push_back(guid);
+
+		for (auto& guid : toDelete)
+			DeleteEntity(guid);
+
+		runtime_entities.clear();
+		reg.clear();
+		return true;
 	}
 }

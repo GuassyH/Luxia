@@ -35,6 +35,7 @@ namespace Luxia
 
 
 		const std::shared_ptr<Luxia::AssetManager> GetAssetManager() { return asset_manager.lock(); }
+		const std::shared_ptr<Luxia::SceneManager> GetSceneManager() { return scene_manager.lock(); }
 		const std::shared_ptr<Luxia::Rendering::IRenderer> GetRenderer() { return renderer.lock(); }
 		const std::shared_ptr<Luxia::ProjectManager> GetProjectManager() { return project_manager.lock(); }
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }

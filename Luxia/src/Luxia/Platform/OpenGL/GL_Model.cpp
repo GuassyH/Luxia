@@ -34,13 +34,13 @@ namespace Luxia::Platform::OpenGL {
 				
 				switch (type) {
 				case aiTextureType_DIFFUSE:
-					tex->type = TextureType::LX_TEXTURE_DIFFUSE;
+					tex->tex_type = TextureType::LX_TEXTURE_DIFFUSE;
 					break;
 				case aiTextureType_SPECULAR:
-					tex->type = TextureType::LX_TEXTURE_SPECULAR;
+					tex->tex_type = TextureType::LX_TEXTURE_SPECULAR;
 					break;
 				case aiTextureType_NORMALS:
-					tex->type = TextureType::LX_TEXTURE_NORMALS;
+					tex->tex_type = TextureType::LX_TEXTURE_NORMALS;
 					break;
 				}
 

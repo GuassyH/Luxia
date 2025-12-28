@@ -5,7 +5,7 @@
 namespace Luxia::Platform::OpenGL {
 	class LUXIA_API GL_Texture : public ITexture {
 	public:
-		GL_Texture() = default;
+		GL_Texture() : ITexture() {}
 		~GL_Texture() = default;
 
 		virtual void CreateFBOTex(const int width, const int height) override;

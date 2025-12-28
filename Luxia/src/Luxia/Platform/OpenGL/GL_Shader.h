@@ -9,7 +9,7 @@
 namespace Luxia::Platform::OpenGL {
 	class LUXIA_API GL_Shader : public IShader {
 	public:
-		GL_Shader() = default;
+		GL_Shader() : IShader() {}
 		GL_Shader(const char* frag_path, const char* vert_path);
 		~GL_Shader() = default;
 

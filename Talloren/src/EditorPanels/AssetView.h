@@ -12,7 +12,7 @@ namespace Talloren::Panels {
 		virtual void Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 
 		virtual void OnEvent(Luxia::Event& e) override;
-		void RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer); // Asset Parent Folders
+		void RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer, bool reset_dir = false); // Asset Parent Folders
 		
 		std::unordered_map<Luxia::GUID, std::filesystem::path> asset_parent_folders;
 		std::filesystem::path selected_folder;

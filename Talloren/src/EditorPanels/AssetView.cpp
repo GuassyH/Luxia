@@ -12,8 +12,10 @@ namespace Talloren::Panels {
 	static AssetFolderTree astfoldertree;
 	static AssetViewer astviewer;
 
+
+
 	// Goes through each assetfile, checks its assets, sets asset parent folder
-	void AssetView::RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer) {
+	void AssetView::RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer, bool reset_dir) {
 		// Holy nested for if statement
 		asset_parent_folders.clear();
 
@@ -27,7 +29,9 @@ namespace Talloren::Panels {
 			}
 		}
 
-		selected_folder = editorLayer->GetAssetManager()->GetAssetDir();
+		if(reset_dir)
+			selected_folder = editorLayer->GetAssetManager()->GetAssetDir();
+
 		LX_INFO("AssetView: Refreshed Asset Parent Folders");
 	}
 
@@ -35,7 +39,7 @@ namespace Talloren::Panels {
 	// CORE
 	void AssetView::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - AssetView Panel: Init");
-		RefreshAPFs(editorLayer);
+		RefreshAPFs(editorLayer, true);
 		astviewer.Init();
 	}
 

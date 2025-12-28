@@ -5,7 +5,6 @@
 
 namespace Luxia::Platform::OpenGL {
 
-	GL_Material::GL_Material() = default;
 
 	void GL_Material::Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (shader) {

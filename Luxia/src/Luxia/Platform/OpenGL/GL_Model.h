@@ -10,7 +10,7 @@
 namespace Luxia::Platform::OpenGL {
 	class LUXIA_API GL_Model : public IModel {
 	public:
-		GL_Model() = default;
+		GL_Model() : IModel() {}
 		~GL_Model() = default;
 
 		virtual std::vector<std::shared_ptr<Mesh>> LoadFromPath(const std::filesystem::path& src_path) override;

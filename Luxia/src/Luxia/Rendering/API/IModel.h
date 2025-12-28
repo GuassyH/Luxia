@@ -14,7 +14,7 @@ namespace Luxia {
 	class Scene;
 	class LUXIA_API IModel : public Luxia::Assets::Asset {
 	public:
-		IModel() = default;
+		IModel() { type = Luxia::AssetType::ModelType; }
 		virtual ~IModel() = default;
 
 		virtual std::vector<std::shared_ptr<Mesh>> LoadFromPath(const std::filesystem::path& src_path) = 0; // temp shader

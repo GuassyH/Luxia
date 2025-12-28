@@ -11,7 +11,8 @@ namespace Luxia {
 		MaterialType	= 3,
 		ShaderType		= 4,
 		AudioType		= 5,
-		SceneType		= 6
+		SceneType		= 6,
+		MeshType		= 7,
 	};
 	inline AssetType PeakAssetType(const std::filesystem::path& metafile_path) {
 		if (!std::filesystem::exists(metafile_path)) { return Luxia::AssetType::NoType; }

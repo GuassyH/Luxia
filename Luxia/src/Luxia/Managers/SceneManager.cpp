@@ -17,7 +17,6 @@ namespace Luxia {
 			}
 		}
 
-
 		return true;
 	}
 
@@ -27,9 +26,14 @@ namespace Luxia {
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile) {
 		if (active_scene) { 
-			SceneSerializer oldserializer(active_scene, asset_manager);
-			oldserializer.Serialize();
+			if (!active_scene->assets.empty()) {
+				SceneSerializer oldserializer(active_scene, asset_manager);
+				oldserializer.Serialize();
+				active_scene->assets[0]->Unload();
+			}
 		}
+
+		// Set new Active Scene
 		active_scene = m_sceneFile;
 
 		SceneSerializer serializer(m_sceneFile, asset_manager);
