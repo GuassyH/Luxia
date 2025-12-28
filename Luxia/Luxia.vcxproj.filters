@@ -76,6 +76,9 @@
     <ClInclude Include="src\Luxia\Components\Component.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Components\ComponentRegistry.h">
+      <Filter>Luxia\Components</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
@@ -99,6 +102,12 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h">
       <Filter>Luxia\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\CustomYAML.h">
+      <Filter>Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Entity.h">
+      <Filter>Luxia</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Events\Event.h">
       <Filter>Luxia\Events</Filter>
@@ -229,15 +238,17 @@
     <ClInclude Include="src\Luxia\Scene\Scene.h">
       <Filter>Luxia\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Scene\SceneSerializer.h">
+      <Filter>Luxia\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\lxpch.h" />
-    <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
-    <ClInclude Include="src\Luxia\Entity.h" />
-    <ClInclude Include="src\Luxia\CustomYAML.h" />
-    <ClInclude Include="src\Luxia\Components\ComponentRegistry.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">
       <Filter>Luxia\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Components\ComponentRegistry.cpp">
+      <Filter>Luxia\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Core\Application.cpp">
       <Filter>Luxia\Core</Filter>
@@ -311,8 +322,9 @@
     <ClCompile Include="src\Luxia\Scene\Scene.cpp">
       <Filter>Luxia\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Luxia\Scene\SceneSerializer.cpp">
+      <Filter>Luxia\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\lxpch.cpp" />
-    <ClCompile Include="src\Luxia\Scene\SceneSerializer.cpp" />
-    <ClCompile Include="src\Luxia\Components\ComponentRegistry.cpp" />
   </ItemGroup>
 </Project>

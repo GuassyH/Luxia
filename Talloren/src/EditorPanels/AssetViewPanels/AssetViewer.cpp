@@ -198,8 +198,9 @@ namespace Talloren::Panels {
 			}
 		}
 
+		static bool openRenamePopup = false;
 
-		// Popup
+		// Asset Context Menu
 		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight)) {
 			if (ImGui::MenuItem("Copy", nullptr, nullptr, editorLayer->isOneSelected)) {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
@@ -211,6 +212,21 @@ namespace Talloren::Panels {
 				if (it != asset_view->asset_parent_folders.end()) {
 					const std::string pathStr = it->second.string(); // keep the string alive
 					ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
+				}
+			}
+			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->isOneSelected)) {
+				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+				auto it = asset_view->asset_parent_folders.find(e_guid);
+				if (it != asset_view->asset_parent_folders.end()) {
+					openRenamePopup = true;
+				}
+			}
+
+			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->areMultipleSelected || editorLayer->isOneSelected)) {
+				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+				auto it = asset_view->asset_parent_folders.find(e_guid);
+				if (it != asset_view->asset_parent_folders.end()) {
+					// Rename Stuff
 				}
 			}
 
@@ -230,7 +246,7 @@ namespace Talloren::Panels {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
-						editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(asset_view->selected_folder, false, "NewMaterial");
+						auto mat = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(asset_view->selected_folder, false, "NewMaterial");
 						asset_view->RefreshAPFs(editorLayer);
 					}
 					ImGui::CloseCurrentPopup();
@@ -245,6 +261,45 @@ namespace Talloren::Panels {
 			}
 			ImGui::EndPopup();
 		}
+
+
+		// Rename Popup
+		if (openRenamePopup) {
+			ImGui::OpenPopup("Rename Asset Popup");
+			openRenamePopup = false;
+		}
+
+		static char nameBuffer[256];
+		static bool init = false;
+
+		if (ImGui::BeginPopupModal("Rename Asset Popup", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
+			auto guid = *editorLayer->selected_assets.begin();
+
+			if (!init) {
+				auto& asset = editorLayer->GetAssetManager()->GetAssetPool().at(guid);
+				strcpy_s(nameBuffer, asset->name.c_str());
+				init = true;
+			}
+
+			ImGui::InputText("New Name", nameBuffer, sizeof(nameBuffer));
+
+			if (ImGui::Button("Rename")) {
+				auto& asset = editorLayer->GetAssetManager()->GetAssetPool().at(guid);
+				asset->name = nameBuffer;
+				init = false;
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Cancel")) {
+				init = false;
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
+		}
+
 	}
 
 }

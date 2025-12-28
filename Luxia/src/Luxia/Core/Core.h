@@ -13,6 +13,47 @@
 #endif // LUXIA_PLATFORM_WINDOWS
 
 
+#if defined(_MSC_VER)
+#define LX_DEBUG_BREAK() __debugbreak()
+#else
+#include <signal.h>
+#define LX_DEBUG_BREAK() raise(SIGTRAP)
+#endif
+
+
+// Enable asserts in debug builds (adjust if you want asserts in release)
+#if defined(LUXIA_DEBUG)
+
+	// Simple assert: logs the expression text
+#define LX_CORE_ASSERT(cond) \
+        do { \
+            if (!(cond)) { \
+                LX_CORE_ERROR("Assertion Failed: {}", #cond); \
+                LX_DEBUG_BREAK(); \
+                std::abort(); \
+            } \
+        } while (0)
+
+	// Assert with custom message (use same format style as LX_CORE_ERROR)
+	// Example: LX_CORE_ASSERT_MSG(ptr != nullptr, "ptr was null for id {}", id);
+#define LX_CORE_ASSERT_MSG(cond, ...) \
+        do { \
+            if (!(cond)) { \
+                LX_CORE_ERROR(__VA_ARGS__); \
+                LX_DEBUG_BREAK(); \
+                std::abort(); \
+            } \
+        } while (0)
+
+#else
+
+	// No-op in non-debug builds (change to still abort if you prefer)
+#define LX_CORE_ASSERT(cond) (void)0
+#define LX_CORE_ASSERT_MSG(cond, ...) (void)0
+
+#endif
+
+
 /// Input Definitions
 
 #ifdef LUXIA_RENDERER_OPENGL

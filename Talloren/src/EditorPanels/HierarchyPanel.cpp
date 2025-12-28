@@ -66,6 +66,8 @@ namespace Talloren::Panels {
 
 		if (!scene) { ImGui::End(); return; }
 
+		static bool openRenamePopup = false;
+
 		if (ImGui::IsWindowHovered()) {
 			if (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]) {
 				if (!ImGui::IsAnyItemHovered()) {
@@ -84,14 +86,14 @@ namespace Talloren::Panels {
 
 		if (ImGui::BeginPopupContextWindow("Create Object", ImGuiPopupFlags_MouseButtonRight)) {
 			// On Creation you should get the option to name the entity
-			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->areMultipleSelected)) {
+			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->isOneSelected || editorLayer->areMultipleSelected)) {
 				for (auto& guid : editorLayer->selected_assets) {
 					entitiesToDelete.push_back(guid);
 					ImGui::CloseCurrentPopup();
 				}
 			}
-			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->areMultipleSelected)) {
-				// entity.name = thing;
+			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->isOneSelected || editorLayer->areMultipleSelected)) {
+				openRenamePopup = true;
 				ImGui::CloseCurrentPopup();
 			}
 			ImGui::Separator();
@@ -128,16 +130,22 @@ namespace Talloren::Panels {
 				if (ImGui::MenuItem("Cube")) {
 					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Cube", editorLayer, scene);
+					auto& mr = new_entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
+					// mr.material = Luxia::Resources::DefaultMaterial();
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Sphere")) {
 					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Sphere", editorLayer, scene);
+					auto& mr = new_entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
+					// mr.material = Luxia::Resources::DefaultMaterial();
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Quad")) {
 					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Quad", editorLayer, scene);
+					auto& mr = new_entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
+					// mr.material = Luxia::Resources::DefaultMaterial();
 					ImGui::CloseCurrentPopup();
 				}
 
@@ -153,7 +161,46 @@ namespace Talloren::Panels {
 			ImGui::EndPopup();
 		}
 
-		for (auto ent : entitiesToDelete) {
+		// Rename Popup
+		if (openRenamePopup) {
+			ImGui::OpenPopup("Rename Entity Popup");
+			openRenamePopup = false;
+		}
+
+		static char nameBuffer[256];
+		static bool init = false;
+
+		if (ImGui::BeginPopupModal("Rename Entity Popup", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
+			auto guid = *editorLayer->selected_assets.begin();
+
+			if (!init) {
+				auto& ent = scene->runtime_entities.at(guid);
+				strcpy_s(nameBuffer, ent.name.c_str());
+				init = true;
+			}
+
+			ImGui::InputText("New Name", nameBuffer, sizeof(nameBuffer));
+
+			if (ImGui::Button("Rename")) {
+				auto& ent = scene->runtime_entities.at(guid);
+				ent.name = nameBuffer;
+				init = false;
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Cancel")) {
+				init = false;
+				ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
+		}
+
+
+		// Delete Entities
+		for (auto& ent : entitiesToDelete) {
 			scene->DeleteEntity(ent);
 		}
 		entitiesToDelete.clear();
@@ -161,12 +208,11 @@ namespace Talloren::Panels {
 		ImGui::End();
 	}
 	void HierarchyPanel::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		entitiesToDelete.clear();
 
 	}
 
 	void HierarchyPanel::OnEvent(Luxia::Event& e) {
-		Luxia::EventDispatcher dispatcher(e);
-
-		// dispatcher.Dispatch<Luxia::RenderCameraEvent>(LX_BIND_EVENT_FN(RenderImage));
+		// Luxia::EventDispatcher dispatcher(e);
 	}
 }

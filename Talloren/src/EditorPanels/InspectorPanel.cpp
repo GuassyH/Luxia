@@ -35,6 +35,7 @@ namespace Talloren::Panels {
 	static char meshbuff[255] = {};
 	static char matbuff[255] = {};
 	void InspectorPanel::RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid) {
+		ImGui::BeginChild("Entity");
 
 		if (!scene->runtime_entities.contains(e_guid)) { ImGui::End(); return; }
 
@@ -128,15 +129,18 @@ namespace Talloren::Panels {
 			}
 			ImGui::EndPopup();
 		}
+
+		ImGui::EndChild();
 	}
 
 	void InspectorPanel::RenderMaterial(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
-		ImGui::Text("Material");
+		ImGui::BeginChild("Material");
 
-		if (!editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(guid)) { return; }
 		std::shared_ptr<Luxia::IMaterial> mat = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(guid);
-
 		if (!mat) { return; }
+
+		ImGui::Text("Material: %s", mat->name.c_str());
+		ImGui::Separator();
 
 		DrawPasteField<Luxia::IShader>(editorLayer, mat->shader, "Shader");
 		ImGui::Spacing();
@@ -167,11 +171,86 @@ namespace Talloren::Panels {
 			ImGui::SliderFloat("Metallic", &mat->metallic, 0.0f, 1.0f);
 			ImGui::SliderFloat("Roughness", &mat->roughness, 0.0f, 1.0f);
 		}
+
+		ImGui::EndChild();
 	}
+
+	void InspectorPanel::RenderMesh(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
+		ImGui::BeginChild("Mesh");
+		
+		std::shared_ptr<Luxia::Mesh> mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(guid);
+		if (!mesh) { return; }
+
+		ImGui::Text("Mesh: %s", mesh->name.c_str());
+		ImGui::Separator();
+
+		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanFullWidth;
+
+		std::ostringstream vertinfo; vertinfo << "Vertices: " << mesh->vertices.size();
+		ImGui::PushID("MeshVerts");
+		bool v_open = ImGui::TreeNodeEx(vertinfo.str().c_str(), flags);
+		ImGui::PopID();
+
+		if (v_open) {
+			std::error_code ec;
+
+			for (const Luxia::Rendering::Vertex& vert : mesh->vertices) {
+				if (ec) continue;
+				ImGui::Text("Position: [%.2f, %.2f, %.2f]", vert.pos.x, vert.pos.y, vert.pos.z);
+			}
+			ImGui::TreePop();
+		}
+
+		std::ostringstream indinfo; indinfo << "Indices: " << mesh->indices.size();
+		ImGui::PushID("MeshInds");
+		bool i_open = ImGui::TreeNodeEx(indinfo.str().c_str(), flags);
+		ImGui::PopID();
+
+		if (i_open) {
+			for (int i = 0; i < mesh->indices.size(); i++) {
+				ImGui::Text("[%u]", mesh->indices[i]); // uint32_t
+				if (i % 3 == 2)
+					ImGui::Separator();
+				else
+					ImGui::SameLine();
+			}
+			ImGui::TreePop();
+		}
+		ImGui::EndChild();
+	}
+
+	void InspectorPanel::RenderShader(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
+		ImGui::BeginChild("Shader");
+
+		std::shared_ptr<Luxia::IShader> shader = editorLayer->GetAssetManager()->GetAsset<Luxia::IShader>(guid);
+		if (!shader) { return; }
+
+		ImGui::Text("Shader: %s", shader->name.c_str());
+		ImGui::Separator();
+
+		std::string typetext = "Type: Surface";
+		ImGui::Text(typetext.c_str());
+		if(ImGui::IsItemHovered())
+		{
+			ImGui::BeginTooltip();
+			ImGui::TextColored(ImVec4(1, 1, 0, 1), "Currently, only surface shaders are supported.");
+			ImGui::EndTooltip();
+		}
+
+		ImGui::Spacing();
+		ImGui::TextWrapped("Vertex Shader Path: %s", shader->GetVertPath().c_str());
+		ImGui::TextWrapped("Fragment Shader Path: %s", shader->GetFragPath().c_str());
+
+		ImGui::EndChild();
+	}
+
 
 	static enum class InspectorMode {
 		Entity,
 		Material,
+		Mesh,
+		Texture,
+		Shader,
 		None
 	};
 	InspectorMode currentMode = InspectorMode::None;
@@ -182,15 +261,27 @@ namespace Talloren::Panels {
 		currentMode = InspectorMode::None;
 
 		if (editorLayer->areNoneSelected) { ImGui::End(); return; }
-		if (!editorLayer->isOneSelected) { ImGui::End(); return; }
+		if (!editorLayer->isOneSelected) { 
+			ImGui::Text("Multiple items selected - Not supported yet");
+			ImGui::End(); 
+			return; 
+		}
 
 		Luxia::GUID e_guid = Luxia::GUID(0);
 		e_guid = *editorLayer->selected_assets.begin();
 
 		if(scene->runtime_entities.contains(e_guid))
 			currentMode = InspectorMode::Entity;
+		else if (!editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid))
+			currentMode = InspectorMode::None;
+		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(e_guid))
+			currentMode = InspectorMode::Mesh;
 		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(e_guid))
 			currentMode = InspectorMode::Material;
+		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::ITexture>(e_guid))
+			currentMode = InspectorMode::Texture;
+		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::IShader>(e_guid))
+			currentMode = InspectorMode::Shader;
 		else
 			currentMode = InspectorMode::None;
 
@@ -202,7 +293,11 @@ namespace Talloren::Panels {
 		case Talloren::Panels::InspectorMode::Material:
 			RenderMaterial(editorLayer, e_guid);
 			break;
-		case Talloren::Panels::InspectorMode::None:
+		case Talloren::Panels::InspectorMode::Mesh:
+			RenderMesh(editorLayer, e_guid);
+			break;
+		case Talloren::Panels::InspectorMode::Shader:
+			RenderShader(editorLayer, e_guid);
 			break;
 		default:
 			break;

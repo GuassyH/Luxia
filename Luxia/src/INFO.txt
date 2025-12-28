@@ -1,18 +1,16 @@
 IMPORTANT
 
-YAML
+- YAML
 	For some reason you NEED to use the debug build in debug mode and the release build in release.
 	No clue why, but i want to fix in the future, for now im just going to focus on advancing
 
-Initializing OpenGL should happen in the openGL renderer, NOT the Window
+- Initializing OpenGL should happen in the openGL renderer, NOT the Window
 
-SetParent 
+- SetParent 
 	Setting Parent should calculate the new size, and de-setting should also, so that you dont mess up the size
 
-Menus For the editor (addcomponent)
+- Scene Index (right now their order is based on when they are loaded)
 
-Scene Index (right now their order is based on when they are loaded)
+- Resources (like built in shaders and meshes that come with the engine) should be loaded once, and not per scene, and shared across projects)
 
-Maybe change PlatformDefinitions to Macros. 
-	LX_CREATE_SHADER(__VA_ARGS__) instead of Platform::Assets::CreateShader();
-	Less code to compile / include / write
+- Renaming entities and assetfiles in the editor

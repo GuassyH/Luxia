@@ -32,6 +32,9 @@ namespace Luxia::Platform::OpenGL {
 		const char* vertSource = vertCode.c_str();
 		const char* fragSource = fragCode.c_str();
 
+		fragment_path = std::string(frag_path);
+		vertex_path = std::string(vert_path);
+
 		Compile(fragSource, vertSource);
 	}
 

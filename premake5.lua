@@ -25,8 +25,16 @@ project "LuxiaVendor"
 		"Luxia/vendor/yaml-cpp/include",
 	}
 
-	libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
-	links { "yaml-cppd" }
+
+	filter "configurations:Debug"
+		links { "yaml-cppd" }
+		libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
+
+	filter "configurations:Release"
+		links { "yaml-cpp" }
+		libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
+
+	filter {}
 
 	filter "system:windows"
 		cppdialect "C++20"
@@ -100,23 +108,26 @@ project "Luxia"
 		}
 
 		
-		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib", "Luxia/vendor/yaml-cpp/build/Debug" }
+		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib" }
 		links { 
 			"glfw3dll",
 			"opengl32", 
 			"assimp-vc143-mtd",
-			"yaml-cppd"
 		}
 
 	-- Specify how to build different configs
 	filter "configurations:Debug"
 		defines "LUXIA_DEBUG"
 		runtime "Debug"
+	    links { "yaml-cppd" }
+		libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LUXIA_RELEASE"
 		runtime "Release"
+		links { "yaml-cpp" }
+		libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
 		optimize "On"
 
 	filter "configurations:Distribution"
@@ -155,14 +166,12 @@ project "Talloren"
 	libdirs {
 		"Luxia/vendor/glfw",
 		"Luxia/vendor/assimp/lib",
-		"Luxia/vendor/yaml-cpp/build/Debug"
 	}
 	links{
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
 		"assimp-vc143-mtd",
-		"yaml-cppd"
 	}
 
 	filter "system:windows"
@@ -183,10 +192,14 @@ project "Talloren"
 	-- Specify how to build different configs
 	filter "configurations:Debug"
 		defines "LUXIA_DEBUG"
+		links { "yaml-cppd" }
+		libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LUXIA_RELEASE"
+		links { "yaml-cpp" }
+		libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
 		optimize "On"
 
 	filter "configurations:Distribution"

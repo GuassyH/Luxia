@@ -12,9 +12,9 @@ namespace Talloren::Layers {
 		entt::registry editor_reg;
 		std::unordered_set<Luxia::GUID> selected_assets;
 
-		bool areNoneSelected = false;
-		bool isOneSelected = false;
-		bool areMultipleSelected = false;
+		bool areNoneSelected = false; // selected == 0
+		bool isOneSelected = false; // selected == 1
+		bool areMultipleSelected = false; // selected > 1
 
 		std::vector<std::shared_ptr<Talloren::IEditorPanel>> panels;
 

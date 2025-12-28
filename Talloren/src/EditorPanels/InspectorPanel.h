@@ -17,8 +17,10 @@ namespace Talloren::Panels {
 
 		std::string PasteFromClipboard();
 	private:
+		void RenderMesh(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 		void RenderMaterial(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 		void RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid);
+		void RenderShader(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 
 		template <typename T>
 		void DrawPasteField(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
@@ -42,14 +44,12 @@ namespace Talloren::Panels {
 			std::string field_label = txt.str();
 			std::string field_hint = asset_to_assign ? std::to_string(asset_to_assign->guid) : "none";
 
-			std::ostringstream hvr_txt; hvr_txt << label << " GUID";
-
 			ImGui::SameLine();
 			ImGui::Text(field_label.c_str());
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
-				ImGui::Text(hvr_txt.str().c_str());
+				ImGui::Text("%s GUID", label);
 				ImGui::Separator();
 				ImGui::TextColored(ImVec4(1, 1, 0, 1), field_hint.c_str());
 				ImGui::EndTooltip();

@@ -4,12 +4,24 @@
     <Filter Include="EditorPanels">
       <UniqueIdentifier>{6FDCDA8C-5B3F-6A31-04C5-A2E7F00636B4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EditorPanels\AssetViewPanels">
+      <UniqueIdentifier>{9C2B9A84-88E6-8930-319E-027B1D38D4C0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="EditorScripts">
       <UniqueIdentifier>{F4161A14-60D7-954A-2912-DFC79591DA26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h" />
+    <ClInclude Include="src\EditorPanels\AssetView.h">
+      <Filter>EditorPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.h">
+      <Filter>EditorPanels\AssetViewPanels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetViewer.h">
+      <Filter>EditorPanels\AssetViewPanels</Filter>
+    </ClInclude>
     <ClInclude Include="src\EditorPanels\GameViewport.h">
       <Filter>EditorPanels</Filter>
     </ClInclude>
@@ -26,12 +38,18 @@
       <Filter>EditorScripts</Filter>
     </ClInclude>
     <ClInclude Include="src\IEditorPanel.h" />
-    <ClInclude Include="src\EditorPanels\AssetView.h" />
-    <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.h" />
-    <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
+    <ClCompile Include="src\EditorPanels\AssetView.cpp">
+      <Filter>EditorPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp">
+      <Filter>EditorPanels\AssetViewPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetViewer.cpp">
+      <Filter>EditorPanels\AssetViewPanels</Filter>
+    </ClCompile>
     <ClCompile Include="src\EditorPanels\GameViewport.cpp">
       <Filter>EditorPanels</Filter>
     </ClCompile>
@@ -45,8 +63,5 @@
       <Filter>EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\Talloren.cpp" />
-    <ClCompile Include="src\EditorPanels\AssetView.cpp" />
-    <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp" />
-    <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetViewer.cpp" />
   </ItemGroup>
 </Project>

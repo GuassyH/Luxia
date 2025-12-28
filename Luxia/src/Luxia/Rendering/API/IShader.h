@@ -46,6 +46,9 @@ namespace Luxia {
 		virtual void SetMat2(const std::string& name, const glm::mat2& mat) const = 0;
 		virtual void SetMat3(const std::string& name, const glm::mat3& mat) const = 0;
 		virtual void SetMat4(const std::string& name, const glm::mat4& mat) const = 0;
+	
+		std::string GetFragPath() const { return fragment_path; }
+		std::string GetVertPath() const { return vertex_path; }
 	protected:
 		std::string fragment_path;
 		std::string vertex_path;

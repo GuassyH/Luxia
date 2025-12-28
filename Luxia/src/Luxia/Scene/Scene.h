@@ -39,9 +39,11 @@ namespace Luxia {
 			return reg.try_get<T>(entity);
 		}
 		template<typename T>
-		T* TryGetFromEntity(const Luxia::Entity& entity) { // Only implemented to make it more readable to me
-			entt::entity = runtime_entities.find(entity.guid)->second.transform->ent_id;
-			return reg.try_get<T>(entity);
+		T* TryGetFromEntity(const Luxia::Entity& entity) {
+			auto it = runtime_entities.find(entity.guid);
+			if (it == runtime_entities.end() || !it->second.transform) return nullptr;
+			entt::entity ent = it->second.transform->ent_id;
+			return reg.try_get<T>(ent);
 		}
 
 		template<typename T>
@@ -49,9 +51,11 @@ namespace Luxia {
 			return reg.get<T>(entity);
 		}
 		template<typename T>
-		T& GetFromEntity(const Luxia::Entity& entity) { // Only implemented to make it more readable to me
-			entt::entity = runtime_entities.find(entity.guid)->second.transform->ent_id;
-			return reg.get<T>(entity);
+		T& GetFromEntity(const Luxia::Entity& entity) {
+			auto it = runtime_entities.find(entity.guid);
+			LX_CORE_ASSERT(it != runtime_entities.end() && it->second.transform, "Entity not found");
+			entt::entity ent = it->second.transform->ent_id;
+			return reg.get<T>(ent);
 		}
 
 

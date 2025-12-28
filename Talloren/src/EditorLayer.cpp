@@ -24,7 +24,7 @@ namespace Talloren::Layers {
 	void EditorLayer::UpdateSelectedConditions() {
 		areNoneSelected = (selected_assets.empty());
 		isOneSelected = (selected_assets.size() == 1);
-		areMultipleSelected = (selected_assets.size() >= 1);
+		areMultipleSelected = (selected_assets.size() > 1);
 	}
 	
 	void EditorLayer::OnAttach() {
