@@ -80,6 +80,11 @@ namespace Talloren::Panels {
 		}
 		#pragma endregion
 
+		if(!shouldDrawWindowContents){
+			ImGui::End();
+			return;
+		}
+
 		// ImGuiDockNodeFlags const dockFlags = shouldDrawWindowContents ? ImGuiDockNodeFlags_None : ImGuiDockNodeFlags_KeepAliveOnly;
 		ImGui::DockSpace(dockspaceID, ImGui::GetContentRegionAvail(), ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton, &assetViewClass);
 
