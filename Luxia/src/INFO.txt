@@ -16,3 +16,7 @@ IMPORTANT
 - Renaming entities and assetfiles in the editor
 
 - Inefficient AssetFile and MetaFile relationship, maybe they should have the same GUID? That would make lookups faster
+
+- Rendering on a seperate thread? Performance boost ash
+
+- Performance profiling window

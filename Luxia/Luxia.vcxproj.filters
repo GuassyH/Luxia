@@ -243,6 +243,7 @@
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
     <ClInclude Include="src\Luxia\Events\MessageEvent.h" />
+    <ClInclude Include="src\Luxia\Core\Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

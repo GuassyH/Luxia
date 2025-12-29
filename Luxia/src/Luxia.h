@@ -5,6 +5,7 @@
 #include "Luxia/Core/Core.h"
 #include "Luxia//Core/Log.h"
 #include "Luxia/Core/Application.h"
+#include "Luxia/Core/Time.h"
 
 // Rendering
 #include "Luxia/Rendering/API/IRenderer.h"

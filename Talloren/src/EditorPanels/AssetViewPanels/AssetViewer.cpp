@@ -240,7 +240,12 @@ namespace Talloren::Panels {
 		// For each asset in the assets_to_draw map, draw it (will be more polished later)
 		float cellSize = 100.0f;
 		float padding = 10.0f;
-		float panelWidth = ImGui::GetContentRegionAvail().x;
+		ImVec2 avail = ImGui::GetContentRegionAvail();
+		float panelWidth = avail.x;
+
+		if (avail.x <= 1.0f || avail.y <= 1.0f)
+			return;
+
 		int columns = (int)(panelWidth / (cellSize + padding));
 		if (columns < 1) columns = 1;
 

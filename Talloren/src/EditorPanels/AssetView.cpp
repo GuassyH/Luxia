@@ -12,8 +12,6 @@ namespace Talloren::Panels {
 	static AssetFolderTree astfoldertree;
 	static AssetViewer astviewer;
 
-
-
 	void AssetView::RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer, bool reset_dir) {
 		asset_parent_folders.clear();
 
@@ -44,19 +42,26 @@ namespace Talloren::Panels {
 	}
 
 	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		ImGuiWindowClass assetViewWindowClass;
+		assetViewWindowClass.ClassId = ImGui::GetID("AssetView_WindowClass");
+		assetViewWindowClass.DockingAllowUnclassed = false;
+
+		ImGui::SetNextWindowClass(&assetViewWindowClass);
 		bool const shouldDrawWindowContents = ImGui::Begin("Asset View");
 
 		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
 
 		#pragma region Dockspace
 		ImGuiID const dockspaceID = ImGui::GetID("AssetView_Dockspace");
-		ImGuiWindowClass workspaceWindowClass;
-		workspaceWindowClass.ClassId = dockspaceID;
-		workspaceWindowClass.DockingAllowUnclassed = false;
+		ImGuiWindowClass assetViewClass;
+		assetViewClass.ClassId = dockspaceID;
+		assetViewClass.DockingAllowUnclassed = false;
 
-		if (!ImGui::DockBuilderGetNode(dockspaceID)) {
+		static bool asset_dock_built = false;
+		if (!asset_dock_built) {
+			ImGui::DockBuilderRemoveNode(dockspaceID); 
 			ImGui::DockBuilderAddNode(dockspaceID, ImGuiDockNodeFlags_DockSpace | ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton);
-			ImGui::DockBuilderSetNodeSize(dockspaceID, ImGui::GetContentRegionAvail());
+			ImGui::DockBuilderSetNodeSize(dockspaceID, ImGui::GetMainViewport()->WorkSize);
 
 			ImGuiID leftDockID = 0, rightDockID = 0;
 			ImGui::DockBuilderSplitNode(dockspaceID, ImGuiDir_Left, 0.5f, &leftDockID, &rightDockID);
@@ -65,16 +70,18 @@ namespace Talloren::Panels {
 			ImGuiDockNode* pRightNode = ImGui::DockBuilderGetNode(rightDockID);
 			pLeftNode->LocalFlags |= ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDockingSplit | ImGuiDockNodeFlags_NoDockingOverMe;
 			pRightNode->LocalFlags |= ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDockingSplit | ImGuiDockNodeFlags_NoDockingOverMe;
+			
 			// Dock windows
 			ImGui::DockBuilderDockWindow("LeftWindow", leftDockID);
 			ImGui::DockBuilderDockWindow("RightWindow", rightDockID);
 
 			ImGui::DockBuilderFinish(dockspaceID);
+			asset_dock_built = true;
 		}
+		#pragma endregion
 
-		ImGuiDockNodeFlags const dockFlags = shouldDrawWindowContents ? ImGuiDockNodeFlags_None : ImGuiDockNodeFlags_KeepAliveOnly;
-		ImGui::DockSpace(dockspaceID, ImGui::GetContentRegionAvail(), dockFlags, &workspaceWindowClass);
-#pragma endregion
+		// ImGuiDockNodeFlags const dockFlags = shouldDrawWindowContents ? ImGuiDockNodeFlags_None : ImGuiDockNodeFlags_KeepAliveOnly;
+		ImGui::DockSpace(dockspaceID, ImGui::GetContentRegionAvail(), ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton, &assetViewClass);
 
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw = {};
 
@@ -94,10 +101,7 @@ namespace Talloren::Panels {
 			astviewer.DrawAssetFiles(editorLayer, this, assets_to_draw);
 			ImGui::End();
 		}
-
-		// should be menu
-
-
+			
 		ImGui::End();
 	}
 

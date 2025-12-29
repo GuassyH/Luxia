@@ -15,12 +15,11 @@ namespace Talloren::Layers {
 		virtual void OnAttach() override { 
 			LX_WARN("ExtraLayer Attached");
 
-			// Makesure scenemanager exists and scene exists
+			// Makesure scene manager exists and scene exists
 			auto sceneMgr = GetSceneManager();
 			if (!sceneMgr) { LX_CORE_WARN("No SceneManager available yet"); return; }
 			if (sceneMgr->scene_files.empty()) { LX_CORE_WARN("No scenes available"); return; }
 			sceneMgr->SetActiveScene(0);
-		
 		}
 		virtual void OnDetach() override {
 			LX_WARN("ExtraLayer Detached");

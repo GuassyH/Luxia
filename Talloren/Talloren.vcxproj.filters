@@ -38,6 +38,7 @@
       <Filter>EditorScripts</Filter>
     </ClInclude>
     <ClInclude Include="src\IEditorPanel.h" />
+    <ClInclude Include="src\EditorPanels\Profiler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
@@ -63,5 +64,6 @@
       <Filter>EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\Talloren.cpp" />
+    <ClCompile Include="src\EditorPanels\Profiler.cpp" />
   </ItemGroup>
 </Project>

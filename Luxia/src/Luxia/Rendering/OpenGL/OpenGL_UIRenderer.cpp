@@ -17,6 +17,8 @@ namespace Luxia::Rendering::OpenGL {
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigDockingAlwaysTabBar = true;
+		
+		io.DisplaySize = ImVec2(1920, 1080);
 
 		ImGui::StyleColorsDark();
 

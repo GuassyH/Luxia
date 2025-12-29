@@ -9,6 +9,7 @@
 #include "Luxia/Layers/UILayer.h"
 
 #include "Luxia/Mesh.h"
+#include "Luxia/Core/Time.h"
 
 namespace Luxia
 {
@@ -51,6 +52,7 @@ namespace Luxia
 	{
 		// While the window is running loop
 		while (m_Window->isRunning()) {
+			Core::Time::get().update();
 			m_Window->BeginFrame();
 			m_Renderer->GetUIRenderer()->BeginFrame();
 			m_EventHandler->DispatchAll(this);

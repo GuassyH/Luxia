@@ -181,6 +181,7 @@
     <ClInclude Include="src\Luxia\Core\EntryPoint.h" />
     <ClInclude Include="src\Luxia\Core\GUID.h" />
     <ClInclude Include="src\Luxia\Core\Log.h" />
+    <ClInclude Include="src\Luxia\Core\Time.h" />
     <ClInclude Include="src\Luxia\Core\WeakPtrProxy.h" />
     <ClInclude Include="src\Luxia\CustomYAML.h" />
     <ClInclude Include="src\Luxia\Entity.h" />
