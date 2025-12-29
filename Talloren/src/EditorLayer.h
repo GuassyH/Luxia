@@ -1,6 +1,7 @@
 #pragma once
 #include "Luxia.h"
 #include "IEditorPanel.h"
+#include <unordered_set>
 
 namespace Talloren::Layers {
 	class EditorLayer : public Luxia::Layer
@@ -16,7 +17,7 @@ namespace Talloren::Layers {
 		bool isOneSelected = false; // selected == 1
 		bool areMultipleSelected = false; // selected > 1
 
-		std::vector<std::shared_ptr<Talloren::IEditorPanel>> panels;
+		std::unordered_set<std::shared_ptr<Talloren::IEditorPanel>> panels;
 
 		void ClearSelected();
 		void InsertSelected(Luxia::GUID guid);
@@ -26,7 +27,27 @@ namespace Talloren::Layers {
 
 		void PushPanel(std::shared_ptr<Talloren::IEditorPanel> m_panel) {
 			m_panel->Init(this, scene_manager->GetActiveScene()); 
-			panels.push_back(std::move(m_panel));
+			panels.insert(std::move(m_panel));
+		}
+
+		void RemovePanel(std::string& name) {
+			for (auto it = panels.begin(); it != panels.end(); ++it) {
+				if ((*it)->GetName() == name) {
+					(*it)->Unload(this, scene_manager->GetActiveScene());
+					panels.erase(it); // erase using iterator
+					return;           // exit after removing
+				}
+			}
+		}
+
+		template <typename T>
+		bool HasPanel() {
+			for (auto& panel : panels) {
+				if (std::dynamic_pointer_cast<T>(panel)) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		virtual void OnAttach() override;

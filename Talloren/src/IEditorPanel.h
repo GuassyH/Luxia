@@ -19,7 +19,20 @@ namespace Talloren {
 		virtual void Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) = 0;
 
 		bool opened = true;
+		std::string& GetName() { return name; }
 
 		virtual void OnEvent(Luxia::Event& e) = 0;
+
+		void TabPopupContextMenu() {
+					
+			if (ImGui::BeginPopupContextItem((std::string("TabContext_") + name).c_str())) {
+				if (ImGui::MenuItem("Close"))
+					opened = false;
+				ImGui::EndPopup();
+			}
+		}
+
+	protected:
+		std::string name = "Editor Panel";
 	};
 };

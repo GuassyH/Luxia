@@ -11,6 +11,8 @@ namespace Talloren::Panels {
 	void Profiler::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
 	void Profiler::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Profiler", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		name = "Profiler";
+		TabPopupContextMenu();
 
 		// Now how the hell do i implement this
 		ImGui::Text("=== Performance Metrics ===");

@@ -37,7 +37,7 @@ namespace Luxia::Layers {
 		std::shared_ptr<Luxia::ITexture> output_tex = e.GetTexture();
 
 		// If any of these fail, we don't render to the viewport, and dont consume the event
-		if (!e.IsMainCamera() || e.IsEditorCamera()) { LX_CORE_ERROR("ViewportLayer: Camera is editor or not main"); return false; }
+		if (!e.IsMainCamera() || e.IsEditorCamera()) { return false; }
 		if (!output_tex) { LX_CORE_ERROR("ViewportLayer: Camera Tex is nullptr"); return false; }
 		if (!output_tex->IsValid()) { LX_CORE_ERROR("ViewportLayer: Camera Tex is not valid"); return false; }
 

@@ -46,8 +46,11 @@ namespace Talloren::Panels {
 		assetViewWindowClass.ClassId = ImGui::GetID("AssetView_WindowClass");
 		assetViewWindowClass.DockingAllowUnclassed = true;
 
+
 		ImGui::SetNextWindowClass(&assetViewWindowClass);
 		bool const shouldDrawWindowContents = ImGui::Begin("Asset View", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		name = "Asset View";
+		TabPopupContextMenu();
 
 		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
 

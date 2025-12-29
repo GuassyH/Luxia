@@ -7,6 +7,8 @@ namespace Talloren::Panels {
 	}
 	void GameViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Game View", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		name = "Game View";
+		TabPopupContextMenu();
 
 		if (!output_texture) { ImGui::End(); return; }
 

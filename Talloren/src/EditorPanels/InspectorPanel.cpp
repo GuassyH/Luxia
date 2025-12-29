@@ -255,6 +255,8 @@ namespace Talloren::Panels {
 
 	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Inspector Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		name = "Inspector Panel";
+		TabPopupContextMenu();
 
 		currentMode = InspectorMode::None;
 

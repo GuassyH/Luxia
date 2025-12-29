@@ -7,7 +7,8 @@
 #include "EditorPanels/Profiler.h"
 
 namespace Talloren::Layers {
-	
+	static std::vector<std::string> layers_to_remove;
+
 	void EditorLayer::ClearSelected() {
 		selected_assets.clear();
 		UpdateSelectedConditions();
@@ -115,6 +116,31 @@ namespace Talloren::Layers {
 				ImGui::EndMenu();
 			}
 
+			if (ImGui::BeginMenu("Layer")) {
+				if (ImGui::BeginMenu("Add Layer")) {
+
+					if (ImGui::MenuItem("Asset View", nullptr, nullptr, !HasPanel<Panels::AssetView>())) {
+						PushPanel(std::make_shared<Talloren::Panels::AssetView>());
+					}
+					if (ImGui::MenuItem("Game Viewport", nullptr, nullptr, !HasPanel<Panels::GameViewport>())) {
+						PushPanel(std::make_shared<Talloren::Panels::GameViewport>());
+					}
+					if (ImGui::MenuItem("Hierarchy", nullptr, nullptr, !HasPanel<Panels::HierarchyPanel>())) {
+						PushPanel(std::make_shared<Talloren::Panels::HierarchyPanel>());
+					}
+					if (ImGui::MenuItem("Inspector", nullptr, nullptr, !HasPanel<Panels::InspectorPanel>())) {
+						PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
+					}
+					if (ImGui::MenuItem("Scene Viewport", nullptr, nullptr, !HasPanel<Panels::SceneViewport>())) {
+						PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
+					}
+
+					ImGui::EndMenu();
+				}
+				
+				ImGui::EndMenu();
+			}
+
 			ImGui::EndMenuBar();
 		}
 
@@ -131,24 +157,27 @@ namespace Talloren::Layers {
 
 		}
 
-		
 		// RENDER WINDOWS
 		for (auto panel : panels) {
 			panel->Render(this, scene_manager->GetActiveScene());
+			if (!panel->opened) {
+				layers_to_remove.push_back(panel->GetName());
+			}
 		}
 
 		if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL) && Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
 			scene_manager->SaveActiveScene();
 		}
 
+		for (auto& layer_name : layers_to_remove) {
+			RemovePanel(layer_name);
+		}
+
+		layers_to_remove.clear();
+
 		ImGui::End();
 
-	/*	if (give_profiler_response) {
-			time_accumulator += Luxia::Core::Time::get().deltaTime;
-			PUSH_EVENT(Luxia::ProfilerResponseEvent, "EditorLayer - Render", time_accumulator);
-			give_profiler_response = false;
-			time_accumulator = 0.0;
-		}*/
+
 	}
 
 	void EditorLayer::OnEvent(Luxia::Event& e) {
