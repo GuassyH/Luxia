@@ -18,10 +18,13 @@ namespace Luxia::Assets {
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::MaterialType;
+			guid = GUID();
 
 			std::shared_ptr<Luxia::IMaterial> mat = Platform::Assets::CreateMaterial();
 			mat->name = m_assetPath.filename().replace_extension("").string();
+			mat->assetFileGUID = guid;
 			mat->guid = GUID();
+
 			assets.push_back(mat);
 
 			Save(m_assetPath);
@@ -39,8 +42,11 @@ namespace Luxia::Assets {
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
+				guid = GUID(config["AssetFileGUID"].as<uint64_t>());
+
 				mat->name = config["Name"].as<std::string>();
 				mat->guid = GUID(config["GUID"].as<uint64_t>());
+				mat->assetFileGUID = guid;
 
 				if (auto propConfig = config["Properties"]) {
 					shaderGUID = GUID(propConfig["Shader"].as<uint64_t>());
@@ -75,6 +81,7 @@ namespace Luxia::Assets {
 
 			out << YAML::BeginMap;
 
+			out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)guid;
 			out << YAML::Key << "Name" << YAML::Value << mat->name;
 			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)mat->guid;
 			out << YAML::Key << "Properties" << YAML::BeginMap;

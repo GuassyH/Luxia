@@ -31,10 +31,11 @@ namespace Luxia {
 					continue;
 				}
 
-				asset_file->guid = meta_file->guid;
+				asset_file->metaGUID = meta_file->guid;
+				meta_file->assetGUID = asset_file->guid;
 
 				// Assign both files pools
-				assetfile_pool[meta_file->guid] = asset_file;
+				assetfile_pool[asset_file->guid] = asset_file;
 				meta_pool[meta_file->guid] = meta_file;
 			}
 		}
@@ -84,9 +85,9 @@ namespace Luxia {
 		// Save metafile, then save asset_file
 		for (auto& [guid, asset_file] : assetfile_pool) {
 
-			meta_pool.find(guid)->second->Save();
+			meta_pool.find(asset_file->metaGUID)->second->Save();
 			if (asset_file) {
-				asset_file->Save(meta_pool.find(guid)->second->assetPath);
+				asset_file->Save(meta_pool.find(asset_file->metaGUID)->second->assetPath);
 			}
 		}
 
@@ -122,13 +123,12 @@ namespace Luxia {
 		{Luxia::AssetType::ModelType, ".luxmodel"},
 		{Luxia::AssetType::TextureType, ".luxtex"},
 		{Luxia::AssetType::MaterialType, ".luxmat"},
+		{Luxia::AssetType::AudioType, ".luxaudio"},
 	};
 
 	// Renames both the asset file and the metafile, and updates the asset and metafile names
 	bool AssetManager::RenameAsset(GUID assetGUID, std::string newName) {
-		/// Currently has O(n) * 2 complexity due to searching for assetfile and metafile
-		/// This could be changed to O(1) by storing GUIDs in the Asset class
-		/// I need to look into this more later
+		// O(1) lookup time
 
 		auto it = asset_pool.find(assetGUID);
 		if (it == asset_pool.end() || !it->second) {
@@ -136,6 +136,10 @@ namespace Luxia {
 			return false;
 		}
 		auto asset = it->second;
+		if(!asset) { 
+			LX_CORE_ERROR("RenameAsset: Asset is nullptr for GUID {}", (uint64_t)assetGUID);
+			return false;
+		}
 
 		// Meshes are internal, so just rename the asset
 		if(asset->type == AssetType::MeshType) {
@@ -147,37 +151,22 @@ namespace Luxia {
 		std::shared_ptr<Assets::AssetFile> assetfile = nullptr;
 		std::shared_ptr<Assets::MetaFile> metafile = nullptr;
 
-		for (auto& [guid, af] : assetfile_pool) {
-			if (!af) continue;
+		assetfile = assetfile_pool.find(asset->assetFileGUID)->second;
+		metafile = meta_pool.find(assetfile->metaGUID)->second;
 
-			for (auto& asset : af->assets) {
-				if (!asset) continue;
-				
-				if (asset->guid == assetGUID) {
-					assetfile = af;
-					break;
-				}
-			}
-
-			if (assetfile) break;
-		}
-
-		if (!assetfile){
-			LX_CORE_ERROR("AssetManager: RenameAsset failed to find AssetFile for asset GUID {}", (uint64_t)assetGUID);
+		auto af_it = assetfile_pool.find(asset->assetFileGUID);
+		if (af_it == assetfile_pool.end() || !af_it->second) {
+			LX_CORE_ERROR("RenameAsset: AssetFile not found for asset GUID {}", (uint64_t)assetGUID);
 			return false;
 		}
+		assetfile = af_it->second;
 
-		for (auto& [guid, mf] : meta_pool) {
-			if (mf->assetPath == assetfile->assetPath) {
-				metafile = mf;
-				break;
-			}
-		}
-
-		if (!metafile) {
-			LX_CORE_ERROR("AssetManager: RenameAsset failed to find MetaFile for asset GUID {}", (uint64_t)assetGUID);
+		auto mf_it = meta_pool.find(assetfile->metaGUID);
+		if (mf_it == meta_pool.end() || !mf_it->second) {
+			LX_CORE_ERROR("RenameAsset: MetaFile not found for asset GUID {}", (uint64_t)assetGUID);
 			return false;
 		}
+		metafile = mf_it->second;
 
 		// Make assetfile path
 		std::filesystem::path old_astfile_p = assetfile->assetPath;
@@ -219,7 +208,7 @@ namespace Luxia {
 		if (metafile_ec) {
 			// If theres an error, reset the name to its original
 			std::error_code rollback_ec;
-			std::filesystem::rename(old_metafile_p, new_metafile_p, rollback_ec);
+			std::filesystem::rename(new_metafile_p, old_metafile_p, rollback_ec);
 
 			LX_ERROR("Failed to rename meta file: {}", metafile_ec.message());
 			return false;
@@ -231,6 +220,9 @@ namespace Luxia {
 		metafile->metaPath = new_metafile_p;
 
 		asset->name = newName;
+
+		metafile->Save();
+		assetfile->Save();
 
 		return true;
 	}

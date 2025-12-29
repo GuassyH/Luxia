@@ -29,7 +29,7 @@ namespace Luxia {
 
 		bool HasActiveScene() const { return active_scene != nullptr; }
 		std::shared_ptr<Scene> GetActiveScene() { 
-			if (!active_scene) { LX_CORE_ERROR("SceneManager: No Active Scene!"); return nullptr; }
+			if (!active_scene) { return nullptr; }
 			return active_scene; 
 		}
 

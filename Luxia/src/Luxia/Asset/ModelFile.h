@@ -17,12 +17,16 @@ namespace Luxia::Assets {
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::ModelType;
+			guid = GUID();
 
 			base_model = Platform::Assets::CreateModel();
+			base_model->assetFileGUID = guid;
+			base_model->guid = GUID();
 
 			std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
 
 			for (auto& mesh : meshes) {
+				mesh->assetFileGUID = guid;
 				mesh->guid = GUID();
 				assets.push_back(mesh);
 			}
@@ -53,6 +57,7 @@ namespace Luxia::Assets {
 
 			mesh->name = name;
 			mesh->guid = guid;
+			mesh->assetFileGUID = guid;
 			mesh->local_id = lid; // useless but why not
 
 			return mesh;
@@ -69,12 +74,14 @@ namespace Luxia::Assets {
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
-				// Check if missing
+				guid = GUID(config["AssetFileGUID"].as<uint64_t>());
+
 				modelPath = config["ModelPath"].as<std::string>();
 				std::vector<std::shared_ptr<Mesh>> meshes = base_model->LoadFromPath(modelPath);
 
 				base_model->name = config["Model"].as<std::string>();
 				base_model->guid = config["GUID"].as<uint64_t>();
+				base_model->assetFileGUID = guid;
 
 				auto meshNodes = config["Meshes"];
 				if (!meshNodes || !meshNodes.IsSequence()) {
@@ -111,6 +118,7 @@ namespace Luxia::Assets {
 
 			out << YAML::BeginMap;
 
+			out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)guid;
 			out << YAML::Key << "ModelPath" << YAML::Value << modelPath.string();
 			out << YAML::Key << "Model" << YAML::Value << base_model->name;
 			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)base_model->guid;

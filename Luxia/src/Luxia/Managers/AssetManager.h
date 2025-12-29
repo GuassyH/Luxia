@@ -41,7 +41,7 @@ namespace Luxia {
 			// Search meta pool for matching srcPath
 			for (auto& [guid, meta_file] : meta_pool) {
 				if (meta_file->assetPath == abs_path) {
-					return guid;
+					return meta_file->assetGUID;
 				}
 			}
 			LX_CORE_ERROR("Asset Manager: GetAssetFileGUID - No matching GUID found for path {}", abs_path.string());
@@ -105,11 +105,14 @@ namespace Luxia {
 			}
 
 			// Assign both files pools
-			assetfile_pool[meta_file->guid] = asset_file;
+			asset_file->metaGUID = meta_file->guid;
+			meta_file->assetGUID = asset_file->guid;
+
+			assetfile_pool[asset_file->guid] = asset_file;
 			meta_pool[meta_file->guid] = meta_file;
 
 			// Return guid
-			return meta_file->guid;
+			return asset_file->guid;
 		}
 		
 		// Import, used for models (.gltf etc) and textures (.png, .jpg etc)
@@ -169,16 +172,17 @@ namespace Luxia {
 			}
 
 
-			asset_file->guid = meta_file->guid;
-
 			// Assign both files pools
-			assetfile_pool[meta_file->guid] = asset_file;
+			asset_file->metaGUID = meta_file->guid;
+			meta_file->assetGUID = asset_file->guid;
+
+			assetfile_pool[asset_file->guid] = asset_file;
 			meta_pool[meta_file->guid] = meta_file;
 
 			LX_CORE_INFO("AssetManager: Loaded {}", abs_path.string());
 
 			// Return guid
-			return meta_file->guid;
+			return asset_file->guid;
 		}
 
 

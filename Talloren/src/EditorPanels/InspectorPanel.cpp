@@ -37,8 +37,6 @@ namespace Talloren::Panels {
 	void InspectorPanel::RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid) {
 		ImGui::BeginChild("Entity");
 
-		if (!scene->runtime_entities.contains(e_guid)) { ImGui::End(); return; }
-
 		Luxia::Entity& ent = scene->runtime_entities.find(e_guid)->second;
 
 		// Name
@@ -266,24 +264,31 @@ namespace Talloren::Panels {
 			ImGui::End(); 
 			return; 
 		}
-
+		
 		Luxia::GUID e_guid = Luxia::GUID(0);
 		e_guid = *editorLayer->selected_assets.begin();
 
-		if(scene->runtime_entities.contains(e_guid))
-			currentMode = InspectorMode::Entity;
-		else if (!editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid))
-			currentMode = InspectorMode::None;
-		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(e_guid))
-			currentMode = InspectorMode::Mesh;
-		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(e_guid))
-			currentMode = InspectorMode::Material;
-		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::ITexture>(e_guid))
-			currentMode = InspectorMode::Texture;
-		else if (editorLayer->GetAssetManager()->HasAsset<Luxia::IShader>(e_guid))
-			currentMode = InspectorMode::Shader;
-		else
-			currentMode = InspectorMode::None;
+		bool foundtype = false;
+		if (scene) {
+			if (scene->runtime_entities.contains(e_guid)) {
+				currentMode = InspectorMode::Entity;
+				foundtype = true;
+			}
+		}
+
+		if (!foundtype) {
+			if (!editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid))
+				currentMode = InspectorMode::None;
+			else if (editorLayer->GetAssetManager()->HasAsset<Luxia::Mesh>(e_guid))
+				currentMode = InspectorMode::Mesh;
+			else if (editorLayer->GetAssetManager()->HasAsset<Luxia::IMaterial>(e_guid))
+				currentMode = InspectorMode::Material;
+			else if (editorLayer->GetAssetManager()->HasAsset<Luxia::ITexture>(e_guid))
+				currentMode = InspectorMode::Texture;
+			else if (editorLayer->GetAssetManager()->HasAsset<Luxia::IShader>(e_guid))
+				currentMode = InspectorMode::Shader;
+		}
+
 
 		switch (currentMode)
 		{

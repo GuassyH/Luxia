@@ -68,19 +68,48 @@ namespace Talloren::Panels {
 	}
 
 	static void OpenAsset(Luxia::GUID guid, Talloren::Layers::EditorLayer* editorLayer) {
-		auto it = editorLayer->GetAssetManager()->GetAssetPool().find(guid);
-		LX_CORE_ASSERT(it->second, "Tried to open invalid asset!");
+		// Validate asset manager and scene manager pointers
+		auto assetManager = editorLayer->GetAssetManager();
+		if (!assetManager) {
+			LX_ERROR("OpenAsset: AssetManager is null");
+			return;
+		}
+
+		const auto& assetPool = assetManager->GetAssetPool();
+		auto it = assetPool.find(guid);
+		if (it == assetPool.end() || !it->second) {
+			LX_ERROR("OpenAsset: asset not found for GUID {}", (uint64_t)guid);
+			return;
+		}
 
 		auto asset = it->second;
 
 		switch (asset->type) {
 		case Luxia::AssetType::SceneType: {
-			for (auto& sf : editorLayer->GetSceneManager()->scene_files) {
+			auto sceneManager = editorLayer->GetSceneManager();
+			if (!sceneManager) {
+				LX_ERROR("OpenAsset: SceneManager is null");
+				return;
+			}
+
+			bool found = false;
+			for (auto& sf : sceneManager->scene_files) {
+				if (!sf) continue;
 				if (sf->assets.empty()) continue;
-				if (sf->assets[0]->guid == guid) {
-					editorLayer->GetSceneManager()->SetActiveScene(sf);
-					break;
+				// defensive check
+				if (sf->assets[0]) {
+					if (sf->assets[0]->guid == guid) {
+						auto loaded = sceneManager->SetActiveScene(sf);
+						if (!loaded) {
+							LX_WARN("OpenAsset: SceneManager::SetActiveScene failed for asset GUID {}", (uint64_t)guid);
+						}
+						found = true;
+						break;
+					}
 				}
+			}
+			if (!found) {
+				LX_WARN("OpenAsset: Scene asset GUID {} not present in SceneManager::scene_files", (uint64_t)guid);
 			}
 			break;
 		}
@@ -92,7 +121,9 @@ namespace Talloren::Panels {
 
 	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Talloren::Layers::EditorLayer* editor_layer) {
 		// Thumbnail
-		ImGui::PushID(asset->guid);
+		// Use stable string id for ImGui PushID to avoid UB from implicit conversions
+		std::string id = std::to_string((uint64_t)asset->guid);
+		ImGui::PushID(id.c_str());
 
 		ImGui::BeginGroup(); // Start group so selectable spans all content
 

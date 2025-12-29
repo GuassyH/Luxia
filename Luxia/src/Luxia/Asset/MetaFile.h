@@ -29,5 +29,6 @@ namespace Luxia::Assets {
 		bool loaded = false;
 
 		GUID guid = GUID(0);
+		GUID assetGUID = GUID(0);
 	};
 }

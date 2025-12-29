@@ -56,13 +56,13 @@ namespace Talloren::Panels {
 
 		ImGui::End();
 
-		// Render Camera
-		std::shared_ptr<Luxia::ITexture> tex = cam.Render(scene, editorLayer->GetRenderer());
+		if (scene) {
+			// Render Camera
+			std::shared_ptr<Luxia::ITexture> tex = cam.Render(scene, editorLayer->GetRenderer());
+			// Render Gizmos?
+			editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::RenderCameraEvent>(tex, false, true));
+		}
 		
-		// Render Gizmos?
-
-
-		editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::RenderCameraEvent>(tex, false, true));
 	}
 	void SceneViewport::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		// Remove component

@@ -14,10 +14,12 @@ namespace Luxia::Assets {
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::TextureType;
+			guid = GUID();
 
 			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
 			texture->name = m_assetPath.filename().replace_extension("").string();
 			texture->LoadFromFile(texture_path);
+			texture->assetFileGUID = guid;
 			texture->guid = GUID();
 
 			assets.push_back(texture);
@@ -38,14 +40,17 @@ namespace Luxia::Assets {
 
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
+				guid = GUID(config["AssetFileGUID"].as<uint64_t>());
 
 				// Check if missing
 				texture->name = config["Name"].as<std::string>();
 				texture->guid = GUID(config["GUID"].as<uint64_t>());
 				texture->LoadFromFile(config["Path"].as<std::string>(), config["Properties"]["Flip"].as<bool>());
 				texture_path = config["Path"].as<std::string>();
+				texture->assetFileGUID = guid;
 
 				auto propConfig = config["Properties"];
+				
 				// Set num colch etc
 
 				loaded = true;
@@ -70,6 +75,7 @@ namespace Luxia::Assets {
 
 			out << YAML::BeginMap;
 
+			out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)guid;
 			out << YAML::Key << "Name" << YAML::Value << texture->name;
 			out << YAML::Key << "GUID" << YAML::Value << texture->guid;
 			out << YAML::Key << "Path" << YAML::Value << texture->path.string();

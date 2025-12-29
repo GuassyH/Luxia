@@ -76,6 +76,7 @@ namespace Luxia {
 		YAML::Emitter out;	
 
 		out << YAML::BeginMap;
+		out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)m_SceneFile->guid;
 		out << YAML::Key << "Name" << YAML::Value << scene.name;
 		out << YAML::Key << "GUID" << YAML::Value << (uint64_t)scene.guid;
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
@@ -173,6 +174,7 @@ namespace Luxia {
 
 		try {
 			YAML::Node config = YAML::LoadFile(m_SceneFile->scene_path.string());
+			scene.assetFileGUID = m_SceneFile->guid;
 
 			// Initialize the entities
 			auto entities = config["Entities"];

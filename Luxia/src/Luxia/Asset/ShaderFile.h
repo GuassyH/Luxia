@@ -41,8 +41,10 @@ namespace Luxia::Assets {
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::ShaderType;
 			shaderType = ShaderFileType::VertexFragment;
+			guid = GUID();
 
 			std::shared_ptr<Luxia::IShader> shader = Platform::Assets::CreateShader(fragPath.string().c_str(), vertPath.string().c_str());
+			shader->assetFileGUID = guid;
 			shader->guid = GUID();
 
 			assets.push_back(shader);
@@ -62,6 +64,8 @@ namespace Luxia::Assets {
 			try {
 				YAML::Node config = YAML::LoadFile(assetPath.string());
 
+				guid = GUID(config["AssetFileGUID"].as<uint64_t>());
+
 				shaderType = static_cast<ShaderFileType>(config["ShaderType"].as<int>());
 
 				if (shaderType == ShaderFileType::VertexFragment) {
@@ -72,6 +76,7 @@ namespace Luxia::Assets {
 					
 					shader->guid = GUID(config["GUID"].as<uint64_t>());
 					shader->name = config["Name"].as<std::string>();
+					shader->assetFileGUID = guid;
 				}
 				else {
 					shaderPath = config["ShaderPath"].as<std::string>();
@@ -99,6 +104,7 @@ namespace Luxia::Assets {
 
 			out << YAML::BeginMap;
 
+			out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)guid;
 			out << YAML::Key << "ShaderType" << YAML::Value << (int)shaderType;
 			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)shader->guid;
 			out << YAML::Key << "Name" << YAML::Value << shader->name;

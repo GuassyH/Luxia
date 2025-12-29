@@ -6,13 +6,11 @@ namespace Luxia {
 	bool SceneManager::LoadScenePool(const std::shared_ptr<AssetManager> m_asset_manager) {
 		asset_manager = m_asset_manager;
 
-		for (auto& [guid, metafile] : asset_manager->GetMetaFilePool()) {
-			if (metafile) {
-				if (metafile->type == AssetType::SceneType) {
-					if (asset_manager->GetAssetFilePool().contains(metafile->guid)) {
-						auto asset = asset_manager->GetAssetFile<Assets::SceneFile>(metafile->guid);
-						scene_files.push_back(std::move(asset));
-					}
+		for (auto& [guid, assetfile] : asset_manager->GetAssetFilePool()) {
+			if (assetfile) {
+				if (assetfile->type == AssetType::SceneType) {
+					auto asset = asset_manager->GetAssetFile<Assets::SceneFile>(assetfile->guid);
+					scene_files.push_back(std::move(asset));
 				}
 			}
 		}
@@ -67,17 +65,23 @@ namespace Luxia {
 
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index) {
-		if (!scene_files[index]) { LX_CORE_ERROR("SceneManager: Set Scene failed, no scene at index: {}", index); return nullptr; }
-		
-		SetActiveScene(scene_files[index]);
-
-		return GetActiveScene();
+		if (index >= scene_files.size()) {
+			LX_CORE_ERROR("SceneManager: Set Scene failed, index {} out of range (size={})", index, scene_files.size());
+			return nullptr;
+		}
+		if (!scene_files[index]) {
+			LX_CORE_ERROR("SceneManager: Set Scene failed, no scene at index: {}", index);
+			return nullptr;
+		}
+		return SetActiveScene(scene_files[index]);
 	}
 	 
 	void SceneManager::Cleanup() {
 		LX_CORE_TRACE("Scene manager cleaned up");
 
-		active_scene->Unload();
+		if(active_scene)
+			active_scene->Unload();
+		
 		scene_files.clear();
 	}
 }

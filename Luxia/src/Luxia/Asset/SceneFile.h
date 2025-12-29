@@ -15,12 +15,14 @@ namespace Luxia::Assets {
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
 			type = Luxia::AssetType::SceneType;
+			guid = GUID();
 
 			assetPath = m_assetPath.lexically_normal();
 			scene_path = assetPath.lexically_normal();
 
 			std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 			scene->name = m_assetPath.filename().replace_extension("").string();
+			scene->assetFileGUID = guid;
 			scene->guid = GUID();
 
 			assets.push_back(scene);
@@ -29,6 +31,7 @@ namespace Luxia::Assets {
 			YAML::Emitter out;
 
 			out << YAML::BeginMap;
+			out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)guid;
 			out << YAML::Key << "Name" << YAML::Value << scene->name;
 			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)scene->guid;
 			out << YAML::EndMap;
@@ -53,8 +56,11 @@ namespace Luxia::Assets {
 			// The rest (entities) is loaded through asset serializer
 			try {
 				YAML::Node config = YAML::LoadFile(scene_path.string());
+				
+				guid = GUID(config["AssetFileGUID"].as<uint64_t>());
 				scene->name = config["Name"].as<std::string>();
 				scene->guid = GUID(config["GUID"].as<uint64_t>());
+				scene->assetFileGUID = guid;
 			}
 			catch (const YAML::Exception& ex) {
 				std::cerr << "YAML error: " << ex.what() << "\n";
