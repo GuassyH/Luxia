@@ -254,7 +254,7 @@ namespace Talloren::Panels {
 	InspectorMode currentMode = InspectorMode::None;
 
 	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		ImGui::Begin("Inspector Panel");
+		ImGui::Begin("Inspector Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
 		currentMode = InspectorMode::None;
 

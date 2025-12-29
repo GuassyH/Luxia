@@ -17,7 +17,7 @@ namespace Talloren::Panels {
 	}
 
 	void SceneViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		ImGui::Begin("Scene View", (bool*)0, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
 		Luxia::Components::Camera& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
 		Talloren::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Talloren::Scripts::SceneCameraScript>();

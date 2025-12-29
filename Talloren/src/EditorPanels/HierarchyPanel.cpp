@@ -62,7 +62,7 @@ namespace Talloren::Panels {
 	}
 
 	void HierarchyPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		ImGui::Begin("Hierarchy Panel");
+		ImGui::Begin("Hierarchy Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
 		if (!scene) { ImGui::End(); return; }
 
