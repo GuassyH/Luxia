@@ -14,37 +14,21 @@ namespace Talloren::Panels {
 
 
 
-	// Goes through each assetfile, checks its assets, sets asset parent folder
 	void AssetView::RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer, bool reset_dir) {
-		// Holy nested for if statement
 		asset_parent_folders.clear();
 
-
+		// Go through each assetfile, then each asset in the assetfile, set its parent folder
 		for (auto& [guid, assetfile] : editorLayer->GetAssetManager()->GetAssetFilePool()) {
 			if (assetfile) {
-				std::vector<Luxia::GUID> guids;
+				const auto parent = assetfile->assetPath.parent_path(); // Temp cache parent path
 				for (auto& asset : assetfile->assets) {
-					if (asset) {
-						guids.push_back(asset->guid);
-					}
-				}
-				if (std::filesystem::exists(assetfile->assetPath)) {
-					for (auto& [guid, metafile] : editorLayer->GetAssetManager()->GetMetaFilePool()) {
-						if (metafile) {
-							if (metafile->assetPath == assetfile->assetPath) {
-								for (auto& guid : guids) {
-									asset_metafile_path[guid] = metafile->metaPath;
-									asset_assetfile_path[guid] = assetfile->assetPath;
-									asset_parent_folders[guid] = assetfile->assetPath.parent_path();
-								}
-							}
-						}
-					}
+					if (!asset) continue;
+					asset_parent_folders[asset->guid] = parent;
 				}
 			}
 		}
 
-
+		// Reset selected folder to asset dir if requested
 		if(reset_dir)
 			selected_folder = editorLayer->GetAssetManager()->GetAssetDir();
 

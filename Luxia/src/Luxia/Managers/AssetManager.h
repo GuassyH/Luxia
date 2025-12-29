@@ -299,6 +299,8 @@ namespace Luxia {
 			return asset ? true : false;
 		}
 
+		bool RenameAsset(GUID assetGUID, std::string newName);
+
 	#pragma endregion
 
 

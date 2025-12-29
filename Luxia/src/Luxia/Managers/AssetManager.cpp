@@ -124,5 +124,114 @@ namespace Luxia {
 		{Luxia::AssetType::MaterialType, ".luxmat"},
 	};
 
+	// Renames both the asset file and the metafile, and updates the asset and metafile names
+	bool AssetManager::RenameAsset(GUID assetGUID, std::string newName) {
+		/// Currently has O(n) * 2 complexity due to searching for assetfile and metafile
+		/// This could be changed to O(1) by storing GUIDs in the Asset class
+		/// I need to look into this more later
 
+		auto it = asset_pool.find(assetGUID);
+		if (it == asset_pool.end() || !it->second) {
+			LX_CORE_ERROR("RenameAsset: Invalid asset GUID {}", (uint64_t)assetGUID);
+			return false;
+		}
+		auto asset = it->second;
+
+		// Meshes are internal, so just rename the asset
+		if(asset->type == AssetType::MeshType) {
+			asset->name = newName;
+			return true;
+		}
+		
+		// Get assetfile and metafile
+		std::shared_ptr<Assets::AssetFile> assetfile = nullptr;
+		std::shared_ptr<Assets::MetaFile> metafile = nullptr;
+
+		for (auto& [guid, af] : assetfile_pool) {
+			if (!af) continue;
+
+			for (auto& asset : af->assets) {
+				if (!asset) continue;
+				
+				if (asset->guid == assetGUID) {
+					assetfile = af;
+					break;
+				}
+			}
+
+			if (assetfile) break;
+		}
+
+		if (!assetfile){
+			LX_CORE_ERROR("AssetManager: RenameAsset failed to find AssetFile for asset GUID {}", (uint64_t)assetGUID);
+			return false;
+		}
+
+		for (auto& [guid, mf] : meta_pool) {
+			if (mf->assetPath == assetfile->assetPath) {
+				metafile = mf;
+				break;
+			}
+		}
+
+		if (!metafile) {
+			LX_CORE_ERROR("AssetManager: RenameAsset failed to find MetaFile for asset GUID {}", (uint64_t)assetGUID);
+			return false;
+		}
+
+		// Make assetfile path
+		std::filesystem::path old_astfile_p = assetfile->assetPath;
+		std::filesystem::path new_astfile_p = old_astfile_p;
+		std::filesystem::path afext = old_astfile_p.extension();
+		new_astfile_p.replace_filename(newName + afext.string());
+		
+
+		// Make Metafile path
+		std::filesystem::path old_metafile_p = metafile->metaPath;
+		std::filesystem::path new_metafile_p = old_metafile_p;
+		std::filesystem::path mfext = old_metafile_p.extension();
+		new_metafile_p.replace_filename(newName + mfext.string());
+
+		// Make sure neither path exists already
+		if(std::filesystem::exists(new_astfile_p)) {
+			LX_ERROR("Cannot rename asset, asset file with name {} already exists", new_astfile_p.string());
+			return false;
+		}
+		if (std::filesystem::exists(new_metafile_p)) {
+			LX_ERROR("Cannot rename asset, meta file with name {} already exists", new_metafile_p.string());
+			return false;
+		}
+
+		// Actually rename everything
+		std::error_code assetfile_ec;
+		std::filesystem::rename(old_astfile_p, new_astfile_p, assetfile_ec);
+		if (assetfile_ec) {
+			// If theres an error, reset the name to its original
+			std::error_code rollback_ec;
+			std::filesystem::rename(new_astfile_p, old_astfile_p, rollback_ec);
+
+			LX_ERROR("Failed to rename asset file: {}", assetfile_ec.message());
+			return false;
+		}
+
+		std::error_code metafile_ec;
+		std::filesystem::rename(old_metafile_p, new_metafile_p, metafile_ec);
+		if (metafile_ec) {
+			// If theres an error, reset the name to its original
+			std::error_code rollback_ec;
+			std::filesystem::rename(old_metafile_p, new_metafile_p, rollback_ec);
+
+			LX_ERROR("Failed to rename meta file: {}", metafile_ec.message());
+			return false;
+		}
+
+		assetfile->assetPath = new_astfile_p;
+
+		metafile->assetPath = new_astfile_p;
+		metafile->metaPath = new_metafile_p;
+
+		asset->name = newName;
+
+		return true;
+	}
 }

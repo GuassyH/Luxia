@@ -14,3 +14,5 @@ IMPORTANT
 - Resources (like built in shaders and meshes that come with the engine) should be loaded once, and not per scene, and shared across projects)
 
 - Renaming entities and assetfiles in the editor
+
+- Inefficient AssetFile and MetaFile relationship, maybe they should have the same GUID? That would make lookups faster

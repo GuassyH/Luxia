@@ -15,8 +15,6 @@ namespace Talloren::Panels {
 		void RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer, bool reset_dir = false); // Asset Parent Folders
 		
 		std::unordered_map<Luxia::GUID, std::filesystem::path> asset_parent_folders;
-		std::unordered_map<Luxia::GUID, std::filesystem::path> asset_assetfile_path;
-		std::unordered_map<Luxia::GUID, std::filesystem::path> asset_metafile_path;
 		std::filesystem::path selected_folder;
 	private:
 	};

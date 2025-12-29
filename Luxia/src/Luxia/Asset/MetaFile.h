@@ -25,7 +25,6 @@ namespace Luxia::Assets {
 
 		std::filesystem::path assetPath = "no/path";
 		std::filesystem::path metaPath = "no/path";
-		std::string name = "no_name";
 
 		bool loaded = false;
 
