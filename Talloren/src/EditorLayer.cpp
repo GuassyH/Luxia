@@ -73,6 +73,54 @@ namespace Talloren::Layers {
 
 		ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
 
+		if(ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("File")) {
+				if(ImGui::MenuItem("New Scene")) {
+					asset_manager->CreateAssetFile<Luxia::AssetType::SceneType>(asset_manager->GetAssetDir(), false, "New Scene");
+					PUSH_EVENT(Luxia::MessageSentEvent, "Asset Created");
+				}
+				if (ImGui::MenuItem("Save Scene", "Ctrl+S")) {
+					scene_manager->SaveActiveScene();
+				}
+				
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("New Project")) {
+					// project_manager->CloseProject();
+					// project_manager->NewProject("E:/BuiltLuxia/NewProject", "New_Project_Name");
+					LX_WARN("New Project Menu Item Clicked - Functionality not implemented yet");
+				}
+				if (ImGui::MenuItem("Open Project")) {
+					// project_manager->CloseProject();
+					// project_manager->OpenProject("E:/BuiltLuxia/NewProject");
+					LX_WARN("Open Project Menu Item Clicked - Functionality not implemented yet");
+				}
+
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("Exit")) {
+					PUSH_EVENT(Luxia::WindowCloseEvent);
+				}
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Edit")) {
+
+				ImGui::EndMenu();
+			}
+
+
+			if (ImGui::BeginMenu("Build")) {
+				// Should be able to build project here
+				// And Also switch Build Configurations
+				// And importantly order by index scenes
+				ImGui::EndMenu();
+			}
+
+			ImGui::EndMenuBar();
+		}
+
 		if (opt_fullscreen)
 			ImGui::PopStyleVar(2);
 
@@ -93,14 +141,7 @@ namespace Talloren::Layers {
 		}
 
 		if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL) && Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
-			auto scene = scene_manager->GetActiveScene();
-			if (scene && scene->scene_file) {
-				Luxia::SceneSerializer serializer(scene->scene_file.lock(), asset_manager.lock());
-
-				serializer.Serialize();
-
-				LX_INFO("Saved Scene");
-			}
+			scene_manager->SaveActiveScene();
 		}
 
 		ImGui::End();

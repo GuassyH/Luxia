@@ -18,5 +18,6 @@ namespace Talloren::Panels {
 		std::shared_ptr<Luxia::ITexture> mat_default_thumbnail;
 		std::shared_ptr<Luxia::ITexture> shader_default_thumbnail;
 		std::shared_ptr<Luxia::ITexture> scene_default_thumbnail;
+		std::shared_ptr<Luxia::ITexture> texture_default_thumbnail;
 	};
 }

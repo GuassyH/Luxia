@@ -49,7 +49,20 @@ namespace Talloren::Panels {
 					cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
 				}
 
-				cam_script.Move();
+				if(editorLayer->isOneSelected) {
+					Luxia::GUID selected_guid = *editorLayer->selected_assets.begin();
+					auto it = scene->runtime_entities.find(selected_guid);
+					if (it != scene->runtime_entities.end()) {
+						Luxia::Components::Transform* focused_t = scene->TryGetFromEntity<Luxia::Components::Transform>(it->second);
+						cam_script.Move(focused_t);
+					}
+					else {
+						cam_script.Move(nullptr);
+					}
+				}
+				else {
+					cam_script.Move(nullptr);
+				}
 				cam_script.Look();
 			}
 		}

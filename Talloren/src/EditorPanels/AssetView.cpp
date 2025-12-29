@@ -35,7 +35,7 @@ namespace Talloren::Panels {
 		LX_INFO("AssetView: Refreshed Asset Parent Folders");
 	}
 
-
+	bool queued_for_refresh = false;
 	// CORE
 	void AssetView::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - AssetView Panel: Init");
@@ -78,6 +78,11 @@ namespace Talloren::Panels {
 
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw = {};
 
+		if(queued_for_refresh) {
+			RefreshAPFs(editorLayer, false);
+			queued_for_refresh = false;
+		}
+
 		if (ImGui::Begin("LeftWindow")) {
 			ImGui::Text("Asset Hierarchy"); ImGui::Separator();
 			assets_to_draw = astfoldertree.DrawFolderHierarchy(editorLayer, this);
@@ -104,5 +109,11 @@ namespace Talloren::Panels {
 	void AssetView::OnEvent(Luxia::Event& e) {
 		Luxia::EventDispatcher dispatcher(e);
 
+		dispatcher.Dispatch<Luxia::MessageSentEvent>([this](Luxia::MessageSentEvent& e_msg) {
+			if (e_msg.GetMessageStr() == "Asset Created" || e_msg.GetMessageStr() == "Asset Deleted") {
+				queued_for_refresh = true;
+			}
+			return false; // Dont Consume
+			});
 	}
 }

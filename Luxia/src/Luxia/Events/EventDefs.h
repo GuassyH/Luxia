@@ -9,3 +9,4 @@
 #include "Luxia/Events/WindowEvent.h"
 #include "Luxia/Events/KeyEvent.h"
 #include "Luxia/Events/RenderEvent.h"
+#include "Luxia/Events/MessageEvent.h"

@@ -188,6 +188,7 @@
     <ClInclude Include="src\Luxia\Events\EventDefs.h" />
     <ClInclude Include="src\Luxia\Events\EventHandler.h" />
     <ClInclude Include="src\Luxia\Events\KeyEvent.h" />
+    <ClInclude Include="src\Luxia\Events\MessageEvent.h" />
     <ClInclude Include="src\Luxia\Events\MouseEvent.h" />
     <ClInclude Include="src\Luxia\Events\RenderEvent.h" />
     <ClInclude Include="src\Luxia\Events\WindowEvent.h" />

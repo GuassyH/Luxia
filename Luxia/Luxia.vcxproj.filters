@@ -242,6 +242,7 @@
       <Filter>Luxia\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
+    <ClInclude Include="src\Luxia\Events\MessageEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

@@ -14,7 +14,7 @@ namespace Talloren::Scripts {
 		float horizontal = 0.0f;
 		float vertical = 0.0f;
 
-		void Move() {
+		void Move(Luxia::Components::Transform* focused_t) {
 			glm::vec3 forward = glm::normalize(transform->GetRotVec());
 			glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
 			glm::vec3 up = glm::normalize(glm::cross(right, forward));
@@ -37,6 +37,13 @@ namespace Talloren::Scripts {
 			moveDir = right * horizontal + forward * vertical;
 			
 			transform->position += moveDir * speed * 0.01f; // Should multiply with delta time
+
+
+			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
+				if (focused_t) {
+					transform->position = focused_t->world_position + (transform->GetRotVec() * -10.0f);
+				}
+			}
 		}
 
 		double last_mouseX;
@@ -69,10 +76,6 @@ namespace Talloren::Scripts {
 			if (transform->euler_angles.x > 89.0f) transform->euler_angles.x = 89.0f;
 			if (transform->euler_angles.x < -89.0f) transform->euler_angles.x = -89.0f;
 
-			// Scroll wheel speed adjust
-			// if (display.scroll != 0) {
-				// moveSpeed = glm::fclamp(moveSpeed * (display.scroll > 0 ? 2.0f : 0.5f), 0.5f, 256.0f);
-			// }
 			if (Luxia::Input::GetScrollOffset().y != 0) {
 				speed = glm::fclamp(speed * (Luxia::Input::GetScrollOffset().y > 0 ? 2.0f : 0.5f), 0.5f, 256.0f);
 			}

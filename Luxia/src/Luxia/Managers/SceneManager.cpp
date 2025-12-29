@@ -76,6 +76,17 @@ namespace Luxia {
 		return SetActiveScene(scene_files[index]);
 	}
 	 
+	bool SceneManager::SaveActiveScene() {
+		if (!active_scene || !active_scene->scene_file) {
+			LX_CORE_ERROR("SceneManager: Save Active Scene failed, no active scene");
+			return false;
+		}
+		SceneSerializer serializer(active_scene->scene_file.lock(), asset_manager);
+		serializer.Serialize();
+		LX_CORE_INFO("Saved Active Scene");
+		return true;
+	}
+
 	void SceneManager::Cleanup() {
 		LX_CORE_TRACE("Scene manager cleaned up");
 

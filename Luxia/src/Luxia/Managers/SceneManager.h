@@ -33,6 +33,8 @@ namespace Luxia {
 			return active_scene; 
 		}
 
+		bool SaveActiveScene();
+
 		std::vector<std::shared_ptr<Luxia::Assets::SceneFile>> scene_files;
 		// std::vector<Luxia::GUID> scene_order; /* Not implemented */
 	private:

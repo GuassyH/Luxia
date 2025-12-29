@@ -133,8 +133,20 @@ namespace Talloren::Panels {
 		switch (asset->type) {
 		case Luxia::AssetType::TextureType:{
 			auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
-			thumbnail = texasset->texID;
-			hasThumbnail = texasset->IsValid();
+			if (texasset) {
+				if (texasset->IsValid()) {
+					thumbnail = texasset->texID;
+					hasThumbnail = texasset->IsValid();
+				}
+				else {
+					thumbnail = texture_default_thumbnail->texID;
+					hasThumbnail = texture_default_thumbnail->IsValid();
+				}
+			}
+			else {
+				thumbnail = texture_default_thumbnail->texID;
+				hasThumbnail = texture_default_thumbnail->IsValid();
+			}
 			break;
 		}
 		case Luxia::AssetType::MeshType: {
@@ -218,6 +230,9 @@ namespace Talloren::Panels {
 
 		scene_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
 		scene_default_thumbnail->LoadFromFile("resources/AssetIcons/SceneDefaultThumbnail.png");
+
+		texture_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
+		texture_default_thumbnail->LoadFromFile("resources/AssetIcons/TextureDefaultThumbnail.png");
 	}
 
 	void AssetViewer::DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)

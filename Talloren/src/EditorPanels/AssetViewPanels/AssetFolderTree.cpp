@@ -56,7 +56,6 @@ namespace Talloren::Panels {
 			DrawPathSelectable(entry, asset_view->selected_folder);
 		}
 
-
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw;
 		if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
 			// If its a valid folder, go through each asset, and see if its guid in the a_p_f path is the selected folder
