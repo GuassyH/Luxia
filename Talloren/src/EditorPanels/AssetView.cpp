@@ -44,7 +44,7 @@ namespace Talloren::Panels {
 	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGuiWindowClass assetViewWindowClass;
 		assetViewWindowClass.ClassId = ImGui::GetID("AssetView_WindowClass");
-		assetViewWindowClass.DockingAllowUnclassed = false;
+		assetViewWindowClass.DockingAllowUnclassed = true;
 
 		ImGui::SetNextWindowClass(&assetViewWindowClass);
 		bool const shouldDrawWindowContents = ImGui::Begin("Asset View");
