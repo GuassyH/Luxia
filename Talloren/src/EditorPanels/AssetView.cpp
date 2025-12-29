@@ -51,7 +51,6 @@ namespace Talloren::Panels {
 
 		std::shared_ptr<Luxia::AssetManager> asset_manager = editorLayer->GetAssetManager();
 
-		#pragma region Dockspace
 		ImGuiID const dockspaceID = ImGui::GetID("AssetView_Dockspace");
 		ImGuiWindowClass assetViewClass;
 		assetViewClass.ClassId = dockspaceID;
@@ -78,14 +77,12 @@ namespace Talloren::Panels {
 			ImGui::DockBuilderFinish(dockspaceID);
 			asset_dock_built = true;
 		}
-		#pragma endregion
 
 		if(!shouldDrawWindowContents){
 			ImGui::End();
 			return;
 		}
 
-		// ImGuiDockNodeFlags const dockFlags = shouldDrawWindowContents ? ImGuiDockNodeFlags_None : ImGuiDockNodeFlags_KeepAliveOnly;
 		ImGui::DockSpace(dockspaceID, ImGui::GetContentRegionAvail(), ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton, &assetViewClass);
 
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw = {};

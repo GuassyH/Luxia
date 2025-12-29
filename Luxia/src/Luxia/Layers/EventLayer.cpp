@@ -56,5 +56,9 @@ namespace Luxia::Layers {
 			return false; // Check each event type and update input
 			});
 	
+		dispatcher.Dispatch<ProfilerRequestEvent>([&](ProfilerRequestEvent& event) {
+			give_profiler_response = true;
+			return false; // Check each event type and update input
+			});
 	}
 }

@@ -30,7 +30,7 @@ namespace Luxia::Layers {
 
 	}
 	void ViewportLayer::OnRender() {
-		
+
 	}
 
 	bool ViewportLayer::RenderCameraToVP(Luxia::RenderCameraEvent& e) {
@@ -50,5 +50,10 @@ namespace Luxia::Layers {
 		Luxia::EventDispatcher dispatcher(e);
 
 		dispatcher.Dispatch<Luxia::RenderCameraEvent>(LX_BIND_EVENT_FN(RenderCameraToVP));
+
+		dispatcher.Dispatch<ProfilerRequestEvent>([&](ProfilerRequestEvent& event) {
+			give_profiler_response = true;
+			return false; // Check each event type and update input
+			});
 	}
 }

@@ -9,7 +9,7 @@ namespace Luxia::Layers {
 		std::shared_ptr<Luxia::IShader> fs_shader;
 		Luxia::Mesh fs_quad;
 
-		ViewportLayer() = default;
+		ViewportLayer() { name = "Viewport Layer"; }
 		~ViewportLayer() = default;
 
 		virtual void OnAttach() override;

@@ -88,13 +88,9 @@ namespace Talloren::Layers {
 				ImGui::Separator();
 
 				if (ImGui::MenuItem("New Project")) {
-					// project_manager->CloseProject();
-					// project_manager->NewProject("E:/BuiltLuxia/NewProject", "New_Project_Name");
 					LX_WARN("New Project Menu Item Clicked - Functionality not implemented yet");
 				}
 				if (ImGui::MenuItem("Open Project")) {
-					// project_manager->CloseProject();
-					// project_manager->OpenProject("E:/BuiltLuxia/NewProject");
 					LX_WARN("Open Project Menu Item Clicked - Functionality not implemented yet");
 				}
 
@@ -147,10 +143,22 @@ namespace Talloren::Layers {
 
 		ImGui::End();
 
-
+	/*	if (give_profiler_response) {
+			time_accumulator += Luxia::Core::Time::get().deltaTime;
+			PUSH_EVENT(Luxia::ProfilerResponseEvent, "EditorLayer - Render", time_accumulator);
+			give_profiler_response = false;
+			time_accumulator = 0.0;
+		}*/
 	}
 
 	void EditorLayer::OnEvent(Luxia::Event& e) {
+		Luxia::EventDispatcher dispatcher(e);
+
+		dispatcher.Dispatch<Luxia::ProfilerRequestEvent>([&](Luxia::ProfilerRequestEvent& event) {
+			give_profiler_response = true;
+			return false; // Check each event type and update input
+			});
+
 		// FORWARD EVENT WINDOWS
 		for (auto panel : panels) {
 			panel->OnEvent(e);

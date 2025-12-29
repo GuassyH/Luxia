@@ -25,9 +25,14 @@ namespace Luxia::Layers {
 		}
 	}
 	void GameLayer::OnRender() {
-	
+
 	}
 	void GameLayer::OnEvent(Event& e) {
-	
+		EventDispatcher dispatcher(e);
+
+		dispatcher.Dispatch<ProfilerRequestEvent>([&](ProfilerRequestEvent& event) {
+			give_profiler_response = true;
+			return false; // Check each event type and update input
+			});
 	}
 }

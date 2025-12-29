@@ -7,7 +7,7 @@ namespace Luxia::Layers {
 	class LUXIA_API UILayer : public Luxia::Layer
 	{
 	public:
-		UILayer() = default;
+		UILayer() {	name = "UILayer";	}
 		~UILayer() = default;
 
 		int flags =

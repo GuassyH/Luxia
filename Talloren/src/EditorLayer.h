@@ -6,7 +6,7 @@ namespace Talloren::Layers {
 	class EditorLayer : public Luxia::Layer
 	{
 	public:
-		EditorLayer() = default;
+		EditorLayer() { name = "Editor Layer"; }
 		~EditorLayer() = default;
 
 		entt::registry editor_reg;

@@ -8,7 +8,7 @@ namespace Luxia::Layers
 	class LUXIA_API RenderLayer : public Layer
 	{
 	public:
-		RenderLayer() = default;
+		RenderLayer() { name = "Render Layer"; }
 		~RenderLayer() = default;
 		
 		virtual void OnAttach() override;

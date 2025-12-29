@@ -33,8 +33,15 @@ namespace Luxia::Layers {
 					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);
 			}
 		}
+
+
 	}
 	void RenderLayer::OnEvent(Event& e) {
+		EventDispatcher dispatcher(e);
 
+		dispatcher.Dispatch<ProfilerRequestEvent>([&](ProfilerRequestEvent& event) {
+			give_profiler_response = true;
+			return false; // Check each event type and update input
+			});
 	}
 }

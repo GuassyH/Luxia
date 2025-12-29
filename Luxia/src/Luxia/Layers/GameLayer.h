@@ -5,7 +5,7 @@
 namespace Luxia::Layers {
 	class LUXIA_API GameLayer : public Layer {
 	public:
-		GameLayer() = default;
+		GameLayer() { name = "Game Layer"; }
 		~GameLayer() = default;
 
 		virtual void OnAttach() override;

@@ -10,7 +10,7 @@ namespace Talloren::Layers {
 
 	class ExtraLayer : public Luxia::Layer {
 	public:
-		ExtraLayer() = default;
+		ExtraLayer() { name = "Extra Layer"; }
 		~ExtraLayer() = default;
 		virtual void OnAttach() override { 
 			LX_WARN("ExtraLayer Attached");
@@ -25,8 +25,23 @@ namespace Talloren::Layers {
 			LX_WARN("ExtraLayer Detached");
 		}
 		virtual void OnUpdate() override {}
-		virtual void OnRender() override {}
-		virtual void OnEvent(Luxia::Event& event) override {}
+		virtual void OnRender() override {
+			//if (give_profiler_response) {
+			//	time_accumulator += Luxia::Core::Time::get().deltaTime;
+			//	PUSH_EVENT(Luxia::ProfilerResponseEvent, "ExtraLayer - Render", time_accumulator);
+			//	give_profiler_response = false;
+			//	time_accumulator = 0.0;
+			//}
+		}
+		virtual void OnEvent(Luxia::Event& event) override {
+			Luxia::EventDispatcher dispatcher(event);
+
+			dispatcher.Dispatch<Luxia::ProfilerRequestEvent>([&](Luxia::ProfilerRequestEvent& event) {
+				// Just pass it on to the event handler
+				give_profiler_response = true;
+				return false; // Check each event type and update input
+				});
+		}
 	};
 }
 

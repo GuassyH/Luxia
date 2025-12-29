@@ -6,6 +6,7 @@
 #include "Luxia/Managers/EventManager.h"
 #include "Luxia/Managers/ProjectManager.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
+#include "Luxia/Core/Time.h"
 
 namespace Luxia
 {
@@ -39,6 +40,9 @@ namespace Luxia
 		const std::shared_ptr<Luxia::Rendering::IRenderer> GetRenderer() { return renderer.lock(); }
 		const std::shared_ptr<Luxia::ProjectManager> GetProjectManager() { return project_manager.lock(); }
 		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
+		
+		bool give_profiler_response = true;
+		std::string name = "Layer";
 	protected:
 		WeakPtrProxy<Luxia::EventHandler> event_handler;
 		WeakPtrProxy<Luxia::ProjectManager> project_manager;
@@ -46,6 +50,7 @@ namespace Luxia
 		WeakPtrProxy<Luxia::AssetManager> asset_manager;
 		WeakPtrProxy<Luxia::SceneManager> scene_manager;
 		WeakPtrProxy<Luxia::IWindow> window;
+	
 	};
 }
 

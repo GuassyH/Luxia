@@ -23,10 +23,15 @@ namespace Luxia::Layers {
 			uiRenderer->RenderElements();
 
 		}	ImGui::End();
-
+		
 	}
 	void UILayer::OnEvent(Event& e) {
 		Luxia::EventDispatcher dispatcher(e);
+		
+		dispatcher.Dispatch<ProfilerRequestEvent>([&](ProfilerRequestEvent& event) {
+			give_profiler_response = true;
+			return false; // Check each event type and update input
+			});
 
 		/* If a camera is rendered do something?
 		dispatcher.Dispatch<RenderCameraEvent>([&](RenderCameraEvent& event) {

@@ -50,6 +50,7 @@ namespace Luxia
 	// Run
 	void Application::Run()
 	{
+		double time_accumulator = 0.0;
 		// While the window is running loop
 		while (m_Window->isRunning()) {
 			Core::Time::get().update();
@@ -57,15 +58,31 @@ namespace Luxia
 			m_Renderer->GetUIRenderer()->BeginFrame();
 			m_EventHandler->DispatchAll(this);
 
-			for (auto& layer : m_LayerStack->m_Layers) 
+			for (auto& layer : m_LayerStack->m_Layers) {
+				time_accumulator = Luxia::Core::Time::get().GetTimeHP();
 				layer->OnUpdate();
+				if (layer->give_profiler_response) {
+					time_accumulator = Luxia::Core::Time::get().GetTimeHP() - time_accumulator;
+					std::string text = layer->name + " - Update";
+					m_EventHandler->PushEvent(std::make_shared<ProfilerResponseEvent>(text, time_accumulator));
+				}
+			}
 			
-			for (auto& layer : m_LayerStack->m_Layers) 
+			for (auto& layer : m_LayerStack->m_Layers) {
+				time_accumulator = Luxia::Core::Time::get().GetTimeHP();
 				layer->OnRender();
-
+				if (layer->give_profiler_response) {
+					time_accumulator = Luxia::Core::Time::get().GetTimeHP() - time_accumulator;
+					std::string text = layer->name + " - Render";
+					m_EventHandler->PushEvent(std::make_shared<ProfilerResponseEvent>(text, time_accumulator));
+					layer->give_profiler_response = false;
+				}
+			}
 			m_Renderer->GetUIRenderer()->EndFrame();
 			m_Window->EndFrame();
 			eventManager.Clear();
+
+			m_EventHandler->PushEvent(std::make_shared<Luxia::MessageSentEvent>(std::string("End of Frame")));
 		}
 	}
 

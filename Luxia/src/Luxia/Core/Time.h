@@ -7,14 +7,14 @@
 namespace Luxia::Core {
 	class LUXIA_API Time {
 	private:
-		float lastFrameTime = 0.0f;
+		double lastFrameTime = 0.0f;
 		int nFrames = 0;
 		float frameTimer = 0.0f;
 
 		Time() : 
-			lastFrameTime(static_cast<float>(
+			lastFrameTime(static_cast<double>(
 			std::chrono::duration_cast<std::chrono::milliseconds>(
-				std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000.0f) 
+				std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000.0) 
 		{}
 	public:
 		Time(const Time&) = delete;
@@ -26,9 +26,9 @@ namespace Luxia::Core {
 		}
 		void update() {
 			// Delta Time Calculation
-			float current_time = static_cast<float>(
+			double current_time = static_cast<double>(
 				std::chrono::duration_cast<std::chrono::milliseconds>(
-				std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000.0f;
+				std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000.0;
 			deltaTime = current_time - lastFrameTime;
 			
 			frameTimer += deltaTime;
@@ -41,13 +41,21 @@ namespace Luxia::Core {
 			}
 
 
-			time = current_time;
 			lastFrameTime = current_time;
 		}
 
 
-		float deltaTime = 0.0f;
-		float time = 0.0f;
+		double GetTime() const { return static_cast<double>(
+			std::chrono::duration_cast<std::chrono::milliseconds>(
+				std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000.0; }
+
+		double GetTimeHP() const {
+			return static_cast<double>(
+				std::chrono::duration_cast<std::chrono::microseconds>(
+					std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000000.0;
+		}
+
+		double deltaTime = 0.0f;
 		int framerate = 0;
 	};
 }

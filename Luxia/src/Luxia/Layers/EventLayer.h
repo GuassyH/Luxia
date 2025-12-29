@@ -8,7 +8,7 @@ namespace Luxia::Layers
 	private:
 		Luxia::EventManager& event_manager = Luxia::EventManager::Get();
 	public:
-		EventLayer() = default;
+		EventLayer() { name = "Event Layer"; }
 		~EventLayer() = default;
 
 		
