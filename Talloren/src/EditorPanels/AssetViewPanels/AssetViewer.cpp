@@ -119,6 +119,33 @@ namespace Talloren::Panels {
 		}
 	}
 
+	void AssetViewer::DrawFolder(const std::filesystem::path path, const float cellSize, AssetView* asset_view) {
+		std::string id = path.string() + "FolderIcon";
+		ImGui::PushID(id.c_str());
+
+		ImGui::BeginGroup(); // Start group so selectable spans all content
+
+		ImGui::Image((ImTextureRef)folder_default_thumbnail->texID, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+
+		// Get size of the group
+		ImVec2 groupSize = ImVec2(ImGui::GetItemRectMax().x - ImGui::GetItemRectMin().x, ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y + 5);
+
+		// Make the selectable span the entire group
+		bool selected = asset_view->selected_folder == path;
+		ImGui::SetCursorPosY(ImGui::GetCursorPosY() - groupSize.y);
+		if (ImGui::Selectable("##FolderSelectable", selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize)) {
+			asset_view->selected_folder = path;
+		}
+
+		// Draw text below image
+		std::string name_text = path.filename().replace_extension("").string().c_str();
+		ImGui::TextWrapped(name_text.c_str());
+
+		ImGui::EndGroup(); // End group
+
+		ImGui::PopID();
+	}
+
 	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Talloren::Layers::EditorLayer* editor_layer) {
 		// Thumbnail
 		// Use stable string id for ImGui PushID to avoid UB from implicit conversions
@@ -131,7 +158,7 @@ namespace Talloren::Panels {
 		bool hasThumbnail = false;
 
 		switch (asset->type) {
-		case Luxia::AssetType::TextureType:{
+		case Luxia::AssetType::TextureType: {
 			auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
 			if (texasset) {
 				if (texasset->IsValid()) {
@@ -220,19 +247,22 @@ namespace Talloren::Panels {
 
 	void AssetViewer::Init() {
 		mesh_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		mesh_default_thumbnail->LoadFromFile("resources/AssetIcons/MeshDefaultThumbnail.png");
+		mesh_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/MeshDefaultThumbnail.png");
 
 		mat_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		mat_default_thumbnail->LoadFromFile("resources/AssetIcons/MatDefaultThumbnail.png");
+		mat_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/MatDefaultThumbnail.png");
 
 		shader_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		shader_default_thumbnail->LoadFromFile("resources/AssetIcons/ShaderDefaultThumbnail.png");
+		shader_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/ShaderDefaultThumbnail.png");
 
 		scene_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		scene_default_thumbnail->LoadFromFile("resources/AssetIcons/SceneDefaultThumbnail.png");
+		scene_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/SceneDefaultThumbnail.png");
 
 		texture_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		texture_default_thumbnail->LoadFromFile("resources/AssetIcons/TextureDefaultThumbnail.png");
+		texture_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/TextureDefaultThumbnail.png");
+
+		folder_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
+		folder_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/FolderDefaultThumbnail.png");
 	}
 
 	void AssetViewer::DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)
@@ -252,6 +282,14 @@ namespace Talloren::Panels {
 		ImGui::Columns(columns, nullptr, false);
 
 		// Should draw sub folders here
+
+		std::error_code ec;
+		for (auto& entry : std::filesystem::directory_iterator(asset_view->selected_folder, ec)) {
+			if (ec) continue;
+			if (!entry.is_directory()) continue;
+			DrawFolder(entry.path(), cellSize, asset_view);
+			ImGui::NextColumn();
+		}
 
 		for (auto& [guid, asset] : assets_to_draw) {
 			if (!asset) continue;

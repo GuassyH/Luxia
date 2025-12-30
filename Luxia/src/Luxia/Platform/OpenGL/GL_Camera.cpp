@@ -9,14 +9,19 @@
 
 namespace Luxia::Platform::OpenGL {
 
+	// Only update on change?
 	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float FOVdeg, const int width, const int height, const float nearPlane, const float farPlane) {
 		// Initialise the matrices
 		m_View = glm::lookAt(pos, pos + rot, glm::vec3(0.0f, 1.0f, 0.0f));
 		m_Proj = glm::perspective(glm::radians(FOVdeg), (float)width / (float)height, nearPlane, farPlane);
 
-		Forward = glm::normalize(rot);
-		Right = glm::normalize(glm::cross(Forward, glm::vec3(0.0f, 1.0f, 0.0f)));
-		Up = glm::normalize(glm::cross(Right, Forward));
+		// Skips recalculating the other vectors unecessarily 
+		glm::vec3 f = glm::normalize(rot);
+		if (Forward != f) {
+			Forward = f;
+			Right = glm::normalize(glm::cross(Forward, glm::vec3(0.0f, 1.0f, 0.0f)));
+			Up = glm::normalize(glm::cross(Right, Forward));
+		}
 	}
 	
 	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) {
@@ -29,18 +34,6 @@ namespace Luxia::Platform::OpenGL {
 		glClearColor(clear_col.r, clear_col.g, clear_col.b, clear_col.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, width, height);
-
-		auto view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
-
-		for (auto entity : view) {
-			auto mr = scene->TryGetFromEntity<Luxia::Components::MeshRenderer>(entity);
-			auto mr_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
-
-			if (mr_t && mr) {
-				Luxia::Rendering::RenderObject ro { mr_t, mr };
-				rend->Submit(ro);
-			}
-		}
 
 		rend->Flush(GetViewMat(), GetProjMat());
 

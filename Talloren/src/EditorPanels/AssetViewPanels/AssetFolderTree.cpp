@@ -38,7 +38,6 @@ namespace Talloren::Panels {
 		}
 	}
 
-
 	std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> AssetFolderTree::DrawFolderHierarchy(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view) {
 		// Popup
 		if (ImGui::BeginPopupContextWindow("Asset Hierarchy Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {

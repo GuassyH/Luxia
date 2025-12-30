@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\EditorPanels\BuildSettings.h" />
     <ClInclude Include="src\EditorPanels\Profiler.h" />
     <ClInclude Include="src\EditorLayer.h" />
     <ClInclude Include="src\EditorPanels\AssetView.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\IEditorPanel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EditorPanels\BuildSettings.cpp" />
     <ClCompile Include="src\EditorPanels\Profiler.cpp" />
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\EditorPanels\AssetView.cpp" />
@@ -177,6 +179,14 @@
     <ProjectReference Include="..\Luxia\vendor\LuxiaVendor.vcxproj">
       <Project>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\AssetIcons\MatDefaultThumbnail.png" />
+    <Image Include="resources\AssetIcons\MeshDefaultThumbnail.png" />
+    <Image Include="resources\AssetIcons\SceneDefaultThumbnail.png" />
+    <Image Include="resources\AssetIcons\ShaderDefaultThumbnail.png" />
+    <Image Include="resources\AssetIcons\TextureDefaultThumbnail.png" />
+    <Image Include="resources\LuxiaLogo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

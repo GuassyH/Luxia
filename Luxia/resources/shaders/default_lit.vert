@@ -13,6 +13,8 @@ out vec3 vertCol;
 out vec2 texCoords;
 out vec3 vertNormal;
 
+out mat3 TBN;
+
 void main(){
 	mat3 normalMat = mat3(transpose(inverse(modelMat)));
 

@@ -33,11 +33,5 @@ namespace Luxia::Layers {
 			return false; // Check each event type and update input
 			});
 
-		/* If a camera is rendered do something?
-		dispatcher.Dispatch<RenderCameraEvent>([&](RenderCameraEvent& event) {
-			size = glm::vec2(event.GetTexture()->GetWidth(), event.GetTexture()->GetHeight());
-			return false; // Check each event type and update input
-			});
-		*/
 	}
 }

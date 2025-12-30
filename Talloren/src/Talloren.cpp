@@ -57,7 +57,7 @@ namespace Talloren {
 			PushLayer(std::make_shared<Talloren::Layers::EditorLayer>());
 			PushLayer(std::make_shared<Talloren::Layers::ExtraLayer>()); // Used for quick client side testing
 			m_Window->SetTitle("Luxia Editor");
-			std::filesystem::path iconpath = "resources/LuxiaLogo.png";
+			std::filesystem::path iconpath = "C:/dev/Luxia/Talloren/resources/LuxiaLogo.png";
 			m_Window->SetIcon(iconpath);
 		}
 	};

@@ -50,6 +50,7 @@ namespace Luxia {
 		T& GetFromEntity(const entt::entity entity) { // Only implemented to make it more readable to me
 			return reg.get<T>(entity);
 		}
+
 		template<typename T>
 		T& GetFromEntity(const Luxia::Entity& entity) {
 			auto it = runtime_entities.find(entity.guid);

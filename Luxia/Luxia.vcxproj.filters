@@ -330,4 +330,14 @@
     </ClCompile>
     <ClCompile Include="src\lxpch.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\default_lit.frag" />
+    <None Include="resources\shaders\default_lit.vert" />
+    <None Include="resources\shaders\default_unlit.frag" />
+    <None Include="resources\shaders\default_unlit.vert" />
+    <None Include="resources\shaders\null.frag" />
+    <None Include="resources\shaders\null.vert" />
+    <None Include="resources\shaders\viewport.frag" />
+    <None Include="resources\shaders\viewport.vert" />
+  </ItemGroup>
 </Project>

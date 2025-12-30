@@ -5,6 +5,7 @@
 #include "EditorPanels/SceneViewport.h"
 #include "EditorPanels/AssetView.h"
 #include "EditorPanels/Profiler.h"
+#include "EditorPanels/BuildSettings.h"
 
 namespace Talloren::Layers {
 	static std::vector<std::string> layers_to_remove;
@@ -109,19 +110,14 @@ namespace Talloren::Layers {
 				ImGui::EndMenu();
 			}
 
-
-			if (ImGui::BeginMenu("Build")) {
-				// Should be able to build project here
-				// And Also switch Build Configurations
-				// And importantly order by index scenes
-				ImGui::EndMenu();
-			}
-
 			if (ImGui::BeginMenu("Layer")) {
 				if (ImGui::BeginMenu("Add Layer")) {
 
 					if (ImGui::MenuItem("Asset View", nullptr, nullptr, !HasPanel<Panels::AssetView>())) {
 						PushPanel(std::make_shared<Talloren::Panels::AssetView>());
+					}
+					if (ImGui::MenuItem("Build Settings", nullptr, nullptr, !HasPanel<Panels::BuildSettings>())) {
+						PushPanel(std::make_shared<Talloren::Panels::BuildSettings>());
 					}
 					if (ImGui::MenuItem("Game Viewport", nullptr, nullptr, !HasPanel<Panels::GameViewport>())) {
 						PushPanel(std::make_shared<Talloren::Panels::GameViewport>());

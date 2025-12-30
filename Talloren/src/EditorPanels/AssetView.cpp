@@ -6,8 +6,6 @@
 #include "AssetViewPanels/AssetFolderTree.h"
 #include "AssetViewPanels/AssetViewer.h"
 
-
-
 namespace Talloren::Panels {
 	static AssetFolderTree astfoldertree;
 	static AssetViewer astviewer;
@@ -45,7 +43,6 @@ namespace Talloren::Panels {
 		ImGuiWindowClass assetViewWindowClass;
 		assetViewWindowClass.ClassId = ImGui::GetID("AssetView_WindowClass");
 		assetViewWindowClass.DockingAllowUnclassed = true;
-
 
 		ImGui::SetNextWindowClass(&assetViewWindowClass);
 		bool const shouldDrawWindowContents = ImGui::Begin("Asset View", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
@@ -102,7 +99,11 @@ namespace Talloren::Panels {
 		}
 
 		if (ImGui::Begin("RightWindow")) {
-			ImGui::Text("Asset View"); ImGui::Separator();
+			ImGui::Text("Asset View");
+			std::string pathtxt = " | " + selected_folder.string();
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f), pathtxt.c_str());
+			ImGui::Separator();
 			astviewer.DrawAssetFiles(editorLayer, this, assets_to_draw);
 			ImGui::End();
 		}
@@ -110,7 +111,6 @@ namespace Talloren::Panels {
 		ImGui::End();
 	}
 
-	
 	void AssetView::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 	
 	}

@@ -21,19 +21,29 @@ namespace Luxia::Layers {
 		auto scene = project_manager->GetSceneManager()->GetActiveScene();
 
 		if (scene) {
-			auto view = scene->GetEntitiesWith<Luxia::Components::Camera>();
+			auto mesh_view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
 
-			for (auto entity : view) {
-				auto& cam = view.get<Luxia::Components::Camera>(entity);
-				auto cam_t = scene->TryGetFromEntity<Luxia::Components::Transform>(entity);
+			// Do this here so you only calculate all the meshes ONCE a frame
+			// Should be done only if a new mesh is added to the scene!
+			renderer->ClearROs();
+			for (auto entity : mesh_view) {
+				auto& mr = scene->GetFromEntity<Luxia::Components::MeshRenderer>(entity);
 
-				if (cam_t && cam.main) 
-					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()), cam.main);
-				else if(!cam_t)  
-					LX_CORE_ERROR("Camera ({}) has no transform!", (int)entity);
+				if (mr.transform) {
+					renderer->Submit({mr.mesh.get(), mr.material.get(), mr.transform->GetMatrix()});
+				}
 			}
-		}
+			
+			auto cam_view = scene->GetEntitiesWith<Luxia::Components::Camera>();
 
+			for (auto entity : cam_view) {
+				auto& cam = scene->GetFromEntity<Luxia::Components::Camera>(entity);
+
+				if (cam.main) 
+					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()), cam.main);
+			}
+			
+		}
 
 	}
 	void RenderLayer::OnEvent(Event& e) {

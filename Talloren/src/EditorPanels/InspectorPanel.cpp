@@ -48,13 +48,6 @@ namespace Talloren::Panels {
 			ent.name = namebuff;
 			memset(namebuff, 0, sizeof(namebuff));
 		}
-		ImGui::SameLine();
-		if (ImGui::Button("U")) {	// You can now delete entities but adding new ones after deleting doesnt work
-			editorLayer->EraseSelected(ent.guid);
-			scene->DeleteEntity(ent.guid);
-			ImGui::End();
-			return;
-		}
 
 		// GUID
 		std::ostringstream info; info << "Entity ID: " << (uint64_t)ent.guid;

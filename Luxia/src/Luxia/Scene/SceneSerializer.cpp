@@ -88,7 +88,6 @@ namespace Luxia {
 		out << YAML::EndSeq;
 		out << YAML::EndMap;
 
-
 		std::ofstream outfile(m_SceneFile->scene_path.string());
 		outfile << out.c_str();
 		outfile.close();

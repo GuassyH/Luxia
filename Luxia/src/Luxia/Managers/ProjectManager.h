@@ -3,6 +3,7 @@
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/SceneManager.h"
 #include "Luxia/Core/Core.h"
+#include "Luxia/Core/GUID.h"
 
 #include <filesystem>
 #include <iostream>
@@ -23,6 +24,7 @@ namespace Luxia {
 		
 		std::shared_ptr<Luxia::AssetManager>& GetAssetManager() { return m_AssetManager; }
 		std::shared_ptr<SceneManager>& GetSceneManager() { return m_SceneManager; }
+
 
 		const std::filesystem::path& GetProjectPath() { return m_ProjectPath; }
 		const std::string& GetProjectName() { return m_ProjectName; }

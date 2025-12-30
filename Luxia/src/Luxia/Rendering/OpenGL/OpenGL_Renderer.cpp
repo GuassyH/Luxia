@@ -25,27 +25,23 @@ namespace Luxia::Rendering::OpenGL {
 
 	// Render the render object (meshrenderer mesh with material and transform)
 	void OpenGL_Renderer::RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		RenderMesh(ro.mesh_rend->mesh, ro.mesh_rend->material, ro.transform->GetMatrix(), viewMat, projMat);
+		RenderMesh(ro.mesh, ro.mat, ro.modelMat, viewMat, projMat);
 	}
 
-	void OpenGL_Renderer::RenderMesh(const std::shared_ptr<Luxia::Mesh> m_mesh, const std::shared_ptr<Luxia::IMaterial> m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
+	void OpenGL_Renderer::RenderMesh(const Luxia::Mesh* m_mesh, Luxia::IMaterial* m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (!m_mesh) 
 			return;
 		if (!m_mesh->IsValid())
 			return;
-		
 
-		bool valid_mat = false;
-
-		if (m_material)
+		if (m_material) {
 			if (m_material->shader)
-				valid_mat = true;
-		
-		if(valid_mat)
-			m_material->Use(modMat, viewMat, projMat);
-		else if (null_mat)
+				m_material->Use(modMat, viewMat, projMat);
+			else 
+				null_mat->Use(modMat, viewMat, projMat);
+		}
+		else
 			null_mat->Use(modMat, viewMat, projMat);
-	
 
 		m_mesh->vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);
@@ -60,9 +56,6 @@ namespace Luxia::Rendering::OpenGL {
 		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);
 
 		m_mesh.vao->Unbind();
-
-		glActiveTexture(0);
-		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	void OpenGL_Renderer::RenderFBO(const Mesh& m_quad, std::shared_ptr<IShader> fs_shader, std::shared_ptr<ITexture> cam_tex) {
