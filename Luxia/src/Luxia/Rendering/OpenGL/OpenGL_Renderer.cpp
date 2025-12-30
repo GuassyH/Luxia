@@ -16,10 +16,10 @@ namespace Luxia::Rendering::OpenGL {
 		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
 
 		// Should be baked into the engine somehow
-		null_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/null.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/null.vert");
+		null_shader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/null.frag", "C:/dev/Luxia/Luxia/resources/shaders/null.vert");
 		null_mat = Platform::Assets::CreateMaterial(null_shader);
 	
-		default_shader = Platform::Assets::CreateShader("E:/BuiltLuxia/Sandbox/assets/shaders/default_lit.frag", "E:/BuiltLuxia/Sandbox/assets/shaders/default_lit.vert");
+		default_shader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/default_lit.frag", "C:/dev/Luxia/Luxia/resources/shaders/default_lit.vert");
 		default_mat = Platform::Assets::CreateMaterial(default_shader);
 	}
 

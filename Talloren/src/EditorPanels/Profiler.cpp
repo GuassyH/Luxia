@@ -5,8 +5,10 @@ namespace Talloren::Panels {
 
 	static std::unordered_map<std::string, double> layer_times;
 	static std::unordered_map<std::string, double> temp_layer_times;
-	static bool should_update = true;
+	static bool queue_update = true;
 	static float reset_update_timer = 0.0f;
+
+	static bool should_update = false;
 
 	void Profiler::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
 	void Profiler::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
@@ -22,6 +24,13 @@ namespace Talloren::Panels {
 		ImGui::Separator();
 
 		ImGui::Text("=== Layer Timings ===");
+		ImGui::Checkbox("Gather Layer Timings", &should_update);
+		
+		if(!should_update) {
+			ImGui::End();
+			return;
+		}
+
 		ImVec2 avail = ImGui::GetContentRegionAvail();
 
 		ImGui::BeginTable("LayerTimingsTable", 2, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_Borders);
@@ -40,11 +49,11 @@ namespace Talloren::Panels {
 
 		ImGui::EndTable();
 		
-		if (should_update&& reset_update_timer >= 0.2f) { // updates 5 times a second
+		if (queue_update && reset_update_timer >= 0.2f) { // updates 5 times a second
 			layer_times.swap(temp_layer_times);
 			temp_layer_times.clear();
 			editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::ProfilerRequestEvent>(Luxia::Core::Time::get().GetTime()));
-			should_update = false;
+			queue_update = false;
 			reset_update_timer = 0.0f;
 		}
 		
@@ -64,7 +73,7 @@ namespace Talloren::Panels {
 
 		dispatcher.Dispatch<Luxia::MessageSentEvent>([&](Luxia::MessageSentEvent& event) {
 			if (event.GetMessageStr() == "End of Frame") {
-				should_update = true;
+				queue_update = true;
 			}
 			return false; // Don't eat
 			});

@@ -8,13 +8,9 @@ uniform mat4 modelMat;
 uniform mat4 projMat;
 uniform mat4 viewMat;
 
-out vec3 crntPos;
-out vec3 vertCol;
-out vec2 texCoords;
 
+vec3 crntPos;
 void main(){
 	crntPos = vec3(modelMat * vec4(aPos, 1.0));
 	gl_Position = projMat * viewMat * vec4(crntPos, 1.0);
-
-	texCoords = aTex;
 }

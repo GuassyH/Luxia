@@ -59,8 +59,11 @@ namespace Luxia
 			m_EventHandler->DispatchAll(this);
 
 			for (auto& layer : m_LayerStack->m_Layers) {
-				time_accumulator = Luxia::Core::Time::get().GetTimeHP();
+				if(layer->give_profiler_response)
+					time_accumulator = Luxia::Core::Time::get().GetTimeHP();
+
 				layer->OnUpdate();
+				
 				if (layer->give_profiler_response) {
 					time_accumulator = Luxia::Core::Time::get().GetTimeHP() - time_accumulator;
 					std::string text = layer->name + " - Update";
@@ -69,8 +72,11 @@ namespace Luxia
 			}
 			
 			for (auto& layer : m_LayerStack->m_Layers) {
-				time_accumulator = Luxia::Core::Time::get().GetTimeHP();
+				if(layer->give_profiler_response)
+					time_accumulator = Luxia::Core::Time::get().GetTimeHP();
+
 				layer->OnRender();
+				
 				if (layer->give_profiler_response) {
 					time_accumulator = Luxia::Core::Time::get().GetTimeHP() - time_accumulator;
 					std::string text = layer->name + " - Render";

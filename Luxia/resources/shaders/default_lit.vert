@@ -1,0 +1,24 @@
+#version 460 core
+
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+layout (location = 2) in vec2 aTex;
+
+uniform mat4 modelMat;
+uniform mat4 projMat;
+uniform mat4 viewMat;
+
+out vec3 crntPos;
+out vec3 vertCol;
+out vec2 texCoords;
+out vec3 vertNormal;
+
+void main(){
+	mat3 normalMat = mat3(transpose(inverse(modelMat)));
+
+	crntPos = vec3(modelMat * vec4(aPos, 1.0));
+	gl_Position = projMat * viewMat * vec4(crntPos, 1.0);
+
+	texCoords = aTex;
+	vertNormal = normalize(normalMat * aNormal);
+}

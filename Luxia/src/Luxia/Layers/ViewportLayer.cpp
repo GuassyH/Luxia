@@ -17,8 +17,8 @@ namespace Luxia::Layers {
 	void ViewportLayer::OnAttach() {
 		LX_CORE_WARN("ViewportLayer Attached");
 		fs_shader = Luxia::Platform::Assets::CreateShader(
-			"C:/dev/Luxia/assets/shaders/viewport.frag", 
-			"C:/dev/Luxia/assets/shaders/viewport.vert");
+			"C:/dev/Luxia/Luxia/resources/shaders/viewport.frag", 
+			"C:/dev/Luxia/Luxia/resources/shaders/viewport.vert");
 
 		fs_quad = Luxia::Mesh(quad_verts, quad_inds);
 		fs_quad.CalculateMesh();

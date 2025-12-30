@@ -32,12 +32,13 @@ namespace Talloren::Layers {
 		LX_CORE_WARN("EditorLayer Attached");
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
 
+		// Just add them all, should use an editor config file but, eh
 		PushPanel(std::make_shared<Talloren::Panels::GameViewport>());
 		PushPanel(std::make_shared<Talloren::Panels::HierarchyPanel>());
 		PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
 		PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
 		PushPanel(std::make_shared<Talloren::Panels::AssetView>());
-		PushPanel(std::make_shared<Talloren::Panels::Profiler>());
+		// PushPanel(std::make_shared<Talloren::Panels::Profiler>());
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
@@ -130,6 +131,9 @@ namespace Talloren::Layers {
 					}
 					if (ImGui::MenuItem("Inspector", nullptr, nullptr, !HasPanel<Panels::InspectorPanel>())) {
 						PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
+					}
+					if (ImGui::MenuItem("Profiler", nullptr, nullptr, !HasPanel<Panels::Profiler>())) {
+						PushPanel(std::make_shared<Talloren::Panels::Profiler>());
 					}
 					if (ImGui::MenuItem("Scene Viewport", nullptr, nullptr, !HasPanel<Panels::SceneViewport>())) {
 						PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
