@@ -12,6 +12,7 @@ IMPORTANT
 - Scene Index (right now their order is based on when they are loaded)
 
 - Resources (like built in shaders and meshes that come with the engine) should be loaded once, and not per scene, and shared across projects)
+		- USE CMAKE
 
 - Rendering on a seperate thread? Performance boost ash
 

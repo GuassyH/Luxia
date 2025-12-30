@@ -366,6 +366,11 @@ namespace Talloren::Panels {
 
 			if (ImGui::BeginMenu("Create", editorLayer->areNoneSelected)) {
 				// Should be created in the folder you are in
+				if (ImGui::MenuItem("New Folder")) {
+					if (std::filesystem::exists(asset_view->selected_folder / "NewFolder")) return;
+					std::filesystem::create_directories(asset_view->selected_folder / "NewFolder");
+				}
+				ImGui::Separator();
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
 						auto mat = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(asset_view->selected_folder, false, "NewMaterial");
@@ -426,6 +431,12 @@ namespace Talloren::Panels {
 			ImGui::EndPopup();
 		}
 
+		if (ImGui::IsWindowHovered()) {
+			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_4)) {
+				if (asset_view->selected_folder != editorLayer->GetAssetManager()->GetAssetDir()) {
+					asset_view->selected_folder = asset_view->selected_folder.parent_path();
+				}
+			}
+		}
 	}
-
 }

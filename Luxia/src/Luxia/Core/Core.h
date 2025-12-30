@@ -163,10 +163,11 @@
 	#define LX_KEY_RIGHT_ALT		GLFW_KEY_RIGHT_ALT		
 	#define LX_KEY_RIGHT_SUPER		GLFW_KEY_RIGHT_SUPER		
 	#define LX_KEY_MENU				GLFW_KEY_MENU				
-	#define LX_MOUSE_BUTTON_1 GLFW_MOUSE_BUTTON_1  /* left */
-	#define LX_MOUSE_BUTTON_2 GLFW_MOUSE_BUTTON_2  /* right */
-	#define LX_MOUSE_BUTTON_3 GLFW_MOUSE_BUTTON_3  /* middle */
-	#define LX_MOUSE_BUTTON_4 GLFW_MOUSE_BUTTON_4  /* back */
+	#define LX_MOUSE_BUTTON_1		GLFW_MOUSE_BUTTON_1  /* left */
+	#define LX_MOUSE_BUTTON_2		GLFW_MOUSE_BUTTON_2  /* right */
+	#define LX_MOUSE_BUTTON_3		GLFW_MOUSE_BUTTON_3  /* middle */
+	#define LX_MOUSE_BUTTON_4		GLFW_MOUSE_BUTTON_4  /* back */
+	#define LX_MOUSE_BUTTON_5		GLFW_MOUSE_BUTTON_5  /* forward */
 #else
 	/* Printable Keys */
 	#define LX_KEY_A constexpr 0

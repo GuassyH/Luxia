@@ -12,7 +12,7 @@ namespace Talloren::Panels {
 		cam_ent->transform = cam_ent;
 		cam_ent->reg = &editorLayer->editor_reg;
 
-		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080);
+		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080).farPlane = 2000.0f;
 		cam_ent->AddComponent<Talloren::Scripts::SceneCameraScript>();
 	}
 
