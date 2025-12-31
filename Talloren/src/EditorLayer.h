@@ -55,6 +55,10 @@ namespace Talloren::Layers {
 		virtual void OnUpdate() override;
 		virtual void OnRender() override;
 		virtual void OnEvent(Luxia::Event& e) override;
+
+	protected:
+		std::shared_ptr<Luxia::ITexture> PlayTex;
+		std::shared_ptr<Luxia::ITexture> PauseTex;
 	};
 }
 

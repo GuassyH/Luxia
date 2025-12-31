@@ -31,13 +31,15 @@ namespace Luxia
 
 		// Initialise layer stack 
 		m_LayerStack = std::make_shared<LayerStack>();
-
 	}
 
 	void Application::CoreStartup() {
 		LX_CORE_INFO("Application Started\n");
 
 		m_Renderer->GetUIRenderer()->Init();
+
+		if (m_ProjectManager->GetSceneManager()->scene_files.empty()) { LX_CORE_WARN("No scenes available"); return; }
+		m_ProjectManager->GetSceneManager()->SetActiveScene(0);
 
 		// Core Layers
 		PushLayer(std::make_shared<Layers::EventLayer>());
@@ -109,8 +111,6 @@ namespace Luxia
 		m_ProjectManager->CloseProject();
 		LX_CORE_ERROR("Application Ended");
 	}
-
-
 
 	bool Application::OnEvent(Luxia::Event& e) {
 		//  Go through each layer from top to bottom and check onEvent

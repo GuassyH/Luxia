@@ -18,6 +18,8 @@ IMPORTANT
 
 - Rework Scene Serializer and SceneFile structure
 
+- Maybe MeshRenderer should store the GUIDs of the mesh and mat and not the shared_ptr to it
+
 --- Future ---
 
 - Lighting (at least global illumination / sun)

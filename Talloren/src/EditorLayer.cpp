@@ -39,7 +39,12 @@ namespace Talloren::Layers {
 		PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
 		PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
 		PushPanel(std::make_shared<Talloren::Panels::AssetView>());
-		// PushPanel(std::make_shared<Talloren::Panels::Profiler>());
+
+		PlayTex = Luxia::Platform::Assets::CreateTexture();
+		PlayTex->LoadFromFile("C:/dev/Luxia/Talloren/resources/PlayButton.png");
+
+		PauseTex = Luxia::Platform::Assets::CreateTexture();
+		PauseTex->LoadFromFile("C:/dev/Luxia/Talloren/resources/PauseButton.png");
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
@@ -141,7 +146,16 @@ namespace Talloren::Layers {
 				ImGui::EndMenu();
 			}
 
+			// Put these buttons in the middle
+			ImVec2 avail = ImGui::GetContentRegionAvail();
+			ImVec2 size = ImGui::GetItemRectSize();
+			ImGui::SetCursorPosX((avail.x / 2.0f) - 10);
+			ImGui::SetCursorPosY(0);
+			ImGui::Image((ImTextureRef)PlayTex->texID, ImVec2(size.y, size.y), ImVec2(0, 0), ImVec2(1, 1));
+			ImGui::Image((ImTextureRef)PauseTex->texID, ImVec2(size.y, size.y), ImVec2(0, 0), ImVec2(1, 1));
+
 			ImGui::EndMenuBar();
+			
 		}
 
 		if (opt_fullscreen)
@@ -176,7 +190,6 @@ namespace Talloren::Layers {
 		layers_to_remove.clear();
 
 		ImGui::End();
-
 
 	}
 
