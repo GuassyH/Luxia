@@ -1,11 +1,11 @@
 #include "GameViewport.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Panels {
-	void GameViewport::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+namespace Editor::Panels {
+	void GameViewport::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - GameView Panel: Init");
 	}
-	void GameViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void GameViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Game View", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 		name = "Game View";
 		TabPopupContextMenu();
@@ -45,7 +45,7 @@ namespace Talloren::Panels {
 
 		ImGui::End();
 	}
-	void GameViewport::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void GameViewport::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 
 	}
 

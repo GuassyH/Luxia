@@ -102,9 +102,9 @@ project "Luxia"
 		buildoptions { "/utf-8", "/wd4251" } -- Ignores the "needs to be dll interfaced warning"
 		linkoptions { "/SUBSYSTEM:CONSOLE" }
 
-		-- Copy file from the buildtarget to bin/outputdir/Talloren
+		-- Copy file from the buildtarget to bin/outputdir/Editor
 		postbuildcommands{
-			('{COPY} %{cfg.buildtarget.relpath} ../bin/' .. outputdir .. '/Talloren'),
+			('{COPY} %{cfg.buildtarget.relpath} ../bin/' .. outputdir .. '/Editor'),
 		}
 
 		
@@ -136,8 +136,8 @@ project "Luxia"
 
 
 
-project "Talloren"
-	location "Talloren"
+project "Editor"
+	location "Editor"
 	kind "ConsoleApp"
 	language "C++"
 
@@ -160,7 +160,7 @@ project "Talloren"
 		"Luxia/vendor/yaml-cpp/include",
 		"Luxia/vendor/glm",
 		"Luxia/src",
-		"Talloren/src",
+		"Editor/src",
 	}
 
 	libdirs {

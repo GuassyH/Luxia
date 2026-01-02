@@ -15,10 +15,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C673EC2F-B240-473B-DB59-35E3C7857CC9}</ProjectGuid>
+    <ProjectGuid>{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Talloren</RootNamespace>
+    <RootNamespace>Editor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -55,23 +55,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)..\bin\Debug-windows-x86_64\Talloren\</OutDir>
-    <IntDir>$(ProjectDir)..\bin-int\Debug-windows-x86_64\Talloren\</IntDir>
-    <TargetName>Talloren</TargetName>
+    <OutDir>$(ProjectDir)..\bin\Debug-windows-x86_64\Editor\</OutDir>
+    <IntDir>$(ProjectDir)..\bin-int\Debug-windows-x86_64\Editor\</IntDir>
+    <TargetName>Editor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)..\bin\Release-windows-x86_64\Talloren\</OutDir>
-    <IntDir>$(ProjectDir)..\bin-int\Release-windows-x86_64\Talloren\</IntDir>
-    <TargetName>Talloren</TargetName>
+    <OutDir>$(ProjectDir)..\bin\Release-windows-x86_64\Editor\</OutDir>
+    <IntDir>$(ProjectDir)..\bin-int\Release-windows-x86_64\Editor\</IntDir>
+    <TargetName>Editor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)..\bin\Distribution-windows-x86_64\Talloren\</OutDir>
-    <IntDir>$(ProjectDir)..\bin-int\Distribution-windows-x86_64\Talloren\</IntDir>
-    <TargetName>Talloren</TargetName>
+    <OutDir>$(ProjectDir)..\bin\Distribution-windows-x86_64\Editor\</OutDir>
+    <IntDir>$(ProjectDir)..\bin-int\Distribution-windows-x86_64\Editor\</IntDir>
+    <TargetName>Editor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,29 +146,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\EditorPanels\BuildSettings.h" />
-    <ClInclude Include="src\EditorPanels\Profiler.h" />
     <ClInclude Include="src\EditorLayer.h" />
     <ClInclude Include="src\EditorPanels\AssetView.h" />
     <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.h" />
     <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetViewer.h" />
+    <ClInclude Include="src\EditorPanels\BuildSettings.h" />
     <ClInclude Include="src\EditorPanels\GameViewport.h" />
     <ClInclude Include="src\EditorPanels\HierarchyPanel.h" />
     <ClInclude Include="src\EditorPanels\InspectorPanel.h" />
+    <ClInclude Include="src\EditorPanels\Profiler.h" />
     <ClInclude Include="src\EditorPanels\SceneViewport.h" />
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
     <ClInclude Include="src\IEditorPanel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\EditorPanels\BuildSettings.cpp" />
-    <ClCompile Include="src\EditorPanels\Profiler.cpp" />
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\EditorPanels\AssetView.cpp" />
     <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp" />
     <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetViewer.cpp" />
+    <ClCompile Include="src\EditorPanels\BuildSettings.cpp" />
     <ClCompile Include="src\EditorPanels\GameViewport.cpp" />
     <ClCompile Include="src\EditorPanels\HierarchyPanel.cpp" />
     <ClCompile Include="src\EditorPanels\InspectorPanel.cpp" />
+    <ClCompile Include="src\EditorPanels\Profiler.cpp" />
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
     <ClCompile Include="src\Talloren.cpp" />
   </ItemGroup>
@@ -179,14 +179,6 @@
     <ProjectReference Include="..\Luxia\vendor\LuxiaVendor.vcxproj">
       <Project>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\AssetIcons\MatDefaultThumbnail.png" />
-    <Image Include="resources\AssetIcons\MeshDefaultThumbnail.png" />
-    <Image Include="resources\AssetIcons\SceneDefaultThumbnail.png" />
-    <Image Include="resources\AssetIcons\ShaderDefaultThumbnail.png" />
-    <Image Include="resources\AssetIcons\TextureDefaultThumbnail.png" />
-    <Image Include="resources\LuxiaLogo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

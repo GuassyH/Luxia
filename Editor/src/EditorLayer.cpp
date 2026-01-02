@@ -7,7 +7,7 @@
 #include "EditorPanels/Profiler.h"
 #include "EditorPanels/BuildSettings.h"
 
-namespace Talloren::Layers {
+namespace Editor::Layers {
 	static std::vector<std::string> layers_to_remove;
 
 	void EditorLayer::ClearSelected() {
@@ -34,17 +34,17 @@ namespace Talloren::Layers {
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
 
 		// Just add them all, should use an editor config file but, eh
-		PushPanel(std::make_shared<Talloren::Panels::GameViewport>());
-		PushPanel(std::make_shared<Talloren::Panels::HierarchyPanel>());
-		PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
-		PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
-		PushPanel(std::make_shared<Talloren::Panels::AssetView>());
+		PushPanel(std::make_shared<Editor::Panels::GameViewport>());
+		PushPanel(std::make_shared<Editor::Panels::HierarchyPanel>());
+		PushPanel(std::make_shared<Editor::Panels::InspectorPanel>());
+		PushPanel(std::make_shared<Editor::Panels::SceneViewport>());
+		PushPanel(std::make_shared<Editor::Panels::AssetView>());
 
 		PlayTex = Luxia::Platform::Assets::CreateTexture();
-		PlayTex->LoadFromFile("C:/dev/Luxia/Talloren/resources/PlayButton.png");
+		PlayTex->LoadFromFile("C:/dev/Luxia/Editor/resources/PlayButton.png");
 
 		PauseTex = Luxia::Platform::Assets::CreateTexture();
-		PauseTex->LoadFromFile("C:/dev/Luxia/Talloren/resources/PauseButton.png");
+		PauseTex->LoadFromFile("C:/dev/Luxia/Editor/resources/PauseButton.png");
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
@@ -119,25 +119,25 @@ namespace Talloren::Layers {
 				if (ImGui::BeginMenu("Add Layer")) {
 
 					if (ImGui::MenuItem("Asset View", nullptr, nullptr, !HasPanel<Panels::AssetView>())) {
-						PushPanel(std::make_shared<Talloren::Panels::AssetView>());
+						PushPanel(std::make_shared<Editor::Panels::AssetView>());
 					}
 					if (ImGui::MenuItem("Build Settings", nullptr, nullptr, !HasPanel<Panels::BuildSettings>())) {
-						PushPanel(std::make_shared<Talloren::Panels::BuildSettings>());
+						PushPanel(std::make_shared<Editor::Panels::BuildSettings>());
 					}
 					if (ImGui::MenuItem("Game Viewport", nullptr, nullptr, !HasPanel<Panels::GameViewport>())) {
-						PushPanel(std::make_shared<Talloren::Panels::GameViewport>());
+						PushPanel(std::make_shared<Editor::Panels::GameViewport>());
 					}
 					if (ImGui::MenuItem("Hierarchy", nullptr, nullptr, !HasPanel<Panels::HierarchyPanel>())) {
-						PushPanel(std::make_shared<Talloren::Panels::HierarchyPanel>());
+						PushPanel(std::make_shared<Editor::Panels::HierarchyPanel>());
 					}
 					if (ImGui::MenuItem("Inspector", nullptr, nullptr, !HasPanel<Panels::InspectorPanel>())) {
-						PushPanel(std::make_shared<Talloren::Panels::InspectorPanel>());
+						PushPanel(std::make_shared<Editor::Panels::InspectorPanel>());
 					}
 					if (ImGui::MenuItem("Profiler", nullptr, nullptr, !HasPanel<Panels::Profiler>())) {
-						PushPanel(std::make_shared<Talloren::Panels::Profiler>());
+						PushPanel(std::make_shared<Editor::Panels::Profiler>());
 					}
 					if (ImGui::MenuItem("Scene Viewport", nullptr, nullptr, !HasPanel<Panels::SceneViewport>())) {
-						PushPanel(std::make_shared<Talloren::Panels::SceneViewport>());
+						PushPanel(std::make_shared<Editor::Panels::SceneViewport>());
 					}
 
 					ImGui::EndMenu();

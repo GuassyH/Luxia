@@ -3,7 +3,7 @@
 #include "Luxia.h"
 #include "glm/glm.hpp"
 
-namespace Talloren::Scripts {
+namespace Editor::Scripts {
 
 	class SceneCameraScript : public Luxia::Components::Component {
 	public:

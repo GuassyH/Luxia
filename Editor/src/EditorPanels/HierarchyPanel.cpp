@@ -1,13 +1,13 @@
 ﻿#include "HierarchyPanel.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Panels {
-	void HierarchyPanel::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+namespace Editor::Panels {
+	void HierarchyPanel::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - Hierarchy Panel: Init");
 	}
 
 	std::vector<Luxia::GUID> entitiesToDelete;
-	void HierarchyPanel::DrawEntitySelectable(Luxia::Entity& entity, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void HierarchyPanel::DrawEntitySelectable(Luxia::Entity& entity, Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		std::ostringstream enttext; enttext << entity.name;
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanFullWidth;
 
@@ -45,7 +45,7 @@ namespace Talloren::Panels {
 		}
 	}
 
-	static Luxia::Entity& CreateHierarchyEntity(std::string name, Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	static Luxia::Entity& CreateHierarchyEntity(std::string name, Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		auto& new_ntt = scene->CreateEntity(name);
 		if (editorLayer->isOneSelected) { // Set parent if there is a currently selected
 			Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
@@ -61,7 +61,7 @@ namespace Talloren::Panels {
 		return new_ntt;
 	}
 
-	void HierarchyPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void HierarchyPanel::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Hierarchy Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 		name = "Hierarchy Panel";
 		TabPopupContextMenu();
@@ -209,7 +209,7 @@ namespace Talloren::Panels {
 
 		ImGui::End();
 	}
-	void HierarchyPanel::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void HierarchyPanel::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		entitiesToDelete.clear();
 
 	}

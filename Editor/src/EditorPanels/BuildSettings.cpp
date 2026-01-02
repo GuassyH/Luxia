@@ -8,13 +8,13 @@
 
 
 
-namespace Talloren::Panels {
+namespace Editor::Panels {
 	// CORE
-	void BuildSettings::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void BuildSettings::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - Build Settings Panel: Init");
 	}
 
-	void BuildSettings::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void BuildSettings::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Build Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 		name = "Build Settings";
 		TabPopupContextMenu();
@@ -35,7 +35,7 @@ namespace Talloren::Panels {
 	}
 
 
-	void BuildSettings::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void BuildSettings::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 
 	}
 

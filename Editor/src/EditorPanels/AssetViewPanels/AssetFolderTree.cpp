@@ -2,7 +2,7 @@
 #include "EditorLayer.h"
 #include "EditorPanels/AssetView.h"
 
-namespace Talloren::Panels {
+namespace Editor::Panels {
 	// Should cache later, not that important now with small trees
 	// Same Setup as hierarchy inspector
 	static void DrawPathSelectable(const std::filesystem::directory_entry& entry, std::filesystem::path& sel_fol) {
@@ -38,7 +38,7 @@ namespace Talloren::Panels {
 		}
 	}
 
-	std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> AssetFolderTree::DrawFolderHierarchy(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view) {
+	std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> AssetFolderTree::DrawFolderHierarchy(Editor::Layers::EditorLayer* editorLayer, AssetView* asset_view) {
 		// Popup
 		if (ImGui::BeginPopupContextWindow("Asset Hierarchy Viewer", ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
 			if (ImGui::MenuItem("Refresh All")) {

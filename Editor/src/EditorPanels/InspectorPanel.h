@@ -4,12 +4,12 @@
 #include "Luxia/Asset/Asset.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Panels {
-	class InspectorPanel : public Talloren::IEditorPanel {
+namespace Editor::Panels {
+	class InspectorPanel : public Editor::IEditorPanel {
 	public:
-		virtual void Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
-		virtual void Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
-		virtual void Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
+		virtual void Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
+		virtual void Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
+		virtual void Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 
 		virtual void OnEvent(Luxia::Event& e) override;
 
@@ -17,13 +17,13 @@ namespace Talloren::Panels {
 
 		std::string PasteFromClipboard();
 	private:
-		void RenderMesh(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
-		void RenderMaterial(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
-		void RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid);
-		void RenderShader(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
+		void RenderMesh(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
+		void RenderMaterial(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
+		void RenderEntity(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid);
+		void RenderShader(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 
 		template <typename T>
-		void DrawPasteField(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
+		void DrawPasteField(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
 			std::ostringstream paste_id; paste_id << "##" << label;
 			ImGui::PushID(paste_id.str().c_str());
 			if (ImGui::Button("Paste")) {

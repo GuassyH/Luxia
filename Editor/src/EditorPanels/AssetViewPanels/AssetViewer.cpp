@@ -8,7 +8,7 @@
 #include <shobjidl.h>
 #include <shellapi.h>
 
-namespace Talloren::Panels {
+namespace Editor::Panels {
 
 	static void CopyToClipboard(std::string to_copy) {
 		const char* cdata = to_copy.c_str();
@@ -67,7 +67,7 @@ namespace Talloren::Panels {
 		return result;
 	}
 
-	static void OpenAsset(Luxia::GUID guid, Talloren::Layers::EditorLayer* editorLayer) {
+	static void OpenAsset(Luxia::GUID guid, Editor::Layers::EditorLayer* editorLayer) {
 		// Validate asset manager and scene manager pointers
 		auto assetManager = editorLayer->GetAssetManager();
 		if (!assetManager) {
@@ -146,7 +146,7 @@ namespace Talloren::Panels {
 		ImGui::PopID();
 	}
 
-	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Talloren::Layers::EditorLayer* editor_layer) {
+	void AssetViewer::DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Editor::Layers::EditorLayer* editor_layer) {
 		// Thumbnail
 		// Use stable string id for ImGui PushID to avoid UB from implicit conversions
 		std::string id = std::to_string((uint64_t)asset->guid);
@@ -247,25 +247,25 @@ namespace Talloren::Panels {
 
 	void AssetViewer::Init() {
 		mesh_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		mesh_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/MeshDefaultThumbnail.png");
+		mesh_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/MeshDefaultThumbnail.png");
 
 		mat_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		mat_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/MatDefaultThumbnail.png");
+		mat_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/MatDefaultThumbnail.png");
 
 		shader_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		shader_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/ShaderDefaultThumbnail.png");
+		shader_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/ShaderDefaultThumbnail.png");
 
 		scene_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		scene_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/SceneDefaultThumbnail.png");
+		scene_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/SceneDefaultThumbnail.png");
 
 		texture_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		texture_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/TextureDefaultThumbnail.png");
+		texture_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/TextureDefaultThumbnail.png");
 
 		folder_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		folder_default_thumbnail->LoadFromFile("C:/dev/Luxia/Talloren/resources/AssetIcons/FolderDefaultThumbnail.png");
+		folder_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/FolderDefaultThumbnail.png");
 	}
 
-	void AssetViewer::DrawAssetFiles(Talloren::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)
+	void AssetViewer::DrawAssetFiles(Editor::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)
 	{
 		// For each asset in the assets_to_draw map, draw it (will be more polished later)
 		float cellSize = 100.0f;
@@ -381,6 +381,7 @@ namespace Talloren::Panels {
 				if (ImGui::MenuItem("Scene")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
 						auto scene = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::SceneType>(asset_view->selected_folder, false, "NewScene");
+						editorLayer->GetSceneManager()->scene_files.push_back(editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::SceneFile>(scene));
 						asset_view->RefreshAPFs(editorLayer);
 					}
 					ImGui::CloseCurrentPopup();
@@ -432,7 +433,7 @@ namespace Talloren::Panels {
 		}
 
 		if (ImGui::IsWindowHovered()) {
-			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_4)) {
+			if (Luxia::Input::IsMouseButtonJustReleased(LX_MOUSE_BUTTON_4)) {
 				if (asset_view->selected_folder != editorLayer->GetAssetManager()->GetAssetDir()) {
 					asset_view->selected_folder = asset_view->selected_folder.parent_path();
 				}

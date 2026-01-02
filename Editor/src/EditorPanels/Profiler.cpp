@@ -1,7 +1,7 @@
 #include "Profiler.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Panels {
+namespace Editor::Panels {
 
 	static std::unordered_map<std::string, double> layer_times;
 	static std::unordered_map<std::string, double> temp_layer_times;
@@ -10,8 +10,8 @@ namespace Talloren::Panels {
 
 	static bool should_update = false;
 
-	void Profiler::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
-	void Profiler::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void Profiler::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
+	void Profiler::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Profiler", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 		name = "Profiler";
 		TabPopupContextMenu();
@@ -61,7 +61,7 @@ namespace Talloren::Panels {
 
 		ImGui::End();
 	}
-	void Profiler::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
+	void Profiler::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {}
 
 	void Profiler::OnEvent(Luxia::Event& e) {
 		Luxia::EventDispatcher dispatcher(e);

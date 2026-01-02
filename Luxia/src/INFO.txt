@@ -20,6 +20,16 @@ IMPORTANT
 
 - Maybe MeshRenderer should store the GUIDs of the mesh and mat and not the shared_ptr to it
 
+--- Next ---
+
+- Scene renaming is weird, it wont rename the scene for some reason
+
+- When importing it opens the last opened filepath, not the file path you clicked import in
+
+- Importing something imports to the same folder that the asset is in, i want to be able to import an asset from outside the project, and just get the path to it and filestuff
+
+- Cleanup
+
 --- Future ---
 
 - Lighting (at least global illumination / sun)

@@ -6,11 +6,11 @@
 #include "AssetViewPanels/AssetFolderTree.h"
 #include "AssetViewPanels/AssetViewer.h"
 
-namespace Talloren::Panels {
+namespace Editor::Panels {
 	static AssetFolderTree astfoldertree;
 	static AssetViewer astviewer;
 
-	void AssetView::RefreshAPFs(Talloren::Layers::EditorLayer* editorLayer, bool reset_dir) {
+	void AssetView::RefreshAPFs(Editor::Layers::EditorLayer* editorLayer, bool reset_dir) {
 		asset_parent_folders.clear();
 
 		// Go through each assetfile, then each asset in the assetfile, set its parent folder
@@ -33,13 +33,13 @@ namespace Talloren::Panels {
 
 	bool queued_for_refresh = false;
 	// CORE
-	void AssetView::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void AssetView::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - AssetView Panel: Init");
 		RefreshAPFs(editorLayer, true);
 		astviewer.Init();
 	}
 
-	void AssetView::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void AssetView::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGuiWindowClass assetViewWindowClass;
 		assetViewWindowClass.ClassId = ImGui::GetID("AssetView_WindowClass");
 		assetViewWindowClass.DockingAllowUnclassed = true;
@@ -111,7 +111,7 @@ namespace Talloren::Panels {
 		ImGui::End();
 	}
 
-	void AssetView::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void AssetView::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 	
 	}
 

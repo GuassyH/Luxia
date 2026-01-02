@@ -3,7 +3,7 @@
 #include "IEditorPanel.h"
 #include <unordered_set>
 
-namespace Talloren::Layers {
+namespace Editor::Layers {
 	class EditorLayer : public Luxia::Layer
 	{
 	public:
@@ -17,7 +17,7 @@ namespace Talloren::Layers {
 		bool isOneSelected = false; // selected == 1
 		bool areMultipleSelected = false; // selected > 1
 
-		std::unordered_set<std::shared_ptr<Talloren::IEditorPanel>> panels;
+		std::unordered_set<std::shared_ptr<Editor::IEditorPanel>> panels;
 
 		void ClearSelected();
 		void InsertSelected(Luxia::GUID guid);
@@ -25,7 +25,7 @@ namespace Talloren::Layers {
 
 		void UpdateSelectedConditions();
 
-		void PushPanel(std::shared_ptr<Talloren::IEditorPanel> m_panel) {
+		void PushPanel(std::shared_ptr<Editor::IEditorPanel> m_panel) {
 			m_panel->Init(this, scene_manager->GetActiveScene()); 
 			panels.insert(std::move(m_panel));
 		}

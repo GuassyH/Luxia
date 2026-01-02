@@ -1,8 +1,8 @@
 #include "InspectorPanel.h"
 #include "EditorLayer.h"
 
-namespace Talloren::Panels {
-	void InspectorPanel::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+namespace Editor::Panels {
+	void InspectorPanel::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - Inspector Panel: Init");
 	}
 
@@ -34,7 +34,7 @@ namespace Talloren::Panels {
 	static char namebuff[255] = {};
 	static char meshbuff[255] = {};
 	static char matbuff[255] = {};
-	void InspectorPanel::RenderEntity(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid) {
+	void InspectorPanel::RenderEntity(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid) {
 		ImGui::BeginChild("Entity");
 
 		Luxia::Entity& ent = scene->runtime_entities.find(e_guid)->second;
@@ -124,7 +124,7 @@ namespace Talloren::Panels {
 		ImGui::EndChild();
 	}
 
-	void InspectorPanel::RenderMaterial(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
+	void InspectorPanel::RenderMaterial(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
 		ImGui::BeginChild("Material");
 
 		std::shared_ptr<Luxia::IMaterial> mat = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(guid);
@@ -166,7 +166,7 @@ namespace Talloren::Panels {
 		ImGui::EndChild();
 	}
 
-	void InspectorPanel::RenderMesh(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
+	void InspectorPanel::RenderMesh(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
 		ImGui::BeginChild("Mesh");
 		
 		std::shared_ptr<Luxia::Mesh> mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(guid);
@@ -210,7 +210,7 @@ namespace Talloren::Panels {
 		ImGui::EndChild();
 	}
 
-	void InspectorPanel::RenderShader(Talloren::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
+	void InspectorPanel::RenderShader(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid) {
 		ImGui::BeginChild("Shader");
 
 		std::shared_ptr<Luxia::IShader> shader = editorLayer->GetAssetManager()->GetAsset<Luxia::IShader>(guid);
@@ -246,7 +246,7 @@ namespace Talloren::Panels {
 	};
 	InspectorMode currentMode = InspectorMode::None;
 
-	void InspectorPanel::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void InspectorPanel::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Inspector Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 		name = "Inspector Panel";
 		TabPopupContextMenu();
@@ -287,16 +287,16 @@ namespace Talloren::Panels {
 
 		switch (currentMode)
 		{
-		case Talloren::Panels::InspectorMode::Entity:
+		case Editor::Panels::InspectorMode::Entity:
 			RenderEntity(editorLayer, scene, e_guid);
 			break;
-		case Talloren::Panels::InspectorMode::Material:
+		case Editor::Panels::InspectorMode::Material:
 			RenderMaterial(editorLayer, e_guid);
 			break;
-		case Talloren::Panels::InspectorMode::Mesh:
+		case Editor::Panels::InspectorMode::Mesh:
 			RenderMesh(editorLayer, e_guid);
 			break;
-		case Talloren::Panels::InspectorMode::Shader:
+		case Editor::Panels::InspectorMode::Shader:
 			RenderShader(editorLayer, e_guid);
 			break;
 		default:
@@ -305,7 +305,7 @@ namespace Talloren::Panels {
 
 		ImGui::End();
 	}
-	void InspectorPanel::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void InspectorPanel::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 
 	}
 

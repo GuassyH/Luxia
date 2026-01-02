@@ -97,7 +97,7 @@
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Luxia\Luxia.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Luxia\Luxia.dll ..\bin\Debug-windows-x86_64\Talloren &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Luxia\Luxia.dll ..\bin\Debug-windows-x86_64\Talloren &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Luxia\Luxia.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Luxia\Luxia.dll ..\bin\Debug-windows-x86_64\Editor &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Luxia\Luxia.dll ..\bin\Debug-windows-x86_64\Editor &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,7 +127,7 @@
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\Luxia\Luxia.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Luxia\Luxia.dll ..\bin\Release-windows-x86_64\Talloren &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Luxia\Luxia.dll ..\bin\Release-windows-x86_64\Talloren &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\Luxia\Luxia.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Luxia\Luxia.dll ..\bin\Release-windows-x86_64\Editor &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Luxia\Luxia.dll ..\bin\Release-windows-x86_64\Editor &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
@@ -157,7 +157,7 @@
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Distribution-windows-x86_64\Luxia\Luxia.dll\ (xcopy /Q /E /Y /I ..\bin\Distribution-windows-x86_64\Luxia\Luxia.dll ..\bin\Distribution-windows-x86_64\Talloren &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Distribution-windows-x86_64\Luxia\Luxia.dll ..\bin\Distribution-windows-x86_64\Talloren &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Distribution-windows-x86_64\Luxia\Luxia.dll\ (xcopy /Q /E /Y /I ..\bin\Distribution-windows-x86_64\Luxia\Luxia.dll ..\bin\Distribution-windows-x86_64\Editor &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Distribution-windows-x86_64\Luxia\Luxia.dll ..\bin\Distribution-windows-x86_64\Editor &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -269,16 +269,6 @@
     <ProjectReference Include="vendor\LuxiaVendor.vcxproj">
       <Project>{F693E7D7-6249-60CD-EB3D-5AA457F256D1}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\shaders\default_lit.frag" />
-    <None Include="resources\shaders\default_lit.vert" />
-    <None Include="resources\shaders\default_unlit.frag" />
-    <None Include="resources\shaders\default_unlit.vert" />
-    <None Include="resources\shaders\null.frag" />
-    <None Include="resources\shaders\null.vert" />
-    <None Include="resources\shaders\viewport.frag" />
-    <None Include="resources\shaders\viewport.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

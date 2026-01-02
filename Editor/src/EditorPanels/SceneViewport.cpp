@@ -2,8 +2,8 @@
 #include "EditorLayer.h"
 #include "EditorScripts/SceneCameraScript.h"
 
-namespace Talloren::Panels {
-	void SceneViewport::Init(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+namespace Editor::Panels {
+	void SceneViewport::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
 
 		entt::entity ent = editorLayer->editor_reg.create();
@@ -13,16 +13,16 @@ namespace Talloren::Panels {
 		cam_ent->reg = &editorLayer->editor_reg;
 
 		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080).farPlane = 2000.0f;
-		cam_ent->AddComponent<Talloren::Scripts::SceneCameraScript>();
+		cam_ent->AddComponent<Editor::Scripts::SceneCameraScript>();
 	}
 
-	void SceneViewport::Render(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void SceneViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 		name = "Scene View";
 		TabPopupContextMenu();
 
 		Luxia::Components::Camera& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
-		Talloren::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Talloren::Scripts::SceneCameraScript>();
+		Editor::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Editor::Scripts::SceneCameraScript>();
 
 		if (output_texture) { 
 			ImVec2 windowSize = ImGui::GetContentRegionAvail();
@@ -79,7 +79,7 @@ namespace Talloren::Panels {
 		}
 		
 	}
-	void SceneViewport::Unload(Talloren::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+	void SceneViewport::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		// Remove component
 		cam_ent->RemoveComponent<Luxia::Components::Camera>();
 		editorLayer->editor_reg.remove<Luxia::Components::Transform>(cam_ent->ent_id);
