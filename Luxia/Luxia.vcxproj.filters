@@ -88,6 +88,9 @@
     <ClInclude Include="src\Luxia\Core\Application.h">
       <Filter>Luxia\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Core\Constants.h">
+      <Filter>Luxia\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Core\Core.h">
       <Filter>Luxia\Core</Filter>
     </ClInclude>
@@ -167,6 +170,9 @@
       <Filter>Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h">
+      <Filter>Luxia\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Managers\ResourceManager.h">
       <Filter>Luxia\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Managers\SceneManager.h">
@@ -293,6 +299,9 @@
       <Filter>Luxia\Managers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp">
+      <Filter>Luxia\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Managers\ResourceManager.cpp">
       <Filter>Luxia\Managers</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp">

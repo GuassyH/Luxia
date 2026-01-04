@@ -16,6 +16,7 @@
 #include "Luxia/Managers/AssetManager.h"
 #include "Luxia/Managers/SceneManager.h"
 #include "Luxia/Managers/ProjectManager.h"
+#include "Luxia/Managers/ResourceManager.h"
 
 #include "Luxia/Scene/SceneSerializer.h"
 

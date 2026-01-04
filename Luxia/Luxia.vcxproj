@@ -177,6 +177,7 @@
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
     <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Core\Application.h" />
+    <ClInclude Include="src\Luxia\Core\Constants.h" />
     <ClInclude Include="src\Luxia\Core\Core.h" />
     <ClInclude Include="src\Luxia\Core\EntryPoint.h" />
     <ClInclude Include="src\Luxia\Core\GUID.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="src\Luxia\Managers\AssetManager.h" />
     <ClInclude Include="src\Luxia\Managers\EventManager.h" />
     <ClInclude Include="src\Luxia\Managers\ProjectManager.h" />
+    <ClInclude Include="src\Luxia\Managers\ResourceManager.h" />
     <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
     <ClInclude Include="src\Luxia\Mesh.h" />
     <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
@@ -248,6 +250,7 @@
     <ClCompile Include="src\Luxia\Layers\ViewportLayer.cpp" />
     <ClCompile Include="src\Luxia\Managers\AssetManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\ProjectManager.cpp" />
+    <ClCompile Include="src\Luxia\Managers\ResourceManager.cpp" />
     <ClCompile Include="src\Luxia\Managers\SceneManager.cpp" />
     <ClCompile Include="src\Luxia\Mesh.cpp" />
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp" />

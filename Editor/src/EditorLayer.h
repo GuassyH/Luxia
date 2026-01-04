@@ -2,6 +2,7 @@
 #include "Luxia.h"
 #include "IEditorPanel.h"
 #include <unordered_set>
+#include "ThumbnailManager.h"
 
 namespace Editor::Layers {
 	class EditorLayer : public Luxia::Layer
@@ -12,6 +13,9 @@ namespace Editor::Layers {
 
 		entt::registry editor_reg;
 		std::unordered_set<Luxia::GUID> selected_assets;
+		std::unordered_map<Luxia::GUID, std::shared_ptr<Luxia::ITexture>> asset_thumbnails;
+		std::vector<Luxia::GUID> queued_for_refresh;
+
 
 		bool areNoneSelected = false; // selected == 0
 		bool isOneSelected = false; // selected == 1
@@ -24,6 +28,8 @@ namespace Editor::Layers {
 		void EraseSelected(Luxia::GUID guid);
 
 		void UpdateSelectedConditions();
+
+		void CreateThumbnails();
 
 		void PushPanel(std::shared_ptr<Editor::IEditorPanel> m_panel) {
 			m_panel->Init(this, scene_manager->GetActiveScene()); 
@@ -57,6 +63,7 @@ namespace Editor::Layers {
 		virtual void OnEvent(Luxia::Event& e) override;
 
 	protected:
+		ThumbnailManager thumbnailManager;
 		std::shared_ptr<Luxia::ITexture> PlayTex;
 		std::shared_ptr<Luxia::ITexture> PauseTex;
 	};

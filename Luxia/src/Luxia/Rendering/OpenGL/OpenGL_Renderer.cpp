@@ -9,18 +9,23 @@
 #include "glfw/glfw3.h"
 #include <KHR/khrplatform.h>
 #include "glad/glad.h"
+#include "glfw/glfw3.h"
+#include "Luxia/Managers/ResourceManager.h"
 
 namespace Luxia::Rendering::OpenGL {
 
 	OpenGL_Renderer::OpenGL_Renderer() {
-		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
+		// Initialize GLFW
+		if (!glfwInit()) { return; }
 
-		// Should be baked into the engine somehow
-		null_shader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/null.frag", "C:/dev/Luxia/Luxia/resources/shaders/null.vert");
-		null_mat = Platform::Assets::CreateMaterial(null_shader);
+		// Set opengl version
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
 	
-		default_shader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/default_lit.frag", "C:/dev/Luxia/Luxia/resources/shaders/default_lit.vert");
-		default_mat = Platform::Assets::CreateMaterial(default_shader);
+		initialized = true;
 	}
 
 	// Render the render object (meshrenderer mesh with material and transform)
@@ -38,10 +43,10 @@ namespace Luxia::Rendering::OpenGL {
 			if (m_material->shader)
 				m_material->Use(modMat, viewMat, projMat);
 			else 
-				null_mat->Use(modMat, viewMat, projMat);
+				ResourceManager::NullMaterial->Use(modMat, viewMat, projMat);
 		}
 		else
-			null_mat->Use(modMat, viewMat, projMat);
+			ResourceManager::NullMaterial->Use(modMat, viewMat, projMat);
 
 		m_mesh->vao->Bind();
 		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);

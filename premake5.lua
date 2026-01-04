@@ -151,6 +151,7 @@ project "Editor"
 	files{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"Luxia/vendor/glad/**.c"
 	}
 
 	-- what should be included?
@@ -172,6 +173,7 @@ project "Editor"
 		"LuxiaVendor",
 		"opengl32",
 		"assimp-vc143-mtd",
+		"glfw3dll"
 	}
 
 	filter "system:windows"

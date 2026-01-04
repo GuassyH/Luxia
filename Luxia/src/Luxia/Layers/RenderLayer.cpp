@@ -44,7 +44,6 @@ namespace Luxia::Layers {
 			}
 			
 		}
-
 	}
 	void RenderLayer::OnEvent(Event& e) {
 		EventDispatcher dispatcher(e);

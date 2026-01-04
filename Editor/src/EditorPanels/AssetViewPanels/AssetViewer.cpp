@@ -1,7 +1,7 @@
 #include "AssetViewer.h"
 #include "EditorLayer.h"
 #include "EditorPanels/AssetView.h"
-
+#include "ThumbnailManager.h"
 
 // THIS IS ONLY FOR WINDOWS 
 #include <Windows.h>
@@ -156,55 +156,55 @@ namespace Editor::Panels {
 
 		unsigned int thumbnail = 0;
 		bool hasThumbnail = false;
+		bool valid = true;
 
-		switch (asset->type) {
-		case Luxia::AssetType::TextureType: {
-			auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
-			if (texasset) {
-				if (texasset->IsValid()) {
-					thumbnail = texasset->texID;
-					hasThumbnail = texasset->IsValid();
+		auto it = editor_layer->asset_thumbnails.find(asset->guid);
+		if (it != editor_layer->asset_thumbnails.end() && it->second) {
+			thumbnail = it->second->texID;
+			hasThumbnail = it->second->IsValid();
+		}
+		if (!hasThumbnail) {
+			switch (asset->type) {
+			case Luxia::AssetType::TextureType: {
+				auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
+				if (texasset) {
+					if (texasset->IsValid()) {
+						thumbnail = texasset->texID;
+					}
+					else {
+						thumbnail = texture_default_thumbnail->texID;
+					}
 				}
 				else {
 					thumbnail = texture_default_thumbnail->texID;
-					hasThumbnail = texture_default_thumbnail->IsValid();
 				}
+				break;
 			}
-			else {
-				thumbnail = texture_default_thumbnail->texID;
-				hasThumbnail = texture_default_thumbnail->IsValid();
+			case Luxia::AssetType::MeshType: 
+				thumbnail = mesh_default_thumbnail->texID;
+				break;
+			case Luxia::AssetType::MaterialType: 
+				thumbnail = mat_default_thumbnail->texID;
+				break;
+			case Luxia::AssetType::ShaderType: 
+				thumbnail = shader_default_thumbnail->texID;
+				break;
+			case Luxia::AssetType::SceneType: 
+				thumbnail = scene_default_thumbnail->texID;
+				break;
+			default:
+				valid = false;
+				break;
 			}
-			break;
-		}
-		case Luxia::AssetType::MeshType: {
-			thumbnail = mesh_default_thumbnail->texID;
-			hasThumbnail = mesh_default_thumbnail->IsValid();
-			break;
-		}
-		case Luxia::AssetType::MaterialType: {
-			thumbnail = mat_default_thumbnail->texID;
-			hasThumbnail = mat_default_thumbnail->IsValid();
-			break;
-		}
-		case Luxia::AssetType::ShaderType: {
-			thumbnail = shader_default_thumbnail->texID;
-			hasThumbnail = shader_default_thumbnail->IsValid();
-			break;
-		}
-		case Luxia::AssetType::SceneType: {
-			thumbnail = scene_default_thumbnail->texID;
-			hasThumbnail = scene_default_thumbnail->IsValid();
-			break;
-		}
-		default:
-			break;
 		}
 
 
 		if (hasThumbnail)
-			ImGui::Image((ImTextureRef)thumbnail, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+			ImGui::Image((ImTextureRef)thumbnail, ImVec2(cellSize, cellSize), ImVec2(0, 1), ImVec2(1,0)); 
+		else if (valid)
+			ImGui::Image((ImTextureRef)thumbnail, ImVec2(cellSize, cellSize)); 
 		else
-			ImGui::Image(nullptr, ImVec2(cellSize, cellSize)); // Replace nullptr with your thumbnail
+			ImGui::Image((ImTextureRef)nullptr, ImVec2(cellSize, cellSize)); 
 
 
 		// Get size of the group
@@ -362,6 +362,11 @@ namespace Editor::Panels {
 				}
 				asset_view->RefreshAPFs(editorLayer);
 				ImGui::CloseCurrentPopup();
+			}
+
+			if (ImGui::MenuItem("Refresh", nullptr, nullptr, editorLayer->areNoneSelected)) {
+				// Should refresh more
+				editorLayer->CreateThumbnails();
 			}
 
 			if (ImGui::BeginMenu("Create", editorLayer->areNoneSelected)) {

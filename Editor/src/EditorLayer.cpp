@@ -1,4 +1,6 @@
 #include "EditorLayer.h"
+
+// EditorPanels
 #include "EditorPanels/GameViewport.h"
 #include "EditorPanels/HierarchyPanel.h"
 #include "EditorPanels/InspectorPanel.h"
@@ -6,6 +8,8 @@
 #include "EditorPanels/AssetView.h"
 #include "EditorPanels/Profiler.h"
 #include "EditorPanels/BuildSettings.h"
+
+#include "glfw/glfw3.h"
 
 namespace Editor::Layers {
 	static std::vector<std::string> layers_to_remove;
@@ -28,8 +32,50 @@ namespace Editor::Layers {
 		isOneSelected = (selected_assets.size() == 1);
 		areMultipleSelected = (selected_assets.size() > 1);
 	}
+
+	void EditorLayer::CreateThumbnails() {
+		int prevFBO = 0;
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
+
+		GLint viewport[4];
+		glGetIntegerv(GL_VIEWPORT, viewport);
+
+		GLboolean depth = glIsEnabled(GL_DEPTH_TEST);
+
+		float clearCol[4];
+		glGetFloatv(GL_COLOR_CLEAR_VALUE, clearCol);
+
+		// Clear existing Thumbnails
+		for (auto& [guid, tex] : asset_thumbnails) {
+			if (tex) {
+				tex->Unload();
+				tex->Delete();
+			}
+		}
+
+		// Create all new ones
+		for (auto& [guid, asset] : asset_manager->GetAssetPool()) {
+			if (asset) {
+				std::shared_ptr<Luxia::ITexture> tex = thumbnailManager.TakeThumbnail(asset, renderer.lock().get());
+				if (tex)
+					if(tex->IsValid())
+						asset_thumbnails[guid] = tex;
+			}
+		}
+
+		glBindFramebuffer(GL_FRAMEBUFFER, prevFBO);
+		if (!depth) glDisable(GL_DEPTH_TEST);
+		glClearColor(clearCol[0], clearCol[1], clearCol[2], clearCol[3]);
+		glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+	}
 	
 	void EditorLayer::OnAttach() {
+		thumbnailManager.Init(256, 256);
+
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+			return;
+		}
+
 		LX_CORE_WARN("EditorLayer Attached");
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
 
@@ -45,6 +91,9 @@ namespace Editor::Layers {
 
 		PauseTex = Luxia::Platform::Assets::CreateTexture();
 		PauseTex->LoadFromFile("C:/dev/Luxia/Editor/resources/PauseButton.png");
+	
+		if (glBindFramebuffer)
+			CreateThumbnails();
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
@@ -169,6 +218,12 @@ namespace Editor::Layers {
 			ImGuiID dockspace_id = ImGui::GetID("Editor Dockspace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
 
+		}
+
+		for (auto& guid : queued_for_refresh) {
+			if (asset_thumbnails.contains(guid)) {
+				thumbnailManager.RefreshThumbnail(asset_manager->GetAssetPool().find(guid)->second, asset_thumbnails.find(guid)->second, renderer.lock().get());
+			}
 		}
 
 		// RENDER WINDOWS

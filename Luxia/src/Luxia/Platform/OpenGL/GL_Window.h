@@ -23,6 +23,7 @@ namespace Luxia::Platform::OpenGL {
 
 		virtual void SetTitle(const std::string& title) override;
 		virtual void SetIcon(const std::filesystem::path& path) override;
+		virtual void MakeContextCurrent() override;
 
 		virtual void OnEvent(Event& e) override;
 	};

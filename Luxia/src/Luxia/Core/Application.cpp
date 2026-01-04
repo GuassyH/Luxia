@@ -11,6 +11,8 @@
 #include "Luxia/Mesh.h"
 #include "Luxia/Core/Time.h"
 
+#include "Luxia/Managers/ResourceManager.h"
+
 namespace Luxia
 {
 
@@ -22,15 +24,20 @@ namespace Luxia
 		
 		// Initialise event handler
 		m_EventHandler = std::make_shared<Luxia::EventHandler>();	
-
-		// Initialise window 
-		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application", m_EventHandler);
 		
 		// Create Renderer
 		m_Renderer = Luxia::Platform::Rendering::CreateRenderer();
 
+		// Initialise window 
+		m_Window = Luxia::Platform::Assets::CreateAppWindow(1920, 1080, "Luxia Application", m_EventHandler);
+
 		// Initialise layer stack 
 		m_LayerStack = std::make_shared<LayerStack>();
+	
+		// Initialise defaults
+		ResourceManager::Init();
+
+		LX_CORE_WARN("glBindFrameBuffer: {}", (void*)glBindFramebuffer);
 	}
 
 	void Application::CoreStartup() {
@@ -109,6 +116,8 @@ namespace Luxia
 		m_EventHandler.reset();
 
 		m_ProjectManager->CloseProject();
+		ResourceManager::Cleanup();
+
 		LX_CORE_ERROR("Application Ended");
 	}
 

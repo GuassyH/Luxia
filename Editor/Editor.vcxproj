@@ -90,7 +90,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;yaml-cppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;glfw3dll.lib;yaml-cppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Luxia\vendor\glfw;..\Luxia\vendor\assimp\lib;..\Luxia\vendor\yaml-cpp\build\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -115,7 +115,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;glfw3dll.lib;yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Luxia\vendor\glfw;..\Luxia\vendor\assimp\lib;..\Luxia\vendor\yaml-cpp\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -140,7 +140,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;assimp-vc143-mtd.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\Luxia\vendor\glfw;..\Luxia\vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -158,8 +158,10 @@
     <ClInclude Include="src\EditorPanels\SceneViewport.h" />
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
     <ClInclude Include="src\IEditorPanel.h" />
+    <ClInclude Include="src\ThumbnailManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Luxia\vendor\glad\glad.c" />
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\EditorPanels\AssetView.cpp" />
     <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp" />
@@ -170,7 +172,7 @@
     <ClCompile Include="src\EditorPanels\InspectorPanel.cpp" />
     <ClCompile Include="src\EditorPanels\Profiler.cpp" />
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
-    <ClCompile Include="src\Talloren.cpp" />
+    <ClCompile Include="src\LuxiaEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Luxia\Luxia.vcxproj">

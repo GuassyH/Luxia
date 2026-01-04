@@ -1,79 +1,105 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="EditorPanels">
-      <UniqueIdentifier>{6FDCDA8C-5B3F-6A31-04C5-A2E7F00636B4}</UniqueIdentifier>
+    <Filter Include="Luxia">
+      <UniqueIdentifier>{287BA00D-948F-C8BE-5D11-6C1EC9E4C4EF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EditorPanels\AssetViewPanels">
-      <UniqueIdentifier>{9C2B9A84-88E6-8930-319E-027B1D38D4C0}</UniqueIdentifier>
+    <Filter Include="Luxia\vendor">
+      <UniqueIdentifier>{85F4C441-7157-54E6-1ADD-8C9C061F2069}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EditorScripts">
-      <UniqueIdentifier>{F4161A14-60D7-954A-2912-DFC79591DA26}</UniqueIdentifier>
+    <Filter Include="Luxia\vendor\glad">
+      <UniqueIdentifier>{AC62C860-1879-C6F6-61F0-5118CD45977E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\EditorPanels">
+      <UniqueIdentifier>{E682FB9F-D27B-1AF2-FBAD-FF76E705FAFD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\EditorPanels\AssetViewPanels">
+      <UniqueIdentifier>{13E08E63-FF30-7AA5-2895-686714450D0F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\EditorScripts">
+      <UniqueIdentifier>{4B8C4F8B-B7A2-4D21-001A-D9426C6F1EA9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\EditorLayer.h" />
+    <ClInclude Include="src\EditorLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\EditorPanels\AssetView.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.h">
-      <Filter>EditorPanels\AssetViewPanels</Filter>
+      <Filter>src\EditorPanels\AssetViewPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetViewer.h">
-      <Filter>EditorPanels\AssetViewPanels</Filter>
+      <Filter>src\EditorPanels\AssetViewPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\BuildSettings.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\GameViewport.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\HierarchyPanel.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\InspectorPanel.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\Profiler.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanels\SceneViewport.h">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h">
-      <Filter>EditorScripts</Filter>
+      <Filter>src\EditorScripts</Filter>
     </ClInclude>
-    <ClInclude Include="src\IEditorPanel.h" />
+    <ClInclude Include="src\IEditorPanel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ThumbnailManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\EditorLayer.cpp" />
+    <ClCompile Include="..\Luxia\vendor\glad\glad.c">
+      <Filter>Luxia\vendor\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\EditorPanels\AssetView.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp">
-      <Filter>EditorPanels\AssetViewPanels</Filter>
+      <Filter>src\EditorPanels\AssetViewPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetViewer.cpp">
-      <Filter>EditorPanels\AssetViewPanels</Filter>
+      <Filter>src\EditorPanels\AssetViewPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\BuildSettings.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\GameViewport.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\HierarchyPanel.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\InspectorPanel.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\Profiler.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp">
-      <Filter>EditorPanels</Filter>
+      <Filter>src\EditorPanels</Filter>
     </ClCompile>
-    <ClCompile Include="src\Talloren.cpp" />
+    <ClCompile Include="src\LuxiaEditor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -25,13 +25,16 @@ namespace Luxia
 		void SetHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
 		EventHandler& GetEventHandler() const { return *event_handler.lock(); }
 
-
+		virtual void MakeContextCurrent() = 0;
 		virtual void SetTitle(const std::string& title) = 0;
 		virtual void SetIcon(const std::filesystem::path& path) = 0;
 		inline glm::vec2 GetSize() { glm::vec2 s = glm::vec2(m_Width, m_Height); return s; }
-		inline bool IsFocused() const { return focused; }
+		inline bool isFocused() const { return focused; }
 		inline bool isRunning() const { return running; }
+		const bool isInitialized() const { return initialized; }
 	protected:
+		bool initialized = false;
+
 		// Basic functions for what to do with each eventtype, can be overridden
 		virtual bool ResizeEvent(WindowResizeEvent& e) {
 			m_Width = e.GetX();

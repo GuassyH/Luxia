@@ -37,8 +37,11 @@ namespace Luxia::Platform::OpenGL {
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-		if (status != GL_FRAMEBUFFER_COMPLETE)
+		if (status != GL_FRAMEBUFFER_COMPLETE) {
 			std::cout << "FBO incomplete: " << std::hex << status << std::dec << std::endl;
+			valid = false;
+			return;
+		}
 
 
 		// All of the FBO data and such is sent back to the input params

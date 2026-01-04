@@ -12,13 +12,6 @@ namespace Luxia::Platform::OpenGL {
 		m_Height = height;
 		m_Title = title;
 
-		if (!glfwInit()) { return -1; }
-
-		// Set opengl version
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 		m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), NULL, NULL);
 		m_Monitor = glfwGetWindowMonitor(m_Window);
 
@@ -45,7 +38,6 @@ namespace Luxia::Platform::OpenGL {
 		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		m_MonitorWidth = mode->width;
 		m_MonitorHeight = mode->height;
-
 
 		m_PosX = (m_MonitorWidth - m_Width) / 2;
 		m_PosY = (m_MonitorHeight - m_Height) / 2;
@@ -114,6 +106,8 @@ namespace Luxia::Platform::OpenGL {
 		// Just debug
 		LX_CORE_INFO("Created Windows Window: {} ({}x{})", m_Title.c_str(), m_Width, m_Height);
 
+		initialized = true;
+
 		return 1;
 	}
 	
@@ -169,5 +163,9 @@ namespace Luxia::Platform::OpenGL {
 		dispatcher.Dispatch<WindowFocusEvent>(LX_BIND_EVENT_FN(FocusEvent));
 		dispatcher.Dispatch<WindowLoseFocusEvent>(LX_BIND_EVENT_FN(LoseFocusEvent));
 		dispatcher.Dispatch<WindowCloseEvent>(LX_BIND_EVENT_FN(CloseEvent));
+	}
+
+	void GL_Window::MakeContextCurrent() {
+		glfwMakeContextCurrent(m_Window);
 	}
 }

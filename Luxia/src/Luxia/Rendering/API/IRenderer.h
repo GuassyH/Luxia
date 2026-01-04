@@ -35,14 +35,13 @@ namespace Luxia::Rendering {
 		virtual void RenderMesh(const Luxia::Mesh* m_mesh, Luxia::IMaterial* m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
 		virtual void RenderMeshPure(const Mesh& m_mesh) = 0;
 		virtual void RenderFBO(const Mesh& m_quad, std::shared_ptr<IShader> fs_shader, std::shared_ptr<ITexture> cam_tex) = 0;
-	
+		const bool isInitialized() const { return initialized; }
+
 		// UI Renderer access
 		std::shared_ptr<IUIRenderer> GetUIRenderer() { return m_UIRenderer; }
-		std::shared_ptr<Luxia::IShader> null_shader = nullptr;
-		std::shared_ptr<Luxia::IShader> default_shader = nullptr;
-		std::shared_ptr<Luxia::IMaterial> null_mat = nullptr;
-		std::shared_ptr<Luxia::IMaterial> default_mat = nullptr;
+
 	protected:
+		bool initialized = false;
 		std::vector<RenderObject> renderObjects;
 		std::shared_ptr<IUIRenderer> m_UIRenderer = nullptr;
 	};

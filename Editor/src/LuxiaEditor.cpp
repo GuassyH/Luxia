@@ -6,6 +6,9 @@
 
 #include "Luxia/Scene/SceneSerializer.h"
 
+#include "KHR/khrplatform.h"
+#include "glad/glad.h"
+#include "glfw/glfw3.h"
 
 namespace Editor {
 	class EditorApp : public Luxia::Application {
@@ -15,6 +18,8 @@ namespace Editor {
 
 		virtual void Startup() override {
 			// Push extra layers used
+			m_Window->MakeContextCurrent();
+
 			PushLayer(std::make_shared<Editor::Layers::EditorLayer>());
 			m_Window->SetTitle("Luxia Editor");
 			std::filesystem::path iconpath = "C:/dev/Luxia/Editor/resources/LuxiaLogo.png";
