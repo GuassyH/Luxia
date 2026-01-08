@@ -21,6 +21,9 @@ namespace Luxia::Screen {
 		#endif // LUXIA_RENDERER_OPENGL
 	}
 	inline void BindRBO(int RBO) {
+		#ifdef LUXIA_RENDERER_OPENGL
+			glBindRenderbuffer(GL_RENDERBUFFER, RBO);
+		#endif // LUXIA_RENDERER_OPENGL
 	}
 
 	inline void ClearFBOTex(std::shared_ptr<Luxia::ITexture> tex, const int width, const int height, const glm::vec4& clear_col) {
@@ -31,6 +34,7 @@ namespace Luxia::Screen {
 			}
 
 			glBindFramebuffer(GL_FRAMEBUFFER, tex->GetFBO());
+			glBindRenderbuffer(GL_RENDERBUFFER, tex->GetRBO());
 			glClearColor(clear_col.r, clear_col.g, clear_col.b, clear_col.a);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glViewport(0, 0, width, height);
@@ -91,12 +95,10 @@ namespace Luxia::Screen {
 		// if pixel is white (255, 255, 255) then its the LAST ID aka no entity (unless you have 16777215 (255^3) entities) 
 		if (pixel[0] == 255 && pixel[1] == 255 && pixel[2] == 255) {
 			// Do sum?
-			LX_ERROR("NO PICKED ENTITY");
 		}
 		else {
 			unsigned int pickedID = (static_cast<unsigned int>(pixel[0]) << 0) | (static_cast<unsigned int>(pixel[1]) << 8) | (static_cast<unsigned int>(pixel[2]) << 16);
 			result = scene->GetFromEntity<Luxia::Components::Transform>(entt::entity(pickedID)).ent_guid;
-			LX_INFO("PICKED ENTITY: {}", (uint64_t)result);
 		}
 
 		BindFBO(0);

@@ -54,16 +54,25 @@ namespace Editor::Panels {
 				glm::vec2 rectp = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y);
 				glm::vec2 rects = glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
 				glm::vec2 rp = Luxia::Screen::GetMousePosRect(rectp, rects, Luxia::Input::GetMousePosition());
-				
+
 				if (cam.width != fbo_pick_tex->GetWidth() || cam.height != fbo_pick_tex->GetHeight()) {
 					fbo_pick_tex->Delete();
 					fbo_pick_tex->CreateFBOTex(cam.width, cam.height);
 				}
 
 				Luxia::GUID picked = Luxia::Screen::GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
-				editorLayer->ClearSelected();
+
 				if (scene->runtime_entities.contains(picked)) {
-					editorLayer->InsertSelected(picked);
+					if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_SHIFT)) {
+						editorLayer->InsertSelected(picked);
+					}
+					else {
+						editorLayer->ClearSelected();
+						editorLayer->InsertSelected(picked);
+					}
+				}
+				else {
+					editorLayer->ClearSelected();
 				}
 			}
 			if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_2)) {
