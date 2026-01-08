@@ -13,7 +13,8 @@ namespace Luxia::Platform::OpenGL {
 		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool m_flip = false) override;
 		virtual bool Unload() override { return true; }
 		virtual void Delete() override;
-		virtual void Use() override;
+		virtual void Bind() override;
+		virtual void Unbind() override;
 
 	};
 }

@@ -28,7 +28,8 @@ namespace Luxia {
 		virtual void LoadFromFile(const std::filesystem::path& m_path, const bool m_flip = false) = 0; // Loading textures
 		virtual bool Unload() override = 0;
 		virtual void Delete() = 0;
-		virtual void Use() = 0;
+		virtual void Bind() = 0;
+		virtual void Unbind() = 0;
 
 		bool IsValid() const	{ return valid; }
 		bool HasPath() const	{ return hasPath; }

@@ -2,6 +2,7 @@
 #include "GL_Camera.h"
 #include "Luxia/Components/Transform.h"
 
+#include "Luxia/Tools/Screen.h"
 #include "Luxia/Scene/Scene.h"
 
 #include "glfw/glfw3.h"
@@ -25,20 +26,13 @@ namespace Luxia::Platform::OpenGL {
 	}
 	
 	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) {
-		if (width != output_texture->GetWidth() || height != output_texture->GetHeight()) {
-			output_texture->Delete();
-			output_texture->CreateFBOTex(width, height);
-		}
-		
-		glBindFramebuffer(GL_FRAMEBUFFER, output_texture->GetFBO());
-		glClearColor(clear_col.r, clear_col.g, clear_col.b, clear_col.a);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glViewport(0, 0, width, height);
+		Luxia::Screen::ClearFBOTex(output_texture, width,height,clear_col);
 
 		rend->Flush(GetViewMat(), GetProjMat());
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		Luxia::Screen::BindFBO(0);
 
 		return output_texture;
 	}
+
 }

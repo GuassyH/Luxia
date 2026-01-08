@@ -3,6 +3,9 @@
 #include "EditorScripts/SceneCameraScript.h"
 
 namespace Editor::Panels {
+
+	static std::shared_ptr<Luxia::ITexture> fbo_pick_tex = Luxia::Platform::Assets::CreateTexture();
+
 	void SceneViewport::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
 
@@ -14,6 +17,8 @@ namespace Editor::Panels {
 
 		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080).farPlane = 2000.0f;
 		cam_ent->AddComponent<Editor::Scripts::SceneCameraScript>();
+
+		fbo_pick_tex->CreateFBOTex(1920, 1080);
 	}
 
 	void SceneViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
@@ -45,12 +50,29 @@ namespace Editor::Panels {
 		cam.height = ImGui::GetWindowHeight() - 20;  // Some sort of padding
 
 		if (ImGui::IsWindowHovered()) {
+			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
+				glm::vec2 rectp = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y);
+				glm::vec2 rects = glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
+				glm::vec2 rp = Luxia::Screen::GetMousePosRect(rectp, rects, Luxia::Input::GetMousePosition());
+				
+				if (cam.width != fbo_pick_tex->GetWidth() || cam.height != fbo_pick_tex->GetHeight()) {
+					fbo_pick_tex->Delete();
+					fbo_pick_tex->CreateFBOTex(cam.width, cam.height);
+				}
+
+				Luxia::GUID picked = Luxia::Screen::GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
+				editorLayer->ClearSelected();
+				if (scene->runtime_entities.contains(picked)) {
+					editorLayer->InsertSelected(picked);
+				}
+			}
 			if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_2)) {
 				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2)) {
 					cam_script.last_mouseX = Luxia::Input::GetMousePosition().x;
 					cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
 				}
 
+				cam_script.Look();
 				if(editorLayer->isOneSelected) {
 					Luxia::GUID selected_guid = *editorLayer->selected_assets.begin();
 					auto it = scene->runtime_entities.find(selected_guid);
@@ -65,7 +87,6 @@ namespace Editor::Panels {
 				else {
 					cam_script.Move(nullptr);
 				}
-				cam_script.Look();
 			}
 		}
 

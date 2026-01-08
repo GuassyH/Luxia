@@ -11,6 +11,9 @@
 #include "Luxia/Rendering/API/IRenderer.h"
 #include "Luxia/Rendering/API/IUIRenderer.h"
 
+// Tools
+#include "Luxia/Tools/Screen.h"
+
 // Managers
 #include "Luxia/Managers/EventManager.h"
 #include "Luxia/Managers/AssetManager.h"

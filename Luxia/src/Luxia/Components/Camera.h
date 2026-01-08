@@ -31,6 +31,8 @@ namespace Luxia::Components {
 
 		glm::vec4 clearColor = glm::vec4(0.3f, 0.5f, 0.4f, 1.0f);
 	
+		const ICamera* GetCamera() const { return camera.get(); }
+
 		virtual void OnInspectorDraw() override {
 			ImGui::DragFloat("FOV", &FOVdeg, 0.1f, 0.0f, 240.0f);
 			ImGui::DragFloat("Near Plane", &nearPlane, 0.03f);
@@ -40,7 +42,7 @@ namespace Luxia::Components {
 			ImGui::Checkbox("Main", &main);
 			ImGui::ColorPicker4("Clear Color", &clearColor.r);
 		}
-	
+		
 	private:
 		std::shared_ptr<ICamera> camera = nullptr;
 	};

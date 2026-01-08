@@ -66,7 +66,7 @@ namespace Luxia::Rendering::OpenGL {
 	void OpenGL_Renderer::RenderFBO(const Mesh& m_quad, std::shared_ptr<IShader> fs_shader, std::shared_ptr<ITexture> cam_tex) {
 		if (!m_quad.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
 
-		cam_tex->Use();
+		cam_tex->Bind();
 		fs_shader->Use();
 
 		glActiveTexture(GL_TEXTURE0);

@@ -23,19 +23,19 @@ namespace Luxia::Platform::OpenGL {
 			// Bind textures if they exist
 			if (diffuse_texture && diffuse_texture->IsValid()) {
 				glActiveTexture(GL_TEXTURE0 + sampler_id);
-				diffuse_texture->Use();
+				diffuse_texture->Bind();
 				shader->SetInt("diffuse0", sampler_id);
 				sampler_id++;
 			}
 			if (specular_texture && specular_texture->IsValid()) {
 				glActiveTexture(GL_TEXTURE0 + sampler_id);
-				specular_texture->Use();
+				specular_texture->Bind();
 				shader->SetInt("specular0", sampler_id);
 				sampler_id++;
 			}
 			if (normal_texture && normal_texture->IsValid()) {
 				glActiveTexture(GL_TEXTURE0 + sampler_id);
-				normal_texture->Use();
+				normal_texture->Bind();
 				shader->SetInt("normals0", sampler_id);
 				sampler_id++;
 			}

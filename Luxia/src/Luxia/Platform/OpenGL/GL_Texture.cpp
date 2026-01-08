@@ -174,10 +174,13 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Texture::Use() {
+	void GL_Texture::Bind() {
 		if (!IsValid()) { LX_CORE_ERROR("Tried to use unvalid texture: {}", path.string()); }
 		glBindTexture(GL_TEXTURE_2D, texID);
 		// Bind currently used texture to be this
 	}
 
+	void GL_Texture::Unbind() {
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 }

@@ -6,10 +6,6 @@
 
 #include "Luxia/Scene/SceneSerializer.h"
 
-#include "KHR/khrplatform.h"
-#include "glad/glad.h"
-#include "glfw/glfw3.h"
-
 namespace Editor {
 	class EditorApp : public Luxia::Application {
 	public:
