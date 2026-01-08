@@ -107,7 +107,6 @@ namespace Editor {
 			max_dist = glm::abs(max_dist);
 
 			glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f / max_dist, 1.0f / max_dist, 1.0f / max_dist));
-			// The position should change to fit the mesh
 			glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 1.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0, 1, 0));
 			glm::mat4 proj = glm::perspective(glm::radians(70.0f), 1.0f, 0.1f, 10.0f);
 
@@ -119,7 +118,7 @@ namespace Editor {
 
 			LX_INFO("Created Thumbnail for Mesh");
 		}
-		
+
 	};
 
 }

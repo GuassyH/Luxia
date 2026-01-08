@@ -12,11 +12,11 @@ namespace Luxia {
 		if (!vao || !vbo || !ebo) { LX_CORE_ERROR("Mesh has invalid VAO, VBO, or EBO!"); return false; }
 
 		vbo->BindBufferData(sizeof(Rendering::Vertex) * vertices.size(), vertices.data());
-
-		// 0x1406 = GL_FLOAT, Temp
-		vao->LinkAttrib(0, 3, 0x1406, sizeof(Rendering::Vertex), offsetof(Rendering::Vertex, pos));
-		vao->LinkAttrib(1, 3, 0x1406, sizeof(Rendering::Vertex), offsetof(Rendering::Vertex, normal));
-		vao->LinkAttrib(2, 2, 0x1406, sizeof(Rendering::Vertex), offsetof(Rendering::Vertex, texCoords));
+		
+		
+		vao->LinkAttrib(0, 3, LX_FLOAT, sizeof(Rendering::Vertex), offsetof(Rendering::Vertex, pos));
+		vao->LinkAttrib(1, 3, LX_FLOAT, sizeof(Rendering::Vertex), offsetof(Rendering::Vertex, normal));
+		vao->LinkAttrib(2, 2, LX_FLOAT, sizeof(Rendering::Vertex), offsetof(Rendering::Vertex, texCoords));
 
 		ebo->BindBufferData(indices.size() * sizeof(uint32_t), indices.data());
 

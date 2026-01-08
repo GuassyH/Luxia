@@ -54,8 +54,36 @@
 #endif
 
 
-/// Input Definitions
+/// Variable Definitions
+#ifdef LUXIA_RENDERER_OPENGL
+	// GLFWs Definition
+	#define LX_BYTE                           0x1400
+	#define LX_UNSIGNED_BYTE                  0x1401
+	#define LX_SHORT                          0x1402
+	#define LX_UNSIGNED_SHORT                 0x1403
+	#define LX_INT                            0x1404
+	#define LX_UNSIGNED_INT                   0x1405
+	#define LX_FLOAT                          0x1406
+	#define LX_2_BYTES                        0x1407
+	#define LX_3_BYTES                        0x1408
+	#define LX_4_BYTES                        0x1409
+	#define LX_DOUBLE                         0x140A
+#else
+	#define LX_BYTE                           0x1400
+	#define LX_UNSIGNED_BYTE                  0x1401
+	#define LX_SHORT                          0x1402
+	#define LX_UNSIGNED_SHORT                 0x1403
+	#define LX_INT                            0x1404
+	#define LX_UNSIGNED_INT                   0x1405
+	#define LX_FLOAT                          0x1406
+	#define LX_2_BYTES                        0x1407
+	#define LX_3_BYTES                        0x1408
+	#define LX_4_BYTES                        0x1409
+	#define LX_DOUBLE                         0x140A
+#endif
 
+
+/// Input Definitions
 #ifdef LUXIA_RENDERER_OPENGL
 	#define LX_KEY_A GLFW_KEY_A 
 	#define LX_KEY_B GLFW_KEY_B 

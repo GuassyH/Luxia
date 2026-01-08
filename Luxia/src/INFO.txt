@@ -20,7 +20,7 @@ IMPORTANT
 
 - Maybe MeshRenderer should store the GUIDs of the mesh and mat and not the shared_ptr to it
 
---- Next ---
+---  Next  ---
 
 - Scene renaming is weird, it wont rename the scene for some reason
 
@@ -37,4 +37,13 @@ IMPORTANT
 - Shadows
 
 - Maybe Deffered rendering?
+
+--- For adding renderers ---
+
+- Add definitions in Core (for input, vars, etc)
+
+- Create the classes (VK_Camera, VK_Texture)
+
+- Add Platform creation definitions 
+
 
