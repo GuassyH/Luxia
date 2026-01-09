@@ -46,4 +46,6 @@ IMPORTANT
 
 - Add Platform creation definitions 
 
+--- Maybe ? ---
 
+- Selection outline is currently depth based, which can look weird. Maybe it should be geometry shader based?

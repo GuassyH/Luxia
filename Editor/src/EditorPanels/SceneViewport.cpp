@@ -141,8 +141,11 @@ namespace Editor::Panels {
 				Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
 
 				if (scene->runtime_entities.contains(picked)) {
-					if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_SHIFT)) {
-						editorLayer->InsertSelected(picked);
+					if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
+						if(!editorLayer->selected_assets.contains(picked))
+							editorLayer->InsertSelected(picked);
+						else
+							editorLayer->EraseSelected(picked);
 					}
 					else {
 						editorLayer->ClearSelected();
@@ -235,53 +238,68 @@ namespace Editor::Panels {
 
 		/// With Depth
 		// Icons like the Camera, Lights, Etc
-		if (editorLayer->isOneSelected) {
-			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
-				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
-				auto mr = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-				if (mr) {
-					// Bind Depth only stuff
-					Luxia::Screen::BindFBO(selection_fbo->GetFBO());
-					glViewport(0, 0, selection_fbo->GetWidth(), selection_fbo->GetHeight());
-					Luxia::Screen::BindRBO(0);
 
-					glClear(GL_DEPTH_BUFFER_BIT);
-					glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-					glEnable(GL_DEPTH_TEST);
-
-					if (mr->mesh) 
-						renderer->RenderMesh(mr->mesh.get(), Luxia::ResourceManager::DepthOnlyMaterial.get(), ent.transform->GetMatrix(), cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
-
-					glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-					
-					// Selection Pass
-					Luxia::Screen::BindFBO(cam_tex->GetFBO());
-					Luxia::Screen::BindRBO(cam_tex->GetRBO());
-
-					glDisable(GL_DEPTH_TEST);
-
-					// Render outline using the output_texture FBO
-					outline_mat->Use();
-					
-					glActiveTexture(GL_TEXTURE0);
-					selection_fbo->Bind();
-					outline_mat->shader->SetInt("depthSample", 0);
-
-					glActiveTexture(GL_TEXTURE1);
-					cam_tex->Bind();
-					outline_mat->shader->SetInt("baseSample", 1);
-
-					outline_mat->shader->SetVec2("texelSize", glm::vec2(1.0f / cam_tex->GetWidth(), 1.0f / cam_tex->GetHeight()));
-					outline_mat->shader->SetFloat("farPlane", cam.farPlane);
-					outline_mat->shader->SetFloat("nearPlane", cam.nearPlane);
-					outline_mat->shader->SetFloat("depthThreshold", 1.0f);
-
-					renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultQuad.get());
-
-					glEnable(GL_DEPTH_TEST);
-					glActiveTexture(GL_TEXTURE0);
+		if (!editorLayer->areNoneSelected) {
+			bool is_one_ent = false;
+			for (auto& guid : editorLayer->selected_assets) {
+				if (scene->runtime_entities.contains(guid)) {
+					if (scene->runtime_entities[guid].transform->HasComponent<Luxia::Components::MeshRenderer>()) {
+						is_one_ent = true;
+					}
 				}
 			}
+
+			if (is_one_ent) {
+				// Bind Depth only stuff
+				Luxia::Screen::BindFBO(selection_fbo->GetFBO());
+				glViewport(0, 0, selection_fbo->GetWidth(), selection_fbo->GetHeight());
+				Luxia::Screen::BindRBO(0);
+
+				glClear(GL_DEPTH_BUFFER_BIT);
+				glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+				glEnable(GL_DEPTH_TEST);
+
+				for (auto& guid : editorLayer->selected_assets) {
+					if (scene->runtime_entities.contains(guid)) {
+						auto& ent = scene->runtime_entities.find(guid)->second;
+						auto mr = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+						if (mr) 
+							renderer->RenderMesh(mr->mesh.get(), Luxia::ResourceManager::DepthOnlyMaterial.get(), ent.transform->GetMatrix(), cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
+					}
+				}
+				glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+					
+				// Selection Pass
+				Luxia::Screen::BindFBO(cam_tex->GetFBO());
+				Luxia::Screen::BindRBO(cam_tex->GetRBO());
+
+				glDisable(GL_DEPTH_TEST);
+
+				// Render outline using the output_texture FBO
+				outline_mat->Use();
+					
+				glActiveTexture(GL_TEXTURE0);
+				selection_fbo->Bind();
+				outline_mat->shader->SetInt("depthSample", 0);
+
+				glActiveTexture(GL_TEXTURE1);
+				cam_tex->Bind();
+				outline_mat->shader->SetInt("baseSample", 1);
+
+				outline_mat->shader->SetVec2("texelSize", glm::vec2(1.0f / (float)cam_tex->GetWidth(), 1.0f / (float)cam_tex->GetHeight()));
+				outline_mat->shader->SetFloat("farPlane", cam.farPlane);
+				outline_mat->shader->SetFloat("nearPlane", cam.nearPlane);
+				outline_mat->shader->SetFloat("depthThreshold", 1.0f);
+
+				renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultQuad.get());
+
+				glEnable(GL_DEPTH_TEST);
+				glActiveTexture(GL_TEXTURE0);
+			}
+		}
+
+		if (editorLayer->isOneSelected) {
+			
 		}
 
 		/// Without Depth
