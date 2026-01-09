@@ -13,6 +13,7 @@ namespace Luxia::Platform::OpenGL {
 		~GL_Material() = default;
 
 		virtual void Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) override;
+		virtual void Use() override;
 		virtual bool Unload() override;
     };
 }

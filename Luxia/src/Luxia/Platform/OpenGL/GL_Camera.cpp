@@ -42,7 +42,7 @@ namespace Luxia::Platform::OpenGL {
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-		output_texture->Unbind();
+		// output_texture->Unbind();
 
 		return output_texture;
 	}

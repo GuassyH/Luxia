@@ -15,7 +15,7 @@ namespace Luxia {
 		static std::shared_ptr<Luxia::Mesh> DefaultSphere;
 		static std::shared_ptr<Luxia::Mesh> DefaultCube;
 		static std::shared_ptr<Luxia::Mesh> DefaultPlane;
-
+		static std::shared_ptr<Luxia::Mesh> DefaultQuad;
 
 
 		// Materials
@@ -28,6 +28,8 @@ namespace Luxia {
 		static std::shared_ptr<Luxia::IShader> DefaultLitShader;
 		static std::shared_ptr<Luxia::IMaterial> DefaultLitMaterial;
 
+		static std::shared_ptr<Luxia::IShader> DepthOnlyShader;
+		static std::shared_ptr<Luxia::IMaterial> DepthOnlyMaterial;
 	};
 }
 

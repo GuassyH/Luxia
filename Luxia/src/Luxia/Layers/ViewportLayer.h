@@ -7,7 +7,6 @@ namespace Luxia::Layers {
 	class LUXIA_API ViewportLayer : public Luxia::Layer {
 	public:
 		std::shared_ptr<Luxia::IShader> fs_shader;
-		Luxia::Mesh fs_quad;
 
 		ViewportLayer() { name = "Viewport Layer"; }
 		~ViewportLayer() = default;

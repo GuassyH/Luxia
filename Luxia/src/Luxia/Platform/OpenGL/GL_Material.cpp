@@ -5,6 +5,12 @@
 
 namespace Luxia::Platform::OpenGL {
 
+	void GL_Material::Use() {
+		if (shader) {
+			shader->Use();
+		}
+	}
+
 
 	void GL_Material::Use(const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		if (shader) {

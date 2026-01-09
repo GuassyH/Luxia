@@ -13,9 +13,13 @@ namespace Luxia {
     std::shared_ptr<Luxia::IShader> ResourceManager::DefaultLitShader = nullptr;
     std::shared_ptr<Luxia::IMaterial> ResourceManager::DefaultLitMaterial = nullptr;
 
+    std::shared_ptr<Luxia::IShader> ResourceManager::DepthOnlyShader = nullptr;
+    std::shared_ptr<Luxia::IMaterial> ResourceManager::DepthOnlyMaterial = nullptr;
+
     std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultSphere = nullptr;
     std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultCube = nullptr;
     std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultPlane = nullptr;
+    std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultQuad = nullptr;
 
 
     void ResourceManager::Init() {
@@ -28,6 +32,8 @@ namespace Luxia {
         DefaultUnlitShader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/default_unlit.frag", "C:/dev/Luxia/Luxia/resources/shaders/default_unlit.vert");
         DefaultUnlitMaterial = Platform::Assets::CreateMaterial(DefaultUnlitShader);
 
+        DepthOnlyShader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/depth_only.frag", "C:/dev/Luxia/Luxia/resources/shaders/depth_only.vert");
+        DepthOnlyMaterial = Platform::Assets::CreateMaterial(DepthOnlyShader);
 
         DefaultSphere = [] {
             Constants::Shapes::UVSphere sphere;
@@ -59,6 +65,22 @@ namespace Luxia {
             return mesh;
             }();
 
+
+        DefaultQuad = [] {
+            std::vector<Luxia::Rendering::Vertex> quad_verts {
+	        {{glm::vec3(-1.0f, -1.0f, 0.0f)}, {glm::vec3(0.0f)}, {glm::vec2(0.0f, 0.0f)}},
+	        {{glm::vec3(1.0f, -1.0f, 0.0f)}, {glm::vec3(0.0f)}, {glm::vec2(1.0f, 0.0f)}},
+	        {{glm::vec3(-1.0f, 1.0f, 0.0f)}, {glm::vec3(0.0f)}, {glm::vec2(0.0f, 1.0f)}},
+	        {{glm::vec3(1.0f, 1.0f, 0.0f)}, {glm::vec3(0.0f)}, {glm::vec2(1.0f, 1.0f)}}
+            };
+            std::vector<unsigned int> quad_inds{0, 1, 2,  1, 3, 2 };
+            std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(
+                quad_verts,
+                quad_inds
+            );
+            mesh->CalculateMesh();
+            return mesh;
+            }();
     }
 
     void ResourceManager::Cleanup() {
@@ -66,10 +88,12 @@ namespace Luxia {
         DefaultSphere->Unload();
         DefaultCube->Unload();
         DefaultPlane->Unload();
-    
+        DefaultQuad->Unload();
+
         DefaultSphere.reset();
         DefaultCube.reset();
         DefaultPlane.reset();
+        DefaultQuad.reset();
         
         // Materials
         DefaultLitMaterial->Unload();
@@ -83,6 +107,12 @@ namespace Luxia {
         DefaultUnlitShader->Delete();
         DefaultUnlitMaterial.reset();
         DefaultUnlitShader.reset();
+
+        DepthOnlyMaterial->Unload();
+        DepthOnlyShader->Unload();
+        DepthOnlyShader->Delete();
+        DepthOnlyMaterial.reset();
+        DepthOnlyShader.reset();
 
         NullMaterial->Unload();
         NullShader->Unload();

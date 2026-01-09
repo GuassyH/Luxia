@@ -5,8 +5,9 @@
 namespace Editor::Panels {
 
 	static std::shared_ptr<Luxia::ITexture> fbo_pick_tex = Luxia::Platform::Assets::CreateTexture();
+	static std::shared_ptr<Luxia::ITexture> selection_fbo = Luxia::Platform::Assets::CreateTexture();
 	static std::shared_ptr<Luxia::IMaterial> outline_mat = Luxia::Platform::Assets::CreateMaterial();
-	static Luxia::Mesh outline_mesh;
+	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
 
 	static Luxia::GUID GetMousePosEntity(glm::vec2 mouse_pos, Luxia::Components::Camera* cam, const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> renderer, std::shared_ptr<Luxia::ITexture> output_texture) {
 
@@ -22,7 +23,7 @@ namespace Editor::Panels {
 		Luxia::Screen::BindFBO(output_texture->GetFBO());
 		Luxia::Screen::BindRBO(output_texture->GetRBO());
 		
-		/// OPENGL DEPENDANT
+		// OPENGL DEPENDANT
 		glClearColor(1, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, cam->width, cam->height);
@@ -50,7 +51,7 @@ namespace Editor::Panels {
 			}
 		}
 
-		/// OPENGL DEPENDANT
+		// OPENGL DEPENDANT
 		GLubyte pixel[4];
 		glReadPixels(static_cast<GLint>(mouse_pos.x), static_cast<GLint>(mouse_pos.y), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixel);
 
@@ -71,6 +72,9 @@ namespace Editor::Panels {
 	}
 
 
+	/// CORE
+
+
 	void SceneViewport::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
 
@@ -84,11 +88,13 @@ namespace Editor::Panels {
 		cam_ent->AddComponent<Editor::Scripts::SceneCameraScript>();
 
 		fbo_pick_tex->CreateFBOTex(1920, 1080);
-		outline_mesh.valid = true;
+		selection_fbo->CreateDepthTex(1920, 1080);
 
-		outline_mat->shader = Luxia::ResourceManager::DefaultUnlitMaterial->shader;
+		outline_shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/Editor/resources/gizmos/outline.frag", "C:/dev/Luxia/Editor/resources/gizmos/outline.vert");
+
+		outline_mat->shader = outline_shader;
 		outline_mat->guid = Luxia::GUID();
-		outline_mat->color = glm::vec4(1.0f, 140.0f / 255.0f, 50.0f / 255.0f, 1.0f);
+		outline_mat->color = glm::vec4(1.0f, 0.55f, 0.2f, 1.0f);
 
 
 		InitGizmos(editorLayer);
@@ -156,20 +162,15 @@ namespace Editor::Panels {
 				}
 
 				cam_script.Look();
+				Luxia::Components::Transform* focused_t = nullptr;
 				if(editorLayer->isOneSelected) {
 					Luxia::GUID selected_guid = *editorLayer->selected_assets.begin();
 					auto it = scene->runtime_entities.find(selected_guid);
 					if (it != scene->runtime_entities.end()) {
-						Luxia::Components::Transform* focused_t = scene->TryGetFromEntity<Luxia::Components::Transform>(it->second);
-						cam_script.Move(focused_t);
-					}
-					else {
-						cam_script.Move(nullptr);
+						focused_t = scene->TryGetFromEntity<Luxia::Components::Transform>(it->second);
 					}
 				}
-				else {
-					cam_script.Move(nullptr);
-				}
+				cam_script.Move(focused_t);
 			}
 		}
 
@@ -208,7 +209,6 @@ namespace Editor::Panels {
 		dispatcher.Dispatch<Luxia::RenderCameraEvent>(LX_BIND_EVENT_FN(RenderImage));
 	}
 
-
 	
 	/// GIZMOS
 
@@ -226,7 +226,12 @@ namespace Editor::Panels {
 		// Rebind
 		Luxia::Screen::BindFBO(cam_tex->GetFBO());
 		Luxia::Screen::BindRBO(cam_tex->GetRBO());
-		cam_tex->Bind();
+
+		if (cam.width != selection_fbo->GetWidth() || cam.height != selection_fbo->GetHeight()) {
+			selection_fbo->Delete();
+			selection_fbo->CreateDepthTex(cam.width, cam.height);
+		}
+
 
 		/// With Depth
 		// Icons like the Camera, Lights, Etc
@@ -235,26 +240,46 @@ namespace Editor::Panels {
 				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
 				auto mr = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
 				if (mr) {
-					if (mr->mesh) {
-						glm::mat4 outline_modmat = ent.transform->GetMatrix();
+					// Bind Depth only stuff
+					Luxia::Screen::BindFBO(selection_fbo->GetFBO());
+					glViewport(0, 0, selection_fbo->GetWidth(), selection_fbo->GetHeight());
+					Luxia::Screen::BindRBO(0);
 
-						// Only do if changed
-						if (outline_mesh.guid != mr->mesh->guid) {
-							outline_mesh.guid = mr->mesh->guid;
-							outline_mesh.vertices = mr->mesh->vertices;
-							outline_mesh.indices = mr->mesh->indices;
-							
-							for (auto& vert : outline_mesh.vertices) {
-								vert.pos += vert.normal * 0.05f;
-							}
+					glClear(GL_DEPTH_BUFFER_BIT);
+					glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+					glEnable(GL_DEPTH_TEST);
 
-							outline_mesh.CalculateMesh();
-						}
+					if (mr->mesh) 
+						renderer->RenderMesh(mr->mesh.get(), Luxia::ResourceManager::DepthOnlyMaterial.get(), ent.transform->GetMatrix(), cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
 
-						glCullFace(GL_FRONT);
-						renderer->RenderMesh(&outline_mesh, outline_mat.get(), outline_modmat, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
-						glCullFace(GL_BACK);
-					}
+					glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+					
+					// Selection Pass
+					Luxia::Screen::BindFBO(cam_tex->GetFBO());
+					Luxia::Screen::BindRBO(cam_tex->GetRBO());
+
+					glDisable(GL_DEPTH_TEST);
+
+					// Render outline using the output_texture FBO
+					outline_mat->Use();
+					
+					glActiveTexture(GL_TEXTURE0);
+					selection_fbo->Bind();
+					outline_mat->shader->SetInt("depthSample", 0);
+
+					glActiveTexture(GL_TEXTURE1);
+					cam_tex->Bind();
+					outline_mat->shader->SetInt("baseSample", 1);
+
+					outline_mat->shader->SetVec2("texelSize", glm::vec2(1.0f / cam_tex->GetWidth(), 1.0f / cam_tex->GetHeight()));
+					outline_mat->shader->SetFloat("farPlane", cam.farPlane);
+					outline_mat->shader->SetFloat("nearPlane", cam.nearPlane);
+					outline_mat->shader->SetFloat("depthThreshold", 1.0f);
+
+					renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultQuad.get());
+
+					glEnable(GL_DEPTH_TEST);
+					glActiveTexture(GL_TEXTURE0);
 				}
 			}
 		}
