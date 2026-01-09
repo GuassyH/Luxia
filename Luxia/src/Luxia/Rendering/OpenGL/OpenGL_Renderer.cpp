@@ -24,7 +24,7 @@ namespace Luxia::Rendering::OpenGL {
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		m_UIRenderer = std::make_shared<OpenGL_UIRenderer>();
-	
+
 		initialized = true;
 	}
 
@@ -34,10 +34,14 @@ namespace Luxia::Rendering::OpenGL {
 	}
 
 	void OpenGL_Renderer::RenderMesh(const Luxia::Mesh* m_mesh, Luxia::IMaterial* m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!m_mesh) 
+		if (!m_mesh) {
+			// LX_CORE_ERROR("Renderer: Null Mesh");
 			return;
-		if (!m_mesh->IsValid())
+		}
+		if (!m_mesh->IsValid()) {
+			// LX_CORE_ERROR("Renderer: Invalid Mesh");
 			return;
+		}
 
 		if (m_material) {
 			if (m_material->shader)

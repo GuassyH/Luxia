@@ -63,6 +63,7 @@
     <ClInclude Include="src\ThumbnailManager.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Gizmos\Gizmo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c">

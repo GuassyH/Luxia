@@ -157,6 +157,7 @@
     <ClInclude Include="src\EditorPanels\Profiler.h" />
     <ClInclude Include="src\EditorPanels\SceneViewport.h" />
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
+    <ClInclude Include="src\Gizmos\Gizmo.h" />
     <ClInclude Include="src\IEditorPanel.h" />
     <ClInclude Include="src\ThumbnailManager.h" />
   </ItemGroup>

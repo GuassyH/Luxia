@@ -5,6 +5,8 @@
 namespace Editor::Panels {
 
 	static std::shared_ptr<Luxia::ITexture> fbo_pick_tex = Luxia::Platform::Assets::CreateTexture();
+	static std::shared_ptr<Luxia::IMaterial> outline_mat = Luxia::Platform::Assets::CreateMaterial();
+	static Luxia::Mesh outline_mesh;
 
 	static Luxia::GUID GetMousePosEntity(glm::vec2 mouse_pos, Luxia::Components::Camera* cam, const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> renderer, std::shared_ptr<Luxia::ITexture> output_texture) {
 
@@ -82,6 +84,14 @@ namespace Editor::Panels {
 		cam_ent->AddComponent<Editor::Scripts::SceneCameraScript>();
 
 		fbo_pick_tex->CreateFBOTex(1920, 1080);
+		outline_mesh.valid = true;
+
+		outline_mat->shader = Luxia::ResourceManager::DefaultUnlitMaterial->shader;
+		outline_mat->guid = Luxia::GUID();
+		outline_mat->color = glm::vec4(1.0f, 140.0f / 255.0f, 50.0f / 255.0f, 1.0f);
+
+
+		InitGizmos(editorLayer);
 	}
 
 	void SceneViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
@@ -166,9 +176,10 @@ namespace Editor::Panels {
 		ImGui::End();
 
 		if (scene) {
-			// Render Camera
+			// Render
 			std::shared_ptr<Luxia::ITexture> tex = cam.Render(scene, editorLayer->GetRenderer());
-			// Render Gizmos?
+			RenderGizmos(editorLayer, scene.get(), tex);
+			// Push for next frame
 			editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::RenderCameraEvent>(tex, false, true));
 		}
 		
@@ -197,5 +208,65 @@ namespace Editor::Panels {
 		dispatcher.Dispatch<Luxia::RenderCameraEvent>(LX_BIND_EVENT_FN(RenderImage));
 	}
 
+
+	
+	/// GIZMOS
+
+
+
+	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
+		gizmos.push_back(std::make_unique<Gizmos::TranslateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
+	}
+
+	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
+		// Get the important stuff
+		Luxia::Rendering::IRenderer* renderer = editorLayer->GetRenderer().get();
+		auto& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
+		
+		// Rebind
+		Luxia::Screen::BindFBO(cam_tex->GetFBO());
+		Luxia::Screen::BindRBO(cam_tex->GetRBO());
+		cam_tex->Bind();
+
+		/// With Depth
+		// Icons like the Camera, Lights, Etc
+		if (editorLayer->isOneSelected) {
+			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
+				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
+				auto mr = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+				if (mr) {
+					if (mr->mesh) {
+						glm::mat4 outline_modmat = ent.transform->GetMatrix();
+
+						// Only do if changed
+						if (outline_mesh.guid != mr->mesh->guid) {
+							outline_mesh.guid = mr->mesh->guid;
+							outline_mesh.vertices = mr->mesh->vertices;
+							outline_mesh.indices = mr->mesh->indices;
+							
+							for (auto& vert : outline_mesh.vertices) {
+								vert.pos += vert.normal * 0.05f;
+							}
+
+							outline_mesh.CalculateMesh();
+						}
+
+						glCullFace(GL_FRONT);
+						renderer->RenderMesh(&outline_mesh, outline_mat.get(), outline_modmat, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
+						glCullFace(GL_BACK);
+					}
+				}
+			}
+		}
+
+		/// Without Depth
+		glClear(GL_DEPTH_BUFFER_BIT);
+		// Translation handles
+
+		// Unbind
+		Luxia::Screen::BindFBO(0);
+		Luxia::Screen::BindRBO(0);
+		cam_tex->Unbind();
+	}
 
 }

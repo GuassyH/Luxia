@@ -23,7 +23,7 @@ namespace Luxia {
 			
 		virtual bool Unload() override;
 
-		bool IsValid() const { return valid; }
+		const bool IsValid() const { return valid; }
 		
 		std::shared_ptr<Rendering::Buffers::VAO> vao = nullptr;
 		std::shared_ptr<Rendering::Buffers::VBO> vbo = nullptr;
@@ -31,8 +31,8 @@ namespace Luxia {
 
 		std::vector<Rendering::Vertex> vertices;
 		std::vector<uint32_t> indices;
-	private:
 		bool valid = false;
+	private:
 	};
 }
 

@@ -97,6 +97,7 @@ namespace Luxia::Platform::OpenGL {
 
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);
+
 		glEnable(GL_DEPTH_TEST);
 
 		// Cull backface

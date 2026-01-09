@@ -23,7 +23,6 @@ namespace Editor {
 
 			std::shared_ptr<Luxia::ITexture> tex = Luxia::Platform::Assets::CreateTexture();
 
-
 			switch (asset->type)
 			{
 			case Luxia::AssetType::MaterialType: {
@@ -81,8 +80,6 @@ namespace Editor {
 			else
 				LX_ERROR("Thumbnail for Mat (FBO: {}) failed", texture->GetFBO());
 
-
-			LX_INFO("Created Thumbnail for Mat");
 		}
 
 		void MeshThumbnail(Luxia::Mesh* mesh, std::shared_ptr<Luxia::ITexture> texture, Luxia::Rendering::IRenderer* renderer) {
@@ -115,8 +112,6 @@ namespace Editor {
 			else
 				LX_ERROR("Thumbnail for Mesh (FBO: {}) failed", texture->GetFBO());
 
-
-			LX_INFO("Created Thumbnail for Mesh");
 		}
 
 	};
