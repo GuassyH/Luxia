@@ -25,12 +25,24 @@ namespace Luxia::Platform::OpenGL {
 		}
 	}
 	
+	// Feels wierd? Why even have abstract camera now
 	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const int width, const int height, const glm::vec4& clear_col) {
-		Luxia::Screen::ClearFBOTex(output_texture, width,height,clear_col);
+		if (width != output_texture->GetWidth() || height != output_texture->GetHeight()) {
+			output_texture->Delete();
+			output_texture->CreateFBOTex(width, height);
+		}
+
+		glBindFramebuffer(GL_FRAMEBUFFER, output_texture->GetFBO());
+		glBindRenderbuffer(GL_RENDERBUFFER, output_texture->GetRBO());
+		glClearColor(clear_col.r, clear_col.g, clear_col.b, clear_col.a);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glViewport(0, 0, width, height);
 
 		rend->Flush(GetViewMat(), GetProjMat());
 
-		Luxia::Screen::BindFBO(0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindRenderbuffer(GL_RENDERBUFFER, 0);
+		output_texture->Unbind();
 
 		return output_texture;
 	}
