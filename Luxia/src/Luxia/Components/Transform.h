@@ -71,11 +71,15 @@ namespace Luxia::Components {
 			// Build local matrix
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
 
+			/*
 			glm::quat rotY = glm::angleAxis(glm::radians(euler_angles.y), glm::vec3(0, 1, 0));
 			glm::quat rotX = glm::angleAxis(glm::radians(euler_angles.x), glm::vec3(1, 0, 0));
 			glm::quat rotZ = glm::angleAxis(glm::radians(euler_angles.z), glm::vec3(0, 0, 1));
+			glm::quat rotationQuat = rotZ * rotY * rotX;
+			*/
 
-			glm::quat rotationQuat = rotY * rotX * rotZ;
+			glm::quat rotationQuat = glm::quat(glm::radians(euler_angles));
+
 			glm::mat4 rotationMatrix = glm::mat4_cast(rotationQuat);
 
 			glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);

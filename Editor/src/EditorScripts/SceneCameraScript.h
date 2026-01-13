@@ -13,14 +13,24 @@ namespace Editor::Scripts {
 		glm::vec3 moveDir;
 		float horizontal = 0.0f;
 		float vertical = 0.0f;
+		float skywards = 0.0f;
 
-		void Move(Luxia::Components::Transform* focused_t) {
+		enum MovementPresets {
+			Me = 0,
+			Xeffi = 1,
+			Aaron = 2
+		};
+
+		MovementPresets movement_preset = MovementPresets::Me;
+
+		void Move() {
 			glm::vec3 forward = glm::normalize(transform->GetRotVec());
 			glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
 			glm::vec3 up = glm::normalize(glm::cross(right, forward));
 
 			horizontal = 0.0f;
 			vertical = 0.0f;
+			skywards = 0.0f;
 
 			if (Luxia::Input::IsKeyPressed(LX_KEY_D))
 				horizontal += 1.0f;
@@ -34,16 +44,41 @@ namespace Editor::Scripts {
 			if (Luxia::Input::IsKeyPressed(LX_KEY_S))
 				vertical -= 1.0f;
 
+			int UpKey = 0;
+			int DownKey = 1;
+
+			switch (movement_preset) {
+			case Editor::Scripts::SceneCameraScript::Me:{
+				UpKey = LX_KEY_E;
+				DownKey = LX_KEY_Q;
+				break;
+			}
+			case Editor::Scripts::SceneCameraScript::Xeffi: {
+				UpKey = LX_KEY_SPACE;
+				DownKey = LX_KEY_C;
+				break;
+			}
+			case Editor::Scripts::SceneCameraScript::Aaron: {
+				UpKey = LX_KEY_F;
+				DownKey = LX_KEY_C;
+				break;
+			}
+			default:
+				UpKey = LX_KEY_E;
+				DownKey = LX_KEY_Q;
+				break;
+			}
+
+			if (Luxia::Input::IsKeyPressed(UpKey))
+				skywards += 1.0f;
+
+			if (Luxia::Input::IsKeyPressed(DownKey))
+				skywards -= 1.0f;
+
 			moveDir = right * horizontal + forward * vertical;
+			moveDir.y += skywards;
 			
 			transform->position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
-
-
-			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
-				if (focused_t) {
-					transform->position = focused_t->world_position + (transform->GetRotVec() * -10.0f);
-				}
-			}
 		}
 
 		double last_mouseX;

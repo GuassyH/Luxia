@@ -16,6 +16,7 @@ namespace Luxia::Components {
 		// data
 		Transform* transform;
 		Luxia::GUID ent_guid = Luxia::GUID(0);
+		bool enabled = true;
 
 		virtual void OnInspectorDraw() {}
 	};

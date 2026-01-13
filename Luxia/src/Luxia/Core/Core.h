@@ -191,6 +191,7 @@
 	#define LX_KEY_RIGHT_ALT		GLFW_KEY_RIGHT_ALT		
 	#define LX_KEY_RIGHT_SUPER		GLFW_KEY_RIGHT_SUPER		
 	#define LX_KEY_MENU				GLFW_KEY_MENU				
+	#define LX_KEY_SPACE			GLFW_KEY_SPACE				
 	#define LX_MOUSE_BUTTON_1		GLFW_MOUSE_BUTTON_1  /* left */
 	#define LX_MOUSE_BUTTON_2		GLFW_MOUSE_BUTTON_2  /* right */
 	#define LX_MOUSE_BUTTON_3		GLFW_MOUSE_BUTTON_3  /* middle */
@@ -307,6 +308,7 @@
 	#define LX_KEY_RIGHT_ALT		constexpr 103
 	#define LX_KEY_RIGHT_SUPER		constexpr 104
 	#define LX_KEY_MENU				constexpr 105
+	#define LX_KEY_SPACE			constexpr 106				
 
 
 	/* Mouse */

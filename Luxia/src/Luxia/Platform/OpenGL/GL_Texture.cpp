@@ -39,7 +39,6 @@ namespace Luxia::Platform::OpenGL {
 			return;
 		}
 
-
 		// All of the FBO data and such is sent back to the input params
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -152,7 +151,7 @@ namespace Luxia::Platform::OpenGL {
 
 		stbi_set_flip_vertically_on_load(flip);
 
-		unsigned char* bytes = stbi_load(m_path.string().c_str(), &imgWidth, &imgHeight, &numColCh, 0);
+		unsigned char* bytes = stbi_load(m_path.lexically_normal().string().c_str(), &imgWidth, &imgHeight, &numColCh, 0);
 
 		if (!bytes) { LX_CORE_ERROR("Texture Loading failed (bytes null): {}", m_path.string()); return; }
 

@@ -15,10 +15,26 @@ namespace Luxia::Layers {
 		LX_CORE_WARN("RenderLayer Detached");
 	}
 	void RenderLayer::OnUpdate() {
-	
+
 	}
 	void RenderLayer::OnRender() {
 		auto scene = project_manager->GetSceneManager()->GetActiveScene();
+
+
+
+		/*
+		if (scene) {
+			for (auto& [guid, entity] : scene->runtime_entities) {
+				if (!entity.enabled) continue;
+
+				auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
+				// ONLY UPDATE ROOTS, Children will be updated as a consequence
+				if (!transform->HasParent()) {
+					transform->UpdateMatrix();
+				}
+			}
+		}
+		*/
 
 		if (scene) {
 			auto mesh_view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
@@ -28,7 +44,6 @@ namespace Luxia::Layers {
 			renderer->ClearROs();
 			for (auto entity : mesh_view) {
 				auto& mr = scene->GetFromEntity<Luxia::Components::MeshRenderer>(entity);
-
 				if (mr.transform) {
 					renderer->Submit({mr.mesh.get(), mr.material.get(), mr.transform->GetMatrix()});
 				}
@@ -38,8 +53,7 @@ namespace Luxia::Layers {
 
 			for (auto entity : cam_view) {
 				auto& cam = scene->GetFromEntity<Luxia::Components::Camera>(entity);
-
-				if (cam.main) 
+				if (cam.main)
 					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()), cam.main);
 			}
 			

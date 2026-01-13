@@ -41,8 +41,8 @@ namespace Luxia::Components {
 			ImGui::DragInt("Width", &width, 1);
 			ImGui::DragInt("Height", &height, 1);
 			ImGui::Checkbox("Main", &main);
-			ImGui::Checkbox("UseSkybox", &useSkybox);
 			ImGui::Spacing();
+			ImGui::Checkbox("UseSkybox", &useSkybox);
 			ImGui::ColorPicker4("Clear Color", &clearColor.r);
 		}
 		

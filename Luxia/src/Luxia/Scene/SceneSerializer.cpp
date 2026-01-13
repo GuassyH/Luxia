@@ -24,6 +24,7 @@ namespace Luxia {
 
 			out << YAML::BeginMap;
 
+			out << YAML::Key << "Enabled" << YAML::Value << entity.transform->enabled;
 			out << YAML::Key << "Position" << YAML::Value << entity.transform->position;
 			out << YAML::Key << "EulerAngles" << YAML::Value << entity.transform->euler_angles;
 			out << YAML::Key << "Scale" << YAML::Value << entity.transform->scale;
@@ -35,6 +36,7 @@ namespace Luxia {
 				out << YAML::Key << "Camera";
 				out << YAML::BeginMap; // Camera
 
+				out << YAML::Key << "Enabled" << YAML::Value << cam->enabled;
 				out << YAML::Key << "FOV" << YAML::Value << cam->FOVdeg;
 				out << YAML::Key << "FarPlane" << YAML::Value << cam->farPlane;
 				out << YAML::Key << "NearPlane" << YAML::Value << cam->nearPlane;
@@ -42,6 +44,7 @@ namespace Luxia {
 				out << YAML::Key << "Width" << YAML::Value << cam->width;
 				out << YAML::Key << "Height" << YAML::Value << cam->height;
 				out << YAML::Key << "ClearColor" << YAML::Value << cam->clearColor;
+				out << YAML::Key << "UseSkybox" << YAML::Value << cam->useSkybox;
 
 				out << YAML::EndMap;
 			}
@@ -51,11 +54,24 @@ namespace Luxia {
 				out << YAML::Key << "MeshRenderer";
 				out << YAML::BeginMap; // Camera
 
+				out << YAML::Key << "Enabled" << YAML::Value << meshrend->enabled;
 				out << YAML::Key << "Mesh" << YAML::Value << (meshrend->mesh ? (uint64_t)meshrend->mesh->guid : 0);
 				out << YAML::Key << "Material" << YAML::Value << (meshrend->material ? (uint64_t)meshrend->material->guid : 0);
 
 				out << YAML::EndMap;
 			}
+
+			auto light = entity.transform->TryGetComponent<Luxia::Components::Light>();
+			if (light) {
+				out << YAML::Key << "Light";
+				out << YAML::BeginMap; // Camera
+
+				out << YAML::Key << "Enabled" << YAML::Value << light->enabled;
+				out << YAML::Key << "Color" << YAML::Value << light->color;
+
+				out << YAML::EndMap;
+			}
+
 		}
 
 		out << YAML::EndMap;
@@ -109,21 +125,25 @@ namespace Luxia {
 			entity.transform->position = transNode["Position"].as<glm::vec3>();
 			entity.transform->euler_angles = transNode["EulerAngles"].as<glm::vec3>();
 			entity.transform->scale = transNode["Scale"].as<glm::vec3>();
+			entity.transform->enabled = transNode["Enabled"].as<bool>();
 
 			if (auto camNode = components["Camera"]) {
 				int width = camNode["Width"].as<int>();
 				int height = camNode["Height"].as<int>();
 
 				auto& cam = entity.transform->AddComponent<Luxia::Components::Camera>(width, height);
+				cam.enabled = camNode["Enabled"].as<bool>();
 				cam.FOVdeg = camNode["FOV"].as<float>();
 				cam.farPlane = camNode["FarPlane"].as<float>();
 				cam.nearPlane = camNode["NearPlane"].as<float>();
 				cam.main = camNode["Main"].as<bool>();
 				cam.clearColor = camNode["ClearColor"].as<glm::vec4>();
+				cam.useSkybox = camNode["UseSkybox"].as<bool>();
 			}
 
 			if (auto meshRendNode = components["MeshRenderer"]) {
 				auto& meshRend = entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
+				meshRend.enabled = meshRendNode["Enabled"].as<bool>();
 
 				uint64_t mesh_guid = 0;
 				uint64_t mat_guid = 0;
@@ -153,6 +173,12 @@ namespace Luxia {
 						LX_CORE_ERROR("SceneSerializer: Deserializing Entity MeshRenderer failed, Mat at GUID: {} - not found", (uint64_t)mat_guid);
 				}
 
+			}
+
+			if (auto lightNode = components["Light"]) {
+				auto& light = entity.transform->AddComponent<Luxia::Components::Light>();
+				light.enabled = lightNode["Enabled"].as<bool>();
+				light.color = lightNode["Color"].as<glm::vec4>();
 			}
 		}
 

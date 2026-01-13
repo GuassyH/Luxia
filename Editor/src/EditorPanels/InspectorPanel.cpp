@@ -41,6 +41,9 @@ namespace Editor::Panels {
 
 		// Name
 		std::ostringstream entname; entname << ent.name;
+
+		ImGui::Checkbox("##IsEnabled", &ent.transform->enabled);
+		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - ImGui::CalcTextSize(entname.str().c_str()).x * 0.5f);
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() * 0.5f - 180 * 0.5f);
 		ImGui::SetNextItemWidth(180);

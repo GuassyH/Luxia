@@ -12,10 +12,9 @@ namespace Luxia::Layers {
 	void GameLayer::OnUpdate() {
 		std::shared_ptr<Scene> scene = scene_manager->GetActiveScene();
 
+
 		if (scene) {
-			auto view = scene->GetEntitiesWith<Components::Transform>();
-		
-			for (auto entity : view) {
+			for (auto& [guid, entity] : scene->runtime_entities) {
 				auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
 				// ONLY UPDATE ROOTS, Children will be updated as a consequence
 				if (!transform->HasParent()) {

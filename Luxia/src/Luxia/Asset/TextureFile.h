@@ -17,8 +17,8 @@ namespace Luxia::Assets {
 			guid = GUID();
 
 			std::shared_ptr<Luxia::ITexture> texture = Platform::Assets::CreateTexture();
-			texture->name = m_assetPath.filename().replace_extension("").string();
 			texture->LoadFromFile(texture_path);
+			texture->name = m_assetPath.filename().replace_extension("").string();
 			texture->assetFileGUID = guid;
 			texture->guid = GUID();
 

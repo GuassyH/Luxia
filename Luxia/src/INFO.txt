@@ -9,26 +9,25 @@ IMPORTANT
 - SetParent 
 	Setting Parent should calculate the new size, and de-setting should also, so that you dont mess up the size
 
-- Scene Index (right now their order is based on when they are loaded)
+- Add Redstone PFP Sun
 
-- Resources (like built in shaders and meshes that come with the engine) should be loaded once, and not per scene, and shared across projects)
-		- USE CMAKE
+- Scene Index (right now their order is based on when they are loaded)
 
 - Rendering on a seperate thread? Performance boost ash
 
-- Rework Scene Serializer and SceneFile structure
-
 - Maybe MeshRenderer should store the GUIDs of the mesh and mat and not the shared_ptr to it
 
+- Rework enabling, made it so its the components that are enabled and not. The entity being enabled is the transform being enabled
+
 - Importing should also be given path to import TO. so you can import from an external folder (maybe?)
+
+- IMPORTANT, MAKE SURE WHEN EXPORTING BLENDER MODELS FOR GIZMOS, +Z IS FORWARD AND +Y IS UP
+
+- Rotations a bit weird
 
 ---  Next  ---
 
 - Scene renaming is weird, it wont rename the scene for some reason
-
-- When importing it opens the last opened filepath, not the file path you clicked import in
-
-- Importing something imports to the same folder that the asset is in, i want to be able to import an asset from outside the project, and just get the path to it and filestuff
 
 - Cleanup
 
@@ -47,7 +46,3 @@ IMPORTANT
 - Create the classes (VK_Camera, VK_Texture)
 
 - Add Platform creation definitions 
-
---- Maybe ? ---
-
-- Selection outline is currently depth based, which can look weird. Maybe it should be geometry shader based?

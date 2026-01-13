@@ -50,12 +50,12 @@ namespace Luxia::Platform::OpenGL {
 			skybox->shader->SetFloat("FOVdeg", FOVdeg);
 				
 			if (mc) {
-				skybox->shader->SetVec3("sunDir", mc->transform->euler_angles);
+				skybox->shader->SetVec3("sunDir", mc->transform->GetRotVec());
 				skybox->shader->SetVec4("sunColor", mc->color);
 			}
 			else {
 				skybox->shader->SetVec3("sunDir", glm::vec3(0.0f, 0.0f, -1.0f));
-				skybox->shader->SetVec4("sunColor", glm::vec4(1.0f));
+				skybox->shader->SetVec4("sunColor", glm::vec4(0.0f));
 			}
 
 			skybox->shader->SetVec3("camForward", GetForward());
