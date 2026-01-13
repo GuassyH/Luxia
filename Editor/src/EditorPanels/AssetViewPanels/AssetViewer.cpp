@@ -247,22 +247,22 @@ namespace Editor::Panels {
 
 	void AssetViewer::Init() {
 		mesh_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		mesh_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/MeshDefaultThumbnail.png");
+		mesh_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/MeshDefaultThumbnail.png");
 
 		mat_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		mat_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/MatDefaultThumbnail.png");
+		mat_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/MatDefaultThumbnail.png");
 
 		shader_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		shader_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/ShaderDefaultThumbnail.png");
+		shader_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/ShaderDefaultThumbnail.png");
 
 		scene_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		scene_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/SceneDefaultThumbnail.png");
+		scene_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/SceneDefaultThumbnail.png");
 
 		texture_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		texture_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/TextureDefaultThumbnail.png");
+		texture_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/TextureDefaultThumbnail.png");
 
 		folder_default_thumbnail = Luxia::Platform::Assets::CreateTexture();
-		folder_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/AssetIcons/FolderDefaultThumbnail.png");
+		folder_default_thumbnail->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/FolderDefaultThumbnail.png");
 	}
 
 	void AssetViewer::DrawAssetFiles(Editor::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw)

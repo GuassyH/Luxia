@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Luxia/Components/Transform.h"
-#include "Luxia/Components/MeshRenderer.h"
 #include "Luxia/Rendering/API/IMaterial.h"
 #include "Luxia/Rendering/API/IUIRenderer.h"
 
@@ -29,6 +27,9 @@ namespace Luxia::Rendering {
 		void ClearROs() {
 			renderObjects.clear();
 		}
+
+		// Step based 
+
 
 		// Basic rendering functions
 		virtual void RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;

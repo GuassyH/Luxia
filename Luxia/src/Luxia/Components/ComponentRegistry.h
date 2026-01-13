@@ -7,6 +7,7 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "MeshRenderer.h"
+#include "Light.h"
 
 namespace Luxia {
     struct LUXIA_API ComponentInfo {

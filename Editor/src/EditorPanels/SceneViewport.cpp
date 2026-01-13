@@ -221,6 +221,9 @@ namespace Editor::Panels {
 		gizmos.push_back(std::make_unique<Gizmos::TranslateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 	}
 
+
+
+
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
 		// Get the important stuff
 		Luxia::Rendering::IRenderer* renderer = editorLayer->GetRenderer().get();
@@ -237,8 +240,8 @@ namespace Editor::Panels {
 
 
 		/// With Depth
-		// Icons like the Camera, Lights, Etc
 
+		// OUTLINE
 		if (!editorLayer->areNoneSelected) {
 			bool is_one_ent = false;
 			for (auto& guid : editorLayer->selected_assets) {
@@ -298,13 +301,31 @@ namespace Editor::Panels {
 			}
 		}
 
-		if (editorLayer->isOneSelected) {
-			
-		}
-
 		/// Without Depth
 		glClear(GL_DEPTH_BUFFER_BIT);
-		// Translation handles
+
+		/* Doesnt work for some reason
+		// Draw translation gizmos
+		if (editorLayer->isOneSelected) {
+			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
+				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
+				
+				for (auto part : gizmos[0]->gizmo_entities) {
+					auto t = editorLayer->editor_reg.try_get<Luxia::Components::Transform>(part);
+					
+					if (t) {
+						LX_INFO("DRAW GIZMO PART");
+						t->transform->position = ent.transform->position;
+						t->transform->euler_angles = ent.transform->euler_angles;
+						auto mr = t->TryGetComponent<Luxia::Components::MeshRenderer>();
+						if (mr) {
+							// renderer->RenderMesh(mr->mesh.get(), Luxia::ResourceManager::DefaultUnlitMaterial.get(), t->GetMatrix(), cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
+						}
+					}
+				}
+			}
+		}
+		*/
 
 		// Unbind
 		Luxia::Screen::BindFBO(0);

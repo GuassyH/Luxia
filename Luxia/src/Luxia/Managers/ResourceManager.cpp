@@ -16,6 +16,9 @@ namespace Luxia {
     std::shared_ptr<Luxia::IShader> ResourceManager::DepthOnlyShader = nullptr;
     std::shared_ptr<Luxia::IMaterial> ResourceManager::DepthOnlyMaterial = nullptr;
 
+    std::shared_ptr<Luxia::IShader> ResourceManager::DefaultSkyboxShader = nullptr;
+    std::shared_ptr<Luxia::IMaterial> ResourceManager::DefaultSkyboxMaterial = nullptr;
+
     std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultSphere = nullptr;
     std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultCube = nullptr;
     std::shared_ptr<Luxia::Mesh> ResourceManager::DefaultPlane = nullptr;
@@ -34,6 +37,10 @@ namespace Luxia {
 
         DepthOnlyShader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/depth_only.frag", "C:/dev/Luxia/Luxia/resources/shaders/depth_only.vert");
         DepthOnlyMaterial = Platform::Assets::CreateMaterial(DepthOnlyShader);
+
+        DefaultSkyboxShader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/default_skybox.frag", "C:/dev/Luxia/Luxia/resources/shaders/default_skybox.vert");
+        DefaultSkyboxMaterial = Platform::Assets::CreateMaterial(DefaultSkyboxShader);
+
 
         DefaultSphere = [] {
             Constants::Shapes::UVSphere sphere;
@@ -113,6 +120,12 @@ namespace Luxia {
         DepthOnlyShader->Delete();
         DepthOnlyMaterial.reset();
         DepthOnlyShader.reset();
+
+        DefaultSkyboxMaterial->Unload();
+        DefaultSkyboxShader->Unload();
+        DefaultSkyboxShader->Delete();
+        DefaultSkyboxMaterial.reset();
+        DefaultSkyboxShader.reset();
 
         NullMaterial->Unload();
         NullShader->Unload();

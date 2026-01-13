@@ -8,6 +8,9 @@
 #include "Luxia/Core/GUID.h"
 
 #include "entt/entt.hpp"
+#include "Luxia/Components/Camera.h"
+#include "Luxia/Components/Light.h"
+
 
 namespace Luxia::Assets {
 	class SceneFile;
@@ -28,6 +31,7 @@ namespace Luxia {
 		void DeleteEntity(Luxia::GUID EntityGUID);
 
 		// Copied and modified entt/entt.hpp view func to forward
+#pragma region Templates
 		template<typename Type, typename... Other, typename... Exclude>
 		entt::basic_view<entt::get_t<entt::storage_for_t<Type>, entt::storage_for_t<Other>...>, entt::exclude_t<entt::storage_for_t<Exclude>...>>
 			GetEntitiesWith(entt::exclude_t<Exclude...> = entt::exclude_t{}) {
@@ -58,7 +62,34 @@ namespace Luxia {
 			entt::entity ent = it->second.transform->ent_id;
 			return reg.get<T>(ent);
 		}
+#pragma endregion
 
+		// Mains
+		Luxia::Components::Light* GetMainLight() {
+			for (auto& [guid, entity] : runtime_entities) {
+				auto l = entity.transform->TryGetComponent<Luxia::Components::Light>();
+				if (l) {
+					// if l is directional light
+					return l;
+				}
+				else continue;
+			}
+			return nullptr;
+		}
+		/*
+		Luxia::Components::Camera* GetMainCamera() {
+			for (auto& [guid, entity] : runtime_entities) {
+				auto c = entity.transform->TryGetComponent<Luxia::Components::Camera>();
+				if (c) {
+					if (c->main)
+						return c;
+					else continue;
+				}
+				else continue;
+			}
+			return nullptr;
+		}
+		*/
 
 		entt::registry& GetReg() { return reg; }
 		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;

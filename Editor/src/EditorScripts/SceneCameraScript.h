@@ -7,7 +7,7 @@ namespace Editor::Scripts {
 
 	class SceneCameraScript : public Luxia::Components::Component {
 	public:
-		float speed = 1.0f;
+		float speed = 10.0f;
 		float sensitivity = 0.002f;
 
 		glm::vec3 moveDir;
@@ -36,7 +36,7 @@ namespace Editor::Scripts {
 
 			moveDir = right * horizontal + forward * vertical;
 			
-			transform->position += moveDir * speed * 0.01f; // Should multiply with delta time
+			transform->position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
 
 
 			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {

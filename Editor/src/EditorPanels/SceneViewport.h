@@ -12,6 +12,7 @@ namespace Editor::Panels {
 
 		void InitGizmos(Editor::Layers::EditorLayer* editorLayer);
 		void RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex);
+	
 
 		std::vector<std::unique_ptr<Gizmos::Gizmo>> gizmos; // Translate = 0, Rotate = 1, Scale = 2
 

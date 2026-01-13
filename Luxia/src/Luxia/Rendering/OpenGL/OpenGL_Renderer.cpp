@@ -28,20 +28,21 @@ namespace Luxia::Rendering::OpenGL {
 		initialized = true;
 	}
 
+	/// Step based
+
+
+	/// Basic render functions
+
 	// Render the render object (meshrenderer mesh with material and transform)
 	void OpenGL_Renderer::RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) {
 		RenderMesh(ro.mesh, ro.mat, ro.modelMat, viewMat, projMat);
 	}
 
 	void OpenGL_Renderer::RenderMesh(const Luxia::Mesh* m_mesh, Luxia::IMaterial* m_material, const glm::mat4& modMat, const glm::mat4& viewMat, const glm::mat4& projMat) {
-		if (!m_mesh) {
-			// LX_CORE_ERROR("Renderer: Null Mesh");
+		if (!m_mesh)
 			return;
-		}
-		if (!m_mesh->IsValid()) {
-			// LX_CORE_ERROR("Renderer: Invalid Mesh");
+		if (!m_mesh->IsValid())
 			return;
-		}
 
 		if (m_material) {
 			if (m_material->shader)

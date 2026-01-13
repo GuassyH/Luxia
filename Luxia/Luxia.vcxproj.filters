@@ -258,6 +258,7 @@
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
     <ClInclude Include="src\Luxia\Tools\Screen.h" />
+    <ClInclude Include="src\Luxia\Components\Light.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

@@ -11,7 +11,7 @@ uniform float depthThreshold;
 in vec2 texcoords;
 
 float LinearizeDepth(float d){
-	float z = d * 2.0 - 1.0;
+	float z = 2.0 * d - 1.0;
 	return ((2.0 * nearPlane * farPlane) / (farPlane + nearPlane - z * (farPlane - nearPlane)));
 }
 

@@ -20,6 +20,8 @@ IMPORTANT
 
 - Maybe MeshRenderer should store the GUIDs of the mesh and mat and not the shared_ptr to it
 
+- Importing should also be given path to import TO. so you can import from an external folder (maybe?)
+
 ---  Next  ---
 
 - Scene renaming is weird, it wont rename the scene for some reason

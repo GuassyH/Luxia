@@ -30,6 +30,9 @@ namespace Luxia {
 
 		static std::shared_ptr<Luxia::IShader> DepthOnlyShader;
 		static std::shared_ptr<Luxia::IMaterial> DepthOnlyMaterial;
+	
+		static std::shared_ptr<Luxia::IShader> DefaultSkyboxShader;
+		static std::shared_ptr<Luxia::IMaterial> DefaultSkyboxMaterial;
 	};
 }
 
