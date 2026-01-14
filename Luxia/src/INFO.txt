@@ -23,8 +23,6 @@ IMPORTANT
 
 - IMPORTANT, MAKE SURE WHEN EXPORTING BLENDER MODELS FOR GIZMOS, +Z IS FORWARD AND +Y IS UP
 
-- Rotations a bit weird
-
 ---  Next  ---
 
 - Scene renaming is weird, it wont rename the scene for some reason

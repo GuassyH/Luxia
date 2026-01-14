@@ -8,6 +8,7 @@
 #include "EditorPanels/AssetView.h"
 #include "EditorPanels/Profiler.h"
 #include "EditorPanels/BuildSettings.h"
+#include "EditorPanels/ShoutoutPanel.h"
 
 #include "glfw/glfw3.h"
 
@@ -187,6 +188,9 @@ namespace Editor::Layers {
 					}
 					if (ImGui::MenuItem("Scene Viewport", nullptr, nullptr, !HasPanel<Panels::SceneViewport>())) {
 						PushPanel(std::make_shared<Editor::Panels::SceneViewport>());
+					}
+					if (ImGui::MenuItem("Shoutouts", nullptr, nullptr, !HasPanel<Panels::ShoutoutPanel>())) {
+						PushPanel(std::make_shared<Editor::Panels::ShoutoutPanel>());
 					}
 
 					ImGui::EndMenu();

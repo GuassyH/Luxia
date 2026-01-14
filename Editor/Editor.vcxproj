@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\EditorPanels\ShoutoutPanel.h" />
     <ClInclude Include="src\EditorLayer.h" />
     <ClInclude Include="src\EditorPanels\AssetView.h" />
     <ClInclude Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.h" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c" />
+    <ClCompile Include="src\EditorPanels\ShoutoutPanel.cpp" />
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\EditorPanels\AssetView.cpp" />
     <ClCompile Include="src\EditorPanels\AssetViewPanels\AssetFolderTree.cpp" />

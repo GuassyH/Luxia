@@ -25,4 +25,31 @@ namespace Editor::Gizmos {
 		orgioMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
 		orgioMaterial->color = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
 	}
+
+
+	/// Gizmo Part
+
+	// Translate
+	bool ArrowGizmoPart::OnClick() {
+		return false;
+	}
+	glm::vec3 ArrowGizmoPart::OnDrag() {
+		return glm::vec3(0.0f);
+	}
+
+	// Scale
+	bool ScaleGizmoPart::OnClick() {
+		return false;
+	}
+	glm::vec3 ScaleGizmoPart::OnDrag() {
+		return glm::vec3(0.0f);
+	}
+
+	// Rotate
+	bool RotateGizmoPart::OnClick() {
+		return false;
+	}
+	glm::vec3 RotateGizmoPart::OnDrag() {
+		return glm::vec3(0.0f);
+	}
 }

@@ -9,6 +9,8 @@ namespace Editor::Panels {
 	static std::shared_ptr<Luxia::IMaterial> outline_mat = Luxia::Platform::Assets::CreateMaterial();
 	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
 
+	static std::shared_ptr<Gizmos::GridGizmo> grid_gizmo = nullptr;
+
 	static enum EditType {
 		Translate = 0,
 		Rotate = 1,
@@ -240,6 +242,7 @@ namespace Editor::Panels {
 		gizmos.push_back(std::make_unique<Gizmos::TranslateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 		gizmos.push_back(std::make_unique<Gizmos::RotateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 		gizmos.push_back(std::make_unique<Gizmos::ScaleGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
+		grid_gizmo = std::make_shared<Gizmos::GridGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos"));
 	}
 
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
@@ -258,6 +261,20 @@ namespace Editor::Panels {
 
 
 		/// With Depth
+
+		// Grid
+		/*
+		auto& mr = grid_gizmo->gizmo_parts[0]->transform->GetComponent<Luxia::Components::MeshRenderer>();
+		mr.transform->position = cam.transform->position;
+		mr.transform->position.y = 0.0f;
+		mr.transform->UpdateMatrix();
+		mr.material->Use();
+		mr.material->shader->SetMat4("modelMat", mr.transform->GetMatrix());
+		mr.material->shader->SetMat4("viewMat", cam.GetCamera()->GetViewMat());
+		mr.material->shader->SetMat4("projMat", cam.GetCamera()->GetProjMat());
+		mr.material->shader->SetVec3("camPos", cam.transform->position);
+		renderer->RenderMeshPure(*mr.mesh.get());
+		*/
 
 		// OUTLINE
 		if (!editorLayer->areNoneSelected) {
@@ -327,7 +344,7 @@ namespace Editor::Panels {
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
 				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
 
-				glm::vec3 cam_to_entity = cam.transform->position + (glm::normalize(ent.transform->world_position - cam.transform->position) * 10.0f);
+				glm::vec3 cam_to_entity = cam.transform->position + (glm::normalize(ent.transform->world_position - cam.transform->position) * 15.0f);
 				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
 				
 				glm::quat entityRot = ent.transform->rotation;

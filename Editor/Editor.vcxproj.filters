@@ -64,6 +64,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Gizmos\Gizmo.h" />
+    <ClInclude Include="src\EditorPanels\ShoutoutPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c">
@@ -103,5 +104,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Gizmos\Gizmo.cpp" />
+    <ClCompile Include="src\EditorPanels\ShoutoutPanel.cpp" />
   </ItemGroup>
 </Project>
