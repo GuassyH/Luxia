@@ -173,6 +173,7 @@
     <ClCompile Include="src\EditorPanels\InspectorPanel.cpp" />
     <ClCompile Include="src\EditorPanels\Profiler.cpp" />
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
+    <ClCompile Include="src\Gizmos\Gizmo.cpp" />
     <ClCompile Include="src\LuxiaEditor.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,8 @@ namespace Luxia::Components {
 		glm::vec3 euler_angles = glm::vec3(0.0f, 0.0f, 0.0f); // (get & set)
 		glm::vec3 scale = glm::vec3(1.0f); // (get & set)
 
+		glm::quat rotation = glm::quat(); // rotation quat
+
 		// Global variables (get)
 		glm::vec3 world_position = glm::vec3(0.0f); // (get only)
 		glm::vec3 world_euler_angles = glm::vec3(0.0f); // (get only)
@@ -67,20 +69,14 @@ namespace Luxia::Components {
 
 
 		glm::mat4& GetMatrix() { return modelMatrix; }
+		glm::mat3 GetRotationMatrix() { return glm::mat3(glm::transpose(glm::inverse(modelMatrix))); }
+		
 		void UpdateMatrix() {
 			// Build local matrix
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
 
-			/*
-			glm::quat rotY = glm::angleAxis(glm::radians(euler_angles.y), glm::vec3(0, 1, 0));
-			glm::quat rotX = glm::angleAxis(glm::radians(euler_angles.x), glm::vec3(1, 0, 0));
-			glm::quat rotZ = glm::angleAxis(glm::radians(euler_angles.z), glm::vec3(0, 0, 1));
-			glm::quat rotationQuat = rotZ * rotY * rotX;
-			*/
-
-			glm::quat rotationQuat = glm::quat(glm::radians(euler_angles));
-
-			glm::mat4 rotationMatrix = glm::mat4_cast(rotationQuat);
+			rotation = glm::quat(glm::radians(euler_angles));
+			glm::mat4 rotationMatrix = glm::mat4_cast(rotation);
 
 			glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
 
@@ -91,13 +87,13 @@ namespace Luxia::Components {
 				modelMatrix = parent->modelMatrix * localMatrix;
 				world_euler_angles = parent->world_euler_angles + euler_angles;
 				world_position = parent->world_position + position;
-				world_scale = parent->world_scale + euler_angles;
+				world_scale = parent->world_scale + scale;
 			}
 			else {
 				modelMatrix = localMatrix;
 				world_euler_angles = euler_angles;
 				world_position = position;
-				world_scale = euler_angles;
+				world_scale = scale;
 			}
 
 			// NOW update children
@@ -105,9 +101,17 @@ namespace Luxia::Components {
 				child->UpdateMatrix();
 		}
 
-		glm::vec3 GetRotVec() const {
-			float pitch = glm::radians(euler_angles.x);
-			float yaw = glm::radians(euler_angles.y);
+		glm::vec3 GetRotVec(bool local = true) const {
+			float pitch = 0;
+			float yaw = 0;
+			if (local) {
+				pitch = glm::radians(euler_angles.x);
+				yaw = glm::radians(euler_angles.y);
+			}
+			else {
+				pitch = glm::radians(world_euler_angles.x);
+				yaw = glm::radians(world_euler_angles.y);
+			}
 
 			glm::vec3 direction = glm::vec3(0.0f);
 			direction.z = -(cos(pitch) * cos(yaw));

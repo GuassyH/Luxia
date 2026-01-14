@@ -102,5 +102,6 @@
     <ClCompile Include="src\LuxiaEditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Gizmos\Gizmo.cpp" />
   </ItemGroup>
 </Project>

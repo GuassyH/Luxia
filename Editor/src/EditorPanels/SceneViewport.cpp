@@ -9,6 +9,13 @@ namespace Editor::Panels {
 	static std::shared_ptr<Luxia::IMaterial> outline_mat = Luxia::Platform::Assets::CreateMaterial();
 	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
 
+	static enum EditType {
+		Translate = 0,
+		Rotate = 1,
+		Scale = 2
+	};
+	static EditType editType = EditType::Translate;
+
 	static Luxia::GUID GetMousePosEntity(glm::vec2 mouse_pos, Luxia::Components::Camera* cam, const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> renderer, std::shared_ptr<Luxia::ITexture> output_texture) {
 
 		if (!output_texture->IsValid() || !output_texture->IsFBOTex()) return Luxia::GUID(0);
@@ -172,6 +179,17 @@ namespace Editor::Panels {
 				cam_script.Look();
 				cam_script.Move();
 			}
+			else {
+				if (Luxia::Input::IsKeyJustPressed(LX_KEY_W)) {
+					editType = EditType::Translate;
+				}
+				else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
+					editType = EditType::Scale;
+				}
+				else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R)) {
+					editType = EditType::Rotate;
+				}
+			}
 
 			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
 				if (focused_t) {
@@ -218,7 +236,10 @@ namespace Editor::Panels {
 	
 	/// GIZMOS
 	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
+		Gizmos::GizmoResources::Init();
 		gizmos.push_back(std::make_unique<Gizmos::TranslateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
+		gizmos.push_back(std::make_unique<Gizmos::RotateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
+		gizmos.push_back(std::make_unique<Gizmos::ScaleGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 	}
 
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
@@ -305,28 +326,30 @@ namespace Editor::Panels {
 		if (editorLayer->isOneSelected) {
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
 				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
+
+				glm::vec3 cam_to_entity = cam.transform->position + (glm::normalize(ent.transform->world_position - cam.transform->position) * 10.0f);
+				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
 				
-				for (entt::entity part : gizmos[0].get()->gizmo_entities) {
-					auto part_transform = editorLayer->editor_reg.try_get<Luxia::Components::Transform>(part);
-					
-					if (part_transform) {
-						glm::vec3 cam_to_entity = cam.transform->position + (glm::normalize(ent.transform->world_position - cam.transform->position) * 10.0f);
-						
-						glm::quat gizmoRot = glm::quat(glm::radians(part_transform->euler_angles));
-						glm::quat entityRot = glm::quat(glm::radians(ent.transform->world_euler_angles));
+				glm::quat entityRot = ent.transform->rotation;
 
-						glm::mat4 model = glm::mat4(1.0f);
-						model = glm::translate(model, cam_to_entity);
+				for (auto part : gizmos[editType].get()->gizmo_parts) {
+					if (part->transform) {
+						auto part_mr = part->transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+						if (!part_mr) continue;
 
+						glm::quat gizmoRot = glm::quat(glm::radians(part->transform->euler_angles));
 						glm::quat rotationQuat = entityRot * gizmoRot;
-						glm::mat4 rotationMatrix = glm::mat4_cast(rotationQuat);
+						glm::mat4 rotationMatrix = glm::mat4(1.0f);
 
-						model *= rotationMatrix;
+						if (ent.transform->HasParent())
+							rotationMatrix *= glm::mat4(ent.transform->parent->GetRotationMatrix());
 
-						auto part_mr = part_transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-						if (part_mr) {
-							renderer->RenderMesh(part_mr->mesh.get(), part_mr->material.get(), model, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
-						}
+						rotationMatrix *= glm::mat4_cast(rotationQuat);
+
+						glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), part->transform->scale);
+						glm::mat4 model = translationMatrix * rotationMatrix * scaleMatrix;
+
+						renderer->RenderMesh(part_mr->mesh.get(), part_mr->material.get(), model, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
 					}
 				}
 			}
