@@ -43,7 +43,7 @@ namespace Luxia::Components {
 			ImGui::Checkbox("Main", &main);
 			ImGui::Spacing();
 			ImGui::Checkbox("UseSkybox", &useSkybox);
-			ImGui::ColorPicker4("Clear Color", &clearColor.r);
+			ImGui::ColorEdit4("Clear Color", &clearColor.r);
 		}
 		
 	private:

@@ -71,11 +71,11 @@ namespace Editor::Layers {
 	}
 	
 	void EditorLayer::OnAttach() {
-		thumbnailManager.Init(256, 256);
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			return;
 		}
+		thumbnailManager.Init(256, 256);
 
 		LX_CORE_WARN("EditorLayer Attached");
 		ImGui::SetCurrentContext(renderer->GetUIRenderer()->GetContext());
@@ -93,6 +93,9 @@ namespace Editor::Layers {
 		PauseTex = Luxia::Platform::Assets::CreateTexture();
 		PauseTex->LoadFromFile("C:/dev/Luxia/Editor/resources/PauseButton.png");
 	
+		NoImageTex = Luxia::Platform::Assets::CreateTexture();
+		NoImageTex->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/NoImage.png");
+
 		if (glBindFramebuffer)
 			CreateThumbnails();
 	}
@@ -101,6 +104,10 @@ namespace Editor::Layers {
 		for (auto panel : panels) {
 			panel->Unload(this, scene_manager->GetActiveScene());
 		}
+
+		PlayTex->Delete();
+		PauseTex->Delete();
+		NoImageTex->Delete();
 	}
 	void EditorLayer::OnUpdate() {
 		UpdateSelectedConditions();

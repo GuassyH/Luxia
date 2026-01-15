@@ -24,9 +24,7 @@ namespace Editor::Scripts {
 		MovementPresets movement_preset = MovementPresets::Me;
 
 		void Move() {
-			glm::vec3 forward = glm::normalize(transform->GetRotVec());
-			glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
-			glm::vec3 up = glm::normalize(glm::cross(right, forward));
+			transform->UpdateMatrix();
 
 			horizontal = 0.0f;
 			vertical = 0.0f;
@@ -75,7 +73,7 @@ namespace Editor::Scripts {
 			if (Luxia::Input::IsKeyPressed(DownKey))
 				skywards -= 1.0f;
 
-			moveDir = right * horizontal + forward * vertical;
+			moveDir = transform->right * horizontal + transform->forward * vertical;
 			moveDir.y += skywards;
 			
 			transform->position += moveDir * speed * Luxia::Core::Time::get().deltaTime;

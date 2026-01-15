@@ -145,21 +145,20 @@ namespace Editor::Panels {
 		DrawPasteField<Luxia::ITexture>(editorLayer, mat->diffuse_texture, "Diffuse");
 		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
-		ImGui::Image(mat->diffuse_texture ? (void*)(uintptr_t)mat->diffuse_texture->texID : nullptr, ImVec2(100, 100)); // should draw "no assigned tex@
+		ImGui::Image(mat->diffuse_texture ? (ImTextureRef)mat->diffuse_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
 
 		// Specular Texture
 		DrawPasteField<Luxia::ITexture>(editorLayer, mat->specular_texture, "Specular");
 		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
-		ImGui::Image(mat->specular_texture ? (void*)(uintptr_t)mat->specular_texture->texID : nullptr, ImVec2(100, 100)); // should draw "no assigned tex@
+		ImGui::Image(mat->specular_texture ? (ImTextureRef)mat->specular_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
 		
 		// Normal Texture
 		DrawPasteField<Luxia::ITexture>(editorLayer, mat->normal_texture, "Normals");
 		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
-		ImGui::Image(mat->normal_texture ? (void*)(uintptr_t)mat->normal_texture->texID : nullptr, ImVec2(100, 100)); // should draw "no assigned tex@
+		ImGui::Image(mat->normal_texture ? (ImTextureRef)mat->normal_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
 		
-
 		if (ImGui::CollapsingHeader("Properties", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGui::ColorEdit4("Color", &mat->color.r);
 			ImGui::SliderFloat("Metallic", &mat->metallic, 0.0f, 1.0f);

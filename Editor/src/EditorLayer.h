@@ -62,6 +62,8 @@ namespace Editor::Layers {
 		virtual void OnRender() override;
 		virtual void OnEvent(Luxia::Event& e) override;
 
+
+		std::shared_ptr<Luxia::ITexture> NoImageTex;
 	protected:
 		ThumbnailManager thumbnailManager;
 		std::shared_ptr<Luxia::ITexture> PlayTex;

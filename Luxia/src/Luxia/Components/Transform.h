@@ -17,14 +17,23 @@
 namespace Luxia::Components {
 	struct LUXIA_API Transform : public Component {
 	public:
+		// REDO THIS ENTIRELY
 		// Local variables (set)
 		glm::vec3 position = glm::vec3(0.0f); // (get & set)
 		glm::vec3 euler_angles = glm::vec3(0.0f, 0.0f, 0.0f); // (get & set)
 		glm::vec3 scale = glm::vec3(1.0f); // (get & set)
 
+		glm::vec3 local_forward = glm::vec3(0.0f, 0.0f, 1.0f);
+		glm::vec3 local_right = glm::vec3(1.0f, 0.0f, 0.0f);
+		glm::vec3 local_up = glm::vec3(0.0f, 1.0f, 0.0f);
+
 		glm::quat rotation = glm::quat(); // rotation quat
 
 		// Global variables (get)
+		glm::vec3 forward = glm::vec3(0.0f, 0.0f, 1.0f);
+		glm::vec3 right = glm::vec3(1.0f, 0.0f, 0.0f);
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+		
 		glm::vec3 world_position = glm::vec3(0.0f); // (get only)
 		glm::vec3 world_euler_angles = glm::vec3(0.0f); // (get only)
 		glm::vec3 world_scale = glm::vec3(0.0f);  // (get only)
@@ -96,12 +105,25 @@ namespace Luxia::Components {
 				world_scale = scale;
 			}
 
+			glm::vec3 f = GetRotVec();
+			if (forward != f) {
+				forward = f;
+				right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
+				up = glm::normalize(glm::cross(right, forward));
+			}
+			glm::vec3 fl = GetRotVec(true);
+			if (local_forward != fl) {
+				local_forward = fl;
+				local_right = glm::normalize(glm::cross(local_forward, glm::vec3(0.0f, 1.0f, 0.0f)));
+				local_up = glm::normalize(glm::cross(local_right, local_forward));
+			}
+
 			// NOW update children
 			for (auto child : children)
 				child->UpdateMatrix();
 		}
 
-		glm::vec3 GetRotVec(bool local = true) const {
+		glm::vec3 GetRotVec(bool local = false) const {
 			float pitch = 0;
 			float yaw = 0;
 			if (local) {

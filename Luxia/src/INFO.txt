@@ -11,6 +11,8 @@ IMPORTANT
 
 - Importing should also be given path to import TO. so you can import from an external folder (maybe?)
 
+- Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
+
 ---  Next  ---
 
 - Scene renaming is weird, it wont rename the scene for some reason

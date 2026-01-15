@@ -44,7 +44,7 @@ namespace Luxia::Rendering::OpenGL {
 				newLO.color = light.color;
 				newLO.type = (int)light.lightType;
 				newLO.position = light.transform->world_position;
-				newLO.rotation = light.transform->GetRotVec(false);
+				newLO.rotation = light.transform->GetRotVec();
 				
 				lightObjects.push_back(newLO);
 				numLights++;

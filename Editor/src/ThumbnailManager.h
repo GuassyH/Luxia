@@ -4,6 +4,7 @@
 
 // This is not portable
 #include "glad/glad.h"
+#include "glfw/glfw3.h"
 
 namespace Editor {
 
@@ -14,8 +15,30 @@ namespace Editor {
 		glm::ivec2 tn_size = glm::ivec2(256, 256);
 		glm::vec4 bg_col = glm::vec4(0.1f, 0.1f, 0.2f, 1.0f);
 
+		unsigned int lightBuffID = 0;
+		int lightBuffSize = 0;
+
 		void Init(uint32_t w, uint32_t h) {
 			tn_size = glm::vec2(w, h);
+
+			std::vector<Luxia::Rendering::IRenderer::LightObject> lightObjects;
+
+			Luxia::Rendering::IRenderer::LightObject newLO = Luxia::Rendering::IRenderer::LightObject();
+
+			newLO.color = glm::vec4(1.0f);
+			newLO.type = 0;
+			newLO.position = glm::vec3(0.0f);
+			newLO.rotation = glm::vec3(0.0f, 0.0f, 1.0f);
+
+			lightObjects.push_back(newLO);
+
+			lightBuffSize = sizeof(Luxia::Rendering::IRenderer::LightObject);
+
+			if (lightBuffID) glDeleteBuffers(1, &lightBuffID);
+			glGenBuffers(1, &lightBuffID);
+			glBindBuffer(GL_SHADER_STORAGE_BUFFER, lightBuffID);
+			glBufferData(GL_SHADER_STORAGE_BUFFER, lightBuffSize, lightObjects.data(), GL_DYNAMIC_DRAW);
+			glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBuffID);
 		}
 
 		std::shared_ptr<Luxia::ITexture> TakeThumbnail(std::shared_ptr<Luxia::Assets::Asset> asset, Luxia::Rendering::IRenderer* renderer) {
@@ -75,8 +98,12 @@ namespace Editor {
 			glm::mat4 view = glm::lookAt(glm::vec3(0.57735f, 0.57735f, 0.57735f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0,1,0));
 			glm::mat4 proj = glm::perspective(glm::radians(70.0f), 1.0f, 0.1f, 10.0f);
 
-			if (Luxia::ResourceManager::DefaultSphere.get() && mat) 
-				renderer->RenderMesh(Luxia::ResourceManager::DefaultSphere.get(), mat, model, view, proj);
+			if (Luxia::ResourceManager::DefaultSphere.get() && mat) {
+				mat->Use(model, view, proj);
+				glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBuffID);
+				mat->shader->SetInt("numLights", 1);
+				renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultSphere.get());
+			}
 			else
 				LX_ERROR("Thumbnail for Mat (FBO: {}) failed", texture->GetFBO());
 
@@ -107,8 +134,12 @@ namespace Editor {
 			glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 1.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0, 1, 0));
 			glm::mat4 proj = glm::perspective(glm::radians(70.0f), 1.0f, 0.1f, 10.0f);
 
-			if (Luxia::ResourceManager::DefaultLitMaterial.get() && mesh)
-				renderer->RenderMesh(mesh, Luxia::ResourceManager::DefaultLitMaterial.get(), model, view, proj);
+			if (Luxia::ResourceManager::DefaultLitMaterial.get() && mesh) {
+				Luxia::ResourceManager::DefaultLitMaterial->Use(model, view, proj);
+				glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBuffID);
+				Luxia::ResourceManager::DefaultLitMaterial->shader->SetInt("numLights", 1);
+				renderer->RenderMeshPure(*mesh);
+			}
 			else
 				LX_ERROR("Thumbnail for Mesh (FBO: {}) failed", texture->GetFBO());
 
