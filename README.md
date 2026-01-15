@@ -94,4 +94,11 @@ CreateAssetFile creates a Luxia file and a meta file without using any existing 
 Scenes are actually assets themselves! These assets are therefore stored in the AssetManager, and are loaded at start (metafiles, not actual runtime instances)
 
 ### SceneManager
-Luxia engine uses a SceneManager which keeps track of which scene is active as well as loading and unloading scenes and loading the ScenePool.
+The SceneManager loads all the scenes into a scene pool (makes scene assets, not loads the scene). The SceneManager then takes responsibility for all the loading and unloading of scenes.
+
+## Licenses
+### Code 
+The project and its code is under the Apache 2.0 license
+
+### Assets
+All assets, unless explicitly stated otherwise, are owned by myself and may not be used to redistribute or sell without consent
