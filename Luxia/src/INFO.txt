@@ -1,27 +1,17 @@
 IMPORTANT
 
-- YAML
-	For some reason you NEED to use the debug build in debug mode and the release build in release.
-	No clue why, but i want to fix in the future, for now im just going to focus on advancing
-
 - Initializing OpenGL should happen in the openGL renderer, NOT the Window
 
 - SetParent 
 	Setting Parent should calculate the new size, and de-setting should also, so that you dont mess up the size
 
-- Add Redstone PFP Sun
-
 - Scene Index (right now their order is based on when they are loaded)
 
 - Rendering on a seperate thread? Performance boost ash
 
-- Maybe MeshRenderer should store the GUIDs of the mesh and mat and not the shared_ptr to it
-
 - Rework enabling, made it so its the components that are enabled and not. The entity being enabled is the transform being enabled
 
 - Importing should also be given path to import TO. so you can import from an external folder (maybe?)
-
-- IMPORTANT, MAKE SURE WHEN EXPORTING BLENDER MODELS FOR GIZMOS, +Z IS FORWARD AND +Y IS UP
 
 ---  Next  ---
 
@@ -44,3 +34,5 @@ IMPORTANT
 - Create the classes (VK_Camera, VK_Texture)
 
 - Add Platform creation definitions 
+
+- Keep in mind editor is not NEARLY abstracted enough

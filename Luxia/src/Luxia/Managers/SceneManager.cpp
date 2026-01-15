@@ -3,24 +3,32 @@
 #include "Luxia/Scene/SceneSerializer.h"
 
 namespace Luxia {
-	bool SceneManager::LoadScenePool(const std::shared_ptr<AssetManager> m_asset_manager) {
+	bool SceneManager::LoadScenePool(std::filesystem::path& projectPath, const std::shared_ptr<AssetManager> m_asset_manager) {
 		asset_manager = m_asset_manager;
+
+		scene_files.clear();
 
 		for (auto& [guid, assetfile] : asset_manager->GetAssetFilePool()) {
 			if (assetfile) {
 				if (assetfile->type == AssetType::SceneType) {
-					auto asset = asset_manager->GetAssetFile<Assets::SceneFile>(assetfile->guid);
-					scene_files.push_back(std::move(asset));
+					auto scenefile = asset_manager->GetAssetFile<Assets::SceneFile>(assetfile->guid);
+					scene_files[scenefile->guid] = scenefile;
 				}
 			}
 		}
 
+		LoadBuildOrder(projectPath);
+
 		return true;
 	}
 
-	bool SceneManager::SaveScenes() {
-		return true;
+
+	bool SceneManager::SaveScenes(std::filesystem::path& projectPath) {
+		return SaveBuildOrder(projectPath);
 	}
+
+
+	// Set and Get Functions 
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile) {
 		if (active_scene) { 
@@ -37,7 +45,7 @@ namespace Luxia {
 		SceneSerializer serializer(m_sceneFile, asset_manager);
 		serializer.Deserialize();
 
-		LX_CORE_INFO("Loaded Scene: {}", 0);
+		LX_CORE_INFO("Loaded Scene: {}", (uint64_t)m_sceneFile->guid);
 
 		return GetActiveScene();
 	}
@@ -65,15 +73,16 @@ namespace Luxia {
 
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index) {
-		if (index >= scene_files.size()) {
-			LX_CORE_ERROR("SceneManager: Set Scene failed, index {} out of range (size={})", index, scene_files.size());
+		if (index >= build_order.size()) {
+			LX_CORE_ERROR("SceneManager: Set Scene failed, index {} out of range (size={})", index, build_order.size());
 			return nullptr;
 		}
-		if (!scene_files[index]) {
-			LX_CORE_ERROR("SceneManager: Set Scene failed, no scene at index: {}", index);
+		if (!scene_files.contains(build_order[index])) {
+			LX_CORE_ERROR("SceneManager: Set SceneFile failed, no scene at index: {}", index);
 			return nullptr;
 		}
-		return SetActiveScene(scene_files[index]);
+
+		return SetActiveScene(scene_files.find(build_order[index])->second);
 	}
 	 
 	bool SceneManager::SaveActiveScene() {
@@ -93,6 +102,95 @@ namespace Luxia {
 		if(active_scene)
 			active_scene->Unload();
 		
-		scene_files.clear();
+		scene_files.clear(); 
+		build_order.clear();
+		active_scene.reset();
+	}
+
+
+	bool SceneManager::LoadBuildOrder(std::filesystem::path& projectPath) {
+		// Load build order
+		build_order.clear();
+		std::filesystem::path buildconfig_p = projectPath / "buildconfig.lux";
+
+		if (std::filesystem::exists(buildconfig_p)) {
+			try {
+				YAML::Node config = YAML::LoadFile(buildconfig_p.string());
+
+				auto order = config["BuildOrder"];
+
+				if (order && order.IsSequence()) {
+					for (auto guid : order) {
+						Luxia::GUID g = Luxia::GUID(guid.as<uint64_t>());
+						if (scene_files.contains(g)) {
+							AddToBuildOrder(g);
+							LX_CORE_INFO("SceneManager: Added {} as {} in build order", guid.as<uint64_t>(), (build_order.size() - 1));
+						}
+						else {
+							LX_CORE_ERROR("SceneManager: Error adding {} to build order", guid.as<uint64_t>(), (build_order.size() - 1));
+						}
+					}
+				}
+			}
+			catch (const YAML::Exception& ex) {
+				std::cerr << "YAML error: " << ex.what() << "\n";
+				return false;
+			}
+		}
+		else {
+			SaveScenes(projectPath);
+		}
+
+	}
+
+
+	bool SceneManager::SaveBuildOrder(std::filesystem::path& projectPath) {
+		std::filesystem::path buildconfig_p = projectPath / "buildconfig.lux";
+
+		YAML::Emitter out;
+
+		if (!out.good()) return false;
+
+		// Emit
+		out << YAML::BeginMap;
+		out << YAML::Key << "BuildOrder" << YAML::Value << YAML::BeginSeq;
+
+		// Add the sequence
+		for (auto& guid : build_order) {
+			out << YAML::Value << (uint64_t)guid;
+		}
+
+		out << YAML::EndSeq;
+		out << YAML::EndMap;
+
+		std::ofstream outfile(buildconfig_p.string());
+
+		if (!outfile.is_open()) return false;
+
+		// Add to file
+		outfile << out.c_str();
+
+		return true;
+	}
+
+	void SceneManager::AddToBuildOrder(Luxia::GUID& guid) {
+		if (std::find(build_order.begin(), build_order.end(), guid) == build_order.end()) {
+			build_order.push_back(guid);
+		}
+	}
+
+	void SceneManager::MoveOrderInBuildOrder(int from_index, int to_index) {
+		if (from_index < 0 || from_index >= build_order.size()) return;
+		if (to_index < 0 || to_index >= build_order.size()) return;
+		if (from_index == to_index) return;
+
+		auto guid = build_order[from_index];
+		build_order.erase(build_order.begin() + from_index);
+		build_order.insert(build_order.begin() + to_index, guid);
+	}
+
+	void SceneManager::RemoveFromBuildOrder(int index) {
+		if (index < 0 || index >= build_order.size()) return;
+		build_order.erase(build_order.begin() + index);
 	}
 }

@@ -141,24 +141,26 @@ namespace Editor::Panels {
 
 			// Picking
 			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
-				glm::vec2 rp = Luxia::Screen::GetMousePosRect(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), glm::vec2(cam.width, cam.height), Luxia::Input::GetMousePosition());
 
-				Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
+				if (scene) {
+					glm::vec2 rp = Luxia::Screen::GetMousePosRect(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), glm::vec2(cam.width, cam.height), Luxia::Input::GetMousePosition());
+					Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
 
-				if (scene->runtime_entities.contains(picked)) {
-					if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
-						if(!editorLayer->selected_assets.contains(picked))
+					if (scene->runtime_entities.contains(picked)) {
+						if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
+							if(!editorLayer->selected_assets.contains(picked))
+								editorLayer->InsertSelected(picked);
+							else
+								editorLayer->EraseSelected(picked);
+						}
+						else {
+							editorLayer->ClearSelected();
 							editorLayer->InsertSelected(picked);
-						else
-							editorLayer->EraseSelected(picked);
+						}
 					}
 					else {
 						editorLayer->ClearSelected();
-						editorLayer->InsertSelected(picked);
 					}
-				}
-				else {
-					editorLayer->ClearSelected();
 				}
 			}
 

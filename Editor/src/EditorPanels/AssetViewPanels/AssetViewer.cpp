@@ -92,24 +92,23 @@ namespace Editor::Panels {
 				return;
 			}
 
-			bool found = false;
-			for (auto& sf : sceneManager->scene_files) {
-				if (!sf) continue;
-				if (sf->assets.empty()) continue;
-				// defensive check
-				if (sf->assets[0]) {
-					if (sf->assets[0]->guid == guid) {
-						auto loaded = sceneManager->SetActiveScene(sf);
-						if (!loaded) {
-							LX_WARN("OpenAsset: SceneManager::SetActiveScene failed for asset GUID {}", (uint64_t)guid);
-						}
-						found = true;
-						break;
-					}
+			Luxia::GUID sfguid = Luxia::GUID(0);
+			for (auto& [tsfguid, sf] : sceneManager->scene_files) {
+				if (!sf->assets[0]) continue;
+				if (sf->assets[0]->guid == asset->guid) {
+					sfguid = tsfguid;
 				}
 			}
-			if (!found) {
-				LX_WARN("OpenAsset: Scene asset GUID {} not present in SceneManager::scene_files", (uint64_t)guid);
+
+			auto it = sceneManager->scene_files.find(sfguid);
+			if (it == sceneManager->scene_files.end() || !it->second) {
+				LX_WARN("OpenAsset: Scene asset GUID {} not found in SceneManager", (uint64_t)sfguid);
+				return;
+			}
+
+			auto loaded = sceneManager->SetActiveScene(it->second);
+			if (!loaded) {
+				LX_WARN("OpenAsset: SceneManager::SetActiveScene failed for asset GUID {}", (uint64_t)sfguid);
 			}
 			break;
 		}
@@ -386,7 +385,7 @@ namespace Editor::Panels {
 				if (ImGui::MenuItem("Scene")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
 						auto scene = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::SceneType>(asset_view->selected_folder, false, "NewScene");
-						editorLayer->GetSceneManager()->scene_files.push_back(editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::SceneFile>(scene));
+						editorLayer->GetSceneManager()->scene_files[scene] = (editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::SceneFile>(scene));
 						asset_view->RefreshAPFs(editorLayer);
 					}
 					ImGui::CloseCurrentPopup();

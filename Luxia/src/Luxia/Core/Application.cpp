@@ -45,8 +45,6 @@ namespace Luxia
 
 		m_Renderer->GetUIRenderer()->Init();
 
-		if (m_ProjectManager->GetSceneManager()->scene_files.empty()) { LX_CORE_WARN("No scenes available"); return; }
-		m_ProjectManager->GetSceneManager()->SetActiveScene(0);
 
 		// Core Layers
 		PushLayer(std::make_shared<Layers::EventLayer>());
@@ -54,11 +52,13 @@ namespace Luxia
 		PushLayer(std::make_shared<Layers::RenderLayer>());
 		PushLayer(std::make_shared<Layers::ViewportLayer>());
 		PushLayer(std::make_shared<Layers::UILayer>());
+
 	}
 
 	// Run
 	void Application::Run()
 	{
+		m_ProjectManager->GetSceneManager()->SetActiveScene(0);
 		double time_accumulator = 0.0;
 		// While the window is running loop
 		while (m_Window->isRunning()) {

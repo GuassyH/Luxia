@@ -240,6 +240,8 @@ namespace Editor::Layers {
 
 		if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL) && Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
 			scene_manager->SaveActiveScene();
+			std::filesystem::path p = project_manager->GetProjectPath();
+			scene_manager->SaveBuildOrder(p);
 		}
 
 		for (auto& layer_name : layers_to_remove) {

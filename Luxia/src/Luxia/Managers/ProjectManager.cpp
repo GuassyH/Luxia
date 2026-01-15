@@ -59,15 +59,15 @@ namespace Luxia {
 
 	// Should be YAML!
 	bool ProjectManager::SaveProjectConfigs() {
-		m_SceneManager->SaveScenes();
+		m_SceneManager->SaveScenes(m_ProjectPath);
 		m_AssetManager->SaveAssetPool(m_ProjectPath);
 
 		YAML::Emitter out;
 
 		out << YAML::BeginMap;
 		
-		out << YAML::Key << "project_path" << YAML::Value << m_ProjectPath.string();
-		out << YAML::Key << "project_name" << YAML::Value << m_ProjectName;
+		out << YAML::Key << "ProjectPath" << YAML::Value << m_ProjectPath.string();
+		out << YAML::Key << "ProjectName" << YAML::Value << m_ProjectName;
 
 		out << YAML::EndMap;
 
@@ -87,15 +87,15 @@ namespace Luxia {
 			YAML::Node config = YAML::LoadFile(m_ConfigPath.string());
 
 			// Check if missing
-			m_ProjectPath = config["project_path"].as<std::string>();
-			m_ProjectName = config["project_name"].as<std::string>();
+			m_ProjectPath = config["ProjectPath"].as<std::string>();
+			m_ProjectName = config["ProjectName"].as<std::string>();
 		}
 		catch (const YAML::Exception& ex) {
 			std::cerr << "YAML error: " << ex.what() << "\n";
 		}
 
 		m_AssetManager->LoadAssetPool(m_ProjectPath);
-		m_SceneManager->LoadScenePool(m_AssetManager);
+		m_SceneManager->LoadScenePool(m_ProjectPath, m_AssetManager);
 
 		return true;
 	}
