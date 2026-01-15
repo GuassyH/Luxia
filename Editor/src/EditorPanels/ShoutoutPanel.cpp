@@ -51,20 +51,6 @@ namespace Editor::Panels {
 
 		ImGui::Separator();
 		
-		if (ImGui::CollapsingHeader("Honourable Mentions")) {
-			ImGui::Text("Destroyanad");
-			ImGui::Text("Dryden");
-			ImGui::Text("Jorm");
-			ImGui::Text("Meowzors");
-			ImGui::Text("Moon Lady");
-			ImGui::Text("Mus");
-			ImGui::Text("RekU");
-			ImGui::Text("R0");
-			ImGui::Text("Stag");
-			ImGui::Text("Stuyk");
-			ImGui::Text("Xeffi");
-		}
-
 		ImGui::End();
 	}
 	void ShoutoutPanel::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {

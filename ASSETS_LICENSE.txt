@@ -1,0 +1,9 @@
+Copyright © 2026 Gustav
+
+All images, textures, artwork, audio, and other non-code assets
+in this repository are NOT licensed under the Apache License 2.0.
+
+All rights reserved unless explicitly stated otherwise.
+
+These assets may not be used, copied, modified, or redistributed
+without explicit permission from the copyright holder [Gustav Haag].
