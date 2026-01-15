@@ -37,10 +37,11 @@ namespace Luxia::Layers {
 		*/
 
 		if (scene) {
-			auto mesh_view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
+			renderer->RecalculateLightBuffer(scene->GetReg());
 
 			// Do this here so you only calculate all the meshes ONCE a frame
 			// Should be done only if a new mesh is added to the scene!
+			auto mesh_view = scene->GetEntitiesWith<Luxia::Components::MeshRenderer>();
 			renderer->ClearROs();
 			for (auto entity : mesh_view) {
 				auto& mr = scene->GetFromEntity<Luxia::Components::MeshRenderer>(entity);

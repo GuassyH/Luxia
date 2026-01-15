@@ -13,9 +13,10 @@ namespace Editor {
 		~EditorApp() = default;
 
 		virtual void Startup() override {
-			// Push extra layers used
+			// Needed to make sure context is current, otherwise, crash, :(
 			m_Window->MakeContextCurrent();
 
+			// Push extra layers used
 			PushLayer(std::make_shared<Editor::Layers::EditorLayer>());
 			m_Window->SetTitle("Luxia Editor");
 			std::filesystem::path iconpath = "C:/dev/Luxia/Editor/resources/LuxiaLogo.png";

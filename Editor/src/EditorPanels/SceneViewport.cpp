@@ -184,14 +184,16 @@ namespace Editor::Panels {
 				cam_script.Move();
 			}
 			else {
-				if (Luxia::Input::IsKeyJustPressed(LX_KEY_W)) {
-					editType = EditType::Translate;
-				}
-				else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
-					editType = EditType::Scale;
-				}
-				else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R)) {
-					editType = EditType::Rotate;
+				if (!Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
+					if (Luxia::Input::IsKeyJustPressed(LX_KEY_W)) {
+						editType = EditType::Translate;
+					}
+					else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
+						editType = EditType::Scale;
+					}
+					else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R)) {
+						editType = EditType::Rotate;
+					}
 				}
 			}
 

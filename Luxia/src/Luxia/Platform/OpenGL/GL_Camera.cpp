@@ -5,8 +5,8 @@
 #include "Luxia/Tools/Screen.h"
 #include "Luxia/Scene/Scene.h"
 
-#include "glfw/glfw3.h"
 #include "glad/glad.h"
+#include "glfw/glfw3.h"
 
 namespace Luxia::Platform::OpenGL {
 

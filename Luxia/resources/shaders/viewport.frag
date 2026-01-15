@@ -78,5 +78,5 @@ vec4 Stretch(){
 
 out vec4 fragCol;
 void main(){
-	fragCol = Fit();
+	fragCol = Fill();
 }

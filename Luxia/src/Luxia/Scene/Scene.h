@@ -69,8 +69,9 @@ namespace Luxia {
 			for (auto& [guid, entity] : runtime_entities) {
 				auto l = entity.transform->TryGetComponent<Luxia::Components::Light>();
 				if (l) {
-					// if l is directional light
-					return l;
+					if (l->lightType == Luxia::LightType::Directional) {
+						return l;
+					}
 				}
 				else continue;
 			}

@@ -67,6 +67,7 @@ namespace Luxia {
 				out << YAML::BeginMap; // Camera
 
 				out << YAML::Key << "Enabled" << YAML::Value << light->enabled;
+				out << YAML::Key << "Type" << YAML::Value << (int)light->lightType;
 				out << YAML::Key << "Color" << YAML::Value << light->color;
 
 				out << YAML::EndMap;
@@ -178,6 +179,7 @@ namespace Luxia {
 			if (auto lightNode = components["Light"]) {
 				auto& light = entity.transform->AddComponent<Luxia::Components::Light>();
 				light.enabled = lightNode["Enabled"].as<bool>();
+				light.lightType = static_cast<Luxia::LightType>(lightNode["Type"].as<int>());
 				light.color = lightNode["Color"].as<glm::vec4>();
 			}
 		}

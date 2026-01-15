@@ -6,10 +6,9 @@
 #include "Luxia/Platform/AssetCreation.h"
 #include "Luxia/Core/Log.h"
 
-#include "glfw/glfw3.h"
-#include <KHR/khrplatform.h>
 #include "glad/glad.h"
 #include "glfw/glfw3.h"
+
 #include "Luxia/Managers/ResourceManager.h"
 
 namespace Luxia::Rendering::OpenGL {
@@ -28,8 +27,38 @@ namespace Luxia::Rendering::OpenGL {
 		initialized = true;
 	}
 
-	/// Step based
+	/// Lights
 
+	void OpenGL_Renderer::RecalculateLightBuffer(entt::registry& reg) {
+		auto light_view = reg.view<Luxia::Components::Light>();
+		
+		std::vector<LightObject> lightObjects;
+
+		numLights = 0;
+		for (auto ent : light_view) {
+			auto& light = reg.get<Luxia::Components::Light>(ent);
+			if (light.transform) {
+
+				LightObject newLO = LightObject();
+
+				newLO.color = light.color;
+				newLO.type = (int)light.lightType;
+				newLO.position = light.transform->world_position;
+				newLO.rotation = light.transform->GetRotVec(false);
+				
+				lightObjects.push_back(newLO);
+				numLights++;
+			}
+		}
+
+		lightBufferSize = sizeof(LightObject) * numLights;
+
+		if (lightBufferID) glDeleteBuffers(1, &lightBufferID);
+		glGenBuffers(1, &lightBufferID);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, lightBufferID);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, lightBufferSize, lightObjects.data(), GL_DYNAMIC_DRAW);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBufferID);
+	}
 
 	/// Basic render functions
 
@@ -45,8 +74,12 @@ namespace Luxia::Rendering::OpenGL {
 			return;
 
 		if (m_material) {
-			if (m_material->shader)
+			if (m_material->shader) {
 				m_material->Use(modMat, viewMat, projMat);
+				// if is lit
+				glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBufferID);
+				m_material->shader->SetInt("numLights", numLights);
+			}
 			else 
 				ResourceManager::NullMaterial->Use(modMat, viewMat, projMat);
 		}

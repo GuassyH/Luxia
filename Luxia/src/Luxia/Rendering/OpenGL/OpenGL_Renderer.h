@@ -8,7 +8,8 @@ namespace Luxia::Rendering::OpenGL {
 		OpenGL_Renderer();
 		~OpenGL_Renderer() = default;
 
-		// Step based
+		// Light
+		virtual void RecalculateLightBuffer(entt::registry& reg) override;
 
 		// Basic render functions
 		virtual void RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) override;

@@ -5,12 +5,23 @@
 
 #include "Luxia/Mesh.h"
 #include "Luxia/Core/Core.h"
+#include "Luxia/Components/Light.h"
 
 namespace Luxia::Rendering {
 	class LUXIA_API IRenderer {
 	public:
 		IRenderer() = default;
 		virtual ~IRenderer() = default;
+
+		struct LightObject {
+			int type;
+			int _pad[3];
+			glm::vec4 color;
+			glm::vec3 position;
+			float pad;
+			glm::vec3 rotation; // vector
+			float pad1;
+		};
 
 		struct RenderObject {
 			Mesh* mesh;
@@ -28,8 +39,11 @@ namespace Luxia::Rendering {
 			renderObjects.clear();
 		}
 
-		// Step based 
-
+		// Light Rendering
+		virtual void RecalculateLightBuffer(entt::registry& reg) = 0;
+		const unsigned int GetLightBufferID() const { return lightBufferID; }
+		const int GetLightBufferSize() const { return lightBufferSize; }
+		const int GetNumLights() const { return numLights; }
 
 		// Basic rendering functions
 		virtual void RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;
@@ -40,10 +54,13 @@ namespace Luxia::Rendering {
 
 		// UI Renderer access
 		std::shared_ptr<IUIRenderer> GetUIRenderer() { return m_UIRenderer; }
-
 	protected:
 		bool initialized = false;
 		std::vector<RenderObject> renderObjects;
 		std::shared_ptr<IUIRenderer> m_UIRenderer = nullptr;
+		
+		unsigned int lightBufferID = 0;
+		int lightBufferSize = 0;
+		int numLights = 0;
 	};
 }

@@ -3,8 +3,8 @@
 #include "Luxia/Rendering/API/IShader.h"
 #include "Luxia/Core/Log.h"
 
-#include "glfw/glfw3.h"
 #include "glad/glad.h"
+#include "glfw/glfw3.h"
 
 namespace Luxia::Platform::OpenGL {
 	class LUXIA_API GL_Shader : public IShader {
