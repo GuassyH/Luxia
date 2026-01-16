@@ -196,7 +196,7 @@ namespace Editor::Panels {
 
 			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
 				if (focused_t) {
-					cam.transform->position = focused_t->world_position + (cam.transform->GetRotVec() * -10.0f);
+					cam.transform->local_position = focused_t->local_position + (cam.transform->GetRotVec() * -10.0f);
 				}
 			}
 		}
@@ -266,14 +266,14 @@ namespace Editor::Panels {
 		// Grid
 		/*
 		auto& mr = grid_gizmo->gizmo_parts[0]->transform->GetComponent<Luxia::Components::MeshRenderer>();
-		mr.transform->position = cam.transform->position;
-		mr.transform->position.y = 0.0f;
+		mr.transform->local_position = cam.transform->local_position;
+		mr.transform->local_position.y = 0.0f;
 		mr.transform->UpdateMatrix();
 		mr.material->Use();
 		mr.material->shader->SetMat4("modelMat", mr.transform->GetMatrix());
 		mr.material->shader->SetMat4("viewMat", cam.GetCamera()->GetViewMat());
 		mr.material->shader->SetMat4("projMat", cam.GetCamera()->GetProjMat());
-		mr.material->shader->SetVec3("camPos", cam.transform->position);
+		mr.material->shader->SetVec3("camPos", cam.transform->local_position);
 		renderer->RenderMeshPure(*mr.mesh.get());
 		*/
 
@@ -345,7 +345,7 @@ namespace Editor::Panels {
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
 				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
 
-				glm::vec3 cam_to_entity = cam.transform->position + (glm::normalize(ent.transform->world_position - cam.transform->position) * 15.0f);
+				glm::vec3 cam_to_entity = cam.transform->local_position + (glm::normalize(ent.transform->local_position - cam.transform->local_position) * 15.0f);
 				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
 				
 				glm::quat entityRot = ent.transform->rotation;
@@ -355,7 +355,7 @@ namespace Editor::Panels {
 						auto part_mr = part->transform->TryGetComponent<Luxia::Components::MeshRenderer>();
 						if (!part_mr) continue;
 
-						glm::quat gizmoRot = glm::quat(glm::radians(part->transform->euler_angles));
+						glm::quat gizmoRot = glm::quat(glm::radians(part->transform->local_euler_angles));
 						glm::quat rotationQuat = entityRot * gizmoRot;
 						glm::mat4 rotationMatrix = glm::mat4(1.0f);
 
@@ -364,7 +364,7 @@ namespace Editor::Panels {
 
 						rotationMatrix *= glm::mat4_cast(rotationQuat);
 
-						glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), part->transform->scale);
+						glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), part->transform->local_scale);
 						glm::mat4 model = translationMatrix * rotationMatrix * scaleMatrix;
 
 						renderer->RenderMesh(part_mr->mesh.get(), part_mr->material.get(), model, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());

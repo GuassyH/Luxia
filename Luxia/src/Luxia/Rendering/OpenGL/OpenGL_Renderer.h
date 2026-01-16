@@ -10,6 +10,7 @@ namespace Luxia::Rendering::OpenGL {
 
 		// Light
 		virtual void RecalculateLightBuffer(entt::registry& reg) override;
+		virtual void BindLightBuffer(const int location) override;
 
 		// Basic render functions
 		virtual void RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) override;

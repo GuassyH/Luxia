@@ -44,6 +44,7 @@ namespace Luxia::Rendering {
 		const unsigned int GetLightBufferID() const { return lightBufferID; }
 		const int GetLightBufferSize() const { return lightBufferSize; }
 		const int GetNumLights() const { return numLights; }
+		virtual void BindLightBuffer(const int location) = 0;
 
 		// Basic rendering functions
 		virtual void RenderRO(const RenderObject& ro, const glm::mat4& viewMat, const glm::mat4& projMat) = 0;

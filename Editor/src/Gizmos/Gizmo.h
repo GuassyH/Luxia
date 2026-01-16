@@ -106,7 +106,7 @@ namespace Editor::Gizmos {
 			std::shared_ptr<BasicGizmoPart> grid_plane = std::make_shared<BasicGizmoPart>();
 			grid_plane->transform = Create(reg);
 			grid_plane->transform->AddComponent<Luxia::Components::MeshRenderer>(Luxia::ResourceManager::DefaultPlane, gridMaterial);
-			grid_plane->transform->scale = glm::vec3(1000.0f, 1.0f, 1000.0f);
+			grid_plane->transform->local_scale = glm::vec3(1000.0f, 1.0f, 1000.0f);
 
 			gizmo_parts.push_back(std::move(grid_plane));
 		}
@@ -125,26 +125,26 @@ namespace Editor::Gizmos {
 
 			std::shared_ptr<ArrowGizmoPart> entity_x = std::make_shared<ArrowGizmoPart>();
 			entity_x->transform = Create(reg);
-			entity_x->transform->euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
+			entity_x->transform->local_euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
 			entity_x->transform->AddComponent<Luxia::Components::MeshRenderer>(arrow_mesh, GizmoResources::xMaterial);
 			entity_x->responsible_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			std::shared_ptr<ArrowGizmoPart> entity_y = std::make_shared<ArrowGizmoPart>();
 			entity_y->transform = Create(reg);
-			entity_y->transform->euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
+			entity_y->transform->local_euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
 			entity_y->transform->AddComponent<Luxia::Components::MeshRenderer>(arrow_mesh, GizmoResources::yMaterial);
 			entity_y->responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			std::shared_ptr<ArrowGizmoPart> entity_z = std::make_shared<ArrowGizmoPart>();
 			entity_z->transform = Create(reg);
-			entity_z->transform->euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			entity_z->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
 			entity_z->transform->AddComponent<Luxia::Components::MeshRenderer>(arrow_mesh, GizmoResources::zMaterial);
 			entity_z->responsible_axis = glm::vec3(0.0f, 0.0f, 1.0f);
 
 			std::shared_ptr<BasicGizmoPart> entity_origo = std::make_shared<BasicGizmoPart>();
 			entity_origo->transform = Create(reg);
-			entity_origo->transform->scale = glm::vec3(0.25f);
-			entity_origo->transform->euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			entity_origo->transform->local_scale = glm::vec3(0.25f);
+			entity_origo->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
 			entity_origo->transform->AddComponent<Luxia::Components::MeshRenderer>(Luxia::ResourceManager::DefaultCube, GizmoResources::orgioMaterial);
 
 
@@ -174,38 +174,38 @@ namespace Editor::Gizmos {
 
 			std::shared_ptr<RotateGizmoPart> rot_entity_x = std::make_shared<RotateGizmoPart>();
 			rot_entity_x->transform = Create(reg);
-			rot_entity_x->transform->euler_angles = glm::vec3(0.0f, 0.0f, 90.0f);
-			rot_entity_x->transform->scale = glm::vec3(0.9f);
+			rot_entity_x->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 90.0f);
+			rot_entity_x->transform->local_scale = glm::vec3(0.9f);
 			rot_entity_x->transform->AddComponent<Luxia::Components::MeshRenderer>(ring_mesh, GizmoResources::xMaterial);
 			rot_entity_x->responsible_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			std::shared_ptr<RotateGizmoPart> rot_entity_y = std::make_shared<RotateGizmoPart>();
 			rot_entity_y->transform = Create(reg);
-			rot_entity_y->transform->euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
-			rot_entity_y->transform->scale = glm::vec3(0.9f);
+			rot_entity_y->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			rot_entity_y->transform->local_scale = glm::vec3(0.9f);
 			rot_entity_y->transform->AddComponent<Luxia::Components::MeshRenderer>(ring_mesh, GizmoResources::yMaterial);
 			rot_entity_y->responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			std::shared_ptr<RotateGizmoPart> rot_entity_z = std::make_shared<RotateGizmoPart>();
 			rot_entity_z->transform = Create(reg);
-			rot_entity_z->transform->euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
-			rot_entity_z->transform->scale = glm::vec3(0.9f);
+			rot_entity_z->transform->local_euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
+			rot_entity_z->transform->local_scale = glm::vec3(0.9f);
 			rot_entity_z->transform->AddComponent<Luxia::Components::MeshRenderer>(ring_mesh, GizmoResources::zMaterial);
 			rot_entity_z->responsible_axis = glm::vec3(0.0f, 0.0f, 1.0f);
 
 			std::shared_ptr<BasicGizmoPart> origo_entity_x = std::make_shared<BasicGizmoPart>();
 			origo_entity_x->transform = Create(reg);
-			origo_entity_x->transform->euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
+			origo_entity_x->transform->local_euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
 			origo_entity_x->transform->AddComponent<Luxia::Components::MeshRenderer>(arrow_mesh, GizmoResources::orgioMaterial);
 
 			std::shared_ptr<BasicGizmoPart> origo_entity_y = std::make_shared<BasicGizmoPart>();
 			origo_entity_y->transform = Create(reg);
-			origo_entity_y->transform->euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			origo_entity_y->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
 			origo_entity_y->transform->AddComponent<Luxia::Components::MeshRenderer>(arrow_mesh, GizmoResources::orgioMaterial);
 
 			std::shared_ptr<BasicGizmoPart> origo_entity_z = std::make_shared<BasicGizmoPart>();
 			origo_entity_z->transform = Create(reg);
-			origo_entity_z->transform->euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
+			origo_entity_z->transform->local_euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
 			origo_entity_z->transform->AddComponent<Luxia::Components::MeshRenderer>(arrow_mesh, GizmoResources::orgioMaterial);
 
 			gizmo_parts.push_back(std::move(rot_entity_x));
@@ -232,26 +232,26 @@ namespace Editor::Gizmos {
 
 			std::shared_ptr<ScaleGizmoPart> entity_x = std::make_shared<ScaleGizmoPart>();
 			entity_x->transform = Create(reg);
-			entity_x->transform->euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
+			entity_x->transform->local_euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
 			entity_x->transform->AddComponent<Luxia::Components::MeshRenderer>(scale_mesh, GizmoResources::xMaterial);
 			entity_x->responsible_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			std::shared_ptr<ScaleGizmoPart> entity_y = std::make_shared<ScaleGizmoPart>();
 			entity_y->transform = Create(reg);
-			entity_y->transform->euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
+			entity_y->transform->local_euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
 			entity_y->transform->AddComponent<Luxia::Components::MeshRenderer>(scale_mesh, GizmoResources::yMaterial);
 			entity_y->responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			std::shared_ptr<ScaleGizmoPart> entity_z = std::make_shared<ScaleGizmoPart>();
 			entity_z->transform = Create(reg);
-			entity_z->transform->euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			entity_z->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
 			entity_z->transform->AddComponent<Luxia::Components::MeshRenderer>(scale_mesh, GizmoResources::zMaterial);
 			entity_z->responsible_axis = glm::vec3(0.0f, 0.0f, 1.0f);
 
 			std::shared_ptr<BasicGizmoPart> entity_origo = std::make_shared<BasicGizmoPart>();
 			entity_origo->transform = Create(reg);
-			entity_origo->transform->scale = glm::vec3(0.25f);
-			entity_origo->transform->euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			entity_origo->transform->local_scale = glm::vec3(0.25f);
+			entity_origo->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
 			entity_origo->transform->AddComponent<Luxia::Components::MeshRenderer>(Luxia::ResourceManager::DefaultCube, GizmoResources::orgioMaterial);
 
 

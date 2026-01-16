@@ -25,9 +25,9 @@ namespace Luxia {
 			out << YAML::BeginMap;
 
 			out << YAML::Key << "Enabled" << YAML::Value << entity.transform->enabled;
-			out << YAML::Key << "Position" << YAML::Value << entity.transform->position;
-			out << YAML::Key << "EulerAngles" << YAML::Value << entity.transform->euler_angles;
-			out << YAML::Key << "Scale" << YAML::Value << entity.transform->scale;
+			out << YAML::Key << "Position" << YAML::Value << entity.transform->local_position;
+			out << YAML::Key << "EulerAngles" << YAML::Value << entity.transform->local_euler_angles;
+			out << YAML::Key << "Scale" << YAML::Value << entity.transform->local_scale;
 
 			out << YAML::EndMap;
 
@@ -123,9 +123,9 @@ namespace Luxia {
 			return entity;
 
 		if (auto transNode = components["Transform"]) {
-			entity.transform->position = transNode["Position"].as<glm::vec3>();
-			entity.transform->euler_angles = transNode["EulerAngles"].as<glm::vec3>();
-			entity.transform->scale = transNode["Scale"].as<glm::vec3>();
+			entity.transform->local_position = transNode["Position"].as<glm::vec3>();
+			entity.transform->local_euler_angles = transNode["EulerAngles"].as<glm::vec3>();
+			entity.transform->local_scale = transNode["Scale"].as<glm::vec3>();
 			entity.transform->enabled = transNode["Enabled"].as<bool>();
 
 			if (auto camNode = components["Camera"]) {
@@ -221,7 +221,7 @@ namespace Luxia {
 					Luxia::GUID parentGUID = GUID(entityNode["Parent"].as<uint64_t>());
 					if (scene.runtime_entities.contains(parentGUID)) {
 						Luxia::Entity& parentEntity = scene.runtime_entities[parentGUID];
-						entity.transform->SetParent(parentEntity.transform);
+						entity.transform->SetParent(parentEntity.transform, false);
 					}
 				}
 			}

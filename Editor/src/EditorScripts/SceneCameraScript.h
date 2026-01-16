@@ -73,10 +73,10 @@ namespace Editor::Scripts {
 			if (Luxia::Input::IsKeyPressed(DownKey))
 				skywards -= 1.0f;
 
-			moveDir = transform->right * horizontal + transform->forward * vertical;
+			moveDir = transform->world_right * horizontal + transform->world_forward * vertical;
 			moveDir.y += skywards;
 			
-			transform->position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
+			transform->local_position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
 		}
 
 		double last_mouseX;
@@ -102,12 +102,12 @@ namespace Editor::Scripts {
 			float rotY = deltaX * sensitivity * 100.0f;
 
 			// Apply rotations to Euler angles
-			transform->euler_angles.x -= rotX; // pitch
-			transform->euler_angles.y += rotY; // yaw
+			transform->local_euler_angles.x -= rotX; // pitch
+			transform->local_euler_angles.y += rotY; // yaw
 
 			// Clamp pitch to avoid flipping
-			if (transform->euler_angles.x > 89.0f) transform->euler_angles.x = 89.0f;
-			if (transform->euler_angles.x < -89.0f) transform->euler_angles.x = -89.0f;
+			if (transform->local_euler_angles.x > 89.0f) transform->local_euler_angles.x = 89.0f;
+			if (transform->local_euler_angles.x < -89.0f) transform->local_euler_angles.x = -89.0f;
 
 			if (Luxia::Input::GetScrollOffset().y != 0) {
 				speed = glm::fclamp(speed * (Luxia::Input::GetScrollOffset().y > 0 ? 2.0f : 0.5f), 0.5f, 256.0f);

@@ -28,6 +28,10 @@ namespace Luxia::Rendering::OpenGL {
 	}
 
 	/// Lights
+	void OpenGL_Renderer::BindLightBuffer(const int location) {
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, location, lightBufferID);
+	}
+
 
 	void OpenGL_Renderer::RecalculateLightBuffer(entt::registry& reg) {
 		auto light_view = reg.view<Luxia::Components::Light>();
@@ -43,7 +47,7 @@ namespace Luxia::Rendering::OpenGL {
 
 				newLO.color = light.color;
 				newLO.type = (int)light.lightType;
-				newLO.position = light.transform->world_position;
+				newLO.position = light.transform->local_position;
 				newLO.rotation = light.transform->GetRotVec();
 				
 				lightObjects.push_back(newLO);
@@ -76,8 +80,7 @@ namespace Luxia::Rendering::OpenGL {
 		if (m_material) {
 			if (m_material->shader) {
 				m_material->Use(modMat, viewMat, projMat);
-				// if is lit
-				glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBufferID);
+				BindLightBuffer(0);
 				m_material->shader->SetInt("numLights", numLights);
 			}
 			else 
