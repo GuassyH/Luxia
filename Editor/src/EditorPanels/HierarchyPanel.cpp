@@ -36,14 +36,14 @@ namespace Editor::Panels {
 		// DRAGGING AND DROPPING
 		if (editorLayer->isOneSelected && editorLayer->selected_assets.contains(entity.guid)) {
 			if (ImGui::BeginDragDropSource()) {
-				ImGui::SetDragDropPayload("ITEMN", &entity.guid, sizeof(uint64_t));
+				ImGui::SetDragDropPayload("ENTITY_ITEM", &entity.guid, sizeof(uint64_t));
 				ImGui::Text(entity.name.c_str());
 				ImGui::EndDragDropSource();
 			}
 		}
 
 		if (ImGui::BeginDragDropTarget()) {
-			if (const auto payload = ImGui::AcceptDragDropPayload("ITEMN")) {
+			if (const auto payload = ImGui::AcceptDragDropPayload("ENTITY_ITEM")) {
 				LX_CORE_ASSERT(payload->DataSize == sizeof(uint64_t));
 				Luxia::GUID payloadGUID = *static_cast<uint64_t*>(payload->Data);
 
@@ -117,7 +117,7 @@ namespace Editor::Panels {
 			}
 
 			if (ImGui::BeginDragDropTarget()) {
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ITEMN")) {
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ENTITY_ITEM")) {
 					LX_CORE_ASSERT(payload->DataSize == sizeof(uint64_t));
 					Luxia::GUID payloadGUID = *static_cast<const uint64_t*>(payload->Data);
 

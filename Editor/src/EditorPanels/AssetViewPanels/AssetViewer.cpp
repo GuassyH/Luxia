@@ -224,6 +224,19 @@ namespace Editor::Panels {
 				editor_layer->InsertSelected(asset->guid);
 			}
 		}
+
+		// Drag and drop
+		if (ImGui::BeginDragDropSource()) {
+			ImGui::SetDragDropPayload("ASSET_ITEM", &asset->guid, sizeof(uint64_t));
+			if (hasThumbnail)
+				ImGui::Image((ImTextureRef)thumbnail, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
+			else if (valid)
+				ImGui::Image((ImTextureRef)thumbnail, ImVec2(50, 50));
+			else
+				ImGui::Image((ImTextureRef)nullptr, ImVec2(50, 50));
+			ImGui::EndDragDropSource();
+		}
+
 		if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
 			if (ImGui::GetIO().KeyCtrl) {
 				if (!is_selected)

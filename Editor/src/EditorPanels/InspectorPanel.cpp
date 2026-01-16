@@ -75,10 +75,10 @@ namespace Editor::Panels {
 						meshrend->OnInspectorDraw();
 
 						// MESH
-						DrawPasteField<Luxia::Mesh>(editorLayer, meshrend->mesh, "Mesh");
+						DrawDropField<Luxia::Mesh>(editorLayer, meshrend->mesh, "Mesh");
 
 						// MATERIAL
-						DrawPasteField<Luxia::IMaterial>(editorLayer, meshrend->material, "Material");
+						DrawDropField<Luxia::IMaterial>(editorLayer, meshrend->material, "Material");
 
 					}
 				}

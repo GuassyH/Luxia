@@ -22,17 +22,23 @@ namespace Editor::Panels {
 		void RenderEntity(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid);
 		void RenderShader(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 
+
+		template <typename T>
+		void PasteAsset(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign) {
+			std::string paste = PasteFromClipboard();
+			Luxia::GUID guid(std::strtoull(paste.c_str(), nullptr, 10));
+			if (editorLayer->GetAssetManager()->HasAsset<T>(guid))
+				asset_to_assign = editorLayer->GetAssetManager()->GetAsset<T>(guid);
+			else
+				LX_ERROR("Tried to assign invalid asset: {}", (uint64_t)guid);
+		}
+
 		template <typename T>
 		void DrawPasteField(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
 			std::ostringstream paste_id; paste_id << "##" << label;
 			ImGui::PushID(paste_id.str().c_str());
 			if (ImGui::Button("Paste")) {
-				std::string paste = PasteFromClipboard();
-				Luxia::GUID guid(std::strtoull(paste.c_str(), nullptr, 10));
-				if (editorLayer->GetAssetManager()->HasAsset<T>(guid))
-					asset_to_assign = editorLayer->GetAssetManager()->GetAsset<T>(guid);
-				else
-					LX_ERROR("Tried to assign invalid asset: {}", (uint64_t)guid);
+				PasteAsset<T>(editorLayer, asset_to_assign);
 			}
 			ImGui::PopID();
 
@@ -55,5 +61,69 @@ namespace Editor::Panels {
 				ImGui::EndTooltip();
 			}
 		}
+
+		template <typename T>
+		void DrawDropField(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
+			std::ostringstream txt; txt << label << ": ";
+			std::string field_text = txt.str();
+
+			std::string buttonid = (asset_to_assign.get() ? std::string(asset_to_assign->name) : std::string("none")) + "##selectable" + std::string(label);
+			std::string popupid = std::string("DrawDropFieldPopup##DDFP") + std::string(asset_to_assign.get() ? std::string(asset_to_assign->name) : std::string("none"));
+
+			// Draw the “input box” style selectable on the right
+			ImGui::Text("%s", field_text.c_str());
+			ImGui::SameLine();
+
+			float fieldWidth = ImGui::GetContentRegionAvail().x - (ImGui::GetWindowWidth() * 0.25f);
+
+			float bright = 2.5f;
+
+			// Push styles
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f * bright, 0.1f * bright, 0.13f * bright, 1.0f));    // base background
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.12f * bright, 0.12f * bright, 0.16f * bright, 1.0f)); // hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.2f * bright, 0.2f * bright, 0.28f * bright, 1.0f)); // active
+			ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
+			ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
+			ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
+
+			// Draw the “field” as an invisible button (acts like a clickable box)
+			ImGui::Button(buttonid.c_str(), ImVec2(fieldWidth, 0));
+			
+			if (ImGui::BeginPopupContextItem(popupid.c_str())) {
+				if (ImGui::MenuItem("Paste", nullptr, nullptr)) {
+					PasteAsset<T>(editorLayer, asset_to_assign);
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Clear", nullptr, nullptr)) {
+					asset_to_assign = nullptr;
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndPopup();
+			}
+
+			// Recieve Payload
+			if (ImGui::BeginDragDropTarget()) {
+				if (const auto payload = ImGui::AcceptDragDropPayload("ASSET_ITEM")) {
+					LX_CORE_ASSERT(payload->DataSize == sizeof(uint64_t));
+					Luxia::GUID payloadGUID = *static_cast<uint64_t*>(payload->Data);
+
+					if (editorLayer->GetAssetManager()->HasAsset<T>(payloadGUID)) {
+						asset_to_assign = editorLayer->GetAssetManager()->GetAsset<T>(payloadGUID);
+					}
+					else {
+						LX_ERROR("Inspector Panel: AssetManager does not contain Asset with guid - {}", (uint64_t)payloadGUID);
+					}
+				}
+
+				ImGui::EndDragDropTarget();
+			}
+
+
+			// Pop styles
+			ImGui::PopStyleVar(2);
+			ImGui::PopStyleColor(4);
+
+		}
+
 	};
 }
