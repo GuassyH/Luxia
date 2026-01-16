@@ -41,10 +41,20 @@ namespace Luxia::Components {
 			return parent != nullptr;
 		}
 
+		bool IsDescendant(Transform* parent, Transform* child) {
+			for (auto* p = parent; p; p = p->parent)
+				if (p == child)
+					return true;
+			return false;
+		}
+
 		Transform* SetParent(Transform* new_parent, bool change_translate = true) {
 			// If same parent, nothing to do
 			if (parent == new_parent)
 				return parent;
+			if (IsDescendant(new_parent, this))
+				return parent;
+			
 
 			// Remove from old parent's children list
 			if (parent) {
@@ -146,7 +156,7 @@ namespace Luxia::Components {
 			direction.y = -sin(pitch);
 			direction.x = (cos(pitch) * sin(yaw));
 
-			return direction;
+			return glm::normalize(direction);
 		}
 		glm::vec3 VecToDeg(const glm::vec3& rad) {
 			return glm::degrees(rad);

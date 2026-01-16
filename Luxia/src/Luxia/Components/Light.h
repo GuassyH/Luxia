@@ -16,6 +16,7 @@ namespace Luxia::Components {
 	public:
 		glm::vec4 color = glm::vec4(1.0f);
 		Luxia::LightType lightType = LightType::Spot;
+		float intensity = 1.0f;
 
 		virtual void OnInspectorDraw() override {
 			const char* items[] = { "Directional", "Spot", "Point", "Area" };

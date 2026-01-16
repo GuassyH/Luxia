@@ -17,6 +17,8 @@ namespace Editor::Panels {
 		bool open = ImGui::TreeNodeEx(enttext.str().c_str(), flags);
 		ImGui::PopID();
 
+
+
 		bool is_selected = editorLayer->selected_assets.contains(entity.guid);
 		if ((ImGui::IsItemClicked(ImGuiMouseButton_Left) || ImGui::IsItemClicked(ImGuiMouseButton_Right)) && !ImGui::IsItemToggledOpen()) {
 			if (ImGui::GetIO().KeyCtrl) {
@@ -31,8 +33,33 @@ namespace Editor::Panels {
 			}
 		}
 
-		ImGui::Separator();
+		// DRAGGING AND DROPPING
+		if (editorLayer->isOneSelected && editorLayer->selected_assets.contains(entity.guid)) {
+			if (ImGui::BeginDragDropSource()) {
+				ImGui::SetDragDropPayload("ITEMN", &entity.guid, sizeof(uint64_t));
+				ImGui::Text(entity.name.c_str());
+				ImGui::EndDragDropSource();
+			}
+		}
 
+		if (ImGui::BeginDragDropTarget()) {
+			if (const auto payload = ImGui::AcceptDragDropPayload("ITEMN")) {
+				LX_CORE_ASSERT(payload->DataSize == sizeof(uint64_t));
+				Luxia::GUID payloadGUID = *static_cast<uint64_t*>(payload->Data);
+
+				if (scene->runtime_entities.contains(payloadGUID) && payloadGUID != entity.guid) {
+					auto& payloadEnt = scene->runtime_entities.find(payloadGUID)->second;
+					payloadEnt.transform->SetParent(entity.transform);
+				}
+				else {
+					LX_ERROR("Hierarchy Panel: Scene does not contain guid - {}", (uint64_t)payloadGUID);
+				}
+			}
+		
+			ImGui::EndDragDropTarget();
+		}
+
+		ImGui::Separator();
 		if (open) {
 			for (auto child : entity.transform->children) {
 				if (!child) continue;
@@ -70,14 +97,6 @@ namespace Editor::Panels {
 
 		static bool openRenamePopup = false;
 
-		if (ImGui::IsWindowHovered()) {
-			if (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]) {
-				if (!ImGui::IsAnyItemHovered()) {
-					editorLayer->ClearSelected();
-				}
-			}
-		}
-
 		for (auto& [guid, entity] : scene->runtime_entities) {
 			if (entity.transform) {
 				if (!entity.transform->HasParent()) {
@@ -85,6 +104,34 @@ namespace Editor::Panels {
 				}
 			}
 		}
+
+
+		if (ImGui::GetContentRegionAvail().y > 0.0f) {
+			ImGui::InvisibleButton("HierarchyEmptySpace", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y));
+			if (ImGui::IsWindowHovered()) {
+				if (ImGui::IsItemHovered()) {
+					if (ImGui::GetIO().MouseClicked[0] || ImGui::GetIO().MouseClicked[1]) {
+						editorLayer->ClearSelected();
+					}
+				}
+			}
+
+			if (ImGui::BeginDragDropTarget()) {
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ITEMN")) {
+					LX_CORE_ASSERT(payload->DataSize == sizeof(uint64_t));
+					Luxia::GUID payloadGUID = *static_cast<const uint64_t*>(payload->Data);
+
+					if (scene->runtime_entities.contains(payloadGUID)) {
+						auto& ent = scene->runtime_entities.at(payloadGUID);
+
+						// DROP ON EMPTY SPACE → UNPARENT
+						ent.transform->SetParent(nullptr);
+					}
+				}
+				ImGui::EndDragDropTarget();
+			}
+		}
+
 
 		if (ImGui::BeginPopupContextWindow("Create Object", ImGuiPopupFlags_MouseButtonRight)) {
 			// On Creation you should get the option to name the entity
@@ -106,23 +153,27 @@ namespace Editor::Panels {
 
 			if (ImGui::BeginMenu("Lights")) {
 				if (ImGui::MenuItem("Directional Light")) {
-					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Directional Light", editorLayer, scene);
+					auto& light = new_entity.transform->AddComponent<Luxia::Components::Light>();
+					light.lightType = Luxia::LightType::Directional;
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Spot Light")) {
-					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Spot Light", editorLayer, scene);
+					auto& light = new_entity.transform->AddComponent<Luxia::Components::Light>();
+					light.lightType = Luxia::LightType::Spot;
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Point Light")) {
-					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Point Light", editorLayer, scene);
+					auto& light = new_entity.transform->AddComponent<Luxia::Components::Light>();
+					light.lightType = Luxia::LightType::Point;
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Area Light")) {
-					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Area Light", editorLayer, scene);
+					auto& light = new_entity.transform->AddComponent<Luxia::Components::Light>();
+					light.lightType = Luxia::LightType::Area;
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndMenu();
@@ -211,7 +262,6 @@ namespace Editor::Panels {
 	}
 	void HierarchyPanel::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		entitiesToDelete.clear();
-
 	}
 
 	void HierarchyPanel::OnEvent(Luxia::Event& e) {

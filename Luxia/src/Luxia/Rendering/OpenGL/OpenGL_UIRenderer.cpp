@@ -35,6 +35,7 @@ namespace Luxia::Rendering::OpenGL {
 
 		custom_style->Colors[ImGuiCol_TitleBg] = ImVec4(0.1f * bright * 0.7f, 0.1f * bright * 0.7f, 0.13f * bright * 0.7f, 1.0f);
 		custom_style->Colors[ImGuiCol_TitleBgActive] = ImVec4(0.1f * bright * 0.5f, 0.1f * bright * 0.5f, 0.13f * bright * 0.5f, 1.0f);
+		custom_style->Colors[ImGuiCol_DragDropTarget] = ImVec4(0.349f, 0.416f, 0.580f, 0.7f);
 
 		LX_CORE_INFO("OpenGL UI Renderer: Initialized ImGui");
 	}
