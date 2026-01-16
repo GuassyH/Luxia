@@ -13,8 +13,6 @@ namespace Editor::Panels {
 
 		virtual void OnEvent(Luxia::Event& e) override;
 
-
-
 		std::string PasteFromClipboard();
 	private:
 		void RenderMesh(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
@@ -99,6 +97,15 @@ namespace Editor::Panels {
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();
+			}
+			else {
+				if (ImGui::IsItemHovered()) {
+					if (ImGui::BeginTooltip()) {
+						if (editorLayer->asset_thumbnails.contains(asset_to_assign->guid))
+							ImGui::Image((ImTextureRef)editorLayer->asset_thumbnails.at(asset_to_assign->guid)->texID, ImVec2(50, 50));
+						ImGui::EndTooltip();
+					}
+				}
 			}
 
 			// Recieve Payload

@@ -457,4 +457,13 @@ namespace Editor::Panels {
 			}
 		}
 	}
+
+	void AssetViewer::Unload() {
+		mesh_default_thumbnail->Delete();
+		mat_default_thumbnail->Delete();
+		shader_default_thumbnail->Delete();
+		scene_default_thumbnail->Delete();
+		texture_default_thumbnail->Delete();
+		folder_default_thumbnail->Delete();
+	}
 }

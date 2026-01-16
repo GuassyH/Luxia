@@ -112,7 +112,7 @@ namespace Editor::Panels {
 	}
 
 	void AssetView::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-	
+		astviewer.Unload();
 	}
 
 	void AssetView::OnEvent(Luxia::Event& e) {

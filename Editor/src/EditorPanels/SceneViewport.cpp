@@ -215,10 +215,15 @@ namespace Editor::Panels {
 	void SceneViewport::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		// Remove component
 		cam_ent->RemoveComponent<Luxia::Components::Camera>();
+		editorLayer->editor_reg.remove<Luxia::Components::Camera>(cam_ent->ent_id);
 		editorLayer->editor_reg.remove<Luxia::Components::Transform>(cam_ent->ent_id);
 		
 		cam_ent = nullptr;
 		output_texture = nullptr;
+
+		fbo_pick_tex->Delete();
+		selection_fbo->Delete();
+		outline_shader->Unload();
 	}
 
 	bool SceneViewport::RenderImage(Luxia::RenderCameraEvent& e) {

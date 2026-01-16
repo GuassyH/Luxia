@@ -11,6 +11,7 @@ namespace Editor::Panels {
 	class AssetViewer {
 	public:
 		void Init();
+		void Unload();
 		void DrawAssetFiles(Editor::Layers::EditorLayer* editorLayer, AssetView* asset_view, std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>>& assets_to_draw);
 		void DrawFileIcon(const std::shared_ptr<Luxia::Assets::Asset> asset, const float cellSize, Editor::Layers::EditorLayer* editor_layer);
 		void DrawFolder(const std::filesystem::path path, const float cellSize, AssetView* asset_view);
