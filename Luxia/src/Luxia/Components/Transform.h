@@ -64,10 +64,10 @@ namespace Luxia::Components {
 
 			// Recalculate position and stuff
 			if (parent && change_translate) {
-				local_position += parent->local_position;
-				local_euler_angles += parent->local_euler_angles;
-				if (glm::length(parent->local_scale) != 0)
-					local_scale /= parent->local_scale;
+				local_position += parent->world_position;
+				local_euler_angles += parent->world_euler_angles;
+				if (glm::length(parent->world_scale) != 0)
+					local_scale /= parent->world_scale;
 				else
 					local_scale = glm::vec3(1.0f);
 			}
