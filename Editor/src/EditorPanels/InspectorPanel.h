@@ -87,7 +87,9 @@ namespace Editor::Panels {
 			// Draw the “field” as an invisible button (acts like a clickable box)
 			ImGui::Button(buttonid.c_str(), ImVec2(fieldWidth, 0));
 			
-			if (ImGui::BeginPopupContextItem(popupid.c_str())) {
+
+			ImGui::PushID(popupid.c_str());
+			if (ImGui::BeginPopupContextItem()) {
 				if (ImGui::MenuItem("Paste", nullptr, nullptr)) {
 					PasteAsset<T>(editorLayer, asset_to_assign);
 					ImGui::CloseCurrentPopup();
@@ -101,12 +103,15 @@ namespace Editor::Panels {
 			else {
 				if (ImGui::IsItemHovered()) {
 					if (ImGui::BeginTooltip()) {
-						if (editorLayer->asset_thumbnails.contains(asset_to_assign->guid))
-							ImGui::Image((ImTextureRef)editorLayer->asset_thumbnails.at(asset_to_assign->guid)->texID, ImVec2(50, 50));
+						if(asset_to_assign)
+							if (editorLayer->asset_thumbnails.contains(asset_to_assign->guid))
+								ImGui::Image((ImTextureRef)editorLayer->asset_thumbnails.at(asset_to_assign->guid)->texID, ImVec2(50, 50));
+
 						ImGui::EndTooltip();
 					}
 				}
 			}
+			ImGui::PopID();
 
 			// Recieve Payload
 			if (ImGui::BeginDragDropTarget()) {

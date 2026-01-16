@@ -136,25 +136,25 @@ namespace Editor::Panels {
 		ImGui::Text("Material: %s", mat->name.c_str());
 		ImGui::Separator();
 
-		DrawPasteField<Luxia::IShader>(editorLayer, mat->shader, "Shader");
+		DrawDropField<Luxia::IShader>(editorLayer, mat->shader, "Shader");
 		ImGui::Spacing();
 		ImGui::Spacing();
 		ImGui::Spacing();
 
 		// Diffuse Texture
-		DrawPasteField<Luxia::ITexture>(editorLayer, mat->diffuse_texture, "Diffuse");
+		DrawDropField<Luxia::ITexture>(editorLayer, mat->diffuse_texture, "Diffuse");
 		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
 		ImGui::Image(mat->diffuse_texture ? (ImTextureRef)mat->diffuse_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
 
 		// Specular Texture
-		DrawPasteField<Luxia::ITexture>(editorLayer, mat->specular_texture, "Specular");
+		DrawDropField<Luxia::ITexture>(editorLayer, mat->specular_texture, "Specular");
 		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
 		ImGui::Image(mat->specular_texture ? (ImTextureRef)mat->specular_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
 		
 		// Normal Texture
-		DrawPasteField<Luxia::ITexture>(editorLayer, mat->normal_texture, "Normals");
+		DrawDropField<Luxia::ITexture>(editorLayer, mat->normal_texture, "Normals");
 		ImGui::SameLine();
 		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
 		ImGui::Image(mat->normal_texture ? (ImTextureRef)mat->normal_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
