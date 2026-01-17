@@ -17,7 +17,7 @@
 
 // Luxia API
 #include "Luxia/Core/Log.h"
-#include "Luxia/Core/Constants.h"
+#include "Luxia/Tools/Constants.h"
 
 // Math
 #include "glm/common.hpp"

@@ -50,7 +50,7 @@ namespace Luxia::Assets {
 		YAML::Emitter out;
 
 		out << YAML::BeginMap;
-		out << YAML::Key << "Type" << YAML::Value << (int)type;
+		out << YAML::Key << "Type" << YAML::Value << static_cast<int>(type);
 		out << YAML::Key << "GUID" << YAML::Value << (uint64_t)guid;
 		out << YAML::Key << "AssetPath" << YAML::Value << assetPath.string();
 		out << YAML::Key << "MetaPath" << YAML::Value << metaPath.string();

@@ -16,7 +16,7 @@ namespace Luxia::Layers {
 			ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_NoNav |
 			ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoBringToFrontOnFocus;
 
-		glm::vec2 size;
+		glm::vec2 size = glm::vec2(1.0f);
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;

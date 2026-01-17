@@ -11,7 +11,6 @@
 #include "Luxia/Components/Camera.h"
 #include "Luxia/Components/Light.h"
 
-
 namespace Luxia::Assets {
 	class SceneFile;
 }
@@ -58,7 +57,7 @@ namespace Luxia {
 		template<typename T>
 		T& GetFromEntity(const Luxia::Entity& entity) {
 			auto it = runtime_entities.find(entity.guid);
-			LX_CORE_ASSERT(it != runtime_entities.end() && it->second.transform, "Entity not found");
+			LX_CORE_ASSERT_MSG(it != runtime_entities.end() && it->second.transform, "Entity not found");
 			entt::entity ent = it->second.transform->ent_id;
 			return reg.get<T>(ent);
 		}
@@ -66,31 +65,25 @@ namespace Luxia {
 
 		// Mains
 		Luxia::Components::Light* GetMainLight() {
-			for (auto& [guid, entity] : runtime_entities) {
-				auto l = entity.transform->TryGetComponent<Luxia::Components::Light>();
-				if (l) {
-					if (l->lightType == Luxia::LightType::Directional) {
-						return l;
-					}
-				}
+			auto light_view = GetEntitiesWith<Luxia::Components::Light>();
+			for (const auto& light_ent : light_view) {
+				auto& l = reg.get<Luxia::Components::Light>(light_ent);
+				if (l.lightType == Luxia::LightType::Directional)
+					return &l;
 				else continue;
 			}
 			return nullptr;
 		}
-		/*
 		Luxia::Components::Camera* GetMainCamera() {
-			for (auto& [guid, entity] : runtime_entities) {
-				auto c = entity.transform->TryGetComponent<Luxia::Components::Camera>();
-				if (c) {
-					if (c->main)
-						return c;
-					else continue;
-				}
+			auto cam_view = GetEntitiesWith<Luxia::Components::Camera>();
+			for (const auto& cam_ent : cam_view) {
+				auto& c = reg.get<Luxia::Components::Camera>(cam_ent);
+				if (c.main) 
+					return &c;
 				else continue;
 			}
 			return nullptr;
 		}
-		*/
 
 		entt::registry& GetReg() { return reg; }
 		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;

@@ -13,6 +13,8 @@ namespace Luxia::Layers {
 	}
 	void ViewportLayer::OnDetach() {
 		LX_CORE_WARN("ViewportLayer Detached");
+
+		fs_shader->Delete();
 	}
 	void ViewportLayer::OnUpdate() {
 

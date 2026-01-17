@@ -14,7 +14,7 @@ namespace Luxia::Rendering::OpenGL::Buffers {
 
 	void OpenGL_VAO::LinkAttrib(unsigned int location, unsigned int numElements, unsigned int type, size_t stride, unsigned int offset) {
 		OpenGL_VAO::Bind();
-		glVertexAttribPointer(location, numElements, type, GL_FALSE, stride, (void*)offset);
+		glVertexAttribPointer(location, numElements, type, GL_FALSE, stride, (void*)(offset));
 		glEnableVertexAttribArray(location);
 	}
 

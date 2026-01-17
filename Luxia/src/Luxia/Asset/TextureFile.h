@@ -45,8 +45,8 @@ namespace Luxia::Assets {
 				// Check if missing
 				texture->name = config["Name"].as<std::string>();
 				texture->guid = GUID(config["GUID"].as<uint64_t>());
-				texture->LoadFromFile(config["Path"].as<std::string>(), config["Properties"]["Flip"].as<bool>());
-				texture_path = config["Path"].as<std::string>();
+				texture_path = std::filesystem::path(config["Path"].as<std::string>());
+				texture->LoadFromFile(std::filesystem::path(config["Path"].as<std::string>()), config["Properties"]["Flip"].as<bool>());
 				texture->assetFileGUID = guid;
 
 				auto propConfig = config["Properties"];

@@ -11,7 +11,6 @@ namespace Luxia {
 			});
 	}
 
-
 	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {
 		Entity ent = Entity();
 
@@ -57,8 +56,8 @@ namespace Luxia {
 		if (runtime_entities.contains(EntityGUID)) {
 			Entity& ent = runtime_entities.find(EntityGUID)->second;
 			
-			// Delete all children FIRST before. This will go to the bottom of the tree, delete, and up
 			// VERY IMPORTANT
+			// Delete all children FIRST before. This will go to the bottom of the tree, delete, and up
 			for (auto child : ent.transform->children) {
 				DeleteEntity(child->ent_guid);
 			}

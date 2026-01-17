@@ -29,7 +29,7 @@ namespace Luxia::Core {
 			double current_time = static_cast<double>(
 				std::chrono::duration_cast<std::chrono::milliseconds>(
 				std::chrono::high_resolution_clock::now().time_since_epoch()).count()) / 1000.0;
-			deltaTime = (float)(current_time - lastFrameTime);
+			deltaTime = static_cast<float>(current_time - lastFrameTime);
 			
 			frameTimer += deltaTime;
 			

@@ -56,8 +56,8 @@ namespace Luxia::Constants {
                         glm::vec3 pos(x, y, z);
                         glm::vec3 normal = glm::normalize(pos);
                         glm::vec2 texCoord(
-                            (float)j / sectorCount,
-                            (float)i / stackCount
+                            static_cast<float>(j) / sectorCount,
+                            static_cast<float>(i) / stackCount
                         );
 
                         verts.push_back({ pos, normal, texCoord });

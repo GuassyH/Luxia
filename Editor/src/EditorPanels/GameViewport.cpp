@@ -16,7 +16,7 @@ namespace Editor::Panels {
 		ImVec2 windowPos = ImGui::GetWindowPos(); // top-left of the window in screen coordinates
 
 		// Camera aspect ratio (width / height)
-		float cameraAspect = (float)output_texture->GetWidth() / (float)output_texture->GetHeight();
+		float cameraAspect = static_cast<float>(output_texture->GetWidth()) / static_cast<float>(output_texture->GetHeight());
 		float windowAspect = windowSize.x / windowSize.y;
 
 		ImVec2 imageSize;
@@ -39,7 +39,7 @@ namespace Editor::Panels {
 		ImGui::SetCursorPosX(imagePosInWindow.x);
 		ImGui::SetCursorPosY(imagePosInWindow.y);
 
-		ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, imageSize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image((ImTextureRef)output_texture->texID, imageSize, ImVec2(0, 1), ImVec2(1, 0));
 
 		output_texture = nullptr;
 

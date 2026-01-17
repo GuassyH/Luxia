@@ -30,6 +30,14 @@ namespace Luxia {
 
 
 	bool Mesh::Unload() {
+		vao->Delete();
+		vbo->Delete();
+		ebo->Delete();
+
+		vao.reset();
+		vbo.reset();
+		ebo.reset();
+		
 		vertices.clear(); 
 		indices.clear(); 
 		valid = false; 

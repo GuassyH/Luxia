@@ -1,10 +1,5 @@
 IMPORTANT
 
-- Initializing OpenGL should happen in the openGL renderer, NOT the Window
-
-- SetParent 
-	Setting Parent should calculate the new size, and de-setting should also, so that you dont mess up the size
-
 - Rendering on a seperate thread? Performance boost ash
 
 - Rework enabling, made it so its the components that are enabled and not. The entity being enabled is the transform being enabled
@@ -20,8 +15,6 @@ IMPORTANT
 - Cleanup
 
 --- Future ---
-
-- Lighting (at least global illumination / sun)
 
 - Shadows
 

@@ -60,9 +60,9 @@ namespace Editor::Panels {
 
 		if (filePath.empty()) return {};
 
-		int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), (int)filePath.size(), nullptr, 0, nullptr, nullptr);
+		int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), static_cast<int>(filePath.size()), nullptr, 0, nullptr, nullptr);
 		std::string result(sizeNeeded, 0);
-		WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), (int)filePath.size(), result.data(), sizeNeeded, nullptr, nullptr);
+		WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), static_cast<int>(filePath.size()), result.data(), sizeNeeded, nullptr, nullptr);
 
 		return result;
 	}
@@ -288,7 +288,7 @@ namespace Editor::Panels {
 		if (avail.x <= 1.0f || avail.y <= 1.0f)
 			return;
 
-		int columns = (int)(panelWidth / (cellSize + padding));
+		int columns = static_cast<int>(panelWidth / (cellSize + padding));
 		if (columns < 1) columns = 1;
 
 		ImGui::Columns(columns, nullptr, false);
@@ -459,11 +459,11 @@ namespace Editor::Panels {
 	}
 
 	void AssetViewer::Unload() {
-		mesh_default_thumbnail->Delete();
-		mat_default_thumbnail->Delete();
-		shader_default_thumbnail->Delete();
-		scene_default_thumbnail->Delete();
-		texture_default_thumbnail->Delete();
-		folder_default_thumbnail->Delete();
+		mesh_default_thumbnail->Unload();
+		mat_default_thumbnail->Unload();
+		shader_default_thumbnail->Unload();
+		scene_default_thumbnail->Unload();
+		texture_default_thumbnail->Unload();
+		folder_default_thumbnail->Unload();
 	}
 }

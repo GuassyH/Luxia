@@ -20,22 +20,6 @@ namespace Luxia::Layers {
 	void RenderLayer::OnRender() {
 		auto scene = project_manager->GetSceneManager()->GetActiveScene();
 
-
-
-		/*
-		if (scene) {
-			for (auto& [guid, entity] : scene->runtime_entities) {
-				if (!entity.enabled) continue;
-
-				auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
-				// ONLY UPDATE ROOTS, Children will be updated as a consequence
-				if (!transform->HasParent()) {
-					transform->UpdateMatrix();
-				}
-			}
-		}
-		*/
-
 		if (scene) {
 			renderer->RecalculateLightBuffer(scene->GetReg());
 
@@ -50,13 +34,9 @@ namespace Luxia::Layers {
 				}
 			}
 			
-			auto cam_view = scene->GetEntitiesWith<Luxia::Components::Camera>();
-
-			for (auto entity : cam_view) {
-				auto& cam = scene->GetFromEntity<Luxia::Components::Camera>(entity);
-				if (cam.main)
-					PUSH_EVENT(RenderCameraEvent, cam.Render(scene, renderer.lock()), cam.main);
-			}
+			auto cam = scene->GetMainCamera();
+			if (cam)
+				PUSH_EVENT(RenderCameraEvent, cam->Render(scene, renderer.lock()), true);
 			
 		}
 	}

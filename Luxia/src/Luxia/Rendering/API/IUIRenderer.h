@@ -29,6 +29,6 @@ namespace Luxia::Rendering {
 		ImGuiContext* GetContext() { return m_Context; }
 	protected:
 		std::vector<std::shared_ptr<IUIElement>> m_UIElements;
-		ImGuiContext* m_Context;
+		ImGuiContext* m_Context = nullptr;
 	};
 }

@@ -67,7 +67,7 @@ namespace Luxia {
 				out << YAML::BeginMap; // Camera
 
 				out << YAML::Key << "Enabled" << YAML::Value << light->enabled;
-				out << YAML::Key << "Type" << YAML::Value << (int)light->lightType;
+				out << YAML::Key << "Type" << YAML::Value << static_cast<int>(light->lightType);
 				out << YAML::Key << "Color" << YAML::Value << light->color;
 
 				out << YAML::EndMap;

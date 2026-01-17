@@ -6,9 +6,12 @@
 
 #include "Component.h"
 
-#include "Luxia/Scene/Scene.h"
 #include "Luxia/Rendering/API/IRenderer.h"
 #include "Luxia/Components/Transform.h"
+
+namespace Luxia {
+	class Scene;
+};
 
 namespace Luxia::Components {
 	struct LUXIA_API Camera : public Component {

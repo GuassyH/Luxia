@@ -54,7 +54,7 @@ namespace Editor::Panels {
 		ImGui::End();
 	}
 	void ShoutoutPanel::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		Redston4Dpfp->Delete();
+		Redston4Dpfp->Unload();
 	}
 
 	void ShoutoutPanel::OnEvent(Luxia::Event& e) {

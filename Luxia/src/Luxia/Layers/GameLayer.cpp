@@ -12,7 +12,6 @@ namespace Luxia::Layers {
 	void GameLayer::OnUpdate() {
 		std::shared_ptr<Scene> scene = scene_manager->GetActiveScene();
 
-
 		if (scene) {
 			for (auto& [guid, entity] : scene->runtime_entities) {
 				auto transform = scene->TryGetFromEntity<Components::Transform>(entity);

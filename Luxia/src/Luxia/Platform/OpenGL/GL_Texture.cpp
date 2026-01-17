@@ -153,7 +153,12 @@ namespace Luxia::Platform::OpenGL {
 
 		unsigned char* bytes = stbi_load(m_path.lexically_normal().string().c_str(), &imgWidth, &imgHeight, &numColCh, 0);
 
-		if (!bytes) { LX_CORE_ERROR("Texture Loading failed (bytes null): {}", m_path.string()); return; }
+		if (bytes == nullptr) {
+			LX_CORE_ERROR("Texture bytes were null for id : {} - path {}", (uint64_t)guid, m_path.string());
+			return;
+		}
+
+		// if (!bytes) { LX_CORE_ERROR("Texture Loading failed (bytes null): {}", m_path.string()); return; }
 
 		glGenTextures(1, &texID);
 		glActiveTexture(GL_TEXTURE0);
@@ -206,7 +211,7 @@ namespace Luxia::Platform::OpenGL {
 	}
 
 
-	void GL_Texture::Delete() {
+	bool GL_Texture::Unload() {
 		// Unload Texture
 		hasPath = false;
 		valid = false;
@@ -218,6 +223,7 @@ namespace Luxia::Platform::OpenGL {
 		}
 
 		is_fbo_tex = false;
+		return true;
 	}
 
 

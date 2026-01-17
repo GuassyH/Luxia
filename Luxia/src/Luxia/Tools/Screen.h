@@ -62,7 +62,7 @@ namespace Luxia::Screen {
 		glm::vec2 NDC = (mouse_pos * 2.0f) - glm::vec2(1.0f);
 
 		float fov = glm::radians(cam->FOVdeg);
-		float aspect = (float)cam->width / (float)cam->height;
+		float aspect = static_cast<float>(cam->width) / static_cast<float>(cam->height);
 		float scale = tan(fov * 0.5f);
 
 		const Luxia::ICamera* pure_cam = cam->GetCamera();

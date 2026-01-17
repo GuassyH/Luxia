@@ -138,9 +138,9 @@ namespace Luxia {
 			}
 		}
 		else {
-			SaveScenes(projectPath);
+			SaveBuildOrder(projectPath);
 		}
-
+		return true;
 	}
 
 

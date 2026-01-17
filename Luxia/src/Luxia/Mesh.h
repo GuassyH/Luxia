@@ -13,7 +13,7 @@ namespace Luxia {
 		Mesh() { type = Luxia::AssetType::MeshType; }
 		~Mesh() = default;
 
-		uint16_t local_id; // the id the model will use
+		uint16_t local_id = 0; // the id the model will use
 
 		Mesh(std::vector<Rendering::Vertex> verts, std::vector<uint32_t> inds)
 			: vertices(verts), indices(inds) {

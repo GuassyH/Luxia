@@ -16,9 +16,9 @@ namespace Editor::Panels {
 
 		std::vector<std::unique_ptr<Gizmos::Gizmo>> gizmos; // Translate = 0, Rotate = 1, Scale = 2
 
-		WeakPtrProxy<Luxia::ITexture> output_texture;
 
-		Luxia::Components::Transform* cam_ent;
+		WeakPtrProxy<Luxia::ITexture> output_texture;
+		Luxia::Components::Transform* cam_ent = nullptr;
 
 		bool RenderImage(Luxia::RenderCameraEvent& e);
 

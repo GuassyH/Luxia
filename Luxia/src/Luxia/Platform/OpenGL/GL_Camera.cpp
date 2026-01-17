@@ -14,7 +14,7 @@ namespace Luxia::Platform::OpenGL {
 	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float fovdeg, const int width, const int height, const float nearPlane, const float farPlane) {
 		// Initialise the matrices
 		m_View = glm::lookAt(pos, pos + rot, glm::vec3(0.0f, 1.0f, 0.0f));
-		m_Proj = glm::perspective(glm::radians(fovdeg), (float)width / (float)height, nearPlane, farPlane);
+		m_Proj = glm::perspective(glm::radians(fovdeg), static_cast<float>(width) / static_cast<float>(height), nearPlane, farPlane);
 		FOVdeg = fovdeg;
 
 		// Skips recalculating the other vectors unecessarily 
@@ -29,7 +29,7 @@ namespace Luxia::Platform::OpenGL {
 	// Feels wierd? Why even have abstract camera now
 	std::shared_ptr<ITexture> GL_Camera::Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const bool useSkybox, const int width, const int height, const glm::vec4& clear_col) {
 		if (width != output_texture->GetWidth() || height != output_texture->GetHeight()) {
-			output_texture->Delete();
+			output_texture->Unload();
 			output_texture->CreateFBOTex(width, height);
 		}
 

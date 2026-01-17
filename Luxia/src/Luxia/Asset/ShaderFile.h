@@ -105,7 +105,7 @@ namespace Luxia::Assets {
 			out << YAML::BeginMap;
 
 			out << YAML::Key << "AssetFileGUID" << YAML::Value << (uint64_t)guid;
-			out << YAML::Key << "ShaderType" << YAML::Value << (int)shaderType;
+			out << YAML::Key << "ShaderType" << YAML::Value << static_cast<int>(shaderType);
 			out << YAML::Key << "GUID" << YAML::Value << (uint64_t)shader->guid;
 			out << YAML::Key << "Name" << YAML::Value << shader->name;
 

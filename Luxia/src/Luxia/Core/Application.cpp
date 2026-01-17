@@ -34,7 +34,10 @@ namespace Luxia
 		// Initialise layer stack 
 		m_LayerStack = std::make_shared<LayerStack>();
 	
-		// Initialise defaults
+		// Initialize UI
+		m_Renderer->GetUIRenderer()->Init();
+		
+		// Initialise Resources
 		ResourceManager::Init();
 
 		LX_CORE_WARN("glBindFrameBuffer: {}", (void*)glBindFramebuffer);
@@ -43,16 +46,12 @@ namespace Luxia
 	void Application::CoreStartup() {
 		LX_CORE_INFO("Application Started\n");
 
-		m_Renderer->GetUIRenderer()->Init();
-
-
 		// Core Layers
 		PushLayer(std::make_shared<Layers::EventLayer>());
 		PushLayer(std::make_shared<Layers::GameLayer>());
 		PushLayer(std::make_shared<Layers::RenderLayer>());
 		PushLayer(std::make_shared<Layers::ViewportLayer>());
 		PushLayer(std::make_shared<Layers::UILayer>());
-
 	}
 
 	// Run
@@ -60,6 +59,7 @@ namespace Luxia
 	{
 		m_ProjectManager->GetSceneManager()->SetActiveScene(0);
 		double time_accumulator = 0.0;
+
 		// While the window is running loop
 		while (m_Window->isRunning()) {
 			Core::Time::get().update();
@@ -68,7 +68,7 @@ namespace Luxia
 			m_EventHandler->DispatchAll(this);
 
 			for (auto& layer : m_LayerStack->m_Layers) {
-				if(layer->give_profiler_response)
+				if(layer->give_profiler_response) // This field, if true, will be set to false after the render process
 					time_accumulator = Luxia::Core::Time::get().GetTimeHP();
 
 				layer->OnUpdate();
@@ -93,6 +93,7 @@ namespace Luxia
 					layer->give_profiler_response = false;
 				}
 			}
+
 			m_Renderer->GetUIRenderer()->EndFrame();
 			m_Window->EndFrame();
 			eventManager.Clear();

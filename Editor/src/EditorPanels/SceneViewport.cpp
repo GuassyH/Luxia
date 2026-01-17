@@ -11,7 +11,7 @@ namespace Editor::Panels {
 
 	static std::shared_ptr<Gizmos::GridGizmo> grid_gizmo = nullptr;
 
-	static enum EditType {
+	enum EditType {
 		Translate = 0,
 		Rotate = 1,
 		Scale = 2
@@ -25,7 +25,7 @@ namespace Editor::Panels {
 		Luxia::GUID result = Luxia::GUID(0);
 
 		if (cam->width != output_texture->GetWidth() || cam->height != output_texture->GetHeight()) {
-			output_texture->Delete();
+			output_texture->Unload();
 			output_texture->CreateFBOTex(cam->width, cam->height);
 		}
 
@@ -48,7 +48,7 @@ namespace Editor::Panels {
 			auto& mr = scene->GetFromEntity<Luxia::Components::MeshRenderer>(entity);
 
 			if (mr.enabled && mr.transform) {
-				int id = (int)mr.transform->ent_id;
+				int id = static_cast<int>(mr.transform->ent_id);
 				id_color.r = ((id & 0x000000FF) >> 0) / 255.0f;
 				id_color.g = ((id & 0x0000FF00) >> 8) / 255.0f;
 				id_color.b = ((id & 0x00FF0000) >> 16) / 255.0f;
@@ -134,8 +134,8 @@ namespace Editor::Panels {
 		}
 
 		// Render last, so that the next frame instantly displays the render output
-		cam.width = ImGui::GetWindowWidth();
-		cam.height = ImGui::GetWindowHeight() - 20;  // Some sort of padding
+		cam.width = static_cast<int>(ImGui::GetWindowWidth());
+		cam.height = static_cast<int>(ImGui::GetWindowHeight() - 20);  // Some sort of padding
 
 		if (ImGui::IsWindowHovered()) {
 
@@ -221,8 +221,8 @@ namespace Editor::Panels {
 		cam_ent = nullptr;
 		output_texture = nullptr;
 
-		fbo_pick_tex->Delete();
-		selection_fbo->Delete();
+		fbo_pick_tex->Unload();
+		selection_fbo->Unload();
 		outline_shader->Unload();
 	}
 
@@ -261,7 +261,7 @@ namespace Editor::Panels {
 		Luxia::Screen::BindRBO(cam_tex->GetRBO());
 
 		if (cam.width != selection_fbo->GetWidth() || cam.height != selection_fbo->GetHeight()) {
-			selection_fbo->Delete();
+			selection_fbo->Unload();
 			selection_fbo->CreateDepthTex(cam.width, cam.height);
 		}
 
@@ -330,7 +330,7 @@ namespace Editor::Panels {
 				cam_tex->Bind();
 				outline_mat->shader->SetInt("baseSample", 1);
 
-				outline_mat->shader->SetVec2("texelSize", glm::vec2(1.0f / (float)cam_tex->GetWidth(), 1.0f / (float)cam_tex->GetHeight()));
+				outline_mat->shader->SetVec2("texelSize", glm::vec2(1.0f / static_cast<float>(cam_tex->GetWidth()), 1.0f / static_cast<float>(cam_tex->GetHeight())));
 				outline_mat->shader->SetFloat("farPlane", cam.farPlane);
 				outline_mat->shader->SetFloat("nearPlane", cam.nearPlane);
 				outline_mat->shader->SetFloat("depthThreshold", 1.0f);

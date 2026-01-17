@@ -162,7 +162,7 @@ namespace Luxia::Platform::OpenGL {
 		std::shared_ptr<Mesh> newMesh = std::make_shared<Mesh>(vertices, indices);
 		newMesh->CalculateMesh();
 		newMesh->name = std::string(mesh->mName.C_Str(), mesh->mName.length);
-		newMesh->local_id = meshes.size();
+		newMesh->local_id = static_cast<uint16_t>(meshes.size());
 		// Create mesh entity and said parent to root_entity
 		return newMesh;
 	}

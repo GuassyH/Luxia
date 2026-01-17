@@ -14,7 +14,7 @@ namespace Luxia::Components {
 
 	struct LUXIA_API Component {
 		// data
-		Transform* transform;
+		Transform* transform = nullptr;
 		Luxia::GUID ent_guid = Luxia::GUID(0);
 		bool enabled = true;
 

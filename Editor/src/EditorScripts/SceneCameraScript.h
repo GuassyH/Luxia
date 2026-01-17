@@ -10,7 +10,7 @@ namespace Editor::Scripts {
 		float speed = 10.0f;
 		float sensitivity = 0.002f;
 
-		glm::vec3 moveDir;
+		glm::vec3 moveDir = glm::vec3(0.0f);
 		float horizontal = 0.0f;
 		float vertical = 0.0f;
 		float skywards = 0.0f;
@@ -79,8 +79,8 @@ namespace Editor::Scripts {
 			transform->local_position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
 		}
 
-		double last_mouseX;
-		double last_mouseY;
+		double last_mouseX = 0.0;
+		double last_mouseY = 0.0;
 
 		void Look() {
 			if (!transform) { return; }
@@ -95,8 +95,8 @@ namespace Editor::Scripts {
 
 			// Should be clamped to window size
 
-			float deltaX = (float)(mouseX - last_mouseX);
-			float deltaY = (float)(mouseY - last_mouseY);
+			float deltaX = static_cast<float>(mouseX - last_mouseX);
+			float deltaY = static_cast<float>(mouseY - last_mouseY);
 
 			float rotX = -deltaY * sensitivity * 100.0f;
 			float rotY = deltaX * sensitivity * 100.0f;

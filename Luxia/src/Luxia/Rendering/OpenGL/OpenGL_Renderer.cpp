@@ -46,7 +46,7 @@ namespace Luxia::Rendering::OpenGL {
 				LightObject newLO = LightObject();
 
 				newLO.color = light.color;
-				newLO.type = (int)light.lightType;
+				newLO.type = static_cast<int>(light.lightType);
 				newLO.position = light.transform->local_position;
 				newLO.rotation = light.transform->GetRotVec();
 				
@@ -90,7 +90,7 @@ namespace Luxia::Rendering::OpenGL {
 			ResourceManager::NullMaterial->Use(modMat, viewMat, projMat);
 
 		m_mesh->vao->Bind();
-		glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_mesh->indices.size()), GL_UNSIGNED_INT, 0);
 
 		m_mesh->vao->Unbind();
 	}
@@ -99,7 +99,7 @@ namespace Luxia::Rendering::OpenGL {
 		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
 
 		m_mesh.vao->Bind();
-		glDrawElements(GL_TRIANGLES, m_mesh.indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_mesh.indices.size()), GL_UNSIGNED_INT, 0);
 
 		m_mesh.vao->Unbind();
 	}
@@ -116,7 +116,7 @@ namespace Luxia::Rendering::OpenGL {
 
 
 		m_quad.vao->Bind();
-		glDrawElements(GL_TRIANGLES, m_quad.indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_quad.indices.size()), GL_UNSIGNED_INT, 0);
 
 		m_quad.vao->Unbind();
 		glActiveTexture(0);

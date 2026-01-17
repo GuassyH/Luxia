@@ -50,7 +50,6 @@ namespace Editor::Layers {
 		for (auto& [guid, tex] : asset_thumbnails) {
 			if (tex) {
 				tex->Unload();
-				tex->Delete();
 			}
 		}
 
@@ -105,9 +104,9 @@ namespace Editor::Layers {
 			panel->Unload(this, scene_manager->GetActiveScene());
 		}
 
-		PlayTex->Delete();
-		PauseTex->Delete();
-		NoImageTex->Delete();
+		PlayTex->Unload();
+		PauseTex->Unload();
+		NoImageTex->Unload();
 	}
 	void EditorLayer::OnUpdate() {
 		UpdateSelectedConditions();

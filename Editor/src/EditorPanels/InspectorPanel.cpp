@@ -238,7 +238,7 @@ namespace Editor::Panels {
 	}
 
 
-	static enum class InspectorMode {
+	enum class InspectorMode {
 		Entity,
 		Material,
 		Mesh,
