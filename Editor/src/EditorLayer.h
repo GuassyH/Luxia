@@ -3,6 +3,7 @@
 #include "IEditorPanel.h"
 #include <unordered_set>
 #include "ThumbnailManager.h"
+#include "SystemFuncs.h"
 
 namespace Editor::Layers {
 	class EditorLayer : public Luxia::Layer

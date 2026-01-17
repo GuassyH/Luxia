@@ -10,17 +10,6 @@
 
 namespace Editor::Panels {
 
-	static void CopyToClipboard(std::string to_copy) {
-		const char* cdata = to_copy.c_str();
-		const size_t len = to_copy.size() + 1;
-		HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
-		memcpy(GlobalLock(hMem), cdata, len);
-		GlobalUnlock(hMem);
-		OpenClipboard(0);
-		EmptyClipboard();
-		SetClipboardData(CF_TEXT, hMem);
-		CloseClipboard();
-	}
 
 	static std::string OpenFileDialogue() {
 		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
@@ -332,7 +321,7 @@ namespace Editor::Panels {
 		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight)) {
 			if (ImGui::MenuItem("Copy", nullptr, nullptr, editorLayer->isOneSelected)) {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				CopyToClipboard(std::to_string((uint64_t)e_guid));
+				SystemFuncs::CopyToClipboard(std::to_string((uint64_t)e_guid));
 			}
 			if (ImGui::MenuItem("Open", nullptr, nullptr, editorLayer->isOneSelected)) {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
@@ -340,25 +329,23 @@ namespace Editor::Panels {
 			}
 			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, editorLayer->isOneSelected)) {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				auto it = asset_view->asset_parent_folders.find(e_guid);
-				if (it != asset_view->asset_parent_folders.end()) {
-					const std::string pathStr = it->second.string(); // keep the string alive
+				if (asset_view->asset_parent_folders.contains(e_guid)) {
+					const std::string pathStr = asset_view->asset_parent_folders.at(e_guid).string(); // keep the string alive
 					ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
 				}
 			}
 			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->isOneSelected)) {
 				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				auto it = asset_view->asset_parent_folders.find(e_guid);
-				if (it != asset_view->asset_parent_folders.end()) {
+				if(asset_view->asset_parent_folders.contains(e_guid)) {
 					openRenamePopup = true;
 				}
 			}
 
 			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->areMultipleSelected || editorLayer->isOneSelected)) {
-				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				auto it = asset_view->asset_parent_folders.find(e_guid);
-				if (it != asset_view->asset_parent_folders.end()) {
-					// Rename Stuff
+				for (auto& e_guid : editorLayer->selected_assets) {
+					if (editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid)) {
+						editorLayer->GetAssetManager()->DeleteAsset(e_guid);
+					}
 				}
 			}
 

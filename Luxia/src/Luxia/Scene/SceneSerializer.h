@@ -1,12 +1,11 @@
 #pragma once
 
-#include "Luxia/Asset/SceneFile.h"
 #include "Luxia/Core/WeakPtrProxy.h"
+#include "Luxia/Asset/SceneFile.h"
 #include "Luxia/Managers/AssetManager.h"
 
 #include "Scene.h"
 #include <yaml-cpp/yaml.h>
-
 
 namespace Luxia {
 	class LUXIA_API SceneSerializer

@@ -226,4 +226,37 @@ namespace Luxia {
 
 		return true;
 	}
+
+
+	bool AssetManager::DeleteAsset(GUID assetGUID) {
+		if (!asset_pool.contains(assetGUID)) return false;
+
+		// Check for no mesh
+		auto asset = asset_pool.at(assetGUID);
+		if (asset->type == Luxia::AssetType::MeshType) {
+			LX_CORE_ERROR("AssetManager: Deleting meshes currently not allowed");
+			return false;
+		}
+
+		if (!assetfile_pool.contains(asset->assetFileGUID)) { LX_CORE_ERROR("AssetManager: (Delete Failed) AssetFile not found for guid : {}", (uint64_t)asset->assetFileGUID); return false; }
+		auto assetfile = assetfile_pool.at(asset->assetFileGUID);
+
+		if (!meta_pool.contains(assetfile->metaGUID)) { LX_CORE_ERROR("AssetManager: (Delete Failed) MetaFile not found for guid : {}", (uint64_t)assetfile->metaGUID); return false; }
+		auto metafile = meta_pool.at(assetfile->metaGUID);
+
+		if (!metafile || !assetfile) { LX_CORE_ERROR("AssetManager: (Delete Failed) Meta or Asset- file nullptr"); return false; }
+
+		asset->Unload();
+		assetfile->Unload();
+		metafile->Unload();
+
+		std::remove(metafile->assetPath.string().c_str());
+		std::remove(metafile->metaPath.string().c_str());
+
+		asset_pool.erase(asset->guid);
+		assetfile_pool.erase(assetfile->guid);
+		meta_pool.erase(metafile->guid);
+
+		return true;
+	}
 }

@@ -160,6 +160,7 @@
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
     <ClInclude Include="src\Gizmos\Gizmo.h" />
     <ClInclude Include="src\IEditorPanel.h" />
+    <ClInclude Include="src\SystemFuncs.h" />
     <ClInclude Include="src\ThumbnailManager.h" />
   </ItemGroup>
   <ItemGroup>

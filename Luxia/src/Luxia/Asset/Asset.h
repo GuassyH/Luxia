@@ -4,6 +4,8 @@
 #include "Luxia/Core/GUID.h"
 #include "Luxia/Asset/AssetType.h"
 
+#include "Luxia/Core/WeakPtrProxy.h"
+
 namespace Luxia::Assets {
 	class LUXIA_API Asset {
 	public:

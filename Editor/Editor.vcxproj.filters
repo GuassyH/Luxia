@@ -65,6 +65,7 @@
     </ClInclude>
     <ClInclude Include="src\Gizmos\Gizmo.h" />
     <ClInclude Include="src\EditorPanels\ShoutoutPanel.h" />
+    <ClInclude Include="src\SystemFuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c">

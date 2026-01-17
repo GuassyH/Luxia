@@ -13,7 +13,6 @@ namespace Editor::Panels {
 
 		virtual void OnEvent(Luxia::Event& e) override;
 
-		std::string PasteFromClipboard();
 	private:
 		void RenderMesh(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 		void RenderMaterial(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
@@ -22,8 +21,9 @@ namespace Editor::Panels {
 
 
 		template <typename T>
-		void PasteAsset(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign) {
-			std::string paste = PasteFromClipboard();
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, void>
+			PasteAsset(Editor::Layers::EditorLayer* editorLayer, WeakPtrProxy<T>& asset_to_assign) {
+			std::string paste = SystemFuncs::PasteFromClipboard();
 			Luxia::GUID guid(std::strtoull(paste.c_str(), nullptr, 10));
 			if (editorLayer->GetAssetManager()->HasAsset<T>(guid))
 				asset_to_assign = editorLayer->GetAssetManager()->GetAsset<T>(guid);
@@ -32,7 +32,8 @@ namespace Editor::Panels {
 		}
 
 		template <typename T>
-		void DrawPasteField(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, void>
+			DrawPasteField(Editor::Layers::EditorLayer* editorLayer, WeakPtrProxy<T>& asset_to_assign, const char* label) {
 			std::ostringstream paste_id; paste_id << "##" << label;
 			ImGui::PushID(paste_id.str().c_str());
 			if (ImGui::Button("Paste")) {
@@ -61,11 +62,12 @@ namespace Editor::Panels {
 		}
 
 		template <typename T>
-		void DrawDropField(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<T>& asset_to_assign, const char* label) {
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, void>
+			DrawDropField(Editor::Layers::EditorLayer* editorLayer, WeakPtrProxy<T>& asset_to_assign, const char* label) {
 			std::ostringstream txt; txt << label << ": ";
 			std::string field_text = txt.str();
 
-			std::string buttonid = (asset_to_assign.get() ? std::string(asset_to_assign->name) : std::string("none")) + "##selectable" + std::string(label);
+			std::string buttonid = (asset_to_assign ? std::string(asset_to_assign->name) : std::string("none")) + "##selectable" + std::string(label);
 			std::string popupid = std::string("DrawDropFieldPopup##DDFP") + std::string(asset_to_assign.get() ? std::string(asset_to_assign->name) : std::string("none"));
 
 			// Draw the “input box” style selectable on the right
@@ -90,6 +92,11 @@ namespace Editor::Panels {
 
 			ImGui::PushID(popupid.c_str());
 			if (ImGui::BeginPopupContextItem()) {
+				if (ImGui::MenuItem("Copy", nullptr, nullptr)) {
+					if (asset_to_assign)
+						SystemFuncs::CopyToClipboard(std::to_string((uint64_t)asset_to_assign->guid));
+					ImGui::CloseCurrentPopup();
+				}
 				if (ImGui::MenuItem("Paste", nullptr, nullptr)) {
 					PasteAsset<T>(editorLayer, asset_to_assign);
 					ImGui::CloseCurrentPopup();

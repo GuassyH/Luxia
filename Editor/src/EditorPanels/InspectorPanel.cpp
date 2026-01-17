@@ -6,30 +6,6 @@ namespace Editor::Panels {
 		LX_INFO("Editor - Inspector Panel: Init");
 	}
 
-	std::string InspectorPanel::PasteFromClipboard()
-	{
-		std::string result;
-
-		if (!OpenClipboard(nullptr))
-			return result;
-
-		HANDLE hData = GetClipboardData(CF_TEXT);
-		if (hData)
-		{
-			char* pszText = static_cast<char*>(GlobalLock(hData));
-			if (pszText)
-			{
-				result = pszText;
-				GlobalUnlock(hData);
-			}
-		}
-
-		CloseClipboard();
-		return result;
-	}
-
-
-
 
 	static char namebuff[255] = {};
 	static char meshbuff[255] = {};

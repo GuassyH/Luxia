@@ -24,7 +24,7 @@ namespace Luxia::Assets {
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath)	// Should assume there is saved data
 		{ return assets; }
 		virtual bool Save(const std::filesystem::path& m_assetPath)	{ return false; }				// Should save data
-		virtual void Unload() {} // Unload the asset
+		virtual void Unload() { for (auto& asset : assets) { asset->Unload(); } assets.clear(); } // Unload the asset
 
 		std::vector<std::shared_ptr<Asset>> Load()
 		{ if (!std::filesystem::exists(assetPath)) { LX_CORE_ERROR("assetPath not set"); return assets; } return Load(assetPath); }

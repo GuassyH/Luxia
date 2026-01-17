@@ -304,9 +304,9 @@ namespace Luxia {
 		}
 
 		bool RenameAsset(GUID assetGUID, std::string newName);
+		bool DeleteAsset(GUID assetGUID);
 
 	#pragma endregion
-
 
 		~AssetManager() = default;
 		AssetManager() = default;

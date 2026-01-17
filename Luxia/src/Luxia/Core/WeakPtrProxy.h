@@ -42,5 +42,6 @@ public:
 	// bool operator!() const { return weak.expired(); }
 	explicit operator bool() const { return !weak.expired(); }
 	bool expired() const { return weak.expired(); }
+	T* get() { if (!weak.expired()) return weak.lock().get(); else return nullptr; }
 	std::shared_ptr<T> lock() const { return weak.lock(); }
 };
