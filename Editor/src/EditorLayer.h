@@ -69,6 +69,7 @@ namespace Editor::Layers {
 		ThumbnailManager thumbnailManager;
 		std::shared_ptr<Luxia::ITexture> PlayTex;
 		std::shared_ptr<Luxia::ITexture> PauseTex;
+		std::shared_ptr<Luxia::ITexture> RunningTex;
 	};
 }
 

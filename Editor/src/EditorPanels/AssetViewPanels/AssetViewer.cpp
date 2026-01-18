@@ -95,7 +95,7 @@ namespace Editor::Panels {
 				return;
 			}
 
-			auto loaded = sceneManager->SetActiveScene(it->second);
+			auto loaded = sceneManager->SetActiveScene(it->second, true);
 			if (!loaded) {
 				LX_WARN("OpenAsset: SceneManager::SetActiveScene failed for asset GUID {}", (uint64_t)sfguid);
 			}

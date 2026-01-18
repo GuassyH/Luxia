@@ -23,16 +23,21 @@ namespace Luxia {
 		bool LoadScenePool(std::filesystem::path& projectPath, const std::shared_ptr<AssetManager> m_asset_manager);
 		bool SaveScenes(std::filesystem::path& projectPath);
 	
-		std::shared_ptr<Scene> SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile);
-		std::shared_ptr<Scene> SetActiveScene(std::shared_ptr<Scene> m_scene);
-		std::shared_ptr<Scene> SetActiveScene(unsigned int index);
+		// Used for just assigning the scene, SaveOnSet describes wether the set function should save the last scene
+		std::shared_ptr<Scene> SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile, bool save_on_set = false);
+		std::shared_ptr<Scene> SetActiveScene(std::shared_ptr<Scene> m_scene, bool save_on_set = false);
+		std::shared_ptr<Scene> SetActiveScene(unsigned int index, bool save_on_set = false);
 
+		// Takes care of the loading, starts the scene
+		bool LoadScene(unsigned int index);
 
 		bool SaveBuildOrder(std::filesystem::path& projectPath);
 		bool LoadBuildOrder(std::filesystem::path& projectPath);
 		void AddToBuildOrder(Luxia::GUID& guid);
 		void MoveOrderInBuildOrder(int from_index, int to_index);
 		void RemoveFromBuildOrder(int index);
+
+		bool running = true; // DONT CHANGE. WILL PAUSE YOUR GAME
 
 		bool HasActiveScene() const { return active_scene != nullptr; }
 		std::shared_ptr<Scene> GetActiveScene() { 

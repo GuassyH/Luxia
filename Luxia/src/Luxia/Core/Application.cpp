@@ -108,8 +108,6 @@ namespace Luxia
 			m_LayerStack->m_Layers[i]->OnDetach();
 		}
 
-		// IMPORTANT TO DO FIRST:
-		m_ProjectManager->GetSceneManager()->SaveActiveScene();
 
 		// Deconstruct
 		m_LayerStack->m_Layers.clear();

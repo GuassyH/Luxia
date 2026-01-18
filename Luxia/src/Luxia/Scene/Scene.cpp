@@ -91,4 +91,20 @@ namespace Luxia {
 		reg.clear();
 		return true;
 	}
+
+	void Scene::Start() {
+		isStarted = true;
+		LX_CORE_TRACE("Scene ({}) Started", (uint64_t)guid);
+	}
+
+	void Scene::Update() {
+		// Update physics
+		// Update c# scripts (when added), or call their awake
+		// LX_CORE_TRACE("Scene ({}) Updated", (uint64_t)guid);
+	}
+
+	void Scene::End() {
+		LX_CORE_TRACE("Scene ({}) Ended", (uint64_t)guid);
+		isStarted = false;
+	}
 }

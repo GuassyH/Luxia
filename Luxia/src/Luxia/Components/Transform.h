@@ -135,7 +135,7 @@ namespace Luxia::Components {
 			}
 
 			forward = glm::normalize(world_rotation * glm::vec3(0, 0, -1));
-			forward.y = -forward.y;
+			// forward.y = -forward.y;
 			up = glm::normalize(world_rotation * glm::vec3(0, 1, 0));
 			right = glm::normalize(world_rotation * glm::vec3(1, 0, 0));
 

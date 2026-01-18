@@ -4,8 +4,6 @@ IMPORTANT
 
 - Rendering on a seperate thread? Performance boost ash
 
-- Maybe rework scene saving?
-
 - Importing should also be given path to import TO. so you can import from an external folder (maybe?)
 
 - Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
@@ -13,6 +11,8 @@ IMPORTANT
 - Fixed rotation stuff in transform, more stuff could be worked on. Like not +ing euler angles
 
 ---  Next  ---
+
+- Rework how scene lifetime works.
 
 - Rework enabling, made it so its the components that are enabled and not. The entity being enabled is the transform being enabled
 

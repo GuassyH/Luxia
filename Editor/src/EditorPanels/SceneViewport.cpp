@@ -90,9 +90,11 @@ namespace Editor::Panels {
 		cam_ent = editorLayer->editor_reg.try_get<Luxia::Components::Transform>(ent);
 		cam_ent->transform = cam_ent;
 		cam_ent->reg = &editorLayer->editor_reg;
+		cam_ent->transform->UpdateMatrix();
 
 		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080).farPlane = 2000.0f;
 		cam_ent->AddComponent<Editor::Scripts::SceneCameraScript>();
+
 
 		fbo_pick_tex->CreateFBOTex(1920, 1080);
 		selection_fbo->CreateDepthTex(1920, 1080);
@@ -350,17 +352,18 @@ namespace Editor::Panels {
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
 				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
 
-				glm::vec3 cam_to_entity = cam.transform->local_position + (glm::normalize(ent.transform->local_position - cam.transform->local_position) * 15.0f);
+				glm::vec3 cam_to_entity = cam.transform->world_position + (glm::normalize(ent.transform->world_position - cam.transform->world_position) * 15.0f);
 				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
 				
-				glm::quat entityRot = ent.transform->world_rotation;
+				glm::quat entityRot = ent.transform->local_rotation;
 
 				for (auto part : gizmos[editType].get()->gizmo_parts) {
 					if (part->transform) {
 						auto part_mr = part->transform->TryGetComponent<Luxia::Components::MeshRenderer>();
 						if (!part_mr) continue;
+						part->transform->UpdateMatrix();
 
-						glm::quat gizmoRot = glm::quat(glm::radians(part->transform->local_euler_angles));
+						glm::quat gizmoRot = part->transform->local_rotation;
 						glm::quat rotationQuat = entityRot * gizmoRot;
 						glm::mat4 rotationMatrix = glm::mat4(1.0f);
 

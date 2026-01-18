@@ -30,12 +30,14 @@ namespace Luxia {
 
 	// Set and Get Functions 
 
-	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile) {
-		if (active_scene) { 
+	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile, bool save_on_set) {
+		if (active_scene && save_on_set) { 
 			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager);
 			oldserializer.Serialize();
 			active_scene->Unload();
 		}
+		if (active_scene)
+			active_scene->Unload();
 
 		// Set new Active Scene
 		active_scene = std::dynamic_pointer_cast<Scene>(m_sceneFile->assets[0]);
@@ -50,12 +52,13 @@ namespace Luxia {
 		return GetActiveScene();
 	}
 
-	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene) {
-		if (active_scene) {
+	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene, bool save_on_set) {
+		if (active_scene && save_on_set) {
 			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager);
 			oldserializer.Serialize();
-			active_scene->Unload();
 		}
+		if(active_scene)
+			active_scene->Unload();
 
 		// Set new Active Scene
 		active_scene = m_scene;
@@ -72,7 +75,7 @@ namespace Luxia {
 	}
 
 
-	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index) {
+	std::shared_ptr<Scene> SceneManager::SetActiveScene(unsigned int index, bool save_on_set) {
 		if (index >= build_order.size()) {
 			LX_CORE_ERROR("SceneManager: Set Scene failed, index {} out of range (size={})", index, build_order.size());
 			return nullptr;
@@ -82,10 +85,15 @@ namespace Luxia {
 			return nullptr;
 		}
 
-		return SetActiveScene(scene_files.find(build_order[index])->second);
+		return SetActiveScene(scene_files.find(build_order[index])->second, save_on_set);
 	}
 	 
 	bool SceneManager::SaveActiveScene() {
+		if (running) {
+			LX_CORE_ERROR("SceneManager: Cant save scene while it is running!");
+			return false;
+		}
+
 		if (!active_scene || !active_scene->scene_file) {
 			LX_CORE_ERROR("SceneManager: Save Active Scene failed, no active scene");
 			return false;
@@ -93,6 +101,21 @@ namespace Luxia {
 		SceneSerializer serializer(active_scene->scene_file.lock(), asset_manager);
 		serializer.Serialize();
 		LX_CORE_INFO("Saved Active Scene");
+
+		return true;
+	}
+
+	bool SceneManager::LoadScene(unsigned int index) {
+		if (build_order.size() >= index) return false;
+
+		if (active_scene)
+			active_scene->End();
+
+		auto scene = SetActiveScene(index);
+		if (!scene) return false;
+
+		scene->Start();
+
 		return true;
 	}
 
@@ -193,4 +216,6 @@ namespace Luxia {
 		if (index < 0 || index >= build_order.size()) return;
 		build_order.erase(build_order.begin() + index);
 	}
+
+
 }

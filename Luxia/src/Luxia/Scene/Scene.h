@@ -24,7 +24,14 @@ namespace Luxia {
 		~Scene() = default;
 
 		virtual bool Unload() override;
+		// Only Creates the reg
 		void Load() { reg = entt::registry(); }
+
+		void Start();
+		void Update();
+		void End();
+
+		bool isStarted = false;
 
 		Entity& CreateEntity(std::string name = "Entity", Luxia::GUID guid = GUID(0));
 		void DeleteEntity(Luxia::GUID EntityGUID);

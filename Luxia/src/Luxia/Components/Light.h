@@ -25,7 +25,7 @@ namespace Luxia::Components {
 				lightType = static_cast<Luxia::LightType>(current_item);
 			}
 
-			ImGui::ColorPicker4("Color", &color.r);
+			ImGui::ColorEdit4("Color", &color.r);
 		}
 	};
 }

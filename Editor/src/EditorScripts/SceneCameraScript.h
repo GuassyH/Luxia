@@ -78,12 +78,7 @@ namespace Editor::Scripts {
 			
 			transform->local_position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
 
-			/*
-			LX_INFO("[F] = {}x {}y {}z\n[U] = {}x {}y {}z\n[R] = {}x {}y {}z",
-				transform->forward.x, transform->forward.y, transform->forward.z, 
-				transform->up.x, transform->up.y, transform->up.z, 
-				transform->right.x, transform->right.y, transform->right.z);
-			*/
+			// LX_INFO("Up = {}x {}y {}z", transform->up.x, transform->up.y, transform->up.z);
 		}
 
 		double last_mouseX = 0.0;
@@ -109,7 +104,7 @@ namespace Editor::Scripts {
 			float rotY = deltaX * sensitivity * 100.0f;
 
 			// Apply rotations to Euler angles
-			transform->local_euler_angles.x -= rotX; // pitch
+			transform->local_euler_angles.x += rotX; // pitch
 			transform->local_euler_angles.y += rotY; // yaw
 
 			// Clamp pitch to avoid flipping

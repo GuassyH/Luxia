@@ -92,6 +92,9 @@ namespace Editor::Layers {
 		PauseTex = Luxia::Platform::Assets::CreateTexture();
 		PauseTex->LoadFromFile("C:/dev/Luxia/Editor/resources/PauseButton.png");
 	
+		RunningTex = Luxia::Platform::Assets::CreateTexture();
+		RunningTex->LoadFromFile("C:/dev/Luxia/Editor/resources/Running.png");
+
 		NoImageTex = Luxia::Platform::Assets::CreateTexture();
 		NoImageTex->LoadFromFile("C:/dev/Luxia/Editor/resources/asset_icons/NoImage.png");
 
@@ -107,6 +110,7 @@ namespace Editor::Layers {
 		PlayTex->Unload();
 		PauseTex->Unload();
 		NoImageTex->Unload();
+		RunningTex->Unload();
 	}
 	void EditorLayer::OnUpdate() {
 		UpdateSelectedConditions();
@@ -207,11 +211,33 @@ namespace Editor::Layers {
 
 			// Put these buttons in the middle
 			ImVec2 avail = ImGui::GetContentRegionAvail();
-			ImVec2 size = ImGui::GetItemRectSize();
-			ImGui::SetCursorPosX((avail.x / 2.0f) - 10);
-			ImGui::SetCursorPosY(0);
-			ImGui::Image((ImTextureRef)PlayTex->texID, ImVec2(size.y, size.y), ImVec2(0, 0), ImVec2(1, 1));
-			ImGui::Image((ImTextureRef)PauseTex->texID, ImVec2(size.y, size.y), ImVec2(0, 0), ImVec2(1, 1));
+			float size = ImGui::GetFrameHeight() - 5;
+			if (scene_manager->running) {
+				ImGui::SetCursorPosX((avail.x / 2.0f) - ((size* 3) / 2));
+				ImGui::Image((ImTextureRef)RunningTex->texID, ImVec2(size + 5, size + 5), ImVec2(0, 0), ImVec2(1, 1));
+			}
+			else
+				ImGui::SetCursorPosX((avail.x / 2.0f) - ((size * 2) / 2));
+
+
+
+			if (ImGui::ImageButton("##PlayButton", (ImTextureRef)PlayTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
+				scene_manager->running = scene_manager->running ? false : true;
+				if (scene_manager->running) {
+					// Should create a seperate instance or something similar
+				}
+				else {
+					// Should end the current scene and reset it
+					auto scene = scene_manager->GetActiveScene();
+					if (scene) {
+						scene->End();
+						scene_manager->SetActiveScene(scene, false);
+					}
+				}
+			}
+			if (ImGui::ImageButton("##PauseButton", (ImTextureRef)PauseTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
+				// Huh
+			}
 
 			ImGui::EndMenuBar();
 			
@@ -245,9 +271,14 @@ namespace Editor::Layers {
 		}
 
 		if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL) && Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
-			scene_manager->SaveActiveScene();
-			std::filesystem::path p = project_manager->GetProjectPath();
-			scene_manager->SaveBuildOrder(p);
+			if (!scene_manager->running) {
+				scene_manager->SaveActiveScene();
+				std::filesystem::path p = project_manager->GetProjectPath();
+				scene_manager->SaveBuildOrder(p);
+			}
+			else {
+				LX_ERROR("EditorLayer: Cant save scene while it is running!");
+			}
 		}
 
 		for (auto& layer_name : layers_to_remove) {
@@ -266,6 +297,12 @@ namespace Editor::Layers {
 		dispatcher.Dispatch<Luxia::ProfilerRequestEvent>([&](Luxia::ProfilerRequestEvent& event) {
 			give_profiler_response = true;
 			return false; // Check each event type and update input
+			});
+
+		dispatcher.Dispatch<Luxia::WindowCloseEvent>([&](Luxia::WindowCloseEvent& event) {
+			if(!scene_manager->running)
+				scene_manager->SaveActiveScene();
+			return false;
 			});
 
 		// FORWARD EVENT WINDOWS
