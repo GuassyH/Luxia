@@ -14,13 +14,13 @@ namespace Editor::Gizmos {
 		orgioMaterial = Luxia::Platform::Assets::CreateMaterial();
 
 		xMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		xMaterial->color = glm::vec4(255.0f / 255.0f, 112.0f / 255.0f, 122.0f / 255.0f, 1.0f);
+		xMaterial->color = glm::vec4(1.0f, 0.4392f, 0.4784f, 1.0f);
 
 		yMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		yMaterial->color = glm::vec4(142.0f / 255.0f, 255.0f / 255.0f, 142.0f / 255.0f, 1.0f);
+		yMaterial->color = glm::vec4(0.5569f, 1.0f, 0.5569f, 1.0f);
 
 		zMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		zMaterial->color = glm::vec4(45.0f / 255.0f, 230.0f / 255.0f, 255.0f / 255.0f, 1.0f);
+		zMaterial->color = glm::vec4(0.1765f, 0.9020f, 1.0f, 1.0f);
 
 		orgioMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
 		orgioMaterial->color = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);

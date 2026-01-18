@@ -353,7 +353,7 @@ namespace Editor::Panels {
 				glm::vec3 cam_to_entity = cam.transform->local_position + (glm::normalize(ent.transform->local_position - cam.transform->local_position) * 15.0f);
 				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
 				
-				glm::quat entityRot = ent.transform->rotation;
+				glm::quat entityRot = ent.transform->world_rotation;
 
 				for (auto part : gizmos[editType].get()->gizmo_parts) {
 					if (part->transform) {

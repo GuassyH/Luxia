@@ -11,19 +11,16 @@
 namespace Luxia::Platform::OpenGL {
 
 	// Only update on change?
-	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float fovdeg, const int width, const int height, const float nearPlane, const float farPlane) {
+	void GL_Camera::UpdateMatrix(const glm::vec3& pos, const Luxia::Components::Transform* transform, const float fovdeg, const int width, const int height, const float nearPlane, const float farPlane) {
 		// Initialise the matrices
-		m_View = glm::lookAt(pos, pos + rot, glm::vec3(0.0f, 1.0f, 0.0f));
+		m_View = glm::lookAt(pos, pos + transform->forward, transform->up);
 		m_Proj = glm::perspective(glm::radians(fovdeg), static_cast<float>(width) / static_cast<float>(height), nearPlane, farPlane);
 		FOVdeg = fovdeg;
 
 		// Skips recalculating the other vectors unecessarily 
-		glm::vec3 f = glm::normalize(rot);
-		if (Forward != f) {
-			Forward = f;
-			Right = glm::normalize(glm::cross(Forward, glm::vec3(0.0f, 1.0f, 0.0f)));
-			Up = glm::normalize(glm::cross(Right, Forward));
-		}
+		Forward = transform->forward;
+		Right = transform->right;
+		Up = transform->up;
 	}
 	
 	// Feels wierd? Why even have abstract camera now

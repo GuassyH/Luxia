@@ -22,12 +22,13 @@ namespace Luxia::Components {
 		glm::vec3 local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f); // (get & set)
 		glm::vec3 local_scale = glm::vec3(1.0f); // (get & set)
 
-		glm::quat rotation = glm::quat(); // rotation quat
+		glm::quat local_rotation = glm::quat(); // rotation quat
+		glm::quat world_rotation = glm::quat();
 
 		// Global variables (get)
-		glm::vec3 world_forward = glm::vec3(0.0f, 0.0f, 1.0f);
-		glm::vec3 world_right = glm::vec3(1.0f, 0.0f, 0.0f);
-		glm::vec3 world_up = glm::vec3(0.0f, 1.0f, 0.0f);
+		glm::vec3 forward = glm::vec3(0.0f, 0.0f, 1.0f);
+		glm::vec3 right = glm::vec3(1.0f, 0.0f, 0.0f);
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 		
 		glm::vec3 world_position = glm::vec3(0.0f); // (get only)
 		glm::vec3 world_euler_angles = glm::vec3(0.0f); // (get only)
@@ -107,10 +108,7 @@ namespace Luxia::Components {
 			if (parent) {
 				world_euler_angles = parent->local_euler_angles + local_euler_angles;
 				world_position = parent->local_position + local_position;
-				if(glm::length(parent->local_scale) != 0)
-					world_scale = local_scale / parent->local_scale;
-				else
-					local_scale = glm::vec3(1.0f);
+				world_scale = local_scale * parent->local_scale;
 			}
 			else {
 				world_euler_angles = local_euler_angles;
@@ -118,21 +116,28 @@ namespace Luxia::Components {
 				world_scale = local_scale;
 			}
 
-			world_forward = GetRotVec();
-			world_right = glm::normalize(glm::cross(world_forward, glm::vec3(0.0f, 1.0f, 0.0f)));
-			world_up = glm::normalize(glm::cross(world_right, world_forward));
-
 			// Build local matrix
-			rotation = glm::quat(glm::radians(local_euler_angles));
+			glm::vec3 euler = local_euler_angles;
+			euler.y = -euler.y;
+			local_rotation = glm::quat(glm::radians(euler));
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), local_scale);
-			glm::mat4 rotationMatrix = glm::mat4_cast(rotation);
+			glm::mat4 rotationMatrix = glm::mat4_cast(local_rotation);
 			glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), local_position);
 			glm::mat4 localModelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
-			if (HasParent())
+			if (HasParent()) {
 				modelMatrix = parent->GetMatrix() * localModelMatrix;
-			else
+				world_rotation = parent->world_rotation * local_rotation;
+			}
+			else {
 				modelMatrix = localModelMatrix;
+				world_rotation = local_rotation;
+			}
+
+			forward = glm::normalize(world_rotation * glm::vec3(0, 0, -1));
+			forward.y = -forward.y;
+			up = glm::normalize(world_rotation * glm::vec3(0, 1, 0));
+			right = glm::normalize(world_rotation * glm::vec3(1, 0, 0));
 
 			// NOW update children
 			for (auto child : children)
@@ -143,8 +148,8 @@ namespace Luxia::Components {
 			float pitch = 0;
 			float yaw = 0;
 			if (local) {
-				pitch = glm::radians(world_euler_angles.x);
-				yaw = glm::radians(world_euler_angles.y);
+				pitch = glm::radians(local_euler_angles.x);
+				yaw = glm::radians(local_euler_angles.y);
 			}
 			else {
 				pitch = glm::radians(world_euler_angles.x);
@@ -207,6 +212,7 @@ namespace Luxia::Components {
 			ImGui::DragFloat3("Position",	&local_position.x, 0.1f);
 			ImGui::DragFloat3("Rotation",	&local_euler_angles.x, 0.1f);
 			ImGui::DragFloat3("Scale",		&local_scale.x, 0.1f);
+
 		}
 
 	private:

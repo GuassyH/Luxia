@@ -73,10 +73,17 @@ namespace Editor::Scripts {
 			if (Luxia::Input::IsKeyPressed(DownKey))
 				skywards -= 1.0f;
 
-			moveDir = transform->world_right * horizontal + transform->world_forward * vertical;
+			moveDir = transform->right * horizontal + transform->forward * vertical;
 			moveDir.y += skywards;
 			
 			transform->local_position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
+
+			/*
+			LX_INFO("[F] = {}x {}y {}z\n[U] = {}x {}y {}z\n[R] = {}x {}y {}z",
+				transform->forward.x, transform->forward.y, transform->forward.z, 
+				transform->up.x, transform->up.y, transform->up.z, 
+				transform->right.x, transform->right.y, transform->right.z);
+			*/
 		}
 
 		double last_mouseX = 0.0;

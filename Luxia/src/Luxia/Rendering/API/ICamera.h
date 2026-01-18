@@ -21,7 +21,7 @@ namespace Luxia {
 		virtual ~ICamera() = default;
 
 		virtual std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> rend, const bool useSkybox, const int width, const int height, const glm::vec4& clear_col) = 0;
-		virtual void UpdateMatrix(const glm::vec3& pos, const glm::vec3& rot, const float fovdeg, const int width, const int height, const float nearPlane, const float farPlane) = 0;
+		virtual void UpdateMatrix(const glm::vec3& pos, const Luxia::Components::Transform* transform, const float fovdeg, const int width, const int height, const float nearPlane, const float farPlane) = 0;
 
 		const glm::mat4& GetViewMat() const { return m_View; }
 		const glm::mat4& GetProjMat() const { return m_Proj; }

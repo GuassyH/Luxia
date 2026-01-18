@@ -23,7 +23,7 @@ namespace Luxia::Components {
 		}
 
 		std::shared_ptr<ITexture> Render(const std::shared_ptr<Luxia::Scene>& scene, const std::shared_ptr<Luxia::Rendering::IRenderer>& rend) {
-			camera->UpdateMatrix(transform->local_position, transform->GetRotVec(), FOVdeg, width, height, nearPlane, farPlane);
+			camera->UpdateMatrix(transform->local_position, transform, FOVdeg, width, height, nearPlane, farPlane);
 			return camera->Render(scene, rend, useSkybox, width, height, clearColor);
 		}
 
