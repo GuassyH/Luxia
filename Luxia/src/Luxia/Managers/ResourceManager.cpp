@@ -33,8 +33,8 @@ namespace Luxia {
         NullShader->name = "null_shader";
 
         NullMaterial = Platform::Assets::CreateMaterial(NullShader);
+        NullMaterial->guid = GUID(657845365465); 
         NullMaterial->name = "null_material";
-        NullMaterial->guid = GUID(657845365465);
 
         DefaultLitShader = Platform::Assets::CreateShader("C:/dev/Luxia/Luxia/resources/shaders/default_lit.frag", "C:/dev/Luxia/Luxia/resources/shaders/default_lit.vert");
         DefaultLitShader->guid = GUID(1265423432);

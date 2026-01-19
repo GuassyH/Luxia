@@ -40,7 +40,12 @@ namespace Luxia {
 			}
 		}
 
-		// Iterate through assets and do what you need
+		
+		// Add Resources
+		for (auto& asset : Luxia::ResourceManager::ResourcesVector) {
+			if (!asset_pool.contains(asset->guid))
+				asset_pool[asset->guid] = asset;
+		}
 
 		// Since shaders should be loaded now, we can now load the material files
 		for (auto [guid, assetfile] : assetfile_pool) {
@@ -66,10 +71,6 @@ namespace Luxia {
 			}
 		}
 
-		for (auto& asset : Luxia::ResourceManager::ResourcesVector) {
-			if(!asset_pool.contains(asset->guid))
-				asset_pool[asset->guid] = asset;
-		}
 
 
 		return true; 

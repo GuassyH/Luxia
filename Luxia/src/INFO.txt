@@ -8,7 +8,7 @@ IMPORTANT
 
 - Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
 
-- Fixed rotation stuff in transform, more stuff could be worked on. Like not +ing euler angles
+- Thumbnail for sphere is... weird
 
 --- Issues ---
 
