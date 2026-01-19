@@ -1,6 +1,6 @@
 #include "lxpch.h"
 #include "AssetManager.h"
-
+#include "ResourceManager.h"
 
 namespace Luxia {
 
@@ -65,6 +65,12 @@ namespace Luxia {
 				}
 			}
 		}
+
+		for (auto& asset : Luxia::ResourceManager::ResourcesVector) {
+			if(!asset_pool.contains(asset->guid))
+				asset_pool[asset->guid] = asset;
+		}
+
 
 		return true; 
 	}

@@ -12,13 +12,11 @@ namespace Editor::Panels {
 		virtual void Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 
 		virtual void OnEvent(Luxia::Event& e) override;
-
 	private:
 		void RenderMesh(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 		void RenderMaterial(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
 		void RenderEntity(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid);
 		void RenderShader(Editor::Layers::EditorLayer* editorLayer, Luxia::GUID guid);
-
 
 		template <typename T>
 		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, void>
@@ -62,8 +60,9 @@ namespace Editor::Panels {
 		}
 
 		template <typename T>
-		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, void>
+		std::enable_if_t<std::is_base_of_v<Luxia::Assets::Asset, T>, bool>
 			DrawDropField(Editor::Layers::EditorLayer* editorLayer, WeakPtrProxy<T>& asset_to_assign, const char* label) {
+			bool changed = false;
 			std::ostringstream txt; txt << label << ": ";
 			std::string field_text = txt.str();
 
@@ -75,7 +74,6 @@ namespace Editor::Panels {
 			ImGui::SameLine();
 
 			float fieldWidth = ImGui::GetContentRegionAvail().x - (ImGui::GetWindowWidth() * 0.25f);
-
 			float bright = 2.5f;
 
 			// Push styles
@@ -88,7 +86,6 @@ namespace Editor::Panels {
 
 			// Draw the “field” as an invisible button (acts like a clickable box)
 			ImGui::Button(buttonid.c_str(), ImVec2(fieldWidth, 0));
-			
 
 			ImGui::PushID(popupid.c_str());
 			if (ImGui::BeginPopupContextItem()) {
@@ -128,6 +125,7 @@ namespace Editor::Panels {
 
 					if (editorLayer->GetAssetManager()->HasAsset<T>(payloadGUID)) {
 						asset_to_assign = editorLayer->GetAssetManager()->GetAsset<T>(payloadGUID);
+						changed = true;
 					}
 					else {
 						LX_ERROR("Inspector Panel: AssetManager does not contain Asset with guid - {}", (uint64_t)payloadGUID);
@@ -142,6 +140,7 @@ namespace Editor::Panels {
 			ImGui::PopStyleVar(2);
 			ImGui::PopStyleColor(4);
 
+			return changed;
 		}
 
 	};

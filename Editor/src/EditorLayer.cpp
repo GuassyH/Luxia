@@ -213,7 +213,7 @@ namespace Editor::Layers {
 			ImVec2 avail = ImGui::GetContentRegionAvail();
 			float size = ImGui::GetFrameHeight() - 5;
 			if (scene_manager->running) {
-				ImGui::SetCursorPosX((avail.x / 2.0f) - ((size* 3) / 2));
+				ImGui::SetCursorPosX((avail.x / 2.0f) - (size * 2 / 2) - (size + 13));
 				ImGui::Image((ImTextureRef)RunningTex->texID, ImVec2(size + 5, size + 5), ImVec2(0, 0), ImVec2(1, 1));
 			}
 			else
@@ -222,7 +222,12 @@ namespace Editor::Layers {
 
 
 			if (ImGui::ImageButton("##PlayButton", (ImTextureRef)PlayTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
+				// Save scene before setting running to true
+				if(!scene_manager->running)
+					scene_manager->SaveActiveScene();
+				
 				scene_manager->running = scene_manager->running ? false : true;
+				
 				if (scene_manager->running) {
 					// Should create a seperate instance or something similar
 				}
@@ -236,7 +241,7 @@ namespace Editor::Layers {
 				}
 			}
 			if (ImGui::ImageButton("##PauseButton", (ImTextureRef)PauseTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
-				// Huh
+				LX_WARN("Pause button does nothing as of current");
 			}
 
 			ImGui::EndMenuBar();

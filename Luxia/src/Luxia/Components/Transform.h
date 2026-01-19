@@ -144,25 +144,6 @@ namespace Luxia::Components {
 				child->UpdateMatrix();
 		}
 
-		glm::vec3 GetRotVec(bool local = false) const {
-			float pitch = 0;
-			float yaw = 0;
-			if (local) {
-				pitch = glm::radians(local_euler_angles.x);
-				yaw = glm::radians(local_euler_angles.y);
-			}
-			else {
-				pitch = glm::radians(world_euler_angles.x);
-				yaw = glm::radians(world_euler_angles.y);
-			}
-
-			glm::vec3 direction = glm::vec3(0.0f);
-			direction.z = -(cos(pitch) * cos(yaw));
-			direction.y = -sin(pitch);
-			direction.x = (cos(pitch) * sin(yaw));
-
-			return glm::normalize(direction);
-		}
 		glm::vec3 VecToDeg(const glm::vec3& rad) {
 			return glm::degrees(rad);
 		}
@@ -176,6 +157,11 @@ namespace Luxia::Components {
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			AddComponent(Args&&... args) {
 			// assert(reg.valid(ent_id));
+			if (reg->try_get<T>(ent_id)) {
+				LX_CORE_ERROR("Tried to add already added component to ent - {}", (uint64_t)ent_guid);
+				return reg->get<T>(ent_id);
+			}
+
 			auto& cb = reg->emplace<T>(ent_id, std::forward<Args>(args)...);
 			Component* c = &cb;
 			c->transform = this;

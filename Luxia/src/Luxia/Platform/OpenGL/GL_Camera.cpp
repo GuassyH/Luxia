@@ -47,7 +47,7 @@ namespace Luxia::Platform::OpenGL {
 			skybox->shader->SetFloat("FOVdeg", FOVdeg);
 				
 			if (mc) {
-				skybox->shader->SetVec3("sunDir", mc->transform->GetRotVec());
+				skybox->shader->SetVec3("sunDir", mc->transform->forward);
 				skybox->shader->SetVec4("sunColor", mc->color);
 			}
 			else {

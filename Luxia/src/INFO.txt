@@ -10,6 +10,10 @@ IMPORTANT
 
 - Fixed rotation stuff in transform, more stuff could be worked on. Like not +ing euler angles
 
+--- Issues ---
+
+- When starting and stopping scene through editor memory usage goes up and stays up. Something isnt being cleared when scene is changed
+
 ---  Next  ---
 
 - Rework how scene lifetime works.

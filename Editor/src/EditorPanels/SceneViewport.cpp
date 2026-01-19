@@ -122,7 +122,6 @@ namespace Editor::Panels {
 			ImVec2 windowSize = ImGui::GetContentRegionAvail();
 
 			// Camera aspect ratio (width / height)
-
 			ImVec2 imageSize = ImGui::GetWindowSize();	imageSize.y -= 20; // Some sort of padding
 
 			ImVec2 imagePosInWindow;
@@ -143,7 +142,6 @@ namespace Editor::Panels {
 
 			// Picking
 			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
-
 				if (scene) {
 					glm::vec2 rp = Luxia::Screen::GetMousePosRect(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), glm::vec2(cam.width, cam.height), Luxia::Input::GetMousePosition());
 					Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
@@ -198,7 +196,7 @@ namespace Editor::Panels {
 
 			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
 				if (focused_t) {
-					cam.transform->local_position = focused_t->local_position + (cam.transform->GetRotVec() * -10.0f);
+					cam.transform->local_position = focused_t->local_position + (cam.transform->forward * -10.0f);
 				}
 			}
 		}
@@ -256,6 +254,7 @@ namespace Editor::Panels {
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
 		// Get the important stuff
 		Luxia::Rendering::IRenderer* renderer = editorLayer->GetRenderer().get();
+		cam_ent->UpdateMatrix();
 		auto& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
 		
 		// Rebind
@@ -270,8 +269,7 @@ namespace Editor::Panels {
 
 		/// With Depth
 
-		// Grid
-		/*
+		/* Grid
 		auto& mr = grid_gizmo->gizmo_parts[0]->transform->GetComponent<Luxia::Components::MeshRenderer>();
 		mr.transform->local_position = cam.transform->local_position;
 		mr.transform->local_position.y = 0.0f;

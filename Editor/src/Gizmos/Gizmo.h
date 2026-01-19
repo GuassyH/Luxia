@@ -181,14 +181,14 @@ namespace Editor::Gizmos {
 
 			std::shared_ptr<RotateGizmoPart> rot_entity_y = std::make_shared<RotateGizmoPart>();
 			rot_entity_y->transform = Create(reg);
-			rot_entity_y->transform->local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f);
+			rot_entity_y->transform->local_euler_angles = glm::vec3(0.0f, 90.0f, 0.0f);
 			rot_entity_y->transform->local_scale = glm::vec3(0.9f);
 			rot_entity_y->transform->AddComponent<Luxia::Components::MeshRenderer>(ring_mesh, GizmoResources::yMaterial);
 			rot_entity_y->responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			std::shared_ptr<RotateGizmoPart> rot_entity_z = std::make_shared<RotateGizmoPart>();
 			rot_entity_z->transform = Create(reg);
-			rot_entity_z->transform->local_euler_angles = glm::vec3(-90.0f, 0.0f, 0.0f);
+			rot_entity_z->transform->local_euler_angles = glm::vec3(-90.0f, 180.0f, 0.0f);
 			rot_entity_z->transform->local_scale = glm::vec3(0.9f);
 			rot_entity_z->transform->AddComponent<Luxia::Components::MeshRenderer>(ring_mesh, GizmoResources::zMaterial);
 			rot_entity_z->responsible_axis = glm::vec3(0.0f, 0.0f, 1.0f);

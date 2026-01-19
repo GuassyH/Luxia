@@ -47,7 +47,7 @@ namespace Luxia {
 		SceneSerializer serializer(m_sceneFile, asset_manager);
 		serializer.Deserialize();
 
-		LX_CORE_INFO("Loaded Scene: {}", (uint64_t)m_sceneFile->guid);
+		LX_CORE_INFO("Loaded Scene: {}", (uint64_t)active_scene->guid);
 
 		return GetActiveScene();
 	}
@@ -68,8 +68,8 @@ namespace Luxia {
 
 		SceneSerializer serializer(m_scene->scene_file.lock(), asset_manager);
 		serializer.Deserialize();
-
-		LX_CORE_INFO("Loaded Scene: {}", 0);
+		
+		LX_CORE_INFO("Loaded Scene: {}", (uint64_t)active_scene->guid);
 
 		return GetActiveScene();
 	}

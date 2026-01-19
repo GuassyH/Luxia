@@ -377,8 +377,11 @@ namespace Editor::Panels {
 				ImGui::Separator();
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
-						auto mat = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(asset_view->selected_folder, false, "NewMaterial");
+						auto matguid = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(asset_view->selected_folder, false, "NewMaterial");
+						auto mat = std::dynamic_pointer_cast<Luxia::IMaterial>(editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::MaterialFile>(matguid)->assets[0]);
+						mat->shader = editorLayer->GetAssetManager()->GetAsset<Luxia::IShader>(Luxia::ResourceManager::DefaultLitShader->guid);
 						asset_view->RefreshAPFs(editorLayer);
+						editorLayer->CreateThumbnails();
 					}
 					ImGui::CloseCurrentPopup();
 				}
@@ -387,6 +390,7 @@ namespace Editor::Panels {
 						auto scene = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::SceneType>(asset_view->selected_folder, false, "NewScene");
 						editorLayer->GetSceneManager()->scene_files[scene] = (editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::SceneFile>(scene));
 						asset_view->RefreshAPFs(editorLayer);
+						editorLayer->CreateThumbnails();
 					}
 					ImGui::CloseCurrentPopup();
 				}

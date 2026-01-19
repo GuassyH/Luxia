@@ -33,6 +33,8 @@ namespace Luxia {
 	
 		static std::shared_ptr<Luxia::IShader> DefaultSkyboxShader;
 		static std::shared_ptr<Luxia::IMaterial> DefaultSkyboxMaterial;
+
+		static std::vector<std::shared_ptr<Luxia::Assets::Asset>> ResourcesVector;
 	};
 }
 

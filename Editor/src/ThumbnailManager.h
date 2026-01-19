@@ -98,14 +98,18 @@ namespace Editor {
 			glm::mat4 view = glm::lookAt(glm::vec3(0.57735f, 0.57735f, 0.57735f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0,1,0));
 			glm::mat4 proj = glm::perspective(glm::radians(70.0f), 1.0f, 0.1f, 10.0f);
 
-			if (Luxia::ResourceManager::DefaultSphere.get() && mat->shader && mat) {
-				mat->Use(model, view, proj);
-				glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBuffID);
-				mat->shader->SetInt("numLights", 1);
-				renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultSphere.get());
+			if (Luxia::ResourceManager::DefaultSphere.get()) {
+				if (mat->shader && mat) {
+					mat->Use(model, view, proj);
+					glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, lightBuffID);
+					mat->shader->SetInt("numLights", 1);
+					renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultSphere.get());
+				}
+				else {
+					Luxia::ResourceManager::NullMaterial->Use(model, view, proj);
+					renderer->RenderMeshPure(*Luxia::ResourceManager::DefaultSphere.get());
+				}
 			}
-			else
-				LX_ERROR("Thumbnail for Mat (FBO: {}) failed", texture->GetFBO());
 
 		}
 

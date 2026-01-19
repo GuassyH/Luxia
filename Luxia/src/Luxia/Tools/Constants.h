@@ -53,8 +53,8 @@ namespace Luxia::Constants {
                         float x = xy * cosf(sectorAngle);
                         float y = xy * sinf(sectorAngle);
 
-                        glm::vec3 pos(x, y, z);
-                        glm::vec3 normal = glm::normalize(pos);
+                        glm::vec3 pos = glm::normalize(glm::vec3(x, y, z)) * 0.5f;
+                        glm::vec3 normal = pos;
                         glm::vec2 texCoord(
                             static_cast<float>(j) / sectorCount,
                             static_cast<float>(i) / stackCount

@@ -7,10 +7,10 @@
 #include "Luxia/Scene/SceneSerializer.h"
 
 namespace Editor {
-	class EditorApp : public Luxia::Application {
+	class LuxiaEditorApp : public Luxia::Application {
 	public:
-		EditorApp() = default;
-		~EditorApp() = default;
+		LuxiaEditorApp() = default;
+		~LuxiaEditorApp() = default;
 
 		virtual void Startup() override {
 			// Needed to make sure context is current, otherwise, crash, :(
@@ -26,7 +26,7 @@ namespace Editor {
 }
 
 std::unique_ptr<Luxia::Application> Luxia::CreateApplication() {
-	std::unique_ptr<Luxia::Application> app = std::make_unique<Editor::EditorApp>();
+	std::unique_ptr<Luxia::Application> app = std::make_unique<Editor::LuxiaEditorApp>();
 	std::filesystem::path new_path = "E:/BuiltLuxia/Sandbox";
 	app->GetProjectManager()->OpenProject(new_path);
 	app->GetProjectManager()->GetSceneManager()->running = false; // Makes sure that the initial scene isnt loaded by the engine, but rather the editor

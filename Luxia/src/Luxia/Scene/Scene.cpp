@@ -72,6 +72,7 @@ namespace Luxia {
 			}
 
 			reg.remove<Luxia::Components::Transform>(ent.transform->ent_id);
+			// reg.destroy(ent.transform->ent_id);
 
 			runtime_entities.erase(EntityGUID);
 		}
@@ -89,6 +90,7 @@ namespace Luxia {
 
 		runtime_entities.clear();
 		reg.clear();
+		toDelete.clear();
 		return true;
 	}
 

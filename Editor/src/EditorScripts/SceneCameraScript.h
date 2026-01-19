@@ -24,7 +24,6 @@ namespace Editor::Scripts {
 		MovementPresets movement_preset = MovementPresets::Me;
 
 		void Move() {
-			transform->UpdateMatrix();
 
 			horizontal = 0.0f;
 			vertical = 0.0f;

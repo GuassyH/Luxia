@@ -184,21 +184,24 @@ namespace Editor::Panels {
 					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Cube", editorLayer, scene);
 					auto& mr = new_entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
-					// mr.material = Luxia::Resources::DefaultMaterial();
+					mr.mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(Luxia::ResourceManager::DefaultCube->guid);
+					mr.material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(Luxia::ResourceManager::DefaultLitMaterial->guid);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Sphere")) {
 					// Does Nothing
 					auto& new_entity = CreateHierarchyEntity("Sphere", editorLayer, scene);
 					auto& mr = new_entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
-					// mr.material = Luxia::Resources::DefaultMaterial();
+					mr.mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(Luxia::ResourceManager::DefaultSphere->guid);
+					mr.material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(Luxia::ResourceManager::DefaultLitMaterial->guid);
 					ImGui::CloseCurrentPopup();
 				}
-				if (ImGui::MenuItem("Quad")) {
+				if (ImGui::MenuItem("Plane")) {
 					// Does Nothing
-					auto& new_entity = CreateHierarchyEntity("Quad", editorLayer, scene);
+					auto& new_entity = CreateHierarchyEntity("Plane", editorLayer, scene);
 					auto& mr = new_entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
-					// mr.material = Luxia::Resources::DefaultMaterial();
+					mr.mesh = editorLayer->GetAssetManager()->GetAsset<Luxia::Mesh>(Luxia::ResourceManager::DefaultPlane->guid);
+					mr.material = editorLayer->GetAssetManager()->GetAsset<Luxia::IMaterial>(Luxia::ResourceManager::DefaultLitMaterial->guid);
 					ImGui::CloseCurrentPopup();
 				}
 
