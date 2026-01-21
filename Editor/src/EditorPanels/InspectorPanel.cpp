@@ -120,20 +120,21 @@ namespace Editor::Panels {
 		// Diffuse Texture
 		DrawDropField<Luxia::ITexture>(editorLayer, mat->diffuse_texture, "Diffuse");
 		ImGui::SameLine();
-		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
-		ImGui::Image(mat->diffuse_texture ? (ImTextureRef)mat->diffuse_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
+		float av = ImGui::GetContentRegionAvail().x; 
+		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - av);
+		ImGui::Image(mat->diffuse_texture ? (ImTextureRef)mat->diffuse_texture->texID : editorLayer->NoImageTex->texID, ImVec2(av, av)); // should draw "no assigned tex@
 
 		// Specular Texture
 		DrawDropField<Luxia::ITexture>(editorLayer, mat->specular_texture, "Specular");
 		ImGui::SameLine();
-		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
-		ImGui::Image(mat->specular_texture ? (ImTextureRef)mat->specular_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
+		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - av);
+		ImGui::Image(mat->specular_texture ? (ImTextureRef)mat->specular_texture->texID : editorLayer->NoImageTex->texID, ImVec2(av, av)); // should draw "no assigned tex@
 		
 		// Normal Texture
 		DrawDropField<Luxia::ITexture>(editorLayer, mat->normal_texture, "Normals");
 		ImGui::SameLine();
-		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 100);
-		ImGui::Image(mat->normal_texture ? (ImTextureRef)mat->normal_texture->texID : editorLayer->NoImageTex->texID, ImVec2(100, 100)); // should draw "no assigned tex@
+		ImGui::SetCursorPosX(ImGui::GetWindowWidth() - av);
+		ImGui::Image(mat->normal_texture ? (ImTextureRef)mat->normal_texture->texID : editorLayer->NoImageTex->texID, ImVec2(av, av)); // should draw "no assigned tex@
 		
 		if (ImGui::CollapsingHeader("Properties", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGui::ColorEdit4("Color", &mat->color.r);

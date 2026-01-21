@@ -6,8 +6,6 @@
 #include "AssetViewPanels/AssetFolderTree.h"
 #include "AssetViewPanels/AssetViewer.h"
 
-
-
 namespace Editor::Panels {
 	static int selected_scene_index;
 

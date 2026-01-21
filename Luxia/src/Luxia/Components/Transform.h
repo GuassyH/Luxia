@@ -49,6 +49,7 @@ namespace Luxia::Components {
 			return false;
 		}
 
+		// THE RETRANSFORM IS WRONG
 		Transform* SetParent(Transform* new_parent, bool change_translate = true) {
 			// If same parent, nothing to do
 			if (parent == new_parent)
@@ -65,26 +66,26 @@ namespace Luxia::Components {
 
 			// Recalculate position and stuff
 			if (parent && change_translate) {
+				local_scale *= parent->world_scale;
 				local_position += parent->world_position;
 				local_euler_angles += parent->world_euler_angles;
-				if (glm::length(parent->world_scale) != 0)
-					local_scale /= parent->world_scale;
-				else
-					local_scale = glm::vec3(1.0f);
 			}
 			
 			// Assign new parent
 			parent = new_parent;
 
-			// Add to new parent's children if not null
+			// Add to new parent's children if not null (/ setting parent to world)
 			if (parent) {
 				parent->children.push_back(this);
 
 				if (change_translate) {
 					// Recalculate position and stuff
-					local_position -= parent->local_position;
-					local_euler_angles -= parent->local_euler_angles;
-					local_scale *= parent->local_scale;
+					local_scale.x /= parent->world_scale.x != 0 ? parent->world_scale.x : 1.0f;
+					local_scale.y /= parent->world_scale.y != 0 ? parent->world_scale.y : 1.0f;
+					local_scale.z /= parent->world_scale.z != 0 ? parent->world_scale.z : 1.0f;
+
+					local_position -= parent->world_position;
+					local_euler_angles -= parent->world_euler_angles;
 				}
 			}
 

@@ -109,7 +109,7 @@ namespace Editor::Panels {
 					if (ImGui::BeginTooltip()) {
 						if(asset_to_assign)
 							if (editorLayer->asset_thumbnails.contains(asset_to_assign->guid))
-								ImGui::Image((ImTextureRef)editorLayer->asset_thumbnails.at(asset_to_assign->guid)->texID, ImVec2(50, 50));
+								ImGui::Image((ImTextureRef)editorLayer->asset_thumbnails.at(asset_to_assign->guid)->texID, ImVec2(50, 50), ImVec2(0, 1), ImVec2(1, 0));
 
 						ImGui::EndTooltip();
 					}

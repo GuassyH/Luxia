@@ -73,8 +73,9 @@ namespace Editor::Scripts {
 				skywards -= 1.0f;
 
 			moveDir = transform->right * horizontal + transform->forward * vertical;
+			moveDir = glm::length(moveDir) != 0 ? glm::normalize(moveDir) : glm::vec3(0);
 			moveDir.y += skywards;
-			
+
 			transform->local_position += moveDir * speed * Luxia::Core::Time::get().deltaTime;
 
 			// LX_INFO("Up = {}x {}y {}z", transform->up.x, transform->up.y, transform->up.z);
