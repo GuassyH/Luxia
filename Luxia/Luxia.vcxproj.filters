@@ -22,6 +22,9 @@
     <Filter Include="Luxia\Managers">
       <UniqueIdentifier>{054A25BC-F117-19C2-DAAB-89E8C618F526}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Luxia\Physics">
+      <UniqueIdentifier>{9A260D15-06E7-884B-CF21-D2C83BA1CD27}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Luxia\Platform">
       <UniqueIdentifier>{7CC4AFB2-6892-A3B8-5126-14DF3D937F1D}</UniqueIdentifier>
     </Filter>
@@ -39,6 +42,9 @@
     </Filter>
     <Filter Include="Luxia\Scene">
       <UniqueIdentifier>{45A6A27B-B15B-1B71-3A50-1548A6041275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Luxia\Tools">
+      <UniqueIdentifier>{A87DBB7B-1433-3471-9D27-2E4809DC2A75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +85,9 @@
     <ClInclude Include="src\Luxia\Components\ComponentRegistry.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Light.h">
+      <Filter>Luxia\Components</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
@@ -86,9 +95,6 @@
       <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\Application.h">
-      <Filter>Luxia\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Luxia\Tools\Constants.h">
       <Filter>Luxia\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Core\Core.h">
@@ -181,6 +187,9 @@
     <ClInclude Include="src\Luxia\Mesh.h">
       <Filter>Luxia</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Physics\PhysicsSystem.h">
+      <Filter>Luxia\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Platform\AssetCreation.h">
       <Filter>Luxia\Platform</Filter>
     </ClInclude>
@@ -256,9 +265,13 @@
     <ClInclude Include="src\Luxia\Scene\SceneSerializer.h">
       <Filter>Luxia\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Tools\Constants.h">
+      <Filter>Luxia\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Tools\Screen.h">
+      <Filter>Luxia\Tools</Filter>
+    </ClInclude>
     <ClInclude Include="src\lxpch.h" />
-    <ClInclude Include="src\Luxia\Tools\Screen.h" />
-    <ClInclude Include="src\Luxia\Components\Light.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

@@ -22,6 +22,9 @@
     <Filter Include="src\EditorScripts">
       <UniqueIdentifier>{4B8C4F8B-B7A2-4D21-001A-D9426C6F1EA9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Gizmos">
+      <UniqueIdentifier>{35F48C12-21AC-CE5F-8AB3-A7BB768A6950}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h">
@@ -54,18 +57,24 @@
     <ClInclude Include="src\EditorPanels\SceneViewport.h">
       <Filter>src\EditorPanels</Filter>
     </ClInclude>
+    <ClInclude Include="src\EditorPanels\ShoutoutPanel.h">
+      <Filter>src\EditorPanels</Filter>
+    </ClInclude>
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h">
       <Filter>src\EditorScripts</Filter>
     </ClInclude>
+    <ClInclude Include="src\Gizmos\Gizmo.h">
+      <Filter>src\Gizmos</Filter>
+    </ClInclude>
     <ClInclude Include="src\IEditorPanel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SystemFuncs.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\ThumbnailManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Gizmos\Gizmo.h" />
-    <ClInclude Include="src\EditorPanels\ShoutoutPanel.h" />
-    <ClInclude Include="src\SystemFuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c">
@@ -101,10 +110,14 @@
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp">
       <Filter>src\EditorPanels</Filter>
     </ClCompile>
+    <ClCompile Include="src\EditorPanels\ShoutoutPanel.cpp">
+      <Filter>src\EditorPanels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gizmos\Gizmo.cpp">
+      <Filter>src\Gizmos</Filter>
+    </ClCompile>
     <ClCompile Include="src\LuxiaEditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Gizmos\Gizmo.cpp" />
-    <ClCompile Include="src\EditorPanels\ShoutoutPanel.cpp" />
   </ItemGroup>
 </Project>

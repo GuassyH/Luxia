@@ -83,6 +83,7 @@ project "Luxia"
 		"%{prj.name}/vendor/imgui",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/vendor/yaml-cpp/include",
+		"%{prj.name}/vendor/Jolt/include",
 	}
 
 	links { "LuxiaVendor" }
@@ -108,11 +109,16 @@ project "Luxia"
 		}
 
 		
-		libdirs { "Luxia/vendor/glfw", "Luxia/vendor/assimp/lib" }
+		libdirs { 
+			"Luxia/vendor/glfw", 
+			"Luxia/vendor/assimp/lib",
+			"Luxia/vendor/Jolt/Build/Windows/Debug"
+		}
 		links { 
 			"glfw3dll",
 			"opengl32", 
 			"assimp-vc143-mtd",
+			"Jolt",
 		}
 
 	-- Specify how to build different configs
@@ -161,19 +167,22 @@ project "Editor"
 		"Luxia/vendor/yaml-cpp/include",
 		"Luxia/vendor/glm",
 		"Luxia/src",
+		"Luxia/vendor/Jolt/include",
 		"Editor/src",
 	}
 
 	libdirs {
 		"Luxia/vendor/glfw",
 		"Luxia/vendor/assimp/lib",
+		"Luxia/vendor/Jolt/Build/Windows/Debug",
 	}
 	links{
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
 		"assimp-vc143-mtd",
-		"glfw3dll"
+		"glfw3dll",
+		"Jolt"
 	}
 
 	filter "system:windows"

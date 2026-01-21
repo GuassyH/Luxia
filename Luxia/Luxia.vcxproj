@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;vendor\yaml-cpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;vendor\yaml-cpp\include;vendor\Jolt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -91,8 +91,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;yaml-cppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;vendor\yaml-cpp\build\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;Jolt.lib;yaml-cppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;vendor\Jolt\Build\Windows\Debug;vendor\yaml-cpp\build\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Debug-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -106,7 +106,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;vendor\yaml-cpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;vendor\yaml-cpp\include;vendor\Jolt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,8 +121,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;vendor\yaml-cpp\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;Jolt.lib;yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;vendor\Jolt\Build\Windows\Debug;vendor\yaml-cpp\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Release-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -136,7 +136,7 @@
       <PrecompiledHeaderFile>lxpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LUXIA_EXPORT;LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;vendor\yaml-cpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\glm;vendor\imgui;vendor\spdlog\include;vendor\yaml-cpp\include;vendor\Jolt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -151,8 +151,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;Jolt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\glfw;vendor\assimp\lib;vendor\Jolt\Build\Windows\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Distribution-windows-x86_64\Luxia\Luxia.lib</ImportLibrary>
       <AdditionalOptions>/SUBSYSTEM:CONSOLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -178,7 +178,6 @@
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
     <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Core\Application.h" />
-    <ClInclude Include="src\Luxia\Tools\Constants.h" />
     <ClInclude Include="src\Luxia\Core\Core.h" />
     <ClInclude Include="src\Luxia\Core\EntryPoint.h" />
     <ClInclude Include="src\Luxia\Core\GUID.h" />
@@ -209,6 +208,8 @@
     <ClInclude Include="src\Luxia\Managers\ResourceManager.h" />
     <ClInclude Include="src\Luxia\Managers\SceneManager.h" />
     <ClInclude Include="src\Luxia\Mesh.h" />
+    <ClInclude Include="src\Luxia\Physics\PhysicsSystem.h" />
+    <ClInclude Include="src\Luxia\Physics\PhysicsWorld.h" />
     <ClInclude Include="src\Luxia\Platform\AssetCreation.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Camera.h" />
     <ClInclude Include="src\Luxia\Platform\OpenGL\GL_Material.h" />
@@ -234,6 +235,7 @@
     <ClInclude Include="src\Luxia\Rendering\Vertex.h" />
     <ClInclude Include="src\Luxia\Scene\Scene.h" />
     <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
+    <ClInclude Include="src\Luxia\Tools\Constants.h" />
     <ClInclude Include="src\Luxia\Tools\Screen.h" />
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>
