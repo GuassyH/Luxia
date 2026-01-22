@@ -24,6 +24,8 @@ IMPORTANT
 
 --- Future ---
 
+- I want to switch to static library for a lot of the vendor products
+
 - Shadows
 
 - Maybe Deffered rendering?

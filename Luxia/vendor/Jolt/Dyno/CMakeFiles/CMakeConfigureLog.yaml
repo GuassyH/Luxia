@@ -1,0 +1,2297 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.14.23+b0019275e for .NET Framework
+      Build started 21/01/2026 23:39:25.
+      
+      Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:00.52
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/4.1.1/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.com"
+    found: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lld-link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.com"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.exe"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/lld-link.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/lld-link.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/lld-link"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/lld-link.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/lld-link.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/lld-link"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/lld-link.com"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/lld-link.exe"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/lld-link"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/lld-link.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/lld-link.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/lld-link"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link.com"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link.exe"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link"
+      - "C:/Program Files/Razer Chroma SDK/bin/lld-link.com"
+      - "C:/Program Files/Razer Chroma SDK/bin/lld-link.exe"
+      - "C:/Program Files/Razer Chroma SDK/bin/lld-link"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/lld-link.com"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/lld-link.exe"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/lld-link"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/lld-link.com"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/lld-link.exe"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/lld-link"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/lld-link.com"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/lld-link.exe"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/lld-link"
+      - "C:/Windows/System32/lld-link.com"
+      - "C:/Windows/System32/lld-link.exe"
+      - "C:/Windows/System32/lld-link"
+      - "C:/Windows/lld-link.com"
+      - "C:/Windows/lld-link.exe"
+      - "C:/Windows/lld-link"
+      - "C:/Windows/System32/wbem/lld-link.com"
+      - "C:/Windows/System32/wbem/lld-link.exe"
+      - "C:/Windows/System32/wbem/lld-link"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Windows/System32/OpenSSH/lld-link.com"
+      - "C:/Windows/System32/OpenSSH/lld-link.exe"
+      - "C:/Windows/System32/OpenSSH/lld-link"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/lld-link"
+      - "C:/Program Files/dotnet/lld-link.com"
+      - "C:/Program Files/dotnet/lld-link.exe"
+      - "C:/Program Files/dotnet/lld-link"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/lld-link.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/lld-link.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/lld-link.com"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/lld-link.exe"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/lld-link"
+      - "C:/Program Files/Git/cmd/lld-link.com"
+      - "C:/Program Files/Git/cmd/lld-link.exe"
+      - "C:/Program Files/Git/cmd/lld-link"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/lld-link.com"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/lld-link.exe"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/lld-link"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link"
+      - "C:/Program Files/CMake/bin/lld-link.com"
+      - "C:/Program Files/CMake/bin/lld-link.exe"
+      - "C:/Program Files/CMake/bin/lld-link"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/lld-link.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/lld-link.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/lld-link"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/lld-link.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/lld-link.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/lld-link"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/lld-link.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/lld-link.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/lld-link"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/lld-link.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/lld-link.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/lld-link"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/lld-link.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/lld-link.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/lld-link"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/lld-link.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/lld-link.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/lld-link"
+      - "C:/Users/haagl/.dotnet/tools/lld-link.com"
+      - "C:/Users/haagl/.dotnet/tools/lld-link.exe"
+      - "C:/Users/haagl/.dotnet/tools/lld-link"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/lld-link.com"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/lld-link.exe"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/lld-link"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.com"
+    found: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_MT"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "mt"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt.com"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt.exe"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/mt.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/mt.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/mt"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/mt.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/mt.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/mt"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/mt.com"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/mt.exe"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/mt"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/mt.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/mt.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/mt"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/mt.com"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/mt.exe"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/mt"
+      - "C:/Program Files/Razer Chroma SDK/bin/mt.com"
+      - "C:/Program Files/Razer Chroma SDK/bin/mt.exe"
+      - "C:/Program Files/Razer Chroma SDK/bin/mt"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/mt.com"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/mt.exe"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/mt"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/mt.com"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/mt.exe"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/mt"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/mt.com"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/mt.exe"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/mt"
+      - "C:/Windows/System32/mt.com"
+      - "C:/Windows/System32/mt.exe"
+      - "C:/Windows/System32/mt"
+      - "C:/Windows/mt.com"
+      - "C:/Windows/mt.exe"
+      - "C:/Windows/mt"
+      - "C:/Windows/System32/wbem/mt.com"
+      - "C:/Windows/System32/wbem/mt.exe"
+      - "C:/Windows/System32/wbem/mt"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt"
+      - "C:/Windows/System32/OpenSSH/mt.com"
+      - "C:/Windows/System32/OpenSSH/mt.exe"
+      - "C:/Windows/System32/OpenSSH/mt"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/mt.com"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/mt.exe"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/mt"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/mt.com"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/mt.exe"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/mt"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/mt"
+      - "C:/Program Files/dotnet/mt.com"
+      - "C:/Program Files/dotnet/mt.exe"
+      - "C:/Program Files/dotnet/mt"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/mt.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/mt.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/mt"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/mt.com"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/mt.exe"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/mt"
+      - "C:/Program Files/Git/cmd/mt.com"
+      - "C:/Program Files/Git/cmd/mt.exe"
+      - "C:/Program Files/Git/cmd/mt"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/mt.com"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/mt.exe"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/mt"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt"
+      - "C:/Program Files/CMake/bin/mt.com"
+      - "C:/Program Files/CMake/bin/mt.exe"
+      - "C:/Program Files/CMake/bin/mt"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/mt.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/mt.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/mt"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/mt.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/mt.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/mt"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/mt.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/mt.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/mt"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/mt.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/mt.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/mt"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/mt.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/mt.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/mt"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/mt.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/mt.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/mt"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/mt.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/mt.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/mt"
+      - "C:/Users/haagl/.dotnet/tools/mt.com"
+      - "C:/Users/haagl/.dotnet/tools/mt.exe"
+      - "C:/Users/haagl/.dotnet/tools/mt"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/mt.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/mt.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/mt"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/mt.com"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/mt.exe"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/mt"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lib"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lib.com"
+    found: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lib.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:574 (enable_language)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:547 (__windows_compiler_msvc_enable_rc)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC-CXX.cmake:6 (__windows_compiler_msvc)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXInformation.cmake:48 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_RC_COMPILER"
+    description: "RC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "rc"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/sbin/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/JoltPhysics/bin/"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/"
+      - "C:/Program Files (x86)/JoltPhysics/"
+    searched_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/rc.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/rc.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/rc"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/rc.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/rc.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/rc"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/rc.com"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/rc.exe"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/rc"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/rc.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/rc.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/rc"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/rc.com"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/rc.exe"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/rc"
+      - "C:/Program Files/Razer Chroma SDK/bin/rc.com"
+      - "C:/Program Files/Razer Chroma SDK/bin/rc.exe"
+      - "C:/Program Files/Razer Chroma SDK/bin/rc"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/rc.com"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/rc.exe"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/rc"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/rc.com"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/rc.exe"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/rc"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/rc.com"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/rc.exe"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/rc"
+      - "C:/Windows/System32/rc.com"
+      - "C:/Windows/System32/rc.exe"
+      - "C:/Windows/System32/rc"
+      - "C:/Windows/rc.com"
+      - "C:/Windows/rc.exe"
+      - "C:/Windows/rc"
+      - "C:/Windows/System32/wbem/rc.com"
+      - "C:/Windows/System32/wbem/rc.exe"
+      - "C:/Windows/System32/wbem/rc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc"
+      - "C:/Windows/System32/OpenSSH/rc.com"
+      - "C:/Windows/System32/OpenSSH/rc.exe"
+      - "C:/Windows/System32/OpenSSH/rc"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/rc.com"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/rc.exe"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/rc"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/rc.com"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/rc.exe"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/rc"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/rc"
+      - "C:/Program Files/dotnet/rc.com"
+      - "C:/Program Files/dotnet/rc.exe"
+      - "C:/Program Files/dotnet/rc"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/rc.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/rc.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/rc"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/rc.com"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/rc.exe"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/rc"
+      - "C:/Program Files/Git/cmd/rc.com"
+      - "C:/Program Files/Git/cmd/rc.exe"
+      - "C:/Program Files/Git/cmd/rc"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/rc.com"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/rc.exe"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/rc"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc"
+      - "C:/Program Files/CMake/bin/rc.com"
+      - "C:/Program Files/CMake/bin/rc.exe"
+      - "C:/Program Files/CMake/bin/rc"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/rc.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/rc.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/rc"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/rc.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/rc.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/rc"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/rc.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/rc.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/rc"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/rc.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/rc.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/rc"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/rc.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/rc.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/rc"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/rc.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/rc.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/rc"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/rc.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/rc.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/rc"
+      - "C:/Users/haagl/.dotnet/tools/rc.com"
+      - "C:/Users/haagl/.dotnet/tools/rc.exe"
+      - "C:/Users/haagl/.dotnet/tools/rc"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/rc.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/rc.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/rc"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/rc.com"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/rc.exe"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/rc"
+      - "C:/Program Files/bin/rc.com"
+      - "C:/Program Files/bin/rc.exe"
+      - "C:/Program Files/bin/rc"
+      - "C:/Program Files/sbin/rc.com"
+      - "C:/Program Files/sbin/rc.exe"
+      - "C:/Program Files/sbin/rc"
+      - "C:/Program Files/rc.com"
+      - "C:/Program Files/rc.exe"
+      - "C:/Program Files/rc"
+      - "C:/Program Files (x86)/bin/rc.com"
+      - "C:/Program Files (x86)/bin/rc.exe"
+      - "C:/Program Files (x86)/bin/rc"
+      - "C:/Program Files (x86)/sbin/rc.com"
+      - "C:/Program Files (x86)/sbin/rc.exe"
+      - "C:/Program Files (x86)/sbin/rc"
+      - "C:/Program Files (x86)/rc.com"
+      - "C:/Program Files (x86)/rc.exe"
+      - "C:/Program Files (x86)/rc"
+      - "C:/Program Files/CMake/bin/rc.com"
+      - "C:/Program Files/CMake/bin/rc.exe"
+      - "C:/Program Files/CMake/bin/rc"
+      - "C:/Program Files/CMake/sbin/rc.com"
+      - "C:/Program Files/CMake/sbin/rc.exe"
+      - "C:/Program Files/CMake/sbin/rc"
+      - "C:/Program Files/CMake/rc.com"
+      - "C:/Program Files/CMake/rc.exe"
+      - "C:/Program Files/CMake/rc"
+      - "C:/Program Files (x86)/JoltPhysics/bin/rc.com"
+      - "C:/Program Files (x86)/JoltPhysics/bin/rc.exe"
+      - "C:/Program Files (x86)/JoltPhysics/bin/rc"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/rc.com"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/rc.exe"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/rc"
+      - "C:/Program Files (x86)/JoltPhysics/rc.com"
+      - "C:/Program Files (x86)/JoltPhysics/rc.exe"
+      - "C:/Program Files (x86)/JoltPhysics/rc"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/JoltPhysics"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/JoltPhysics"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/CMakeScratch/TryCompile-2pz9wp"
+      binary: "C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/CMakeScratch/TryCompile-2pz9wp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/CMakeScratch/TryCompile-2pz9wp'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_7dc76.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.23+b0019275e for .NET Framework
+        Build started 21/01/2026 23:39:26.
+        
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\CMakeScratch\\TryCompile-2pz9wp\\cmTC_7dc76.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_7dc76.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\CMakeScratch\\TryCompile-2pz9wp\\Debug\\".
+          Creating directory "cmTC_7dc76.dir\\Debug\\cmTC_7dc76.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_7dc76.dir\\Debug\\cmTC_7dc76.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_7dc76.dir\\Debug\\cmTC_7dc76.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"cmTC_7dc76.dir\\Debug\\\\" /Fd"cmTC_7dc76.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35220 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"cmTC_7dc76.dir\\Debug\\\\" /Fd"cmTC_7dc76.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\CMakeScratch\\TryCompile-2pz9wp\\Debug\\cmTC_7dc76.exe" /INCREMENTAL /ILK:"cmTC_7dc76.dir\\Debug\\cmTC_7dc76.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/CMakeScratch/TryCompile-2pz9wp/Debug/cmTC_7dc76.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/CMakeScratch/TryCompile-2pz9wp/Debug/cmTC_7dc76.lib" /MACHINE:X64  /machine:x64 cmTC_7dc76.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_7dc76.vcxproj -> C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\CMakeScratch\\TryCompile-2pz9wp\\Debug\\cmTC_7dc76.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_7dc76.dir\\Debug\\cmTC_7dc76.tlog\\unsuccessfulbuild".
+          Touching "cmTC_7dc76.dir\\Debug\\cmTC_7dc76.tlog\\cmTC_7dc76.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\CMakeScratch\\TryCompile-2pz9wp\\cmTC_7dc76.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.52
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.44.35220.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CheckIPOSupported.cmake:197 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CheckIPOSupported.cmake:320 (_ipo_run_language_check)"
+      - "CMakeLists.txt:293 (check_ipo_supported)"
+      - "CMakeLists.txt:304 (SET_INTERPROCEDURAL_OPTIMIZATION)"
+    directories:
+      source: "C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src"
+      binary: "C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin"
+    buildResult:
+      variable: "_IPO_LANGUAGE_CHECK_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.23+b0019275e for .NET Framework
+        Build started 21/01/2026 23:39:27.
+        
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" on node 1 (default targets).
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ZERO_CHECK\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          1>Checking Build System
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\ZERO_CHECK.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (default targets).
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) on node 1 (default targets).
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) is building "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (4) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "foo.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\".
+          Creating directory "foo.dir\\Debug\\foo.tlog\\".
+        InitializeBuildStatus:
+          Creating "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"foo.dir\\Debug\\\\" /Fd"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35220 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"foo.dir\\Debug\\\\" /Fd"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          foo.cpp
+        Lib:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.lib" /NOLOGO /MACHINE:X64 /LTCG foo.dir\\Debug\\foo.obj
+          foo.vcxproj -> C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.lib
+        FinalizeBuildStatus:
+          Deleting file "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+          Touching "foo.dir\\Debug\\foo.tlog\\foo.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "boo.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "boo.dir\\Debug\\boo.tlog\\".
+        InitializeBuildStatus:
+          Creating "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35220 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          main.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.exe" /NOLOGO Debug\\foo.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /LTCGOUT:"boo.dir\\Debug\\boo.iobj" /TLBID:1 /IMPLIB:"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.lib" /MACHINE:X64 boo.dir\\Debug\\main.obj
+          Generating code
+          Not all modules are compiled with -Gy (function comdat), build without incremental LTCG.
+          Finished generating code
+          boo.vcxproj -> C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.exe
+        FinalizeBuildStatus:
+          Deleting file "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+          Touching "boo.dir\\Debug\\boo.tlog\\boo.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ALL_BUILD\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\ALL_BUILD.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.17
+        
+      exitCode: 0
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/FindVulkan.cmake:387 (find_path)"
+      - "C:/dev/Luxia/Luxia/vendor/Jolt/TestFramework/TestFramework.cmake:2 (find_package)"
+      - "CMakeLists.txt:432 (include)"
+    mode: "path"
+    variable: "Vulkan_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "vulkan/vulkan.h"
+    candidate_directories:
+      - "/include/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/include/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/include/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/include/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/JoltPhysics/include/"
+      - "C:/Program Files (x86)/JoltPhysics/"
+    searched_directories:
+      - "/include/vulkan/vulkan.h"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/vulkan/vulkan.h"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/vulkan/vulkan.h"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/vulkan/vulkan.h"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/vulkan/vulkan.h"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/vulkan/vulkan.h"
+      - "C:/Program Files/Razer Chroma SDK/bin/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/vulkan/vulkan.h"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/vulkan/vulkan.h"
+      - "C:/Windows/System32/vulkan/vulkan.h"
+      - "C:/Windows/vulkan/vulkan.h"
+      - "C:/Windows/System32/wbem/vulkan/vulkan.h"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/vulkan/vulkan.h"
+      - "C:/Windows/System32/OpenSSH/vulkan/vulkan.h"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/vulkan/vulkan.h"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/vulkan/vulkan.h"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/vulkan/vulkan.h"
+      - "C:/Program Files/dotnet/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/vulkan/vulkan.h"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/vulkan/vulkan.h"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/vulkan/vulkan.h"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/vulkan/vulkan.h"
+      - "C:/Program Files/Git/cmd/vulkan/vulkan.h"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/bin/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/vulkan/vulkan.h"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/vulkan/vulkan.h"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/vulkan/vulkan.h"
+      - "C:/Users/haagl/.dotnet/tools/vulkan/vulkan.h"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/vulkan/vulkan.h"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/vulkan/vulkan.h"
+      - "C:/Program Files/include/vulkan/vulkan.h"
+      - "C:/Program Files/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/include/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/include/vulkan/vulkan.h"
+      - "C:/Program Files/CMake/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/JoltPhysics/include/vulkan/vulkan.h"
+      - "C:/Program Files (x86)/JoltPhysics/vulkan/vulkan.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/JoltPhysics"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/JoltPhysics"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/FindVulkan.cmake:394 (find_library)"
+      - "C:/dev/Luxia/Luxia/vendor/Jolt/TestFramework/TestFramework.cmake:2 (find_package)"
+      - "CMakeLists.txt:432 (include)"
+    mode: "library"
+    variable: "Vulkan_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "vulkan-1"
+    candidate_directories:
+      - "/lib/"
+      - "/bin/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/lib/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/lib/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/lib/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/JoltPhysics/lib/"
+      - "C:/Program Files (x86)/JoltPhysics/"
+      - "C:/Program Files (x86)/JoltPhysics/bin/"
+    searched_directories:
+      - "/lib/"
+      - "/bin/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/lib/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/lib/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/lib/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/JoltPhysics/lib/"
+      - "C:/Program Files (x86)/JoltPhysics/"
+      - "C:/Program Files (x86)/JoltPhysics/bin/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/JoltPhysics"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/JoltPhysics"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "C:/Program Files (x86)/JoltPhysics/bin"
+        - "C:/Program Files/CMake/bin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/FindVulkan.cmake:402 (find_program)"
+      - "C:/dev/Luxia/Luxia/vendor/Jolt/TestFramework/TestFramework.cmake:2 (find_package)"
+      - "CMakeLists.txt:432 (include)"
+    mode: "program"
+    variable: "Vulkan_GLSLC_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "glslc"
+    candidate_directories:
+      - "/bin/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/sbin/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/JoltPhysics/bin/"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/"
+      - "C:/Program Files (x86)/JoltPhysics/"
+    searched_directories:
+      - "/bin/glslc.com"
+      - "/bin/glslc.exe"
+      - "/bin/glslc"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/glslc.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/glslc.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/glslc"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/glslc.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/glslc.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/glslc"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/glslc.com"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/glslc.exe"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/glslc"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/glslc.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/glslc.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/glslc"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/glslc.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/glslc.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/glslc"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/glslc.com"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/glslc.exe"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/glslc"
+      - "C:/Program Files/Razer Chroma SDK/bin/glslc.com"
+      - "C:/Program Files/Razer Chroma SDK/bin/glslc.exe"
+      - "C:/Program Files/Razer Chroma SDK/bin/glslc"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/glslc.com"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/glslc.exe"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/glslc"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/glslc.com"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/glslc.exe"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/glslc"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/glslc.com"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/glslc.exe"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/glslc"
+      - "C:/Windows/System32/glslc.com"
+      - "C:/Windows/System32/glslc.exe"
+      - "C:/Windows/System32/glslc"
+      - "C:/Windows/glslc.com"
+      - "C:/Windows/glslc.exe"
+      - "C:/Windows/glslc"
+      - "C:/Windows/System32/wbem/glslc.com"
+      - "C:/Windows/System32/wbem/glslc.exe"
+      - "C:/Windows/System32/wbem/glslc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/glslc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/glslc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/glslc"
+      - "C:/Windows/System32/OpenSSH/glslc.com"
+      - "C:/Windows/System32/OpenSSH/glslc.exe"
+      - "C:/Windows/System32/OpenSSH/glslc"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/glslc.com"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/glslc.exe"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/glslc"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/glslc.com"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/glslc.exe"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/glslc"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/glslc.com"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/glslc.exe"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/glslc"
+      - "C:/Program Files/dotnet/glslc.com"
+      - "C:/Program Files/dotnet/glslc.exe"
+      - "C:/Program Files/dotnet/glslc"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/glslc.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/glslc.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/glslc"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/glslc.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/glslc.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/glslc"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/glslc.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/glslc.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/glslc"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/glslc.com"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/glslc.exe"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/glslc"
+      - "C:/Program Files/Git/cmd/glslc.com"
+      - "C:/Program Files/Git/cmd/glslc.exe"
+      - "C:/Program Files/Git/cmd/glslc"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/glslc.com"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/glslc.exe"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/glslc"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/glslc.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/glslc.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/glslc"
+      - "C:/Program Files/CMake/bin/glslc.com"
+      - "C:/Program Files/CMake/bin/glslc.exe"
+      - "C:/Program Files/CMake/bin/glslc"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/glslc.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/glslc.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/glslc"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/glslc.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/glslc.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/glslc"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/glslc.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/glslc.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/glslc"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/glslc.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/glslc.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/glslc"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/glslc.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/glslc.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/glslc"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/glslc.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/glslc.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/glslc"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/glslc.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/glslc.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/glslc"
+      - "C:/Users/haagl/.dotnet/tools/glslc.com"
+      - "C:/Users/haagl/.dotnet/tools/glslc.exe"
+      - "C:/Users/haagl/.dotnet/tools/glslc"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/glslc.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/glslc.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/glslc"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/glslc.com"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/glslc.exe"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/glslc"
+      - "C:/Program Files/bin/glslc.com"
+      - "C:/Program Files/bin/glslc.exe"
+      - "C:/Program Files/bin/glslc"
+      - "C:/Program Files/sbin/glslc.com"
+      - "C:/Program Files/sbin/glslc.exe"
+      - "C:/Program Files/sbin/glslc"
+      - "C:/Program Files/glslc.com"
+      - "C:/Program Files/glslc.exe"
+      - "C:/Program Files/glslc"
+      - "C:/Program Files (x86)/bin/glslc.com"
+      - "C:/Program Files (x86)/bin/glslc.exe"
+      - "C:/Program Files (x86)/bin/glslc"
+      - "C:/Program Files (x86)/sbin/glslc.com"
+      - "C:/Program Files (x86)/sbin/glslc.exe"
+      - "C:/Program Files (x86)/sbin/glslc"
+      - "C:/Program Files (x86)/glslc.com"
+      - "C:/Program Files (x86)/glslc.exe"
+      - "C:/Program Files (x86)/glslc"
+      - "C:/Program Files/CMake/bin/glslc.com"
+      - "C:/Program Files/CMake/bin/glslc.exe"
+      - "C:/Program Files/CMake/bin/glslc"
+      - "C:/Program Files/CMake/sbin/glslc.com"
+      - "C:/Program Files/CMake/sbin/glslc.exe"
+      - "C:/Program Files/CMake/sbin/glslc"
+      - "C:/Program Files/CMake/glslc.com"
+      - "C:/Program Files/CMake/glslc.exe"
+      - "C:/Program Files/CMake/glslc"
+      - "C:/Program Files (x86)/JoltPhysics/bin/glslc.com"
+      - "C:/Program Files (x86)/JoltPhysics/bin/glslc.exe"
+      - "C:/Program Files (x86)/JoltPhysics/bin/glslc"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/glslc.com"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/glslc.exe"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/glslc"
+      - "C:/Program Files (x86)/JoltPhysics/glslc.com"
+      - "C:/Program Files (x86)/JoltPhysics/glslc.exe"
+      - "C:/Program Files (x86)/JoltPhysics/glslc"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/JoltPhysics"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/JoltPhysics"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/FindVulkan.cmake:410 (find_program)"
+      - "C:/dev/Luxia/Luxia/vendor/Jolt/TestFramework/TestFramework.cmake:2 (find_package)"
+      - "CMakeLists.txt:432 (include)"
+    mode: "program"
+    variable: "Vulkan_GLSLANG_VALIDATOR_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "glslangValidator"
+    candidate_directories:
+      - "/bin/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
+      - "C:/Program Files/Razer Chroma SDK/bin/"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/"
+      - "C:/Users/haagl/.dotnet/tools/"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/sbin/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/JoltPhysics/bin/"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/"
+      - "C:/Program Files (x86)/JoltPhysics/"
+    searched_directories:
+      - "/bin/glslangValidator.com"
+      - "/bin/glslangValidator.exe"
+      - "/bin/glslangValidator"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/glslangValidator.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/glslangValidator.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64/glslangValidator"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/glslangValidator.com"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/glslangValidator.exe"
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/glslangValidator"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/glslangValidator.com"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/glslangValidator.exe"
+      - "C:/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin/glslangValidator"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/glslangValidator.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/glslangValidator.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-8.0.322.6-hotspot/bin/glslangValidator"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/glslangValidator.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/glslangValidator.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/glslangValidator"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/glslangValidator.com"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/glslangValidator.exe"
+      - "C:/Program Files (x86)/Razer Chroma SDK/bin/glslangValidator"
+      - "C:/Program Files/Razer Chroma SDK/bin/glslangValidator.com"
+      - "C:/Program Files/Razer Chroma SDK/bin/glslangValidator.exe"
+      - "C:/Program Files/Razer Chroma SDK/bin/glslangValidator"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/glslangValidator.com"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/glslangValidator.exe"
+      - "C:/Program Files (x86)/Razer/ChromaBroadcast/bin/glslangValidator"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/glslangValidator.com"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/glslangValidator.exe"
+      - "C:/Program Files/Razer/ChromaBroadcast/bin/glslangValidator"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/glslangValidator.com"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/glslangValidator.exe"
+      - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/glslangValidator"
+      - "C:/Windows/System32/glslangValidator.com"
+      - "C:/Windows/System32/glslangValidator.exe"
+      - "C:/Windows/System32/glslangValidator"
+      - "C:/Windows/glslangValidator.com"
+      - "C:/Windows/glslangValidator.exe"
+      - "C:/Windows/glslangValidator"
+      - "C:/Windows/System32/wbem/glslangValidator.com"
+      - "C:/Windows/System32/wbem/glslangValidator.exe"
+      - "C:/Windows/System32/wbem/glslangValidator"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/glslangValidator.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/glslangValidator.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/glslangValidator"
+      - "C:/Windows/System32/OpenSSH/glslangValidator.com"
+      - "C:/Windows/System32/OpenSSH/glslangValidator.exe"
+      - "C:/Windows/System32/OpenSSH/glslangValidator"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/glslangValidator.com"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/glslangValidator.exe"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/glslangValidator"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/glslangValidator.com"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/glslangValidator.exe"
+      - "C:/Users/haagl/AppData/Local/Microsoft/WindowsApps/glslangValidator"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/glslangValidator.com"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/glslangValidator.exe"
+      - "C:/Program Files/Microsoft SQL Server/130/Tools/Binn/glslangValidator"
+      - "C:/Program Files/dotnet/glslangValidator.com"
+      - "C:/Program Files/dotnet/glslangValidator.exe"
+      - "C:/Program Files/dotnet/glslangValidator"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/glslangValidator.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/glslangValidator.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/glslangValidator"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/glslangValidator.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/glslangValidator.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/glslangValidator"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/glslangValidator.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/glslangValidator.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/glslangValidator"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/glslangValidator.com"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/glslangValidator.exe"
+      - "C:/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR/glslangValidator"
+      - "C:/Program Files/Git/cmd/glslangValidator.com"
+      - "C:/Program Files/Git/cmd/glslangValidator.exe"
+      - "C:/Program Files/Git/cmd/glslangValidator"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/glslangValidator.com"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/glslangValidator.exe"
+      - "C:/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.0/glslangValidator"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/glslangValidator.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/glslangValidator.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/glslangValidator"
+      - "C:/Program Files/CMake/bin/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/glslangValidator"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/system32/glslangValidator"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/glslangValidator"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/%SystemRoot%/System32/Wbem/glslangValidator"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/glslangValidator"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/%SYSTEMROOT%/System32/OpenSSH/glslangValidator"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/glslangValidator.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/glslangValidator.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/Scripts/glslangValidator"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/glslangValidator.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/glslangValidator.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Python/Python310/glslangValidator"
+      - "C:/Users/haagl/.dotnet/tools/glslangValidator.com"
+      - "C:/Users/haagl/.dotnet/tools/glslangValidator.exe"
+      - "C:/Users/haagl/.dotnet/tools/glslangValidator"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/glslangValidator.com"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/glslangValidator.exe"
+      - "C:/Users/haagl/AppData/Local/Programs/Microsoft VS Code/bin/glslangValidator"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/glslangValidator.com"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/glslangValidator.exe"
+      - "C:/Users/haagl/AppData/Local/GitHubDesktop/bin/glslangValidator"
+      - "C:/Program Files/bin/glslangValidator.com"
+      - "C:/Program Files/bin/glslangValidator.exe"
+      - "C:/Program Files/bin/glslangValidator"
+      - "C:/Program Files/sbin/glslangValidator.com"
+      - "C:/Program Files/sbin/glslangValidator.exe"
+      - "C:/Program Files/sbin/glslangValidator"
+      - "C:/Program Files/glslangValidator.com"
+      - "C:/Program Files/glslangValidator.exe"
+      - "C:/Program Files/glslangValidator"
+      - "C:/Program Files (x86)/bin/glslangValidator.com"
+      - "C:/Program Files (x86)/bin/glslangValidator.exe"
+      - "C:/Program Files (x86)/bin/glslangValidator"
+      - "C:/Program Files (x86)/sbin/glslangValidator.com"
+      - "C:/Program Files (x86)/sbin/glslangValidator.exe"
+      - "C:/Program Files (x86)/sbin/glslangValidator"
+      - "C:/Program Files (x86)/glslangValidator.com"
+      - "C:/Program Files (x86)/glslangValidator.exe"
+      - "C:/Program Files (x86)/glslangValidator"
+      - "C:/Program Files/CMake/bin/glslangValidator.com"
+      - "C:/Program Files/CMake/bin/glslangValidator.exe"
+      - "C:/Program Files/CMake/bin/glslangValidator"
+      - "C:/Program Files/CMake/sbin/glslangValidator.com"
+      - "C:/Program Files/CMake/sbin/glslangValidator.exe"
+      - "C:/Program Files/CMake/sbin/glslangValidator"
+      - "C:/Program Files/CMake/glslangValidator.com"
+      - "C:/Program Files/CMake/glslangValidator.exe"
+      - "C:/Program Files/CMake/glslangValidator"
+      - "C:/Program Files (x86)/JoltPhysics/bin/glslangValidator.com"
+      - "C:/Program Files (x86)/JoltPhysics/bin/glslangValidator.exe"
+      - "C:/Program Files (x86)/JoltPhysics/bin/glslangValidator"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/glslangValidator.com"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/glslangValidator.exe"
+      - "C:/Program Files (x86)/JoltPhysics/sbin/glslangValidator"
+      - "C:/Program Files (x86)/JoltPhysics/glslangValidator.com"
+      - "C:/Program Files (x86)/JoltPhysics/glslangValidator.exe"
+      - "C:/Program Files (x86)/JoltPhysics/glslangValidator"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.0\\bin"
+        - "C:\\Program Files\\Microsoft\\jdk-11.0.16.101-hotspot\\bin"
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.322.6-hotspot\\bin"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files\\Razer Chroma SDK\\bin"
+        - "C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files\\Razer\\ChromaBroadcast\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2025.3.0\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "%SystemRoot%\\system32"
+        - "%SystemRoot%"
+        - "%SystemRoot%\\System32\\Wbem"
+        - "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\"
+        - "%SYSTEMROOT%\\System32\\OpenSSH\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Python\\Python310\\"
+        - "C:\\Users\\haagl\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\haagl\\.dotnet\\tools"
+        - "C:\\Users\\haagl\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\haagl\\AppData\\Local\\GitHubDesktop\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/JoltPhysics"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/JoltPhysics"
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CheckIPOSupported.cmake:197 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CheckIPOSupported.cmake:320 (_ipo_run_language_check)"
+      - "CMakeLists.txt:293 (check_ipo_supported)"
+      - "CMakeLists.txt:304 (SET_INTERPROCEDURAL_OPTIMIZATION)"
+    directories:
+      source: "C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src"
+      binary: "C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin"
+    buildResult:
+      variable: "_IPO_LANGUAGE_CHECK_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.23+b0019275e for .NET Framework
+        Build started 21/01/2026 23:40:04.
+        
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" on node 1 (default targets).
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ZERO_CHECK\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          1>Checking Build System
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\ZERO_CHECK.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (default targets).
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) on node 1 (default targets).
+        Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) is building "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (4) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "foo.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\".
+          Creating directory "foo.dir\\Debug\\foo.tlog\\".
+        InitializeBuildStatus:
+          Creating "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"foo.dir\\Debug\\\\" /Fd"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35220 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"foo.dir\\Debug\\\\" /Fd"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          foo.cpp
+        Lib:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.lib" /NOLOGO /MACHINE:X64 /LTCG foo.dir\\Debug\\foo.obj
+          foo.vcxproj -> C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\foo.lib
+        FinalizeBuildStatus:
+          Deleting file "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+          Touching "foo.dir\\Debug\\foo.tlog\\foo.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "boo.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "boo.dir\\Debug\\boo.tlog\\".
+        InitializeBuildStatus:
+          Creating "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35220 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          main.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.exe" /NOLOGO Debug\\foo.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /LTCGOUT:"boo.dir\\Debug\\boo.iobj" /TLBID:1 /IMPLIB:"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.lib" /MACHINE:X64 boo.dir\\Debug\\main.obj
+          Generating code
+          Not all modules are compiled with -Gy (function comdat), build without incremental LTCG.
+          Finished generating code
+          boo.vcxproj -> C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.exe
+        FinalizeBuildStatus:
+          Deleting file "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+          Touching "boo.dir\\Debug\\boo.tlog\\boo.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ALL_BUILD\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ALL_BUILD\\ALL_BUILD.tlog\\ALL_BUILD.lastbuildstate".
+        Done Building Project "C:\\dev\\Luxia\\Luxia\\vendor\\Jolt\\Dyno\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.19
+        
+      exitCode: 0
+...

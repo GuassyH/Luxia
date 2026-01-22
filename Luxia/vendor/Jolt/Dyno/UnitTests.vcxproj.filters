@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\ArrayTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\BinaryHeapTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\FPFlushDenormalsTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\HashCombineTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\InsertionSortTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\JobSystemTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\LinearCurveTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\PreciseMathTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\ScopeExitTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\STLLocalAllocatorTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\StringToolsTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\QuickSortTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\UnorderedSetTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\UnorderedMapTest.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\ClosestPointTests.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\ConvexHullBuilderTest.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\EllipseTest.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\EPATests.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\GJKTests.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\PlaneTests.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\RayAABoxTests.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\BVec16Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\DMat44Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\DVec3Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\EigenValueSymmetricTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\HalfFloatTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\Mat44Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\MathTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\MatrixTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\QuatTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\UVec4Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\TrigonometryTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\Vec3Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\Vec4Tests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\VectorTests.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ActiveEdgesTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\BroadPhaseTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CastShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CharacterVirtualTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CollideShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CollidePointTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CollisionGroupTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ContactListenerTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ConvexVsTrianglesTest.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\DistanceConstraintTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\EstimateCollisionResponseTest.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\HeightFieldShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\HingeConstraintTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\MotionQualityLinearCastTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\MutableCompoundShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ObjectLayerPairFilterTableTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ObjectLayerPairFilterMaskTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\OffsetCenterOfMassShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PathConstraintTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PhysicsDeterminismTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PhysicsStepListenerTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PhysicsTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\RayShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SensorTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ShapeFilterTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SixDOFConstraintTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SliderConstraintTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SoftBodyTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SubShapeIDTest.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\TaperedCylinderShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\TransformedShapeTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\WheeledVehicleTests.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\PhysicsTestContext.cpp" />
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTestFramework.cpp" />
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\ObjectStream\ObjectStreamTest.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\doctest.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Layers.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\LoggingBodyActivationListener.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\LoggingContactListener.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\PhysicsTestContext.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTestFramework.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\Distribution\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTests.cmake" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{90D61B96-C658-34C3-A6D6-08115CBD1D4B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{6F6BF30D-F950-39D1-980B-3D799B9B3432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{4C3B56FF-4219-3C46-AFBD-6BFB5F19AD3C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectStream">
+      <UniqueIdentifier>{DF617AF8-6CEB-30D9-8A6C-ACC8A8F9E306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{2621DDBC-707F-3190-A4E4-3658B9F97D2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{2F8EBD63-C238-3BF5-B7AB-7B0A68592E58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{B4334FDF-9514-37EB-8C39-E6B7971A6F4C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

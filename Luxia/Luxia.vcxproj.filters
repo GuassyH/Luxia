@@ -190,6 +190,9 @@
     <ClInclude Include="src\Luxia\Physics\PhysicsSystem.h">
       <Filter>Luxia\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Physics\PhysicsWorld.h">
+      <Filter>Luxia\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Platform\AssetCreation.h">
       <Filter>Luxia\Platform</Filter>
     </ClInclude>
@@ -324,6 +327,9 @@
     </ClCompile>
     <ClCompile Include="src\Luxia\Mesh.cpp">
       <Filter>Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Physics\PhysicsSystem.cpp">
+      <Filter>Luxia\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Platform\OpenGL\GL_Camera.cpp">
       <Filter>Luxia\Platform\OpenGL</Filter>

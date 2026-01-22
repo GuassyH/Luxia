@@ -83,7 +83,9 @@ project "Luxia"
 		"%{prj.name}/vendor/imgui",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/vendor/yaml-cpp/include",
-		"%{prj.name}/vendor/Jolt/include",
+		"%{prj.name}/vendor/assimp/include",
+		"%{prj.name}/vendor/Jolt"
+
 	}
 
 	links { "LuxiaVendor" }
@@ -111,29 +113,39 @@ project "Luxia"
 		
 		libdirs { 
 			"Luxia/vendor/glfw", 
-			"Luxia/vendor/assimp/lib",
-			"Luxia/vendor/Jolt/Build/Windows/Debug"
+			"Luxia/vendor/Jolt/include"
 		}
 		links { 
 			"glfw3dll",
 			"opengl32", 
-			"assimp-vc143-mtd",
-			"Jolt",
+			"Jolt"
 		}
 
 	-- Specify how to build different configs
 	filter "configurations:Debug"
 		defines "LUXIA_DEBUG"
 		runtime "Debug"
-	    links { "yaml-cppd" }
-		libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
+	    links { 
+			"yaml-cppd",
+			"assimp-vc143-mtd"
+		}
+		libdirs { 
+			"Luxia/vendor/yaml-cpp/build/Debug",
+			"Luxia/vendor/assimp/build/lib/Debug",
+		}
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LUXIA_RELEASE"
 		runtime "Release"
-		links { "yaml-cpp" }
-		libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
+	    links { 
+			"yaml-cpp",
+			"assimp-vc143-mt"
+		}
+		libdirs { 
+			"Luxia/vendor/yaml-cpp/build/Release",
+			"Luxia/vendor/assimp/build/lib/Release",
+		}
 		optimize "On"
 
 	filter "configurations:Distribution"
@@ -166,21 +178,20 @@ project "Editor"
 		"Luxia/vendor/spdlog/include",
 		"Luxia/vendor/yaml-cpp/include",
 		"Luxia/vendor/glm",
+		"Luxia/vendor/assimp/include",
 		"Luxia/src",
-		"Luxia/vendor/Jolt/include",
+		"Luxia/vendor/Jolt",
 		"Editor/src",
 	}
 
 	libdirs {
 		"Luxia/vendor/glfw",
-		"Luxia/vendor/assimp/lib",
-		"Luxia/vendor/Jolt/Build/Windows/Debug",
+		"Luxia/vendor/Jolt/include",
 	}
 	links{
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
-		"assimp-vc143-mtd",
 		"glfw3dll",
 		"Jolt"
 	}
@@ -203,14 +214,10 @@ project "Editor"
 	-- Specify how to build different configs
 	filter "configurations:Debug"
 		defines "LUXIA_DEBUG"
-		links { "yaml-cppd" }
-		libdirs { "Luxia/vendor/yaml-cpp/build/Debug" }
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LUXIA_RELEASE"
-		links { "yaml-cpp" }
-		libdirs { "Luxia/vendor/yaml-cpp/build/Release" }
 		optimize "On"
 
 	filter "configurations:Distribution"

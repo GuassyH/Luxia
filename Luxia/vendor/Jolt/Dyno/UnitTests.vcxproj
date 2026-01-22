@@ -1,0 +1,721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Distribution|x64">
+      <Configuration>Distribution</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E4A5D87C-8E5C-30DD-868B-E809E0C040BE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>UnitTests</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UnitTests.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UnitTests</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UnitTests.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UnitTests</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\Distribution\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">UnitTests.dir\Distribution\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">UnitTests</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'"></LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DiagnosticsFormat>Classic</DiagnosticsFormat>
+      <DisableSpecificWarnings>4577</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/UnitTests.dir/Debug/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;JPH_SHARED_LIBRARY;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;JPH_USE_AVX2;JPH_USE_AVX;JPH_USE_SSE4_1;JPH_USE_SSE4_2;JPH_USE_LZCNT;JPH_USE_TZCNT;JPH_USE_F16C;JPH_USE_FMADD;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;JPH_SHARED_LIBRARY;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;JPH_USE_AVX2;JPH_USE_AVX;JPH_USE_SSE4_1;JPH_USE_SSE4_2;JPH_USE_LZCNT;JPH_USE_TZCNT;JPH_USE_F16C;JPH_USE_FMADD;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Debug\Jolt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /ignore:4221</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/Debug/UnitTests.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/Debug/UnitTests.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DiagnosticsFormat>Classic</DiagnosticsFormat>
+      <DisableSpecificWarnings>4577</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/UnitTests.dir/Release/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;JPH_SHARED_LIBRARY;NDEBUG;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;JPH_USE_AVX2;JPH_USE_AVX;JPH_USE_SSE4_1;JPH_USE_SSE4_2;JPH_USE_LZCNT;JPH_USE_TZCNT;JPH_USE_F16C;JPH_USE_FMADD;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;JPH_SHARED_LIBRARY;NDEBUG;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;JPH_USE_AVX2;JPH_USE_AVX;JPH_USE_SSE4_1;JPH_USE_SSE4_2;JPH_USE_LZCNT;JPH_USE_TZCNT;JPH_USE_F16C;JPH_USE_FMADD;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Release\Jolt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /ignore:4221</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/Release/UnitTests.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/Release/UnitTests.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zc:__cplusplus</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DiagnosticsFormat>Classic</DiagnosticsFormat>
+      <DisableSpecificWarnings>4577</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/UnitTests.dir/Distribution/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;JPH_SHARED_LIBRARY;NDEBUG;JPH_OBJECT_STREAM;JPH_USE_AVX2;JPH_USE_AVX;JPH_USE_SSE4_1;JPH_USE_SSE4_2;JPH_USE_LZCNT;JPH_USE_TZCNT;JPH_USE_F16C;JPH_USE_FMADD;CMAKE_INTDIR="Distribution"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;JPH_SHARED_LIBRARY;NDEBUG;JPH_OBJECT_STREAM;JPH_USE_AVX2;JPH_USE_AVX;JPH_USE_SSE4_1;JPH_USE_SSE4_2;JPH_USE_LZCNT;JPH_USE_TZCNT;JPH_USE_F16C;JPH_USE_FMADD;CMAKE_INTDIR=\"Distribution\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..\UnitTests;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Distribution\Jolt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /ignore:4221</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/Distribution/UnitTests.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/Distribution/UnitTests.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Jolt/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/dev/Luxia/Luxia/vendor/Jolt/Jolt -BC:/dev/Luxia/Luxia/vendor/Jolt/Dyno --check-stamp-file C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\CMakeLists-CXX.txt.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\foo.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\main.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeSystem.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\HelloWorld\HelloWorld.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\Jolt.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\JoltViewer\JoltViewer.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\PerformanceTest\PerformanceTest.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Samples\Samples.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\TestFramework\TestFramework.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTests.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Jolt/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/dev/Luxia/Luxia/vendor/Jolt/Jolt -BC:/dev/Luxia/Luxia/vendor/Jolt/Dyno --check-stamp-file C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\CMakeLists-CXX.txt.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\foo.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\main.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeSystem.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\HelloWorld\HelloWorld.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\Jolt.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\JoltViewer\JoltViewer.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\PerformanceTest\PerformanceTest.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Samples\Samples.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\TestFramework\TestFramework.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTests.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">Building Custom Rule C:/dev/Luxia/Luxia/vendor/Jolt/Jolt/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/dev/Luxia/Luxia/vendor/Jolt/Jolt -BC:/dev/Luxia/Luxia/vendor/Jolt/Dyno --check-stamp-file C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\CMakeLists-CXX.txt.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\foo.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\main.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\4.1.1\CMakeSystem.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\HelloWorld\HelloWorld.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Jolt\Jolt.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\JoltViewer\JoltViewer.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\PerformanceTest\PerformanceTest.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\Samples\Samples.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\TestFramework\TestFramework.cmake;C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTests.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\cmake_pch.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/UnitTests.dir/Debug/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/UnitTests.dir/Release/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/UnitTests.dir/Distribution/cmake_pch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\ArrayTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\BinaryHeapTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\FPFlushDenormalsTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\HashCombineTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\InsertionSortTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\JobSystemTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\LinearCurveTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\PreciseMathTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\ScopeExitTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\STLLocalAllocatorTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\StringToolsTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\QuickSortTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\UnorderedSetTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Core\UnorderedMapTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\doctest.h" />
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\ClosestPointTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\ConvexHullBuilderTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\EllipseTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\EPATests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\GJKTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\PlaneTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Geometry\RayAABoxTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Layers.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\LoggingBodyActivationListener.h" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\LoggingContactListener.h" />
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\BVec16Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\DMat44Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\DVec3Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\EigenValueSymmetricTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\HalfFloatTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\Mat44Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\MathTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\MatrixTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\QuatTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\UVec4Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\TrigonometryTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\Vec3Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\Vec4Tests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Math\VectorTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ActiveEdgesTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\BroadPhaseTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CastShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CharacterVirtualTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CollideShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CollidePointTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\CollisionGroupTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ContactListenerTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ConvexVsTrianglesTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\DistanceConstraintTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\EstimateCollisionResponseTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\HeightFieldShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\HingeConstraintTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\MotionQualityLinearCastTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\MutableCompoundShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ObjectLayerPairFilterTableTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ObjectLayerPairFilterMaskTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\OffsetCenterOfMassShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PathConstraintTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PhysicsDeterminismTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PhysicsStepListenerTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\PhysicsTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\RayShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SensorTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ShapeFilterTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\ShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SixDOFConstraintTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SliderConstraintTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SoftBodyTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\SubShapeIDTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\TaperedCylinderShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\TransformedShapeTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\Physics\WheeledVehicleTests.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\PhysicsTestContext.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\PhysicsTestContext.h" />
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTestFramework.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTestFramework.h" />
+    <None Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\UnitTests.cmake">
+    </None>
+    <ClCompile Include="C:\dev\Luxia\Luxia\vendor\Jolt\UnitTests\ObjectStream\ObjectStreamTest.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/CMakeFiles/UnitTests.dir/Distribution/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\Debug\cmake_pch.hxx" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\Release\cmake_pch.hxx" />
+    <ClInclude Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\CMakeFiles\UnitTests.dir\Distribution\cmake_pch.hxx" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\ZERO_CHECK.vcxproj">
+      <Project>{D6607992-9749-388C-8E8B-459E9A083193}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\dev\Luxia\Luxia\vendor\Jolt\Dyno\Jolt.vcxproj">
+      <Project>{86CA1E8F-AB80-3AA4-9A9E-F22FF9BD3C87}</Project>
+      <Name>Jolt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

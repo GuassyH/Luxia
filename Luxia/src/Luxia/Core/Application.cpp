@@ -12,7 +12,7 @@
 #include "Luxia/Core/Time.h"
 
 #include "Luxia/Managers/ResourceManager.h"
-
+#include "Luxia/Physics/PhysicsSystem.h"
 namespace Luxia
 {
 
@@ -40,11 +40,16 @@ namespace Luxia
 		// Initialise Resources
 		ResourceManager::Init();
 
+
 		LX_CORE_WARN("glBindFrameBuffer: {}", (void*)glBindFramebuffer);
 	}
 
 	void Application::CoreStartup() {
 		LX_CORE_INFO("Application Started\n");
+		
+		// Initialize Physics
+		LX_CORE_TRACE("Initializing Physics");
+		Physics::PhysicsSystem::Initialize();
 
 		// Core Layers
 		PushLayer(std::make_shared<Layers::EventLayer>());
@@ -117,6 +122,8 @@ namespace Luxia
 
 		m_ProjectManager->CloseProject();
 		ResourceManager::Cleanup();
+
+		Physics::PhysicsSystem::Shutdown();
 
 		LX_CORE_ERROR("Application Ended");
 	}
