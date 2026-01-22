@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "MeshRenderer.h"
 #include "Light.h"
+#include "RigidBody.h"
 
 namespace Luxia {
     struct LUXIA_API ComponentInfo {

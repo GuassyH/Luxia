@@ -1,5 +1,6 @@
 #include "lxpch.h"
 #include "Scene.h"
+#include "Luxia/Core/Time.h"
 
 #include "Luxia/Components/ComponentRegistry.h"
 
@@ -96,17 +97,59 @@ namespace Luxia {
 
 	void Scene::Start() {
 		isStarted = true;
+		physicsWorld = Physics::PhysicsSystem::CreateWorld(Physics::PhysicsWorldDesc()); // Create with standard desc
+		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
+
+		bool isFirst = true;
+		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
+			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
+
+			// Temp settings
+			JPH::BodyCreationSettings settings;
+			settings.SetShape(rb.boxShape);
+			if(isFirst)
+				settings.mMotionType = JPH::EMotionType::Dynamic;
+			else
+				settings.mMotionType = JPH::EMotionType::Kinematic;
+
+			settings.mObjectLayer = Physics::Layers::MOVING;
+			settings.mPosition = Physics::ToJolt(rb.transform->local_position);
+			settings.mRotation = Physics::ToJolt(rb.transform->local_rotation);
+			settings.mFriction = 0.5f;
+			settings.mRestitution = 0.2f;
+
+			isFirst = false;
+
+			// Create the body
+			JPH::Body* body = body_interface.CreateBody(settings);
+			// Add it to interface and activate
+			body_interface.AddBody(body->GetID(), JPH::EActivation::Activate);
+			rb.bodyID = body->GetID();
+		}
+
 		LX_CORE_TRACE("Scene ({}) Started", (uint64_t)guid);
 	}
 
 	void Scene::Update() {
 		// Update physics
-		// Update c# scripts (when added), or call their awake
-		// LX_CORE_TRACE("Scene ({}) Updated", (uint64_t)guid);
+		physicsWorld->step(Luxia::Core::Time::get().deltaTime);
+	
+		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
+
+		// Go through each entity, get their position and rotation
+		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
+			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
+			rb.CalculatePosition(Physics::ToGLM(body_interface.GetPosition(rb.bodyID)));
+			rb.CalculateRotation(Physics::ToGLM(body_interface.GetRotation(rb.bodyID)));
+		}
 	}
 
 	void Scene::End() {
 		LX_CORE_TRACE("Scene ({}) Ended", (uint64_t)guid);
 		isStarted = false;
+
+		Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); // Unneccessary
+		physicsWorld.release();
+		physicsWorld.reset();
 	}
 }

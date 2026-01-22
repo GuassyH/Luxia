@@ -78,6 +78,7 @@ namespace Luxia::Physics {
 		return world;
 	}
 	void PhysicsSystem::DeleteWorld(PhysicsWorld* world) {
-		// Uninitialize the world
+		if (!world) return;
+		// ??
 	}
 }

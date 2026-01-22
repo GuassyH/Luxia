@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
+#include "Luxia/Core/Log.h"
 #include "glm/glm.hpp"
 #include "PhysicsSystem.h"
 
@@ -9,8 +10,11 @@
 
 #include <Jolt/Physics/Body/BodyCreationSettings.h>
 #include <Jolt/Physics/Body/BodyActivationListener.h>
+#include <Jolt/Physics/Body/BodyInterface.h>
+#include <Jolt/Physics/Body/Body.h>
 #include <Jolt/Physics/PhysicsSystem.h>
 
+// These were taken from JoltPhysics HelloWorld to learn about Jolt
 namespace Luxia::Physics {
 	/// Layers that objects can be in, defines what can collide with what.
 	namespace Layers {
@@ -151,9 +155,26 @@ namespace Luxia::Physics {
 
 namespace Luxia::Physics {
 
+	inline glm::vec3 ToGLM(const JPH::Vec3& v) {
+		return glm::vec3(v.GetX(), v.GetY(), v.GetZ());
+	}
+
+	inline JPH::Vec3 ToJolt(const glm::vec3& v) {
+		return JPH::Vec3(v.x, v.y, v.z);
+	}
+
+	inline glm::quat ToGLM(const JPH::Quat& q) {
+		// JPH::Quat stores (w, x, y, z)
+		return glm::quat(q.GetW(), q.GetX(), q.GetY(), q.GetZ());
+	}
+
+	inline JPH::Quat ToJolt(const glm::quat& q) {
+		// glm::quat stores (w, x, y, z)
+		return JPH::Quat(q.w, q.x, q.y, q.z);
+	}
+
 	struct PhysicsWorldDesc {
 		glm::vec3 gravity = glm::vec3(0.0f, -9.82f, 0.0f);
-		uint32_t maxBodies = 1024;
 
 		const unsigned int cMaxBodies = 1024;
 		const unsigned int cNumBodyMutexes = 0;
@@ -179,6 +200,8 @@ namespace Luxia::Physics {
 			jphSystem.Init(PWD.cMaxBodies, PWD.cNumBodyMutexes, PWD.cMaxBodyPairs, PWD.cMaxContactConstraints, broadPhaseLayerInterface, objectVsBroadPhaseLayerFilter, objectLayerPairFilter);
 			jphSystem.SetBodyActivationListener(&bodyActivationListener);
 			jphSystem.SetContactListener(&contactListener);
+			jphSystem.SetGravity(JPH::Vec3(PWD.gravity.x, PWD.gravity.y, PWD.gravity.z));
+
 		}
 
 		void step(float dt) {
@@ -187,6 +210,7 @@ namespace Luxia::Physics {
 		}
 
 		PhysicsWorldDesc settings;
+
 	};
 
 }

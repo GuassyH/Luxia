@@ -176,6 +176,7 @@
     <ClInclude Include="src\Luxia\Components\ComponentRegistry.h" />
     <ClInclude Include="src\Luxia\Components\Light.h" />
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Luxia\Components\RigidBody.h" />
     <ClInclude Include="src\Luxia\Components\Transform.h" />
     <ClInclude Include="src\Luxia\Core\Application.h" />
     <ClInclude Include="src\Luxia\Core\Core.h" />

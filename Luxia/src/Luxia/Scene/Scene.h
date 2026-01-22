@@ -10,6 +10,8 @@
 #include "entt/entt.hpp"
 #include "Luxia/Components/Camera.h"
 #include "Luxia/Components/Light.h"
+#include "Luxia/Physics/PhysicsWorld.h"
+#include "Luxia/Physics/PhysicsSystem.h"
 
 namespace Luxia::Assets {
 	class SceneFile;
@@ -92,6 +94,7 @@ namespace Luxia {
 			return nullptr;
 		}
 
+		std::unique_ptr<Physics::PhysicsWorld> physicsWorld = nullptr;
 		entt::registry& GetReg() { return reg; }
 		WeakPtrProxy<Luxia::Assets::SceneFile> scene_file;
 		std::unordered_map<GUID, Entity> runtime_entities;
