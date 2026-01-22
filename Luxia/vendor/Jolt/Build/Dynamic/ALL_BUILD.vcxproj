@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Distribution|x64">
+      <Configuration>Distribution</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{82CBD5D0-45BE-35B2-95A9-FA9D9F7354CF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build -BC:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/Dynamic --check-stamp-file C:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/Dynamic/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\CMakeLists-CXX.txt.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\foo.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\main.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeSystem.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\HelloWorld\HelloWorld.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Jolt.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\JoltViewer\JoltViewer.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\PerformanceTest\PerformanceTest.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Samples.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\TestFramework.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\UnitTests\UnitTests.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build -BC:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/Dynamic --check-stamp-file C:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/Dynamic/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\CMakeLists-CXX.txt.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\foo.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\main.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeSystem.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\HelloWorld\HelloWorld.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Jolt.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\JoltViewer\JoltViewer.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\PerformanceTest\PerformanceTest.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Samples.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\TestFramework.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\UnitTests\UnitTests.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">Building Custom Rule C:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build -BC:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/Dynamic --check-stamp-file C:/Users/haagl/Desktop/Jolt/JoltPhysics-5.5.0/Build/Dynamic/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\CMakeLists-CXX.txt.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\foo.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CheckIPOSupported\main.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\4.1.1\CMakeSystem.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\HelloWorld\HelloWorld.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Jolt.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\JoltViewer\JoltViewer.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\PerformanceTest\PerformanceTest.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Samples.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\TestFramework.cmake;C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\UnitTests\UnitTests.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\ZERO_CHECK.vcxproj">
+      <Project>{BDA2957E-94F3-3D57-A52D-5EEADC7F4CAC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\HelloWorld.vcxproj">
+      <Project>{553E7BD5-ED26-3E6D-84A7-D83ED79F5953}</Project>
+      <Name>HelloWorld</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\Jolt.vcxproj">
+      <Project>{1309D4B5-84B3-3975-93EC-B22FCE36479B}</Project>
+      <Name>Jolt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\JoltViewer.vcxproj">
+      <Project>{601E16C8-864B-36D9-989E-CB7AD3E26584}</Project>
+      <Name>JoltViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\PerformanceTest.vcxproj">
+      <Project>{9F2D0E61-CB50-3246-8556-E29A4B5E5EF7}</Project>
+      <Name>PerformanceTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\Samples.vcxproj">
+      <Project>{E1D84B99-63F2-3CFA-B477-C7015AC75948}</Project>
+      <Name>Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\TestFramework.vcxproj">
+      <Project>{DF80D1A5-5FD3-36F1-A151-813F3DF9B5ED}</Project>
+      <Name>TestFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\UnitTests.vcxproj">
+      <Project>{07271749-A34D-36D5-8A76-32AD20C5EFD6}</Project>
+      <Name>UnitTests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

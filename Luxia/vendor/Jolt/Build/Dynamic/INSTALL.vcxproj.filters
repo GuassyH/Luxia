@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\97a8d9f5ec600359913cd8f3712d6feb\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{211E4605-A4CE-3677-BC2B-32B8A6EEADAA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

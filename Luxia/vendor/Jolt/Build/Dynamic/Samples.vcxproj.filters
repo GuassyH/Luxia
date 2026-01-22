@@ -1,0 +1,975 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Samples.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\SamplesApp.cpp" />
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\BroadPhase\BroadPhaseCastRayTest.cpp">
+      <Filter>Tests\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\BroadPhase\BroadPhaseInsertionTest.cpp">
+      <Filter>Tests\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\BroadPhase\BroadPhaseTest.cpp">
+      <Filter>Tests\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterBaseTest.cpp">
+      <Filter>Tests\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterPlanetTest.cpp">
+      <Filter>Tests\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterTest.cpp">
+      <Filter>Tests\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterVirtualTest.cpp">
+      <Filter>Tests\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterSpaceShipTest.cpp">
+      <Filter>Tests\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConeConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConstraintPriorityTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConstraintSingularityTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConstraintVsCOMChangeTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\DistanceConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\FixedConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\GearConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\HingeConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PointConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PathConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PoweredHingeConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PoweredSwingTwistConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PoweredSliderConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PulleyConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\RackAndPinionConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SwingTwistConstraintFrictionTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SwingTwistConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SixDOFConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SliderConstraintTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SpringTest.cpp">
+      <Filter>Tests\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\CapsuleVsBoxTest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\ClosestPointTest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\ConvexHullTest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\ConvexHullShrinkTest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\EPATest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\InteractivePairsTest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\RandomRayTest.cpp">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ActiveEdgesTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\AllowedDOFsTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\BigVsSmallTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\EnhancedInternalEdgeRemovalTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ShapeFilterTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SimCollideBodyVsBodyTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SimShapeFilterTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\CenterOfMassTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeMotionQualityTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeMotionTypeTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeShapeTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeObjectLayerTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ContactListenerTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ContactManifoldTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ConveyorBeltTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\DampingTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\DynamicMeshTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\FrictionTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\FrictionPerTriangleTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\FunnelTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\GravityFactorTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\GyroscopicForceTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\HeavyOnLightTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\HighSpeedTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\IslandTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\KinematicTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\LoadSaveBinaryTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\LoadSaveSceneTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ManifoldReductionTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ModifyMassTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\MultithreadedTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\PyramidTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\RestitutionTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SensorTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SimpleTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\StackTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\TwoDFunnelTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\WallTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ActivateDuringUpdateTest.cpp">
+      <Filter>Tests\General</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\CreateRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyBendConstraintTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyContactListenerTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyCosseratRodConstraintTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyCustomUpdateTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyForceTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyFrictionTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyGravityFactorTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyKinematicTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyLRAConstraintTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyPressureTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyRestitutionTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyShapesTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodySkinnedConstraintTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodySensorTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyStressTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyUpdatePositionTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyVertexRadiusTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyVsFastMovingTest.cpp">
+      <Filter>Tests\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Test.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Tools\LoadSnapshotTest.cpp">
+      <Filter>Tests\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\DynamicScaledShape.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledBoxShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledCapsuleShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledStaticCompoundShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledMutableCompoundShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledOffsetCenterOfMassShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledConvexHullShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledCylinderShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledHeightFieldShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledMeshShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledPlaneShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledSphereShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledTaperedCapsuleShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledTaperedCylinderShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledTriangleShapeTest.cpp">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\BoxShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\CapsuleShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\DeformedHeightFieldShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\EmptyShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\StaticCompoundShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\MutableCompoundShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\OffsetCenterOfMassShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\ConvexHullShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\CylinderShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\HeightFieldShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\MeshShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\MeshShapeUserDataTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\SphereShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\PlaneShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\RotatedTranslatedShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\TaperedCapsuleShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\TaperedCylinderShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\TriangleShapeTest.cpp">
+      <Filter>Tests\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\MotorcycleTest.cpp">
+      <Filter>Tests\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\TankTest.cpp">
+      <Filter>Tests\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleConstraintTest.cpp">
+      <Filter>Tests\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleSixDOFTest.cpp">
+      <Filter>Tests\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleStressTest.cpp">
+      <Filter>Tests\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleTest.cpp">
+      <Filter>Tests\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Water\BoatTest.cpp">
+      <Filter>Tests\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Water\WaterShapeTest.cpp">
+      <Filter>Tests\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\ContactListenerImpl.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\RagdollLoader.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\ShapeCreator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\SoftBodyCreator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\BigWorldTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\KinematicRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\LoadSaveBinaryRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\LoadSaveRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\LoadRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\PoweredRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\RigPileTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\SkeletonMapperTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\SoftKeyframedRigTest.cpp">
+      <Filter>Tests\Rig</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Layers.h" />
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\SamplesApp.h" />
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\BroadPhase\BroadPhaseCastRayTest.h">
+      <Filter>Tests\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\BroadPhase\BroadPhaseInsertionTest.h">
+      <Filter>Tests\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\BroadPhase\BroadPhaseTest.h">
+      <Filter>Tests\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterBaseTest.h">
+      <Filter>Tests\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterPlanetTest.h">
+      <Filter>Tests\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterTest.h">
+      <Filter>Tests\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterVirtualTest.h">
+      <Filter>Tests\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Character\CharacterSpaceShipTest.h">
+      <Filter>Tests\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConeConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConstraintPriorityTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConstraintSingularityTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\ConstraintVsCOMChangeTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\DistanceConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\FixedConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\GearConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\HingeConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PointConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PathConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PoweredHingeConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PoweredSwingTwistConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PoweredSliderConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\PulleyConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\RackAndPinionConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SwingTwistConstraintFrictionTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SwingTwistConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SixDOFConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SliderConstraintTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Constraints\SpringTest.h">
+      <Filter>Tests\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\CapsuleVsBoxTest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\ClosestPointTest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\ConvexHullTest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\ConvexHullShrinkTest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\EPATest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\InteractivePairsTest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ConvexCollision\RandomRayTest.h">
+      <Filter>Tests\ConvexCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ActiveEdgesTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\AllowedDOFsTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\BigVsSmallTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\EnhancedInternalEdgeRemovalTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ShapeFilterTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SimCollideBodyVsBodyTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SimShapeFilterTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\CenterOfMassTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeMotionQualityTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeMotionTypeTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeShapeTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ChangeObjectLayerTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ContactListenerTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ContactManifoldTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ConveyorBeltTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\DampingTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\DynamicMeshTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\FrictionTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\FrictionPerTriangleTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\FunnelTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\GravityFactorTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\GyroscopicForceTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\HeavyOnLightTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\HighSpeedTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\IslandTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\KinematicTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\LoadSaveBinaryTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\LoadSaveSceneTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ManifoldReductionTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ModifyMassTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\MultithreadedTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\PyramidTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\RestitutionTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SensorTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\SimpleTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\StackTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\TwoDFunnelTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\WallTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\General\ActivateDuringUpdateTest.h">
+      <Filter>Tests\General</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\CreateRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyBendConstraintTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyContactListenerTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyCosseratRodConstraintTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyCustomUpdateTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyForceTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyFrictionTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyGravityFactorTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyKinematicTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyLRAConstraintTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyPressureTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyRestitutionTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyShapesTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodySkinnedConstraintTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodySensorTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyStressTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyUpdatePositionTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyVertexRadiusTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\SoftBody\SoftBodyVsFastMovingTest.h">
+      <Filter>Tests\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Test.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Tools\LoadSnapshotTest.h">
+      <Filter>Tests\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\DynamicScaledShape.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledBoxShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledCapsuleShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledStaticCompoundShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledMutableCompoundShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledOffsetCenterOfMassShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledConvexHullShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledCylinderShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledHeightFieldShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledMeshShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledPlaneShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledSphereShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledTaperedCapsuleShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledTaperedCylinderShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\ScaledShapes\ScaledTriangleShapeTest.h">
+      <Filter>Tests\ScaledShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\BoxShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\CapsuleShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\DeformedHeightFieldShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\EmptyShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\StaticCompoundShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\MutableCompoundShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\OffsetCenterOfMassShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\ConvexHullShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\CylinderShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\HeightFieldShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\MeshShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\MeshShapeUserDataTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\SphereShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\PlaneShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\RotatedTranslatedShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\TaperedCapsuleShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\TaperedCylinderShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Shapes\TriangleShapeTest.h">
+      <Filter>Tests\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\MotorcycleTest.h">
+      <Filter>Tests\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\TankTest.h">
+      <Filter>Tests\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleConstraintTest.h">
+      <Filter>Tests\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleSixDOFTest.h">
+      <Filter>Tests\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleStressTest.h">
+      <Filter>Tests\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Vehicle\VehicleTest.h">
+      <Filter>Tests\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Water\BoatTest.h">
+      <Filter>Tests\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Water\WaterShapeTest.h">
+      <Filter>Tests\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\ContactListenerImpl.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\DebugRendererSP.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\RagdollLoader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\ShapeCreator.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Utils\SoftBodyCreator.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\BigWorldTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\KinematicRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\LoadSaveBinaryRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\LoadSaveRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\LoadRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\PoweredRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\RigPileTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\SkeletonMapperTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Tests\Rig\SoftKeyframedRigTest.h">
+      <Filter>Tests\Rig</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Samples.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Samples.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Samples.dir\Distribution\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Samples\Samples.cmake" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{5D9A409E-EC44-3E1C-A1F1-66973A569600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{06130023-714A-3EB1-84D4-CD89EE91BA90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{04B593AC-F966-3454-AAA4-40102BB3E078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\BroadPhase">
+      <UniqueIdentifier>{DB770598-CBBD-3E87-A51B-7C2A4B8DE4DF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Character">
+      <UniqueIdentifier>{BF9AFEDA-C419-3726-A8F3-98D512981B5B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Constraints">
+      <UniqueIdentifier>{38B1617E-EB78-36F2-BAAA-2BAA95356EFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\ConvexCollision">
+      <UniqueIdentifier>{55DEE0B9-4538-37C8-BA5B-C45EFA65FB9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\General">
+      <UniqueIdentifier>{50DC2FB6-502D-3422-BC10-48B95F09B8F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Rig">
+      <UniqueIdentifier>{1E783FAB-430B-3563-8E0E-F444A05CC198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\ScaledShapes">
+      <UniqueIdentifier>{7E6C8D51-A6C1-39A4-8BCE-23887DE0862A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Shapes">
+      <UniqueIdentifier>{AF6BFB2B-ACA7-30E6-9717-7D5B1D9704A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SoftBody">
+      <UniqueIdentifier>{9E0A4BC7-3592-3F81-AB83-30CC94FC7435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Tools">
+      <UniqueIdentifier>{6F30F612-90EA-3FDC-8618-8B18C795CB60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Vehicle">
+      <UniqueIdentifier>{4636FB3F-7ED1-3F11-80B9-BED811CB1515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Water">
+      <UniqueIdentifier>{9A4CDBDA-5C0A-3D57-878D-02DD2923FD7C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{6696CD4F-9D10-3C97-A97E-7C28DD3506CF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

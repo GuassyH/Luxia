@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"C:/dev/Luxia/Luxia/vendor/Jolt/Dyno/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

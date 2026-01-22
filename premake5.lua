@@ -100,6 +100,11 @@ project "Luxia"
 			"LUXIA_EXPORT",
 			"LUXIA_PLATFORM_WINDOWS",
 			"LUXIA_RENDERER_OPENGL", 
+			"JPH_SHARED_LIBRARY",
+			"JPH_FLOATING_POINT_EXCEPTIONS_ENABLED",
+			"JPH_DEBUG_RENDERER",
+			"JPH_PROFILE_ENABLED",
+			"JPH_OBJECT_STREAM"
 		}
 
 		buildoptions { "/utf-8", "/wd4251" } -- Ignores the "needs to be dll interfaced warning"
@@ -113,7 +118,7 @@ project "Luxia"
 		
 		libdirs { 
 			"Luxia/vendor/glfw", 
-			"Luxia/vendor/Jolt/include"
+			"Luxia/vendor/Jolt/lib"
 		}
 		links { 
 			"glfw3dll",
@@ -186,7 +191,7 @@ project "Editor"
 
 	libdirs {
 		"Luxia/vendor/glfw",
-		"Luxia/vendor/Jolt/include",
+		"Luxia/vendor/Jolt/lib",
 	}
 	links{
 		"Luxia",

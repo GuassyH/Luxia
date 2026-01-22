@@ -30,9 +30,9 @@ namespace Luxia {
 
 
 	bool Mesh::Unload() {
-		vao->Delete();
-		vbo->Delete();
-		ebo->Delete();
+		if (vao) vao->Delete();
+		if (vbo) vbo->Delete();
+		if (ebo) ebo->Delete();
 
 		vao.reset();
 		vbo.reset();

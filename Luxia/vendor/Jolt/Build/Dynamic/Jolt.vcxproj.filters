@@ -1,0 +1,1411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Jolt.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\AABBTree\AABBTreeBuilder.cpp">
+      <Filter>AABBTree</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Color.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Factory.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\IssueReporting.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystemSingleThreaded.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystemThreadPool.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystemWithBarrier.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\LinearCurve.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Memory.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Profiler.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\RTTI.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Semaphore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StringTools.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\TickCounter.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ConvexHullBuilder.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ConvexHullBuilder2D.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\Indexify.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\OrientedBox.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Vec3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\SerializableObject.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\Body.cpp">
+      <Filter>Physics\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyCreationSettings.cpp">
+      <Filter>Physics\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyInterface.cpp">
+      <Filter>Physics\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyManager.cpp">
+      <Filter>Physics\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MassProperties.cpp">
+      <Filter>Physics\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MotionProperties.cpp">
+      <Filter>Physics\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\Character.cpp">
+      <Filter>Physics\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\CharacterBase.cpp">
+      <Filter>Physics\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\CharacterVirtual.cpp">
+      <Filter>Physics\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhase.cpp">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseBruteForce.cpp">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseQuadTree.cpp">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\QuadTree.cpp">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CastConvexVsTriangles.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CastSphereVsTriangles.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideConvexVsTriangles.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideSphereVsTriangles.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollisionDispatch.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollisionGroup.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\EstimateCollisionResponse.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\GroupFilter.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\GroupFilterTable.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ManifoldBetweenTwoFaces.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\NarrowPhaseQuery.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\NarrowPhaseStats.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\PhysicsMaterial.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\PhysicsMaterialSimple.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\BoxShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CapsuleShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CompoundShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ConvexHullShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ConvexShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CylinderShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\DecoratedShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\EmptyShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\HeightFieldShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\MeshShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\MutableCompoundShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\OffsetCenterOfMassShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\PlaneShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\RotatedTranslatedShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ScaledShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\Shape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\SphereShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\StaticCompoundShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TaperedCapsuleShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TaperedCylinderShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TriangleShape.cpp">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\TransformedShape.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConeConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\Constraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintManager.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ContactConstraintManager.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\DistanceConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\FixedConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\GearConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\HingeConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\MotorSettings.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PathConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PathConstraintPath.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PathConstraintPathHermite.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PointConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PulleyConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\RackAndPinionConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SixDOFConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SliderConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SpringSettings.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SwingTwistConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\TwoBodyConstraint.cpp">
+      <Filter>Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\DeterminismLog.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\IslandBuilder.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\LargeIslandSplitter.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsScene.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsSystem.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsUpdateContext.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Ragdoll\Ragdoll.cpp">
+      <Filter>Physics\Ragdoll</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyCreationSettings.cpp">
+      <Filter>Physics\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyMotionProperties.cpp">
+      <Filter>Physics\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyShape.cpp">
+      <Filter>Physics\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodySharedSettings.cpp">
+      <Filter>Physics\SoftBody</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\StateRecorderImpl.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\MotorcycleController.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\TrackedVehicleController.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleAntiRollBar.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleCollisionTester.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleConstraint.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleController.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleDifferential.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleEngine.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleTrack.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleTransmission.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\Wheel.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\WheeledVehicleController.cpp">
+      <Filter>Physics\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\RegisterTypes.cpp" />
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRendererPlayback.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRendererRecorder.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRendererSimple.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\SkeletalAnimation.cpp">
+      <Filter>Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\Skeleton.cpp">
+      <Filter>Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\SkeletonMapper.cpp">
+      <Filter>Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\SkeletonPose.cpp">
+      <Filter>Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\TriangleSplitter\TriangleSplitter.cpp">
+      <Filter>TriangleSplitter</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\TriangleSplitter\TriangleSplitterBinning.cpp">
+      <Filter>TriangleSplitter</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\TriangleSplitter\TriangleSplitterMean.cpp">
+      <Filter>TriangleSplitter</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStream.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamBinaryIn.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamBinaryOut.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamIn.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamOut.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamTextIn.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamTextOut.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\TypeDeclarations.cpp">
+      <Filter>ObjectStream</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\AABBTree\AABBTreeBuilder.h">
+      <Filter>AABBTree</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\AABBTree\AABBTreeToBuffer.h">
+      <Filter>AABBTree</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\AABBTree\NodeCodec\NodeCodecQuadTreeHalfFloat.h">
+      <Filter>AABBTree\NodeCodec</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\AABBTree\TriangleCodec\TriangleCodecIndexed8BitPackSOA4Flags.h">
+      <Filter>AABBTree\TriangleCodec</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ConfigurationString.h" />
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\ARMNeon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Array.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Atomics.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\BinaryHeap.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\ByteBuffer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Color.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Factory.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\FixedSizeFreeList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\FixedSizeFreeList.inl">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\FPControlWord.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\FPException.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\FPFlushDenormals.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\HashCombine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\HashTable.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\InsertionSort.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\IssueReporting.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystem.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystem.inl">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystemSingleThreaded.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystemThreadPool.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\JobSystemWithBarrier.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\LinearCurve.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\LockFreeHashMap.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\LockFreeHashMap.inl">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Memory.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Mutex.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\MutexArray.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\NonCopyable.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Profiler.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Profiler.inl">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\QuickSort.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Reference.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Result.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\RTTI.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\ScopeExit.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\Semaphore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StaticArray.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\STLAlignedAllocator.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\STLAllocator.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\STLLocalAllocator.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\STLTempAllocator.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StreamIn.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StreamOut.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StreamUtils.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StreamWrapper.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StridedPtr.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\StringTools.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\TempAllocator.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\TickCounter.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\UnorderedMap.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Core\UnorderedSet.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\AABox.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\AABox4.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ClipPoly.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ClosestPoint.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ConvexHullBuilder.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ConvexHullBuilder2D.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\ConvexSupport.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\Ellipse.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\EPAConvexHullBuilder.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\EPAPenetrationDepth.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\GJKClosestPoint.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\IndexedTriangle.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\Indexify.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\MortonCode.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\OrientedBox.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\Plane.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\RayAABox.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\RayCapsule.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\RayCylinder.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\RaySphere.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\RayTriangle.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\Sphere.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Geometry\Triangle.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Jolt.h" />
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\BVec16.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\BVec16.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\DMat44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\DMat44.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Double3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\DVec3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\DVec3.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\DynMatrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\EigenValueSymmetric.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\FindRoot.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Float2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Float3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Float4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\GaussianElimination.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\HalfFloat.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Mat44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Mat44.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\MathTypes.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Quat.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Quat.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Real.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Swizzle.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Trigonometry.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\UVec4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\UVec4.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Vec3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Vec3.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Vec4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Vec4.inl">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Math\Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStream.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\SerializableAttribute.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\SerializableAttributeEnum.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\SerializableAttributeTyped.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\SerializableObject.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\TypeDeclarations.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\AllowedDOFs.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\Body.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\Body.inl">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyAccess.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyActivationListener.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyCreationSettings.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyFilter.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyID.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyInterface.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyLock.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyLockInterface.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyLockMulti.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyManager.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyPair.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\BodyType.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MassProperties.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MotionProperties.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MotionProperties.inl">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MotionQuality.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Body\MotionType.h">
+      <Filter>Physics\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\Character.h">
+      <Filter>Physics\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\CharacterBase.h">
+      <Filter>Physics\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\CharacterID.h">
+      <Filter>Physics\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Character\CharacterVirtual.h">
+      <Filter>Physics\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\AABoxCast.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ActiveEdgeMode.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ActiveEdges.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BackFaceMode.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhase.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseBruteForce.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseLayer.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseLayerInterfaceMask.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseLayerInterfaceTable.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseQuadTree.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\BroadPhaseQuery.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\ObjectVsBroadPhaseLayerFilterMask.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\ObjectVsBroadPhaseLayerFilterTable.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\BroadPhase\QuadTree.h">
+      <Filter>Physics\Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CastConvexVsTriangles.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CastResult.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CastSphereVsTriangles.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollectFacesMode.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideConvexVsTriangles.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollidePointResult.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideShape.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideShapeVsShapePerLeaf.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideSoftBodyVertexIterator.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideSoftBodyVerticesVsTriangles.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollideSphereVsTriangles.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollisionCollector.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollisionCollectorImpl.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollisionDispatch.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\CollisionGroup.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ContactListener.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\EstimateCollisionResponse.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\GroupFilter.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\GroupFilterTable.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\InternalEdgeRemovingCollector.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ManifoldBetweenTwoFaces.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\NarrowPhaseQuery.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\NarrowPhaseStats.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ObjectLayer.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ObjectLayerPairFilterMask.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ObjectLayerPairFilterTable.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\PhysicsMaterial.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\PhysicsMaterialSimple.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\RayCast.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\BoxShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CapsuleShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CompoundShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CompoundShapeVisitors.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ConvexHullShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ConvexShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\CylinderShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\DecoratedShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\EmptyShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\GetTrianglesContext.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\HeightFieldShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\MeshShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\MutableCompoundShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\OffsetCenterOfMassShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\PlaneShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\PolyhedronSubmergedVolumeCalculator.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\RotatedTranslatedShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ScaledShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\ScaleHelpers.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\Shape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\SphereShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\StaticCompoundShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\SubShapeID.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\SubShapeIDPair.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TaperedCapsuleShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TaperedCylinderShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TriangleShape.h">
+      <Filter>Physics\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ShapeCast.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\ShapeFilter.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\SimShapeFilter.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\SimShapeFilterWrapper.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\SortReverseAndStore.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\TransformedShape.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\CalculateSolverSteps.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConeConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\Constraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintManager.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\AngleConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\AxisConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\DualAxisConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\GearConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\HingeRotationConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\IndependentAxisConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\PointConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\RackAndPinionConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\RotationEulerConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\RotationQuatConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\SpringPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ConstraintPart\SwingTwistConstraintPart.h">
+      <Filter>Physics\Constraints\ConstraintPart</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\ContactConstraintManager.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\DistanceConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\FixedConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\GearConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\HingeConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\MotorSettings.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PathConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PathConstraintPath.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PathConstraintPathHermite.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PointConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\PulleyConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\RackAndPinionConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SixDOFConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SliderConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SpringSettings.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\SwingTwistConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Constraints\TwoBodyConstraint.h">
+      <Filter>Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\DeterminismLog.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\EActivation.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\EPhysicsUpdateError.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\IslandBuilder.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\LargeIslandSplitter.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsLock.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsScene.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsSettings.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsStepListener.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsSystem.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\PhysicsUpdateContext.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Ragdoll\Ragdoll.h">
+      <Filter>Physics\Ragdoll</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyContactListener.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyCreationSettings.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyManifold.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyMotionProperties.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyShape.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodySharedSettings.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyUpdateContext.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\SoftBody\SoftBodyVertex.h">
+      <Filter>Physics\SoftBody</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\StateRecorder.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\StateRecorderImpl.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\MotorcycleController.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\TrackedVehicleController.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleAntiRollBar.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleCollisionTester.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleConstraint.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleController.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleDifferential.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleEngine.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleTrack.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\VehicleTransmission.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\Wheel.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Vehicle\WheeledVehicleController.h">
+      <Filter>Physics\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\RegisterTypes.h" />
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRendererPlayback.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRendererRecorder.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Renderer\DebugRendererSimple.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\SkeletalAnimation.h">
+      <Filter>Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\Skeleton.h">
+      <Filter>Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\SkeletonMapper.h">
+      <Filter>Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Skeleton\SkeletonPose.h">
+      <Filter>Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\TriangleSplitter\TriangleSplitter.h">
+      <Filter>TriangleSplitter</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\TriangleSplitter\TriangleSplitterBinning.h">
+      <Filter>TriangleSplitter</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\TriangleSplitter\TriangleSplitterMean.h">
+      <Filter>TriangleSplitter</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\GetPrimitiveTypeOfType.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamBinaryIn.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamBinaryOut.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamIn.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamOut.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamTextIn.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamTextOut.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\ObjectStream\ObjectStreamTypes.h">
+      <Filter>ObjectStream</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Jolt.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Jolt.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\Jolt.dir\Distribution\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Jolt.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Jolt.cmake" />
+    <None Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Jolt\Physics\Collision\Shape\TaperedCapsuleShape.gliffy">
+      <Filter>Physics\Collision\Shape</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="AABBTree">
+      <UniqueIdentifier>{2C5929FF-9724-338A-89E4-CF1C1B03EE66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AABBTree\NodeCodec">
+      <UniqueIdentifier>{1585CDF8-D91E-3F7D-83C0-71145A9EC80C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AABBTree\TriangleCodec">
+      <UniqueIdentifier>{A3E789D7-3ABC-39B1-98F6-26841461A8C8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{0C84E325-93DC-3418-9E59-9467820ABDE0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{9275D0B7-B77A-3E85-A07B-DF7EAAD65344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{BE04F707-60BF-3374-85E5-5F3AD6D6DB0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectStream">
+      <UniqueIdentifier>{1A4F86A3-C651-3DBB-AEB0-86163B062639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{8EF39BF9-C96A-3779-A7C3-810ECAC946B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Body">
+      <UniqueIdentifier>{75945A07-1212-3580-BA33-04AA8C266D9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Character">
+      <UniqueIdentifier>{41B35735-DD3E-37D9-AA12-9B1D31D6EC11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Collision">
+      <UniqueIdentifier>{485AFC9C-7455-32D2-840C-4BD46A90CAF5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Collision\BroadPhase">
+      <UniqueIdentifier>{1A78D411-B6F8-37A7-ABD1-E2FCBA77F4F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Collision\Shape">
+      <UniqueIdentifier>{4BD7B5E2-9375-3730-B7DE-5E9087BFD835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Constraints">
+      <UniqueIdentifier>{7B46353F-C95D-3164-A746-FB587B1C371A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Constraints\ConstraintPart">
+      <UniqueIdentifier>{723133D2-79C6-37C7-A35B-FD148D173C7B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Ragdoll">
+      <UniqueIdentifier>{B1D6BDE9-1165-3AC1-A37D-A9EAC1907816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\SoftBody">
+      <UniqueIdentifier>{222FC1BF-5979-358E-9B00-33BF9A833707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Vehicle">
+      <UniqueIdentifier>{0A701B20-04BA-3E93-A644-31D736F9238C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{5D9A409E-EC44-3E1C-A1F1-66973A569600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{9E0A893D-1C43-3D09-8640-5BDC29730AF5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skeleton">
+      <UniqueIdentifier>{8C42277A-16E2-308E-A8C2-4E4D5A485979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{06130023-714A-3EB1-84D4-CD89EE91BA90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TriangleSplitter">
+      <UniqueIdentifier>{0F1FE183-16CB-3AFE-822A-82E7DBC36AC8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

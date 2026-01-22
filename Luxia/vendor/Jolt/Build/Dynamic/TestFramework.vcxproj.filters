@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\TestFramework.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Application\Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Application\DebugUI.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\External\Perlin.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\BlitSurface.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\LoadBMP.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\LoadTGA.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\Surface.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\ZoomImage.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DebugRendererImp.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\Font.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\RenderPrimitive.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIAnimation.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIAnimationSlide.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UICheckBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIComboBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIHorizontalStack.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIImage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UISlider.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIStaticText.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UITextButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIVerticalStack.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\CustomMemoryHook.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\ReadData.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Input\Win\KeyboardWin.cpp">
+      <Filter>Input\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Input\Win\MouseWin.cpp">
+      <Filter>Input\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\ConstantBufferDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\FatalErrorIfFailedDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\PipelineStateDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\RendererDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\RenderInstancesDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\RenderPrimitiveDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\TextureDX12.cpp">
+      <Filter>Renderer\DX12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\AssetStream.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\Log.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Window\ApplicationWindowWin.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Application\Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Application\DebugUI.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Application\EntryPoint.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\External\Perlin.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\External\stb_truetype.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\BlitSurface.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\LoadBMP.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\LoadTGA.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\Surface.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Image\ZoomImage.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Input\Keyboard.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Input\Mouse.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DebugRendererImp.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\Font.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\Frustum.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\PipelineState.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\PixelShader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\RenderInstances.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\RenderPrimitive.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\Texture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\VertexShader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\TestFramework.h" />
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIAnimation.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIAnimationSlide.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UICheckBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIComboBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIEventListener.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIHorizontalStack.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIImage.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UISlider.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIStaticText.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UITextButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UITexturedQuad.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\UI\UIVerticalStack.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\CustomMemoryHook.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\AssetStream.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Utils\ReadData.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Window\ApplicationWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Input\Win\KeyboardWin.h">
+      <Filter>Input\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Input\Win\MouseWin.h">
+      <Filter>Input\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\ConstantBufferDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\CommandQueueDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\DescriptorHeapDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\FatalErrorIfFailedDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\PipelineStateDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\PixelShaderDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\RendererDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\RenderInstancesDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\RenderPrimitiveDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\TextureDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Renderer\DX12\VertexShaderDX12.h">
+      <Filter>Renderer\DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\Window\ApplicationWindowWin.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\VertexConstants.h">
+      <Filter>Assets\Shaders\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\TestFramework.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\TestFramework.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\Dynamic\CMakeFiles\TestFramework.dir\Distribution\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Build\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\FontVertexShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\LineVertexShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\TriangleDepthVertexShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\TriangleVertexShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\UIVertexShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\FontPixelShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\LinePixelShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\TriangleDepthPixelShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\TrianglePixelShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\UIPixelShader.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+    <FXCompile Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\Assets\Shaders\DX\UIPixelShaderUntextured.hlsl">
+      <Filter>Assets\Shaders\DX</Filter>
+    </FXCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\haagl\Desktop\Jolt\JoltPhysics-5.5.0\TestFramework\TestFramework.cmake" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{D800D55A-95A5-3397-A2B0-3CA1BC327239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{DD9603AC-0254-3CFE-875C-C7C15AF4E24F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Shaders">
+      <UniqueIdentifier>{F6313ECB-9CEC-33AD-82C3-D196AD45E2A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Shaders\DX">
+      <UniqueIdentifier>{ECA2E871-7140-3E3C-8892-7CB59F563C82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{5D9C6630-9AEC-3E90-9D1C-40BB7C938EC8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{54ADBC72-AD67-3264-848D-5084F7CA09E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{ED9C8FC4-164E-3561-8A9C-59B1608CB31D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Win">
+      <UniqueIdentifier>{CCB07205-3F45-31CD-B3FD-3EBAC3F8AC8F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{5D9A409E-EC44-3E1C-A1F1-66973A569600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{9E0A893D-1C43-3D09-8640-5BDC29730AF5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\DX12">
+      <UniqueIdentifier>{7A119E29-26F9-37BE-AE20-549690A6796D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{06130023-714A-3EB1-84D4-CD89EE91BA90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{DDB0D566-D09B-3D7C-9A38-033CE66790A1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{6696CD4F-9D10-3C97-A97E-7C28DD3506CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{613465BF-0F2D-3784-83B0-28D48CC494FD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
