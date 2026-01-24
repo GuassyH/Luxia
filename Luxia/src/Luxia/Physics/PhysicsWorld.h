@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Luxia/Core/Core.h"
 #include "Luxia/Core/Log.h"
@@ -13,6 +13,7 @@
 #include <Jolt/Physics/Body/BodyInterface.h>
 #include <Jolt/Physics/Body/Body.h>
 #include <Jolt/Physics/PhysicsSystem.h>
+#include <Jolt/Math/DMat44.h>
 
 // These were taken from JoltPhysics HelloWorld to learn about Jolt
 namespace Luxia::Physics {
@@ -163,14 +164,36 @@ namespace Luxia::Physics {
 		return JPH::Vec3(v.x, v.y, v.z);
 	}
 
-	inline glm::quat ToGLM(const JPH::Quat& q) {
-		// JPH::Quat stores (w, x, y, z)
-		return glm::quat(q.GetW(), q.GetX(), q.GetY(), q.GetZ());
+	inline glm::quat ToGLM(const JPH::Quat& q)
+	{
+		glm::quat g(
+			q.GetW(),
+			q.GetX(),
+			q.GetY(),
+			q.GetZ()
+		);
+
+		static const glm::quat zFix =
+			glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0));
+
+		return glm::inverse(zFix) * g;
 	}
 
-	inline JPH::Quat ToJolt(const glm::quat& q) {
-		// glm::quat stores (w, x, y, z)
-		return JPH::Quat(q.w, q.x, q.y, q.z);
+	inline JPH::Quat ToJolt(const glm::quat& q)
+	{
+		// 180° rotation around Y to convert -Z forward → +Z forward
+		static const glm::quat zFix =
+			glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0));
+
+		glm::quat corrected = zFix * q;
+
+		// glm::quat = (w, x, y, z)
+		return JPH::Quat(
+			corrected.x,
+			corrected.y,
+			corrected.z,
+			corrected.w
+		);
 	}
 
 	struct PhysicsWorldDesc {
@@ -208,8 +231,6 @@ namespace Luxia::Physics {
 			int step = 1; // Should be 1 step per 1/60th seconds according to JPH
 			jphSystem.Update(dt, step, Luxia::Physics::PhysicsSystem::sTempAllocator, Luxia::Physics::PhysicsSystem::sJobSystem);
 		}
-
-		PhysicsWorldDesc settings;
 
 	};
 

@@ -119,7 +119,7 @@ namespace Luxia::Components {
 
 			// Build local matrix
 			glm::vec3 euler = local_euler_angles;
-			euler.y = -euler.y;
+			// euler.y = -euler.y;
 			local_rotation = glm::quat(glm::radians(euler));
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), local_scale);
 			glm::mat4 rotationMatrix = glm::mat4_cast(local_rotation);

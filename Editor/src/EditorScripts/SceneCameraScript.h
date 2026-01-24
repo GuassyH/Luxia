@@ -105,7 +105,7 @@ namespace Editor::Scripts {
 
 			// Apply rotations to Euler angles
 			transform->local_euler_angles.x += rotX; // pitch
-			transform->local_euler_angles.y += rotY; // yaw
+			transform->local_euler_angles.y -= rotY; // yaw
 
 			// Clamp pitch to avoid flipping
 			if (transform->local_euler_angles.x > 89.0f) transform->local_euler_angles.x = 89.0f;

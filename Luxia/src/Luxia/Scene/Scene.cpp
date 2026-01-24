@@ -100,31 +100,27 @@ namespace Luxia {
 		physicsWorld = Physics::PhysicsSystem::CreateWorld(Physics::PhysicsWorldDesc()); // Create with standard desc
 		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
 
-		bool isFirst = true;
 		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
 			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
 
 			// Temp settings
 			JPH::BodyCreationSettings settings;
 			settings.SetShape(rb.boxShape);
-			if(isFirst)
-				settings.mMotionType = JPH::EMotionType::Dynamic;
-			else
-				settings.mMotionType = JPH::EMotionType::Kinematic;
 
+
+			settings.mMotionType = rb.motionType;
 			settings.mObjectLayer = Physics::Layers::MOVING;
-			settings.mPosition = Physics::ToJolt(rb.transform->local_position);
-			settings.mRotation = Physics::ToJolt(rb.transform->local_rotation);
+			settings.mPosition = Physics::ToJolt(rb.transform->world_position);
+			settings.mRotation = Physics::ToJolt(rb.transform->world_rotation);
 			settings.mFriction = 0.5f;
-			settings.mRestitution = 0.2f;
+			settings.mRestitution = 0.1f;
 
-			isFirst = false;
 
 			// Create the body
 			JPH::Body* body = body_interface.CreateBody(settings);
 			// Add it to interface and activate
 			body_interface.AddBody(body->GetID(), JPH::EActivation::Activate);
-			rb.bodyID = body->GetID();
+			rb.body = body;
 		}
 
 		LX_CORE_TRACE("Scene ({}) Started", (uint64_t)guid);
@@ -132,15 +128,21 @@ namespace Luxia {
 
 	void Scene::Update() {
 		// Update physics
-		physicsWorld->step(Luxia::Core::Time::get().deltaTime);
+		auto rigid_view = GetEntitiesWith<Luxia::Components::RigidBody>();
+		for (auto entity : rigid_view) {
+			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
+			rb.body->SetMotionType(rb.motionType);
+		}
 	
+		physicsWorld->step(Luxia::Core::Time::get().deltaTime);
+		
 		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
 
 		// Go through each entity, get their position and rotation
-		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
+		for (auto entity : rigid_view) {
 			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
-			rb.CalculatePosition(Physics::ToGLM(body_interface.GetPosition(rb.bodyID)));
-			rb.CalculateRotation(Physics::ToGLM(body_interface.GetRotation(rb.bodyID)));
+			rb.CalculatePosition(Physics::ToGLM(body_interface.GetPosition(rb.body->GetID())));
+			rb.CalculateRotation(Physics::ToGLM(body_interface.GetRotation(rb.body->GetID())));
 		}
 	}
 

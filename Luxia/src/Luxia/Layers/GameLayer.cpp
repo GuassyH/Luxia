@@ -19,9 +19,6 @@ namespace Luxia::Layers {
 		std::shared_ptr<Scene> scene = scene_manager->GetActiveScene();
 
 		if (scene) {
-			if (scene_manager->running && !scene->isStarted)
-				scene->Start();
-
 			// This should always update, even if playing is paused
 			for (auto& [guid, entity] : scene->runtime_entities) {
 				auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
@@ -30,6 +27,9 @@ namespace Luxia::Layers {
 					transform->UpdateMatrix();
 				}
 			}
+
+			if (scene_manager->running && !scene->isStarted)
+				scene->Start();
 
 			// Should check for should update
 			if(scene_manager->running && scene->isStarted)

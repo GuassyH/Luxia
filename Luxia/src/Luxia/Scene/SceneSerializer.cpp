@@ -1,7 +1,7 @@
 #include "lxpch.h"
 #include "SceneSerializer.h"
 
-#include "Luxia/Components/Camera.h"
+#include "Luxia/Components/ComponentRegistry.h"
 #include "Luxia/CustomYAML.h"
 
 namespace Luxia {
@@ -52,7 +52,7 @@ namespace Luxia {
 			auto meshrend = entity.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
 			if (meshrend) {
 				out << YAML::Key << "MeshRenderer";
-				out << YAML::BeginMap; // Camera
+				out << YAML::BeginMap; // MeshRenderer
 
 				out << YAML::Key << "Enabled" << YAML::Value << meshrend->enabled;
 				out << YAML::Key << "Mesh" << YAML::Value << (meshrend->mesh ? (uint64_t)meshrend->mesh->guid : 0);
@@ -64,7 +64,7 @@ namespace Luxia {
 			auto light = entity.transform->TryGetComponent<Luxia::Components::Light>();
 			if (light) {
 				out << YAML::Key << "Light";
-				out << YAML::BeginMap; // Camera
+				out << YAML::BeginMap; // Light
 
 				out << YAML::Key << "Enabled" << YAML::Value << light->enabled;
 				out << YAML::Key << "Type" << YAML::Value << static_cast<int>(light->lightType);
@@ -73,6 +73,16 @@ namespace Luxia {
 				out << YAML::EndMap;
 			}
 
+			auto rb = entity.transform->TryGetComponent<Luxia::Components::RigidBody>();
+			if (rb) {
+				out << YAML::Key << "RigidBody";
+				out << YAML::BeginMap; // Camera
+
+				out << YAML::Key << "Enabled" << YAML::Value << rb->enabled;
+				out << YAML::Key << "MotionType" << YAML::Value << static_cast<int>(rb->motionType);
+
+				out << YAML::EndMap;
+			}
 		}
 
 		out << YAML::EndMap;
@@ -181,6 +191,12 @@ namespace Luxia {
 				light.enabled = lightNode["Enabled"].as<bool>();
 				light.lightType = static_cast<Luxia::LightType>(lightNode["Type"].as<int>());
 				light.color = lightNode["Color"].as<glm::vec4>();
+			}
+
+			if (auto rbNode = components["RigidBody"]) {
+				auto& rb = entity.transform->AddComponent<Luxia::Components::RigidBody>();
+				rb.enabled = rbNode["Enabled"].as<bool>();
+				rb.motionType = static_cast<JPH::EMotionType>(rbNode["MotionType"].as<int>());
 			}
 		}
 
