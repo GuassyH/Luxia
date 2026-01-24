@@ -21,8 +21,8 @@ namespace Luxia::Components {
 		}
 
 		void CalculateRotation(glm::quat new_world_rotation) {
-			// do NOTHING right now
-			transform->local_euler_angles += glm::degrees(glm::eulerAngles(new_world_rotation)) - transform->world_euler_angles;
+			glm::quat delta = new_world_rotation * glm::inverse(transform->world_rotation);
+			transform->local_rotation = delta * transform->local_rotation;
 		}
 
 		virtual void OnInspectorDraw() override {

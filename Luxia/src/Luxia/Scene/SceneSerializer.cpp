@@ -26,7 +26,7 @@ namespace Luxia {
 
 			out << YAML::Key << "Enabled" << YAML::Value << entity.transform->enabled;
 			out << YAML::Key << "Position" << YAML::Value << entity.transform->local_position;
-			out << YAML::Key << "EulerAngles" << YAML::Value << entity.transform->local_euler_angles;
+			out << YAML::Key << "Rotation" << YAML::Value << entity.transform->local_rotation;
 			out << YAML::Key << "Scale" << YAML::Value << entity.transform->local_scale;
 
 			out << YAML::EndMap;
@@ -134,7 +134,7 @@ namespace Luxia {
 
 		if (auto transNode = components["Transform"]) {
 			entity.transform->local_position = transNode["Position"].as<glm::vec3>();
-			entity.transform->local_euler_angles = transNode["EulerAngles"].as<glm::vec3>();
+			entity.transform->local_rotation = transNode["Rotation"].as<glm::quat>();
 			entity.transform->local_scale = transNode["Scale"].as<glm::vec3>();
 			entity.transform->enabled = transNode["Enabled"].as<bool>();
 

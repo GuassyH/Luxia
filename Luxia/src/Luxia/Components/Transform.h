@@ -19,21 +19,22 @@ namespace Luxia::Components {
 	public:
 		// Local variables (set)
 		glm::vec3 local_position = glm::vec3(0.0f); // (get & set)
-		glm::vec3 local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f); // (get & set)
+		glm::vec3 local_euler_angles = glm::vec3(0.0f, 0.0f, 0.0f); // (get)
 		glm::vec3 local_scale = glm::vec3(1.0f); // (get & set)
+		glm::quat local_rotation = glm::identity<glm::quat>(); // (get & set)
 
-		glm::quat local_rotation = glm::quat(); // rotation quat
-		glm::quat world_rotation = glm::quat();
-
-		// Global variables (get)
+		// Directions
 		glm::vec3 forward = glm::vec3(0.0f, 0.0f, 1.0f);
 		glm::vec3 right = glm::vec3(1.0f, 0.0f, 0.0f);
 		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 		
+		// Global variables (get)
 		glm::vec3 world_position = glm::vec3(0.0f); // (get only)
 		glm::vec3 world_euler_angles = glm::vec3(0.0f); // (get only)
 		glm::vec3 world_scale = glm::vec3(0.0f);  // (get only)
+		glm::quat world_rotation = glm::identity<glm::quat>(); // (get only)
 
+		// Transform
 		entt::entity ent_id = entt::entity(0);
 		std::vector<Transform*> children;
 		Transform* parent = nullptr;
@@ -110,17 +111,17 @@ namespace Luxia::Components {
 				world_euler_angles = parent->local_euler_angles + local_euler_angles;
 				world_position = parent->local_position + local_position;
 				world_scale = local_scale * parent->local_scale;
-			}
+				world_rotation = glm::normalize(parent->local_rotation * local_rotation);
+ 			}
 			else {
 				world_euler_angles = local_euler_angles;
 				world_position = local_position;
 				world_scale = local_scale;
+				world_rotation = glm::normalize(local_rotation);
 			}
 
-			// Build local matrix
-			glm::vec3 euler = local_euler_angles;
-			// euler.y = -euler.y;
-			local_rotation = glm::quat(glm::radians(euler));
+			local_rotation = glm::normalize(local_rotation);
+
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), local_scale);
 			glm::mat4 rotationMatrix = glm::mat4_cast(local_rotation);
 			glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), local_position);
@@ -128,15 +129,13 @@ namespace Luxia::Components {
 
 			if (HasParent()) {
 				modelMatrix = parent->GetMatrix() * localModelMatrix;
-				world_rotation = parent->world_rotation * local_rotation;
 			}
 			else {
 				modelMatrix = localModelMatrix;
-				world_rotation = local_rotation;
 			}
 
-			forward = glm::normalize(world_rotation * glm::vec3(0, 0, -1));
 			// forward.y = -forward.y;
+			forward = glm::normalize(world_rotation * glm::vec3(0, 0, -1));
 			up = glm::normalize(world_rotation * glm::vec3(0, 1, 0));
 			right = glm::normalize(world_rotation * glm::vec3(1, 0, 0));
 

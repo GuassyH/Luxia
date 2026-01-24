@@ -166,6 +166,8 @@ namespace Luxia::Physics {
 
 	inline glm::quat ToGLM(const JPH::Quat& q)
 	{
+		return glm::quat(q.GetW(), q.GetX(), q.GetY(), q.GetZ());
+
 		glm::quat g(
 			q.GetW(),
 			q.GetX(),
@@ -181,6 +183,8 @@ namespace Luxia::Physics {
 
 	inline JPH::Quat ToJolt(const glm::quat& q)
 	{
+		return JPH::Quat(q.x, q.y, q.z, q.w);
+
 		// 180° rotation around Y to convert -Z forward → +Z forward
 		static const glm::quat zFix =
 			glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0));
