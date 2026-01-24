@@ -104,8 +104,8 @@ namespace Editor::Scripts {
 			float rotY = deltaX * sensitivity * 100.0f;
 
 			// Apply rotations to Euler angles
-			transform->local_euler_angles.x += rotX; // pitch
-			transform->local_euler_angles.y -= rotY; // yaw
+			transform->AddEulerAngles(glm::vec3(rotX, 0.0f, 0.0f)); // pitch
+			transform->AddEulerAngles(glm::vec3(0.0f, -rotY, 0.0f)); // yaw
 
 			// Clamp pitch to avoid flipping
 			if (transform->local_euler_angles.x > 89.0f) transform->local_euler_angles.x = 89.0f;

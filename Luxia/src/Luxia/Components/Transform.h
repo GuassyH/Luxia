@@ -101,7 +101,6 @@ namespace Luxia::Components {
 			return new_child;
 		}
 
-
 		glm::mat4& GetMatrix() { return modelMatrix; }
 		glm::mat3 GetRotationMatrix() { return glm::mat3(glm::transpose(glm::inverse(modelMatrix))); }
 		
@@ -144,6 +143,15 @@ namespace Luxia::Components {
 				child->UpdateMatrix();
 		}
 
+		void SetEulerAngles(const glm::vec3& euler_angles) {
+			local_euler_angles = euler_angles;
+			local_rotation = glm::quat(glm::radians(local_euler_angles));
+		}
+		void AddEulerAngles(const glm::vec3& euler_angles) {
+			local_euler_angles += euler_angles;
+			local_rotation = glm::quat(glm::radians(local_euler_angles));
+		}
+
 		glm::vec3 VecToDeg(const glm::vec3& rad) {
 			return glm::degrees(rad);
 		}
@@ -153,6 +161,7 @@ namespace Luxia::Components {
 		entt::registry* reg = nullptr;
 
 		// Inline header?
+#pragma region GetAdd
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			AddComponent(Args&&... args) {
@@ -193,12 +202,16 @@ namespace Luxia::Components {
 			RemoveComponent() {
 			reg->remove<T>(ent_id);
 		}
+#pragma endregion
 
 		virtual void OnInspectorDraw() override {
+			glm::vec3 euler = local_euler_angles;
 			ImGui::DragFloat3("Position",	&local_position.x, 0.1f);
-			ImGui::DragFloat3("Rotation",	&local_euler_angles.x, 0.1f);
+			if (ImGui::DragFloat3("Rotation", &euler.x, 0.1f)) {
+				SetEulerAngles(euler);
+			}
 			ImGui::DragFloat3("Scale",		&local_scale.x, 0.1f);
-
+			
 		}
 
 	private:
