@@ -134,7 +134,7 @@ namespace Luxia {
 
 		if (auto transNode = components["Transform"]) {
 			entity.transform->local_position = transNode["Position"].as<glm::vec3>();
-			entity.transform->local_rotation = transNode["Rotation"].as<glm::quat>();
+			entity.transform->local_rotation = glm::normalize(transNode["Rotation"].as<glm::quat>());
 			entity.transform->local_scale = transNode["Scale"].as<glm::vec3>();
 			entity.transform->enabled = transNode["Enabled"].as<bool>();
 

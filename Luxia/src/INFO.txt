@@ -8,6 +8,8 @@ IMPORTANT
 
 - Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
 
+- NEED TO FIX. EULER ANGLES UPDATING IN TRANSFORM INCORRECTLY
+
 - Thumbnail for sphere is... weird
 
 --- Issues ---

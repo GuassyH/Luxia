@@ -115,7 +115,7 @@ namespace Luxia::Physics {
 		// See: ContactListener
 		virtual JPH::ValidateResult	OnContactValidate(const JPH::Body& inBody1, const JPH::Body& inBody2, JPH::RVec3Arg inBaseOffset, const JPH::CollideShapeResult& inCollisionResult) override
 		{
-			LX_CORE_INFO("[Physics]: Contact validate callback");
+			// LOGGING LX_CORE_INFO("[Physics]: Contact validate callback");
 
 			// Allows you to ignore a contact before it is created (using layers to not make objects collide is cheaper!)
 			return JPH::ValidateResult::AcceptAllContactsForThisBodyPair;
@@ -123,17 +123,17 @@ namespace Luxia::Physics {
 
 		virtual void			OnContactAdded(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings) override
 		{
-			LX_CORE_INFO("[Physics]: A contact was added");
+			// LOGGING LX_CORE_INFO("[Physics]: A contact was added");
 		}
 
 		virtual void			OnContactPersisted(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings) override
 		{
-			LX_CORE_INFO("[Physics]: A contact was persisted");
+			// LOGGING LX_CORE_INFO("[Physics]: A contact was persisted");
 		}
 
 		virtual void			OnContactRemoved(const JPH::SubShapeIDPair& inSubShapePair) override
 		{
-			LX_CORE_INFO("[Physics]: A contact was removed");
+			// LOGGING LX_CORE_INFO("[Physics]: A contact was removed");
 		}
 	};
 
@@ -143,12 +143,12 @@ namespace Luxia::Physics {
 	public:
 		virtual void		OnBodyActivated(const JPH::BodyID& inBodyID, JPH::uint64 inBodyUserData) override
 		{
-			LX_CORE_INFO("[Physics]: A body got activated");
+			// LOGGING LX_CORE_INFO("[Physics]: A body got activated");
 		}
 
 		virtual void		OnBodyDeactivated(const JPH::BodyID& inBodyID, JPH::uint64 inBodyUserData) override
 		{
-			LX_CORE_INFO("[Physics]: A body went to sleep");
+			// LOGGING LX_CORE_INFO("[Physics]: A body went to sleep");
 		}
 	};
 }
