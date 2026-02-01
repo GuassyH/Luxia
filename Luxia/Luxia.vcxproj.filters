@@ -10,6 +10,9 @@
     <Filter Include="Luxia\Components">
       <UniqueIdentifier>{3D17B13A-2910-D08C-5242-B5113E9AAF98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Luxia\Components\Colliders">
+      <UniqueIdentifier>{4DF2814F-3902-2E20-A2BB-923E8EEA1CB9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Luxia\Core">
       <UniqueIdentifier>{80D8ECDC-6C90-2E2A-D597-0786C16EC91A}</UniqueIdentifier>
     </Filter>
@@ -79,6 +82,12 @@
     <ClInclude Include="src\Luxia\Components\Camera.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Colliders\BoxCollider.h">
+      <Filter>Luxia\Components\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\Colliders\Collider.h">
+      <Filter>Luxia\Components\Colliders</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Components\Component.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
@@ -89,6 +98,9 @@
       <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\MeshRenderer.h">
+      <Filter>Luxia\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\RigidBody.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Transform.h">
@@ -275,6 +287,7 @@
       <Filter>Luxia\Tools</Filter>
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
+    <ClInclude Include="src\Luxia\Tools\PhysicsTools.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

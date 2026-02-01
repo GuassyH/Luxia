@@ -172,6 +172,8 @@
     <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
+    <ClInclude Include="src\Luxia\Components\Colliders\BoxCollider.h" />
+    <ClInclude Include="src\Luxia\Components\Colliders\Collider.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
     <ClInclude Include="src\Luxia\Components\ComponentRegistry.h" />
     <ClInclude Include="src\Luxia\Components\Light.h" />
@@ -237,6 +239,7 @@
     <ClInclude Include="src\Luxia\Scene\Scene.h" />
     <ClInclude Include="src\Luxia\Scene\SceneSerializer.h" />
     <ClInclude Include="src\Luxia\Tools\Constants.h" />
+    <ClInclude Include="src\Luxia\Tools\PhysicsTools.h" />
     <ClInclude Include="src\Luxia\Tools\Screen.h" />
     <ClInclude Include="src\lxpch.h" />
   </ItemGroup>

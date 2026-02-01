@@ -10,6 +10,9 @@
 #include "Light.h"
 #include "RigidBody.h"
 
+#include "Colliders/Collider.h"
+#include "Colliders/BoxCollider.h"
+
 namespace Luxia {
     struct LUXIA_API ComponentInfo {
         std::string name;

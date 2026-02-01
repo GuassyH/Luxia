@@ -1,7 +1,7 @@
 #include "lxpch.h"
 #include "Scene.h"
-#include "Luxia/Core/Time.h"
 
+#include "Luxia/Core/Time.h"
 #include "Luxia/Components/ComponentRegistry.h"
 
 namespace Luxia {
@@ -10,6 +10,11 @@ namespace Luxia {
 			[&](const auto& pair) {
 				return pair.second.name == name;
 			});
+	}
+
+	Scene::Scene() : reg(entt::registry()) {
+		type = Luxia::AssetType::SceneType;
+		physicsWorld = Physics::PhysicsSystem::CreateWorld(Physics::PhysicsWorldDesc()); // Create with standard desc
 	}
 
 	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {
@@ -72,6 +77,9 @@ namespace Luxia {
 				}
 			}
 
+			if (ent.transform->HasParent())
+				ent.transform->SetParent(nullptr);
+
 			reg.remove<Luxia::Components::Transform>(ent.transform->ent_id);
 			// reg.destroy(ent.transform->ent_id);
 
@@ -92,38 +100,26 @@ namespace Luxia {
 		runtime_entities.clear();
 		reg.clear();
 		toDelete.clear();
+
+		Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); // Unneccessary
+		
+		physicsWorld.release();
+		physicsWorld.reset();
+
 		return true;
 	}
 
 	void Scene::Start() {
 		isStarted = true;
-		physicsWorld = Physics::PhysicsSystem::CreateWorld(Physics::PhysicsWorldDesc()); // Create with standard desc
 		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
 
 		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
 			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
 
-			// Temp settings
-			JPH::BodyCreationSettings settings;
-			settings.SetShape(rb.boxShape);
-
-
-			settings.mMotionType = rb.motionType;
-			settings.mObjectLayer = Physics::Layers::MOVING;
-			settings.mPosition = Physics::ToJolt(rb.transform->world_position);
-			settings.mRotation = Physics::ToJolt(rb.transform->world_rotation);
-			settings.mFriction = 0.5f;
-			settings.mRestitution = 0.1f;
-
-
-			// Create the body
-			JPH::Body* body = body_interface.CreateBody(settings);
-			// Add it to interface and activate
-			body_interface.AddBody(body->GetID(), JPH::EActivation::Activate);
-			rb.body = body;
+			rb.InitBody(body_interface);
 		}
-
-		LX_CORE_TRACE("Scene ({}) Started", (uint64_t)guid);
+		
+		// LX_CORE_TRACE("Scene ({}) Started", (uint64_t)guid);
 	}
 
 	void Scene::Update() {
@@ -147,11 +143,15 @@ namespace Luxia {
 	}
 
 	void Scene::End() {
-		LX_CORE_TRACE("Scene ({}) Ended", (uint64_t)guid);
+		// LX_CORE_TRACE("Scene ({}) Ended", (uint64_t)guid);
 		isStarted = false;
 
-		Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); // Unneccessary
-		physicsWorld.release();
-		physicsWorld.reset();
+		JPH::BodyIDVector bodies;
+		physicsWorld->jphSystem.GetBodies(bodies);
+		for (auto& body : bodies) {
+			// physicsWorld->jphSystem.GetBodyInterface().DestroyBodies(&body, 1);
+			physicsWorld->jphSystem.GetBodyInterface().RemoveBody(body);
+		}
+
 	}
 }

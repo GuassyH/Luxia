@@ -4,6 +4,7 @@
 #include "Luxia/Core/Log.h"
 #include "glm/glm.hpp"
 #include "PhysicsSystem.h"
+#include "Luxia/Tools/PhysicsTools.h"
 
 #define JPH_OVERRIDE_NEW_DELETE
 #include "Jolt/Jolt.h"
@@ -14,6 +15,9 @@
 #include <Jolt/Physics/Body/Body.h>
 #include <Jolt/Physics/PhysicsSystem.h>
 #include <Jolt/Math/DMat44.h>
+#include <Jolt/Physics/Collision/RayCast.h>
+#include <Jolt/Physics/Collision/CastResult.h>
+#include <Jolt/Physics/Body/BodyLock.h>
 
 // These were taken from JoltPhysics HelloWorld to learn about Jolt
 namespace Luxia::Physics {
@@ -21,7 +25,8 @@ namespace Luxia::Physics {
 	namespace Layers {
 		static constexpr JPH::ObjectLayer NON_MOVING = 0;
 		static constexpr JPH::ObjectLayer MOVING = 1;
-		static constexpr JPH::ObjectLayer NUM_LAYERS = 2;
+		static constexpr JPH::ObjectLayer NON_COLLIDING = 2;
+		static constexpr JPH::ObjectLayer NUM_LAYERS = 3;
 
 	};
 
@@ -46,7 +51,8 @@ namespace Luxia::Physics {
 	namespace BroadPhaseLayers {
 		static constexpr JPH::BroadPhaseLayer NON_MOVING(0);
 		static constexpr JPH::BroadPhaseLayer MOVING(1);
-		static constexpr JPH::uint NUM_LAYERS(2);
+		static constexpr JPH::BroadPhaseLayer NON_COLLIDING(2);
+		static constexpr JPH::uint NUM_LAYERS(3);
 	}
 
 
@@ -60,6 +66,7 @@ namespace Luxia::Physics {
 			// Create a mapping table from object to broad phase layer
 			mObjectToBroadPhase[Layers::NON_MOVING] = BroadPhaseLayers::NON_MOVING;
 			mObjectToBroadPhase[Layers::MOVING] = BroadPhaseLayers::MOVING;
+			mObjectToBroadPhase[Layers::NON_COLLIDING] = BroadPhaseLayers::NON_COLLIDING;
 		}
 
 		virtual JPH::uint GetNumBroadPhaseLayers() const override
@@ -78,9 +85,10 @@ namespace Luxia::Physics {
 		{
 			switch ((JPH::BroadPhaseLayer::Type)inLayer)
 			{
-			case (JPH::BroadPhaseLayer::Type)BroadPhaseLayers::NON_MOVING:	return "NON_MOVING";
-			case (JPH::BroadPhaseLayer::Type)BroadPhaseLayers::MOVING:		return "MOVING";
-			default:													JPH_ASSERT(false); return "INVALID";
+			case (JPH::BroadPhaseLayer::Type)BroadPhaseLayers::NON_MOVING:			return "NON_MOVING";
+			case (JPH::BroadPhaseLayer::Type)BroadPhaseLayers::MOVING:				return "MOVING";
+			case (JPH::BroadPhaseLayer::Type)BroadPhaseLayers::NON_COLLIDING:		return "NON_COLLIDING";
+			default:																JPH_ASSERT(false); return "INVALID";
 			}
 		}
 #endif // JPH_EXTERNAL_PROFILE || JPH_PROFILE_ENABLED
@@ -101,6 +109,8 @@ namespace Luxia::Physics {
 				return inLayer2 == BroadPhaseLayers::MOVING;
 			case Layers::MOVING:
 				return true;
+			case Layers::NON_COLLIDING:
+				return false;
 			default:
 				JPH_ASSERT(false);
 				return false;
@@ -121,17 +131,17 @@ namespace Luxia::Physics {
 			return JPH::ValidateResult::AcceptAllContactsForThisBodyPair;
 		}
 
-		virtual void			OnContactAdded(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings) override
+		virtual void OnContactAdded(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings) override
 		{
 			// LOGGING LX_CORE_INFO("[Physics]: A contact was added");
 		}
 
-		virtual void			OnContactPersisted(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings) override
+		virtual void OnContactPersisted(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings) override
 		{
 			// LOGGING LX_CORE_INFO("[Physics]: A contact was persisted");
 		}
 
-		virtual void			OnContactRemoved(const JPH::SubShapeIDPair& inSubShapePair) override
+		virtual void OnContactRemoved(const JPH::SubShapeIDPair& inSubShapePair) override
 		{
 			// LOGGING LX_CORE_INFO("[Physics]: A contact was removed");
 		}
@@ -141,12 +151,12 @@ namespace Luxia::Physics {
 	class MyBodyActivationListener : public JPH::BodyActivationListener
 	{
 	public:
-		virtual void		OnBodyActivated(const JPH::BodyID& inBodyID, JPH::uint64 inBodyUserData) override
+		virtual void OnBodyActivated(const JPH::BodyID& inBodyID, JPH::uint64 inBodyUserData) override
 		{
 			// LOGGING LX_CORE_INFO("[Physics]: A body got activated");
 		}
 
-		virtual void		OnBodyDeactivated(const JPH::BodyID& inBodyID, JPH::uint64 inBodyUserData) override
+		virtual void OnBodyDeactivated(const JPH::BodyID& inBodyID, JPH::uint64 inBodyUserData) override
 		{
 			// LOGGING LX_CORE_INFO("[Physics]: A body went to sleep");
 		}
@@ -203,6 +213,7 @@ namespace Luxia::Physics {
 	struct PhysicsWorldDesc {
 		glm::vec3 gravity = glm::vec3(0.0f, -9.82f, 0.0f);
 
+		const float sleepVelocityThreshold = 0.01f;
 		const unsigned int cMaxBodies = 1024;
 		const unsigned int cNumBodyMutexes = 0;
 		const unsigned int cMaxBodyPairs = 1024;
@@ -223,12 +234,14 @@ namespace Luxia::Physics {
 		MyContactListener contactListener;
 
 		void Initialize(const PhysicsWorldDesc& PWD) {
+			auto physicsSettings = jphSystem.GetPhysicsSettings();
+			physicsSettings.mPointVelocitySleepThreshold = PWD.sleepVelocityThreshold;
 
 			jphSystem.Init(PWD.cMaxBodies, PWD.cNumBodyMutexes, PWD.cMaxBodyPairs, PWD.cMaxContactConstraints, broadPhaseLayerInterface, objectVsBroadPhaseLayerFilter, objectLayerPairFilter);
 			jphSystem.SetBodyActivationListener(&bodyActivationListener);
 			jphSystem.SetContactListener(&contactListener);
+			jphSystem.SetPhysicsSettings(physicsSettings);
 			jphSystem.SetGravity(JPH::Vec3(PWD.gravity.x, PWD.gravity.y, PWD.gravity.z));
-
 		}
 
 		void step(float dt) {
@@ -236,6 +249,41 @@ namespace Luxia::Physics {
 			jphSystem.Update(dt, step, Luxia::Physics::PhysicsSystem::sTempAllocator, Luxia::Physics::PhysicsSystem::sJobSystem);
 		}
 
+
+		bool RayCast(const glm::vec3& origin, const glm::vec3& direction, float maxDistance, Luxia::Physics::RayCastHit* hit) {
+			JPH::RRayCast ray;
+			ray.mOrigin = Luxia::Physics::ToJolt(origin);
+			ray.mDirection = Luxia::Physics::ToJolt(direction) * maxDistance;
+
+			JPH::RayCastResult jphHit;
+
+			bool did_hit = jphSystem.GetNarrowPhaseQuery().CastRay(ray, jphHit);
+			if (did_hit) {
+				if (hit) {
+					const JPH::BodyLockRead lock(jphSystem.GetBodyLockInterface(), jphHit.mBodyID);
+					if (!lock.Succeeded()) return false;
+
+					hit->hit = true;
+					hit->distance = jphHit.mFraction * maxDistance;
+					hit->position = Luxia::Physics::ToGLM(ray.GetPointOnRay(jphHit.mFraction));
+					hit->bodyID = jphHit.mBodyID;
+
+					const JPH::Body& body = lock.GetBody();
+					hit->normal = Luxia::Physics::ToGLM(body.GetWorldSpaceSurfaceNormal(jphHit.mSubShapeID2, ray.GetPointOnRay(jphHit.mFraction)));
+				}
+			}
+			else {
+				if (hit) {
+					hit->hit = false;
+					hit->distance = 0.0f;
+					hit->position = glm::vec3(0.0f);
+					// hit->bodyID = JPH::BodyID(0);
+					hit->normal = glm::vec3(0.0f);
+				}
+			}
+
+			return did_hit;
+		}
 	};
 
 }

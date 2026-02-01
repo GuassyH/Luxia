@@ -210,6 +210,11 @@ project "Editor"
 		defines{
 			"LUXIA_PLATFORM_WINDOWS",
 			"LUXIA_RENDERER_OPENGL",
+			"JPH_SHARED_LIBRARY",
+			"JPH_FLOATING_POINT_EXCEPTIONS_ENABLED",
+			"JPH_DEBUG_RENDERER",
+			"JPH_PROFILE_ENABLED",
+			"JPH_OBJECT_STREAM"
 		}
 
 		buildoptions { "/utf-8", "/wd4251" }

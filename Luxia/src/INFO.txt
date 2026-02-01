@@ -6,9 +6,10 @@ IMPORTANT
 
 - Importing should also be given path to import TO. so you can import from an external folder (maybe?)
 
-- Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
+- First half extent valid, when stopping starting again its reset to 0.5
 
-- NEED TO FIX. EULER ANGLES UPDATING IN TRANSFORM INCORRECTLY
+THIS
+- Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
 
 - Thumbnail for sphere is... weird
 

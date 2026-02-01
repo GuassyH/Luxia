@@ -104,8 +104,6 @@ namespace Luxia::Components {
 		
 		void UpdateMatrix() {
 			// Combine with parent matrix
-			local_rotation = glm::normalize(local_rotation);
-			
 			glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), local_scale);
 			glm::mat4 rotationMatrix = glm::mat4_cast(local_rotation);
 			glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), local_position);
@@ -135,8 +133,12 @@ namespace Luxia::Components {
 		}
 
 		// Get rotation in Euler angles (degrees)
-		glm::vec3 GetEulerAngles() const {
-			return glm::degrees(glm::eulerAngles(local_rotation));
+		glm::vec3 GetEulerAngles(bool local = true) const {
+			if(local)
+				return glm::degrees(glm::eulerAngles(local_rotation));
+			else
+				return glm::degrees(glm::eulerAngles(world_rotation));
+
 		}
 
 		// Set rotation from Euler angles (degrees)
@@ -146,15 +148,22 @@ namespace Luxia::Components {
 		}
 
 		// Add rotation in Euler angles (degrees), applied in local space
-		void AddEulerAngles(const glm::vec3& euler_angles_deg) {
-			glm::quat delta = glm::quat(glm::radians(euler_angles_deg));
-			local_rotation = glm::normalize(local_rotation * delta);
-			// Use delta * local_rotation if i want it applied in world space instead
+		void AddEulerAngles(const glm::vec3& euler_angles_deg, bool local = true) {
+			glm::quat delta = glm::normalize(glm::quat(glm::radians(euler_angles_deg)));
+
+			if (local)
+				local_rotation = glm::normalize(local_rotation * delta); // local space
+			else
+				local_rotation = glm::normalize(delta * local_rotation); // world space
 		}
 
-		void AddRotationAroundAxis(const glm::vec3& axis, float angle_deg) {
+		void AddRotationAroundAxis(const glm::vec3& axis, float angle_deg, bool local = true) {
 			glm::quat delta = glm::angleAxis(glm::radians(angle_deg), glm::normalize(axis));
-			local_rotation = glm::normalize(delta * local_rotation); // local space
+
+			if (local)
+				local_rotation = glm::normalize(local_rotation * delta); // local space
+			else
+				local_rotation = glm::normalize(delta * local_rotation); // world space
 		}
 		Transform() = default;
 
@@ -204,15 +213,13 @@ namespace Luxia::Components {
 		}
 #pragma endregion
 
-		glm::vec3 prevEuler = GetEulerAngles();
 		virtual void OnInspectorDraw() override {
 			ImGui::DragFloat3("Position",	&local_position.x, 0.1f);
 
-			glm::vec3 euler = prevEuler;
+			glm::vec3 euler = GetEulerAngles();
 			if (ImGui::DragFloat3("Rotation", &euler.x, 0.1f)) {
-				glm::vec3 delta = euler - prevEuler;
+				glm::vec3 delta = euler - GetEulerAngles();
 				AddEulerAngles(delta); // apply as incremental rotation
-				prevEuler = euler;
 			}
 			ImGui::DragFloat3("Scale",		&local_scale.x, 0.1f);
 			

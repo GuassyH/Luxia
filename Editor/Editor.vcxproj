@@ -78,7 +78,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;JPH_SHARED_LIBRARY;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;LUXIA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\glm;..\Luxia\vendor\assimp\include;..\Luxia\src;..\Luxia\vendor\Jolt;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -99,7 +99,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;JPH_SHARED_LIBRARY;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;LUXIA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\glm;..\Luxia\vendor\assimp\include;..\Luxia\src;..\Luxia\vendor\Jolt;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -124,7 +124,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUXIA_PLATFORM_WINDOWS;LUXIA_RENDERER_OPENGL;JPH_SHARED_LIBRARY;JPH_FLOATING_POINT_EXCEPTIONS_ENABLED;JPH_DEBUG_RENDERER;JPH_PROFILE_ENABLED;JPH_OBJECT_STREAM;LUXIA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Luxia\vendor;..\Luxia\vendor\spdlog\include;..\Luxia\vendor\yaml-cpp\include;..\Luxia\vendor\glm;..\Luxia\vendor\assimp\include;..\Luxia\src;..\Luxia\vendor\Jolt;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -158,6 +158,7 @@
     <ClInclude Include="src\EditorPanels\SceneViewport.h" />
     <ClInclude Include="src\EditorPanels\ShoutoutPanel.h" />
     <ClInclude Include="src\EditorScripts\SceneCameraScript.h" />
+    <ClInclude Include="src\EditorScripts\SceneShooterTest.h" />
     <ClInclude Include="src\Gizmos\Gizmo.h" />
     <ClInclude Include="src\IEditorPanel.h" />
     <ClInclude Include="src\SystemFuncs.h" />

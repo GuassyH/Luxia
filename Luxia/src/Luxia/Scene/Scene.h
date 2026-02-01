@@ -22,7 +22,7 @@ namespace Luxia {
 	class LUXIA_API Scene : public Luxia::Assets::Asset
 	{
 	public:
-		Scene() : reg(entt::registry()) { type = Luxia::AssetType::SceneType; }
+		Scene();
 		~Scene() = default;
 
 		virtual bool Unload() override;

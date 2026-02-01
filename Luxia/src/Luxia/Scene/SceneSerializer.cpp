@@ -80,7 +80,24 @@ namespace Luxia {
 
 				out << YAML::Key << "Enabled" << YAML::Value << rb->enabled;
 				out << YAML::Key << "MotionType" << YAML::Value << static_cast<int>(rb->motionType);
+				out << YAML::Key << "MotionQuality" << YAML::Value << static_cast<int>(rb->motionQuality);
+				out << YAML::Key << "Mass" << YAML::Value << rb->mass;
+				out << YAML::Key << "LinearDamping" << YAML::Value << rb->linearDamping;
+				out << YAML::Key << "AngularDamping" << YAML::Value << rb->angularDamping;
+				out << YAML::Key << "GravityScale" << YAML::Value << rb->gravityScale;
 
+				out << YAML::EndMap;
+			}
+
+			auto bc = entity.transform->TryGetComponent<Luxia::Components::BoxCollider>();
+			if (bc) {
+				out << YAML::Key << "BoxCollider";
+				out << YAML::BeginMap; // BoxCollider
+				
+				out << YAML::Key << "Enabled" << YAML::Value << bc->enabled;
+				out << YAML::Key << "HalfExtent" << YAML::Value << Luxia::Physics::ToGLM(bc->halfExtent);
+				out << YAML::Key << "Offset" << YAML::Value << bc->offset;
+				
 				out << YAML::EndMap;
 			}
 		}
@@ -138,6 +155,7 @@ namespace Luxia {
 			entity.transform->local_scale = transNode["Scale"].as<glm::vec3>();
 			entity.transform->enabled = transNode["Enabled"].as<bool>();
 
+			// Camera
 			if (auto camNode = components["Camera"]) {
 				int width = camNode["Width"].as<int>();
 				int height = camNode["Height"].as<int>();
@@ -152,6 +170,7 @@ namespace Luxia {
 				cam.useSkybox = camNode["UseSkybox"].as<bool>();
 			}
 
+			// MeshRenderer
 			if (auto meshRendNode = components["MeshRenderer"]) {
 				auto& meshRend = entity.transform->AddComponent<Luxia::Components::MeshRenderer>();
 				meshRend.enabled = meshRendNode["Enabled"].as<bool>();
@@ -186,6 +205,7 @@ namespace Luxia {
 
 			}
 
+			// Light
 			if (auto lightNode = components["Light"]) {
 				auto& light = entity.transform->AddComponent<Luxia::Components::Light>();
 				light.enabled = lightNode["Enabled"].as<bool>();
@@ -193,10 +213,24 @@ namespace Luxia {
 				light.color = lightNode["Color"].as<glm::vec4>();
 			}
 
+			// RigidBody
 			if (auto rbNode = components["RigidBody"]) {
 				auto& rb = entity.transform->AddComponent<Luxia::Components::RigidBody>();
 				rb.enabled = rbNode["Enabled"].as<bool>();
 				rb.motionType = static_cast<JPH::EMotionType>(rbNode["MotionType"].as<int>());
+				rb.motionQuality = static_cast<JPH::EMotionQuality>(rbNode["MotionQuality"].as<int>());
+				rb.mass = rbNode["Mass"].as<float>();
+				rb.linearDamping = rbNode["LinearDamping"].as<float>();
+				rb.angularDamping = rbNode["AngularDamping"].as<float>();
+				rb.gravityScale = rbNode["GravityScale"].as<float>();
+			}
+
+			// BoxCollider
+			if (auto bcNode = components["BoxCollider"]) {
+				auto& bc = entity.transform->AddComponent<Luxia::Components::BoxCollider>();
+				bc.enabled = bcNode["Enabled"].as<bool>();
+				bc.halfExtent = Luxia::Physics::ToJolt(bcNode["HalfExtent"].as<glm::vec3>());
+				bc.offset = bcNode["Offset"].as<glm::vec3>();
 			}
 		}
 

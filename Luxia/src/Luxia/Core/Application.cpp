@@ -25,6 +25,9 @@ namespace Luxia
 		// Initialise event handler
 		m_EventHandler = std::make_shared<Luxia::EventHandler>();	
 		
+		// Initialize Physics
+		Physics::PhysicsSystem::Initialize();
+
 		// Create Renderer
 		m_Renderer = Luxia::Platform::Rendering::CreateRenderer();
 
@@ -46,10 +49,6 @@ namespace Luxia
 
 	void Application::CoreStartup() {
 		LX_CORE_INFO("Application Started\n");
-		
-		// Initialize Physics
-		LX_CORE_TRACE("Initializing Physics");
-		Physics::PhysicsSystem::Initialize();
 
 		// Core Layers
 		PushLayer(std::make_shared<Layers::EventLayer>());

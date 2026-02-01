@@ -1,6 +1,7 @@
 #include "SceneViewport.h"
 #include "EditorLayer.h"
 #include "EditorScripts/SceneCameraScript.h"
+#include "EditorScripts/SceneShooterTest.h"
 
 namespace Editor::Panels {
 
@@ -8,6 +9,8 @@ namespace Editor::Panels {
 	static std::shared_ptr<Luxia::ITexture> selection_fbo = Luxia::Platform::Assets::CreateTexture();
 	static std::shared_ptr<Luxia::IMaterial> outline_mat = Luxia::Platform::Assets::CreateMaterial();
 	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
+	static Luxia::Physics::RayCastHit last_ray_hit = Luxia::Physics::RayCastHit();
+
 
 	static std::shared_ptr<Gizmos::GridGizmo> grid_gizmo = nullptr;
 
@@ -94,7 +97,7 @@ namespace Editor::Panels {
 
 		cam_ent->AddComponent<Luxia::Components::Camera>(1920, 1080).farPlane = 2000.0f;
 		cam_ent->AddComponent<Editor::Scripts::SceneCameraScript>();
-
+		cam_ent->AddComponent<Editor::Scripts::SceneShooterTest>();
 
 		fbo_pick_tex->CreateFBOTex(1920, 1080);
 		selection_fbo->CreateDepthTex(1920, 1080);
@@ -116,6 +119,7 @@ namespace Editor::Panels {
 
 		Luxia::Components::Camera& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
 		Editor::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Editor::Scripts::SceneCameraScript>();
+		cam.transform->UpdateMatrix();
 
 		// Set the image
 		if (output_texture) { 
@@ -144,6 +148,25 @@ namespace Editor::Panels {
 			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
 				if (scene) {
 					glm::vec2 rp = Luxia::Screen::GetMousePosRect(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), glm::vec2(cam.width, cam.height), Luxia::Input::GetMousePosition());
+					glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
+					
+					// Raycasting (start scene to set rigidbodies)
+					bool was_running = scene->isStarted;
+					if(!was_running)
+						scene->Start();
+					
+					if (scene->physicsWorld->RayCast(cam_ent->transform->world_position, ray_dir, 1000.0f, &last_ray_hit)) {
+						LX_INFO("Raycasted TRUE: Pos {}x {}y {}z", last_ray_hit.position.x, last_ray_hit.position.y, last_ray_hit.position.z);
+					}
+					else {
+						LX_INFO("Raycasted FALSE: Dir {}x {}y {}z", ray_dir.x, ray_dir.y, ray_dir.z);
+					}
+
+					if (!was_running)
+						scene->End();
+
+
+					// FBO Picking
 					Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
 
 					if (scene->runtime_entities.contains(picked)) {
@@ -178,6 +201,11 @@ namespace Editor::Panels {
 				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2)) {
 					cam_script.last_mouseX = Luxia::Input::GetMousePosition().x;
 					cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
+				}
+
+				if (Luxia::Input::IsKeyJustPressed(LX_KEY_H) && scene) {
+					if(editorLayer->GetSceneManager()->running)
+						cam_ent->transform->GetComponent<Editor::Scripts::SceneShooterTest>().Shoot(*scene, editorLayer->GetAssetManager().get());
 				}
 
 				cam_script.Look();
@@ -254,9 +282,9 @@ namespace Editor::Panels {
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
 		// Get the important stuff
 		Luxia::Rendering::IRenderer* renderer = editorLayer->GetRenderer().get();
-		cam_ent->UpdateMatrix();
 		auto& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
-		
+		cam.transform->UpdateMatrix();
+
 		// Rebind
 		Luxia::Screen::BindFBO(cam_tex->GetFBO());
 		Luxia::Screen::BindRBO(cam_tex->GetRBO());

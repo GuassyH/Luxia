@@ -105,11 +105,11 @@ namespace Editor::Scripts {
 
 			// Apply rotations to Euler angles
 			transform->AddEulerAngles(glm::vec3(rotX, 0.0f, 0.0f)); // pitch
-			transform->AddRotationAroundAxis(glm::vec3(0.0f, 1.0f, 0.0f), -rotY); // yaw
+			transform->AddRotationAroundAxis(glm::vec3(0.0f, 1.0f, 0.0f), -rotY, false); // yaw
 
 			// Clamp pitch to avoid flipping
 			glm::vec3 euler = transform->GetEulerAngles();
-			if (euler.x > 89.0f) euler.x = 89.0f;
+			if (euler.x > 89.0f) euler.x = 89.0f; // yaw
 			if (euler.x < -89.0f) euler.x = -89.0f;
 
 			if (Luxia::Input::GetScrollOffset().y != 0) {
