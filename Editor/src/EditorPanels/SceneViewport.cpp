@@ -83,7 +83,6 @@ namespace Editor::Panels {
 		return result;
 	}
 
-
 	/// CORE
 	void SceneViewport::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
@@ -148,24 +147,8 @@ namespace Editor::Panels {
 			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
 				if (scene) {
 					glm::vec2 rp = Luxia::Screen::GetMousePosRect(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), glm::vec2(cam.width, cam.height), Luxia::Input::GetMousePosition());
-					glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
+					// glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
 					
-					// Raycasting (start scene to set rigidbodies)
-					bool was_running = scene->isStarted;
-					if(!was_running)
-						scene->Start();
-					
-					if (scene->physicsWorld->RayCast(cam_ent->transform->world_position, ray_dir, 1000.0f, &last_ray_hit)) {
-						LX_INFO("Raycasted TRUE: Pos {}x {}y {}z", last_ray_hit.position.x, last_ray_hit.position.y, last_ray_hit.position.z);
-					}
-					else {
-						LX_INFO("Raycasted FALSE: Dir {}x {}y {}z", ray_dir.x, ray_dir.y, ray_dir.z);
-					}
-
-					if (!was_running)
-						scene->End();
-
-
 					// FBO Picking
 					Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
 
