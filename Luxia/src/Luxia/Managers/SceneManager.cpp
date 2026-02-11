@@ -45,6 +45,7 @@ namespace Luxia {
 		if (!active_scene) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, could not cast to Scene"); return nullptr; }
 
 		SceneSerializer serializer(m_sceneFile, asset_manager);
+		active_scene->Load();
 		serializer.Deserialize();
 
 		LX_CORE_INFO("Loaded Scene: {}", (uint64_t)active_scene->guid);
@@ -67,8 +68,9 @@ namespace Luxia {
 		if (!active_scene->scene_file) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, Scene has no SceneFile"); return nullptr; }
 
 		SceneSerializer serializer(m_scene->scene_file.lock(), asset_manager);
+		active_scene->Load();
 		serializer.Deserialize();
-		
+
 		LX_CORE_INFO("Loaded Scene: {}", (uint64_t)active_scene->guid);
 
 		return GetActiveScene();

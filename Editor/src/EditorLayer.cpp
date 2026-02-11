@@ -222,13 +222,9 @@ namespace Editor::Layers {
 
 
 			if (ImGui::ImageButton("##PlayButton", (ImTextureRef)PlayTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
-				// Save scene before setting running to true
-				if(!scene_manager->running)
+				// If not running, save the scene state and start
+				if (!scene_manager->running) {
 					scene_manager->SaveActiveScene();
-				
-				scene_manager->running = scene_manager->running ? false : true;
-				
-				if (scene_manager->running) {
 					// Should create a seperate instance or something similar
 				}
 				else {
@@ -237,8 +233,11 @@ namespace Editor::Layers {
 					if (scene) {
 						scene->End();
 						scene_manager->SetActiveScene(scene, false);
+						// DONT UNLOAD IT. Just reset to the saved state
 					}
 				}
+
+				scene_manager->running = scene_manager->running ? false : true;
 			}
 			if (ImGui::ImageButton("##PauseButton", (ImTextureRef)PauseTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
 				LX_WARN("Pause button does nothing as of current");

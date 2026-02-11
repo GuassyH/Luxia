@@ -12,9 +12,8 @@ namespace Luxia {
 			});
 	}
 
-	Scene::Scene() : reg(entt::registry()) {
+	Scene::Scene() {
 		type = Luxia::AssetType::SceneType;
-		physicsWorld = Physics::PhysicsSystem::CreateWorld(Physics::PhysicsWorldDesc()); // Create with standard desc
 	}
 
 	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {
@@ -87,6 +86,11 @@ namespace Luxia {
 		}
 	}
 
+	void Scene::Load() {
+		reg = entt::registry();
+		physicsWorld = Physics::PhysicsSystem::CreateWorld(Physics::PhysicsWorldDesc()); // Create with standard desc
+	}
+
 	bool Scene::Unload() {
 		std::vector<GUID> toDelete;
 		toDelete.reserve(runtime_entities.size());
@@ -111,15 +115,13 @@ namespace Luxia {
 
 	void Scene::Start() {
 		isStarted = true;
-		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
 
+		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
 		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
 			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
 
 			rb.InitBody(body_interface);
 		}
-		
-		LX_CORE_TRACE("Number of bodies before: {}", physicsWorld->jphSystem.GetNumBodies());
 	}
 
 	void Scene::Update() {
@@ -145,6 +147,11 @@ namespace Luxia {
 	void Scene::End() {
 		isStarted = false;
 
-		LX_CORE_TRACE("Number of bodies after: {}", physicsWorld->jphSystem.GetNumBodies());
+		auto& body_interface = physicsWorld->jphSystem.GetBodyInterface();
+		for (auto entity : GetEntitiesWith<Luxia::Components::RigidBody>()) {
+			auto& rb = GetFromEntity<Luxia::Components::RigidBody>(entity);
+
+			rb.UnloadBody(body_interface);
+		}
 	}
 }

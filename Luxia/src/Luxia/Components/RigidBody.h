@@ -23,7 +23,7 @@ namespace Luxia::Components {
 		JPH::EMotionQuality motionQuality = JPH::EMotionQuality::Discrete;
 
 		void InitBody(JPH::BodyInterface& body_interface) {
-			body = nullptr;
+			
 
 			JPH::BodyCreationSettings settings;
 			
@@ -59,6 +59,16 @@ namespace Luxia::Components {
 			body = body_interface.CreateBody(settings);
 
 			body_interface.AddBody(body->GetID(), JPH::EActivation::Activate);
+		}
+
+		void UnloadBody(JPH::BodyInterface& body_interface) {
+			if (body) {
+				if(body_interface.IsAdded(body->GetID())) {
+					body_interface.RemoveBody(body->GetID());
+					body_interface.DestroyBody(body->GetID());
+				}
+				body = nullptr;
+			}
 		}
 
 		void CalculatePosition(glm::vec3 new_world_pos) {

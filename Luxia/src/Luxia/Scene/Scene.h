@@ -25,9 +25,9 @@ namespace Luxia {
 		Scene();
 		~Scene() = default;
 
+		void Load();
 		virtual bool Unload() override;
 		// Only Creates the reg
-		void Load() { reg = entt::registry(); }
 
 		void Start();
 		void Update();
