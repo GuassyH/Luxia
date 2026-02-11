@@ -119,7 +119,7 @@ namespace Luxia {
 			rb.InitBody(body_interface);
 		}
 		
-		// LX_CORE_TRACE("Scene ({}) Started", (uint64_t)guid);
+		LX_CORE_TRACE("Number of bodies before: {}", physicsWorld->jphSystem.GetNumBodies());
 	}
 
 	void Scene::Update() {
@@ -143,15 +143,8 @@ namespace Luxia {
 	}
 
 	void Scene::End() {
-		// LX_CORE_TRACE("Scene ({}) Ended", (uint64_t)guid);
 		isStarted = false;
 
-		JPH::BodyIDVector bodies;
-		physicsWorld->jphSystem.GetBodies(bodies);
-		for (auto& body : bodies) {
-			// physicsWorld->jphSystem.GetBodyInterface().DestroyBodies(&body, 1);
-			physicsWorld->jphSystem.GetBodyInterface().RemoveBody(body);
-		}
-
+		LX_CORE_TRACE("Number of bodies after: {}", physicsWorld->jphSystem.GetNumBodies());
 	}
 }

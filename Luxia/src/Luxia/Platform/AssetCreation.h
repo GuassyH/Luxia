@@ -23,9 +23,8 @@ namespace Luxia::Platform::Assets {
 		return std::make_shared<Platform::OpenGL::GL_Camera>(std::forward<decltype(args)>(args)...);
 	}
 
-	inline std::shared_ptr<IWindow> LUXIA_API CreateAppWindow(int width, int height, std::string name, std::shared_ptr<Luxia::EventHandler> m_eventHandler) {
+	inline std::shared_ptr<IWindow> LUXIA_API CreateAppWindow(int width, int height, std::string name) {
 		auto win = std::make_shared<Platform::OpenGL::GL_Window>();
-		win->SetHandler(m_eventHandler);
 		win->Create(width, height, name);
 		return win;
 	}

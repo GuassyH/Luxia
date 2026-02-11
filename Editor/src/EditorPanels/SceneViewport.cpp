@@ -236,7 +236,7 @@ namespace Editor::Panels {
 			std::shared_ptr<Luxia::ITexture> tex = cam.Render(scene, editorLayer->GetRenderer());
 			RenderGizmos(editorLayer, scene.get(), tex);
 			// Push for next frame
-			editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::RenderCameraEvent>(tex, false, true));
+			PUSH_EVENT(Luxia::RenderCameraEvent, tex, false, true);
 		}
 		
 	}

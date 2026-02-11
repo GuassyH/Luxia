@@ -52,7 +52,7 @@ namespace Editor::Panels {
 		if (queue_update && reset_update_timer >= 0.2f) { // updates 5 times a second
 			layer_times.swap(temp_layer_times);
 			temp_layer_times.clear();
-			editorLayer->GetEventHandler().PushEvent(std::make_shared<Luxia::ProfilerRequestEvent>(Luxia::Core::Time::get().GetTime()));
+			PUSH_EVENT(Luxia::ProfilerRequestEvent, Luxia::Core::Time::get().GetTime());
 			queue_update = false;
 			reset_update_timer = 0.0f;
 		}

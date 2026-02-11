@@ -50,49 +50,49 @@ namespace Luxia::Platform::OpenGL {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (win) {
 				if (action == GLFW_PRESS)
-					win->GetEventHandler().PushEvent(std::make_shared<KeyPressEvent>(key));
+					PUSH_EVENT(KeyPressEvent, key);
 				else if (action == GLFW_RELEASE)
-					win->GetEventHandler().PushEvent(std::make_shared<KeyReleaseEvent>(key));
+					PUSH_EVENT(KeyReleaseEvent, key);
 			}
 			});
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
-			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseMoveEvent>(xpos, ypos));
+			if (win) PUSH_EVENT(MouseMoveEvent, xpos, ypos);
 			});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (action == GLFW_PRESS)
-				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonPressEvent>(button));
+				PUSH_EVENT(MouseButtonPressEvent, button);
 			else if (action == GLFW_RELEASE)
-				win->GetEventHandler().PushEvent(std::make_shared<MouseButtonReleaseEvent>(button));
+				PUSH_EVENT(MouseButtonReleaseEvent, button);
 			});
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
-			if (win) win->GetEventHandler().PushEvent(std::make_shared<MouseScrollEvent>(xoffset, yoffset));
+			if (win) PUSH_EVENT(MouseScrollEvent, xoffset, yoffset);
 			});
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
-			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(width, height));
+			if (win) PUSH_EVENT(WindowResizeEvent, width, height);
 			});
 		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xpos, int ypos) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
-			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowMoveEvent>(xpos, ypos));
+			if (win) PUSH_EVENT(WindowMoveEvent, xpos, ypos);
 			});
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
-			if (win) win->GetEventHandler().PushEvent(std::make_shared<WindowCloseEvent>());
+			if (win) PUSH_EVENT(WindowCloseEvent);
 			});
 		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
 			GL_Window* win = reinterpret_cast<GL_Window*>(glfwGetWindowUserPointer(window));
 			if (!win) return;
-			focused == 1 ? win->GetEventHandler().PushEvent(std::make_shared<WindowFocusEvent>())
-				: win->GetEventHandler().PushEvent(std::make_shared<WindowLoseFocusEvent>());
+			focused == 1 ? PUSH_EVENT(WindowFocusEvent)
+				: PUSH_EVENT(WindowLoseFocusEvent);
 			});
 
 
 		// Set Size
-		GetEventHandler().PushEvent(std::make_shared<WindowResizeEvent>(m_Width, m_Height));
-		GetEventHandler().PushEvent(std::make_shared<WindowMoveEvent>(m_PosX, m_PosY));
+		PUSH_EVENT(WindowResizeEvent, m_Width, m_Height);
+		PUSH_EVENT(WindowMoveEvent, m_PosX, m_PosY);
 
 
 		// Culling stuff

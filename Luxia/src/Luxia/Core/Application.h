@@ -30,7 +30,7 @@ namespace Luxia
 		void CoreShutdown();
 
 		void PushLayer(std::shared_ptr<Luxia::Layer> layer) { 
-			m_LayerStack->PushLayer(layer, m_EventHandler, m_ProjectManager, m_Renderer, m_Window); 
+			m_LayerStack->PushLayer(layer, m_ProjectManager, m_Renderer, m_Window); 
 		}
 		bool OnEvent(Luxia::Event& e);
 
@@ -38,13 +38,11 @@ namespace Luxia
 		inline std::shared_ptr<Luxia::LayerStack> GetLayerStack() { return m_LayerStack; }
 
 		std::shared_ptr<Luxia::ProjectManager> GetProjectManager() { return m_ProjectManager; }
-		std::shared_ptr<Luxia::EventHandler> GetEventHandler() { return m_EventHandler; }
 		std::shared_ptr<Luxia::Rendering::IRenderer> GetRenderer() { return m_Renderer; }
 		// Each client defines this function; editor, runtime, etc.
 	protected:
 		std::shared_ptr<Luxia::IWindow> m_Window;
 		std::shared_ptr<Luxia::LayerStack> m_LayerStack;
-		std::shared_ptr<Luxia::EventHandler> m_EventHandler;
 		Luxia::EventManager& eventManager = Luxia::EventManager::Get();
 		
 		std::shared_ptr<Luxia::ProjectManager> m_ProjectManager;

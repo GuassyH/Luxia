@@ -12,7 +12,7 @@
 namespace Luxia::Components {
 	struct LUXIA_API RigidBody : public Component {
 	public:
-		JPH::Body* body;
+		JPH::Body* body = nullptr;
 
 		float gravityScale = 1.0f;
 		float mass = 1.0f;
@@ -23,6 +23,8 @@ namespace Luxia::Components {
 		JPH::EMotionQuality motionQuality = JPH::EMotionQuality::Discrete;
 
 		void InitBody(JPH::BodyInterface& body_interface) {
+			body = nullptr;
+
 			JPH::BodyCreationSettings settings;
 			
 			JPH::MassProperties mass_props;

@@ -23,12 +23,11 @@ namespace Luxia
 		virtual void OnEvent(Event& event) = 0;
 
 		void SetDeps(
-			const std::shared_ptr<Luxia::EventHandler>& handler,
 			const std::shared_ptr<Luxia::ProjectManager>& manager,
 			const std::shared_ptr<Luxia::Rendering::IRenderer>& m_renderer,
 			const std::shared_ptr<Luxia::IWindow>& m_window)
 		{ 
-		event_handler = handler; project_manager = manager; renderer = m_renderer; 
+		project_manager = manager; renderer = m_renderer; 
 		asset_manager = project_manager->GetAssetManager();
 		scene_manager = project_manager->GetSceneManager();
 		window = m_window;
@@ -39,18 +38,15 @@ namespace Luxia
 		const std::shared_ptr<Luxia::SceneManager> GetSceneManager() { return scene_manager.lock(); }
 		const std::shared_ptr<Luxia::Rendering::IRenderer> GetRenderer() { return renderer.lock(); }
 		const std::shared_ptr<Luxia::ProjectManager> GetProjectManager() { return project_manager.lock(); }
-		Luxia::EventHandler& GetEventHandler() { return *event_handler.lock(); }
 		
 		bool give_profiler_response = true;
 		std::string name = "Layer";
 	protected:
-		WeakPtrProxy<Luxia::EventHandler> event_handler;
 		WeakPtrProxy<Luxia::ProjectManager> project_manager;
 		WeakPtrProxy<Luxia::Rendering::IRenderer> renderer;
 		WeakPtrProxy<Luxia::AssetManager> asset_manager;
 		WeakPtrProxy<Luxia::SceneManager> scene_manager;
 		WeakPtrProxy<Luxia::IWindow> window;
-	
 	};
 }
 

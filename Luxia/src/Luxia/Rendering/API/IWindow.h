@@ -22,8 +22,6 @@ namespace Luxia
 		virtual void Close() = 0;
 
 		virtual void OnEvent(Event& e) = 0;
-		void SetHandler(std::shared_ptr<EventHandler> handler) { event_handler = handler; }
-		EventHandler& GetEventHandler() const { return *event_handler.lock(); }
 
 		virtual void MakeContextCurrent() = 0;
 		virtual void SetTitle(const std::string& title) = 0;
@@ -58,8 +56,6 @@ namespace Luxia
 			Close();
 			return true;
 		}		
-
-		WeakPtrProxy<EventHandler> event_handler = nullptr;
 
 		int m_Width = 0;
 		int m_Height = 0;

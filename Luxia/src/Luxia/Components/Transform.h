@@ -14,6 +14,8 @@
 #include <entt/entt.hpp>
 #include "Luxia/Components/Component.h"
 
+#include "Luxia/Events/EventHandler.h"
+
 namespace Luxia::Components {
 	struct LUXIA_API Transform : public Component {
 	public:
@@ -167,7 +169,9 @@ namespace Luxia::Components {
 		}
 		Transform() = default;
 
+
 		entt::registry* reg = nullptr;
+		Luxia::EventHandler* eventHandler = nullptr;
 
 		// Inline header?
 #pragma region GetAdd
