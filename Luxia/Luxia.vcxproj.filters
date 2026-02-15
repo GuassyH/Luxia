@@ -283,11 +283,13 @@
     <ClInclude Include="src\Luxia\Tools\Constants.h">
       <Filter>Luxia\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Tools\PhysicsTools.h">
+      <Filter>Luxia\Tools</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Tools\Screen.h">
       <Filter>Luxia\Tools</Filter>
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
-    <ClInclude Include="src\Luxia\Tools\PhysicsTools.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

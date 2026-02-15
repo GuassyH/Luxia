@@ -14,6 +14,29 @@ namespace Editor::Panels {
 
 	static std::shared_ptr<Gizmos::GridGizmo> grid_gizmo = nullptr;
 
+	void SceneViewport::RenderTopBar(Editor::Layers::EditorLayer* editorLayer) {
+		if (ImGui::BeginMenuBar()) {
+			if (ImGui::BeginMenu("Gizmos")) {
+				if (ImGui::MenuItem("Grid", nullptr, grid_gizmo->gizmo_parts[0]->transform->enabled)) {
+					grid_gizmo->gizmo_parts[0]->transform->enabled = !grid_gizmo->gizmo_parts[0]->transform->enabled;
+				}
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Camera")) {
+				ImGui::Checkbox("Use Skybox", &cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox);
+				if(!cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox)
+					ImGui::ColorEdit4("Clear Color", &cam_ent->GetComponent<Luxia::Components::Camera>().clearColor.r);
+				ImGui::SliderFloat("FOV", &cam_ent->GetComponent<Luxia::Components::Camera>().FOVdeg, 1.0f, 179.0f);
+				ImGui::DragFloat("Near Plane", &cam_ent->GetComponent<Luxia::Components::Camera>().nearPlane, 0.01f, 0.01f, cam_ent->GetComponent<Luxia::Components::Camera>().farPlane - 0.1f);
+				ImGui::DragFloat("Far Plane", &cam_ent->GetComponent<Luxia::Components::Camera>().farPlane, 1.0f, cam_ent->GetComponent<Luxia::Components::Camera>().nearPlane + 0.1f, 10000.0f);
+
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+	}
+
 	enum EditType {
 		Translate = 0,
 		Rotate = 1,
@@ -73,7 +96,12 @@ namespace Editor::Panels {
 		}
 		else {
 			unsigned int pickedID = (static_cast<unsigned int>(pixel[0]) << 0) | (static_cast<unsigned int>(pixel[1]) << 8) | (static_cast<unsigned int>(pixel[2]) << 16);
-			result = scene->GetFromEntity<Luxia::Components::Transform>(entt::entity(pickedID)).ent_guid;
+			if (scene->GetReg().try_get<Luxia::Components::Transform>(entt::entity(pickedID))) {
+				result = scene->GetFromEntity<Luxia::Components::Transform>(entt::entity(pickedID)).ent_guid;
+			}
+			else {
+				LX_CORE_ERROR("Picked entity with ID {} but it doesn't have a transform component", pickedID);
+			}
 		}
 
 		Luxia::Screen::BindFBO(0);
@@ -112,20 +140,21 @@ namespace Editor::Panels {
 	}
 
 	void SceneViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_MenuBar);
 		name = "Scene View";
 		TabPopupContextMenu();
 
 		Luxia::Components::Camera& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
 		Editor::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Editor::Scripts::SceneCameraScript>();
+		cam.width = static_cast<int>(ImGui::GetWindowWidth());
+		cam.height = static_cast<int>(ImGui::GetWindowHeight() - 20);  // Some sort of padding
 		cam.transform->UpdateMatrix();
+		glm::vec2 imageSize = glm::vec2(cam.width, cam.height);
 
 		// Set the image
 		if (output_texture) { 
+			RenderTopBar(editorLayer);
 			ImVec2 windowSize = ImGui::GetContentRegionAvail();
-
-			// Camera aspect ratio (width / height)
-			ImVec2 imageSize = ImGui::GetWindowSize();	imageSize.y -= 20; // Some sort of padding
 
 			ImVec2 imagePosInWindow;
 			imagePosInWindow.x = ((windowSize.x - imageSize.x) * 0.5f) + ImGui::GetCursorPosX();
@@ -134,19 +163,17 @@ namespace Editor::Panels {
 			ImGui::SetCursorPosX(imagePosInWindow.x);
 			ImGui::SetCursorPosY(imagePosInWindow.y);
 
-			ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, imageSize, ImVec2(0, 1), ImVec2(1, 0));
+			ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, ImVec2(imageSize.x, imageSize.y), ImVec2(0, 1), ImVec2(1, 0));
 		}
 
-		// Render last, so that the next frame instantly displays the render output
-		cam.width = static_cast<int>(ImGui::GetWindowWidth());
-		cam.height = static_cast<int>(ImGui::GetWindowHeight() - 20);  // Some sort of padding
 
 		if (ImGui::IsWindowHovered()) {
 
 			// Picking
 			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
 				if (scene) {
-					glm::vec2 rp = Luxia::Screen::GetMousePosRect(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), glm::vec2(cam.width, cam.height), Luxia::Input::GetMousePosition());
+					glm::vec2 window_pos = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
+					glm::vec2 rp = Luxia::Screen::GetMousePosRect(window_pos, imageSize, imageSize, Luxia::Input::GetMousePosition());
 					// glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
 					
 					// FBO Picking
@@ -260,6 +287,7 @@ namespace Editor::Panels {
 		gizmos.push_back(std::make_unique<Gizmos::RotateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 		gizmos.push_back(std::make_unique<Gizmos::ScaleGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 		grid_gizmo = std::make_shared<Gizmos::GridGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos"));
+		grid_gizmo->gizmo_parts[0]->transform->enabled = false;
 	}
 
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
@@ -279,19 +307,20 @@ namespace Editor::Panels {
 
 
 		/// With Depth
-
-		/* Grid
-		auto& mr = grid_gizmo->gizmo_parts[0]->transform->GetComponent<Luxia::Components::MeshRenderer>();
-		mr.transform->local_position = cam.transform->local_position;
-		mr.transform->local_position.y = 0.0f;
-		mr.transform->UpdateMatrix();
-		mr.material->Use();
-		mr.material->shader->SetMat4("modelMat", mr.transform->GetMatrix());
-		mr.material->shader->SetMat4("viewMat", cam.GetCamera()->GetViewMat());
-		mr.material->shader->SetMat4("projMat", cam.GetCamera()->GetProjMat());
-		mr.material->shader->SetVec3("camPos", cam.transform->local_position);
-		renderer->RenderMeshPure(*mr.mesh.get());
-		*/
+		// Grid
+		if(grid_gizmo->gizmo_parts[0]->transform->enabled)
+		{
+			auto& mr = grid_gizmo->gizmo_parts[0]->transform->GetComponent<Luxia::Components::MeshRenderer>();
+			mr.transform->local_position = cam.transform->local_position;
+			mr.transform->local_position.y = 0.0f;
+			mr.transform->UpdateMatrix();
+			mr.material->Use();
+			mr.material->shader->SetMat4("modelMat", mr.transform->GetMatrix());
+			mr.material->shader->SetMat4("viewMat", cam.GetCamera()->GetViewMat());
+			mr.material->shader->SetMat4("projMat", cam.GetCamera()->GetProjMat());
+			mr.material->shader->SetVec3("camPos", cam.transform->local_position);
+			renderer->RenderMeshPure(*mr.mesh.get());
+		}
 
 		// OUTLINE
 		if (!editorLayer->areNoneSelected) {

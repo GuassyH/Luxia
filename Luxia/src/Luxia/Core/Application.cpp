@@ -61,39 +61,38 @@ namespace Luxia
 		m_ProjectManager->GetSceneManager()->SetActiveScene(0);
 		double time_accumulator = 0.0;
 		Luxia::EventHandler& event_handler = Luxia::EventHandler::get();
+		Luxia::Core::Time& time = Luxia::Core::Time::get();
 
 		// While the window is running loop
 		while (m_Window->isRunning()) {
-			Core::Time::get().update();
+			time.update();
 			m_Window->BeginFrame();
 			m_Renderer->GetUIRenderer()->BeginFrame();
 			event_handler.DispatchAll(this);
 
 			for (auto& layer : m_LayerStack->m_Layers) {
 				if(layer->give_profiler_response) // This field, if true, will be set to false after the render process
-					time_accumulator = Luxia::Core::Time::get().GetTimeHP();
+					time_accumulator = time.GetTimeHP();
 
 				layer->OnUpdate();
 				
-				if (layer->give_profiler_response) {
-					time_accumulator = Luxia::Core::Time::get().GetTimeHP() - time_accumulator;
-					std::string text = layer->name + " - Update";
-					event_handler.PushEvent(std::make_shared<ProfilerResponseEvent>(text, time_accumulator));
-				}
+				if (!layer->give_profiler_response) continue;
+				time_accumulator = time.GetTimeHP() - time_accumulator;
+				std::string text = layer->name + " - Update";
+				event_handler.PushEvent(std::make_shared<ProfilerResponseEvent>(text, time_accumulator));
 			}
 			
 			for (auto& layer : m_LayerStack->m_Layers) {
 				if(layer->give_profiler_response)
-					time_accumulator = Luxia::Core::Time::get().GetTimeHP();
+					time_accumulator = time.GetTimeHP();
 
 				layer->OnRender();
 				
-				if (layer->give_profiler_response) {
-					time_accumulator = Luxia::Core::Time::get().GetTimeHP() - time_accumulator;
-					std::string text = layer->name + " - Render";
-					event_handler.PushEvent(std::make_shared<ProfilerResponseEvent>(text, time_accumulator));
-					layer->give_profiler_response = false;
-				}
+				if (!layer->give_profiler_response) continue;
+				time_accumulator = time.GetTimeHP() - time_accumulator;
+				std::string text = layer->name + " - Render";
+				event_handler.PushEvent(std::make_shared<ProfilerResponseEvent>(text, time_accumulator));
+				layer->give_profiler_response = false;
 			}
 
 			m_Renderer->GetUIRenderer()->EndFrame();

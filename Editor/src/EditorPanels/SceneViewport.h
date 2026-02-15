@@ -10,6 +10,8 @@ namespace Editor::Panels {
 		virtual void Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 		virtual void Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) override;
 
+		void RenderTopBar(Editor::Layers::EditorLayer* editorLayer);
+
 		void InitGizmos(Editor::Layers::EditorLayer* editorLayer);
 		void RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex);
 	
