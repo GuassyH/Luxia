@@ -12,7 +12,7 @@ namespace Luxia::Assets {
 		GUID guid = GUID(0);
 		GUID assetFileGUID = GUID(0);
 		std::string name = "no_name";
-		Luxia::AssetType type = Luxia::AssetType::NoType;
+		Luxia::AssetType type = Luxia::AssetType::None;
 
 		// Asset() = default;
 		Asset() = default;

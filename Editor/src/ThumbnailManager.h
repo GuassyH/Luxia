@@ -48,13 +48,13 @@ namespace Editor {
 
 			switch (asset->type)
 			{
-			case Luxia::AssetType::MaterialType: {
+			case Luxia::AssetType::Material: {
 				tex->CreateFBOTex(tn_size.x, tn_size.y);
 				auto mat = std::dynamic_pointer_cast<Luxia::IMaterial>(asset);
 				MatThumbnail(mat.get(), tex, renderer);
 				break;
 			}
-			case Luxia::AssetType::MeshType: {
+			case Luxia::AssetType::Mesh: {
 				tex->CreateFBOTex(tn_size.x, tn_size.y);
 				auto mesh = std::dynamic_pointer_cast<Luxia::Mesh>(asset);
 				MeshThumbnail(mesh.get(), tex, renderer);
@@ -70,12 +70,12 @@ namespace Editor {
 		void RefreshThumbnail(std::shared_ptr<Luxia::Assets::Asset> asset, std::shared_ptr<Luxia::ITexture> texture, Luxia::Rendering::IRenderer* renderer) {
 			switch (asset->type)
 			{
-			case Luxia::AssetType::MaterialType: {
+			case Luxia::AssetType::Material: {
 				auto mat = std::dynamic_pointer_cast<Luxia::IMaterial>(asset);
 				MatThumbnail(mat.get(), texture, renderer);
 				break;
 			}
-			case Luxia::AssetType::MeshType: {
+			case Luxia::AssetType::Mesh: {
 				auto mesh = std::dynamic_pointer_cast<Luxia::Mesh>(asset);
 				MeshThumbnail(mesh.get(), texture, renderer);
 				break;

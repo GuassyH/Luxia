@@ -17,7 +17,7 @@ namespace Luxia::Assets {
 		GUID normalsGUID = GUID(0);
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::MaterialType;
+			type = Luxia::AssetType::Material;
 			guid = GUID();
 
 			std::shared_ptr<Luxia::IMaterial> mat = Platform::Assets::CreateMaterial();
@@ -32,7 +32,7 @@ namespace Luxia::Assets {
 		}
 
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::MaterialType;
+			type = Luxia::AssetType::Material;
 
 			assetPath = m_assetPath;
 			loaded = false;

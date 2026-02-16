@@ -14,11 +14,11 @@ namespace Luxia {
 	class LUXIA_API IMaterial : public Luxia::Assets::Asset {
 	public:
 		IMaterial() {
-			type = Luxia::AssetType::MaterialType;
+			type = Luxia::AssetType::Material;
 		}
 		IMaterial(const std::shared_ptr<IShader> matShader) {
 			shader = matShader;
-			type = Luxia::AssetType::MaterialType;
+			type = Luxia::AssetType::Material;
 		}
 		virtual ~IMaterial() = default;
 

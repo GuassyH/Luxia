@@ -49,7 +49,7 @@ namespace Luxia {
 
 		// Since shaders should be loaded now, we can now load the material files
 		for (auto [guid, assetfile] : assetfile_pool) {
-			if (assetfile->type == Luxia::AssetType::MaterialType) {
+			if (assetfile->type == Luxia::AssetType::Material) {
 				std::shared_ptr<Luxia::Assets::MaterialFile> matfile = std::dynamic_pointer_cast<Luxia::Assets::MaterialFile>(assetfile);
 				std::shared_ptr<Luxia::IMaterial> mat = std::dynamic_pointer_cast<Luxia::IMaterial>(assetfile->assets[0]);
 				if (matfile && mat) {
@@ -114,23 +114,26 @@ namespace Luxia {
 
 	
 	std::unordered_map<std::string, Luxia::AssetType> AssetManager::extensions = {
-		{".png",	Luxia::AssetType::TextureType},
-		{".jpg",	Luxia::AssetType::TextureType},
-		{".jpeg",	Luxia::AssetType::TextureType},
-		{".bmp",	Luxia::AssetType::TextureType},
-		{".obj",	Luxia::AssetType::ModelType},
-		{".fbx",	Luxia::AssetType::ModelType},
-		{".gltf",	Luxia::AssetType::ModelType},
-		{".wav",	Luxia::AssetType::AudioType},
-		{".mp3",	Luxia::AssetType::AudioType},
+		{".png",	Luxia::AssetType::Texture},
+		{".jpg",	Luxia::AssetType::Texture},
+		{".jpeg",	Luxia::AssetType::Texture},
+		{".bmp",	Luxia::AssetType::Texture},
+		{".obj",	Luxia::AssetType::Model},
+		{".fbx",	Luxia::AssetType::Model},
+		{".gltf",	Luxia::AssetType::Model},
+		{".wav",	Luxia::AssetType::Audio},
+		{".mp3",	Luxia::AssetType::Audio},
+		{".csharp",	Luxia::AssetType::Script},
+		{".cs",		Luxia::AssetType::Script},
 	};
 	std::unordered_map<Luxia::AssetType, std::string> AssetManager::asset_extensions = {
-		{Luxia::AssetType::ShaderType, ".luxshader"},
-		{Luxia::AssetType::SceneType, ".luxscene"},
-		{Luxia::AssetType::ModelType, ".luxmodel"},
-		{Luxia::AssetType::TextureType, ".luxtex"},
-		{Luxia::AssetType::MaterialType, ".luxmat"},
-		{Luxia::AssetType::AudioType, ".luxaudio"},
+		{Luxia::AssetType::Shader, ".luxshader"},
+		{Luxia::AssetType::Scene, ".luxscene"},
+		{Luxia::AssetType::Model, ".luxmodel"},
+		{Luxia::AssetType::Texture, ".luxtex"},
+		{Luxia::AssetType::Material, ".luxmat"},
+		{Luxia::AssetType::Audio, ".luxaudio"},
+		{Luxia::AssetType::Script, ".luxscript"},
 	};
 
 	// Renames both the asset file and the metafile, and updates the asset and metafile names
@@ -149,7 +152,7 @@ namespace Luxia {
 		}
 
 		// Meshes are internal, so just rename the asset
-		if(asset->type == AssetType::MeshType) {
+		if(asset->type == AssetType::Mesh) {
 			asset->name = newName;
 			return true;
 		}
@@ -240,7 +243,7 @@ namespace Luxia {
 
 		// Check for no mesh
 		auto asset = asset_pool.at(assetGUID);
-		if (asset->type == Luxia::AssetType::MeshType) {
+		if (asset->type == Luxia::AssetType::Mesh) {
 			LX_CORE_ERROR("AssetManager: Deleting meshes currently not allowed");
 			return false;
 		}

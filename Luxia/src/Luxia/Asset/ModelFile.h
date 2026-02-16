@@ -16,7 +16,7 @@ namespace Luxia::Assets {
 		std::shared_ptr<Luxia::IModel> base_model;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::ModelType;
+			type = Luxia::AssetType::Model;
 			guid = GUID();
 
 			base_model = Platform::Assets::CreateModel();
@@ -64,7 +64,7 @@ namespace Luxia::Assets {
 		}
 
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::ModelType;
+			type = Luxia::AssetType::Model;
 
 			assetPath = m_assetPath.lexically_normal();
 			loaded = false;

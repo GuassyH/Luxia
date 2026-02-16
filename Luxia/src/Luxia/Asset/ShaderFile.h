@@ -11,12 +11,12 @@ namespace Luxia::Assets {
 		~ShaderFile() = default;
 		ShaderFile(const std::filesystem::path& shader_path)
 			: shaderPath(shader_path) {
-			type = AssetType::ShaderType;
+			type = AssetType::Shader;
 			shaderType = ShaderFileType::Other;
 		}
 		ShaderFile(const std::filesystem::path& frag_path, const std::filesystem::path& vert_path) 
 			: fragPath(frag_path), vertPath(vert_path) {
-			type = AssetType::ShaderType;
+			type = AssetType::Shader;
 			shaderType = ShaderFileType::VertexFragment;
 		}
 
@@ -39,7 +39,7 @@ namespace Luxia::Assets {
 		std::filesystem::path shaderPath;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::ShaderType;
+			type = Luxia::AssetType::Shader;
 			shaderType = ShaderFileType::VertexFragment;
 			guid = GUID();
 
@@ -54,7 +54,7 @@ namespace Luxia::Assets {
 		}
 
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::ShaderType;
+			type = Luxia::AssetType::Shader;
 
 			assetPath = m_assetPath;
 			loaded = false;

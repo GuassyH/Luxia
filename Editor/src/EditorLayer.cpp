@@ -146,7 +146,7 @@ namespace Editor::Layers {
 		{
 			if (ImGui::BeginMenu("File")) {
 				if(ImGui::MenuItem("New Scene")) {
-					asset_manager->CreateAssetFile<Luxia::AssetType::SceneType>(asset_manager->GetAssetDir(), false, "New Scene");
+					asset_manager->CreateAssetFile<Luxia::AssetType::Scene>(asset_manager->GetAssetDir(), false, "New Scene");
 					PUSH_EVENT(Luxia::MessageSentEvent, "Asset Created");
 				}
 				if (ImGui::MenuItem("Save Scene", "Ctrl+S")) {

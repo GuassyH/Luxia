@@ -10,6 +10,8 @@
 
 namespace Editor::Panels {
 
+	static bool isFolderSelected = false;
+	static std::filesystem::path selectedFolderPath = "";
 
 	static std::string OpenFileDialogue() {
 		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
@@ -74,7 +76,7 @@ namespace Editor::Panels {
 		auto asset = it->second;
 
 		switch (asset->type) {
-		case Luxia::AssetType::SceneType: {
+		case Luxia::AssetType::Scene: {
 			auto sceneManager = editorLayer->GetSceneManager();
 			if (!sceneManager) {
 				LX_ERROR("OpenAsset: SceneManager is null");
@@ -121,9 +123,14 @@ namespace Editor::Panels {
 		// Make the selectable span the entire group
 		bool selected = asset_view->selected_folder == path;
 		ImGui::SetCursorPosY(ImGui::GetCursorPosY() - groupSize.y);
-		if (ImGui::Selectable("##FolderSelectable", selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize)) {
+		if (ImGui::Selectable("##FolderSelectable", selected, ImGuiSelectableFlags_AllowItemOverlap | ImGuiSelectableFlags_AllowDoubleClick, groupSize) && ImGui::IsMouseDoubleClicked(0)) {
 			asset_view->selected_folder = path;
 		}
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+			isFolderSelected = true;
+			selectedFolderPath = path;
+		}
+			// Folder Context Menu
 
 		// Draw text below image
 		std::string name_text = path.filename().replace_extension("").string().c_str();
@@ -153,7 +160,7 @@ namespace Editor::Panels {
 		}
 		if (!hasThumbnail) {
 			switch (asset->type) {
-			case Luxia::AssetType::TextureType: {
+			case Luxia::AssetType::Texture: {
 				auto texasset = std::dynamic_pointer_cast<Luxia::ITexture>(asset);
 				if (texasset) {
 					if (texasset->IsValid()) {
@@ -168,16 +175,16 @@ namespace Editor::Panels {
 				}
 				break;
 			}
-			case Luxia::AssetType::MeshType: 
+			case Luxia::AssetType::Mesh: 
 				thumbnail = mesh_default_thumbnail->texID;
 				break;
-			case Luxia::AssetType::MaterialType: 
+			case Luxia::AssetType::Material: 
 				thumbnail = mat_default_thumbnail->texID;
 				break;
-			case Luxia::AssetType::ShaderType: 
+			case Luxia::AssetType::Shader: 
 				thumbnail = shader_default_thumbnail->texID;
 				break;
-			case Luxia::AssetType::SceneType: 
+			case Luxia::AssetType::Scene: 
 				thumbnail = scene_default_thumbnail->texID;
 				break;
 			default:
@@ -306,11 +313,13 @@ namespace Editor::Panels {
 			if (ImGui::GetIO().MouseClicked[0]) {
 				if (!ImGui::IsAnyItemHovered()) {
 					editorLayer->ClearSelected();
+					isFolderSelected = false;
 				}
 			}		
 			if (ImGui::GetIO().MouseClicked[1]) {
 				if (!ImGui::IsAnyItemHovered()) {
 					editorLayer->ClearSelected();
+					isFolderSelected = false;
 				}
 			}
 		}
@@ -318,40 +327,62 @@ namespace Editor::Panels {
 		static bool openRenamePopup = false;
 
 		// Asset Context Menu
-		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight)) {
-			if (ImGui::MenuItem("Copy", nullptr, nullptr, editorLayer->isOneSelected)) {
-				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				SystemFuncs::CopyToClipboard(std::to_string((uint64_t)e_guid));
-			}
-			if (ImGui::MenuItem("Open", nullptr, nullptr, editorLayer->isOneSelected)) {
-				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				OpenAsset(e_guid, editorLayer);
-			}
-			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, editorLayer->isOneSelected)) {
-				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				if (asset_view->asset_parent_folders.contains(e_guid)) {
-					const std::string pathStr = asset_view->asset_parent_folders.at(e_guid).string(); // keep the string alive
-					ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
+		if (ImGui::BeginPopupContextWindow("Asset Viewer", ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverExistingPopup)) {
+			if (ImGui::MenuItem("Copy", nullptr, nullptr, editorLayer->isOneSelected  || isFolderSelected)) {
+				if (!isFolderSelected) {
+					Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+					SystemFuncs::CopyToClipboard(std::to_string((uint64_t)e_guid));
+				}
+				else {
+					isFolderSelected = false;
 				}
 			}
-			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->isOneSelected)) {
-				Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
-				if(asset_view->asset_parent_folders.contains(e_guid)) {
-					openRenamePopup = true;
+			if (ImGui::MenuItem("Open", nullptr, nullptr, editorLayer->isOneSelected || isFolderSelected)) {
+				if(!isFolderSelected){
+					Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+					OpenAsset(e_guid, editorLayer);
+				}else{
+					isFolderSelected = false;
+					asset_view->selected_folder = selectedFolderPath;
+				}
+			}
+			if (ImGui::MenuItem("Open in File-Explorer", nullptr, nullptr, editorLayer->isOneSelected || isFolderSelected)) {
+				if(!isFolderSelected){
+					Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+					if (asset_view->asset_parent_folders.contains(e_guid)) {
+						const std::string pathStr = asset_view->asset_parent_folders.at(e_guid).string(); // keep the string alive
+						ShellExecuteA(nullptr, "open", pathStr.c_str(), nullptr, nullptr, SW_SHOW);
+					}
+				}else{
+					isFolderSelected = false;
+				}
+			}
+			if (ImGui::MenuItem("Rename", nullptr, nullptr, editorLayer->isOneSelected || isFolderSelected)) {
+				if(!isFolderSelected){
+					Luxia::GUID e_guid = *editorLayer->selected_assets.begin();
+					if(asset_view->asset_parent_folders.contains(e_guid)) {
+						openRenamePopup = true;
+					}
+				}else{
+					isFolderSelected = false;
 				}
 			}
 
-			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->areMultipleSelected || editorLayer->isOneSelected)) {
-				for (auto& e_guid : editorLayer->selected_assets) {
-					if (editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid)) {
-						editorLayer->GetAssetManager()->DeleteAsset(e_guid);
+			if (ImGui::MenuItem("Delete", nullptr, nullptr, editorLayer->areMultipleSelected || editorLayer->isOneSelected || isFolderSelected)) {
+				if(!isFolderSelected){
+					for (auto& e_guid : editorLayer->selected_assets) {
+						if (editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid)) {
+							editorLayer->GetAssetManager()->DeleteAsset(e_guid);
+						}
 					}
+				}else{
+					isFolderSelected = false;
 				}
 			}
 
 			ImGui::Separator();
 			
-			if (ImGui::MenuItem("Import", nullptr, nullptr, editorLayer->areNoneSelected)) {
+			if (ImGui::MenuItem("Import", nullptr, nullptr, editorLayer->areNoneSelected && !isFolderSelected)) {
 				// Open Folder, if you choose something of supported type, import correctly
 				std::string fp = OpenFileDialogue();
 				std::filesystem::path filepath = fp;
@@ -363,12 +394,12 @@ namespace Editor::Panels {
 				ImGui::CloseCurrentPopup();
 			}
 
-			if (ImGui::MenuItem("Refresh", nullptr, nullptr, editorLayer->areNoneSelected)) {
+			if (ImGui::MenuItem("Refresh", nullptr, nullptr, editorLayer->areNoneSelected && !isFolderSelected)) {
 				// Should refresh more
 				editorLayer->CreateThumbnails();
 			}
 
-			if (ImGui::BeginMenu("Create", editorLayer->areNoneSelected)) {
+			if (ImGui::BeginMenu("Create", editorLayer->areNoneSelected && !isFolderSelected)) {
 				// Should be created in the folder you are in
 				if (ImGui::MenuItem("New Folder")) {
 					if (std::filesystem::exists(asset_view->selected_folder / "NewFolder")) return;
@@ -377,7 +408,7 @@ namespace Editor::Panels {
 				ImGui::Separator();
 				if (ImGui::MenuItem("Material")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
-						auto matguid = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::MaterialType>(asset_view->selected_folder, false, "NewMaterial");
+						auto matguid = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::Material>(asset_view->selected_folder, false, "NewMaterial");
 						auto mat = std::dynamic_pointer_cast<Luxia::IMaterial>(editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::MaterialFile>(matguid)->assets[0]);
 						mat->shader = editorLayer->GetAssetManager()->GetAsset<Luxia::IShader>(Luxia::ResourceManager::DefaultLitShader->guid);
 						asset_view->RefreshAPFs(editorLayer);
@@ -387,7 +418,7 @@ namespace Editor::Panels {
 				}
 				if (ImGui::MenuItem("Scene")) {
 					if (!asset_view->selected_folder.empty() && std::filesystem::exists(asset_view->selected_folder)) {
-						auto scene = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::SceneType>(asset_view->selected_folder, false, "NewScene");
+						auto scene = editorLayer->GetAssetManager()->CreateAssetFile<Luxia::AssetType::Scene>(asset_view->selected_folder, false, "NewScene");
 						editorLayer->GetSceneManager()->scene_files[scene] = (editorLayer->GetAssetManager()->GetAssetFile<Luxia::Assets::SceneFile>(scene));
 						asset_view->RefreshAPFs(editorLayer);
 						editorLayer->CreateThumbnails();

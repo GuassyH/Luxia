@@ -8,7 +8,7 @@
 #include <filesystem>
 
 namespace Luxia {
-	enum LUXIA_API TextureType {
+	enum LUXIA_API Texture {
 		LX_TEXTURE_DIFFUSE		= 0,
 		LX_TEXTURE_SPECULAR		= 1,
 		LX_TEXTURE_NORMALS		= 2,
@@ -20,7 +20,7 @@ namespace Luxia {
 	public:
 		unsigned int texID = 0;
 
-		ITexture() { type = Luxia::AssetType::TextureType; }
+		ITexture() { type = Luxia::AssetType::Texture; }
 		virtual ~ITexture() = default;
 
 		virtual void CreateFBOTex(const int width, const int height) = 0;
@@ -42,7 +42,7 @@ namespace Luxia {
 		unsigned int GetRBO() const { return rbo; }
 		bool IsFBOTex() const { return is_fbo_tex; }
 
-		TextureType tex_type = TextureType::LX_TEXTURE_DIFFUSE;
+		Texture tex_type = Texture::LX_TEXTURE_DIFFUSE;
 		std::filesystem::path path = "";
 	protected:
 		int imgWidth = 0, imgHeight = 0, numColCh = 3;

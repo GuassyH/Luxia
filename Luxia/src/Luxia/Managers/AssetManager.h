@@ -74,7 +74,7 @@ namespace Luxia {
 		template <Luxia::AssetType type, typename... Args> // where_rel_path is where it should be created 
 		GUID CreateAssetFile(const std::filesystem::path& where_path, const bool relative, const std::string ast_name, Args&&... args) 
 		{
-			if (type == AssetType::NoType) { LX_CORE_ERROR("Asset Manager: CreateAssetFile - NoType given"); return GUID(0); }
+			if (type == AssetType::None) { LX_CORE_ERROR("Asset Manager: CreateAssetFile - None given"); return GUID(0); }
 			std::string suf = asset_extensions.find(type)->second;
 
 			// Get the absolute path
@@ -130,7 +130,7 @@ namespace Luxia {
 			std::filesystem::path assetfile_path = abs_path;
 			std::filesystem::path metafile_path = abs_path;
 
-			AssetType type = AssetType::NoType;
+			AssetType type = AssetType::None;
 			std::string typesuf = "";
 			for (auto& [a_suf, atype] : extensions) {
 				if (abs_path.string().find(a_suf, abs_path.string().size() - a_suf.size()) != std::string::npos) {
@@ -139,7 +139,7 @@ namespace Luxia {
 					break;
 				}
 			}
-			if (type == AssetType::NoType || typesuf == "") {
+			if (type == AssetType::None || typesuf == "") {
 				LX_CORE_ERROR("Asset Manager: Importing asset failed for - {} (unknown extension)", where_path.string());
 				return GUID(0);
 			}
@@ -150,10 +150,10 @@ namespace Luxia {
 			std::shared_ptr<Assets::AssetFile> asset_file = nullptr;
 
 			switch (type) {
-			case AssetType::ModelType:
+			case AssetType::Model:
 				asset_file = NewAssetFile(assetfile_path, type, abs_path);
 				break;
-			case AssetType::TextureType:
+			case AssetType::Texture:
 				asset_file = NewAssetFile(assetfile_path, type, abs_path);
 				break;
 			default:
@@ -257,21 +257,21 @@ namespace Luxia {
 		{
 			switch (type)
 			{
-				case AssetType::NoType:
-					LX_CORE_ERROR("Make Shared from type failed, NoType given");
+				case AssetType::None:
+					LX_CORE_ERROR("Make Shared from type failed, None given");
 					return nullptr;
-				case AssetType::MaterialType:
+				case AssetType::Material:
 					return std::make_shared<Assets::MaterialFile>(std::forward<Args>(args)...);
-				case AssetType::AudioType:
-					LX_CORE_ERROR("Make Shared from type failed, AudioType not implemented");
+				case AssetType::Audio:
+					LX_CORE_ERROR("Make Shared from type failed, Audio not implemented");
 					return nullptr;
-				case AssetType::ModelType:
+				case AssetType::Model:
 					return std::make_shared<Assets::ModelFile>(std::forward<Args>(args)...);
-				case AssetType::TextureType:
+				case AssetType::Texture:
 					return std::make_shared<Assets::TextureFile>(std::forward<Args>(args)...);
-				case AssetType::SceneType:
+				case AssetType::Scene:
 					return std::make_shared<Assets::SceneFile>(std::forward<Args>(args)...);;
-				case AssetType::ShaderType:
+				case AssetType::Shader:
 					return std::make_shared<Assets::ShaderFile>(std::forward<Args>(args)...);;
 				default:
 					return nullptr;

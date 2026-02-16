@@ -13,7 +13,7 @@ namespace Luxia {
 	}
 
 	Scene::Scene() {
-		type = Luxia::AssetType::SceneType;
+		type = Luxia::AssetType::Scene;
 	}
 
 	Entity& Scene::CreateEntity(std::string name, Luxia::GUID guid) {

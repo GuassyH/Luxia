@@ -36,7 +36,7 @@ namespace Luxia::Assets {
 		GUID guid = GUID(0);
 		GUID metaGUID = GUID(0);
 		std::vector<std::shared_ptr<Asset>> assets = std::vector<std::shared_ptr<Asset>>(0);
-		AssetType type = AssetType::NoType;
+		AssetType type = AssetType::None;
 		std::filesystem::path assetPath = "no/path";
 	};
 

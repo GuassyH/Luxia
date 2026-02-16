@@ -17,11 +17,11 @@
 namespace Luxia::Physics {
 
 	static struct RayCastHit {
-		float distance;
+		float distance = 0.0f;
 		bool hit = false;
-		glm::vec3 position;
-		glm::vec3 normal;
-		JPH::BodyID bodyID;
+		glm::vec3 position = glm::vec3(0.0f);
+		glm::vec3 normal = glm::vec3(0.0f);
+		JPH::BodyID bodyID = JPH::BodyID(0);
 	};
 
 };

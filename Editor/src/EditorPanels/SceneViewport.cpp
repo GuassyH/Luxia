@@ -164,77 +164,76 @@ namespace Editor::Panels {
 			ImGui::SetCursorPosY(imagePosInWindow.y);
 
 			ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, ImVec2(imageSize.x, imageSize.y), ImVec2(0, 1), ImVec2(1, 0));
-		}
 
+			if (ImGui::IsWindowHovered() && ImGui::IsItemHovered()) {
 
-		if (ImGui::IsWindowHovered()) {
-
-			// Picking
-			if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
-				if (scene) {
-					glm::vec2 window_pos = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
-					glm::vec2 rp = Luxia::Screen::GetMousePosRect(window_pos, imageSize, imageSize, Luxia::Input::GetMousePosition());
-					// glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
+				// Picking
+				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
+					if (scene) {
+						glm::vec2 window_pos = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
+						glm::vec2 rp = Luxia::Screen::GetMousePosRect(window_pos, imageSize, imageSize, Luxia::Input::GetMousePosition());
+						// glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
 					
-					// FBO Picking
-					Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
+						// FBO Picking
+						Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
 
-					if (scene->runtime_entities.contains(picked)) {
-						if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
-							if(!editorLayer->selected_assets.contains(picked))
+						if (scene->runtime_entities.contains(picked)) {
+							if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
+								if(!editorLayer->selected_assets.contains(picked))
+									editorLayer->InsertSelected(picked);
+								else
+									editorLayer->EraseSelected(picked);
+							}
+							else {
+								editorLayer->ClearSelected();
 								editorLayer->InsertSelected(picked);
-							else
-								editorLayer->EraseSelected(picked);
+							}
 						}
 						else {
 							editorLayer->ClearSelected();
-							editorLayer->InsertSelected(picked);
 						}
 					}
-					else {
-						editorLayer->ClearSelected();
+				}
+
+				// Movement
+				Luxia::Components::Transform* focused_t = nullptr;
+				if(editorLayer->isOneSelected) {
+					Luxia::GUID selected_guid = *editorLayer->selected_assets.begin();
+					auto it = scene->runtime_entities.find(selected_guid);
+					if (it != scene->runtime_entities.end()) {
+						focused_t = scene->TryGetFromEntity<Luxia::Components::Transform>(it->second);
 					}
 				}
-			}
-
-			// Movement
-			Luxia::Components::Transform* focused_t = nullptr;
-			if(editorLayer->isOneSelected) {
-				Luxia::GUID selected_guid = *editorLayer->selected_assets.begin();
-				auto it = scene->runtime_entities.find(selected_guid);
-				if (it != scene->runtime_entities.end()) {
-					focused_t = scene->TryGetFromEntity<Luxia::Components::Transform>(it->second);
-				}
-			}
 		
-			if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_2)) {
-				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2)) {
-					cam_script.last_mouseX = Luxia::Input::GetMousePosition().x;
-					cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
+				if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_2)) {
+					if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_2)) {
+						cam_script.last_mouseX = Luxia::Input::GetMousePosition().x;
+						cam_script.last_mouseY = Luxia::Input::GetMousePosition().y;
+					}
+
+					if (Luxia::Input::IsKeyJustPressed(LX_KEY_H) && scene) {
+						if(editorLayer->GetSceneManager()->running)
+							cam_ent->transform->GetComponent<Editor::Scripts::SceneShooterTest>().Shoot(*scene, editorLayer->GetAssetManager().get());
+					}
+
+					cam_script.Look();
+					cam_script.Move();
+				}
+				else {
+					if (!Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
+						if (Luxia::Input::IsKeyJustPressed(LX_KEY_W))
+							editType = EditType::Translate;
+						else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S))
+							editType = EditType::Scale;
+						else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R))
+							editType = EditType::Rotate;
+					}
 				}
 
-				if (Luxia::Input::IsKeyJustPressed(LX_KEY_H) && scene) {
-					if(editorLayer->GetSceneManager()->running)
-						cam_ent->transform->GetComponent<Editor::Scripts::SceneShooterTest>().Shoot(*scene, editorLayer->GetAssetManager().get());
-				}
-
-				cam_script.Look();
-				cam_script.Move();
-			}
-			else {
-				if (!Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
-					if (Luxia::Input::IsKeyJustPressed(LX_KEY_W))
-						editType = EditType::Translate;
-					else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S))
-						editType = EditType::Scale;
-					else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R))
-						editType = EditType::Rotate;
-				}
-			}
-
-			if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
-				if (focused_t) {
-					cam.transform->local_position = focused_t->local_position + (cam.transform->forward * -10.0f);
+				if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
+					if (focused_t) {
+						cam.transform->local_position = focused_t->local_position + (cam.transform->forward * -10.0f);
+					}
 				}
 			}
 		}

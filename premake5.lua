@@ -14,6 +14,7 @@ project "LuxiaVendor"
     location "Luxia/vendor"
     kind "StaticLib"
     language "C++"
+	toolset "msc-v145"
 
     files { 
 		"Luxia/vendor/imgui/**.cpp",
@@ -58,6 +59,7 @@ project "Luxia"
 	location "Luxia"
 	kind "SharedLib"
 	language "C++"
+	toolset "msc-v145"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	
@@ -163,6 +165,7 @@ project "Editor"
 	location "Editor"
 	kind "ConsoleApp"
 	language "C++"
+	toolset "msc-v145"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 

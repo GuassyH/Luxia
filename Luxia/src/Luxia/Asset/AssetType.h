@@ -5,23 +5,24 @@
 
 namespace Luxia {
 	const enum class LUXIA_API AssetType {
-		NoType			= 0,
-		ModelType		= 1,
-		TextureType		= 2,
-		MaterialType	= 3,
-		ShaderType		= 4,
-		AudioType		= 5,
-		SceneType		= 6,
-		MeshType		= 7,
+		None			= 0,
+		Model		= 1,
+		Texture		= 2,
+		Material	= 3,
+		Shader		= 4,
+		Audio		= 5,
+		Scene		= 6,
+		Mesh		= 7,
+		Script		= 8
 	};
 	inline AssetType PeakAssetType(const std::filesystem::path& metafile_path) {
-		if (!std::filesystem::exists(metafile_path)) { return Luxia::AssetType::NoType; }
+		if (!std::filesystem::exists(metafile_path)) { return Luxia::AssetType::None; }
 
 		std::ifstream infile(metafile_path);
-		if (!infile.is_open()) { return Luxia::AssetType::NoType; }
+		if (!infile.is_open()) { return Luxia::AssetType::None; }
 
 		std::string line;
-		Luxia::AssetType type = Luxia::AssetType::NoType;
+		Luxia::AssetType type = Luxia::AssetType::None;
 		while (std::getline(infile, line)) {
 			// Trim whitespace if needed
 			if (line.rfind("type=", 0) == 0) {

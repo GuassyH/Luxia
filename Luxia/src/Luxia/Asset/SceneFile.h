@@ -8,13 +8,13 @@ namespace Luxia::Assets {
 		SceneFile() = default;
 		SceneFile(const std::filesystem::path m_scenePath)
 			: scene_path(m_scenePath.lexically_normal()) {
-			type = Luxia::AssetType::SceneType;
+			type = Luxia::AssetType::Scene;
 		}
 		SceneFile(const std::filesystem::path t1, const std::filesystem::path t2) {} // Dummy constructor to avoid template issues
 		~SceneFile() = default;
 
 		virtual bool Create(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::SceneType;
+			type = Luxia::AssetType::Scene;
 			guid = GUID();
 
 			assetPath = m_assetPath.lexically_normal();
@@ -45,7 +45,7 @@ namespace Luxia::Assets {
 		}
 
 		virtual std::vector<std::shared_ptr<Asset>> Load(const std::filesystem::path& m_assetPath) override {
-			type = Luxia::AssetType::SceneType;
+			type = Luxia::AssetType::Scene;
 
 			assetPath = m_assetPath.lexically_normal();
 			scene_path = assetPath.lexically_normal();

@@ -8,7 +8,7 @@ namespace Luxia::Platform::OpenGL {
 		GL_Material() : IMaterial() {} 
 		GL_Material(const std::shared_ptr<IShader> matShader)
 			: Luxia::IMaterial(matShader) {
-			type = Luxia::AssetType::MaterialType;
+			type = Luxia::AssetType::Material;
 		}
 		~GL_Material() = default;
 

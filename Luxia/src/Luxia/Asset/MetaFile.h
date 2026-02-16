@@ -21,7 +21,7 @@ namespace Luxia::Assets {
 		bool Save();
 		void Unload(); // Unload the asset
 
-		AssetType type = AssetType::NoType;
+		AssetType type = AssetType::None;
 
 		std::filesystem::path assetPath = "no/path";
 		std::filesystem::path metaPath = "no/path";

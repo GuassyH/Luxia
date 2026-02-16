@@ -25,7 +25,7 @@ namespace Luxia {
 	public:
 		unsigned int ID = 0;
 
-		IShader() { Luxia::AssetType::ShaderType; }
+		IShader() { Luxia::AssetType::Shader; }
 		IShader(const char* frag_path, const char* vert_path) { }
 		virtual ~IShader() = default;
 
