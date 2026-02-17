@@ -47,7 +47,7 @@ namespace Editor::Layers {
 		glGetFloatv(GL_COLOR_CLEAR_VALUE, clearCol);
 
 		// Clear existing Thumbnails
-		for (auto& [guid, tex] : asset_thumbnails) {
+		for (auto& [_, tex] : asset_thumbnails) {
 			if (tex) {
 				tex->Unload();
 			}

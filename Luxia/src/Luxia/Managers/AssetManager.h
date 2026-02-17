@@ -40,7 +40,7 @@ namespace Luxia {
 		GUID GetAssetFileGUID(const std::filesystem::path& rel_path) {
 			std::filesystem::path abs_path = asset_dir / rel_path.lexically_normal();
 			// Search meta pool for matching srcPath
-			for (auto& [guid, meta_file] : meta_pool) {
+			for (auto& [_, meta_file] : meta_pool) {
 				if (meta_file->assetPath == abs_path) {
 					return meta_file->assetGUID;
 				}

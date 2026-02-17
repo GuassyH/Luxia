@@ -82,10 +82,10 @@
     <ClInclude Include="src\Luxia\Components\Camera.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Components\Colliders\BoxCollider.h">
+    <ClInclude Include="src\Luxia\Components\ColliderShapes\BoxShape.h">
       <Filter>Luxia\Components\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Components\Colliders\Collider.h">
+    <ClInclude Include="src\Luxia\Components\Collider.h">
       <Filter>Luxia\Components\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Component.h">
@@ -291,7 +291,8 @@
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
     <ClInclude Include="src\Luxia\Asset\ScriptFile.h" />
-    <ClInclude Include="src\Luxia\Components\Colliders\SphereCollider.h" />
+    <ClInclude Include="src\Luxia\Components\ColliderShapes\SphereShape.h" />
+    <ClInclude Include="src\Luxia\Components\ColliderShapes\ColliderShape.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

@@ -97,7 +97,7 @@ namespace Editor::Panels {
 
 		static bool openRenamePopup = false;
 
-		for (auto& [guid, entity] : scene->runtime_entities) {
+		for (auto& [_, entity] : scene->runtime_entities) {
 			if (entity.transform) {
 				if (!entity.transform->HasParent()) {
 					DrawEntitySelectable(entity, editorLayer, scene);

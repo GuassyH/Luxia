@@ -9,10 +9,8 @@
 #include "MeshRenderer.h"
 #include "Light.h"
 #include "RigidBody.h"
+#include "Collider.h"
 
-#include "Colliders/Collider.h"
-#include "Colliders/BoxCollider.h"
-#include "Colliders/SphereCollider.h"
 
 namespace Luxia {
     struct LUXIA_API ComponentInfo {

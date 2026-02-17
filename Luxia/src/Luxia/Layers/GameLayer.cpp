@@ -1,5 +1,6 @@
 #include "lxpch.h"
 #include "GameLayer.h"
+#include "Luxia/Components/Collider.h"
 
 namespace Luxia::Layers {
 	
@@ -19,12 +20,23 @@ namespace Luxia::Layers {
 		std::shared_ptr<Scene> scene = scene_manager->GetActiveScene();
 
 		if (scene) {
-			// This should always update, even if playing is paused
-			for (auto& [guid, entity] : scene->runtime_entities) {
-				auto transform = scene->TryGetFromEntity<Components::Transform>(entity);
-				// ONLY UPDATE ROOTS, Children will be updated as a consequence
-				if (!transform->HasParent()) {
-					transform->UpdateMatrix();
+
+			auto transform_view = scene->GetEntitiesWith<Components::Transform>();
+			for (auto entity : transform_view) {
+				auto& transform = scene->GetFromEntity<Components::Transform>(entity);
+				if (!transform.HasParent()) {
+					transform.UpdateMatrix();
+				}
+			}
+
+			// Update Colliders (dirty check?)
+			auto collider_view = scene->GetEntitiesWith<Components::Collider>();
+			for (auto& entity : collider_view) {
+				auto& col = scene->GetFromEntity<Components::Collider>(entity);
+				if (col.enabled && col.colliderShape) {
+					if (col.colliderShape->scale != col.scale) {
+						col.InitCollider();
+					}
 				}
 			}
 

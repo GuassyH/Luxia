@@ -89,14 +89,15 @@ namespace Luxia {
 				out << YAML::EndMap;
 			}
 
-			auto bc = entity.transform->TryGetComponent<Luxia::Components::BoxCollider>();
-			if (bc) {
-				out << YAML::Key << "BoxCollider";
-				out << YAML::BeginMap; // BoxCollider
+			auto col = entity.transform->TryGetComponent<Luxia::Components::Collider>();
+			if (col) {
+				out << YAML::Key << "Collider";
+				out << YAML::BeginMap; // Collider
 				
-				out << YAML::Key << "Enabled" << YAML::Value << bc->enabled;
-				out << YAML::Key << "HalfExtent" << YAML::Value << Luxia::Physics::ToGLM(bc->halfExtent);
-				out << YAML::Key << "Offset" << YAML::Value << bc->offset;
+				out << YAML::Key << "Enabled" << YAML::Value << col->enabled;
+				out << YAML::Key << "ColliderType" << YAML::Value << static_cast<int>(col->colliderType);
+				out << YAML::Key << "Scale" << YAML::Value << col->scale;
+				out << YAML::Key << "Offset" << YAML::Value << col->offset;
 				
 				out << YAML::EndMap;
 			}
@@ -125,7 +126,7 @@ namespace Luxia {
 		out << YAML::Key << "GUID" << YAML::Value << (uint64_t)scene.guid;
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
 
-		for (auto& [guid, entity] : scene.runtime_entities) {
+		for (auto& [_, entity] : scene.runtime_entities) {
 			SerializeEntity(entity, out);
 		}
 
@@ -225,21 +226,16 @@ namespace Luxia {
 				rb.gravityScale = rbNode["GravityScale"].as<float>();
 			}
 
-			// BoxCollider
-			if (auto bcNode = components["BoxCollider"]) {
-				auto& bc = entity.transform->AddComponent<Luxia::Components::BoxCollider>();
+			// Collider
+			if (auto bcNode = components["Collider"]) {
+				auto& bc = entity.transform->AddComponent<Luxia::Components::Collider>();
 				bc.enabled = bcNode["Enabled"].as<bool>();
-				bc.halfExtent = Luxia::Physics::ToJolt(bcNode["HalfExtent"].as<glm::vec3>());
+				bc.colliderType = static_cast<Luxia::Collider::ColliderType>(bcNode["ColliderType"].as<int>());
+				bc.scale = bcNode["Scale"].as<glm::vec3>();
 				bc.offset = bcNode["Offset"].as<glm::vec3>();
+				bc.InitCollider();
 			}
 
-			// SphereCollider
-			if (auto bcNode = components["SphereCollider"]) {
-				auto& bc = entity.transform->AddComponent<Luxia::Components::BoxCollider>();
-				bc.enabled = bcNode["Enabled"].as<bool>();
-				bc.halfExtent = Luxia::Physics::ToJolt(bcNode["HalfExtent"].as<glm::vec3>());
-				bc.offset = bcNode["Offset"].as<glm::vec3>();
-			}
 		}
 
 

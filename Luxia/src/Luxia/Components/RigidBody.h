@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "Colliders/BoxCollider.h"
-#include "Colliders/SphereCollider.h"
+#include "Collider.h"
 
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/Body.h>
@@ -36,15 +35,13 @@ namespace Luxia::Components {
 			settings.mObjectLayer = Physics::Layers::MOVING;
 
 			// Check for collider
-			if(transform->HasComponent<Components::BoxCollider>()) {
-				auto& bcollider = transform->GetComponent<Components::BoxCollider>();
-				shape = bcollider.InitCollider();
+			if(transform->HasComponent<Components::Collider>()) {
+				auto& collider = transform->GetComponent<Components::Collider>();
+				shape = collider.shape;
+				if(!collider.shape)
+					LX_CORE_ERROR("Collider component exists but shape is null for entity with GUID: {}", (uint64_t)ent_guid);
 			}
-			else if (transform->HasComponent<Components::SphereCollider>()) {
-				auto& scollider = transform->GetComponent<Components::SphereCollider>();
-				shape = scollider.InitCollider();
-			}
-			else {
+			if (shape == nullptr) { // even if collider exists but shape is null, we create a default one to avoid errors
 				shape = new JPH::SphereShape(0.01f);
 				settings.mObjectLayer = Physics::Layers::NON_COLLIDING;
 			}

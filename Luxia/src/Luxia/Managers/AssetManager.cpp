@@ -48,7 +48,7 @@ namespace Luxia {
 		}
 
 		// Since shaders should be loaded now, we can now load the material files
-		for (auto [guid, assetfile] : assetfile_pool) {
+		for (auto [_, assetfile] : assetfile_pool) {
 			if (assetfile->type == Luxia::AssetType::Material) {
 				std::shared_ptr<Luxia::Assets::MaterialFile> matfile = std::dynamic_pointer_cast<Luxia::Assets::MaterialFile>(assetfile);
 				std::shared_ptr<Luxia::IMaterial> mat = std::dynamic_pointer_cast<Luxia::IMaterial>(assetfile->assets[0]);
@@ -90,8 +90,7 @@ namespace Luxia {
 		}
 
 		// Save metafile, then save asset_file
-		for (auto& [guid, asset_file] : assetfile_pool) {
-
+		for (auto& [_, asset_file] : assetfile_pool) {
 			meta_pool.find(asset_file->metaGUID)->second->Save();
 			if (asset_file) {
 				asset_file->Save(meta_pool.find(asset_file->metaGUID)->second->assetPath);
@@ -102,7 +101,7 @@ namespace Luxia {
 	}
 
 	void AssetManager::Cleanup() {
-		for (auto& [guid, assetfile] : asset_pool) {
+		for (auto& [_, assetfile] : asset_pool) {
 			if (assetfile) {
 				assetfile->Unload();
 			}

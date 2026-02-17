@@ -38,8 +38,8 @@ namespace Editor::Scripts {
 			rb.gravityScale = 0.0f; // No gravity for bullets
 
 			// Add BoxCollider component
-			auto& boxCollider = bullet.transform->AddComponent<Luxia::Components::BoxCollider>();
-			boxCollider.halfExtent = Luxia::Physics::ToJolt(glm::vec3(0.05f));
+			auto& boxCollider = bullet.transform->AddComponent<Luxia::Components::Collider>(Luxia::Collider::ColliderType::Box);
+			boxCollider.scale = glm::vec3(0.05f);
 
 			// Initialize the rigid body
 			rb.InitBody(scene.physicsWorld->jphSystem.GetBodyInterface());

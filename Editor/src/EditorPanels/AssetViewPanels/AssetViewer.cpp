@@ -248,7 +248,7 @@ namespace Editor::Panels {
 			ImGui::NextColumn();
 		}
 
-		for (auto& [guid, asset] : assets_to_draw) {
+		for (auto& [_, asset] : assets_to_draw) {
 			if (!asset) continue;
 			DrawFileIcon(asset.lock(), cellSize, editorLayer);
 			ImGui::NextColumn();

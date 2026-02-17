@@ -42,6 +42,7 @@ namespace Editor::Panels {
 		}
 
 		// Loop through all components and render them
+		bool drawnCollider = false;
 		for (auto& comp : Luxia::componentRegistry) {
 			if (comp.hasFunc(ent.transform)) {
 				if (comp.name == "Mesh Renderer") {
@@ -58,7 +59,16 @@ namespace Editor::Panels {
 
 					}
 				}
-
+				// Check if the name is a collider, and if we havent drawn a collider yet draw it
+				else if (comp.name == "Box Collider" || comp.name == "Sphere Collider") {
+					if (!drawnCollider) {
+						auto collider = ent.transform->TryGetComponent<Luxia::Components::Collider>();
+						if (ImGui::CollapsingHeader(comp.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+							collider->OnInspectorDraw();
+						}
+						drawnCollider = true; 
+					}
+				}
 				// Draw Regular
 				else if (ImGui::CollapsingHeader(comp.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
 					comp.getFunc(ent.transform)->OnInspectorDraw();

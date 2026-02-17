@@ -8,7 +8,7 @@ namespace Luxia {
 
 		scene_files.clear();
 
-		for (auto& [guid, assetfile] : asset_manager->GetAssetFilePool()) {
+		for (auto& [_, assetfile] : asset_manager->GetAssetFilePool()) {
 			if (assetfile) {
 				if (assetfile->type == AssetType::Scene) {
 					auto scenefile = asset_manager->GetAssetFile<Assets::SceneFile>(assetfile->guid);
