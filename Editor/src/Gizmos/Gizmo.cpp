@@ -6,12 +6,14 @@ namespace Editor::Gizmos {
 	std::shared_ptr<Luxia::IMaterial> GizmoResources::yMaterial = nullptr;
 	std::shared_ptr<Luxia::IMaterial> GizmoResources::zMaterial = nullptr;
 	std::shared_ptr<Luxia::IMaterial> GizmoResources::orgioMaterial = nullptr;
+	std::shared_ptr<Luxia::IMaterial> GizmoResources::hoverMaterial = nullptr;
 
 	void GizmoResources::Init() {
 		xMaterial = Luxia::Platform::Assets::CreateMaterial();
 		yMaterial = Luxia::Platform::Assets::CreateMaterial();
 		zMaterial = Luxia::Platform::Assets::CreateMaterial();
 		orgioMaterial = Luxia::Platform::Assets::CreateMaterial();
+		hoverMaterial = Luxia::Platform::Assets::CreateMaterial();
 
 		xMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
 		xMaterial->color = glm::vec4(1.0f, 0.4392f, 0.4784f, 1.0f);
@@ -24,6 +26,11 @@ namespace Editor::Gizmos {
 
 		orgioMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
 		orgioMaterial->color = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
+
+		zMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
+
+		hoverMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
+		hoverMaterial->color = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
 	}
 
 

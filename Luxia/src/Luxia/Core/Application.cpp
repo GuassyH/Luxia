@@ -1,3 +1,5 @@
+#define JPH_OVERRIDE_NEW_DELETE
+
 #include "lxpch.h"
 #include "Application.h"
 #include "Luxia/Platform/PlatformDefinitions.h"

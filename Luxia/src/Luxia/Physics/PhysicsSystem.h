@@ -1,24 +1,20 @@
 #pragma once
 
 #include "Luxia/Core/Core.h"
-
 #include "Luxia/Core/Log.h"
 
-#define JPH_OVERRIDE_NEW_DELETE
+ 
 #include "Jolt/Jolt.h"
 #include "Jolt/Core/JobSystemThreadPool.h"
 #include "Jolt/Core/TempAllocator.h"
 
-JPH_SUPPRESS_WARNINGS_STD_BEGIN
 #include <iostream>
-JPH_SUPPRESS_WARNINGS_STD_END
-
 
 namespace Luxia::Physics {
 	class PhysicsWorld;
 	struct PhysicsWorldDesc;
 	
-	class PhysicsSystem {
+	class LUXIA_API PhysicsSystem {
 	public:
 		static void Initialize();
 		static void Shutdown();

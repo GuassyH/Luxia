@@ -6,8 +6,8 @@
 #include "PhysicsSystem.h"
 #include "Luxia/Tools/PhysicsTools.h"
 
-#define JPH_OVERRIDE_NEW_DELETE
-#include "Jolt/Jolt.h"
+ 
+#include <Jolt/Jolt.h>
 
 #include <Jolt/Physics/Body/BodyCreationSettings.h>
 #include <Jolt/Physics/Body/BodyActivationListener.h>
@@ -18,6 +18,8 @@
 #include <Jolt/Physics/Collision/RayCast.h>
 #include <Jolt/Physics/Collision/CastResult.h>
 #include <Jolt/Physics/Body/BodyLock.h>
+
+
 
 // These were taken from JoltPhysics HelloWorld to learn about Jolt
 namespace Luxia::Physics {
@@ -221,7 +223,7 @@ namespace Luxia::Physics {
 	};
 
 
-	class PhysicsWorld {
+	class LUXIA_API PhysicsWorld {
 	public:
 		PhysicsWorld() = default;
 		~PhysicsWorld() = default;

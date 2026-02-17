@@ -7,7 +7,7 @@
 
 #include "glm/glm.hpp"
 
-#define JPH_OVERRIDE_NEW_DELETE
+ 
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/BodyID.h"
 #include "Jolt/Physics/Body/Body.h"

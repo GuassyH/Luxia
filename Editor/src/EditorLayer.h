@@ -1,9 +1,12 @@
 #pragma once
+
+ 
 #include "Luxia.h"
 #include "IEditorPanel.h"
 #include <unordered_set>
 #include "ThumbnailManager.h"
 #include "SystemFuncs.h"
+
 
 namespace Editor::Layers {
 	class EditorLayer : public Luxia::Layer
@@ -17,6 +20,7 @@ namespace Editor::Layers {
 		std::unordered_map<Luxia::GUID, std::shared_ptr<Luxia::ITexture>> asset_thumbnails;
 		std::vector<Luxia::GUID> queued_for_refresh;
 
+		std::unique_ptr<Luxia::Physics::PhysicsWorld> physicsWorld = nullptr;
 
 		bool areNoneSelected = false; // selected == 0
 		bool isOneSelected = false; // selected == 1

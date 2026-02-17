@@ -218,15 +218,14 @@ namespace Luxia::Components {
 #pragma endregion
 
 		virtual void OnInspectorDraw() override {
-			ImGui::DragFloat3("Position",	&local_position.x, 0.1f);
+			ImGui::DragFloat3("Position", &local_position.x, 0.1f);
 
 			glm::vec3 euler = GetEulerAngles();
 			if (ImGui::DragFloat3("Rotation", &euler.x, 0.1f)) {
 				glm::vec3 delta = euler - GetEulerAngles();
-				AddEulerAngles(delta); // apply as incremental rotation
+				AddEulerAngles(delta, false); // apply as incremental rotation
 			}
-			ImGui::DragFloat3("Scale",		&local_scale.x, 0.1f);
-			
+			ImGui::DragFloat3("Scale", &local_scale.x, 0.1f);
 		}
 
 	private:

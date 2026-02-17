@@ -1,17 +1,15 @@
 #pragma once
 
 #include "ColliderShape.h"
-#include "Luxia/Physics/PhysicsWorld.h"
-
 #include "Jolt/Physics/Collision/Shape/BoxShape.h"
-
+#include "Jolt/Physics/Collision/Shape/RotatedTranslatedShape.h"
 
 namespace Luxia::Collider {
 	struct LUXIA_API BoxShape : public ColliderShape {
 	public:
-		virtual JPH::ShapeRefC InitCollider(glm::vec3& scale) override {
+		virtual JPH::ShapeRefC InitCollider(glm::vec3& scale, glm::vec3& offset) override {
 			this->scale = scale;
-			return new JPH::BoxShape(Luxia::Physics::ToJolt(scale));
+			return new JPH::RotatedTranslatedShape(Physics::ToJolt(offset), JPH::Quat::sIdentity(), new JPH::BoxShape(Luxia::Physics::ToJolt(scale)));
 		}
 
 		virtual void OnInspectorDraw(glm::vec3& scale, glm::vec3& offset) override {

@@ -15,6 +15,7 @@ namespace Editor {
 		virtual void Startup() override {
 			// Needed to make sure context is current, otherwise, crash, :(
 			m_Window->MakeContextCurrent();
+			JPH::RegisterDefaultAllocator();
 
 			// Push extra layers used
 			PushLayer(std::make_shared<Editor::Layers::EditorLayer>());

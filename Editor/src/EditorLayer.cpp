@@ -74,6 +74,9 @@ namespace Editor::Layers {
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			return;
 		}
+		
+		physicsWorld = Luxia::Physics::PhysicsSystem::CreateWorld(Luxia::Physics::PhysicsWorldDesc());
+		
 		thumbnailManager.Init(256, 256);
 
 		LX_CORE_WARN("EditorLayer Attached");
@@ -111,9 +114,16 @@ namespace Editor::Layers {
 		PauseTex->Unload();
 		NoImageTex->Unload();
 		RunningTex->Unload();
+
+		Luxia::Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); // Unneccessary
+
+		physicsWorld.release();
+		physicsWorld.reset();
 	}
 	void EditorLayer::OnUpdate() {
 		UpdateSelectedConditions();
+
+		physicsWorld->step(Luxia::Core::Time::get().deltaTime);
 	}
 	void EditorLayer::OnRender() {
 		std::shared_ptr<Luxia::Rendering::IUIRenderer> uiRenderer = renderer->GetUIRenderer();

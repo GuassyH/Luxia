@@ -6,6 +6,7 @@
 #include "ColliderShapes/BoxShape.h"
 #include "ColliderShapes/SphereShape.h"
 
+ 
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/Body.h>
 #include <Jolt/Physics/Body/BodyCreationSettings.h>
@@ -51,7 +52,7 @@ namespace Luxia::Components {
 
 			// Return the shape reference from the collider shape
 			if (colliderShape) {
-				shape = colliderShape->InitCollider(scale);
+				shape = colliderShape->InitCollider(scale, offset);
 			}
 		}
 		void ReleaseCollider() {

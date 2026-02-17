@@ -139,6 +139,28 @@ namespace Editor::Panels {
 		InitGizmos(editorLayer);
 	}
 
+	void SceneViewport::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
+		// Remove component
+		cam_ent->RemoveComponent<Luxia::Components::Camera>();
+		editorLayer->editor_reg.remove<Luxia::Components::Camera>(cam_ent->ent_id);
+		editorLayer->editor_reg.remove<Luxia::Components::Transform>(cam_ent->ent_id);
+
+		cam_ent = nullptr;
+		output_texture = nullptr;
+
+		fbo_pick_tex->Unload();
+		selection_fbo->Unload();
+		outline_shader->Unload();
+
+		// Unload all gizmos (and other physics stuff) from physics world
+		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
+		auto view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
+		for (auto entity : view) {
+			auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
+			rb.UnloadBody(body_interface);
+		}
+	}
+
 	void SceneViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_MenuBar);
 		name = "Scene View";
@@ -165,32 +187,34 @@ namespace Editor::Panels {
 
 			ImGui::Image((ImTextureID)(intptr_t)output_texture->texID, ImVec2(imageSize.x, imageSize.y), ImVec2(0, 1), ImVec2(1, 0));
 
+
 			if (ImGui::IsWindowHovered() && ImGui::IsItemHovered()) {
 
 				// Picking
-				if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
-					if (scene) {
-						glm::vec2 window_pos = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
-						glm::vec2 rp = Luxia::Screen::GetMousePosRect(window_pos, imageSize, imageSize, Luxia::Input::GetMousePosition());
-						// glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y), glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
+				if (scene) {
+					glm::vec2 window_pos = glm::vec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
+					glm::vec2 rp = Luxia::Screen::GetMousePosRect(window_pos, imageSize, imageSize, Luxia::Input::GetMousePosition());
+					glm::vec3 ray_dir = Luxia::Screen::GetRayDir(Luxia::Screen::GetMousePosRectClamped(window_pos, glm::vec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight()), Luxia::Input::GetMousePosition()), &cam);
 					
-						// FBO Picking
-						Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
-
-						if (scene->runtime_entities.contains(picked)) {
-							if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
-								if(!editorLayer->selected_assets.contains(picked))
+					if (!GizmoRaycasts(editorLayer, scene.get(), ray_dir)) {
+						if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
+							// FBO Picking
+							Luxia::GUID picked = GetMousePosEntity(rp, &cam, scene, editorLayer->GetRenderer(), fbo_pick_tex);
+							if (scene->runtime_entities.contains(picked)) {
+								if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
+									if(!editorLayer->selected_assets.contains(picked))
+										editorLayer->InsertSelected(picked);
+									else
+										editorLayer->EraseSelected(picked);
+								}
+								else {
+									editorLayer->ClearSelected();
 									editorLayer->InsertSelected(picked);
-								else
-									editorLayer->EraseSelected(picked);
+								}
 							}
 							else {
 								editorLayer->ClearSelected();
-								editorLayer->InsertSelected(picked);
 							}
-						}
-						else {
-							editorLayer->ClearSelected();
 						}
 					}
 				}
@@ -249,19 +273,7 @@ namespace Editor::Panels {
 		}
 		
 	}
-	void SceneViewport::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
-		// Remove component
-		cam_ent->RemoveComponent<Luxia::Components::Camera>();
-		editorLayer->editor_reg.remove<Luxia::Components::Camera>(cam_ent->ent_id);
-		editorLayer->editor_reg.remove<Luxia::Components::Transform>(cam_ent->ent_id);
-		
-		cam_ent = nullptr;
-		output_texture = nullptr;
 
-		fbo_pick_tex->Unload();
-		selection_fbo->Unload();
-		outline_shader->Unload();
-	}
 
 	bool SceneViewport::RenderImage(Luxia::RenderCameraEvent& e) {
 		if (!e.GetTexture()) { return false; }
@@ -287,6 +299,14 @@ namespace Editor::Panels {
 		gizmos.push_back(std::make_unique<Gizmos::ScaleGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
 		grid_gizmo = std::make_shared<Gizmos::GridGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos"));
 		grid_gizmo->gizmo_parts[0]->transform->enabled = false;
+
+		// Add all gizmos (and other physics stuff) to physics world for raycasting
+		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
+		auto view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
+		for (auto entity : view) {
+			auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
+			rb.InitBody(body_interface);
+		}
 	}
 
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
@@ -294,6 +314,8 @@ namespace Editor::Panels {
 		Luxia::Rendering::IRenderer* renderer = editorLayer->GetRenderer().get();
 		auto& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
 		cam.transform->UpdateMatrix();
+
+		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
 
 		// Rebind
 		Luxia::Screen::BindFBO(cam_tex->GetFBO());
@@ -383,6 +405,35 @@ namespace Editor::Panels {
 
 		/// Without Depth
 		glClear(GL_DEPTH_BUFFER_BIT);
+		
+
+		// Remove all gizmos (and other physics stuff) from physics world for raycasting (so they dont interfere with actual entities)
+		for (auto& gizmo : gizmos) {
+			for (auto part : gizmo->gizmo_parts) {
+				if (auto mr = part->transform->TryGetComponent<Luxia::Components::MeshRenderer>()) {
+					mr->material = part->material;
+				}
+
+				if (auto rb = part->transform->TryGetComponent<Luxia::Components::RigidBody>()) {
+					// body_interface.SetObjectLayer(rb->body->GetID(), Luxia::Physics::Layers::NON_COLLIDING);
+					if (editorLayer->physicsWorld->jphSystem.GetBodyInterface().IsAdded(rb->body->GetID()))
+						editorLayer->physicsWorld->jphSystem.GetBodyInterface().RemoveBody(rb->body->GetID());
+				}
+			}
+		}
+
+		// If the last hit was true
+		if (last_ray_hit.hit) {
+			auto rb_view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
+			for (auto entity : rb_view) {
+				auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
+				if (rb.body->GetID() == last_ray_hit.bodyID) {
+					if (auto mr = rb.transform->TryGetComponent<Luxia::Components::MeshRenderer>()) {
+						mr->material = Gizmos::GizmoResources::hoverMaterial;
+					}
+				}
+			}
+		}
 
 		// Draw translation gizmos
 		if (editorLayer->isOneSelected) {
@@ -392,7 +443,7 @@ namespace Editor::Panels {
 				glm::vec3 cam_to_entity = cam.transform->world_position + (glm::normalize(ent.transform->world_position - cam.transform->world_position) * 15.0f);
 				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
 				
-				glm::quat entityRot = ent.transform->local_rotation;
+				glm::quat entityRot = ent.transform->world_rotation;
 
 				for (auto part : gizmos[editType].get()->gizmo_parts) {
 					if (part->transform) {
@@ -400,7 +451,7 @@ namespace Editor::Panels {
 						if (!part_mr) continue;
 						part->transform->UpdateMatrix();
 
-						glm::quat gizmoRot = part->transform->local_rotation;
+						glm::quat gizmoRot = part->transform->world_rotation;
 						glm::quat rotationQuat = entityRot * gizmoRot;
 						glm::mat4 rotationMatrix = glm::mat4(1.0f);
 
@@ -413,6 +464,14 @@ namespace Editor::Panels {
 						glm::mat4 model = translationMatrix * rotationMatrix * scaleMatrix;
 
 						renderer->RenderMesh(part_mr->mesh.get(), part_mr->material.get(), model, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
+
+						//part->transform->GetComponent<Luxia::Components::RigidBody>().body->SetPo
+						if (auto rb = part->transform->TryGetComponent<Luxia::Components::RigidBody>()) {
+							if (!body_interface.IsAdded(rb->body->GetID()))
+								body_interface.AddBody(rb->body->GetID(), JPH::EActivation::Activate);
+							body_interface.SetRotation(rb->body->GetID(), Luxia::Physics::ToJolt(rotationQuat), JPH::EActivation::Activate);
+							body_interface.SetPosition(rb->body->GetID(), Luxia::Physics::ToJolt(cam_to_entity), JPH::EActivation::Activate);
+						}
 					}
 				}
 			}
@@ -424,4 +483,13 @@ namespace Editor::Panels {
 		cam_tex->Unbind();
 	}
 
+
+
+	bool SceneViewport::GizmoRaycasts(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, glm::vec3 ray_dir) {
+		editorLayer->physicsWorld->RayCast(cam_ent->transform->world_position, ray_dir, cam_ent->GetComponent<Luxia::Components::Camera>().farPlane, &last_ray_hit);
+		if (last_ray_hit.hit) {
+			return true;
+		}
+		return false;
+	}
 }
