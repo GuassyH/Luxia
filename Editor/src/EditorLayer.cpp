@@ -110,12 +110,13 @@ namespace Editor::Layers {
 			panel->Unload(this, scene_manager->GetActiveScene());
 		}
 
+
 		PlayTex->Unload();
 		PauseTex->Unload();
 		NoImageTex->Unload();
 		RunningTex->Unload();
 
-		Luxia::Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); // Unneccessary
+		Luxia::Physics::PhysicsSystem::DeleteWorld(physicsWorld.get());
 
 		physicsWorld.release();
 		physicsWorld.reset();

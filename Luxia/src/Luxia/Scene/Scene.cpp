@@ -105,7 +105,7 @@ namespace Luxia {
 		reg.clear();
 		toDelete.clear();
 
-		Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); // Unneccessary
+		Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); 
 		
 		physicsWorld.release();
 		physicsWorld.reset();

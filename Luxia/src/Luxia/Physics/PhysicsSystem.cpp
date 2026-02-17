@@ -80,10 +80,20 @@ namespace Luxia::Physics {
 	void PhysicsSystem::DeleteWorld(PhysicsWorld* world) {
 		if (!world) return;
 
-		JPH::BodyIDVector bodies;
-		world->jphSystem.GetBodies(bodies);
-		world->jphSystem.GetBodyInterface().RemoveBodies(bodies.data(), bodies.size());
-		world->jphSystem.GetBodyInterface().DestroyBodies(bodies.data(), bodies.size());
+		if (world->jphSystem.GetNumBodies() > 0) {
+			JPH::BodyIDVector bodies;
+			world->jphSystem.GetBodies(bodies);
+
+			auto& body_interface = world->jphSystem.GetBodyInterface();
+
+			for (auto& bodyID : bodies) {
+				if (body_interface.IsAdded(bodyID))
+					body_interface.RemoveBody(bodyID);
+				
+				world->jphSystem.GetBodyInterface().DestroyBody(bodyID);
+			}
+
+		}
 		// ??
 	}
 }
