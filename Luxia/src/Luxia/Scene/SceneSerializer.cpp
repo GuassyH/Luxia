@@ -31,8 +31,7 @@ namespace Luxia {
 
 			out << YAML::EndMap;
 
-			auto cam = entity.transform->TryGetComponent<Luxia::Components::Camera>();
-			if (cam) {
+			if (auto cam = entity.transform->TryGetComponent<Luxia::Components::Camera>()) {
 				out << YAML::Key << "Camera";
 				out << YAML::BeginMap; // Camera
 
@@ -49,8 +48,7 @@ namespace Luxia {
 				out << YAML::EndMap;
 			}
 
-			auto meshrend = entity.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-			if (meshrend) {
+			if (auto meshrend = entity.transform->TryGetComponent<Luxia::Components::MeshRenderer>()) {
 				out << YAML::Key << "MeshRenderer";
 				out << YAML::BeginMap; // MeshRenderer
 
@@ -61,8 +59,7 @@ namespace Luxia {
 				out << YAML::EndMap;
 			}
 
-			auto light = entity.transform->TryGetComponent<Luxia::Components::Light>();
-			if (light) {
+			if (auto light = entity.transform->TryGetComponent<Luxia::Components::Light>()) {
 				out << YAML::Key << "Light";
 				out << YAML::BeginMap; // Light
 
@@ -73,8 +70,7 @@ namespace Luxia {
 				out << YAML::EndMap;
 			}
 
-			auto rb = entity.transform->TryGetComponent<Luxia::Components::RigidBody>();
-			if (rb) {
+			if (auto rb = entity.transform->TryGetComponent<Luxia::Components::RigidBody>()) {
 				out << YAML::Key << "RigidBody";
 				out << YAML::BeginMap; // Camera
 
@@ -89,8 +85,7 @@ namespace Luxia {
 				out << YAML::EndMap;
 			}
 
-			auto col = entity.transform->TryGetComponent<Luxia::Components::Collider>();
-			if (col) {
+			if (auto col = entity.transform->TryGetComponent<Luxia::Components::Collider>()) {
 				out << YAML::Key << "Collider";
 				out << YAML::BeginMap; // Collider
 				

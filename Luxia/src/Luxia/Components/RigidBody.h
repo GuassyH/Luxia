@@ -23,8 +23,6 @@ namespace Luxia::Components {
 		JPH::EMotionQuality motionQuality = JPH::EMotionQuality::Discrete;
 
 		void InitBody(JPH::BodyInterface& body_interface) {
-			
-
 			JPH::BodyCreationSettings settings;
 			
 			JPH::MassProperties mass_props;

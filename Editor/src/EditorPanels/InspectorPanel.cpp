@@ -7,12 +7,14 @@ namespace Editor::Panels {
 	}
 
 
+	
 	static char namebuff[255] = {};
 	static char meshbuff[255] = {};
 	static char matbuff[255] = {};
 	void InspectorPanel::RenderEntity(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene, Luxia::GUID e_guid) {
-		ImGui::BeginChild("Entity");
+		std::string componentToRemove = "none";
 
+		ImGui::BeginChild("Entity");
 		Luxia::Entity& ent = scene->runtime_entities.find(e_guid)->second;
 
 		// Name
@@ -45,39 +47,41 @@ namespace Editor::Panels {
 		bool drawnCollider = false;
 		for (auto& comp : Luxia::componentRegistry) {
 			if (comp.hasFunc(ent.transform)) {
-				if (comp.name == "Mesh Renderer") {
-					// Needs to be here to use asset_manager
-					auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-					if (ImGui::CollapsingHeader("Mesh Renderer", ImGuiTreeNodeFlags_DefaultOpen)) {
-						meshrend->OnInspectorDraw();
-
-						// MESH
-						DrawDropField<Luxia::Mesh>(editorLayer, meshrend->mesh, "Mesh");
-
-						// MATERIAL
-						DrawDropField<Luxia::IMaterial>(editorLayer, meshrend->material, "Material");
-
-					}
+				// Incase its a collider, we only want to draw one of them, since they share the same component
+				if (comp.name == "Box Collider" || comp.name == "Sphere Collider") {
+					if (drawnCollider)
+						goto SkipDraw;
+					else 
+						drawnCollider = true;
 				}
-				// Check if the name is a collider, and if we havent drawn a collider yet draw it
-				else if (comp.name == "Box Collider" || comp.name == "Sphere Collider") {
-					if (!drawnCollider) {
-						auto collider = ent.transform->TryGetComponent<Luxia::Components::Collider>();
-						if (ImGui::CollapsingHeader(comp.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
-							collider->OnInspectorDraw();
-						}
-						drawnCollider = true; 
+
+				if (ImGui::CollapsingHeader(comp.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+					// For removing
+					if (ImGui::BeginPopupContextItem((std::string("CompContext_") + comp.name).c_str())) {
+						if (ImGui::MenuItem("Remove"))
+							componentToRemove = comp.name;
+						ImGui::EndPopup();
 					}
-				}
-				// Draw Regular
-				else if (ImGui::CollapsingHeader(comp.name.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+
+
 					comp.getFunc(ent.transform)->OnInspectorDraw();
-				}
+				
+					// Special Cases for components that need to use editor layer or other external functionality
+					if (comp.name == "Mesh Renderer") {
+						auto meshrend = ent.transform->TryGetComponent<Luxia::Components::MeshRenderer>();
+						DrawDropField<Luxia::Mesh>(editorLayer, meshrend->mesh, "Mesh");
+						DrawDropField<Luxia::IMaterial>(editorLayer, meshrend->material, "Material");
+					}
+					
+					// In case we skip
+				SkipDraw:
+					continue;
 
+				}
 			}
 		}
 
-		// TEMP ADD COMPONENT
+		// Add Component Popup
 		float avail = ImGui::GetContentRegionAvail().x;
 		float buttonWidth = 120.0f; // make it big enough
 		ImGui::SetCursorPosX((avail - buttonWidth) / 2.0f);
@@ -85,7 +89,6 @@ namespace Editor::Panels {
 			ImGui::OpenPopup("Add Component");
 		}
 
-		// should be menu
 		ImVec2 windowSize = ImGui::GetWindowSize();
 		ImVec2 contentSize = ImGui::CalcTextSize("Add Component");
 		float popupWidth = 200.0f;
@@ -109,6 +112,26 @@ namespace Editor::Panels {
 			}
 			ImGui::EndPopup();
 		}
+
+		// Remove Component functionality
+		if (componentToRemove != "none") {
+			if (componentToRemove == "Transform") { LX_ERROR("Cannot Remove Transform Component - Functionality not implemented yet"); }
+			else {
+				if (componentToRemove == "Box Collider" || componentToRemove == "Sphere Collider") {
+					ent.transform->RemoveComponent<Luxia::Components::Collider>();
+				}
+				else {
+					for (auto& comp : Luxia::componentRegistry) {
+						if (comp.name == componentToRemove) {
+							comp.removeFunc(ent.transform);
+							break;
+						}
+					}
+				}
+			}
+			componentToRemove = "none";
+		}
+
 
 		ImGui::EndChild();
 	}
@@ -291,6 +314,8 @@ namespace Editor::Panels {
 		default:
 			break;
 		}
+
+
 
 		ImGui::End();
 	}
