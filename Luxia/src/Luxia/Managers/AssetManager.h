@@ -10,6 +10,7 @@
 #include "Luxia/Asset/ModelFile.h"
 #include "Luxia/Asset/SceneFile.h"
 #include "Luxia/Asset/MetaFile.h"
+#include "Luxia/Asset/ScriptFile.h"
 
 
 #include "Luxia/Platform/PlatformDefinitions.h"
@@ -270,9 +271,11 @@ namespace Luxia {
 				case AssetType::Texture:
 					return std::make_shared<Assets::TextureFile>(std::forward<Args>(args)...);
 				case AssetType::Scene:
-					return std::make_shared<Assets::SceneFile>(std::forward<Args>(args)...);;
+					return std::make_shared<Assets::SceneFile>(std::forward<Args>(args)...);
 				case AssetType::Shader:
-					return std::make_shared<Assets::ShaderFile>(std::forward<Args>(args)...);;
+					return std::make_shared<Assets::ShaderFile>(std::forward<Args>(args)...);
+				case AssetType::Script:
+					return std::make_shared<Assets::ScriptFile>(std::forward<Args>(args)...);
 				default:
 					return nullptr;
 			}

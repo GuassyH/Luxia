@@ -169,11 +169,13 @@
     <ClInclude Include="src\Luxia\Asset\MetaFile.h" />
     <ClInclude Include="src\Luxia\Asset\ModelFile.h" />
     <ClInclude Include="src\Luxia\Asset\SceneFile.h" />
+    <ClInclude Include="src\Luxia\Asset\ScriptFile.h" />
     <ClInclude Include="src\Luxia\Asset\ShaderFile.h" />
     <ClInclude Include="src\Luxia\Asset\TextureFile.h" />
     <ClInclude Include="src\Luxia\Components\Camera.h" />
     <ClInclude Include="src\Luxia\Components\Colliders\BoxCollider.h" />
     <ClInclude Include="src\Luxia\Components\Colliders\Collider.h" />
+    <ClInclude Include="src\Luxia\Components\Colliders\SphereCollider.h" />
     <ClInclude Include="src\Luxia\Components\Component.h" />
     <ClInclude Include="src\Luxia\Components\ComponentRegistry.h" />
     <ClInclude Include="src\Luxia\Components\Light.h" />

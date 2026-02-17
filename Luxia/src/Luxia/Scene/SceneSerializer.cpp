@@ -232,6 +232,14 @@ namespace Luxia {
 				bc.halfExtent = Luxia::Physics::ToJolt(bcNode["HalfExtent"].as<glm::vec3>());
 				bc.offset = bcNode["Offset"].as<glm::vec3>();
 			}
+
+			// SphereCollider
+			if (auto bcNode = components["SphereCollider"]) {
+				auto& bc = entity.transform->AddComponent<Luxia::Components::BoxCollider>();
+				bc.enabled = bcNode["Enabled"].as<bool>();
+				bc.halfExtent = Luxia::Physics::ToJolt(bcNode["HalfExtent"].as<glm::vec3>());
+				bc.offset = bcNode["Offset"].as<glm::vec3>();
+			}
 		}
 
 

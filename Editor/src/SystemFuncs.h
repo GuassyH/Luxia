@@ -39,4 +39,49 @@ namespace Editor::SystemFuncs {
 		return result;
 	}
 	
+	inline std::string OpenFileDialogue() {
+		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+		if (FAILED(hr)) return {};
+
+		IFileOpenDialog* pFileOpen = nullptr;
+		hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pFileOpen));
+
+		std::wstring filePath;
+
+		if (SUCCEEDED(hr))
+		{
+			hr = pFileOpen->Show(nullptr);
+
+			if (SUCCEEDED(hr))
+			{
+				IShellItem* pItem = nullptr;
+				hr = pFileOpen->GetResult(&pItem);
+
+				if (SUCCEEDED(hr))
+				{
+					PWSTR pszFilePath = nullptr;
+					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
+
+					if (SUCCEEDED(hr))
+					{
+						filePath = pszFilePath;
+						CoTaskMemFree(pszFilePath);
+					}
+					pItem->Release();
+				}
+			}
+			pFileOpen->Release();
+		}
+
+		CoUninitialize();
+
+		if (filePath.empty()) return {};
+
+		int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), static_cast<int>(filePath.size()), nullptr, 0, nullptr, nullptr);
+		std::string result(sizeNeeded, 0);
+		WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), static_cast<int>(filePath.size()), result.data(), sizeNeeded, nullptr, nullptr);
+
+		return result;
+	}
+
 }

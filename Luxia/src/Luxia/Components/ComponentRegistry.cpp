@@ -10,7 +10,8 @@ namespace Luxia {
         LX_CREATE_COMPONENT_INFO(Components::MeshRenderer, "Mesh Renderer"),
         LX_CREATE_COMPONENT_INFO(Components::Light, "Light"),
         LX_CREATE_COMPONENT_INFO(Components::RigidBody, "RigidBody"),
-		LX_CREATE_COMPONENT_INFO(Components::BoxCollider, "Box Collider"),
+        LX_CREATE_COMPONENT_INFO(Components::BoxCollider, "Box Collider"),
+        LX_CREATE_COMPONENT_INFO(Components::SphereCollider, "Sphere Collider"),
         // Add more here
     };
 }

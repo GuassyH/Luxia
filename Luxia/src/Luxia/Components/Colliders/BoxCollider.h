@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "Luxia/Physics/PhysicsWorld.h"
 
+#include "Jolt/Physics/Collision/Shape/BoxShape.h"
+
 
 namespace Luxia::Components {
 	struct LUXIA_API BoxCollider : public Collider {
@@ -17,8 +19,9 @@ namespace Luxia::Components {
 
 		virtual void OnInspectorDraw() override {
 			glm::vec3 ghalfExtent = Luxia::Physics::ToGLM(this->halfExtent);
-			if (ImGui::DragFloat3("Half Extent", &ghalfExtent.x, 0.1f, 0.0f)) {
+			if (ImGui::DragFloat3("Half Extent", &ghalfExtent.x, 0.1f, 0.0001f)) {
 				this->halfExtent = Luxia::Physics::ToJolt(ghalfExtent);
+				boxShape.GetPtr()->Release();
 				boxShape = new JPH::BoxShape(halfExtent);
 			}
 			ImGui::DragFloat3("Offset", &offset.x, 0.1f, 0.0f);

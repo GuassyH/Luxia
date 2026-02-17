@@ -8,10 +8,14 @@ IMPORTANT
 
 - First half extent valid, when stopping starting again its reset to 0.5
 
+- Collider class holds the collider type and the ShapeRefC. When creating collider it will take the type into account
+	That way you can call "HasComponent<Collider>()" and it will return true if it has any collider, not just a specific one. Also when adding a collider component it will check if there is already a collider component and if there is it will replace it instead of adding a new one. That way you can change the collider type without having to remove the old one first
+
 THIS
 - Maybe adding component should push an event? Could slow the engine down a LOT however could be good for for example when a mesh is added or a light
 
-- Thumbnail for sphere is... weird
+- When renaming folder, send folder new name to assetmanager map, when saving assetmanager or reimporting
+	then check if the metafile or assetfile path is in the assetmanager path map and replace it with new path
 
 --- Issues ---
 

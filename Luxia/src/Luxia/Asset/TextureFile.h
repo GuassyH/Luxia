@@ -1,3 +1,4 @@
+
 #pragma once
 #include "Luxia/Asset/AssetFile.h"
 #include "Luxia/Platform/PlatformDefinitions.h"
@@ -50,7 +51,7 @@ namespace Luxia::Assets {
 				texture->assetFileGUID = guid;
 
 				auto propConfig = config["Properties"];
-				
+
 				// Set num colch etc
 
 				loaded = true;

@@ -290,6 +290,8 @@
       <Filter>Luxia\Tools</Filter>
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
+    <ClInclude Include="src\Luxia\Asset\ScriptFile.h" />
+    <ClInclude Include="src\Luxia\Components\Colliders\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">

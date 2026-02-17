@@ -2,11 +2,12 @@
 
 #include "Component.h"
 #include "Colliders/BoxCollider.h"
+#include "Colliders/SphereCollider.h"
 
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/Body.h>
 #include <Jolt/Physics/Body/BodyCreationSettings.h>
-#include <Jolt/Physics/Collision/Shape/BoxShape.h>
+#include <Jolt/Physics/Collision/Shape/SphereShape.h>
 
 
 namespace Luxia::Components {
@@ -31,17 +32,24 @@ namespace Luxia::Components {
 			mass_props.mMass = mass;
 			mass_props.mInertia = JPH::Mat44::sScale(JPH::Vec3(1.0f, 1.0f, 1.0f)); // Simple inertia, can be improved
 
+			JPH::ShapeRefC shape = nullptr;
+			settings.mObjectLayer = Physics::Layers::MOVING;
+
 			// Check for collider
 			if(transform->HasComponent<Components::BoxCollider>()) {
 				auto& bcollider = transform->GetComponent<Components::BoxCollider>();
-				JPH::ShapeRefC shape = bcollider.InitCollider();
-				settings.SetShape(shape);
-				settings.mObjectLayer = Physics::Layers::MOVING;
+				shape = bcollider.InitCollider();
+			}
+			else if (transform->HasComponent<Components::SphereCollider>()) {
+				auto& scollider = transform->GetComponent<Components::SphereCollider>();
+				shape = scollider.InitCollider();
 			}
 			else {
-				settings.SetShape(new JPH::BoxShape(JPH::Vec3(0.5f, 0.5f, 0.5f)));
+				shape = new JPH::SphereShape(0.01f);
 				settings.mObjectLayer = Physics::Layers::NON_COLLIDING;
 			}
+
+			settings.SetShape(shape);
 
 			// Set body settings
 			settings.mMotionType = motionType;
