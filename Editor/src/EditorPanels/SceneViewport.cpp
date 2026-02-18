@@ -12,16 +12,16 @@ namespace Editor::Panels {
 	static Luxia::Physics::RayCastHit last_ray_hit = Luxia::Physics::RayCastHit();
 
 
-	static std::shared_ptr<Gizmos::GridGizmo> grid_gizmo = nullptr;
-
 	void SceneViewport::RenderTopBar(Editor::Layers::EditorLayer* editorLayer) {
 		if (ImGui::BeginMenuBar()) {
+			/*
 			if (ImGui::BeginMenu("Gizmos")) {
 				if (ImGui::MenuItem("Grid", nullptr, grid_gizmo->gizmo_parts[0]->transform->enabled)) {
 					grid_gizmo->gizmo_parts[0]->transform->enabled = !grid_gizmo->gizmo_parts[0]->transform->enabled;
 				}
 				ImGui::EndMenu();
 			}
+			*/
 
 			if (ImGui::BeginMenu("Camera")) {
 				ImGui::Checkbox("Use Skybox", &cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox);
@@ -293,12 +293,11 @@ namespace Editor::Panels {
 	
 	/// GIZMOS
 	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
-		Gizmos::GizmoResources::Init();
-		gizmos.push_back(std::make_unique<Gizmos::TranslateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
-		gizmos.push_back(std::make_unique<Gizmos::RotateGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
-		gizmos.push_back(std::make_unique<Gizmos::ScaleGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos")));
-		grid_gizmo = std::make_shared<Gizmos::GridGizmo>(editorLayer->editor_reg, std::filesystem::path("C:/dev/Luxia/Editor/resources/gizmos"));
-		grid_gizmo->gizmo_parts[0]->transform->enabled = false;
+		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
+
+		
+		gizmos.push_back(Gizmos::ArrowCollection(&editorLayer->editor_reg));
+
 
 		// Add all gizmos (and other physics stuff) to physics world for raycasting
 		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
@@ -328,21 +327,7 @@ namespace Editor::Panels {
 
 
 		/// With Depth
-		// Grid
-		if(grid_gizmo->gizmo_parts[0]->transform->enabled)
-		{
-			auto& mr = grid_gizmo->gizmo_parts[0]->transform->GetComponent<Luxia::Components::MeshRenderer>();
-			mr.transform->local_position = cam.transform->local_position;
-			mr.transform->local_position.y = 0.0f;
-			mr.transform->UpdateMatrix();
-			mr.material->Use();
-			mr.material->shader->SetMat4("modelMat", mr.transform->GetMatrix());
-			mr.material->shader->SetMat4("viewMat", cam.GetCamera()->GetViewMat());
-			mr.material->shader->SetMat4("projMat", cam.GetCamera()->GetProjMat());
-			mr.material->shader->SetVec3("camPos", cam.transform->local_position);
-			renderer->RenderMeshPure(*mr.mesh.get());
-		}
-
+	
 		// OUTLINE
 		if (!editorLayer->areNoneSelected) {
 			bool is_one_ent = false;
@@ -406,75 +391,42 @@ namespace Editor::Panels {
 		/// Without Depth
 		glClear(GL_DEPTH_BUFFER_BIT);
 		
+		//
+		if (editorLayer->isOneSelected) {
+			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
+				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
+				glm::vec3 cam_to_entity = cam.transform->world_position + (glm::normalize(ent.transform->world_position - cam.transform->world_position) * 15.0f);
 
-		// Remove all gizmos (and other physics stuff) from physics world for raycasting (so they dont interfere with actual entities)
-		for (auto& gizmo : gizmos) {
-			for (auto part : gizmo->gizmo_parts) {
-				if (auto mr = part->transform->TryGetComponent<Luxia::Components::MeshRenderer>()) {
-					mr->material = part->material;
-				}
-
-				if (auto rb = part->transform->TryGetComponent<Luxia::Components::RigidBody>()) {
-					// body_interface.SetObjectLayer(rb->body->GetID(), Luxia::Physics::Layers::NON_COLLIDING);
-					if (editorLayer->physicsWorld->jphSystem.GetBodyInterface().IsAdded(rb->body->GetID()))
-						editorLayer->physicsWorld->jphSystem.GetBodyInterface().RemoveBody(rb->body->GetID());
+				for (auto& gizmo : gizmos) {
+					for (auto gizmo_behaviour : gizmo.behaviours) {
+						if (gizmo_behaviour->gizmo_part) {
+							gizmo_behaviour->transform->local_position = cam_to_entity;
+							gizmo_behaviour->transform->local_rotation = ent.transform->world_rotation;
+							gizmo_behaviour->gizmo_part->OnUpdate(editorLayer);
+						}
+					}
 				}
 			}
 		}
+							// gizmo_behaviour->gizmo_part->OnRender(editorLayer->GetRenderer().get(), &cam);
 
-		// If the last hit was true
 		if (last_ray_hit.hit) {
 			auto rb_view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
 			for (auto entity : rb_view) {
 				auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
 				if (rb.body->GetID() == last_ray_hit.bodyID) {
-					if (auto mr = rb.transform->TryGetComponent<Luxia::Components::MeshRenderer>()) {
-						mr->material = Gizmos::GizmoResources::hoverMaterial;
+					if (auto gb = rb.transform->TryGetComponent<Gizmos::GizmoBehaviour>()) {
+						gb->gizmo_part->OnHover();
 					}
 				}
 			}
 		}
 
-		// Draw translation gizmos
-		if (editorLayer->isOneSelected) {
-			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
-				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
-
-				glm::vec3 cam_to_entity = cam.transform->world_position + (glm::normalize(ent.transform->world_position - cam.transform->world_position) * 15.0f);
-				glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), cam_to_entity);
-				
-				glm::quat entityRot = ent.transform->world_rotation;
-
-				for (auto part : gizmos[editType].get()->gizmo_parts) {
-					if (part->transform) {
-						auto part_mr = part->transform->TryGetComponent<Luxia::Components::MeshRenderer>();
-						if (!part_mr) continue;
-						part->transform->UpdateMatrix();
-
-						glm::quat gizmoRot = part->transform->world_rotation;
-						glm::quat rotationQuat = entityRot * gizmoRot;
-						glm::mat4 rotationMatrix = glm::mat4(1.0f);
-
-						if (ent.transform->HasParent())
-							rotationMatrix *= glm::mat4(ent.transform->parent->GetRotationMatrix());
-
-						rotationMatrix *= glm::mat4_cast(rotationQuat);
-
-						glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), part->transform->local_scale);
-						glm::mat4 model = translationMatrix * rotationMatrix * scaleMatrix;
-
-						renderer->RenderMesh(part_mr->mesh.get(), part_mr->material.get(), model, cam.GetCamera()->GetViewMat(), cam.GetCamera()->GetProjMat());
-
-						//part->transform->GetComponent<Luxia::Components::RigidBody>().body->SetPo
-						if (auto rb = part->transform->TryGetComponent<Luxia::Components::RigidBody>()) {
-							if (!body_interface.IsAdded(rb->body->GetID()))
-								body_interface.AddBody(rb->body->GetID(), JPH::EActivation::Activate);
-							body_interface.SetRotation(rb->body->GetID(), Luxia::Physics::ToJolt(rotationQuat), JPH::EActivation::Activate);
-							body_interface.SetPosition(rb->body->GetID(), Luxia::Physics::ToJolt(cam_to_entity), JPH::EActivation::Activate);
-						}
-					}
-				}
-			}
+		auto gb_view = editorLayer->editor_reg.view<Gizmos::GizmoBehaviour>();
+		for (auto entity : gb_view) {
+			auto& gb = editorLayer->editor_reg.get<Gizmos::GizmoBehaviour>(entity);
+			gb.gizmo_part->OnRender(editorLayer->GetRenderer().get(), &cam);
+			gb.gizmo_part->OnUnhover(); // If hovered check?
 		}
 
 		// Unbind

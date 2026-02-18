@@ -171,7 +171,6 @@ namespace Luxia::Components {
 
 
 		entt::registry* reg = nullptr;
-		Luxia::EventHandler* eventHandler = nullptr;
 
 		// Inline header?
 #pragma region GetAdd

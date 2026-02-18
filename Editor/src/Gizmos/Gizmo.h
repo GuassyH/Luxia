@@ -7,10 +7,20 @@
 #include "Luxia/Components/ComponentRegistry.h"
 #include "Luxia/Managers/ResourceManager.h"
 
+#include "Luxia/Components/Component.h"
+#include "Luxia/Components/Camera.h"
+#include "Luxia/Components/MeshRenderer.h"
+#include "Luxia/Rendering/API/IRenderer.h"
+
+#include "EditorLayer.h"
+
+/// <summary>
+/// An entity will hold a GizmoBehaviour, which is given an abstracted unique pointer to a GizmoPart
+/// For example for translate there will be three entities, one will have x arrow, one y arrow, and one z arrow
+/// 
+/// </summary>
 
 namespace Editor::Gizmos {
-
-	/// Resources
 
 	class GizmoResources {
 	public:
@@ -20,82 +30,94 @@ namespace Editor::Gizmos {
 		static std::shared_ptr<Luxia::IMaterial> orgioMaterial;
 		static std::shared_ptr<Luxia::IMaterial> hoverMaterial;
 
-		static void Init();
+		static std::shared_ptr<Luxia::Mesh> arrowMesh;
+
+		static void Init(std::filesystem::path path_to_gizmos);
 	};
 
-	/// Gizmo parts
-
-	class GizmoPart  {
-	public:
+	// The Gizmo Part
+	class GizmoPart {
+	public:  
 		Luxia::Components::Transform* transform = nullptr;
 
-		std::shared_ptr<Luxia::IMaterial> material = nullptr;
-
-		GizmoPart() = default;
 		virtual ~GizmoPart() = default;
+		virtual void OnInit() = 0;
 
-		virtual bool OnClick() = 0;
-		virtual glm::vec3 OnDrag() = 0;
+		virtual void OnUpdate(Editor::Layers::EditorLayer* editorLayer) = 0;
+		virtual void OnRender(Luxia::Rendering::IRenderer* renderer, Luxia::Components::Camera* camera) = 0;
+		
+		virtual void OnHover() = 0;
+		virtual void OnUnhover() = 0;
+
+		virtual void OnClick() = 0;
+		virtual void OnDrag() = 0;
 	};
 
-
-	class BasicGizmoPart : public GizmoPart {
+	// Arrow Part (moves the
+	class ArrowPart : public GizmoPart {
 	public:
-		// does nothing
-		virtual bool OnClick() override {
-			return false;
+		std::shared_ptr<Luxia::IMaterial> normalMat = nullptr;
+		std::shared_ptr<Luxia::IMaterial> hoverMat = nullptr;
+
+		glm::vec3 rot = glm::vec3(0.0f);
+		glm::vec3 responsible_axis = glm::vec3(0.0f);
+
+		Luxia::Components::MeshRenderer* mesh_renderer = nullptr;
+
+		virtual void OnInit() override {
+			hoverMat = GizmoResources::hoverMaterial;
+
+			mesh_renderer = &transform->AddComponent<Luxia::Components::MeshRenderer>(GizmoResources::arrowMesh, normalMat);
 		}
-		// does nothing
-		virtual glm::vec3 OnDrag() override {
-			return glm::vec3(0.0f);
+		
+		virtual void OnUpdate(Editor::Layers::EditorLayer* editorLayer) {
+			transform->AddEulerAngles(rot, true);
+			transform->UpdateMatrix();
+			editorLayer->physicsWorld->jphSystem.GetBodyInterface().SetPositionAndRotation(
+				transform->GetComponent<Luxia::Components::RigidBody>().body->GetID(),
+				Luxia::Physics::ToJolt(transform->world_position),
+				Luxia::Physics::ToJolt(transform->world_rotation),
+				JPH::EActivation::Activate);
+		}
+
+		virtual void OnRender(Luxia::Rendering::IRenderer* renderer, Luxia::Components::Camera* camera) override {
+			if (!mesh_renderer) return;
+			renderer->RenderMesh(mesh_renderer->mesh.get(), mesh_renderer->material.get(), transform->GetMatrix(), camera->GetCamera()->GetViewMat(), camera->GetCamera()->GetProjMat());
+		}
+
+		virtual void OnUnhover() override {
+			mesh_renderer->material = normalMat;
+		}
+		virtual void OnHover() override {
+			mesh_renderer->material = hoverMat;
+		}
+		
+		virtual void OnClick() override {
+
+		}
+		virtual void OnDrag() override {
+
 		}
 	};
 
-	class ArrowGizmoPart : public GizmoPart {
+	// The Component
+	class GizmoBehaviour : public Luxia::Components::Component {
 	public:
-		// which axis the arrow is responsible for
-		glm::vec3 responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
-
-		virtual bool OnClick() override;
-		virtual glm::vec3 OnDrag() override;
+		std::shared_ptr<GizmoPart> gizmo_part = nullptr;
+		GizmoBehaviour() = default;
 	};
 
-	class ScaleGizmoPart : public GizmoPart {
-	public:
-		// which axis the arrow is responsible for
-		glm::vec3 responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
-
-		virtual bool OnClick() override;
-		virtual glm::vec3 OnDrag() override;
+	// The Collection
+	struct GizmoCollection {
+		std::vector<GizmoBehaviour*> behaviours;
 	};
 
-	class RotateGizmoPart : public GizmoPart {
-	public:
-		// which axis the arrow is responsible for
-		glm::vec3 responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 
-		virtual bool OnClick() override;
-		virtual glm::vec3 OnDrag() override;
-	};
+	GizmoCollection ArrowCollection(entt::registry* reg);
+};
 
-	/// Gizmos
-
-	class Gizmo {
-	public:
-		Gizmo() = default;
-		virtual ~Gizmo() = default;
-
-		std::vector<std::shared_ptr<GizmoPart>> gizmo_parts;
-	};
-
-	static Luxia::Components::Transform* Create(entt::registry& reg) {
-		entt::entity entity = reg.create();
-		auto& transform = reg.emplace<Luxia::Components::Transform>(entity);
-		transform.ent_id = entity;
-		transform.reg = &reg;
-
-		return &transform;
-	}
+/*
+namespace Editor::Gizmos {
 
 	class GridGizmo : public Gizmo {
 	public:
@@ -287,3 +309,5 @@ namespace Editor::Gizmos {
 		}
 	};
 }
+
+*/
