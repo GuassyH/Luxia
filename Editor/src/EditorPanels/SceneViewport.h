@@ -16,7 +16,7 @@ namespace Editor::Panels {
 		void RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex);
 		bool GizmoRaycasts(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, glm::vec3 ray_dir);
 
-		std::vector<Gizmos::GizmoCollection> gizmos;
+		std::vector<Gizmos::GizmoCollection> transform_gizmos;
 
 		WeakPtrProxy<Luxia::ITexture> output_texture;
 		Luxia::Components::Transform* cam_ent = nullptr;

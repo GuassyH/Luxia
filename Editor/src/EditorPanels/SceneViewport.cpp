@@ -296,7 +296,7 @@ namespace Editor::Panels {
 		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
 
 		
-		gizmos.push_back(Gizmos::ArrowCollection(&editorLayer->editor_reg));
+		transform_gizmos.push_back(Gizmos::ArrowCollection(&editorLayer->editor_reg));
 
 
 		// Add all gizmos (and other physics stuff) to physics world for raycasting
@@ -391,42 +391,39 @@ namespace Editor::Panels {
 		/// Without Depth
 		glClear(GL_DEPTH_BUFFER_BIT);
 		
-		//
-		if (editorLayer->isOneSelected) {
-			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) {
-				auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
-				glm::vec3 cam_to_entity = cam.transform->world_position + (glm::normalize(ent.transform->world_position - cam.transform->world_position) * 15.0f);
+		// Update Gizmos
+		auto gb_view = editorLayer->editor_reg.view<Gizmos::GizmoBehaviour>();
+		for (auto entity : gb_view) {
+			auto& gb = editorLayer->editor_reg.get<Gizmos::GizmoBehaviour>(entity);
+			if (gb.gizmo_part && gb.transform->enabled) {
+				if (gb.gizmo_part->ShouldUpdate(editorLayer, &cam, scene)) {
+					gb.gizmo_part->OnUpdate(editorLayer, &cam, scene);
+				}
+			}
+		}
 
-				for (auto& gizmo : gizmos) {
-					for (auto gizmo_behaviour : gizmo.behaviours) {
-						if (gizmo_behaviour->gizmo_part) {
-							gizmo_behaviour->transform->local_position = cam_to_entity;
-							gizmo_behaviour->transform->local_rotation = ent.transform->world_rotation;
-							gizmo_behaviour->gizmo_part->OnUpdate(editorLayer);
+		// If there was a hit last frame
+		if (last_ray_hit.hit) {
+			for (auto entity : gb_view) {
+				if (auto rb = editorLayer->editor_reg.try_get<Luxia::Components::RigidBody>(entity)) {
+					if (rb->body->GetID() == last_ray_hit.bodyID) {
+						if (auto gb = rb->transform->TryGetComponent<Gizmos::GizmoBehaviour>()) {
+							gb->gizmo_part->OnHover();
 						}
 					}
 				}
 			}
 		}
-							// gizmo_behaviour->gizmo_part->OnRender(editorLayer->GetRenderer().get(), &cam);
 
-		if (last_ray_hit.hit) {
-			auto rb_view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
-			for (auto entity : rb_view) {
-				auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
-				if (rb.body->GetID() == last_ray_hit.bodyID) {
-					if (auto gb = rb.transform->TryGetComponent<Gizmos::GizmoBehaviour>()) {
-						gb->gizmo_part->OnHover();
-					}
-				}
-			}
-		}
-
-		auto gb_view = editorLayer->editor_reg.view<Gizmos::GizmoBehaviour>();
+		// Render Gizmos
 		for (auto entity : gb_view) {
 			auto& gb = editorLayer->editor_reg.get<Gizmos::GizmoBehaviour>(entity);
-			gb.gizmo_part->OnRender(editorLayer->GetRenderer().get(), &cam);
-			gb.gizmo_part->OnUnhover(); // If hovered check?
+			if (gb.gizmo_part && gb.transform->enabled) {
+				if (gb.gizmo_part->ShouldRender(editorLayer, &cam, scene)) {
+					gb.gizmo_part->OnRender(editorLayer->GetRenderer().get(), editorLayer, &cam);
+					gb.gizmo_part->OnUnhover(); // If hovered check?
+				}
+			}
 		}
 
 		// Unbind

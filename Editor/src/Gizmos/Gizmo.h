@@ -43,8 +43,12 @@ namespace Editor::Gizmos {
 		virtual ~GizmoPart() = default;
 		virtual void OnInit() = 0;
 
-		virtual void OnUpdate(Editor::Layers::EditorLayer* editorLayer) = 0;
-		virtual void OnRender(Luxia::Rendering::IRenderer* renderer, Luxia::Components::Camera* camera) = 0;
+
+		virtual bool ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) = 0;
+		virtual void OnUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) = 0;
+
+		virtual bool ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) = 0;
+		virtual void OnRender(Luxia::Rendering::IRenderer* renderer, Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera) = 0;
 		
 		virtual void OnHover() = 0;
 		virtual void OnUnhover() = 0;
@@ -63,14 +67,28 @@ namespace Editor::Gizmos {
 		glm::vec3 responsible_axis = glm::vec3(0.0f);
 
 		Luxia::Components::MeshRenderer* mesh_renderer = nullptr;
+		bool is_hovered = false;
 
 		virtual void OnInit() override {
 			hoverMat = GizmoResources::hoverMaterial;
-
 			mesh_renderer = &transform->AddComponent<Luxia::Components::MeshRenderer>(GizmoResources::arrowMesh, normalMat);
 		}
-		
-		virtual void OnUpdate(Editor::Layers::EditorLayer* editorLayer) {
+
+		virtual bool ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) override {
+			if (!scene) return false;
+			if (editorLayer->isOneSelected) {
+				if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) return true;
+				else return false;
+			}
+			return false;
+		}
+		virtual void OnUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) override {
+			auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
+			glm::vec3 cam_to_entity = camera->transform->world_position + (glm::normalize(ent.transform->world_position - camera->transform->world_position) * 15.0f);
+
+			transform->local_position = cam_to_entity;
+			transform->local_rotation = ent.transform->world_rotation;
+
 			transform->AddEulerAngles(rot, true);
 			transform->UpdateMatrix();
 			editorLayer->physicsWorld->jphSystem.GetBodyInterface().SetPositionAndRotation(
@@ -79,17 +97,26 @@ namespace Editor::Gizmos {
 				Luxia::Physics::ToJolt(transform->world_rotation),
 				JPH::EActivation::Activate);
 		}
-
-		virtual void OnRender(Luxia::Rendering::IRenderer* renderer, Luxia::Components::Camera* camera) override {
+		virtual bool ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
+			if (editorLayer->isOneSelected) return true;
+			else return false;
+		}
+		virtual void OnRender(Luxia::Rendering::IRenderer* renderer, Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera) override {
 			if (!mesh_renderer) return;
 			renderer->RenderMesh(mesh_renderer->mesh.get(), mesh_renderer->material.get(), transform->GetMatrix(), camera->GetCamera()->GetViewMat(), camera->GetCamera()->GetProjMat());
 		}
 
 		virtual void OnUnhover() override {
-			mesh_renderer->material = normalMat;
+			if (is_hovered) {
+				mesh_renderer->material = normalMat;
+				is_hovered = false;
+			}
 		}
 		virtual void OnHover() override {
-			mesh_renderer->material = hoverMat;
+			if (!is_hovered) {
+				mesh_renderer->material = hoverMat;
+				is_hovered = true;
+			}
 		}
 		
 		virtual void OnClick() override {
