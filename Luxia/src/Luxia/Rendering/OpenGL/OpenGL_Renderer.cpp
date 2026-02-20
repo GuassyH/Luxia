@@ -124,4 +124,9 @@ namespace Luxia::Rendering::OpenGL {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	}
+
+	void OpenGL_Renderer::RenderLine(const glm::vec3 start, glm::vec4 stop, const glm::mat4& viewMat, const glm::mat4& projMat) {
+		LX_CORE_ERROR("OpenGL Renderer: Render Line does nothing");
+	}
+
 }

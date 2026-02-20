@@ -85,7 +85,12 @@ namespace Editor::Gizmos {
 	}
 
 
-	/// Arrow Part WRONG RN
+#pragma region Rotate
+
+
+#pragma endregion 
+
+#pragma region Arrow
 
 	void ArrowPart::OnInit() {
 		hoverMat = GizmoResources::hoverMaterial;
@@ -108,13 +113,6 @@ namespace Editor::Gizmos {
 			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
 			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
 
-			if (scene) {
-				if (editorLayer->isOneSelected) {
-					auto& ent = scene->runtime_entities.at(*editorLayer->selected_assets.begin());
-					target_transform = ent.transform;
-				}
-			}
-
 			if (!body_interface.IsAdded(rb.body->GetID())) {
 				body_interface.AddBody(rb.body->GetID(), JPH::EActivation::DontActivate);
 			}
@@ -128,7 +126,6 @@ namespace Editor::Gizmos {
 
 			if (body_interface.IsAdded(rb.body->GetID())) {
 				body_interface.RemoveBody(rb.body->GetID());
-				target_transform = nullptr;
 			}
 
 			is_active = false;
@@ -140,8 +137,9 @@ namespace Editor::Gizmos {
 		auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
 		glm::vec3 cam_to_entity = camera->transform->world_position + (glm::normalize(ent.transform->world_position - camera->transform->world_position) * 15.0f);
 
-		// transform->local_position = cam_to_entity;
-		transform->local_position = ent.transform->world_position;
+		target_transform = ent.transform;
+
+		transform->local_position = cam_to_entity;
 		transform->local_rotation = ent.transform->world_rotation;
 
 		transform->AddEulerAngles(rot, true);
@@ -254,6 +252,7 @@ namespace Editor::Gizmos {
 	void ArrowPart::OnUnclick(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer, Editor::Panels::SceneViewport* sceneViewport) {
 		if (is_clicked) {
 			sceneViewport->active_gizmo_part = nullptr;
+			target_transform = nullptr;
 			is_clicked = false;
 		}
 	}
@@ -343,4 +342,7 @@ namespace Editor::Gizmos {
 
 		return collection;
 	}
+
+#pragma endregion
+
 }

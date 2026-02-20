@@ -11,7 +11,6 @@ namespace Editor::Panels {
 	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
 	static Luxia::Physics::RayCastHit last_ray_hit = Luxia::Physics::RayCastHit();
 
-
 	void SceneViewport::RenderTopBar(Editor::Layers::EditorLayer* editorLayer) {
 		if (ImGui::BeginMenuBar()) {
 			/*
