@@ -295,9 +295,7 @@ namespace Editor::Panels {
 	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
 		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
 
-		
-		transform_gizmos.push_back(Gizmos::ArrowCollection(&editorLayer->editor_reg));
-
+		Gizmos::ArrowCollection(&editorLayer->editor_reg);
 
 		// Add all gizmos (and other physics stuff) to physics world for raycasting
 		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
@@ -404,17 +402,22 @@ namespace Editor::Panels {
 
 		// If there was a hit last frame
 		if (scene) {
-			if (last_ray_hit.hit) {
+			if (active_gizmo_part) {
+				if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_1)) {
+					active_gizmo_part->OnDrag(last_ray_hit, editorLayer, this);
+				}
+			}
+			else if (last_ray_hit.hit) {
 				for (auto entity : gb_view) {
 					if (auto rb = editorLayer->editor_reg.try_get<Luxia::Components::RigidBody>(entity)) {
 						if (rb->body->GetID() == last_ray_hit.bodyID) {
 							if (auto gb = rb->transform->TryGetComponent<Gizmos::GizmoBehaviour>()) {
 								gb->gizmo_part->OnHover();
 								if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
-									gb->gizmo_part->OnClick(last_ray_hit, editorLayer);
+									gb->gizmo_part->OnClick(last_ray_hit, editorLayer, this);
 								}
 								if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_1)) {
-									gb->gizmo_part->OnDrag(last_ray_hit, editorLayer);
+									gb->gizmo_part->OnDrag(last_ray_hit, editorLayer, this);
 								}
 							}
 						}
@@ -430,6 +433,16 @@ namespace Editor::Panels {
 				if (gb.gizmo_part->ShouldRender(editorLayer, &cam, scene)) {
 					gb.gizmo_part->OnRender(editorLayer->GetRenderer().get(), editorLayer, &cam);
 					gb.gizmo_part->OnUnhover(); // If hovered check?
+				}
+			}
+		}
+
+		// Check unclick
+		if (Luxia::Input::IsMouseButtonJustReleased(LX_MOUSE_BUTTON_1)) {
+			for (auto entity : gb_view) {
+				auto& gb = editorLayer->editor_reg.get<Gizmos::GizmoBehaviour>(entity);
+				if (gb.gizmo_part && gb.transform->enabled) {
+					gb.gizmo_part->OnUnclick(last_ray_hit, editorLayer, this);
 				}
 			}
 		}

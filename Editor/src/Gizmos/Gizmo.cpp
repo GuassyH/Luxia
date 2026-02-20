@@ -1,6 +1,48 @@
 #include "Gizmo.h"
+#include "EditorPanels/SceneViewport.h"
 
 namespace Editor::Gizmos {
+
+	static bool closestPointOnLineToRay(
+		const glm::vec3& linePoint,
+		const glm::vec3& lineDir,   // normalize this
+		const glm::vec3& rayOrigin,
+		const glm::vec3& rayDir,    // normalize this
+		glm::vec3& outClosestPoint
+	) {
+		glm::vec3 w0 = linePoint - rayOrigin;
+
+		float a = glm::dot(lineDir, lineDir); // = 1
+		float b = glm::dot(lineDir, rayDir);
+		float c = glm::dot(rayDir, rayDir);   // = 1
+		float d = glm::dot(lineDir, w0);
+		float e = glm::dot(rayDir, w0);
+
+		float denom = a * c - b * b;
+
+		float t, s;
+
+		// If not parallel
+		if (fabs(denom) > 1e-6f) {
+			t = (b * e - c * d) / denom;
+			s = (a * e - b * d) / denom;
+		}
+		else {
+			// Parallel: pick arbitrary closest
+			t = -d / a;
+			s = 0.0f;
+		}
+
+		// Enforce ray constraint
+		if (s < 0.0f) {
+			s = 0.0f;
+			t = -d / a; // project ray origin onto line
+		}
+
+		outClosestPoint = linePoint + t * lineDir;
+		return true;
+	}
+
 
 	std::shared_ptr<Luxia::IMaterial> GizmoResources::xMaterial = nullptr;
 	std::shared_ptr<Luxia::IMaterial> GizmoResources::yMaterial = nullptr;
@@ -131,7 +173,9 @@ namespace Editor::Gizmos {
 		}
 	}
 
-	void ArrowPart::OnClick(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer) {
+	void ArrowPart::OnClick(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer, Editor::Panels::SceneViewport* sceneViewport) {
+		sceneViewport->active_gizmo_part = this;
+		
 		if (!target_transform || !hit.hit) {
 			LX_ERROR("Gizmo has no target");
 			return;
@@ -139,50 +183,79 @@ namespace Editor::Gizmos {
 
 		// Get on_click_length;
 		glm::vec3 translate_direction;
-		if (responsible_axis.x == 1.0f)
-			translate_direction = target_transform->right;
-		else if (responsible_axis.y == 1.0f)
-			translate_direction = target_transform->up;
-		else
-			translate_direction = -target_transform->forward;
 
-		glm::vec3 new_hit_vec = hit.position - transform->world_position;
-		if (new_hit_vec != last_hit_vec) {
-			glm::vec3 axisDir = glm::normalize(translate_direction);
-			float length = glm::dot(new_hit_vec, axisDir);
-			on_click_length = length;
+		switch (axis){
+		case Editor::Gizmos::x:
+			translate_direction = target_transform->right;
+			break;
+		case Editor::Gizmos::y:
+			translate_direction = target_transform->up;
+			break;
+		case Editor::Gizmos::z:
+			translate_direction = -target_transform->forward;
+			break;
+		default:
+			translate_direction = glm::vec3(0.0f);
+			break;
 		}
+		
+		glm::vec3 hit_pos;
+		closestPointOnLineToRay(target_transform->world_position, translate_direction, hit.ray.origin, hit.ray.direction, hit_pos);
+		glm::vec3 new_hit_vec = hit_pos - target_transform->world_position;
+
+		glm::vec3 axisDir = translate_direction;
+		float length = glm::dot(new_hit_vec, axisDir);
+		on_click_length = length;
 
 		is_clicked = true;
 		last_hit_vec = new_hit_vec;
 	}
-	void ArrowPart::OnDrag(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer) {
+
+
+	void ArrowPart::OnDrag(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer, Editor::Panels::SceneViewport* sceneViewport) {
 		if (!is_clicked) return;
 
-		if (!target_transform || !hit.hit) {
+		if (!target_transform) {
 			LX_ERROR("Gizmo has no target");
 			return;
 		}
-	
-		glm::vec3 translate_direction;
-		if (responsible_axis.x == 1.0f)
-			translate_direction = target_transform->right;
-		else if (responsible_axis.y == 1.0f)
-			translate_direction = target_transform->up;
-		else
-			translate_direction = -target_transform->forward;
 
-		glm::vec3 new_hit_vec = hit.position - transform->world_position;
+
+		glm::vec3 translate_direction;
+		switch (axis) {
+		case Editor::Gizmos::x:
+			translate_direction = target_transform->right;
+			break;
+		case Editor::Gizmos::y:
+			translate_direction = target_transform->up;
+			break;
+		case Editor::Gizmos::z:
+			translate_direction = -target_transform->forward;
+			break;
+		default:
+			translate_direction = glm::vec3(0.0f);
+			break;
+		}
+
+		glm::vec3 hit_pos;
+		closestPointOnLineToRay(target_transform->world_position, translate_direction, hit.ray.origin, hit.ray.direction, hit_pos);
+		glm::vec3 new_hit_vec = hit_pos - target_transform->world_position;
 
 		// if dragged
-		if (new_hit_vec != last_hit_vec) {
-			glm::vec3 axisDir = glm::normalize(translate_direction);
+		if (glm::length2(new_hit_vec - last_hit_vec) > 1e-6f) {
+			glm::vec3 axisDir = translate_direction;
 			float length = glm::dot(new_hit_vec, axisDir);
-			LX_INFO("Len {}", length);
 			target_transform->transform->local_position += translate_direction * (length - on_click_length);
 		}
 		// Compare the two 
 		last_hit_vec = new_hit_vec;
+	}
+
+	void ArrowPart::OnUnclick(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer, Editor::Panels::SceneViewport* sceneViewport) {
+		if (is_clicked) {
+			sceneViewport->active_gizmo_part = nullptr;
+			is_clicked = false;
+		}
 	}
 
 	GizmoCollection ArrowCollection(entt::registry* reg) {
@@ -200,8 +273,8 @@ namespace Editor::Gizmos {
 		arrow_x_gizmo_part->normalMat = Gizmos::GizmoResources::xMaterial;
 		arrow_x_gizmo_part->transform = &arrow_x_t;
 		arrow_x_gizmo_part->rot = glm::vec3(0.0f, 90.0f, 0.0f);
-		arrow_x_gizmo_part->responsible_axis = glm::vec3(1.0f, 0.0f, 0.0f);
-		arrow_x_gizmo_part->OnInit();
+		arrow_x_gizmo_part->axis = Axis::x;
+;		arrow_x_gizmo_part->OnInit();
 
 		auto& arrow_x_gizmo_behaviour = arrow_x_t.AddComponent<Gizmos::GizmoBehaviour>();
 		arrow_x_gizmo_behaviour.gizmo_part = arrow_x_gizmo_part;
@@ -219,7 +292,7 @@ namespace Editor::Gizmos {
 		arrow_y_gizmo_part->normalMat = Gizmos::GizmoResources::yMaterial;
 		arrow_y_gizmo_part->transform = &arrow_y_t;
 		arrow_y_gizmo_part->rot = glm::vec3(-90.0f, 0.0f, 0.0f);
-		arrow_y_gizmo_part->responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
+		arrow_y_gizmo_part->axis = Axis::y;
 		arrow_y_gizmo_part->OnInit();
 
 		auto& arrow_y_gizmo_behaviour = arrow_y_t.AddComponent<Gizmos::GizmoBehaviour>();
@@ -238,7 +311,7 @@ namespace Editor::Gizmos {
 		arrow_z_gizmo_part->normalMat = Gizmos::GizmoResources::zMaterial;
 		arrow_z_gizmo_part->transform = &arrow_z_t;
 		arrow_z_gizmo_part->rot = glm::vec3(0.0f, 0.0f, 0.0f);
-		arrow_z_gizmo_part->responsible_axis = glm::vec3(0.0f, 0.0f, 1.0f);
+		arrow_z_gizmo_part->axis = Axis::z;
 		arrow_z_gizmo_part->OnInit();
 
 		auto& arrow_z_gizmo_behaviour = arrow_z_t.AddComponent<Gizmos::GizmoBehaviour>();
