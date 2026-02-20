@@ -9,6 +9,8 @@ IMPORTANT
 - When renaming folder, send folder new name to assetmanager map, when saving assetmanager or reimporting
 	then check if the metafile or assetfile path is in the assetmanager path map and replace it with new path
 
+- Gizmos, Need OnActivate and OnDeactivate (so rigidbodies can be removed and added for example)
+
 --- Issues ---
 
 - When starting and stopping scene through editor memory usage goes up and stays up. Something isnt being cleared when scene is changed

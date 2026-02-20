@@ -403,12 +403,20 @@ namespace Editor::Panels {
 		}
 
 		// If there was a hit last frame
-		if (last_ray_hit.hit) {
-			for (auto entity : gb_view) {
-				if (auto rb = editorLayer->editor_reg.try_get<Luxia::Components::RigidBody>(entity)) {
-					if (rb->body->GetID() == last_ray_hit.bodyID) {
-						if (auto gb = rb->transform->TryGetComponent<Gizmos::GizmoBehaviour>()) {
-							gb->gizmo_part->OnHover();
+		if (scene) {
+			if (last_ray_hit.hit) {
+				for (auto entity : gb_view) {
+					if (auto rb = editorLayer->editor_reg.try_get<Luxia::Components::RigidBody>(entity)) {
+						if (rb->body->GetID() == last_ray_hit.bodyID) {
+							if (auto gb = rb->transform->TryGetComponent<Gizmos::GizmoBehaviour>()) {
+								gb->gizmo_part->OnHover();
+								if (Luxia::Input::IsMouseButtonJustPressed(LX_MOUSE_BUTTON_1)) {
+									gb->gizmo_part->OnClick(last_ray_hit, editorLayer);
+								}
+								if (Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_1)) {
+									gb->gizmo_part->OnDrag(last_ray_hit, editorLayer);
+								}
+							}
 						}
 					}
 				}

@@ -259,6 +259,10 @@ namespace Luxia::Physics {
 
 			JPH::RayCastResult jphHit;
 
+			hit->ray.origin = origin;
+			hit->ray.direction = direction;
+			hit->ray.length = maxDistance;
+
 			bool did_hit = jphSystem.GetNarrowPhaseQuery().CastRay(ray, jphHit);
 			if (did_hit) {
 				if (hit) {
@@ -269,6 +273,7 @@ namespace Luxia::Physics {
 					hit->distance = jphHit.mFraction * maxDistance;
 					hit->position = Luxia::Physics::ToGLM(ray.GetPointOnRay(jphHit.mFraction));
 					hit->bodyID = jphHit.mBodyID;
+
 
 					const JPH::Body& body = lock.GetBody();
 					hit->normal = Luxia::Physics::ToGLM(body.GetWorldSpaceSurfaceNormal(jphHit.mSubShapeID2, ray.GetPointOnRay(jphHit.mFraction)));

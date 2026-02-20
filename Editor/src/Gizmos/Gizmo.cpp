@@ -43,6 +43,148 @@ namespace Editor::Gizmos {
 	}
 
 
+	/// Arrow Part WRONG RN
+
+	void ArrowPart::OnInit() {
+		hoverMat = GizmoResources::hoverMaterial;
+		mesh_renderer = &transform->AddComponent<Luxia::Components::MeshRenderer>(GizmoResources::arrowMesh, normalMat);
+	}
+
+	bool ArrowPart::ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
+		bool should_update = false;
+
+		if (!scene) should_update = false;
+		if (editorLayer->isOneSelected) {
+			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) should_update = true;
+			else should_update = false;
+		}
+
+		/// Makes sure to remove rigidbody if not use
+
+		// Was inactive and now is activated
+		if (!is_active && should_update) {
+			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
+			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
+
+			if (scene) {
+				if (editorLayer->isOneSelected) {
+					auto& ent = scene->runtime_entities.at(*editorLayer->selected_assets.begin());
+					target_transform = ent.transform;
+				}
+			}
+
+			if (!body_interface.IsAdded(rb.body->GetID())) {
+				body_interface.AddBody(rb.body->GetID(), JPH::EActivation::DontActivate);
+			}
+
+			is_active = true;
+		}
+		// Is active and should now be inactive
+		else if (is_active && !should_update) {
+			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
+			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
+
+			if (body_interface.IsAdded(rb.body->GetID())) {
+				body_interface.RemoveBody(rb.body->GetID());
+				target_transform = nullptr;
+			}
+
+			is_active = false;
+		}
+
+		return should_update;
+	}
+	void ArrowPart::OnUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
+		auto& ent = scene->runtime_entities.find(*editorLayer->selected_assets.begin())->second;
+		glm::vec3 cam_to_entity = camera->transform->world_position + (glm::normalize(ent.transform->world_position - camera->transform->world_position) * 15.0f);
+
+		// transform->local_position = cam_to_entity;
+		transform->local_position = ent.transform->world_position;
+		transform->local_rotation = ent.transform->world_rotation;
+
+		transform->AddEulerAngles(rot, true);
+		transform->UpdateMatrix();
+		editorLayer->physicsWorld->jphSystem.GetBodyInterface().SetPositionAndRotation(
+			transform->GetComponent<Luxia::Components::RigidBody>().body->GetID(),
+			Luxia::Physics::ToJolt(transform->world_position),
+			Luxia::Physics::ToJolt(transform->world_rotation),
+			JPH::EActivation::Activate);
+	}
+	bool ArrowPart::ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
+		if (editorLayer->isOneSelected) return true;
+		else return false;
+	}
+	void ArrowPart::OnRender(Luxia::Rendering::IRenderer* renderer, Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera) {
+		if (!mesh_renderer) return;
+		renderer->RenderMesh(mesh_renderer->mesh.get(), mesh_renderer->material.get(), transform->GetMatrix(), camera->GetCamera()->GetViewMat(), camera->GetCamera()->GetProjMat());
+	}
+	void ArrowPart::OnUnhover() {
+		if (is_hovered) {
+			mesh_renderer->material = normalMat;
+			is_hovered = false;
+		}
+	}
+	void ArrowPart::OnHover() {
+		if (!is_hovered) {
+			mesh_renderer->material = hoverMat;
+			is_hovered = true;
+		}
+	}
+
+	void ArrowPart::OnClick(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer) {
+		if (!target_transform || !hit.hit) {
+			LX_ERROR("Gizmo has no target");
+			return;
+		}
+
+		// Get on_click_length;
+		glm::vec3 translate_direction;
+		if (responsible_axis.x == 1.0f)
+			translate_direction = target_transform->right;
+		else if (responsible_axis.y == 1.0f)
+			translate_direction = target_transform->up;
+		else
+			translate_direction = -target_transform->forward;
+
+		glm::vec3 new_hit_vec = hit.position - transform->world_position;
+		if (new_hit_vec != last_hit_vec) {
+			glm::vec3 axisDir = glm::normalize(translate_direction);
+			float length = glm::dot(new_hit_vec, axisDir);
+			on_click_length = length;
+		}
+
+		is_clicked = true;
+		last_hit_vec = new_hit_vec;
+	}
+	void ArrowPart::OnDrag(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer) {
+		if (!is_clicked) return;
+
+		if (!target_transform || !hit.hit) {
+			LX_ERROR("Gizmo has no target");
+			return;
+		}
+	
+		glm::vec3 translate_direction;
+		if (responsible_axis.x == 1.0f)
+			translate_direction = target_transform->right;
+		else if (responsible_axis.y == 1.0f)
+			translate_direction = target_transform->up;
+		else
+			translate_direction = -target_transform->forward;
+
+		glm::vec3 new_hit_vec = hit.position - transform->world_position;
+
+		// if dragged
+		if (new_hit_vec != last_hit_vec) {
+			glm::vec3 axisDir = glm::normalize(translate_direction);
+			float length = glm::dot(new_hit_vec, axisDir);
+			LX_INFO("Len {}", length);
+			target_transform->transform->local_position += translate_direction * (length - on_click_length);
+		}
+		// Compare the two 
+		last_hit_vec = new_hit_vec;
+	}
+
 	GizmoCollection ArrowCollection(entt::registry* reg) {
 		Gizmos::GizmoCollection collection = Gizmos::GizmoCollection();
 		// X ARROW
@@ -58,6 +200,7 @@ namespace Editor::Gizmos {
 		arrow_x_gizmo_part->normalMat = Gizmos::GizmoResources::xMaterial;
 		arrow_x_gizmo_part->transform = &arrow_x_t;
 		arrow_x_gizmo_part->rot = glm::vec3(0.0f, 90.0f, 0.0f);
+		arrow_x_gizmo_part->responsible_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 		arrow_x_gizmo_part->OnInit();
 
 		auto& arrow_x_gizmo_behaviour = arrow_x_t.AddComponent<Gizmos::GizmoBehaviour>();
@@ -76,6 +219,7 @@ namespace Editor::Gizmos {
 		arrow_y_gizmo_part->normalMat = Gizmos::GizmoResources::yMaterial;
 		arrow_y_gizmo_part->transform = &arrow_y_t;
 		arrow_y_gizmo_part->rot = glm::vec3(-90.0f, 0.0f, 0.0f);
+		arrow_y_gizmo_part->responsible_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 		arrow_y_gizmo_part->OnInit();
 
 		auto& arrow_y_gizmo_behaviour = arrow_y_t.AddComponent<Gizmos::GizmoBehaviour>();
@@ -94,6 +238,7 @@ namespace Editor::Gizmos {
 		arrow_z_gizmo_part->normalMat = Gizmos::GizmoResources::zMaterial;
 		arrow_z_gizmo_part->transform = &arrow_z_t;
 		arrow_z_gizmo_part->rot = glm::vec3(0.0f, 0.0f, 0.0f);
+		arrow_z_gizmo_part->responsible_axis = glm::vec3(0.0f, 0.0f, 1.0f);
 		arrow_z_gizmo_part->OnInit();
 
 		auto& arrow_z_gizmo_behaviour = arrow_z_t.AddComponent<Gizmos::GizmoBehaviour>();
