@@ -11,37 +11,24 @@ namespace Editor::Panels {
 	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
 	static Luxia::Physics::RayCastHit last_ray_hit = Luxia::Physics::RayCastHit();
 
-	void SceneViewport::RenderTopBar(Editor::Layers::EditorLayer* editorLayer) {
-		if (ImGui::BeginMenuBar()) {
-			/*
-			if (ImGui::BeginMenu("Gizmos")) {
-				if (ImGui::MenuItem("Grid", nullptr, grid_gizmo->gizmo_parts[0]->transform->enabled)) {
-					grid_gizmo->gizmo_parts[0]->transform->enabled = !grid_gizmo->gizmo_parts[0]->transform->enabled;
-				}
-				ImGui::EndMenu();
-			}
-			*/
 
-			if (ImGui::BeginMenu("Camera")) {
-				ImGui::Checkbox("Use Skybox", &cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox);
-				if(!cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox)
-					ImGui::ColorEdit4("Clear Color", &cam_ent->GetComponent<Luxia::Components::Camera>().clearColor.r);
-				ImGui::SliderFloat("FOV", &cam_ent->GetComponent<Luxia::Components::Camera>().FOVdeg, 1.0f, 179.0f);
-				ImGui::DragFloat("Near Plane", &cam_ent->GetComponent<Luxia::Components::Camera>().nearPlane, 0.01f, 0.01f, cam_ent->GetComponent<Luxia::Components::Camera>().farPlane - 0.1f);
-				ImGui::DragFloat("Far Plane", &cam_ent->GetComponent<Luxia::Components::Camera>().farPlane, 1.0f, cam_ent->GetComponent<Luxia::Components::Camera>().nearPlane + 0.1f, 10000.0f);
-
-				ImGui::EndMenu();
-			}
-			ImGui::EndMenuBar();
-		}
-	}
-
-	enum EditType {
+	enum EditTool {
 		Translate = 0,
 		Rotate = 1,
 		Scale = 2
 	};
-	static EditType editType = EditType::Translate;
+	static EditTool editTool = EditTool::Translate;
+	static std::vector<std::unique_ptr<Gizmos::GizmoCollection>> edit_tools;
+
+	static void SetTool(int index, Editor::Layers::EditorLayer* editorLayer) {
+		for (int i = 0; i < 3; i++) {
+			auto collection_ptr = edit_tools[i].get();
+			for (auto& gizmo_behaviour : collection_ptr->behaviours) {
+				gizmo_behaviour->gizmo_part->is_active = (i != index ? false : true);
+			}
+		}
+	}
+
 
 	static Luxia::GUID GetMousePosEntity(glm::vec2 mouse_pos, Luxia::Components::Camera* cam, const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> renderer, std::shared_ptr<Luxia::ITexture> output_texture) {
 
@@ -111,6 +98,23 @@ namespace Editor::Panels {
 	}
 
 	/// CORE
+	void SceneViewport::RenderTopBar(Editor::Layers::EditorLayer* editorLayer) {
+		if (ImGui::BeginMenuBar()) {
+
+			if (ImGui::BeginMenu("Camera")) {
+				ImGui::Checkbox("Use Skybox", &cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox);
+				if(!cam_ent->GetComponent<Luxia::Components::Camera>().useSkybox)
+					ImGui::ColorEdit4("Clear Color", &cam_ent->GetComponent<Luxia::Components::Camera>().clearColor.r);
+				ImGui::SliderFloat("FOV", &cam_ent->GetComponent<Luxia::Components::Camera>().FOVdeg, 1.0f, 179.0f);
+				ImGui::DragFloat("Near Plane", &cam_ent->GetComponent<Luxia::Components::Camera>().nearPlane, 0.01f, 0.01f, cam_ent->GetComponent<Luxia::Components::Camera>().farPlane - 0.1f);
+				ImGui::DragFloat("Far Plane", &cam_ent->GetComponent<Luxia::Components::Camera>().farPlane, 1.0f, cam_ent->GetComponent<Luxia::Components::Camera>().nearPlane + 0.1f, 10000.0f);
+
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+	}
+	
 	void SceneViewport::Init(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		LX_INFO("Editor - SceneView Panel: Init");
 
@@ -242,16 +246,6 @@ namespace Editor::Panels {
 					cam_script.Look();
 					cam_script.Move();
 				}
-				else {
-					if (!Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)) {
-						if (Luxia::Input::IsKeyJustPressed(LX_KEY_W))
-							editType = EditType::Translate;
-						else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S))
-							editType = EditType::Scale;
-						else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R))
-							editType = EditType::Rotate;
-					}
-				}
 
 				if (Luxia::Input::IsKeyJustPressed(LX_KEY_F)) {
 					if (focused_t) {
@@ -295,7 +289,9 @@ namespace Editor::Panels {
 		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
 
 		// Gizmos::ArrowCollection(&editorLayer->editor_reg);
-		Gizmos::ScaleCollection(&editorLayer->editor_reg);
+		edit_tools.push_back(std::make_unique<Gizmos::ArrowCollection>(&editorLayer->editor_reg));
+		edit_tools.push_back(std::make_unique<Gizmos::RotateCollection>(&editorLayer->editor_reg));
+		edit_tools.push_back(std::make_unique<Gizmos::ScaleCollection>(&editorLayer->editor_reg));
 
 		// Add all gizmos (and other physics stuff) to physics world for raycasting
 		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
@@ -304,6 +300,8 @@ namespace Editor::Panels {
 			auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
 			rb.InitBody(body_interface);
 		}
+
+		SetTool(0, editorLayer);
 	}
 
 	void SceneViewport::RenderGizmos(Editor::Layers::EditorLayer* editorLayer, Luxia::Scene* scene, std::shared_ptr<Luxia::ITexture> cam_tex) {
@@ -389,6 +387,23 @@ namespace Editor::Panels {
 		/// Without Depth
 		glClear(GL_DEPTH_BUFFER_BIT);
 		
+		// Selecting Gizmo
+		if (!Luxia::Input::IsMouseButtonPressed(LX_MOUSE_BUTTON_2) && !Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL)){
+			if (Luxia::Input::IsKeyJustPressed(LX_KEY_W)) {
+				editTool = EditTool::Translate;
+				SetTool(editTool, editorLayer);
+			}
+			else if (Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
+				editTool = EditTool::Scale;
+				SetTool(editTool, editorLayer);
+			}
+			else if (Luxia::Input::IsKeyJustPressed(LX_KEY_R)) {
+				editTool = EditTool::Rotate;
+				SetTool(editTool, editorLayer);
+			}
+		}
+
+
 		// Update Gizmos
 		auto gb_view = editorLayer->editor_reg.view<Gizmos::GizmoBehaviour>();
 		for (auto entity : gb_view) {

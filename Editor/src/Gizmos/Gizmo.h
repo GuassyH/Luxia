@@ -52,6 +52,8 @@ namespace Editor::Gizmos {
 	public:  
 		Luxia::Components::Transform* transform = nullptr;
 
+		bool is_active = true;
+
 		virtual ~GizmoPart() = default;
 		virtual void OnInit() = 0;
 
@@ -90,7 +92,7 @@ namespace Editor::Gizmos {
 
 		bool is_clicked = false;
 		bool is_hovered = false;
-		bool is_active = true;
+		bool is_switched_active = true; // used for adding and removing rigidbody
 
 		virtual void OnInit() override;
 		virtual bool ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) override;
@@ -120,7 +122,7 @@ namespace Editor::Gizmos {
 
 		bool is_clicked = false;
 		bool is_hovered = false;
-		bool is_active = true;
+		bool is_switched_active = true; // used for adding and removing rigidbody
 
 		virtual void OnInit() override;
 		virtual bool ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) override;
@@ -171,6 +173,17 @@ namespace Editor::Gizmos {
 	};
 
 
-	GizmoCollection ArrowCollection(entt::registry* reg);
-	GizmoCollection ScaleCollection(entt::registry* reg);
+	struct ArrowCollection : GizmoCollection {
+		ArrowCollection(entt::registry* reg);
+	};
+
+	struct ScaleCollection : GizmoCollection {
+		ScaleCollection(entt::registry* reg);
+	};
+
+	struct RotateCollection : GizmoCollection {
+		RotateCollection(entt::registry* reg) {
+			// Do something
+		}
+	};
 };

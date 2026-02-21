@@ -105,16 +105,18 @@ namespace Editor::Gizmos {
 	bool ArrowPart::ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
 		bool should_update = false;
 
-		if (!scene) should_update = false;
-		if (editorLayer->isOneSelected) {
+		if (editorLayer->isOneSelected && is_active) {
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) should_update = true;
 			else should_update = false;
+		}
+		else {
+			should_update = false;
 		}
 
 		/// Makes sure to remove rigidbody if not use
 
 		// Was inactive and now is activated
-		if (!is_active && should_update) {
+		if (!is_switched_active && should_update) {
 			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
 			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
 
@@ -122,10 +124,10 @@ namespace Editor::Gizmos {
 				body_interface.AddBody(rb.body->GetID(), JPH::EActivation::DontActivate);
 			}
 
-			is_active = true;
+			is_switched_active = true;
 		}
 		// Is active and should now be inactive
-		else if (is_active && !should_update) {
+		else if (is_switched_active && !should_update) {
 			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
 			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
 
@@ -133,7 +135,7 @@ namespace Editor::Gizmos {
 				body_interface.RemoveBody(rb.body->GetID());
 			}
 
-			is_active = false;
+			is_switched_active = false;
 		}
 
 		return should_update;
@@ -156,7 +158,7 @@ namespace Editor::Gizmos {
 			JPH::EActivation::Activate);
 	}
 	bool ArrowPart::ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
-		if (editorLayer->isOneSelected) return true;
+		if (editorLayer->isOneSelected && is_active) return true;
 		else return false;
 	}
 	void ArrowPart::OnRender(Luxia::Rendering::IRenderer* renderer, Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera) {
@@ -258,8 +260,7 @@ namespace Editor::Gizmos {
 		}
 	}
 
-	GizmoCollection ArrowCollection(entt::registry* reg) {
-		Gizmos::GizmoCollection collection = Gizmos::GizmoCollection();
+	ArrowCollection::ArrowCollection(entt::registry* reg) {
 		// X ARROW
 		entt::entity arrow_x_ent = reg->create();
 		auto& arrow_x_t = reg->emplace<Luxia::Components::Transform>(arrow_x_ent);
@@ -337,11 +338,9 @@ namespace Editor::Gizmos {
 		z_col.InitCollider();
 
 		// Push to collection
-		collection.behaviours.push_back(arrow_x_t.TryGetComponent<Gizmos::GizmoBehaviour>());
-		collection.behaviours.push_back(arrow_y_t.TryGetComponent<Gizmos::GizmoBehaviour>());
-		collection.behaviours.push_back(arrow_z_t.TryGetComponent<Gizmos::GizmoBehaviour>());
-
-		return collection;
+		behaviours.push_back(arrow_x_t.TryGetComponent<Gizmos::GizmoBehaviour>());
+		behaviours.push_back(arrow_y_t.TryGetComponent<Gizmos::GizmoBehaviour>());
+		behaviours.push_back(arrow_z_t.TryGetComponent<Gizmos::GizmoBehaviour>());
 	}
 
 #pragma endregion
@@ -357,16 +356,18 @@ namespace Editor::Gizmos {
 	bool ScalePart::ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
 		bool should_update = false;
 
-		if (!scene) should_update = false;
-		if (editorLayer->isOneSelected) {
+		if (editorLayer->isOneSelected && is_active) {
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin())) should_update = true;
 			else should_update = false;
+		}
+		else {
+			should_update = false;
 		}
 
 		/// Makes sure to remove rigidbody if not use
 
 		// Was inactive and now is activated
-		if (!is_active && should_update) {
+		if (!is_switched_active && should_update) {
 			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
 			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
 
@@ -374,10 +375,10 @@ namespace Editor::Gizmos {
 				body_interface.AddBody(rb.body->GetID(), JPH::EActivation::DontActivate);
 			}
 
-			is_active = true;
+			is_switched_active = true;
 		}
 		// Is active and should now be inactive
-		else if (is_active && !should_update) {
+		else if (is_switched_active && !should_update) {
 			auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
 			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
 
@@ -385,7 +386,7 @@ namespace Editor::Gizmos {
 				body_interface.RemoveBody(rb.body->GetID());
 			}
 
-			is_active = false;
+			is_switched_active = false;
 		}
 
 		return should_update;
@@ -408,7 +409,7 @@ namespace Editor::Gizmos {
 			JPH::EActivation::Activate);
 	}
 	bool ScalePart::ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
-		if (editorLayer->isOneSelected) return true;
+		if (editorLayer->isOneSelected && is_active) return true;
 		else return false;
 	}
 	void ScalePart::OnRender(Luxia::Rendering::IRenderer* renderer, Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera) {
@@ -520,8 +521,7 @@ namespace Editor::Gizmos {
 		}
 	}
 
-	GizmoCollection ScaleCollection(entt::registry* reg) {
-		Gizmos::GizmoCollection collection = Gizmos::GizmoCollection();
+	ScaleCollection::ScaleCollection(entt::registry* reg) {
 		// X ARROW
 		entt::entity arrow_x_ent = reg->create();
 		auto& arrow_x_t = reg->emplace<Luxia::Components::Transform>(arrow_x_ent);
@@ -599,11 +599,9 @@ namespace Editor::Gizmos {
 		z_col.InitCollider();
 
 		// Push to collection
-		collection.behaviours.push_back(arrow_x_t.TryGetComponent<Gizmos::GizmoBehaviour>());
-		collection.behaviours.push_back(arrow_y_t.TryGetComponent<Gizmos::GizmoBehaviour>());
-		collection.behaviours.push_back(arrow_z_t.TryGetComponent<Gizmos::GizmoBehaviour>());
-
-		return collection;
+		behaviours.push_back(arrow_x_t.TryGetComponent<Gizmos::GizmoBehaviour>());
+		behaviours.push_back(arrow_y_t.TryGetComponent<Gizmos::GizmoBehaviour>());
+		behaviours.push_back(arrow_z_t.TryGetComponent<Gizmos::GizmoBehaviour>());
 	}
 
 #pragma endregion
