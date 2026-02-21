@@ -128,7 +128,7 @@ namespace Editor::Panels {
 		fbo_pick_tex->CreateFBOTex(1920, 1080);
 		selection_fbo->CreateDepthTex(1920, 1080);
 
-		outline_shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/Editor/resources/gizmos/outline.frag", "C:/dev/Luxia/Editor/resources/gizmos/outline.vert");
+		outline_shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/Editor/resources/gizmos/shaders/outline.frag", "C:/dev/Luxia/Editor/resources/gizmos/shaders/outline.vert");
 
 		outline_mat->shader = outline_shader;
 		outline_mat->guid = Luxia::GUID();
@@ -294,7 +294,8 @@ namespace Editor::Panels {
 	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
 		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
 
-		Gizmos::ArrowCollection(&editorLayer->editor_reg);
+		// Gizmos::ArrowCollection(&editorLayer->editor_reg);
+		Gizmos::ScaleCollection(&editorLayer->editor_reg);
 
 		// Add all gizmos (and other physics stuff) to physics world for raycasting
 		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
