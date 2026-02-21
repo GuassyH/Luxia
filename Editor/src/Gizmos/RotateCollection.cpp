@@ -2,8 +2,6 @@
 #include "EditorPanels/SceneViewport.h"
 
 namespace Editor::Gizmos {
-
-
 	void RotatePart::OnInit() {
 		hoverMat = GizmoResources::hoverMaterial;
 		mesh_renderer = &transform->AddComponent<Luxia::Components::MeshRenderer>(GizmoResources::rotateMesh, normalMat);
@@ -95,27 +93,22 @@ namespace Editor::Gizmos {
 		}
 
 		// Get on_click_length;
-		glm::vec3 rotate_axis;
 		glm::vec3 axis_forward;
 		glm::vec3 axis_up;
 		switch (axis) {
 		case Editor::Gizmos::x:
-			rotate_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 			axis_forward = target_transform->forward;
 			axis_up = target_transform->up;
 			break;
 		case Editor::Gizmos::y:
-			rotate_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 			axis_forward = target_transform->right;
 			axis_up = target_transform->forward;
 			break;
 		case Editor::Gizmos::z:
-			rotate_axis = glm::vec3(0.0f, 0.0f, -1.0f);
 			axis_forward = target_transform->right;
 			axis_up = target_transform->up;
 			break;
 		default:
-			rotate_axis = glm::vec3(0.0f);
 			axis_forward = glm::vec3(0.0f, 0.0f, -1.0f);
 			axis_up = glm::vec3(0.0f, 1.0f, 0.0f);
 			break;
@@ -144,22 +137,22 @@ namespace Editor::Gizmos {
 		glm::vec3 axis_up;
 		switch (axis) {
 		case Editor::Gizmos::x:
-			rotate_axis = glm::vec3(1.0f, 0.0f, 0.0f);
+			rotate_axis = target_transform->right;
 			axis_forward = target_transform->forward;
 			axis_up = target_transform->up;
 			break;
 		case Editor::Gizmos::y:
-			rotate_axis = glm::vec3(0.0f, 1.0f, 0.0f);
+			rotate_axis = target_transform->up;
 			axis_forward = target_transform->right;
 			axis_up = target_transform->forward;
 			break;
 		case Editor::Gizmos::z:
-			rotate_axis = glm::vec3(0.0f, 0.0f, -1.0f);
+			rotate_axis = target_transform->forward;
 			axis_forward = target_transform->right;
 			axis_up = target_transform->up;
 			break;
 		default:
-			rotate_axis = glm::vec3(0.0f);
+			rotate_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 			axis_forward = glm::vec3(0.0f, 0.0f, -1.0f);
 			axis_up = glm::vec3(0.0f, 1.0f, 0.0f);
 			break;
@@ -181,7 +174,7 @@ namespace Editor::Gizmos {
 			);
 
 			float angleDeg = glm::degrees(signedAngle);
-			target_transform->AddEulerAngles(rotate_axis * angleDeg, true);
+			target_transform->AddEulerAngles(rotate_axis * angleDeg, false);
 		}
 		// Compare the two 
 		last_intersect_pos = new_hit_pos;
