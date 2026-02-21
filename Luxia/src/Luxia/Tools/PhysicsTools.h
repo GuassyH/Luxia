@@ -71,4 +71,30 @@ namespace Luxia::Physics {
 		outClosestPoint = linePoint + t * lineDir;
 		return true;
 	}
+
+	static bool RayIntersectPlane(
+		const glm::vec3& planeOrigin,
+		const glm::vec3& planeForward,  // normalize this
+		const glm::vec3& planeUp,       // normalize this
+		const glm::vec3& rayOrigin,
+		const glm::vec3& rayDir,        // normalize this
+		glm::vec3& outIntersection
+	) {
+		glm::vec3 planeNormal = glm::normalize(glm::cross(planeForward, planeUp));
+
+		float denom = glm::dot(planeNormal, rayDir);
+
+		// Ray parallel to plane
+		if (fabs(denom) < 1e-6f)
+			return false;
+
+		float t = glm::dot(planeOrigin - rayOrigin, planeNormal) / denom;
+
+		// Ray intersection must be forward
+		if (t < 0.0f)
+			return false;
+
+		outIntersection = rayOrigin + t * rayDir;
+		return true;
+	}
 };

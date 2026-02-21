@@ -96,35 +96,37 @@ namespace Editor::Gizmos {
 
 		// Get on_click_length;
 		glm::vec3 rotate_axis;
-		glm::vec3 transform_axis;
+		glm::vec3 axis_forward;
+		glm::vec3 axis_up;
 		switch (axis) {
 		case Editor::Gizmos::x:
 			rotate_axis = glm::vec3(1.0f, 0.0f, 0.0f);
-			transform_axis = target_transform->right;
+			axis_forward = target_transform->forward;
+			axis_up = target_transform->up;
 			break;
 		case Editor::Gizmos::y:
 			rotate_axis = glm::vec3(0.0f, 1.0f, 0.0f);
-			transform_axis = target_transform->up;
+			axis_forward = target_transform->right;
+			axis_up = target_transform->forward;
 			break;
 		case Editor::Gizmos::z:
 			rotate_axis = glm::vec3(0.0f, 0.0f, -1.0f);
-			transform_axis = -target_transform->forward;
+			axis_forward = target_transform->right;
+			axis_up = target_transform->up;
 			break;
 		default:
 			rotate_axis = glm::vec3(0.0f);
-			transform_axis = glm::vec3(0.0f);
+			axis_forward = glm::vec3(0.0f, 0.0f, -1.0f);
+			axis_up = glm::vec3(0.0f, 1.0f, 0.0f);
 			break;
 		}
 
 		glm::vec3 hit_pos;
-		Luxia::Physics::ClosestPointOnLineToRay(target_transform->world_position, transform_axis, hit.ray.origin, hit.ray.direction, hit_pos);
-		glm::vec3 new_hit_vec = hit_pos - target_transform->world_position;
-
-		float length = glm::dot(new_hit_vec, transform_axis);
-		on_click_length = length;
+		Luxia::Physics::RayIntersectPlane(target_transform->world_position, axis_forward, axis_up, hit.ray.origin, hit.ray.direction, hit_pos);
+		glm::vec3 new_hit_pos = hit_pos - target_transform->world_position;
 
 		is_clicked = true;
-		last_hit_vec = new_hit_vec;
+		last_intersect_pos = new_hit_pos;
 	}
 
 	// UNIQUE
@@ -138,39 +140,51 @@ namespace Editor::Gizmos {
 
 
 		glm::vec3 rotate_axis;
-		glm::vec3 transform_axis;
+		glm::vec3 axis_forward;
+		glm::vec3 axis_up;
 		switch (axis) {
 		case Editor::Gizmos::x:
 			rotate_axis = glm::vec3(1.0f, 0.0f, 0.0f);
-			transform_axis = target_transform->right;
+			axis_forward = target_transform->forward;
+			axis_up = target_transform->up;
 			break;
 		case Editor::Gizmos::y:
 			rotate_axis = glm::vec3(0.0f, 1.0f, 0.0f);
-			transform_axis = target_transform->up;
+			axis_forward = target_transform->right;
+			axis_up = target_transform->forward;
 			break;
 		case Editor::Gizmos::z:
-			rotate_axis = glm::vec3(0.0f, 0.0f, 1.0f);
-			transform_axis = -target_transform->forward;
+			rotate_axis = glm::vec3(0.0f, 0.0f, -1.0f);
+			axis_forward = target_transform->right;
+			axis_up = target_transform->up;
 			break;
 		default:
 			rotate_axis = glm::vec3(0.0f);
-			transform_axis = glm::vec3(0.0f);
+			axis_forward = glm::vec3(0.0f, 0.0f, -1.0f);
+			axis_up = glm::vec3(0.0f, 1.0f, 0.0f);
 			break;
 		}
 
 		glm::vec3 hit_pos;
-		Luxia::Physics::ClosestPointOnLineToRay(target_transform->world_position, transform_axis, hit.ray.origin, hit.ray.direction, hit_pos);
-		glm::vec3 new_hit_vec = hit_pos - target_transform->world_position;
+		Luxia::Physics::RayIntersectPlane(target_transform->world_position, axis_forward, axis_up, hit.ray.origin, hit.ray.direction, hit_pos);
+		glm::vec3 new_hit_pos = hit_pos - target_transform->world_position;
 
 		// if dragged
-		if (glm::length2(new_hit_vec - last_hit_vec) > 1e-6f) {
-			glm::vec3 axisDir = transform_axis;
-			float length = glm::dot(new_hit_vec, axisDir);
-			// target_transform->transform->local_rotate += rotate_axis * (length - on_click_length) * 2.0f;
-			on_click_length = length;
+		if (glm::length2(new_hit_pos - last_intersect_pos) > 1e-6f) {
+			glm::vec3 v0 = glm::normalize(last_intersect_pos);
+			glm::vec3 v1 = glm::normalize(new_hit_pos);
+
+			// rotate_axis must be normalized and in the SAME SPACE as v0/v1
+			float signedAngle = atan2(
+				glm::dot(glm::cross(v0, v1), rotate_axis),
+				glm::dot(v0, v1)
+			);
+
+			float angleDeg = glm::degrees(signedAngle);
+			target_transform->AddEulerAngles(rotate_axis * angleDeg, true);
 		}
 		// Compare the two 
-		last_hit_vec = new_hit_vec;
+		last_intersect_pos = new_hit_pos;
 	}
 	void RotatePart::OnUnclick(Luxia::Physics::RayCastHit& hit, Editor::Layers::EditorLayer* editorLayer, Editor::Panels::SceneViewport* sceneViewport) {
 		if (is_clicked) {

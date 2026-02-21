@@ -146,8 +146,7 @@ namespace Editor::Gizmos {
 
 		Axis axis = Axis::x;
 		glm::vec3 rot = glm::vec3(0.0f);
-		glm::vec3 last_hit_vec = glm::vec3(0.0f);
-		float on_click_length = 0.0f;
+		glm::vec3 last_intersect_pos = glm::vec3(0.0f);
 
 		Luxia::Components::Transform* target_transform = nullptr;
 

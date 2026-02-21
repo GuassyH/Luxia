@@ -160,8 +160,7 @@ namespace Editor::Gizmos {
 
 		// if dragged
 		if (glm::length2(new_hit_vec - last_hit_vec) > 1e-6f) {
-			glm::vec3 axisDir = transform_axis;
-			float length = glm::dot(new_hit_vec, axisDir);
+			float length = glm::dot(new_hit_vec, transform_axis);
 			target_transform->transform->local_scale += scale_axis * (length - on_click_length) * 2.0f;
 			on_click_length = length;
 		}

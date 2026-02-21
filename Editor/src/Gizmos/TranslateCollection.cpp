@@ -152,8 +152,7 @@ namespace Editor::Gizmos {
 
 		// if dragged
 		if (glm::length2(new_hit_vec - last_hit_vec) > 1e-6f) {
-			glm::vec3 axisDir = translate_direction;
-			float length = glm::dot(new_hit_vec, axisDir);
+			float length = glm::dot(new_hit_vec, translate_direction);
 			target_transform->transform->local_position += translate_direction * (length - on_click_length);
 		}
 		// Compare the two 
