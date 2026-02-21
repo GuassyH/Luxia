@@ -123,5 +123,8 @@
     <ClCompile Include="src\LuxiaEditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Gizmos\TranslateCollection.cpp" />
+    <ClCompile Include="src\Gizmos\ScaleCollection.cpp" />
+    <ClCompile Include="src\Gizmos\RotateCollection.cpp" />
   </ItemGroup>
 </Project>

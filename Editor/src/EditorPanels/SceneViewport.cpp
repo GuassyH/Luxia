@@ -288,8 +288,8 @@ namespace Editor::Panels {
 	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
 		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
 
-		// Gizmos::ArrowCollection(&editorLayer->editor_reg);
-		edit_tools.push_back(std::make_unique<Gizmos::ArrowCollection>(&editorLayer->editor_reg));
+		// Gizmos::TranslateCollection(&editorLayer->editor_reg);
+		edit_tools.push_back(std::make_unique<Gizmos::TranslateCollection>(&editorLayer->editor_reg));
 		edit_tools.push_back(std::make_unique<Gizmos::RotateCollection>(&editorLayer->editor_reg));
 		edit_tools.push_back(std::make_unique<Gizmos::ScaleCollection>(&editorLayer->editor_reg));
 

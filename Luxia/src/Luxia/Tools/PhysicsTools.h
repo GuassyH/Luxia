@@ -31,4 +31,44 @@ namespace Luxia::Physics {
 		JPH::BodyID bodyID = JPH::BodyID(0);
 	};
 
+
+	static bool ClosestPointOnLineToRay (
+		const glm::vec3& linePoint,
+		const glm::vec3& lineDir,   // normalize this
+		const glm::vec3& rayOrigin,
+		const glm::vec3& rayDir,    // normalize this
+		glm::vec3& outClosestPoint
+	) {
+		glm::vec3 w0 = linePoint - rayOrigin;
+
+		float a = glm::dot(lineDir, lineDir); // = 1
+		float b = glm::dot(lineDir, rayDir);
+		float c = glm::dot(rayDir, rayDir);   // = 1
+		float d = glm::dot(lineDir, w0);
+		float e = glm::dot(rayDir, w0);
+
+		float denom = a * c - b * b;
+
+		float t, s;
+
+		// If not parallel
+		if (fabs(denom) > 1e-6f) {
+			t = (b * e - c * d) / denom;
+			s = (a * e - b * d) / denom;
+		}
+		else {
+			// Parallel: pick arbitrary closest
+			t = -d / a;
+			s = 0.0f;
+		}
+
+		// Enforce ray constraint
+		if (s < 0.0f) {
+			s = 0.0f;
+			t = -d / a; // project ray origin onto line
+		}
+
+		outClosestPoint = linePoint + t * lineDir;
+		return true;
+	}
 };

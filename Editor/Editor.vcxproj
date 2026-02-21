@@ -179,6 +179,9 @@
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
     <ClCompile Include="src\EditorPanels\ShoutoutPanel.cpp" />
     <ClCompile Include="src\Gizmos\Gizmo.cpp" />
+    <ClCompile Include="src\Gizmos\RotateCollection.cpp" />
+    <ClCompile Include="src\Gizmos\ScaleCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TranslateCollection.cpp" />
     <ClCompile Include="src\LuxiaEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
