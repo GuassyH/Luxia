@@ -11,7 +11,8 @@ namespace Editor::Gizmos {
 
 	std::shared_ptr<Luxia::Mesh> GizmoResources::arrowMesh = nullptr;
 	std::shared_ptr<Luxia::Mesh> GizmoResources::scaleMesh = nullptr;
-	std::shared_ptr<Luxia::Mesh> GizmoResources::rotateMesh = nullptr;
+	std::shared_ptr<Luxia::Mesh> GizmoResources::rotateQMesh = nullptr;
+	std::shared_ptr<Luxia::Mesh> GizmoResources::rotateWMesh = nullptr;
 
 	void GizmoResources::Init(std::filesystem::path path_to_gizmos) {
 		// Materials
@@ -48,7 +49,8 @@ namespace Editor::Gizmos {
 
 		std::shared_ptr<Luxia::IModel> rotateModel = Luxia::Platform::Assets::CreateModel();
 		rotateModel->LoadFromPath(path_to_gizmos / "rotate/rotate.fbx");
-		rotateMesh = rotateModel->meshes[0];
+		rotateQMesh = rotateModel->meshes[0];
+		rotateWMesh = rotateModel->meshes[1];
 	
 	}
 

@@ -43,7 +43,8 @@ namespace Editor::Gizmos {
 
 		static std::shared_ptr<Luxia::Mesh> arrowMesh;
 		static std::shared_ptr<Luxia::Mesh> scaleMesh;
-		static std::shared_ptr<Luxia::Mesh> rotateMesh;
+		static std::shared_ptr<Luxia::Mesh> rotateQMesh; // Quadrant Mesh
+		static std::shared_ptr<Luxia::Mesh> rotateWMesh; // Wheel Mesh
 
 		static void Init(std::filesystem::path path_to_gizmos);
 	};
@@ -143,6 +144,8 @@ namespace Editor::Gizmos {
 		std::shared_ptr<Luxia::IMaterial> normalMat = nullptr;
 		std::shared_ptr<Luxia::IMaterial> hoverMat = nullptr;
 		Luxia::Components::MeshRenderer* mesh_renderer = nullptr;
+		std::shared_ptr<Luxia::Mesh> mesh;
+
 
 		Axis axis = Axis::x;
 		glm::vec3 rot = glm::vec3(0.0f);
@@ -189,6 +192,6 @@ namespace Editor::Gizmos {
 	};
 
 	struct RotateCollection : GizmoCollection {
-		RotateCollection(entt::registry* reg);
+		RotateCollection(entt::registry* reg, bool use_wheel = true);
 	};
 };

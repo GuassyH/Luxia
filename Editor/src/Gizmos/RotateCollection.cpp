@@ -4,7 +4,7 @@
 namespace Editor::Gizmos {
 	void RotatePart::OnInit() {
 		hoverMat = GizmoResources::hoverMaterial;
-		mesh_renderer = &transform->AddComponent<Luxia::Components::MeshRenderer>(GizmoResources::rotateMesh, normalMat);
+		mesh_renderer = &transform->AddComponent<Luxia::Components::MeshRenderer>(mesh, normalMat);
 	}
 
 	bool RotatePart::ShouldUpdate(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
@@ -131,27 +131,31 @@ namespace Editor::Gizmos {
 			return;
 		}
 
-
+		glm::vec3 local_axis;
 		glm::vec3 rotate_axis;
 		glm::vec3 axis_forward;
 		glm::vec3 axis_up;
 		switch (axis) {
 		case Editor::Gizmos::x:
+			local_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 			rotate_axis = target_transform->right;
 			axis_forward = target_transform->forward;
 			axis_up = target_transform->up;
 			break;
 		case Editor::Gizmos::y:
+			local_axis = glm::vec3(0.0f, 1.0f, 0.0f);
 			rotate_axis = target_transform->up;
 			axis_forward = target_transform->right;
 			axis_up = target_transform->forward;
 			break;
 		case Editor::Gizmos::z:
+			local_axis = glm::vec3(0.0f, 0.0f, -1.0f);
 			rotate_axis = target_transform->forward;
 			axis_forward = target_transform->right;
 			axis_up = target_transform->up;
 			break;
 		default:
+			local_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 			rotate_axis = glm::vec3(1.0f, 0.0f, 0.0f);
 			axis_forward = glm::vec3(0.0f, 0.0f, -1.0f);
 			axis_up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -174,7 +178,7 @@ namespace Editor::Gizmos {
 			);
 
 			float angleDeg = glm::degrees(signedAngle);
-			target_transform->AddEulerAngles(rotate_axis * angleDeg, false);
+			target_transform->AddEulerAngles(local_axis * angleDeg, true);
 		}
 		// Compare the two 
 		last_intersect_pos = new_hit_pos;
@@ -189,7 +193,7 @@ namespace Editor::Gizmos {
 
 
 
-	RotateCollection::RotateCollection(entt::registry* reg) {
+	RotateCollection::RotateCollection(entt::registry* reg, bool use_wheel) {
 		// X ARROW
 		entt::entity rotate_x_ent = reg->create();
 		auto& rotate_x_t = reg->emplace<Luxia::Components::Transform>(rotate_x_ent);
@@ -204,6 +208,7 @@ namespace Editor::Gizmos {
 		rotate_x_gizmo_part->transform = &rotate_x_t;
 		rotate_x_gizmo_part->rot = glm::vec3(-90.0f, -90.0f, 0.0f);
 		rotate_x_gizmo_part->axis = Axis::x;
+		rotate_x_gizmo_part->mesh = use_wheel ? GizmoResources::rotateWMesh : GizmoResources::rotateQMesh;
 		rotate_x_gizmo_part->OnInit();
 
 		auto& rotate_x_gizmo_behaviour = rotate_x_t.AddComponent<Gizmos::GizmoBehaviour>();
@@ -223,6 +228,7 @@ namespace Editor::Gizmos {
 		rotate_y_gizmo_part->transform = &rotate_y_t;
 		rotate_y_gizmo_part->rot = glm::vec3(0.0f, 0.0f, 0.0f);
 		rotate_y_gizmo_part->axis = Axis::y;
+		rotate_y_gizmo_part->mesh = use_wheel ? GizmoResources::rotateWMesh : GizmoResources::rotateQMesh;
 		rotate_y_gizmo_part->OnInit();
 
 		auto& rotate_y_gizmo_behaviour = rotate_y_t.AddComponent<Gizmos::GizmoBehaviour>();
@@ -242,6 +248,7 @@ namespace Editor::Gizmos {
 		rotate_z_gizmo_part->transform = &rotate_z_t;
 		rotate_z_gizmo_part->rot = glm::vec3(-90.0f, 0.0f, 0.0f);
 		rotate_z_gizmo_part->axis = Axis::z;
+		rotate_z_gizmo_part->mesh = use_wheel ? GizmoResources::rotateWMesh : GizmoResources::rotateQMesh;
 		rotate_z_gizmo_part->OnInit();
 
 		auto& rotate_z_gizmo_behaviour = rotate_z_t.AddComponent<Gizmos::GizmoBehaviour>();
@@ -250,6 +257,11 @@ namespace Editor::Gizmos {
 
 		glm::vec3 col_scale = glm::vec3(1.0f, 0.1f, 1.0f);
 		glm::vec3 col_offset = glm::vec3(1.0f, 0.0f, 1.0f);
+
+		if (use_wheel) {
+			col_scale = glm::vec3(2.0f, 0.2f, 2.0f);
+			col_offset = glm::vec3(0.0f);
+		}
 
 		// RigidBodies
 		rotate_x_t.AddComponent<Luxia::Components::RigidBody>().motionType = JPH::EMotionType::Kinematic;

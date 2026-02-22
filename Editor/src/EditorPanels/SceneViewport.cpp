@@ -20,6 +20,7 @@ namespace Editor::Panels {
 	static EditTool editTool = EditTool::Translate;
 	static std::vector<std::unique_ptr<Gizmos::GizmoCollection>> edit_tools;
 
+	// Disables all tools and enables the indexed one
 	static void SetTool(int index, Editor::Layers::EditorLayer* editorLayer) {
 		for (int i = 0; i < 3; i++) {
 			auto collection_ptr = edit_tools[i].get();
@@ -290,7 +291,7 @@ namespace Editor::Panels {
 
 		// Gizmos::TranslateCollection(&editorLayer->editor_reg);
 		edit_tools.push_back(std::make_unique<Gizmos::TranslateCollection>(&editorLayer->editor_reg));
-		edit_tools.push_back(std::make_unique<Gizmos::RotateCollection>(&editorLayer->editor_reg));
+		edit_tools.push_back(std::make_unique<Gizmos::RotateCollection>(&editorLayer->editor_reg, true)); // false for quad rotator
 		edit_tools.push_back(std::make_unique<Gizmos::ScaleCollection>(&editorLayer->editor_reg));
 
 		// Add all gizmos (and other physics stuff) to physics world for raycasting
