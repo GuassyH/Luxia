@@ -110,7 +110,6 @@ namespace Editor::Layers {
 			panel->Unload(this, scene_manager->GetActiveScene());
 		}
 
-
 		PlayTex->Unload();
 		PauseTex->Unload();
 		NoImageTex->Unload();
@@ -122,8 +121,14 @@ namespace Editor::Layers {
 		physicsWorld.reset();
 	}
 	void EditorLayer::OnUpdate() {
-		UpdateSelectedConditions();
+		if (Luxia::Input::IsKeyJustPressed(LX_KEY_DELETE)) {
+			std::unordered_set<Luxia::GUID> assets_to_delete = selected_assets;
+			for (auto& guid : assets_to_delete) {
+				DeleteEntityOrAsset(guid);
+			}
+		}
 
+		UpdateSelectedConditions();
 		physicsWorld->step(Luxia::Core::Time::get().deltaTime);
 	}
 	void EditorLayer::OnRender() {
@@ -156,7 +161,7 @@ namespace Editor::Layers {
 		if(ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("File")) {
-				if(ImGui::MenuItem("New Scene")) {
+				if (ImGui::MenuItem("New Scene")) {
 					asset_manager->CreateAssetFile<Luxia::AssetType::Scene>(asset_manager->GetAssetDir(), false, "New Scene");
 					PUSH_EVENT(Luxia::MessageSentEvent, "Asset Created");
 				}
@@ -236,18 +241,14 @@ namespace Editor::Layers {
 				// If not running, save the scene state and start
 				if (!scene_manager->running) {
 					scene_manager->SaveActiveScene();
-					// Should create a seperate instance or something similar
 				}
 				else {
-					// Should end the current scene and reset it
 					auto scene = scene_manager->GetActiveScene();
 					if (scene) {
 						scene->End();
 						scene_manager->SetActiveScene(scene, false);
-						// DONT UNLOAD IT. Just reset to the saved state
 					}
 				}
-
 				scene_manager->running = scene_manager->running ? false : true;
 			}
 			if (ImGui::ImageButton("##PauseButton", (ImTextureRef)PauseTex->texID, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1))) {
@@ -255,7 +256,6 @@ namespace Editor::Layers {
 			}
 
 			ImGui::EndMenuBar();
-			
 		}
 
 		if (opt_fullscreen)
@@ -326,4 +326,32 @@ namespace Editor::Layers {
 		}
 	}
 
+	bool EditorLayer::DeleteEntityOrAsset(Luxia::GUID guid) {
+		if (DeleteEntity(guid))
+			return true;
+		else if (DeleteAsset(guid))
+			return true;
+
+		return false;
+	}
+
+	bool EditorLayer::DeleteEntity(Luxia::GUID guid) {
+		if (auto scene = scene_manager->GetActiveScene()) {
+			if (scene->runtime_entities.contains(guid)) {
+				scene->DeleteEntity(guid);
+				EraseSelected(guid);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool EditorLayer::DeleteAsset(Luxia::GUID guid) {
+		if (asset_manager->GetAssetPool().contains(guid)) {
+			asset_manager->DeleteAsset(guid);
+			EraseSelected(guid);
+			return true;
+		}
+		return false;
+	}
 }

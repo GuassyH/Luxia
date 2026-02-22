@@ -67,6 +67,9 @@ namespace Editor::Layers {
 		virtual void OnRender() override;
 		virtual void OnEvent(Luxia::Event& e) override;
 
+		bool DeleteEntity(Luxia::GUID guid); // Checks valididty
+		bool DeleteAsset(Luxia::GUID guid); // Checks valididty
+		bool DeleteEntityOrAsset(Luxia::GUID guid); // Checks validity (checks both scene and asset manager)
 
 		std::shared_ptr<Luxia::ITexture> NoImageTex;
 	protected:

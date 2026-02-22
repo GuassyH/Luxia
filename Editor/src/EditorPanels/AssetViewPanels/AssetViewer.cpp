@@ -11,6 +11,8 @@ namespace Editor::Panels {
 	static bool isFolderSelected = false;
 	static std::filesystem::path selectedFolderPath = "";
 
+	static std::unordered_set<Luxia::GUID> assets_to_delete;
+
 	static void OpenAsset(Luxia::GUID guid, Editor::Layers::EditorLayer* editorLayer) {
 		// Validate asset manager and scene manager pointers
 		auto assetManager = editorLayer->GetAssetManager();
@@ -323,7 +325,7 @@ namespace Editor::Panels {
 				if(!isFolderSelected){
 					for (auto& e_guid : editorLayer->selected_assets) {
 						if (editorLayer->GetAssetManager()->GetAssetPool().contains(e_guid)) {
-							editorLayer->GetAssetManager()->DeleteAsset(e_guid);
+							assets_to_delete.insert(e_guid);
 						}
 					}
 				}else{
@@ -473,6 +475,12 @@ namespace Editor::Panels {
 				}
 			}
 		}
+
+		// Delete assets
+		for (auto& guid : assets_to_delete) {
+			editorLayer->DeleteAsset(guid);
+		}
+		assets_to_delete.clear();
 	}
 
 	void AssetViewer::Unload() {

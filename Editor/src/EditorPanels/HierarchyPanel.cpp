@@ -256,8 +256,8 @@ namespace Editor::Panels {
 
 
 		// Delete Entities
-		for (auto& ent : entitiesToDelete) {
-			scene->DeleteEntity(ent);
+		for (auto& guid : entitiesToDelete) {
+			editorLayer->DeleteEntity(guid);
 		}
 		entitiesToDelete.clear();
 

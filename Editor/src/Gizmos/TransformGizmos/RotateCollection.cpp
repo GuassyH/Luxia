@@ -1,4 +1,4 @@
-#include "Gizmo.h"
+#include "RotateCollection.h"
 #include "EditorPanels/SceneViewport.h"
 
 namespace Editor::Gizmos {
@@ -63,8 +63,10 @@ namespace Editor::Gizmos {
 			JPH::EActivation::Activate);
 	}
 	bool RotatePart::ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
-		if (editorLayer->isOneSelected && is_active) return true;
-		else return false;
+		if (editorLayer->isOneSelected && is_active)
+			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin()))
+				return true;
+		return false;
 	}
 	void RotatePart::OnRender(Luxia::Rendering::IRenderer* renderer, Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera) {
 		if (!mesh_renderer) return;

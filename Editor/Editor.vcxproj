@@ -161,6 +161,9 @@
     <ClInclude Include="src\EditorScripts\SceneShooterTest.h" />
     <ClInclude Include="src\Gizmos\Gizmo.h" />
     <ClInclude Include="src\Gizmos\GizmoDebug.h" />
+    <ClInclude Include="src\Gizmos\TransformGizmos\RotateCollection.h" />
+    <ClInclude Include="src\Gizmos\TransformGizmos\ScaleCollection.h" />
+    <ClInclude Include="src\Gizmos\TransformGizmos\TranslateCollection.h" />
     <ClInclude Include="src\IEditorPanel.h" />
     <ClInclude Include="src\SystemFuncs.h" />
     <ClInclude Include="src\ThumbnailManager.h" />
@@ -179,9 +182,9 @@
     <ClCompile Include="src\EditorPanels\SceneViewport.cpp" />
     <ClCompile Include="src\EditorPanels\ShoutoutPanel.cpp" />
     <ClCompile Include="src\Gizmos\Gizmo.cpp" />
-    <ClCompile Include="src\Gizmos\RotateCollection.cpp" />
-    <ClCompile Include="src\Gizmos\ScaleCollection.cpp" />
-    <ClCompile Include="src\Gizmos\TranslateCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TransformGizmos\RotateCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TransformGizmos\ScaleCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TransformGizmos\TranslateCollection.cpp" />
     <ClCompile Include="src\LuxiaEditor.cpp" />
   </ItemGroup>
   <ItemGroup>

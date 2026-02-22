@@ -3,6 +3,10 @@
 #include "EditorScripts/SceneCameraScript.h"
 #include "EditorScripts/SceneShooterTest.h"
 
+#include "Gizmos/TransformGizmos/TranslateCollection.h"
+#include "Gizmos/TransformGizmos/ScaleCollection.h"
+#include "Gizmos/TransformGizmos/RotateCollection.h"
+
 namespace Editor::Panels {
 
 	static std::shared_ptr<Luxia::ITexture> fbo_pick_tex = Luxia::Platform::Assets::CreateTexture();

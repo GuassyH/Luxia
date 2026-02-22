@@ -79,6 +79,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Gizmos\GizmoDebug.h" />
+    <ClInclude Include="src\Gizmos\TransformGizmos\TranslateCollection.h" />
+    <ClInclude Include="src\Gizmos\TransformGizmos\ScaleCollection.h" />
+    <ClInclude Include="src\Gizmos\TransformGizmos\RotateCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c">
@@ -123,8 +126,8 @@
     <ClCompile Include="src\LuxiaEditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Gizmos\TranslateCollection.cpp" />
-    <ClCompile Include="src\Gizmos\ScaleCollection.cpp" />
-    <ClCompile Include="src\Gizmos\RotateCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TransformGizmos\TranslateCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TransformGizmos\ScaleCollection.cpp" />
+    <ClCompile Include="src\Gizmos\TransformGizmos\RotateCollection.cpp" />
   </ItemGroup>
 </Project>
