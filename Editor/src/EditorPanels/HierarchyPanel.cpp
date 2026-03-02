@@ -17,19 +17,30 @@ namespace Editor::Panels {
 		bool open = ImGui::TreeNodeEx(enttext.str().c_str(), flags);
 		ImGui::PopID();
 
-
-
 		bool is_selected = editorLayer->selected_assets.contains(entity.guid);
-		if ((ImGui::IsItemClicked(ImGuiMouseButton_Left) || ImGui::IsItemClicked(ImGuiMouseButton_Right)) && !ImGui::IsItemToggledOpen()) {
-			if (ImGui::GetIO().KeyCtrl) {
-				if (is_selected)
-					editorLayer->EraseSelected(entity.guid);
-				else
+
+		if (!ImGui::IsItemToggledOpen()) {
+			if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) {
+				if (ImGui::GetIO().KeyCtrl) {
+					if (is_selected)
+						editorLayer->EraseSelected(entity.guid);
+					else
+						editorLayer->InsertSelected(entity.guid);
+				}
+				else {
+					editorLayer->ClearSelected();
 					editorLayer->InsertSelected(entity.guid);
+				}
 			}
-			else {
-				editorLayer->ClearSelected();
-				editorLayer->InsertSelected(entity.guid);
+			else if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+				if (ImGui::GetIO().KeyCtrl) {
+					if (!is_selected)
+						editorLayer->InsertSelected(entity.guid);
+				}
+				else if (!is_selected) {
+					editorLayer->ClearSelected();
+					editorLayer->InsertSelected(entity.guid);
+				}
 			}
 		}
 

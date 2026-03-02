@@ -15,7 +15,8 @@ namespace Luxia {
 		KeyPressed, KeyReleased,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
 		MessageSent, MessageReceived,
-		RequestProfileData, ProfileDataResponse
+		RequestProfilerData, ProfilerDataResponse,
+		OpenProject, NewProject
 	};
 
 	// The events category
@@ -29,7 +30,8 @@ namespace Luxia {
 		EventCategoryMouseButton	= 0b1 << 5,
 		EventCategoryRender			= 0b1 << 6,
 		EventCategoryMessage		= 0b1 << 7,
-		EventCategoryProfile		= 0b1 << 8
+		EventCategoryProfile		= 0b1 << 8,
+		EventCategoryProject		= 0b1 << 9
 	};
 }
 

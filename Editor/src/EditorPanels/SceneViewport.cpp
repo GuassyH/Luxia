@@ -167,12 +167,23 @@ namespace Editor::Panels {
 			auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
 			rb.UnloadBody(body_interface);
 		}
+
+		edit_tools.clear();
 	}
 
 	void SceneViewport::Render(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_MenuBar);
 		name = "Scene View";
 		TabPopupContextMenu();
+
+		if (!cam_ent) {
+			ImGui::End();
+			return;
+		}
+		else if (!cam_ent->transform->HasComponent<Luxia::Components::Transform>()) {
+			ImGui::End();
+			return;
+		}
 
 		Luxia::Components::Camera& cam = cam_ent->GetComponent<Luxia::Components::Camera>();
 		Editor::Scripts::SceneCameraScript& cam_script = cam_ent->GetComponent<Editor::Scripts::SceneCameraScript>();

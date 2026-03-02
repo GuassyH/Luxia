@@ -45,7 +45,7 @@ namespace Editor::Panels {
 		assetViewWindowClass.DockingAllowUnclassed = true;
 
 		ImGui::SetNextWindowClass(&assetViewWindowClass);
-		bool const shouldDrawWindowContents = ImGui::Begin("Asset View", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+		bool const shouldDrawWindowContents = ImGui::Begin("Asset View");
 		name = "Asset View";
 		TabPopupContextMenu();
 
@@ -56,7 +56,8 @@ namespace Editor::Panels {
 		assetViewClass.ClassId = dockspaceID;
 		assetViewClass.DockingAllowUnclassed = false;
 
-		static bool asset_dock_built = false;
+		static bool asset_dock_built = ImGui::DockBuilderGetNode(dockspaceID);
+
 		if (!asset_dock_built) {
 			ImGui::DockBuilderRemoveNode(dockspaceID); 
 			ImGui::DockBuilderAddNode(dockspaceID, ImGuiDockNodeFlags_DockSpace | ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton);
@@ -78,13 +79,14 @@ namespace Editor::Panels {
 			asset_dock_built = true;
 		}
 
-		if(!shouldDrawWindowContents){
-			ImGui::End();
-			return;
-		}
-
 		ImGui::DockSpace(dockspaceID, ImGui::GetContentRegionAvail(), ImGuiDockNodeFlags_NoWindowMenuButton | ImGuiDockNodeFlags_NoCloseButton, &assetViewClass);
 
+		if(!shouldDrawWindowContents){
+			ImGui::End();
+			LX_CORE_TRACE("AssetView: Window collapsed, skipping rendering contents.");
+			return;
+		}
+		
 		std::unordered_map<Luxia::GUID, WeakPtrProxy<Luxia::Assets::Asset>> assets_to_draw = {};
 
 		if(queued_for_refresh) {
@@ -92,27 +94,26 @@ namespace Editor::Panels {
 			queued_for_refresh = false;
 		}
 
-		if (ImGui::Begin("LeftWindow")) {
-			ImGui::Text("Asset Hierarchy"); ImGui::Separator();
-			assets_to_draw = astfoldertree.DrawFolderHierarchy(editorLayer, this);
-			ImGui::End();
-		}
+		ImGui::Begin("LeftWindow");
+		ImGui::Text("Asset Hierarchy"); ImGui::Separator();
+		assets_to_draw = astfoldertree.DrawFolderHierarchy(editorLayer, this);
+		ImGui::End();
 
-		if (ImGui::Begin("RightWindow")) {
-			ImGui::Text("Asset View");
-			std::string pathtxt = " | " + selected_folder.string();
-			ImGui::SameLine();
-			ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f), pathtxt.c_str());
-			ImGui::Separator();
-			astviewer.DrawAssetFiles(editorLayer, this, assets_to_draw);
-			ImGui::End();
-		}
+		ImGui::Begin("RightWindow");
+		ImGui::Text("Asset View");
+		std::string pathtxt = " | " + selected_folder.string();
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f), pathtxt.c_str());
+		ImGui::Separator();
+		astviewer.DrawAssetFiles(editorLayer, this, assets_to_draw);
+		ImGui::End();
 			
 		ImGui::End();
 	}
 
 	void AssetView::Unload(Editor::Layers::EditorLayer* editorLayer, std::shared_ptr<Luxia::Scene> scene) {
 		astviewer.Unload();
+		
 	}
 
 	void AssetView::OnEvent(Luxia::Event& e) {

@@ -177,7 +177,7 @@ namespace Luxia::Components {
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			AddComponent(Args&&... args) {
-			// assert(reg.valid(ent_id));
+			LX_CORE_ASSERT_MSG(reg->valid(ent_id), "Tried to remove non-existent component from ent - {}", (uint64_t)ent_guid);
 			if (reg->try_get<T>(ent_id)) {
 				LX_CORE_ERROR("Tried to add already added component to ent - {}", (uint64_t)ent_guid);
 				return reg->get<T>(ent_id);
@@ -193,25 +193,28 @@ namespace Luxia::Components {
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T&>
 			GetComponent() {
-			// assert(reg.valid(ent_id));
+			LX_CORE_ASSERT_MSG(reg->valid(ent_id), "Tried to remove non-existent component from ent - {}", (uint64_t)ent_guid);
 			return reg->get<T>(ent_id);
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, T*>
 			TryGetComponent() {
+			LX_CORE_ASSERT_MSG(reg->valid(ent_id), "Tried to remove non-existent component from ent - {}", (uint64_t)ent_guid);
 			return reg->try_get<T>(ent_id);
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, bool>
 			HasComponent() {
+			LX_CORE_ASSERT_MSG(reg->valid(ent_id), "Tried to remove non-existent component from ent - {}", (uint64_t)ent_guid);
 			return reg->try_get<T>(ent_id) != nullptr ? true : false;
 		}
 
 		template <typename T, typename... Args>
 		std::enable_if_t<std::is_base_of_v<Luxia::Components::Component, T>, void>
 			RemoveComponent() {
+			LX_CORE_ASSERT_MSG(reg->valid(ent_id), "Tried to remove non-existent component from ent - {}", (uint64_t)ent_guid);
 			reg->remove<T>(ent_id);
 		}
 #pragma endregion

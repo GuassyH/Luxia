@@ -6,9 +6,9 @@ namespace Luxia::Layers {
 	
 	void GameLayer::OnAttach() {
 		LX_CORE_WARN("GameLayer Attached");
-		if (scene_manager->running) {
-			if (scene_manager->LoadScene(0)) {
-				auto scene = scene_manager->GetActiveScene();
+		if (GetSceneManager()->running) {
+			if (GetSceneManager()->LoadScene(0)) {
+				auto scene = GetSceneManager()->GetActiveScene();
 				scene->Start();
 			}
 		}
@@ -17,7 +17,7 @@ namespace Luxia::Layers {
 		LX_CORE_WARN("GameLayer Detached");
 	}
 	void GameLayer::OnUpdate() {
-		std::shared_ptr<Scene> scene = scene_manager->GetActiveScene();
+		std::shared_ptr<Scene> scene = GetSceneManager()->GetActiveScene();
 
 		if (scene) {
 
@@ -40,11 +40,11 @@ namespace Luxia::Layers {
 				}
 			}
 
-			if (scene_manager->running && !scene->isStarted)
+			if (GetSceneManager()->running && !scene->isStarted)
 				scene->Start();
 
 			// Should check for should update
-			if(scene_manager->running && scene->isStarted)
+			if(GetSceneManager()->running && scene->isStarted)
 				scene->Update();
 		}
 	}
@@ -60,11 +60,12 @@ namespace Luxia::Layers {
 			});
 
 		dispatcher.Dispatch<WindowCloseEvent>([&](WindowCloseEvent& event) {
-			auto scene = scene_manager->GetActiveScene();
+			auto scene = GetSceneManager()->GetActiveScene();
 			if (scene)
 				scene->End();
-			scene_manager->running = false;
+			GetSceneManager()->running = false;
 			return false;
-			});
+			}); 
+
 	}
 }

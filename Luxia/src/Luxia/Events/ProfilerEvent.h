@@ -8,7 +8,7 @@ namespace Luxia {
 	public:
 		ProfilerRequestEvent(double time) : m_time(time) {}
 		
-		GET_EVENT_TYPE(EventType::RequestProfileData)
+		GET_EVENT_TYPE(EventType::RequestProfilerData)
 		GET_EVENT_CATEGORY(EventCategoryProfile)
 
 		double GetTime() const { return m_time; }
@@ -26,7 +26,7 @@ namespace Luxia {
 	public:
 		ProfilerResponseEvent(std::string name, double time) : m_name(name), m_time(time) {}
 
-		GET_EVENT_TYPE(EventType::ProfileDataResponse)
+		GET_EVENT_TYPE(EventType::ProfilerDataResponse)
 		GET_EVENT_CATEGORY(EventCategoryProfile)
 
 		double GetTime() const { return m_time; }

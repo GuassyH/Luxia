@@ -101,7 +101,12 @@ namespace Luxia {
 	}
 
 	void AssetManager::Cleanup() {
-		for (auto& [_, assetfile] : asset_pool) {
+		for (auto& [_, asset] : asset_pool) {
+			if (asset) {
+				asset->Unload();
+			}
+		}
+		for (auto& [_, assetfile] : assetfile_pool) {
 			if (assetfile) {
 				assetfile->Unload();
 			}

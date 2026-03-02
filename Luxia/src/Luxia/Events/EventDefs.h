@@ -11,3 +11,4 @@
 #include "Luxia/Events/RenderEvent.h"
 #include "Luxia/Events/MessageEvent.h"
 #include "Luxia/Events/ProfilerEvent.h"
+#include "Luxia/Events/ProjectEvent.h"

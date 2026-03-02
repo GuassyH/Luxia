@@ -65,7 +65,7 @@ namespace Editor::Gizmos {
 			JPH::EActivation::Activate);
 	}
 	bool TranslateAxis::ShouldRender(Editor::Layers::EditorLayer* editorLayer, Luxia::Components::Camera* camera, Luxia::Scene* scene) {
-		if (editorLayer->isOneSelected && is_active)
+		if (editorLayer->isOneSelected && is_active && is_switched_active)
 			if (scene->runtime_entities.contains(*editorLayer->selected_assets.begin()))
 				return true;
 		return false;
@@ -194,7 +194,7 @@ namespace Editor::Gizmos {
 			auto& rb = transform->GetComponent<Luxia::Components::RigidBody>();
 
 			if (!body_interface.IsAdded(rb.body->GetID())) {
-				body_interface.AddBody(rb.body->GetID(), JPH::EActivation::DontActivate);
+				body_interface.AddBody(rb.body->GetID(), JPH::EActivation::Activate);
 			}
 
 			is_switched_active = true;

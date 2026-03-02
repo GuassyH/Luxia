@@ -24,16 +24,16 @@ namespace Editor::Gizmos {
 		hoverMaterial = Luxia::Platform::Assets::CreateMaterial();
 
 		xMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		xMaterial->color = glm::vec4(1.0f, 0.4392f, 0.4784f, 1.0f);
+		xMaterial->color = glm::vec4(1.0f, 0.4392f, 0.4784f, 0.9f);
 
 		yMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		yMaterial->color = glm::vec4(0.5569f, 1.0f, 0.5569f, 1.0f);
+		yMaterial->color = glm::vec4(0.5569f, 1.0f, 0.5569f, 0.9f);
 
 		zMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		zMaterial->color = glm::vec4(0.1765f, 0.9020f, 1.0f, 1.0f);
+		zMaterial->color = glm::vec4(0.1765f, 0.9020f, 1.0f, 0.9f);
 
 		orgioMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
-		orgioMaterial->color = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
+		orgioMaterial->color = glm::vec4(0.8f, 0.8f, 0.8f, 0.9f);
 
 		hoverMaterial->shader = Luxia::ResourceManager::DefaultUnlitShader;
 		hoverMaterial->color = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);

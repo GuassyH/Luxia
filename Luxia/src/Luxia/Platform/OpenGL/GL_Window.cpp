@@ -94,15 +94,19 @@ namespace Luxia::Platform::OpenGL {
 		PUSH_EVENT(WindowResizeEvent, m_Width, m_Height);
 		PUSH_EVENT(WindowMoveEvent, m_PosX, m_PosY);
 
-
 		// Culling stuff
 		glViewport(0, 0, m_Width, m_Height);
-
 		glEnable(GL_DEPTH_TEST);
 
 		// Cull backface
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
+
+		// Alpha
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+
+		// glEnable(GL_FRAMEBUFFER_SRGB);
 
 		// Just debug
 		LX_CORE_INFO("Created Windows Window: {} ({}x{})", m_Title.c_str(), m_Width, m_Height);

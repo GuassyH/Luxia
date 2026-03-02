@@ -50,7 +50,7 @@ namespace Luxia {
 		std::unordered_map<Luxia::GUID, std::shared_ptr<Luxia::Assets::SceneFile>> scene_files;
 		std::vector<Luxia::GUID> build_order;
 	private:
-		std::shared_ptr<AssetManager> asset_manager;
+		WeakPtrProxy<AssetManager> asset_manager;
 		std::shared_ptr<Scene> active_scene;
 	};
 }

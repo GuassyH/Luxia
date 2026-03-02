@@ -32,7 +32,7 @@ namespace Luxia {
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Assets::SceneFile> m_sceneFile, bool save_on_set) {
 		if (active_scene && save_on_set) { 
-			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager);
+			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager.lock());
 			oldserializer.Serialize();
 			active_scene->Unload();
 		}
@@ -44,7 +44,7 @@ namespace Luxia {
 
 		if (!active_scene) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, could not cast to Scene"); return nullptr; }
 
-		SceneSerializer serializer(m_sceneFile, asset_manager);
+		SceneSerializer serializer(m_sceneFile, asset_manager.lock());
 		active_scene->Load();
 		serializer.Deserialize();
 
@@ -55,7 +55,7 @@ namespace Luxia {
 
 	std::shared_ptr<Scene> SceneManager::SetActiveScene(std::shared_ptr<Scene> m_scene, bool save_on_set) {
 		if (active_scene && save_on_set) {
-			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager);
+			SceneSerializer oldserializer(active_scene->scene_file.lock(), asset_manager.lock());
 			oldserializer.Serialize();
 		}
 		if(active_scene)
@@ -67,7 +67,7 @@ namespace Luxia {
 		if (!active_scene) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, could not cast to Scene"); return nullptr; }
 		if (!active_scene->scene_file) { LX_CORE_ERROR("SceneManager: Set Active Scene failed, Scene has no SceneFile"); return nullptr; }
 
-		SceneSerializer serializer(m_scene->scene_file.lock(), asset_manager);
+		SceneSerializer serializer(m_scene->scene_file.lock(), asset_manager.lock());
 		active_scene->Load();
 		serializer.Deserialize();
 
@@ -100,7 +100,7 @@ namespace Luxia {
 			LX_CORE_ERROR("SceneManager: Save Active Scene failed, no active scene");
 			return false;
 		}
-		SceneSerializer serializer(active_scene->scene_file.lock(), asset_manager);
+		SceneSerializer serializer(active_scene->scene_file.lock(), asset_manager.lock());
 		serializer.Serialize();
 		LX_CORE_INFO("Saved Active Scene");
 
@@ -122,14 +122,12 @@ namespace Luxia {
 	}
 
 	void SceneManager::Cleanup() {
-		LX_CORE_TRACE("Scene manager cleaned up");
-
-		if(active_scene)
-			active_scene->Unload();
-		
 		scene_files.clear(); 
 		build_order.clear();
 		active_scene.reset();
+		active_scene = nullptr;
+
+		LX_CORE_TRACE("Scene manager cleaned up");
 	}
 
 

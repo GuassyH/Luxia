@@ -118,8 +118,11 @@ namespace Luxia
 		m_Window.reset();
 		// Remove events? 
 
+		LX_CORE_INFO("Pre Close");
 		m_ProjectManager->CloseProject();
+		LX_CORE_INFO("Post Close");
 		ResourceManager::Cleanup();
+		LX_CORE_INFO(" ASD ");
 
 		Physics::PhysicsSystem::Shutdown();
 
@@ -133,10 +136,50 @@ namespace Luxia
 			if (e.isConsumed)
 				break;
 		}
-		if (!e.isConsumed) {
+
+		// Send event to window if e isnt consumed
+		if (!e.isConsumed)
 			m_Window->OnEvent(e);
-		}
 		
+		if (e.isConsumed)
+			return true;
+		
+		// If event isnt consumed, if a new project is created or opened
+		if (e.GetEventType() == EventType::NewProject || e.GetEventType() == EventType::OpenProject) {
+			// Detach layer (to safely remove any references to old project data, as the asset and scene manager will be different)
+			for (auto& layer : m_LayerStack->m_Layers) {
+				layer->OnDetach();
+			}
+			
+			// Create or open project
+			EventDispatcher dispatcher(e);
+			dispatcher.Dispatch<NewProjectEvent>([&](NewProjectEvent& event) {
+				LX_CORE_TRACE("{}", event.GetDebug());
+				std::string current_project_path = m_ProjectManager->GetProjectPath().string();
+				m_ProjectManager->CloseProject();
+				if(!m_ProjectManager->NewProject(event.GetDir(), event.GetName()))
+					m_ProjectManager->OpenProject(current_project_path);
+
+				return true;
+				});
+
+			dispatcher.Dispatch<OpenProjectEvent>([&](OpenProjectEvent& event) {
+				LX_CORE_TRACE("{}", event.GetDebug());
+				std::string current_project_path = m_ProjectManager->GetProjectPath().string();
+				m_ProjectManager->CloseProject();
+				if(!m_ProjectManager->OpenProject(event.GetDir()))
+					m_ProjectManager->OpenProject(current_project_path);
+
+				return true;
+				});
+
+			// Re-add layer and set dependancies
+			for (auto& layer : m_LayerStack->m_Layers) {
+				layer->SetDeps(m_ProjectManager, m_Renderer, m_Window);
+				layer->OnAttach();
+			}
+		}
+
 		return e.isConsumed;
 	}
 }

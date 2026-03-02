@@ -84,7 +84,7 @@ namespace Editor::Panels {
 			isFolderSelected = true;
 			selectedFolderPath = path;
 		}
-			// Folder Context Menu
+		// Folder Context Menu
 
 		// Draw text below image
 		std::string name_text = path.filename().replace_extension("").string().c_str();
@@ -157,18 +157,8 @@ namespace Editor::Panels {
 		// Make the selectable span the entire group
 		bool is_selected = editor_layer->selected_assets.contains(asset->guid);
 		ImGui::SetCursorPosY(ImGui::GetCursorPosY() - groupSize.y);
-		if (ImGui::Selectable("##AssetSelectable", is_selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize)) {
-			if (ImGui::GetIO().KeyCtrl) {
-				if (is_selected)
-					editor_layer->EraseSelected(asset->guid);
-				else
-					editor_layer->InsertSelected(asset->guid);
-			}
-			else {
-				editor_layer->ClearSelected();
-				editor_layer->InsertSelected(asset->guid);
-			}
-		}
+
+		ImGui::Selectable("##AssetSelectable", is_selected, ImGuiSelectableFlags_AllowItemOverlap, groupSize);
 
 		// Drag and drop
 		if (ImGui::BeginDragDropSource()) {
@@ -184,15 +174,29 @@ namespace Editor::Panels {
 
 		if (ImGui::IsItemHovered()) {
 			if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+				// Asset Context Menu
 				if (ImGui::GetIO().KeyCtrl) {
 					if (!is_selected)
 						editor_layer->InsertSelected(asset->guid);
 				}
-				else {
+				else if (!is_selected) {
 					editor_layer->ClearSelected();
 					editor_layer->InsertSelected(asset->guid);
 				}
 			}
+			if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+				if (ImGui::GetIO().KeyCtrl) {
+					if (is_selected)
+						editor_layer->EraseSelected(asset->guid);
+					else
+						editor_layer->InsertSelected(asset->guid);
+				}
+				else if (!is_selected) {
+					editor_layer->ClearSelected();
+					editor_layer->InsertSelected(asset->guid);
+				}
+			}
+
 			if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
 				OpenAsset(asset->guid, editor_layer);
 			}

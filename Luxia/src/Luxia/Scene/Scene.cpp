@@ -61,27 +61,23 @@ namespace Luxia {
 		if (runtime_entities.contains(EntityGUID)) {
 			Entity& ent = runtime_entities.find(EntityGUID)->second;
 			
-			// VERY IMPORTANT
-			// Delete all children FIRST before. This will go to the bottom of the tree, delete, and up
-			for (auto child : ent.transform->children) {
-				DeleteEntity(child->ent_guid);
-			}
-		
-			// Go through each component and remove
-			for (auto& comp : Luxia::componentRegistry) {
-				if (ent.transform) {
+			if (ent.transform) {
+				// Delete Childern
+				while (!ent.transform->children.empty()) {
+					auto child = ent.transform->children.back();
+					DeleteEntity(child->ent_guid);
+				}
+			
+				// Go through each component and remove
+				for (auto& comp : Luxia::componentRegistry) {
 					if (comp.hasFunc(ent.transform)) {
 						comp.removeFunc(ent.transform);
 					}
 				}
+
+				reg.remove<Luxia::Components::Transform>(ent.transform->ent_id);
 			}
-
-			if (ent.transform->HasParent())
-				ent.transform->SetParent(nullptr);
-
-			reg.remove<Luxia::Components::Transform>(ent.transform->ent_id);
 			// reg.destroy(ent.transform->ent_id);
-
 			runtime_entities.erase(EntityGUID);
 		}
 	}
@@ -103,6 +99,7 @@ namespace Luxia {
 
 		runtime_entities.clear();
 		reg.clear();
+		reg.~basic_registry();
 		toDelete.clear();
 
 		Physics::PhysicsSystem::DeleteWorld(physicsWorld.get()); 

@@ -15,6 +15,38 @@
 namespace Editor::Layers {
 	static std::vector<std::string> layers_to_remove;
 
+	static char dirBuffer[256];
+	static char nameBuffer[256];
+	static bool open_new_project_popup = false;
+
+	static void DrawNewProjectPopup() {
+		if (open_new_project_popup) {
+			memset(dirBuffer, 0, sizeof(dirBuffer));
+			memset(nameBuffer, 0, sizeof(nameBuffer));
+			ImGui::OpenPopup("New Project Popup");
+			open_new_project_popup = false;
+		}
+
+		if (ImGui::BeginPopupModal("New Project Popup", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
+			ImGui::InputText("Directory", dirBuffer, sizeof(dirBuffer));
+			ImGui::SameLine();
+			if (ImGui::Button(":")) {
+				memset(dirBuffer, 0, sizeof(dirBuffer));
+				memcpy(dirBuffer, Editor::SystemFuncs::OpenFolderDialog().c_str(), sizeof(dirBuffer));
+			}
+
+			ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer), ImGuiInputTextFlags_AlwaysOverwrite);
+
+			if (ImGui::Button("Create")) {
+				ImGui::CloseCurrentPopup();
+				PUSH_EVENT(Luxia::NewProjectEvent, std::string(dirBuffer), std::string(nameBuffer));
+			}
+
+			ImGui::EndPopup();
+		}
+	}
+
+
 	void EditorLayer::ClearSelected() {
 		selected_assets.clear();
 		UpdateSelectedConditions();
@@ -70,13 +102,13 @@ namespace Editor::Layers {
 	}
 	
 	void EditorLayer::OnAttach() {
+		scene_manager->running = false; // Just to be safe, should be set to false on scene manager init but, eh
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			return;
 		}
 		
 		physicsWorld = Luxia::Physics::PhysicsSystem::CreateWorld(Luxia::Physics::PhysicsWorldDesc());
-		
 		thumbnailManager.Init(256, 256);
 
 		LX_CORE_WARN("EditorLayer Attached");
@@ -106,19 +138,25 @@ namespace Editor::Layers {
 	}
 	void EditorLayer::OnDetach() {
 		LX_CORE_WARN("EditorLayer Detached");
-		for (auto panel : panels) {
-			panel->Unload(this, scene_manager->GetActiveScene());
-		}
+
+		std::vector<std::string> panel_names;
+		for (auto panel : panels) 
+			panel_names.push_back(panel->GetName());
+		
+		for (auto& name : panel_names)
+			RemovePanel(name);
+
+		Luxia::Physics::PhysicsSystem::DeleteWorld(physicsWorld.get());
 
 		PlayTex->Unload();
 		PauseTex->Unload();
 		NoImageTex->Unload();
 		RunningTex->Unload();
 
-		Luxia::Physics::PhysicsSystem::DeleteWorld(physicsWorld.get());
-
 		physicsWorld.release();
 		physicsWorld.reset();
+	
+		editor_reg.clear();
 	}
 	void EditorLayer::OnUpdate() {
 		if (Luxia::Input::IsKeyJustPressed(LX_KEY_DELETE)) {
@@ -156,7 +194,7 @@ namespace Editor::Layers {
 
 		}
 
-		ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
+		ImGui::Begin("DockSpace", &dockspaceOpen, window_flags);
 
 		if(ImGui::BeginMenuBar())
 		{
@@ -172,10 +210,12 @@ namespace Editor::Layers {
 				ImGui::Separator();
 
 				if (ImGui::MenuItem("New Project")) {
-					LX_WARN("New Project Menu Item Clicked - Functionality not implemented yet");
+					// Open a file dialog to select the project directory and name, then push the event with that info
+					open_new_project_popup = true;
 				}
 				if (ImGui::MenuItem("Open Project")) {
-					LX_WARN("Open Project Menu Item Clicked - Functionality not implemented yet");
+					std::string dir = Editor::SystemFuncs::OpenFolderDialog();
+					PUSH_EVENT(Luxia::OpenProjectEvent, dir);
 				}
 
 				ImGui::Separator();
@@ -285,6 +325,8 @@ namespace Editor::Layers {
 			}
 		}
 
+		DrawNewProjectPopup();
+
 		if (Luxia::Input::IsKeyPressed(LX_KEY_LEFT_CONTROL) && Luxia::Input::IsKeyJustPressed(LX_KEY_S)) {
 			if (!scene_manager->running) {
 				scene_manager->SaveActiveScene();
@@ -301,9 +343,7 @@ namespace Editor::Layers {
 		}
 
 		layers_to_remove.clear();
-
 		ImGui::End();
-
 	}
 
 	void EditorLayer::OnEvent(Luxia::Event& e) {

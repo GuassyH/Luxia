@@ -39,6 +39,7 @@ namespace Editor::SystemFuncs {
 		return result;
 	}
 	
+	// Select a file
 	inline std::string OpenFileDialogue() {
 		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 		if (FAILED(hr)) return {};
@@ -80,6 +81,80 @@ namespace Editor::SystemFuncs {
 		int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), static_cast<int>(filePath.size()), nullptr, 0, nullptr, nullptr);
 		std::string result(sizeNeeded, 0);
 		WideCharToMultiByte(CP_UTF8, 0, filePath.c_str(), static_cast<int>(filePath.size()), result.data(), sizeNeeded, nullptr, nullptr);
+
+		return result;
+	}
+
+	// Select a folder
+	inline std::string OpenFolderDialog()
+	{
+		HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+		if (FAILED(hr)) return {};
+
+		IFileOpenDialog* pFileOpen = nullptr;
+		hr = CoCreateInstance(
+			CLSID_FileOpenDialog,
+			nullptr,
+			CLSCTX_INPROC_SERVER,
+			IID_PPV_ARGS(&pFileOpen)
+		);
+
+		std::wstring folderPath;
+
+		if (SUCCEEDED(hr))
+		{
+			DWORD options;
+			if (SUCCEEDED(pFileOpen->GetOptions(&options)))
+			{
+				pFileOpen->SetOptions(
+					options | FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM | FOS_PATHMUSTEXIST
+				);
+			}
+
+			hr = pFileOpen->Show(nullptr);
+
+			if (SUCCEEDED(hr))
+			{
+				IShellItem* pItem = nullptr;
+				hr = pFileOpen->GetResult(&pItem);
+
+				if (SUCCEEDED(hr))
+				{
+					PWSTR pszFolderPath = nullptr;
+					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFolderPath);
+
+					if (SUCCEEDED(hr))
+					{
+						folderPath = pszFolderPath;
+						CoTaskMemFree(pszFolderPath);
+					}
+
+					pItem->Release();
+				}
+			}
+
+			pFileOpen->Release();
+		}
+
+		CoUninitialize();
+
+		if (folderPath.empty()) return {};
+
+		int sizeNeeded = WideCharToMultiByte(
+			CP_UTF8, 0,
+			folderPath.c_str(),
+			static_cast<int>(folderPath.size()),
+			nullptr, 0, nullptr, nullptr
+		);
+
+		std::string result(sizeNeeded, 0);
+		WideCharToMultiByte(
+			CP_UTF8, 0,
+			folderPath.c_str(),
+			static_cast<int>(folderPath.size()),
+			result.data(),
+			sizeNeeded, nullptr, nullptr
+		);
 
 		return result;
 	}

@@ -4,23 +4,25 @@
 
 namespace Luxia {
 
-	bool ProjectManager::NewProject(const std::filesystem::path& folder_path, const std::string& project_name) {
+	// Folder path is the directory
+	bool ProjectManager::NewProject(const std::filesystem::path& project_directory, const std::string& project_name) {
 		// Check if there is already a folder at that path
-		if (std::filesystem::exists(folder_path)) {
-			LX_CORE_WARN("Project Manager: folder already at path - {}", folder_path.string());
+		m_ProjectPath = (project_directory / project_name).lexically_normal();
+
+		if (std::filesystem::exists(m_ProjectPath)) {
+			LX_CORE_WARN("Project Manager: folder already at path - {}", m_ProjectPath.string());
 			return false;
 		}
 
 		// Check if creating folder is successful
-		if (!std::filesystem::create_directory(folder_path)) {
-			LX_CORE_ERROR("Project Manager: failed to create project dir at - {}", folder_path.string());
+		if (!std::filesystem::create_directory(m_ProjectPath)) {
+			LX_CORE_ERROR("Project Manager: failed to create project dir at - {}", m_ProjectPath.string());
 			return false;
 		}
 
 
-		m_ProjectPath = folder_path.lexically_normal();
 		m_ProjectName = project_name;
-		m_ConfigPath = (folder_path / "config.lux").lexically_normal();
+		m_ConfigPath = (m_ProjectPath / "config.lux").lexically_normal();
 		
 
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();
@@ -28,11 +30,11 @@ namespace Luxia {
 
 		// Try to save project
 		if (!SaveProjectConfigs()) {
-			LX_CORE_ERROR("Project Manager: failed to save project at - {}", folder_path.string());
+			LX_CORE_ERROR("Project Manager: failed to save project at - {}", m_ProjectPath.string());
 			return false;
 		}
 
-		LX_CORE_INFO("Project Manager: created project at - {}", folder_path.string());
+		LX_CORE_INFO("Project Manager: created project at - {}", m_ProjectPath.string());
 		return true;
 	}
 
@@ -41,9 +43,14 @@ namespace Luxia {
 			LX_CORE_ERROR("Project Manager: project doesnt exist - {}", folder_path.string());
 			return false;
 		}
-
+		
 		m_ProjectPath = folder_path.lexically_normal();
 		m_ConfigPath = (folder_path / "config.lux").lexically_normal();
+		
+		if (!std::filesystem::exists(m_ConfigPath)){
+			LX_CORE_ERROR("Project Manager: config doesnt exist - {}", m_ConfigPath.string());
+			return false;
+		}
 
 
 		m_AssetManager = std::make_shared<Luxia::AssetManager>();

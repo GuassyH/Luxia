@@ -293,6 +293,7 @@
     <ClInclude Include="src\Luxia\Asset\ScriptFile.h" />
     <ClInclude Include="src\Luxia\Components\ColliderShapes\SphereShape.h" />
     <ClInclude Include="src\Luxia\Components\ColliderShapes\ColliderShape.h" />
+    <ClInclude Include="src\Luxia\Events\ProjectEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">
