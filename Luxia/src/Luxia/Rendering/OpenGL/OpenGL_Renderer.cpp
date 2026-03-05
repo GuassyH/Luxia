@@ -96,7 +96,10 @@ namespace Luxia::Rendering::OpenGL {
 	}
 
 	void OpenGL_Renderer::RenderMeshPure(const Mesh& m_mesh) {
-		if (!m_mesh.IsValid()) { LX_CORE_ERROR("Tried to render in-valid mesh"); return; }
+		if (!m_mesh.IsValid()) { 
+			LX_CORE_ERROR("Renderer (RenderMeshPure): Tried to render in-valid mesh"); 
+			return; 
+		}
 
 		m_mesh.vao->Bind();
 		glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_mesh.indices.size()), GL_UNSIGNED_INT, 0);

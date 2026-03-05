@@ -71,8 +71,6 @@ namespace Luxia {
 			}
 		}
 
-
-
 		return true; 
 	}
 
@@ -101,18 +99,34 @@ namespace Luxia {
 	}
 
 	void AssetManager::Cleanup() {
+		// wont be unloaded
+		std::unordered_set<GUID> static_asset_guids;
+		for (auto& asset : Luxia::ResourceManager::ResourcesVector) {
+			static_asset_guids.insert(asset->guid);
+		}
+
 		for (auto& [_, asset] : asset_pool) {
-			if (asset) {
+			if (!asset)
+				continue;
+			
+			if (!static_asset_guids.contains(asset->guid))
 				asset->Unload();
-			}
 		}
 		for (auto& [_, assetfile] : assetfile_pool) {
 			if (assetfile) {
 				assetfile->Unload();
 			}
 		}
+		for (auto& [_, metafile] : meta_pool) {
+			if (metafile) {
+				metafile->Unload();
+			}
+		}
 
 		asset_pool.clear();
+		assetfile_pool.clear();
+		meta_pool.clear();
+
 		LX_CORE_TRACE("Asset Manager cleaned up");
 	}
 

@@ -15,7 +15,6 @@ namespace Editor::Panels {
 	static std::shared_ptr<Luxia::IShader> outline_shader = nullptr;
 	static Luxia::Physics::RayCastHit last_ray_hit = Luxia::Physics::RayCastHit();
 
-
 	enum EditTool {
 		Translate = 0,
 		Rotate = 1,
@@ -33,7 +32,6 @@ namespace Editor::Panels {
 			}
 		}
 	}
-
 
 	static Luxia::GUID GetMousePosEntity(glm::vec2 mouse_pos, Luxia::Components::Camera* cam, const std::shared_ptr<Luxia::Scene> scene, const std::shared_ptr<Luxia::Rendering::IRenderer> renderer, std::shared_ptr<Luxia::ITexture> output_texture) {
 
@@ -102,7 +100,7 @@ namespace Editor::Panels {
 		return result;
 	}
 
-	/// CORE
+	// CORE
 	void SceneViewport::RenderTopBar(Editor::Layers::EditorLayer* editorLayer) {
 		if (ImGui::BeginMenuBar()) {
 
@@ -127,6 +125,7 @@ namespace Editor::Panels {
 		editorLayer->editor_reg.emplace<Luxia::Components::Transform>(ent);
 		cam_ent = editorLayer->editor_reg.try_get<Luxia::Components::Transform>(ent);
 		cam_ent->transform = cam_ent;
+		cam_ent->ent_id = ent;
 		cam_ent->reg = &editorLayer->editor_reg;
 		cam_ent->transform->UpdateMatrix();
 
@@ -136,13 +135,11 @@ namespace Editor::Panels {
 
 		fbo_pick_tex->CreateFBOTex(1920, 1080);
 		selection_fbo->CreateDepthTex(1920, 1080);
-
 		outline_shader = Luxia::Platform::Assets::CreateShader("C:/dev/Luxia/Editor/resources/gizmos/shaders/outline.frag", "C:/dev/Luxia/Editor/resources/gizmos/shaders/outline.vert");
 
 		outline_mat->shader = outline_shader;
 		outline_mat->guid = Luxia::GUID();
 		outline_mat->color = glm::vec4(1.0f, 0.55f, 0.2f, 1.0f);
-
 
 		InitGizmos(editorLayer);
 	}

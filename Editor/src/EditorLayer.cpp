@@ -155,6 +155,10 @@ namespace Editor::Layers {
 
 		physicsWorld.release();
 		physicsWorld.reset();
+
+		asset_thumbnails.clear();
+		selected_assets.clear();
+		queued_for_refresh.clear();
 	
 		editor_reg.clear();
 	}

@@ -146,6 +146,9 @@ namespace Luxia
 		
 		// If event isnt consumed, if a new project is created or opened
 		if (e.GetEventType() == EventType::NewProject || e.GetEventType() == EventType::OpenProject) {
+			// Clear renderer!
+			m_Renderer->ClearROs();
+			
 			// Detach layer (to safely remove any references to old project data, as the asset and scene manager will be different)
 			for (auto& layer : m_LayerStack->m_Layers) {
 				layer->OnDetach();
@@ -178,6 +181,7 @@ namespace Luxia
 				layer->SetDeps(m_ProjectManager, m_Renderer, m_Window);
 				layer->OnAttach();
 			}
+			LX_CORE_INFO("Resource Vector Size: {}", ResourceManager::ResourcesVector.size());
 		}
 
 		return e.isConsumed;
