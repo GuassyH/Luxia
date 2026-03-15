@@ -19,6 +19,25 @@ namespace Editor::Layers {
 	static char nameBuffer[256];
 	static bool open_new_project_popup = false;
 
+	void EditorLayer::DeleteEditorEntity(entt::registry& reg, Luxia::Components::Transform* ent) {
+		if (!ent) return;
+
+		// Delete Childern
+		while (!ent->children.empty()) {
+			auto child = ent->children.back();
+			DeleteEditorEntity(reg, ent);
+		}
+
+		// Go through each component and remove
+		for (auto& comp : Luxia::componentRegistry) {
+			if (comp.hasFunc(ent)) {
+				comp.removeFunc(ent);
+			}
+		}
+
+		reg.remove<Luxia::Components::Transform>(ent->ent_id);
+	}
+
 	static void DrawNewProjectPopup() {
 		if (open_new_project_popup) {
 			memset(dirBuffer, 0, sizeof(dirBuffer));
@@ -159,7 +178,13 @@ namespace Editor::Layers {
 		asset_thumbnails.clear();
 		selected_assets.clear();
 		queued_for_refresh.clear();
-	
+		UpdateSelectedConditions();
+
+		auto view = editor_reg.view<Luxia::Components::Transform>();
+		for (auto& ent : view) {
+			DeleteEditorEntity(editor_reg, &view.get<Luxia::Components::Transform>(ent));
+		}
+
 		editor_reg.clear();
 	}
 	void EditorLayer::OnUpdate() {

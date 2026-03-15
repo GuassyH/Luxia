@@ -159,10 +159,21 @@ namespace Editor::Panels {
 
 		// Unload all gizmos (and other physics stuff) from physics world
 		auto& body_interface = editorLayer->physicsWorld->jphSystem.GetBodyInterface();
-		auto view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
-		for (auto entity : view) {
+		auto rb_view = editorLayer->editor_reg.view<Luxia::Components::RigidBody>();
+		for (auto entity : rb_view) {
 			auto& rb = editorLayer->editor_reg.get<Luxia::Components::RigidBody>(entity);
 			rb.UnloadBody(body_interface);
+		}
+
+		auto t_view = editorLayer->editor_reg.view<Luxia::Components::Transform>();
+		for (auto& ent : t_view) {
+			Luxia::Components::Transform* t = editorLayer->editor_reg.try_get<Luxia::Components::Transform>(ent);
+			editorLayer->DeleteEditorEntity(editorLayer->editor_reg, t);
+		}
+
+		for (auto& tool : edit_tools) {
+			tool->behaviours.clear();
+			tool.reset();
 		}
 
 		edit_tools.clear();
@@ -301,7 +312,6 @@ namespace Editor::Panels {
 	void SceneViewport::InitGizmos(Editor::Layers::EditorLayer* editorLayer) {
 		Gizmos::GizmoResources::Init("C:/dev/Luxia/Editor/resources/gizmos");
 
-		// Gizmos::TranslateCollection(&editorLayer->editor_reg);
 		edit_tools.push_back(std::make_unique<Gizmos::TranslateCollection>(&editorLayer->editor_reg));
 		edit_tools.push_back(std::make_unique<Gizmos::RotateCollection>(&editorLayer->editor_reg, true)); // false for quad rotator
 		edit_tools.push_back(std::make_unique<Gizmos::ScaleCollection>(&editorLayer->editor_reg));

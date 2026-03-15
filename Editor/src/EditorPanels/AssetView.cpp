@@ -14,7 +14,7 @@ namespace Editor::Panels {
 		asset_parent_folders.clear();
 
 		// Go through each assetfile, then each asset in the assetfile, set its parent folder
-		for (auto& [guid, assetfile] : editorLayer->GetAssetManager()->GetAssetFilePool()) {
+		for (auto& [_, assetfile] : editorLayer->GetAssetManager()->GetAssetFilePool()) {
 			if (assetfile) {
 				const auto parent = assetfile->assetPath.parent_path(); // Temp cache parent path
 				for (auto& asset : assetfile->assets) {

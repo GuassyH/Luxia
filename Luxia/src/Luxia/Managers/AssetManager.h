@@ -133,9 +133,9 @@ namespace Luxia {
 
 			AssetType type = AssetType::None;
 			std::string typesuf = "";
-			for (auto& [a_suf, atype] : extensions) {
+			for (auto& [a_suf, a_type] : extensions) {
 				if (abs_path.string().find(a_suf, abs_path.string().size() - a_suf.size()) != std::string::npos) {
-					type = atype;
+					type = a_type;
 					typesuf = asset_extensions.find(type)->second;
 					break;
 				}

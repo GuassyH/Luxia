@@ -32,6 +32,8 @@ namespace Editor::Layers {
 		void InsertSelected(Luxia::GUID guid);
 		void EraseSelected(Luxia::GUID guid);
 
+		void DeleteEditorEntity(entt::registry& reg, Luxia::Components::Transform* ent);
+
 		void UpdateSelectedConditions();
 
 		void CreateThumbnails();

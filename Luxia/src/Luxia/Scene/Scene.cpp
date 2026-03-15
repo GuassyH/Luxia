@@ -91,7 +91,7 @@ namespace Luxia {
 		std::vector<GUID> toDelete;
 		toDelete.reserve(runtime_entities.size());
 
-		for (auto& [guid, entity] : runtime_entities)
+		for (auto& [guid, _] : runtime_entities)
 			toDelete.push_back(guid);
 
 		for (auto& guid : toDelete)

@@ -38,22 +38,22 @@ namespace Editor::Panels {
 				return;
 			}
 
-			Luxia::GUID sfguid = Luxia::GUID(0);
-			for (auto& [tsfguid, sf] : sceneManager->scene_files) {
-				if (!sf->assets[0]) continue;
-				if (sf->assets[0]->guid == asset->guid) 
-					sfguid = tsfguid;
+			Luxia::GUID scenefile_guid = Luxia::GUID(0);
+			for (auto& [temp_scenefile_guid, scene_file] : sceneManager->scene_files) {
+				if (!scene_file->assets[0]) continue;
+				if (scene_file->assets[0]->guid == asset->guid)
+					scenefile_guid = temp_scenefile_guid;
 			}
 
-			auto it = sceneManager->scene_files.find(sfguid);
+			auto it = sceneManager->scene_files.find(scenefile_guid);
 			if (it == sceneManager->scene_files.end() || !it->second) {
-				LX_WARN("OpenAsset: Scene asset GUID {} not found in SceneManager", (uint64_t)sfguid);
+				LX_WARN("OpenAsset: Scene asset GUID {} not found in SceneManager", (uint64_t)scenefile_guid);
 				return;
 			}
 
 			auto loaded = sceneManager->SetActiveScene(it->second, true);
 			if (!loaded) 
-				LX_WARN("OpenAsset: SceneManager::SetActiveScene failed for asset GUID {}", (uint64_t)sfguid);
+				LX_WARN("OpenAsset: SceneManager::SetActiveScene failed for asset GUID {}", (uint64_t)scenefile_guid);
 			
 			break;
 		}
