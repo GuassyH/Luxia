@@ -10,8 +10,8 @@
     <Filter Include="Luxia\Components">
       <UniqueIdentifier>{3D17B13A-2910-D08C-5242-B5113E9AAF98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Luxia\Components\Colliders">
-      <UniqueIdentifier>{4DF2814F-3902-2E20-A2BB-923E8EEA1CB9}</UniqueIdentifier>
+    <Filter Include="Luxia\Components\ColliderShapes">
+      <UniqueIdentifier>{5E651219-CA48-2159-D34B-4F953FAEE7A9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Luxia\Core">
       <UniqueIdentifier>{80D8ECDC-6C90-2E2A-D597-0786C16EC91A}</UniqueIdentifier>
@@ -24,6 +24,9 @@
     </Filter>
     <Filter Include="Luxia\Managers">
       <UniqueIdentifier>{054A25BC-F117-19C2-DAAB-89E8C618F526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Luxia\Mono">
+      <UniqueIdentifier>{D053F2DC-BC0B-342A-2513-0D8611EACE1A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Luxia\Physics">
       <UniqueIdentifier>{9A260D15-06E7-884B-CF21-D2C83BA1CD27}</UniqueIdentifier>
@@ -73,6 +76,9 @@
     <ClInclude Include="src\Luxia\Asset\SceneFile.h">
       <Filter>Luxia\Asset</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Asset\ScriptFile.h">
+      <Filter>Luxia\Asset</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Asset\ShaderFile.h">
       <Filter>Luxia\Asset</Filter>
     </ClInclude>
@@ -82,11 +88,17 @@
     <ClInclude Include="src\Luxia\Components\Camera.h">
       <Filter>Luxia\Components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Luxia\Components\ColliderShapes\BoxShape.h">
-      <Filter>Luxia\Components\Colliders</Filter>
-    </ClInclude>
     <ClInclude Include="src\Luxia\Components\Collider.h">
-      <Filter>Luxia\Components\Colliders</Filter>
+      <Filter>Luxia\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\ColliderShapes\BoxShape.h">
+      <Filter>Luxia\Components\ColliderShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\ColliderShapes\ColliderShape.h">
+      <Filter>Luxia\Components\ColliderShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Components\ColliderShapes\SphereShape.h">
+      <Filter>Luxia\Components\ColliderShapes</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Components\Component.h">
       <Filter>Luxia\Components</Filter>
@@ -154,6 +166,9 @@
     <ClInclude Include="src\Luxia\Events\ProfilerEvent.h">
       <Filter>Luxia\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Luxia\Events\ProjectEvent.h">
+      <Filter>Luxia\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Luxia\Events\RenderEvent.h">
       <Filter>Luxia\Events</Filter>
     </ClInclude>
@@ -198,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="src\Luxia\Mesh.h">
       <Filter>Luxia</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Luxia\Mono\MonoRuntime.h">
+      <Filter>Luxia\Mono</Filter>
     </ClInclude>
     <ClInclude Include="src\Luxia\Physics\PhysicsSystem.h">
       <Filter>Luxia\Physics</Filter>
@@ -290,10 +308,6 @@
       <Filter>Luxia\Tools</Filter>
     </ClInclude>
     <ClInclude Include="src\lxpch.h" />
-    <ClInclude Include="src\Luxia\Asset\ScriptFile.h" />
-    <ClInclude Include="src\Luxia\Components\ColliderShapes\SphereShape.h" />
-    <ClInclude Include="src\Luxia\Components\ColliderShapes\ColliderShape.h" />
-    <ClInclude Include="src\Luxia\Events\ProjectEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Luxia\Asset\MetaFile.cpp">
@@ -346,6 +360,9 @@
     </ClCompile>
     <ClCompile Include="src\Luxia\Mesh.cpp">
       <Filter>Luxia</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Luxia\Mono\MonoRuntime.cpp">
+      <Filter>Luxia\Mono</Filter>
     </ClCompile>
     <ClCompile Include="src\Luxia\Physics\PhysicsSystem.cpp">
       <Filter>Luxia\Physics</Filter>

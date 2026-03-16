@@ -80,6 +80,7 @@ project "Luxia"
 	-- what should be included?
 	includedirs{
 		"%{prj.name}/src",
+		"$(MONO_PROJECT)include/mono-2.0",
 		"%{prj.name}/vendor",
 		"%{prj.name}/vendor/glm",
 		"%{prj.name}/vendor/imgui",
@@ -108,24 +109,30 @@ project "Luxia"
 			"JPH_PROFILE_ENABLED",
 			"JPH_OBJECT_STREAM"
 		}
-
+		
 		buildoptions { "/utf-8", "/wd4251" } -- Ignores the "needs to be dll interfaced warning"
 		linkoptions { "/SUBSYSTEM:CONSOLE" }
 
 		-- Copy file from the buildtarget to bin/outputdir/Editor
 		postbuildcommands{
-			('{COPY} %{cfg.buildtarget.relpath} ../bin/' .. outputdir .. '/Editor'),
+			('{COPY} "%{cfg.buildtarget.relpath}" "../bin/' .. outputdir .. '/Editor"'),
+			('{COPY} "$(MONO_PROJECT)bin/mono-2.0-sgen.dll" "../bin/' .. outputdir .. '/Editor"'),
+			('{COPYDIR} "$(MONO_PROJECT)lib/mono" "../bin/' .. outputdir .. '/Editor/mono"'),
+			-- ('{COPY} "%{prj.name}/vendor/Jolt/lib/Jolt.dll" "../bin/' .. outputdir .. '/Editor"'),
+			-- ('{COPY} "%{prj.name}/vendor/glfw/glfw3.dll" "../bin/' .. outputdir .. '/Editor"'),
 		}
 
 		
 		libdirs { 
-			"Luxia/vendor/glfw", 
-			"Luxia/vendor/Jolt/lib"
+			"%{prj.name}/vendor/glfw", 
+			"%{prj.name}/vendor/Jolt/lib",
+			"$(MONO_PROJECT)lib"
 		}
 		links { 
 			"glfw3dll",
 			"opengl32", 
-			"Jolt"
+			"Jolt",
+			"mono-2.0-sgen"
 		}
 
 	-- Specify how to build different configs
@@ -137,9 +144,16 @@ project "Luxia"
 			"assimp-vc143-mtd"
 		}
 		libdirs { 
-			"Luxia/vendor/yaml-cpp/build/Debug",
-			"Luxia/vendor/assimp/build/lib/Debug",
+			"%{prj.name}/vendor/yaml-cpp/build/Debug",
+			"%{prj.name}/vendor/assimp/build/lib/Debug",
 		}
+
+		-- Why no worky
+		postbuildcommands{
+			-- ('{COPY} "Luxia/vendor/yaml-cpp/build/Debug/yaml-cppd.dll" "../bin/' .. outputdir .. '/Editor"'),
+			-- ('{COPY} "Luxia/vendor/assimp/build/lib/Debug/assimp-vc143-mtd.dll" "../bin/' .. outputdir .. '/Editor"'),
+		}
+
 		symbols "On"
 
 	filter "configurations:Release"
@@ -150,9 +164,15 @@ project "Luxia"
 			"assimp-vc143-mt"
 		}
 		libdirs { 
-			"Luxia/vendor/yaml-cpp/build/Release",
-			"Luxia/vendor/assimp/build/lib/Release",
+			"%{prj.name}/vendor/yaml-cpp/build/Release",
+			"%{prj.name}/vendor/assimp/build/lib/Release",
 		}
+
+		postbuildcommands{
+			-- ('{COPY} "Luxia/vendor/yaml-cpp/build/Release/yaml-cpp.dll" "../bin/' .. outputdir .. '/Editor"'),
+			-- ('{COPY} "Luxia/vendor/assimp/build/lib/Release/assimp-vc143-mt.dll" "../bin/' .. outputdir .. '/Editor"'),
+		}
+
 		optimize "On"
 
 	filter "configurations:Distribution"
@@ -195,13 +215,15 @@ project "Editor"
 	libdirs {
 		"Luxia/vendor/glfw",
 		"Luxia/vendor/Jolt/lib",
+		"mono/4.5",
 	}
 	links{
 		"Luxia",
 		"LuxiaVendor",
 		"opengl32",
 		"glfw3dll",
-		"Jolt"
+		"Jolt",
+		"mono-2.0-sgen.dll",
 	}
 
 	filter "system:windows"
@@ -236,3 +258,4 @@ project "Editor"
 	filter "configurations:Distribution"
 		defines "LUXIA_DIST"
 		optimize "On"
+

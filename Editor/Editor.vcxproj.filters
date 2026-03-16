@@ -25,6 +25,9 @@
     <Filter Include="src\Gizmos">
       <UniqueIdentifier>{35F48C12-21AC-CE5F-8AB3-A7BB768A6950}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Gizmos\TransformGizmos">
+      <UniqueIdentifier>{79186DBC-6528-198D-CEE1-7DABBA100826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h">
@@ -69,6 +72,18 @@
     <ClInclude Include="src\Gizmos\Gizmo.h">
       <Filter>src\Gizmos</Filter>
     </ClInclude>
+    <ClInclude Include="src\Gizmos\GizmoDebug.h">
+      <Filter>src\Gizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gizmos\TransformGizmos\RotateCollection.h">
+      <Filter>src\Gizmos\TransformGizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gizmos\TransformGizmos\ScaleCollection.h">
+      <Filter>src\Gizmos\TransformGizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gizmos\TransformGizmos\TranslateCollection.h">
+      <Filter>src\Gizmos\TransformGizmos</Filter>
+    </ClInclude>
     <ClInclude Include="src\IEditorPanel.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -78,10 +93,6 @@
     <ClInclude Include="src\ThumbnailManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Gizmos\GizmoDebug.h" />
-    <ClInclude Include="src\Gizmos\TransformGizmos\TranslateCollection.h" />
-    <ClInclude Include="src\Gizmos\TransformGizmos\ScaleCollection.h" />
-    <ClInclude Include="src\Gizmos\TransformGizmos\RotateCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Luxia\vendor\glad\glad.c">
@@ -123,11 +134,17 @@
     <ClCompile Include="src\Gizmos\Gizmo.cpp">
       <Filter>src\Gizmos</Filter>
     </ClCompile>
+    <ClCompile Include="src\Gizmos\TransformGizmos\RotateCollection.cpp">
+      <Filter>src\Gizmos\TransformGizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gizmos\TransformGizmos\ScaleCollection.cpp">
+      <Filter>src\Gizmos\TransformGizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gizmos\TransformGizmos\TranslateCollection.cpp">
+      <Filter>src\Gizmos\TransformGizmos</Filter>
+    </ClCompile>
     <ClCompile Include="src\LuxiaEditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Gizmos\TransformGizmos\TranslateCollection.cpp" />
-    <ClCompile Include="src\Gizmos\TransformGizmos\ScaleCollection.cpp" />
-    <ClCompile Include="src\Gizmos\TransformGizmos\RotateCollection.cpp" />
   </ItemGroup>
 </Project>

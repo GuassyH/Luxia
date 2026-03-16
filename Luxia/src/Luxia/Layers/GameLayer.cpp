@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "Luxia/Components/Collider.h"
 
+
 namespace Luxia::Layers {
 	
 	void GameLayer::OnAttach() {
@@ -12,6 +13,8 @@ namespace Luxia::Layers {
 				scene->Start();
 			}
 		}
+
+
 	}
 	void GameLayer::OnDetach() {
 		LX_CORE_WARN("GameLayer Detached");

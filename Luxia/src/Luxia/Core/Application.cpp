@@ -15,6 +15,11 @@
 
 #include "Luxia/Managers/ResourceManager.h"
 #include "Luxia/Physics/PhysicsSystem.h"
+
+
+#include "Luxia/Mono/MonoRuntime.h"
+
+
 namespace Luxia
 {
 
@@ -60,6 +65,12 @@ namespace Luxia
 	// Run
 	void Application::Run()
 	{
+		std::cout << "\n=================================== \n" << std::endl;
+		
+		/// TESTING C# HERE
+		Luxia::Mono::MonoRuntime monoRuntime;
+
+
 		m_ProjectManager->GetSceneManager()->SetActiveScene(0);
 		double time_accumulator = 0.0;
 		Luxia::EventHandler& event_handler = Luxia::EventHandler::get();
@@ -103,6 +114,11 @@ namespace Luxia
 
 			event_handler.PushEvent(std::make_shared<Luxia::MessageSentEvent>(std::string("End of Frame")));
 		}
+
+
+		std::cout << "\n =================================== \n" << std::endl;
+
+
 	}
 
 	void Application::CoreShutdown() {
@@ -118,11 +134,8 @@ namespace Luxia
 		m_Window.reset();
 		// Remove events? 
 
-		LX_CORE_INFO("Pre Close");
 		m_ProjectManager->CloseProject();
-		LX_CORE_INFO("Post Close");
 		ResourceManager::Cleanup();
-		LX_CORE_INFO(" ASD ");
 
 		Physics::PhysicsSystem::Shutdown();
 
