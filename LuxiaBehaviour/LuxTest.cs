@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace LuxiaBehaviour
 {
-    public class LuxTest
+    public class LuxTest : ILuxiaBehaviour
 	{
-        public static void main()
+
+        public void Update()
         {
-            Luxia.Log.Line("Hello!");
+            Luxia.Log.Line(TestString());
+        }
+
+        string TestString()
+        {
+            return "Hello World!";
 		}
 	}
 }

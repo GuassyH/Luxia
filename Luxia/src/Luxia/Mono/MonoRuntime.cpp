@@ -28,41 +28,42 @@ namespace Luxia::Mono {
 
         if (m_domain) {
             m_assembly = mono_domain_assembly_open(m_domain, (exeDir + std::string("/LuxiaBehaviour.dll")).c_str());
-            if (m_assembly) {
-				m_image = mono_assembly_get_image(m_assembly);
-                if(m_image) {
-                    // Register internal calls (define cs extern functions)
-                    mono_add_internal_call("LuxiaBehaviour.Luxia.Log::Line", &Log_Line);
+            if (!m_assembly) return;
+
+			m_image = mono_assembly_get_image(m_assembly);
+            if (!m_image) return;
+
+            // Register internal calls (define cs extern functions)
+            mono_add_internal_call("LuxiaBehaviour.Luxia.Log::Line", &Log_Line);
 				
-					MonoClass* testClass = mono_class_from_name(m_image, "LuxiaBehaviour", "LuxTest");
-                    if (testClass) {
-						// Describe the method signature: void TestMethod()
-						MonoMethodDesc* m_MainDesc = mono_method_desc_new(".LuxTest:main()", false);
-                        if (m_MainDesc) {
-                            MonoMethod* m_MainMethod = mono_method_desc_search_in_class(m_MainDesc, testClass);
-                            if(m_MainMethod){
-								MonoObject* exception = nullptr;
-								m_object = mono_runtime_invoke(m_MainMethod, nullptr, nullptr, &exception);
-                                if (m_object) {
-                                    LX_CORE_INFO("Successfully invoked C# method!");
+			MonoClass* testClass = mono_class_from_name(m_image, "LuxiaBehaviour", "LuxTest");
+            if (!testClass) return;
 
-									mono_gchandle_new(m_object, false); // Prevent GC from collecting the object
+			// Describe the method signature: void TestMethod()
+			MonoMethodDesc* m_UpdateDesc = mono_method_desc_new("LuxTest:Update()", false);
+            if (!m_UpdateDesc) return;
 
-                                }
+            MonoMethod* m_UpdateMethod = mono_method_desc_search_in_class(m_UpdateDesc, testClass);
+            if(m_UpdateMethod){
+				MonoObject* exception = nullptr;
+				m_object = mono_object_new(m_domain, testClass);
+				mono_runtime_object_init(m_object);
+                mono_runtime_invoke(m_UpdateMethod, m_object, nullptr, &exception);
 
-                                if (exception) {
-                                    char* excMsg = mono_string_to_utf8(mono_object_to_string(exception, nullptr));
-                                    LX_CORE_ERROR("Exception while invoking C# method: {}", excMsg);
-                                    mono_free(excMsg);
-                                }
-
-                            }
-
-							mono_method_desc_free(m_MainDesc);
-                        }
-                    }
+                if (m_object) {
+                    LX_CORE_INFO("Successfully invoked C# method!");
+					mono_gchandle_new(m_object, false); // Prevent GC from collecting the object
                 }
+
+                if (exception) {
+                    char* excMsg = mono_string_to_utf8(mono_object_to_string(exception, nullptr));
+                    LX_CORE_ERROR("Exception while invoking C# method: {}", excMsg);
+                    mono_free(excMsg);
+                }
+
             }
+
+			mono_method_desc_free(m_UpdateDesc);
         }
 	}
 	

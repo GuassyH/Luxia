@@ -259,3 +259,23 @@ project "Editor"
 		defines "LUXIA_DIST"
 		optimize "On"
 
+
+project "LuxiaBehaviour"
+	location "LuxiaBehaviour"
+	kind "SharedLib"
+	language "C#"
+	dotnetframework "4.8"
+
+	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	
+	-- Set target build directories
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files {
+		"LuxiaBehaviour/**.cs"
+	}
+
+	postbuildcommands{
+		('{COPY} "%{cfg.buildtarget.relpath}" "../bin/' .. outputdir .. '/Editor"'),
+	}
